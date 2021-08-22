@@ -12,7 +12,7 @@ from genmodels.mixgenerate import MixGenerate
 # import utils.stylegan2ada.legacy as legacy
 import numpy as np
 import os
-
+# def dataloader():
 if __name__ == '__main__':
 
     if torch.cuda.is_available():
