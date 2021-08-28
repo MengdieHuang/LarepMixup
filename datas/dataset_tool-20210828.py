@@ -285,7 +285,7 @@ def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):           
     # print("train_loader[0]",train_loader[0])
     images = []
     labels = []
-    for _, (img, lab) in enumerate(train_loader):
+    for index, (img, lab) in enumerate(train_loader):
         # images.cuda()
         # labels.cuda()
         # print("img.size",img.size())            #   images.size torch.Size([1, 3, 256, 256])
@@ -294,7 +294,9 @@ def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):           
         labels.append(lab)
         print("images.len",len(images))             #   1
         print("labels,len",len(labels))             #   1
-        raise error("flag-20210826------------------------------------------------")
+        if index > 57235:
+            print('当前样本编号：',index)
+
 
 
     images = np.concatenate(images)
@@ -302,6 +304,7 @@ def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):           
     images = images.transpose([0, 2, 3, 1]) # NCHW -> NHWC
     print("total images.shape",images.shape)
     print("total labels.shape",labels.shape)
+    raise error("flag-20210826------------------------------------------------")
     
     #可视化
     # im, lab = next(iter(train_loader))
