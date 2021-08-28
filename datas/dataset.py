@@ -484,6 +484,30 @@ class MaggieDataset:
             ) 
             return train_dataset
 
+        elif self._args.dataset == 'imagenetmixed10':
+
+            os.makedirs("/home/data/ImageNet", exist_ok=True)
+
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 229
+            else:
+                crop_size = 256 #224
+
+            train_dataset = MaggieImageNet(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+                "/home/data/ImageNet",
+                split='train',
+                download=False,
+                transform=transforms.Compose(                               #   组合多个图像变换
+                    [
+                        transforms.Resize(crop_size),                       #   通过Resize(size, interpolation=Image.BILINEAR)函数将输入的图像转换为期望的尺寸，此处期望的输出size=img_size
+                        transforms.CenterCrop(crop_size),                    #   基于给定输入图像的中心，按照期望的尺寸（img_size）裁剪图像！！！解决了ImageNet数据集中个别样本size不符合3x256x256引发的问题
+                        transforms.ToTensor(),                                  #   将PIL图像或者ndArry数据转换为tensor
+                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                    ]     
+                ),
+            ) 
+            return train_dataset
+
         elif self._args.dataset == 'lsun':
             os.makedirs("/home/data/maggie/lsun/20210413", exist_ok=True)
             train_dataset =MaggieLSUN(                                             
