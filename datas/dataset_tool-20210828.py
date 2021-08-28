@@ -249,19 +249,9 @@ def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):           
     in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
     in_info_path = "/home/data/ImageNet/info"
     in_hier = ImageNetHierarchy(in_path, in_info_path)                  
-    #   in_path should point to a folder with the ImageNet dataset in train and val
-    #   in_info_path should be the path to the directory containing the aforementioned files (wordnet.is_a.txt, words.txt, imagenet_class_index.json).
+
     superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
     class_ranges, label_map = in_hier.get_subclasses(superclass_wnid, balanced=True)
-    
-    # print("superclass_wnid:",superclass_wnid)   
-    #   superclass_wnid: ['n02084071', 'n01503061', 'n02159955', 'n02484322', 'n02958343', 'n02120997', 'n04490091', 'n13134947', 'n12992868', 'n02858304']
-    
-    # print("class_ranges:",class_ranges)   
-    #   class_ranges: [{151, 152, 153, 154, 155, 156}, {7, 8, 9, 10, 11, 12}, {300, 301, 302, 303, 304, 305}, {370, 371, 372, 373, 374, 375}, {609, 627, 468, 436, 407, 511}, {288, 289, 290, 291, 286, 287}, {864, 675, 555, 717, 569, 734}, {948, 984, 987, 988, 989, 990}, {992, 993, 994, 995, 996, 991}, {576, 554, 814, 625, 914, 472}]
-    
-    # print("label_map:",label_map)   
-    #   label_map: {0: 'dog, domestic dog, Canis familiaris', 1: 'bird', 2: 'insect', 3: 'monkey', 4: 'car, auto, automobile, machine, motorcar', 5: 'feline, felid', 6: 'truck, motortruck', 7: 'fruit', 8: 'fungus', 9: 'boat'}
 
     num_workers =4
     batch_size =1
@@ -273,72 +263,177 @@ def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):           
     print("custom_dataset.transform_train:",custom_dataset.transform_train)   
     print("custom_dataset.custom_class:",custom_dataset.custom_class)   # None
     print("custom_dataset.label_mapping:",custom_dataset.label_mapping)   
+    print("custom_dataset.data_path:",custom_dataset.data_path)   # 10
+    # raise error
 
     train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
 
-    # print("train_loader.__dict__.keys()",train_loader.__dict__.keys())
-    # train_loader.__dict__.keys() dict_keys(['dataset', 'num_workers', 'prefetch_factor', 'pin_memory', 'timeout', 'worker_init_fn', '_DataLoader__multiprocessing_context', '_dataset_kind', 'batch_size', 'drop_last', 'sampler', 'batch_sampler', 'generator', 'collate_fn', 'persistent_workers', '_DataLoader__initialized', '_IterableDataset_len_called', '_iterator'])
-
-    # print("test_loader.__dict__.keys()",test_loader.__dict__.keys())
-    # test_loader.__dict__.keys() dict_keys(['dataset', 'num_workers', 'prefetch_factor', 'pin_memory', 'timeout', 'worker_init_fn', '_DataLoader__multiprocessing_context', '_dataset_kind', 'batch_size', 'drop_last', 'sampler', 'batch_sampler', 'generator', 'collate_fn', 'persistent_workers', '_DataLoader__initialized', '_IterableDataset_len_called', '_iterator'])
-    
-    # print("train_loader[0]",train_loader[0])
-    images = []
-    labels = []
-    for index, (img, lab) in enumerate(train_loader):
-        # images.cuda()
-        # labels.cuda()
-        # print("img.size",img.size())            #   images.size torch.Size([1, 3, 256, 256])
-        # print("lab.size",lab.size())            #   labels.size torch.Size([1])
-        images.append(img.reshape(-1, 3, 256, 256))
-        labels.append(lab)
-        print("images.len",len(images))             #   1
-        print("labels,len",len(labels))             #   1
-        if index > 57235:
-            print('当前样本编号：',index)
+    # images = []
+    # labels = []
+    # print("train_loader.len:", len(train_loader)) #train_loader.len: 77237
+    # for index, (img, lab) in enumerate(train_loader):
+    #     # images.cuda()
+    #     # labels.cuda()
+    #     # print("img.size",img.size())            #   images.size torch.Size([1, 3, 256, 256])
+    #     # print("lab.size",lab.size())            #   labels.size torch.Size([1])
+    #     images.append(img.reshape(-1, 3, 256, 256))
+    #     labels.append(lab)
+    #     print("images.len",len(images))             #   1
+    #     print("labels,len",len(labels))             #   1
+    #     if index > 57235:
+    #         print('当前样本编号：',index)
 
 
-
-    images = np.concatenate(images)
-    labels = np.concatenate(labels)
-    images = images.transpose([0, 2, 3, 1]) # NCHW -> NHWC
-    print("total images.shape",images.shape)
-    print("total labels.shape",labels.shape)
-    raise error("flag-20210826------------------------------------------------")
-    
-    #可视化
-    # im, lab = next(iter(train_loader))
-    # show_image_row([im], tlist=[[label_map[int(k)] for k in lab]])
-
-    # with tarfile.open(tarball, 'r:gz') as tar:
-    #     # for batch in range(1, 6):
-    #     member = tar.getmember(f'cifar-100-python/train')
-    #     with tar.extractfile(member) as file:
-    #         data = pickle.load(file, encoding='latin1')
-    #     print(data)
-    #     print(data.keys())                                                                  #   dict_keys(['filenames', 'batch_label', 'fine_labels', 'coarse_labels', 'data'])
-        
-    #     images.append(data['data'].reshape(-1, 3, 32, 32))
-    #     labels.append(data['fine_labels'])
 
     # images = np.concatenate(images)
     # labels = np.concatenate(labels)
     # images = images.transpose([0, 2, 3, 1]) # NCHW -> NHWC
+    # print("total images.shape",images.shape)
+    # print("total labels.shape",labels.shape)
+    # # raise error("flag-20210826------------------------------------------------")
 
-    assert images.shape == (77237, 256, 256, 3) and images.dtype == np.uint8
-    assert labels.shape == (77237,) and labels.dtype in [np.int32, np.int64]
-    assert np.min(images) == 0 and np.max(images) == 255
-    assert np.min(labels) == 0 and np.max(labels) == 9                                             #   共10个类别
+    # assert images.shape == (77237, 256, 256, 3) and images.dtype == np.uint8
+    # assert labels.shape == (77237,) and labels.dtype in [np.int32, np.int64]
+    # assert np.min(images) == 0 and np.max(images) == 255
+    # assert np.min(labels) == 0 and np.max(labels) == 9                                             #   共10个类别
 
-    max_idx = maybe_min(len(images), max_images)
+    # print("train_loader.__dict__.keys()",train_loader.__dict__.keys())
+    # print("train_loader.dataset.len",len(train_loader.dataset))
 
+    # raise error
+    trainset_len =len(train_loader.dataset)
+    max_idx = maybe_min(trainset_len, max_images)
+    
     def iterate_images():
-        for idx, img in enumerate(images):
-            yield dict(img=img, label=int(labels[idx]))
+        # for idx, img in enumerate(images):
+        for idx, (img, lab) in enumerate(train_loader):
+            # print("image index:",idx)
+            # print("img.shape",img.shape)
+            img.reshape(-1, 3, 256, 256)
+            # print("img.shape",img.shape)        
+            img = img.numpy()
+            # print("img.shape",img.shape)            #   img.shape (1, 3, 256, 256)
+            img =img[-1]
+            # print("img.shape",img.shape)            #   img.shape (3, 256, 256)
+
+            # raise error
+            lab = lab.numpy()
+            # print("img.type:",type(img))
+            # print("lab.type:",type(lab))
+            # print("img.shape:",img.shape)                   #   img.shape: (3, 256, 256)
+            # print("lab:",lab)
+            # raise error
+            # img = img.transpose([0, 2, 3, 1])               #   NCHW -> NHWC
+            img = img.transpose([1, 2, 0])               #   NCHW -> NHWC
+            
+            # print("img.shape:",img.shape)                   #   img.shape: (256, 256, 3)
+            # print("img.dtype",img.dtype)                    #   img.dtype float32
+            # print("img:",img)
+
+            img = (img*255).astype(np.uint8)
+            # print("img.dtype",img.dtype)                    #   img.dtype uint8
+            # print("img:",img)
+
+            assert img.shape == (256, 256, 3) and img.dtype == np.uint8
+            assert lab.shape == (1,) and lab.dtype in [np.int32, np.int64]
+            # assert np.min(img) == 0 and np.max(img) == 255
+            # assert np.min(lab) == 0 and np.max(lab) == 9
+            assert np.min(img) >= 0 and np.max(img) <= 255
+            assert np.min(lab) >= 0 and np.max(lab) <= 9
+            # raise error
+
+            # yield dict(img=img, label=int(labels[idx]))
+            yield dict(img=img, label=int(lab))
+
             if idx >= max_idx-1:
                 break
 
+    print("mixed 10 zip finished")
+
     return max_idx, iterate_images() 
+
+# def open_imagenetmixed10(tarball: str, *, max_images: Optional[int]):                                  #   ILSVRC2012_img_train.tar
+#     in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
+#     in_info_path = "/home/data/ImageNet/info"
+#     in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+#     #   in_path should point to a folder with the ImageNet dataset in train and val
+#     #   in_info_path should be the path to the directory containing the aforementioned files (wordnet.is_a.txt, words.txt, imagenet_class_index.json).
+#     superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
+#     class_ranges, label_map = in_hier.get_subclasses(superclass_wnid, balanced=True)
+    
+#     # print("superclass_wnid:",superclass_wnid)   
+#     #   superclass_wnid: ['n02084071', 'n01503061', 'n02159955', 'n02484322', 'n02958343', 'n02120997', 'n04490091', 'n13134947', 'n12992868', 'n02858304']
+    
+#     # print("class_ranges:",class_ranges)   
+#     #   class_ranges: [{151, 152, 153, 154, 155, 156}, {7, 8, 9, 10, 11, 12}, {300, 301, 302, 303, 304, 305}, {370, 371, 372, 373, 374, 375}, {609, 627, 468, 436, 407, 511}, {288, 289, 290, 291, 286, 287}, {864, 675, 555, 717, 569, 734}, {948, 984, 987, 988, 989, 990}, {992, 993, 994, 995, 996, 991}, {576, 554, 814, 625, 914, 472}]
+    
+#     # print("label_map:",label_map)   
+#     #   label_map: {0: 'dog, domestic dog, Canis familiaris', 1: 'bird', 2: 'insect', 3: 'monkey', 4: 'car, auto, automobile, machine, motorcar', 5: 'feline, felid', 6: 'truck, motortruck', 7: 'fruit', 8: 'fungus', 9: 'boat'}
+
+#     num_workers =4
+#     batch_size =1
+#     custom_dataset = datasets.CustomImageNet(in_path, class_ranges)     #   CustomImageNet默认会resize成224x224，修改类中相关参数后，resize成256x256. StyleGAN2ADA只能接受2的幂次
+
+#     print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
+#     # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+#     print("custom_dataset.num_classes:",custom_dataset.num_classes)   # 10
+#     print("custom_dataset.transform_train:",custom_dataset.transform_train)   
+#     print("custom_dataset.custom_class:",custom_dataset.custom_class)   # None
+#     print("custom_dataset.label_mapping:",custom_dataset.label_mapping)   
+#     print("custom_dataset.data_path:",custom_dataset.data_path)   # 10
+#     # raise error
+
+#     train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
+    
+#     #可视化
+#     # im, lab = next(iter(train_loader))
+#     # show_image_row([im], tlist=[[label_map[int(k)] for k in lab]])
+
+#     # print("train_loader.__dict__.keys()",train_loader.__dict__.keys())
+#     # train_loader.__dict__.keys() dict_keys(['dataset', 'num_workers', 'prefetch_factor', 'pin_memory', 'timeout', 'worker_init_fn', '_DataLoader__multiprocessing_context', '_dataset_kind', 'batch_size', 'drop_last', 'sampler', 'batch_sampler', 'generator', 'collate_fn', 'persistent_workers', '_DataLoader__initialized', '_IterableDataset_len_called', '_iterator'])
+
+#     # print("test_loader.__dict__.keys()",test_loader.__dict__.keys())
+#     # test_loader.__dict__.keys() dict_keys(['dataset', 'num_workers', 'prefetch_factor', 'pin_memory', 'timeout', 'worker_init_fn', '_DataLoader__multiprocessing_context', '_dataset_kind', 'batch_size', 'drop_last', 'sampler', 'batch_sampler', 'generator', 'collate_fn', 'persistent_workers', '_DataLoader__initialized', '_IterableDataset_len_called', '_iterator'])
+    
+#     # print("train_loader[0]",train_loader[0])
+#     images = []
+#     labels = []
+#     print("train_loader.len:", len(train_loader)) #train_loader.len: 77237
+#     for index, (img, lab) in enumerate(train_loader):
+#         # images.cuda()
+#         # labels.cuda()
+#         # print("img.size",img.size())            #   images.size torch.Size([1, 3, 256, 256])
+#         # print("lab.size",lab.size())            #   labels.size torch.Size([1])
+#         images.append(img.reshape(-1, 3, 256, 256))
+#         labels.append(lab)
+#         print("images.len",len(images))             #   1
+#         print("labels,len",len(labels))             #   1
+#         if index > 57235:
+#             print('当前样本编号：',index)
+
+
+
+#     images = np.concatenate(images)
+#     labels = np.concatenate(labels)
+#     images = images.transpose([0, 2, 3, 1]) # NCHW -> NHWC
+#     print("total images.shape",images.shape)
+#     print("total labels.shape",labels.shape)
+#     # raise error("flag-20210826------------------------------------------------")
+
+#     assert images.shape == (77237, 256, 256, 3) and images.dtype == np.uint8
+#     assert labels.shape == (77237,) and labels.dtype in [np.int32, np.int64]
+#     assert np.min(images) == 0 and np.max(images) == 255
+#     assert np.min(labels) == 0 and np.max(labels) == 9                                             #   共10个类别
+
+#     max_idx = maybe_min(len(images), max_images)
+
+#     def iterate_images():
+#         for idx, img in enumerate(images):
+#             yield dict(img=img, label=int(labels[idx]))
+#             if idx >= max_idx-1:
+#                 break
+
+#     return max_idx, iterate_images() 
 # # #------------------------------------maggie----------------------------------
 
 def error(msg):
