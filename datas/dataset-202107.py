@@ -385,10 +385,9 @@ class MaggieDataset:
         return self._testdataset
 
     def __loadtraindataset__(self):
-        print("flag-20210826--------------------")
         if self._args.dataset == 'mnist':
             os.makedirs("/home/data/maggie/mnist", exist_ok=True)
-            train_dataset = MaggieMNIST(                                             
+            train_dataset = MaggieMNIST(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
                 "/home/data/maggie/mnist",
                 train=True,                                             #   从training.pt创建数据集
                 download=True,                                          #   自动从网上下载数据集
@@ -405,10 +404,10 @@ class MaggieDataset:
 
         elif self._args.dataset == 'kmnist':
             os.makedirs("/home/data/maggie/kmnist", exist_ok=True)
-            train_dataset = MaggieKMNIST(                                            
+            train_dataset = MaggieKMNIST(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
                 "/home/data/maggie/kmnist",
                 train=True,                                             #   从training.pt创建数据集
-                download=True,                                          #   自动从网上下载数据集
+                download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
                         transforms.Resize(self._args.img_size), 

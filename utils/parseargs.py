@@ -28,18 +28,18 @@ def parse_arguments():
     for parser_object in [parser_load,parser_run]:
         parser_object.add_argument('--exp_name',type=str,default=None,help='Name of the experiment',
             choices=[
-                'gan-mnist','gan-kmnist','gan-cifar10','gan-cifar100','gan-lsun','gan-imagenet','gan-imagenet10',
-                'acgan-mnist','acgan-kmnist','acgan-cifar10','acgan-cifar100','acgan-lsun','acgan-imagenet','acgan-imagenet10',
-                'aae-mnist','aae-kmnist','aae-cifar10','aae-cifar100','aae-lsun','aae-imagenet','aae-imagenet10',
-                'vae-mnist','vae-kmnist','vae-cifar10','vae-cifar100','vae-lsun','vae-imagenet','vae-imagenet10',
-                'stylegan2-mnist','stylegan2-kmnist','stylegan2-cifar10','stylegan2-cifar100','stylegan2-lsun','stylegan2-imagenet','stylegan2-imagenet10',
-                'stylegan2ada-mnist','stylegan2ada-kmnist','stylegan2ada-cifar10','stylegan2ada-cifar100','stylegan2ada-lsun','stylegan2ada-imagenet','stylegan2ada-imagenet10','stylegan2ada-svhn','stylegan2ada-stl10',
-                'resnet50-mnist', 'resnet50-kmnist','resnet50-cifar10','resnet50-cifar100','resnet50-lsun','resnet50-imagenet','resnet50-imagenet10',
-                'vgg19-mnist','vgg19-kmnist', 'vgg19-cifar10','vgg19-cifar100', 'vgg19-lsun','vgg19-imagenet', 'vgg19-imagenet10',
-                'alexnet-mnist','alexnet-kmnist', 'alexnet-cifar10','alexnet-cifar100', 'alexnet-lsun','alexnet-imagenet', 'alexnet-imagenet10',
-                'densenet169-mnist','densenet169-kmnist', 'densenet169-cifar10','densenet169-cifar100', 'densenet169-lsun','densenet169-imagenet', 'densenet169-imagenet10',
-                'inception_v3-mnist','inception_v3-kmnist', 'inception_v3-cifar10','inception_v3-cifar100', 'inception_v3-lsun','inception_v3-imagenet', 'inception_v3-imagenet10',
-                'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenet10','resnet34-svhn','resnet34-stl10'
+                'gan-mnist','gan-kmnist','gan-cifar10','gan-cifar100','gan-lsun','gan-imagenet','gan-imagenetmixed10',
+                'acgan-mnist','acgan-kmnist','acgan-cifar10','acgan-cifar100','acgan-lsun','acgan-imagenet','acgan-imagenetmixed10',
+                'aae-mnist','aae-kmnist','aae-cifar10','aae-cifar100','aae-lsun','aae-imagenet','aae-imagenetmixed10',
+                'vae-mnist','vae-kmnist','vae-cifar10','vae-cifar100','vae-lsun','vae-imagenet','vae-imagenetmixed10',
+                'stylegan2-mnist','stylegan2-kmnist','stylegan2-cifar10','stylegan2-cifar100','stylegan2-lsun','stylegan2-imagenet','stylegan2-imagenetmixed10',
+                'stylegan2ada-mnist','stylegan2ada-kmnist','stylegan2ada-cifar10','stylegan2ada-cifar100','stylegan2ada-lsun','stylegan2ada-imagenet','stylegan2ada-imagenetmixed10','stylegan2ada-svhn','stylegan2ada-stl10',
+                'resnet50-mnist', 'resnet50-kmnist','resnet50-cifar10','resnet50-cifar100','resnet50-lsun','resnet50-imagenet','resnet50-imagenetmixed10',
+                'vgg19-mnist','vgg19-kmnist', 'vgg19-cifar10','vgg19-cifar100', 'vgg19-lsun','vgg19-imagenet', 'vgg19-imagenetmixed10',
+                'alexnet-mnist','alexnet-kmnist', 'alexnet-cifar10','alexnet-cifar100', 'alexnet-lsun','alexnet-imagenet', 'alexnet-imagenetmixed10',
+                'densenet169-mnist','densenet169-kmnist', 'densenet169-cifar10','densenet169-cifar100', 'densenet169-lsun','densenet169-imagenet', 'densenet169-imagenetmixed10',
+                'inception_v3-mnist','inception_v3-kmnist', 'inception_v3-cifar10','inception_v3-cifar100', 'inception_v3-lsun','inception_v3-imagenet', 'inception_v3-imagenetmixed10',
+                'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenetmixed10','resnet34-svhn','resnet34-stl10'
 
             ]  
 
@@ -53,7 +53,7 @@ def parse_arguments():
         )
 
         parser_object.add_argument('--dataset',type=str,default=None,
-            choices=['mnist', 'kmnist', 'cifar10', 'cifar100', 'lsun', 'imagenet','imagenet10','svhn','stl10'],
+            choices=['mnist', 'kmnist', 'cifar10', 'cifar100', 'lsun', 'imagenet','imagenetmixed10','svhn','stl10'],
             help="""
             mnist:      size = 1x28x28, class_num = 10, train_sample_num = 60000 (6000 per class), test_sample_num = 10000 (1000 per class), link = http://yann.lecun.com/exdb/mnist/
             kmnist:     size = 1x28x28, class_num = 10, train_sample_num = 60000 (6000 per class), test_sample_num = 10000 (1000 per class), link = https://github.com/rois-codh/kmnist
@@ -61,6 +61,7 @@ def parse_arguments():
             cifar100:   size = 3x32x32, class_num = 100, train_sample_num = 50000 (500 per class), test_sample_num = 10000 (100 per class), link :https://www.cs.toronto.edu/~kriz/cifar.html
             lsun:       size = 3x256x256, class_num = 30, train_sample_num = ???, test_sample_num = ???, link: https://www.yf.io/p/lsun
             imagenet:   size = 1x1024x1024, class_num = 1000, train_sample_num = 1321167, test_sample_num = 100000, link: http://image-net.org/
+            imagenetmixed10: size=1x256x256, class_num = 10, train_sample_num = 77237, test sample_num = 3000
             stl10 :     size = 3x96x96(改成了3x128x128),     class_num = 10
             svhn:      size = 3x32x32, class_num = 10, train_sample_num = 73257  (6000 per class), test_sample_num = 26032 (1000 per class), link = http://ufldl.stanford.edu/housenumbers/ 
             
@@ -163,7 +164,7 @@ def parse_arguments():
 
 
         #-------------------------other arguments-------------------------
-        parser_object.add_argument('--img_size',type=int, default=28)
+        parser_object.add_argument('--img_size',type=int, default=32)
         parser_object.add_argument('--channels', type=int, default=1)
         parser_object.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")    #   一阶梯度动量的衰减
         parser_object.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
@@ -188,8 +189,8 @@ def reset_arguments(args):
         args.n_classes = 100;   args.img_size = 32;     args.channels = 3  
     elif args.dataset == 'imagenet':
         args.n_classes = 1000;  args.img_size = 1024;   args.channels = 3  
-    elif args.dataset == 'imagenet10':
-        args.n_classes = 10;    args.img_size = 1024;   args.channels = 3  
+    elif args.dataset == 'imagenetmixed10':
+        args.n_classes = 10;    args.img_size = 256;   args.channels = 3  
     elif args.dataset == 'lsun':
         args.n_classes = 10;    args.img_size = 256;    args.channels = 3  
     elif args.dataset == 'svhn':
