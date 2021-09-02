@@ -35,6 +35,8 @@ import utils.sampler
 import re
 from typing import List, Optional
 import click
+from torchvision.transforms import transforms
+
 
 class MaggieStylegan2ada:
 
@@ -528,7 +530,7 @@ class MaggieStylegan2ada:
     def __projectmain__(self, opt, exp_result_dir,ori_x_set, ori_y_set):
         print("running projecting main()..............")
 
-        if ori_x_set is not None :
+        if ori_x_set is not None :      # 实验都是没有view dataset的，都由此进入投影
             self.ori_x_set = ori_x_set
             self.ori_y_set = ori_y_set
             print("Project original images from images tensor set !")
@@ -566,7 +568,7 @@ class MaggieStylegan2ada:
 
         projected_x_set = []
         projected_y_set = []
-        
+
         for index in range(len(target_x_set)):                                                                            #   从filenames池中迭代读取一个个路径filename
             # target_fname=None
             if  self._args.project_target_num != None:
@@ -581,7 +583,8 @@ class MaggieStylegan2ada:
                         num_steps = opt.num_steps,
                         # projected_img_index = index,
                         projected_img_index = index + opt.batch_size * self._batch_index,
-                        laber_index = target_y_set[index]       
+                        laber_index = target_y_set[index]
+                        # label_name_list= label_names      
                     )
                     #-----------------maggie add-----------
                     projected_x_set.append(projected_w)
@@ -598,7 +601,9 @@ class MaggieStylegan2ada:
                     num_steps = opt.num_steps,
                     # projected_img_index = index,
                     projected_img_index = index + opt.batch_size * self._batch_index,
-                    laber_index = target_y_set[index]       
+                    laber_index = target_y_set[index]
+                    # label_name_list= label_names      
+
                 )
                 #-----------------maggie add-----------
                 projected_x_set.append(projected_w)
@@ -617,6 +622,7 @@ class MaggieStylegan2ada:
         num_steps: int,                  #   默认是1000，指的是投影优化器参数更新的步长
         projected_img_index:int,         #   
         laber_index: int
+        # label_name_list:list             # label_name_list
     ):
 
         print(f"projecting {projected_img_index:08d} image:")
@@ -646,34 +652,86 @@ class MaggieStylegan2ada:
         # print("target_pil.shape:",target_pil.shape)                                                                             #   target_pil.shape: (32, 32, 3)                                                          
         # print("target_pil.dtype:",target_pil.dtype)                                                                             #   target_pil.dtype: uint8                                                                              
 
-        target_pil = PIL.Image.fromarray(target_pil, 'RGB')
-
-        #---------加载PIL
-        w, h = target_pil.size
-        # print('target_pil.size=%s' % target_pil)
-
-        s = min(w, h)
-        target_pil = target_pil.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
-        target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS)
-
         
-        target_uint8 = np.array(target_pil, dtype=np.uint8)
-        # print("target_uint8:",target_uint8)                                                                                     #   target_uint8: [[[ 59  62  63] [ 43  46  45]
-        # print("target_uint8.type:",type(target_uint8))                                                                          #   target_uint8.type: <class 'numpy.ndarray'>
-        # print("target_uint8.shape:",target_uint8.shape)                                                                         #   target_uint8.shape: (32, 32, 3)
-        # print("target_uint8.dtype:",target_uint8.dtype)                                                                         #   target_uint8.dtype: uint8
+        if self._args.dataset != 'kmnist' and self._args.dataset != 'mnist':
+            # print("target_pil.shape:",target_pil.shape)         #   target_pil.shape: (32, 32, 3)
+            target_pil = PIL.Image.fromarray(target_pil, 'RGB')
+
+            #---------加载PIL
+            w, h = target_pil.size
+            # print('target_pil.size=%s' % target_pil)
+
+            s = min(w, h)
+            target_pil = target_pil.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
+            target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS)
+
+            target_uint8 = np.array(target_pil, dtype=np.uint8)
+            # print("target_uint8:",target_uint8)                                                                                     #   target_uint8: [[[ 59  62  63] [ 43  46  45]
+            # print("target_uint8.type:",type(target_uint8))                                                                          #   target_uint8.type: <class 'numpy.ndarray'>
+            # print("target_uint8.shape:",target_uint8.shape)                                                                         #   ttarget_uint8.shape: (32, 32, 3)
+            # print("target_uint8.dtype:",target_uint8.dtype)                                                                         #   target_uint8.dtype: uint8
 
 
-        # Optimize projection.
-        start_time = perf_counter()
-        projected_w_steps = self.__project__(
-            G,
-            target=torch.tensor(target_uint8.transpose([2, 0, 1]), device=device),                                              #   pylint: disable=not-callable
-            num_steps=num_steps,
-            device=device,
-            verbose=True
-        )
-        # print (f'Elapsed: {(perf_counter()-start_time):.1f} s')
+            # Optimize projection.
+            start_time = perf_counter()
+            projected_w_steps = self.__project__(
+                G,
+                target=torch.tensor(target_uint8.transpose([2, 0, 1]), device=device),                                              #   pylint: disable=not-callable
+                num_steps=num_steps,
+                device=device,
+                verbose=True
+            )
+            # print (f'Elapsed: {(perf_counter()-start_time):.1f} s')
+
+        elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
+
+            target_pil = target_pil.unsqueeze(0)
+            # print("target_pil.shape:",target_pil.shape)     #   target_pil.shape: torch.Size([1,28, 28])
+  
+            transform = transforms.Resize(32)
+            target_pil = transform(target_pil)
+            # print("target_pil.shape:",target_pil.shape)     # target_pil.shape: torch.Size([1, 32, 32])
+    
+            target_pil = target_pil.numpy()
+            # print("target_pil.type:",type(target_pil))      #  target_pil.type: <class 'numpy.ndarray'>
+            # print("target_pil.shape:",target_pil.shape)     #   
+            
+            target_pil = target_pil[0]
+            # print("target_pil.shape:",target_pil.shape)     #   (32,32)
+
+            target_pil = PIL.Image.fromarray(target_pil, '1')   # 1是黑白模式
+
+            #---------加载PIL
+            w, h = target_pil.size
+            # print('target_pil.size=%s' % target_pil)
+
+            s = min(w, h)
+            target_pil = target_pil.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
+            target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS)
+            
+            target_uint8 = np.array(target_pil, dtype=np.uint8)
+            target_uint8 = torch.tensor(target_uint8)
+            target_uint8 = target_uint8.unsqueeze(0)
+            # print("target_uint8.shape:",target_uint8.shape)                               #   target_uint8.shape: torch.Size([1, 32, 32])
+
+            target_uint8 = target_uint8.numpy()
+            # print("target_uint8:",target_uint8)                                                                                     
+            # print("target_uint8.type:",type(target_uint8))                                                                        
+            # print("target_uint8.shape:",target_uint8.shape)                               #   target_uint8.shape: (1, 32, 32)
+            # print("target_uint8.dtype:",target_uint8.dtype)                               #   target_uint8.dtype: uint8                                      
+
+            # Optimize projection.
+            start_time = perf_counter()
+            projected_w_steps = self.__project__(
+                G,
+                # target=torch.tensor(target_uint8.transpose([2, 0, 1]), device=device),                                              #   pylint: disable=not-callable
+                target=torch.tensor(target_uint8, device=device),                                              #   pylint: disable=not-callable
+                num_steps=num_steps,
+                device=device,
+                verbose=True
+            )
+            # print (f'Elapsed: {(perf_counter()-start_time):.1f} s')
+
 
         # #------------maggie---------
         # print("projected_w_steps: ",projected_w_steps)                                                                        #   projected_w_steps.shape:  torch.Size([1000, 8, 512])        8是指复制的八份512向量，因为要送到stylegan2ada网络的mapping模块
@@ -699,11 +757,19 @@ class MaggieStylegan2ada:
         # label_number = int(label_number)                                                                                        #   str -> int
         # label = image_name[11:]
 
-        classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
+        #------------20210901--------
+        
+        # label_names =  self.__labelnames__() 
+        # print("label_names:",label_names)
+        #----------------------------
 
+        classification = self.__labelnames__() 
+        print("label_names:",classification)
+        # print("classification.type:",type(classification))
         img_index = f'{projected_img_index:08d}'
         label_number = int(laber_index)
         label = classification[label_number]
+        print(f"label = {laber_index:04d}-{classification[label_number]}")
 
         # print('img_index=%s'% img_index)
         # print('label_number=%s'% label_number)
@@ -756,6 +822,29 @@ class MaggieStylegan2ada:
         # print("projected_y.shape: ",projected_y.shape)                                                                        #  projected_y.shape:  torch.Size([1, 8])
         return projected_w,projected_y
         #-----------------------------------
+
+    def __labelnames__(self):
+        opt = self._args
+        print("opt.dataset:",opt.dataset)
+        
+        label_names = []
+        
+        if opt.dataset == 'cifar10':
+            label_names = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
+        
+        elif opt.dataset == 'cifar100': # = cle_train_dataloader.dataset.classes
+            label_names = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee', 'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus', 'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle', 'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch', 'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant', 'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house', 'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion', 'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle', 'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid', 'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree', 'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit', 'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal', 'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake', 'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper', 'table', 'tank', 'telephone', 'television', 'tiger', 'tractor', 'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale', 'willow_tree', 'wolf', 'woman', 'worm']
+        
+        elif opt.dataset =='svhn':
+            label_names = ['0','1','2','3','4','5','6','7','8','9']
+
+        elif opt.dataset =='kmnist':
+            label_names = ['0','1','2','3','4','5','6','7','8','9']
+
+        else:
+            raise error            
+        
+        return label_names
 
     def __run_projection_dataset_fromviewfolder(self,opt,exp_result_dir):
 
@@ -973,6 +1062,8 @@ class MaggieStylegan2ada:
         verbose                    = False,
         device: torch.device
     ):
+        # print("G.img_channels:",G.img_channels)                 #   G.img_channels: 1
+        # print("G.img_resolution:",G.img_resolution)             #   G.img_resolution: 32
         assert target.shape == (G.img_channels, G.img_resolution, G.img_resolution)
 
         def logprint(*args):
@@ -993,7 +1084,12 @@ class MaggieStylegan2ada:
         noise_bufs = { name: buf for (name, buf) in G.synthesis.named_buffers() if 'noise_const' in name }
 
         # Load VGG16 feature detector.
-        url = 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metrics/vgg16.pt'
+        if self._args.dataset != 'kmnist' and self._args.dataset != 'mnist':
+            url = 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metrics/vgg16.pt'          #该VGG模型不支持单通道样本
+        elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
+            print("请准备预训练好的单通道VGG16模型")
+            url = 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metrics/vgg16.pt' 
+
         with dnnlib.util.open_url(url) as f:
             vgg16 = torch.jit.load(f).eval().to(device)
 

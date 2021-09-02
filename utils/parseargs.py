@@ -122,7 +122,7 @@ def parse_arguments():
         #-------------------------arguments for stylegan2ada projector-------------------------
         parser_object.add_argument('--gen_network_pkl', help='Network pickle filename',default = None)
         parser_object.add_argument('--target_fname', help='Target image file to project to', metavar='FILE', default= None)
-        parser_object.add_argument('--num_steps', help='Number of optimization steps', type=int, default=100)          #   控制投影一个样本要迭代多少轮的参数
+        parser_object.add_argument('--num_steps', help='Number of optimization steps', type=int, default=10)          #   控制投影一个样本要迭代多少轮的参数
         parser_object.add_argument('--save_video', help='Save an mp4 video of optimization progress', type=bool, default=False)
         parser_object.add_argument('--target_dataset', help = 'The zip dataset path of target png images to project to', metavar='PATH',type = str, default = None)
         parser_object.add_argument('--viewdataset_path', help = 'The png dataset path of target png images to project to', metavar='PATH',type = str, default = None)
@@ -180,15 +180,15 @@ def parse_arguments():
 def reset_arguments(args):
     # set dataset parameters
     if args.dataset == 'mnist':
-        args.n_classes = 10;    args.img_size = 28;     args.channels = 1  
+        args.n_classes = 10;    args.img_size = 32;     args.channels = 1  
     elif args.dataset == 'kmnist':
-        args.n_classes = 10;    args.img_size = 28;     args.channels = 1        
+        args.n_classes = 10;    args.img_size = 32;     args.channels = 1        
     elif args.dataset == 'cifar10':
         args.n_classes = 10;    args.img_size = 32;     args.channels = 3  
     elif args.dataset == 'cifar100':
         args.n_classes = 100;   args.img_size = 32;     args.channels = 3  
     elif args.dataset == 'imagenet':
-        args.n_classes = 1000;  args.img_size = 1024;   args.channels = 3  
+        args.n_classes = 1000;  args.img_size = 256;   args.channels = 3  
     elif args.dataset == 'imagenetmixed10':
         args.n_classes = 10;    args.img_size = 256;   args.channels = 3  
     elif args.dataset == 'lsun':
@@ -196,7 +196,7 @@ def reset_arguments(args):
     elif args.dataset == 'svhn':
         args.n_classes = 10;    args.img_size = 32;     args.channels = 3  
     elif args.dataset == 'stl10':
-        args.n_classes = 10;    args.img_size = 96;     args.channels = 3          #   data预处理时从96填充到128    
+        args.n_classes = 10;    args.img_size = 64;     args.channels = 3          #   data预处理时从96填充到128    
 
     return args
 

@@ -107,13 +107,32 @@ class MixGenerate:
         local_model_pkl = "abc test"
         return local_model_pkl
 
+
+
+
     #   建立流形映射
     def projectmain(self,cle_train_dataloader):
         #分成batch输入
+        # print("cle_train_dataloader.dataset.__dict__:",cle_train_dataloader.dataset.__dict__)
+        print("cle_train_dataloader.dataset.__dict__.keys():",cle_train_dataloader.dataset.__dict__.keys())
+        # print("cle_train_dataloader.dataset.labels.shape:",cle_train_dataloader.dataset.labels.shape)
+        print(" cle_train_dataloader.dataset.data[0].shape:", cle_train_dataloader.dataset.data[0].shape)   #torch.Size([28, 28])
+        print("cle_train_dataloader..__dict__.keys():",cle_train_dataloader.__dict__.keys())
 
-        self.cle_x_train = cle_train_dataloader.dataset.data
-        self.cle_y_train = cle_train_dataloader.dataset.targets
+        # raise error
 
+        if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='kmnist':
+            self.cle_x_train = cle_train_dataloader.dataset.data        #   读出来的数据是transformer前的
+            self.cle_y_train = cle_train_dataloader.dataset.targets 
+        elif self._args.dataset =='svhn':
+            self.cle_x_train = cle_train_dataloader.dataset.data
+            self.cle_y_train = cle_train_dataloader.dataset.labels            
+
+        # print("cle_train_dataloader.dataset.__dict__:",cle_train_dataloader.dataset.__dict__)
+        # print(cle_train_dataloader.dataset.classes)
+        # print(cle_train_dataloader.dataset.class_to_idx)
+
+        # raise error
         # print("self.cle_x_train.type:",type(self.cle_x_train))                          #   self.cle_x_train.type: <class 'numpy.ndarray'>
         # print("self.cle_x_train:",self.cle_x_train)                                     #   self.cle_x_train: [[[[ 59  62  63][ 43  46  45]...
         print("self.cle_x_train.shape:",self.cle_x_train.shape)                         #   self.cle_x_train.shape: (50000, 32, 32, 3)
