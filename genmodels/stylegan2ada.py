@@ -172,6 +172,7 @@ class MaggieStylegan2ada:
         allow_tf32 = None, # Allow PyTorch to use TF32 for matmul and convolutions: <bool>, default = False
         nobench    = None, # Disable cuDNN benchmarking: <bool>, default = False
         workers    = None, # Override number of DataLoader workers: <int>, default = 3
+        pretrain_pkl_path =None, # pretrained stylegan2ADA model pkl path
     ):
         args = dnnlib.EasyDict()
         # ------------------------------------------
@@ -433,6 +434,12 @@ class MaggieStylegan2ada:
             desc += '-resumecustom'
             args.resume_pkl = resume                                                                                            #   custom path or url
 
+        # maggie-----------
+        if pretrain_pkl_path is not None:
+            args.resume_pkl = pretrain_pkl_path  
+            print("args.resume_pkl:",args.resume_pkl)
+        #---------------------
+        
         if resume != 'noresume':
             args.ada_kimg = 100                                                                                                 #   make ADA react faster at the beginning
             args.ema_rampup = None                                                                                              #   disable EMA rampup
@@ -585,7 +592,9 @@ class MaggieStylegan2ada:
 
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
+
         os.makedirs(exp_result_dir,exist_ok=True)    
 
         target_x_set = self.ori_x_set

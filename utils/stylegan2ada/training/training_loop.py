@@ -170,6 +170,11 @@ def training_loop(
     G_ema = copy.deepcopy(G).eval()
 
     # Resume from existing pickle.
+    #--------------
+    print("resume_pkl:",resume_pkl)
+    print("rank:",rank)
+    # raise error
+    #--------------
     if (resume_pkl is not None) and (rank == 0):
         print(f'Resuming from "{resume_pkl}"')
         with dnnlib.util.open_url(resume_pkl) as f:

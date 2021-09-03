@@ -385,7 +385,6 @@ class MaggieDataset:
         return self._testdataset
 
     def __loadtraindataset__(self):
-        print("flag-20210826--------------------")
         if self._args.dataset == 'mnist':
             os.makedirs("/home/data/maggie/mnist", exist_ok=True)
             train_dataset = MaggieMNIST(                                             

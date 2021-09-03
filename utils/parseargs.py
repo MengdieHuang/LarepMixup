@@ -118,6 +118,7 @@ def parse_arguments():
         parser_object.add_argument('--nhwc', help='Use NHWC memory format with FP16', type=bool, metavar='BOOL')
         parser_object.add_argument('--nobench', help='Disable cuDNN benchmarking', type=bool, metavar='BOOL')
         parser_object.add_argument('--allow-tf32', help='Allow PyTorch to use TF32 internally', type=bool, metavar='BOOL')
+        parser_object.add_argument('--pretrain_pkl_path', help = 'pretrained stylegan2ada model path',type = str, default=None)
 
         #-------------------------arguments for stylegan2ada projector-------------------------
         parser_object.add_argument('--gen_network_pkl', help='Network pickle filename',default = None)
@@ -288,7 +289,7 @@ def get_stylegan2ada_args(args_dictionary_copy):
     setup_training_loop_kwargs_list = [
         'gpus','snap','metrics','seed','data','cond','subset','mirror','cfg','gamma',
         'kimg','batch_size','aug','p','target','augpipe','resume','freezed','fp32','nhwc',
-        'allow_tf32','nobench','workers']
+        'allow_tf32','nobench','workers','pretrain_pkl_path']
 
     stylegan2ada_config_kwargs = dict()
     for key in setup_training_loop_kwargs_list:
