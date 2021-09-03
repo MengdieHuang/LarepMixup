@@ -101,6 +101,8 @@ class MixGenerate:
             self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
             snapshot_network_pkls = self._model.snapshot_network_pkls()                                                         #   返回一个snapshot_network_pkl列表
             snapshot_network_pkl = snapshot_network_pkls[-1]
+        else:
+            print("without gen model")
         return snapshot_network_pkl
 
     def __getlocalpkl__(self)->"CustomGenNet":

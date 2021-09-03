@@ -122,7 +122,7 @@ def parse_arguments():
         #-------------------------arguments for stylegan2ada projector-------------------------
         parser_object.add_argument('--gen_network_pkl', help='Network pickle filename',default = None)
         parser_object.add_argument('--target_fname', help='Target image file to project to', metavar='FILE', default= None)
-        parser_object.add_argument('--num_steps', help='Number of optimization steps', type=int, default=10)          #   控制投影一个样本要迭代多少轮的参数
+        parser_object.add_argument('--num_steps', help='Number of optimization steps', type=int, default=1000)          #   控制投影一个样本要迭代多少轮的参数
         parser_object.add_argument('--save_video', help='Save an mp4 video of optimization progress', type=bool, default=False)
         parser_object.add_argument('--target_dataset', help = 'The zip dataset path of target png images to project to', metavar='PATH',type = str, default = None)
         parser_object.add_argument('--viewdataset_path', help = 'The png dataset path of target png images to project to', metavar='PATH',type = str, default = None)

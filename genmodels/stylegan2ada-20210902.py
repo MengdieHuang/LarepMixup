@@ -658,29 +658,85 @@ class MaggieStylegan2ada:
         # Load networks.
         device = torch.device('cuda')
         with dnnlib.util.open_url(network_pkl) as fp:
-            G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                         #   load_network_pkl（）会调用到persistency中的class解释器。
+            G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                                           #   load_network_pkl（）会调用到persistency中的class解释器。
+
+        # #-----maggie PIL
+        # # print("target_pil:",target_pil)                                                                                         #   target_pil: tensor([[[-1.2854e+00, -1.5955e+00, -1.4598e+00,  ...,  6.3375e-01,
+        # # print("target_pil.type:",type(target_pil))                                                                              #   target_pil.type: <class 'torch.Tensor'>
+        # # print("target_pil.shape:",target_pil.shape)                                                                             #   target_pil.shape: torch.Size([3, 32, 32])
+        # # print("target_pil.dtype:",target_pil.dtype)                                                                             #   target_pil.dtype: torch.float32
+        
+        # target_pil = target_pil.unsqueeze(0)
+        # # print("target_pil.shape:",target_pil.shape)                                                                             #   target_pil.shape: torch.Size([1, 3, 32, 32])
+
+        # target_pil = (target_pil + 1) * (255/2)                                                                                 
+        # target_pil = target_pil.permute(0, 2, 3, 1).clamp(0, 255).to(torch.uint8)[0].cpu().numpy()                               
+
+        # print("target_pil:",target_pil)                                                                                         #   target_pil: [[[ 59  62  63]  [ 43  46  45]
+        # print("target_pil.type:",type(target_pil))                                                                              #   target_pil.type: <class 'numpy.ndarray'>                                                                          
+        # print("target_pil.shape:",target_pil.shape)                                                                             #   target_pil.shape: (32, 32, 3)                                                          
+        # print("target_pil.dtype:",target_pil.dtype)                                                                             #   target_pil.dtype: uint8                                                                              
+
         
         if self._args.dataset != 'kmnist' and self._args.dataset != 'mnist':
-            # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (32, 32, 3)   
+            # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (32, 32, 3)
+            # print("target_pil:",target_pil)                       #     [216 184 140][151 118  84][123  92  72]]]
+            # print("target_pil[15][15]：",target_pil[15][15])         #  target_pil[15][15]： [247 234 212]       
             target_pil = PIL.Image.fromarray(target_pil, 'RGB')     #   fromarray接收的是WHC格式或WH格式
-        
+            
             #---------加载PIL并resize 直接在0-255原图上resize
             w, h = target_pil.size
+            # print('target_pil.size=%s' % target_pil)
+
             s = min(w, h)
             target_pil = target_pil.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
             target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS)
+            # print("target_pil：",target_pil)                    #   target_pil： <PIL.Image.Image image mode=1 size=32x32 at 0x7F383C03ADD0>
 
             target_uint8 = np.array(target_pil, dtype=np.uint8)
+            # print("target_uint8[15][15]：",target_uint8[15][15])          # target_uint8[15][15]： [247 234 212]      
 
             # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (32, 32, 3)
             target_uint8 = target_uint8.transpose([2, 0, 1])
             # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (3, 32, 32) 
 
         elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
+            # #方法一：
+            # # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: torch.Size([28, 28]) kmnist dataset读出来的默认就是tensor
+            # # print("target_pil[15]：",target_pil[15])              
+            # # target_pil[15]： tensor([  0,   0,   0,   0,   0,  16, 246, 255, 255, 255, 230,  19,   0,   0,  0,   0,   0,   0,   0,   0, 144, 255,  95,   0,   0,   0,   0,   0]
+            # target_pil = target_pil.numpy()
+            # # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (28, 28)
+            
+            # # numpy resize
+            # target_pil = target_pil.reshape(-1, 28, 28)
+            # target_pil = np.pad(target_pil, [(0,0), (2,2), (2,2)], 'constant', constant_values=0)        
+            # # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (1,32,32)
+
+            # target_uint8 = np.array(target_pil, dtype=np.uint8)           
+            # # print("target_uint8[0][17]：",target_uint8[0][17])                #   target_uint8[0][17]： [  0   0   0   0   0   0   0  16 246 255 255 255 230  19   0   0   0   0   0   0   0   0 144 255  95   0   0   0   0   0   0   0]
+            # # print("target_uint8.shape:",target_uint8.shape)                               #   target_uint8.shape: (1, 32, 32)
+            # # for i in range(27):
+            # #     print(target_uint8[0][i])                
+            
+     
+     
+            # target_pil = target_pil[0]
+            # # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (32,32)
+            # # for i in range(27):
+            # #     print(target_pil[i])                
+                        
+            # # numpy转PIL
+            # # PIL.Image.fromarray(img[:, :, 0], 'L').save(fname)
+
+            # target_pil = PIL.Image.fromarray(target_pil, 'L')     #   fromarray接收的是WHC格式或WH格式
+            #--------------------------------------------------
+            # 方法二
             target_pil = target_pil.numpy()                         
             target_pil = PIL.Image.fromarray(target_pil, 'L')     #   fromarray接收的是WHC格式或WH格式 28,28
             
             w, h = target_pil.size
+
             s = min(w, h)
             target_pil = target_pil.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
             target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS) #32,32
@@ -706,6 +762,9 @@ class MaggieStylegan2ada:
             verbose=True
         )        
         # # print (f'Elapsed: {(perf_counter()-start_time):.1f} s')
+        # print("projected_w_steps.shape:",projected_w_steps.shape)   #   projected_w_steps.shape: torch.Size([10, 8, 512])
+        # print("projected_w[0][:10]:",projected_w_steps[0][0][:10])  #   projected_w[0][:10]: tensor([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan], device='cuda:0')
+        # raise error
 
 
         # #------------maggie---------
@@ -723,7 +782,14 @@ class MaggieStylegan2ada:
                 synth_image = (synth_image + 1) * (255/2)
                 synth_image = synth_image.permute(0, 2, 3, 1).clamp(0, 255).to(torch.uint8)[0].cpu().numpy()
                 video.append_data(np.concatenate([target_uint8, synth_image], axis=1))
-            video.close()  
+            video.close()
+
+        #----------------maggie add 读取target iamge的label---------------------
+        #image_name = 00000000-6-frog
+        # img_index = image_name[0:8]
+        # label_number = image_name[9:10]                                                                                         #   此时 label_number是str
+        # label_number = int(label_number)                                                                                        #   str -> int
+        # label = image_name[11:]
 
         #------------20210901--------
         
@@ -744,10 +810,12 @@ class MaggieStylegan2ada:
         # print('label=%s'% label)
         
         #   存原图
+        
         # Save final projected frame and W vector.
         #-=-----maggie注释 不存原图
         target_pil.save(f'{outdir}/original-{img_index}-{label_number}-{label}.png')                                            #   指的是原图
         #-=-------------
+        # raise error
         #   存投影
         projected_w = projected_w_steps[-1]                                                                                     #   projected_w.shape:  torch.Size([8, 512])    
 
@@ -756,8 +824,8 @@ class MaggieStylegan2ada:
         # print("projected_w[0].dtype:",projected_w[0].dtype)
         # print("projected_w[0][:10]:",projected_w[0][:10])
 
-        # print("projected_w[0][:10]:",projected_w[0][:10])           #   w_out[step][0][:10]:  tensor([ 0.3518,  0.8602,  0.6213,  0.1626,  1.1341,  1.2988,  1.2405,  1.2416,
-        # raise error
+        # for i in range(512):
+        #     print(projected_w[0][i])                
         synth_image = G.synthesis(projected_w.unsqueeze(0), noise_mode='const')                                                 #   projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
 
         
@@ -1059,7 +1127,7 @@ class MaggieStylegan2ada:
         if self._args.dataset != 'kmnist' and self._args.dataset != 'mnist':
             url = 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metrics/vgg16.pt'          #该VGG模型不支持单通道样本
         elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
-            # print("请准备预训练好的单通道VGG16模型")
+            print("请准备预训练好的单通道VGG16模型")
             url = 'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metrics/vgg16.pt' 
 
         with dnnlib.util.open_url(url) as f:
@@ -1167,10 +1235,9 @@ class MaggieStylegan2ada:
 
             w_out[step] = w_opt.detach()[0]             
     
-            # #---------maggie----------
+            #---------maggie----------
             # print("w_out[step].shape: ", w_out[step].shape)         #   w_out[step].shape:  torch.Size([1, 512])
-            # print("w_out[step][0][:10]: ", w_out[step][0][:10]) #   projected_w[0][:10]: tensor([ 0.3518,  0.8602,  0.6213,  0.1626,  1.1341,  1.2988,  1.2405,  1.2416,
-            # #-------------------------
+            #-------------------------
 
             # Normalize noise.
             with torch.no_grad():
