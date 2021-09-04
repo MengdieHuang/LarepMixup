@@ -168,7 +168,7 @@ class MixGenerate:
                     # print("cle_y_trainbatch:",cle_y_trainbatch)                                     #   cle_y_trainbatch: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7,
                     # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))                            #   cle_y_trainbatch.len: 256
 
-                    print(f"Projecting *{self._args.dataset}* {batch_index}/{batch_num} batch training sets...")                      #   projecting 00000031 image:
+                    print(f"Projecting *{self._args.dataset}* {batch_index}/{batch_num} batch data sets...")                      #   projecting 00000031 image:
                     pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                                                                               #   numpy
                     
                     # print("pro_w_trainbatch.type:",type(pro_w_trainbatch))                              #   pro_w_trainbatch.type: <class 'torch.Tensor'>
@@ -376,9 +376,12 @@ class MixGenerate:
         if self._args.gen_model == "stylegan2ada":
             
             if self._args.mixed_dataset ==None:
-                print("无 mix dataset path")
-                self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
-            else:
+                
+                if self._args.generate_seeds is not None:
+                    self._model.generate(self._exp_result_dir)
+                else:
+                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+            elif self._args.mixed_dataset !=None:
                 print("有 mix dataset path")
                 self._model.generate(self._exp_result_dir)
 

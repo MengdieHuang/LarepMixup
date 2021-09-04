@@ -16,6 +16,7 @@ import os
 import json
 import tempfile
 import torch
+from torchvision.models.shufflenetv2 import channel_shuffle
 import utils.stylegan2ada.dnnlib as dnnlib       
 from utils.stylegan2ada.training import training_loop
 from utils.stylegan2ada.metrics import metric_main
@@ -516,7 +517,6 @@ class MaggieStylegan2ada:
     
         return snapshot_network_pkls
 
-
 #-----------------投影--------------------
     def wyset(self):
         return self.projected_w_set,self.projected_y_set
@@ -533,8 +533,6 @@ class MaggieStylegan2ada:
         projected_w_set, projected_y_set = self.__projectmain__(self._args, self._exp_result_dir,ori_x_set, ori_y_set)
         self.projected_w_set = projected_w_set
         self.projected_y_set = projected_y_set
-
-
 
     def __projectmain__(self, opt, exp_result_dir,ori_x_set, ori_y_set):
         print("running projecting main()..............")
@@ -592,8 +590,8 @@ class MaggieStylegan2ada:
 
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
 
         os.makedirs(exp_result_dir,exist_ok=True)    
 
@@ -669,8 +667,15 @@ class MaggieStylegan2ada:
         with dnnlib.util.open_url(network_pkl) as fp:
             G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                         #   load_network_pkl（）会调用到persistency中的class解释器。
         
-        if self._args.dataset != 'kmnist' and self._args.dataset != 'mnist':
+        if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='svhn':
+            if self._args.dataset =='svhn':
+                # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (3, 32, 32)
+                target_pil = target_pil.transpose([1, 2, 0])
+                # print("target_pil.shape:",target_pil.shape)           #  target_pil.shape: (32, 32, 3)
+
             # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (32, 32, 3)   
+            # print("target_pil[:,:,0]:",target_pil[:,:,0])
+
             target_pil = PIL.Image.fromarray(target_pil, 'RGB')     #   fromarray接收的是WHC格式或WH格式
         
             #---------加载PIL并resize 直接在0-255原图上resize
@@ -680,10 +685,12 @@ class MaggieStylegan2ada:
             target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS)
 
             target_uint8 = np.array(target_pil, dtype=np.uint8)
-
+            # print("target_uint8.shape:",target_uint8.shape)                                 #      
+            # print("target_uint8[:,:,0]:",target_uint8[:,:,0])
+            
             # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (32, 32, 3)
             target_uint8 = target_uint8.transpose([2, 0, 1])
-            # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (3, 32, 32) 
+            # print("target_uint8.shape:",target_uint8.shape)                                 #              
 
         elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
             target_pil = target_pil.numpy()                         
@@ -699,10 +706,6 @@ class MaggieStylegan2ada:
      
             target_uint8 = torch.tensor(target_uint8).unsqueeze(0)
             target_uint8 = target_uint8.numpy()
-            # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (1, 32, 32) 
-            # for i in range(32):
-            #     print(target_uint8[0][i])                
-                        
 
         # Optimize projection.计算投影
         start_time = perf_counter()
@@ -754,8 +757,10 @@ class MaggieStylegan2ada:
         
         #   存原图
         # Save final projected frame and W vector.
-        #-=-----maggie注释 不存原图
+        # -=-----maggie注释 不存原图
         target_pil.save(f'{outdir}/original-{img_index}-{label_number}-{label}.png')                                            #   指的是原图
+        
+        # raise error
         #-=-------------
         #   存投影
         projected_w = projected_w_steps[-1]                                                                                     #   projected_w.shape:  torch.Size([8, 512])    
@@ -1674,21 +1679,39 @@ class MaggieStylegan2ada:
                 generated_x_set, generated_y_set = self.__generate_dataset__(opt, exp_result_dir)
             
             elif opt.mixed_dataset == None:
-                generated_x_set, generated_y_set = self.__generate_images__(
-                    ctx = click.Context,                                                                                        #   没调试好
-                    network_pkl = opt.gen_network_pkl,
-                    # seeds = opt.seeds,
-                    # seeds = [600, 601, 602, 603, 604, 605],
-                    seeds = [500, 501, 502, 503, 504, 505],
-                    truncation_psi = opt.truncation_psi,
-                    noise_mode = opt.noise_mode,
-                    outdir = exp_result_dir,
-                    class_idx = opt.class_idx,
-                    projected_w = opt.projected_w,
-                    mixed_label_path = None
-                    # mixed_label_path = opt.projected_w_label
-                )
-        
+                if opt.projected_w is not None:
+                    print("根据projected_w生成图像")
+                    generated_x_set, generated_y_set = self.__generate_images__(
+                        ctx = click.Context,                                                                                        #   没调试好
+                        network_pkl = opt.gen_network_pkl,
+                        # seeds = opt.seeds,
+                        # seeds = [600, 601, 602, 603, 604, 605],
+                        seeds = [500, 501, 502, 503, 504, 505],
+                        truncation_psi = opt.truncation_psi,
+                        noise_mode = opt.noise_mode,
+                        outdir = exp_result_dir,
+                        class_idx = opt.class_idx,
+                        projected_w = opt.projected_w,
+                        mixed_label_path = None
+                        # mixed_label_path = opt.projected_w_label
+                    )
+                elif opt.projected_w is None:
+                    print("根据seed生成图像")
+                    print("opt.generate_seeds:",opt.generate_seeds)
+                    generated_x_set, generated_y_set = self.__generate_images__(
+                        ctx = click.Context,                                                                                        #   没调试好
+                        network_pkl = opt.gen_network_pkl,
+                        seeds = opt.generate_seeds,
+                        truncation_psi = opt.truncation_psi,
+                        noise_mode = opt.noise_mode,
+                        outdir = exp_result_dir,
+                        class_idx = opt.class_idx,
+                        projected_w = opt.projected_w,
+                        mixed_label_path = None
+                        # mixed_label_path = opt.projected_w_label
+                    )              
+                    raise error      
+            
         return generated_x_set, generated_y_set
 
     def __generatefromntensor__(self):
@@ -2064,6 +2087,7 @@ class MaggieStylegan2ada:
             return generated_x, generated_y
             #--------------------------------------
 
+        #-----------20210903---------没有投影向量时才会往下进行--------------
         if seeds is None:
             ctx.fail('--seeds option is required when not using --projected_w')
 
@@ -2083,7 +2107,20 @@ class MaggieStylegan2ada:
             z = torch.from_numpy(np.random.RandomState(seed).randn(1, G.z_dim)).to(device)
             img = G(z, label, truncation_psi=truncation_psi, noise_mode=noise_mode)
             img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
-            PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB').save(f'{outdir}/seed{seed:04d}.png') 
+
+            #-----------maggie20210903-----------
+            # print("img.shape:",img.shape)   #   img.shape: torch.Size([1, 32, 32, 1])
+            _, _, _, channel_num = img.shape
+            
+            assert channel_num in [1, 3]
+            if channel_num == 1:
+                PIL.Image.fromarray(img[0][:, :, 0].cpu().numpy(), 'L').save(f'{outdir}/seed{seed:04d}.png') 
+            if channel_num == 3:
+                PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB').save(f'{outdir}/seed{seed:04d}.png') 
+
+            #-------------------------------------
+
+            # PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB').save(f'{outdir}/seed{seed:04d}.png') 
 
         #------------maggie add---------------
         generated_x = img[0]

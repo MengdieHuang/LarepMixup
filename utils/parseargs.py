@@ -135,7 +135,8 @@ def parse_arguments():
         parser_object.add_argument('--noise-mode', help='Noise mode', type=click.Choice(['const', 'random', 'none']), default='const')
         parser_object.add_argument('--projected_w', help='Projection result file', type=str, metavar='FILE',default = None)
         parser_object.add_argument('--mixed_dataset', help='Projection result file', type=str, metavar='FILE',default = None)            
-        parser_object.add_argument('--seeds', type=Optional[List[int]], help='List of random seeds')
+        # parser_object.add_argument('--generate_seeds', type=Optional[List[int]], help='List of random generate seeds')
+        parser_object.add_argument('--generate_seeds', nargs='+', type=int, help='List of random generate seeds',default = None, )
         parser_object.add_argument('--projected_w_label', help='Projection result file', type=str, metavar='FILE',default = None)
         
         #-------------------------arguments for stylegan2ada interpolation-------------------------
