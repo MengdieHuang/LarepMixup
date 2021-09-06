@@ -40,9 +40,20 @@ def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.D
 
         with torch.no_grad():
             output = classifier(imgs)
-            # print("output:",output)
+            # print("output:",output)                                     #   output: tensor([[-3.9918e+00, -4.0301e+00,  6.1573e+00,  ...,  1.5459e+00
+            # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
+            # softmax_output = torch.nn.functional.softmax(output, dim = 1)
+            # print("softmax_output:",softmax_output)                     #   softmax_output: tensor([[2.6576e-05, 2.5577e-05, 6.7951e-01,  ..., 6.7526e-03, 4.7566e-05,,
+            # print("softmax_output.shape:",softmax_output.shape)         #   softmax_output.shape: torch.Size([256, 10])              
+            # raise Exception("maggie error 20210906")
+
             loss = classify_loss(output,labs)
             _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
+            
+            # loss = classify_loss(softmax_output,labs)
+            # _, predicted_label_index = torch.max(softmax_output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
+                        
+            
             # print("predicted_label_index:",predicted_label_index)                                                           #   predicted_label_index: tensor([1, 4, 0, 6, 0, 0, 7, 8, 0, 3, 3, 0, 7, 4, 9, 3], device='cuda:0')
             # print("labs:",labs)                                                                                             #   labs: tensor([1, 6, 8, 2, 8, 8, 5, 0, 1, 1, 9, 0, 7, 4, 1, 2], device='cuda:0')
             batch_same_num = (predicted_label_index == labs).sum().item()

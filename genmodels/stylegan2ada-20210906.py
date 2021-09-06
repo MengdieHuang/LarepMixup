@@ -521,6 +521,12 @@ class MaggieStylegan2ada:
     def wyset(self):
         return self.projected_w_set,self.projected_y_set
 
+    # def project(self,exp_result_dir, ori_x_set = None, ori_y_set = None):
+    #     self._exp_result_dir = exp_result_dir
+    #     projected_w_set, projected_y_set = self.__projectmain__(self._args, self._exp_result_dir,ori_x_set, ori_y_set)
+    #     self.projected_w_set = projected_w_set
+    #     self.projected_y_set = projected_y_set
+
     def project(self,exp_result_dir, ori_x_set = None, ori_y_set = None,batch_index=None):
         self._exp_result_dir = exp_result_dir
         self._batch_index = batch_index
@@ -559,14 +565,13 @@ class MaggieStylegan2ada:
 
     def __labelnames__(self):
         opt = self._args
-        # print("opt.dataset:",opt.dataset)
+        print("opt.dataset:",opt.dataset)
         
         label_names = []
         
         if opt.dataset == 'cifar10':
             label_names = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
-            #   label_names = ['飞机'，'汽车'，'鸟'，'猫'，'鹿'，'狗'，'青蛙'，'马'，'船'，'卡车']
-
+        
         elif opt.dataset == 'cifar100': # = cle_train_dataloader.dataset.classes
             label_names = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee', 'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus', 'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle', 'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch', 'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant', 'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house', 'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion', 'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle', 'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid', 'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree', 'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit', 'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal', 'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake', 'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper', 'table', 'tank', 'telephone', 'television', 'tiger', 'tractor', 'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale', 'willow_tree', 'wolf', 'woman', 'worm']
         
@@ -576,13 +581,8 @@ class MaggieStylegan2ada:
         elif opt.dataset =='kmnist':
             label_names = ['0','1','2','3','4','5','6','7','8','9']
         
-        elif opt.dataset =='stl10': # cle_train_dataloader.dataset.classes 标签序号是0-9, dataloader 已调整数字0的标签为0
+        elif opt.dataset =='stl10': # cle_train_dataloader.dataset.classes 标签序号是1-10
             label_names = ['airplane', 'bird', 'car', 'cat', 'deer', 'dog', 'horse', 'monkey', 'ship', 'truck']
-            #   label_names = ['飞机'，'鸟'，'汽车'，'猫'，'鹿'，'狗'，'马'，'猴子'，'船'，'卡车'] 
-        
-        elif opt.dataset =='imagenetmixed10':
-            label_names = ['dog,','bird','insect','monkey','car','feline','truck','fruit','fungus','boat']        
-            #   label_names = ['狗，'，'鸟'，'昆虫'，'猴子'，'汽车'，'猫'，'卡车'，'水果'，'真菌'，'船']
         else:
             raise error            
         
@@ -592,8 +592,8 @@ class MaggieStylegan2ada:
 
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
 
         os.makedirs(exp_result_dir,exist_ok=True)    
 
@@ -640,9 +640,6 @@ class MaggieStylegan2ada:
 
                 )
                 #-----------------maggie add-----------
-                # print("projected_w.shape:",projected_w.shape)       #   projected_w.shape: torch.Size([10, 512])
-                # print("projected_y.shape:",projected_y.shape)
-                # raise error
                 projected_x_set.append(projected_w)
                 projected_y_set.append(projected_y)         
                 #--------------------------------------                   
@@ -672,8 +669,8 @@ class MaggieStylegan2ada:
         with dnnlib.util.open_url(network_pkl) as fp:
             G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                         #   load_network_pkl（）会调用到persistency中的class解释器。
         
-        if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='svhn' or self._args.dataset =='stl10' or self._args.dataset =='imagenetmixed10':
-            # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (256, 256, 3)
+        if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='svhn' or self._args.dataset =='stl10':
+            # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (3, 96, 96)
             # raise error
             if self._args.dataset =='svhn' or self._args.dataset =='stl10':
                 # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (3, 32, 32)
@@ -852,12 +849,12 @@ class MaggieStylegan2ada:
         projected_y = int(laber_index)                                                                                              #   这时的label还是一个数字 projected_y.shape = int
         projected_y = projected_y * torch.ones(G.mapping.num_ws, dtype = int)                                                   #   生成一个G.mapping.num_ws维整型张量
 
-        # print("projected_w.shape: ",projected_w.shape)                                                                        #  projected_w.shape:  torch.Size([8, 512])  # stl10 projected_w.shape:  torch.Size([10, 512])
-        # print("projected_y: ",projected_y)                                                                                      #  projected_y:  tensor([[3., 3., 3., 3., 3., 3., 3., 3.]])
-        # print("projected_y.shape: ",projected_y.shape)                                                                        #  stl10 projected_y.shape:  torch.Size([10])  #projected_y.shape:  torch.Size([8])
-        # raise error
+        # print("projected_w.shape: ",projected_w.shape)                                                                        #  projected_w.shape:  torch.Size([8, 512])
+        print("projected_y: ",projected_y)                                                                                      #  projected_y:  tensor([[3., 3., 3., 3., 3., 3., 3., 3.]])
+        # print("projected_y.shape: ",projected_y.shape)                                                                        #  projected_y.shape:  torch.Size([1, 8])
         return projected_w,projected_y
         #-----------------------------------
+
 
     def __run_projection_dataset_fromviewfolder(self,opt,exp_result_dir):
 
@@ -992,7 +989,6 @@ class MaggieStylegan2ada:
         # #------------maggie---------
         # print("projected_w_steps: ",projected_w_steps)                                                                        #   projected_w_steps.shape:  torch.Size([1000, 8, 512])        8是指复制的八份512向量，因为要送到stylegan2ada网络的mapping模块
         # print("projected_w_steps.shape: ",projected_w_steps.shape)                                                            #   projected_w_steps.shape:  torch.Size([1000, 8, 512])
-        # raise error
         # #---------------------------
 
         # Render debug output: optional video and projected image and W vector.
@@ -1230,8 +1226,7 @@ class MaggieStylegan2ada:
 
         #---------maggie----------
         # print("w_out.shape: ", w_out.shape)                         #   w_out.shape:  torch.Size([1000, 1, 512])
-        # print("G.mapping.num_ws: ",G.mapping.num_ws)                #   G.mapping.num_ws = 8                # STL10 G.mapping.num_ws:  10
-        # raise error
+        # print("G.mapping.num_ws: ",G.mapping.num_ws)                #   G.mapping.num_ws = 8
         #-------------------------
         return w_out.repeat([1, G.mapping.num_ws, 1])
     
@@ -1308,8 +1303,6 @@ class MaggieStylegan2ada:
         interpolated_w_set = []
         interpolated_y_set = []
         #--------------------------
-        print("projected_w_set_x.shape:",projected_w_set_x.shape)           #   projected_w_set_x.shape: torch.Size([38, 10, 512])
-        print("projected_w_set_y.shape:",projected_w_set_y.shape)
 
         if opt.mix_w_num == 2:
             print("Dual mixup----------------------")
@@ -1343,14 +1336,9 @@ class MaggieStylegan2ada:
                 
                     # print("w_mixed.shape: ",w_mixed.shape)                                                                          #   w_mixed.shape:  torch.Size([1, 512]) 
                     # print("y_mixed.shape: ",y_mixed.shape)                                                                          #   y_mixed.shape:  torch.Size([1, 10])
-                    # print("projected_w_set_x.size(1):",projected_w_set_x.size(1))       #   stl10, projected_w_set_x.size(1): 10   cifar10: projected_w_set_x.size(1): 8
-                    # print("projected_w_set_y.size(1):",projected_w_set_y.size(1))       #   projected_w_set_y.size(1): 10 projected_w_set_y.size(1): 8
-                    repeat_num = projected_w_set_x.size(1)
-                    # raise error
-                    # w_mixed = w_mixed.repeat([8,1])       
-                    # y_mixed = y_mixed.repeat([8,1])
-                    w_mixed = w_mixed.repeat([repeat_num,1])       
-                    y_mixed = y_mixed.repeat([repeat_num,1])                    
+
+                    w_mixed = w_mixed.repeat([8,1])       
+                    y_mixed = y_mixed.repeat([8,1])
                     # print("w_mixed: ",w_mixed)                             
                     # print("w_mixed.shape: ",w_mixed.shape)                                                                      #   w_mixed.shape:  torch.Size([8,512])
                     # print("y_mixed: ",y_mixed)                             
@@ -1413,12 +1401,8 @@ class MaggieStylegan2ada:
                     # print("w_mixed.shape: ",w_mixed.shape)                                                       #   w_mixed.shape:  torch.Size([1, 512]) 
                     # print("y_mixed.shape: ",y_mixed.shape)                                                       #   y_mixed.shape:  torch.Size([1, 10])
 
-                    repeat_num = projected_w_set_x.size(1)
-                    # raise error
-                    # w_mixed = w_mixed.repeat([8,1])       
-                    # y_mixed = y_mixed.repeat([8,1])
-                    w_mixed = w_mixed.repeat([repeat_num,1])       
-                    y_mixed = y_mixed.repeat([repeat_num,1]) 
+                    w_mixed = w_mixed.repeat([8,1])       
+                    y_mixed = y_mixed.repeat([8,1])
                     # print("w_mixed: ",w_mixed)                             
                     # print("w_mixed.shape: ",w_mixed.shape)                                                        #   w_mixed.shape:  torch.Size([8,512])
                     # print("y_mixed: ",y_mixed)                             
@@ -1829,7 +1813,7 @@ class MaggieStylegan2ada:
             w = w[-1]                                                                                                           #   w.shape: torch.Size([1, 8,512]))         
             projected_w_set_x.append(w)                                                                                         
         projected_w_set_x = torch.stack(projected_w_set_x)           
-        # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                               #   projected_w_set_x.shape: torch.Size([37, 8, 512])   #stl10 projected_w_set_x.shape: torch.Size([38, 10, 512])
+        # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                               #   projected_w_set_x.shape: torch.Size([37, 8, 512])
 
         projected_w_set_y = []       
         for label_npz_path in label_npz_paths:                                                                                  
@@ -1839,9 +1823,9 @@ class MaggieStylegan2ada:
             y = y[-1]                                                                                                           #   y.shape: torch.Size([1, 8]))
             projected_w_set_y.append(y)
         projected_w_set_y = torch.stack(projected_w_set_y)           
-        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])  #   projected_w_set_y.shape: torch.Size([38, 10])
+        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])
         projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)                           
-        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                       #   projected_w_set_y.shape: torch.Size([37, 8, 10])    #projected_w_set_y.shape: torch.Size([38, 10, 10])
+        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                       #   projected_w_set_y.shape: torch.Size([37, 8, 10])
 
         # raise error
         interpolated_w_set, interpolated_y_set = self.__getmixededwy__(opt, projected_w_set_x,projected_w_set_y,exp_result_dir)
@@ -1850,6 +1834,69 @@ class MaggieStylegan2ada:
         #------maggie add----------
         return interpolated_w_set, interpolated_y_set
         #--------------------------
+
+    # # def __DatasetTwoMixup__(self,opt,exp_result_dir,npzfile_path,npzfile_name):
+    # def __Dataset2Mixup__(self,opt,exp_result_dir,projected_w_npz_paths,label_npz_paths):
+
+    #     print("flag: DatasetTwoMixup")
+    #     device = torch.device('cuda')
+    #     projected_w_set_x = []       
+    #     for projected_w_path in projected_w_npz_paths:                                                                                   
+    #         w = np.load(projected_w_path)['w']
+    #         w = torch.tensor(w, device=device)                                                                                 
+    #         # print("w.shape:",w.shape)
+    #         w = w[-1]                                                                                                           #   w.shape: torch.Size([1, 8,512]))         
+    #         projected_w_set_x.append(w)                                                                                         
+    #     projected_w_set_x = torch.stack(projected_w_set_x)           
+    #     # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                               #   projected_w_set_x.shape: torch.Size([37, 8, 512])
+
+    #     projected_w_set_y = []       
+    #     for label_npz_path in label_npz_paths:                                                                                  
+    #         y = np.load(label_npz_path)['w']
+    #         y = torch.tensor(y, device=device)                                                                                 
+    #         # print("y.shape:",y.shape)
+    #         y = y[-1]                                                                                                           #   y.shape: torch.Size([1, 8]))
+    #         projected_w_set_y.append(y)
+    #     projected_w_set_y = torch.stack(projected_w_set_y)           
+    #     # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])
+    #     projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)                           
+    #     # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                       #   projected_w_set_y.shape: torch.Size([37, 8, 10])
+
+    #     # raise error
+    #     interpolated_w_set, interpolated_y_set = self.__getmixededwy__(opt, projected_w_set_x,projected_w_set_y,exp_result_dir)
+    #     return interpolated_w_set, interpolated_y_set
+
+    # # def __DatasetThreeMixup__(self,opt,exp_result_dir,npzfile_path):
+    # def __Dataset3Mixup__(self,opt,exp_result_dir,projected_w_npz_paths,label_npz_paths):
+
+    #     print("flag: DatasetThreeMixup")
+    #     device = torch.device('cuda')
+    #     projected_w_set_x = []       
+    #     for projected_w_path in projected_w_npz_paths:                                                                                   
+    #         w = np.load(projected_w_path)['w']
+    #         w = torch.tensor(w, device=device)                                                                                 
+    #         # print("w.shape:",w.shape)
+    #         w = w[-1]                                                                                                           #   w.shape: torch.Size([1, 8,512]))         
+    #         projected_w_set_x.append(w)                                                                                         
+    #     projected_w_set_x = torch.stack(projected_w_set_x)           
+    #     # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                               #   projected_w_set_x.shape: torch.Size([37, 8, 512])
+
+    #     projected_w_set_y = []       
+    #     for label_npz_path in label_npz_paths:                                                                                  
+    #         y = np.load(label_npz_path)['w']
+    #         y = torch.tensor(y, device=device)                                                                                 
+    #         # print("y.shape:",y.shape)
+    #         y = y[-1]                                                                                                           #   y.shape: torch.Size([1, 8]))
+    #         projected_w_set_y.append(y)
+    #     projected_w_set_y = torch.stack(projected_w_set_y)           
+    #     # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])
+    #     projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)                           
+    #     # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                       #   projected_w_set_y.shape: torch.Size([37, 8, 10])
+
+    #     # raise error
+    #     interpolated_w_set, interpolated_y_set = self.__getmixededwy__(opt, projected_w_set_x,projected_w_set_y,exp_result_dir)
+    #     return interpolated_w_set, interpolated_y_set
+
 
 #-----------------生成--------------------
     def genxyset(self):
@@ -1973,7 +2020,7 @@ class MaggieStylegan2ada:
             
             ws = interpolated_w.unsqueeze(0)                                                                                    #   ws.shape: torch.Size([1, 8, 512]) ws里本来可能有一个batch的w,现在只有1个w
             # print("ws:",ws)
-            # print("ws.shape: ",ws.shape)    #   ws.shape:  torch.Size([1, 8, 512])      #   ws.shape:  torch.Size([1, 8, 512])
+            # print("ws.shape: ",ws.shape)
 
             mixed_label = interpolated_y.unsqueeze(0)                                                   
             # print("flag A mixed_label.shape:",mixed_label.shape)                                                              #   mixed_label.shape: torch.Size([1, 8, 10])
@@ -2041,10 +2088,9 @@ class MaggieStylegan2ada:
                 classification = self.__labelnames__()
 
                 #--------------------------
-                # print("G.num_ws: ", G.num_ws)                                                                                     #   G.num_ws:  8          #   G.num_ws:  10
-                # print("G.w_dim: ", G.w_dim)                                                                                       #   G.w_dim:  512         #   G.w_dim:  512
-                # print("ws.shape[1:]:",ws.shape[1:])                                                                                 #   ws.shape[1:]: torch.Size([8, 512])
-                # # raise error
+                # print("G.num_ws: ", G.num_ws)                                                                                     #   8
+                # print("G.w_dim: ", G.w_dim)                                                                                       #   512
+
                 assert ws.shape[1:] == (G.num_ws, G.w_dim)                                                                          #   断言的功能是，在满足条件时，程序go on，在不满足条件时，报错
                 for _, w in enumerate(ws):
 
@@ -2215,7 +2261,7 @@ class MaggieStylegan2ada:
                     img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)[0].cpu().numpy()
                     # print("flag 2: modified generated img: ",img)                                                                 #   [0,255] uint8
                     # print("flag 2: modified generated img.type: ",type(img))                                                      #   torch.tensor
-                    # print("flag 2: modified generated img.shape: ",img.shape)                                                     #   img.shape:  torch.Size([1, 32, 32, 3])
+                    print("flag 2: modified generated img.shape: ",img.shape)                                                     #   img.shape:  torch.Size([1, 32, 32, 3])
 
                     w1_label_name = f"{classification[int(w1_label_index)]}"
                     w2_label_name = f"{classification[int(w2_label_index)]}"
@@ -2381,7 +2427,7 @@ class MaggieStylegan2ada:
             mixed_label = torch.tensor(mixed_label, device=device)                                                              #   pylint: disable=not-callable
             mixed_label = mixed_label[-1]
             # print(mixed_label)
-            # print(mixed_label.shape)        #   torch.Size([8, 10])
+            print(mixed_label.shape)        #   torch.Size([8, 10])
             #------------------------------------------------------
             #-----------maggie-------------------------------------
             # print('ws=%s' % ws)#  maggie
@@ -2407,14 +2453,14 @@ class MaggieStylegan2ada:
 
                #-----------------maggie add-----------
                 generated_x = img[-1]            
-                # print("generated_x[0]: ",generated_x[0])                                                                        #   generated_x[0]:  tensor([[ 0.9688,  0.9599,  0.9377,  ..., -0.0858, -0.1952, -0.3162],,
-                # print("generated_x.type: ",type(generated_x))                                                                   #   generated_x.type:  <class 'torch.Tensor'>
-                # print("generated_x.shape: ",generated_x.shape)                                                                  #   generated_x.shape:  torch.Size([3, 32, 32])
+                print("generated_x[0]: ",generated_x[0])                                                                        #   generated_x[0]:  tensor([[ 0.9688,  0.9599,  0.9377,  ..., -0.0858, -0.1952, -0.3162],,
+                print("generated_x.type: ",type(generated_x))                                                                   #   generated_x.type:  <class 'torch.Tensor'>
+                print("generated_x.shape: ",generated_x.shape)                                                                  #   generated_x.shape:  torch.Size([3, 32, 32])
                 
                 generated_y = mixed_label[-1]
-                # print("generated_y: ",generated_y)                                                                              #   generated_y:  tensor([0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1311, 0.0000, 0.0000,0.8689],
-                # print("generated_y.type: ",type(generated_y))                                                                   #   torch.tensor
-                # print("generated_y.shape: ",generated_y.shape)                                                                  #   generated_y.shape:  torch.Size([10])
+                print("generated_y: ",generated_y)                                                                              #   generated_y:  tensor([0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.1311, 0.0000, 0.0000,0.8689],
+                print("generated_y.type: ",type(generated_y))                                                                   #   torch.tensor
+                print("generated_y.shape: ",generated_y.shape)                                                                  #   generated_y.shape:  torch.Size([10])
 
                 img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
 

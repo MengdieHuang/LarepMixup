@@ -45,12 +45,15 @@ if __name__ == '__main__':
             target_classifier = MaggieClassifier(args)
             # cle_x_train, cle_y_train = target_classifier.settensor(cle_train_dataloader)
             # cle_x_test, cle_y_test = target_classifier.settensor(cle_test_dataloader)
+
             if args.pretrained_on_imagenet == False:
                 target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  #   自定义的训练法
                 # target_classifier.artmodel().fit(cle_x_train, cle_y_train, nb_epochs=args.epochs, batch_size=args.batch_size)                             #   art的训练法
+                
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
-            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
+            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
+            
             # cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)                    #   测试一下evaluate和EvaluateClassifier计算结果是否一致
             # print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
             # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
@@ -100,25 +103,14 @@ if __name__ == '__main__':
             loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
             loss_txt_content = f'{attack_classifier.getexpresultdir()}/standard-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
 
-
-
-      #   Project latent representation       存到本地    //mmat/result/project/...
-
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-            generate_model.projectmain(cle_train_dataloader) 
-            # generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
+            # generate_model.projectmain(cle_train_dataloader) 
+            generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
 
-    # elif args.mode == 'interpolate':
-    #     if args.gen_network_pkl != None:     
-    #         if args.projected_dataset != None:    
-    #             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-    #             generate_model.interpolatemain() 
-    #     else:
-    #         raise Exception("There is no gen_network_pkl, please train generative model first!")
     elif args.mode == 'interpolate':
         if args.gen_network_pkl != None:     
             # if args.projected_dataset != None:    
@@ -126,11 +118,7 @@ if __name__ == '__main__':
             generate_model.interpolatemain() 
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")    
-    # elif args.mode == 'generate':
-    #     if args.gen_network_pkl != None:     
-    #         if args.mix_dataset != None:    
-    #             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)                        
-    #             generate_model.generatemain()
+
 
     elif args.mode == 'generate':
         if args.gen_network_pkl != None:     

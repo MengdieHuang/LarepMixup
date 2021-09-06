@@ -143,6 +143,10 @@ def parse_arguments():
         parser_object.add_argument('--projected_w1', help='Projection result file', type=str, metavar='FILE')
         parser_object.add_argument('--projected_w2', help='Projection result file', type=str, metavar='FILE')
         parser_object.add_argument('--projected_w3', help='Projection result file', type=str, metavar='FILE',default= None)
+        parser_object.add_argument('--projected_w1_label', help='Projection result file', type=str, metavar='FILE')
+        parser_object.add_argument('--projected_w2_label', help='Projection result file', type=str, metavar='FILE')
+        parser_object.add_argument('--projected_w3_label', help='Projection result file', type=str, metavar='FILE',default= None)
+
         parser_object.add_argument('--mix_mode', help='mix mode of the projected w', type=str, default='basemixup', choices=['basemixup', 'maskmixup', 'adversarialmixup'])
         parser_object.add_argument('--mix_w_num', help='number of the projected w for mixup', type=int, default=2)
         parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='uniformsampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2'])
@@ -236,7 +240,7 @@ def set_exp_result_dir(args):
     elif args.mode == 'project':
         exp_result_dir = f'{save_path}/{args.mode}/{args.exp_name}/{date}'             
     elif args.mode == 'interpolate':
-        exp_result_dir = f'{save_path}/{args.mode}/{args.mix_mode}/{args.sample_mode}/{args.exp_name}/{date}'
+        exp_result_dir = f'{save_path}/{args.mode}/{args.mix_w_num}mixup/{args.mix_mode}/{args.sample_mode}/{args.exp_name}/{date}'
     elif args.mode == 'defense':     
         if args.defense_mode == "at":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{date}'

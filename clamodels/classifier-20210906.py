@@ -22,8 +22,6 @@ import math
 import random
 import copy
 
-from tensorboardX import SummaryWriter
-
 def smooth_step(a,b,c,d,epoch_index):
     if epoch_index <= a:        #   <=10
         return 0.01
@@ -274,19 +272,6 @@ class MaggieClassifier:
             
             if epoch_index % 10 == 0 and epoch_index > 0:
                 torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index:04d}.pkl')
-            
-            #-------------tensorboard实时画图-------------------
-            
-            tensorboard_log_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
-            os.makedirs(tensorboard_log_dir,exist_ok=True)    
-            # print("tensorboard_log_dir:",tensorboard_log_dir)   
-            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
-
-            writer = SummaryWriter(log_dir = tensorboard_log_dir, comment= '-'+'testacc')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer.add_scalar(tag = "epoch_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
-            writer.close()
-            # raise error
-            #--------------------------------------------------
 
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     

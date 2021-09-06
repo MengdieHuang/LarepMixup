@@ -250,76 +250,6 @@ def open_stl10_128(tarball: str, *, max_images: Optional[int]):
     return max_idx, iterate_images()
 
 def open_stl10_64(tarball: str, *, max_images: Optional[int]):
-    
-    # images = []
-    # labels = []
-
-    # with tarfile.open(tarball, 'r:gz') as tar:  
-    #     print(tar.getnames())                                                               #   ['stl10_binary', 'stl10_binary/test_X.bin', 'stl10_binary/test_y.bin', 'stl10_binary/train_X.bin', 'stl10_binary/train_y.bin', 'stl10_binary/unlabeled_X.bin', 'stl10_binary/class_names.txt', 'stl10_binary/fold_indices.txt']
-
-    #     trainset_x_bin_path = '/home/data/maggie/stl10/stl10_binary/train_X.bin'            #   大写X
-    #     trainset_y_bin_path = '/home/data/maggie/stl10/stl10_binary/train_y.bin'            #   小写y
-
-    #     with open(trainset_x_bin_path, 'rb') as trainset_x_bin_file:
-    #         images = np.fromfile(trainset_x_bin_file, dtype=np.uint8)
-    #         # print("images: ",images)                                                                #   images:  [146 146 146 ... 170 174 170]
-    #         # print("images.type: ",type(images))                                                     #   images.type:  <class 'numpy.ndarray'>
-    #         # print("images.shape: ",images.shape)                                                    #   images.shape:  (138240000,)
-    #         images = images.reshape(-1, 3, 96, 96)                                                     
-    #         images = images.transpose([0, 1, 3, 2])      
-    #         print("images.shape: ",images.shape)                                                    #   images.shape:  (5000, 3, 96, 96)                       
-        
-    #     with open(trainset_y_bin_path, 'rb') as trainset_y_bin_file:
-    #         labels = np.fromfile(trainset_y_bin_file, dtype=np.uint8) - 1  # 0-based
-    #         labels = np.int32(labels)
-    #         # print("labels: ",labels)                                                                #   labels:  [1 5 1 ... 1 7 5]
-    #         # print("labels.type: ",type(labels))                                                     #   labels.type:  <class 'numpy.ndarray'>
-    #         # print("labels.shape: ",labels.shape)                                                    #   labels.shape:  (5000,)
-                                           
-    # # images = images.reshape(-1, 3, 96, 96)                                  #   stl10是96x96像素，为了stylegan2ada使用，改成2的幂次方
-    # # print("images.shape: ",images.shape)                                                      #   images.shape:  (5000, 3, 96, 96)
-    
-    # images = torch.Tensor(images)
-    # print("images.shape: ",images.shape)                                                      #   images.shape:  torch.Size([5000, 3, 96, 96])
-
-    # # transform=transforms.Compose( 
-    # #     [
-    # #         transforms.Resize(64), 
-    # #         transforms.CenterCrop(64),
-    # #         transforms.ToTensor(), 
-    # #         transforms.Normalize([0.5], [0.5])
-    # #     ]
-    # # ),
-
-
-
-    # # resize_transform = transforms.Resize(64)
-    # # images = resize_transform(images)
-    # # print("images.shape: ",images.shape)                                                      #   images.shape:  torch.Size([5000, 3, 64, 64])
-
-    # # normalize_transform = transforms.Normalize([0.5], [0.5])
-    # # images = normalize_transform(images)
-    # # print("images.shape: ",images.shape)                                                      #   images.shape:  torch.Size([5000, 3, 64, 64])
-
-    # images = images.numpy()
-    # print("images.shape: ",images.shape)                                                    #   images.shape:  (5000, 3, 64, 64)
-    
-    # images = images.transpose([0, 2, 3, 1])
-    # print("images.shape: ",images.shape)                                                      #   images.shape:  (5000, 64, 64, 3)
-    # print("images.dtype: ",images.dtype)                                                      #   images.dtype:  float32
-    # images =images.astype(np.uint8)
-
-    # # images = (images*255).astype(np.uint8)
-    # print("images.dtype: ",images.dtype)                                                      #   images.dtype:  uint8
-
-    # # print("images[0]: ",images[0])
-    # print("labels.shape: ",labels.shape)                                                      #   labels.shape:  (5000,)
-
-    # assert images.shape == (5000, 64, 64, 3) and images.dtype == np.uint8
-    # assert labels.shape == (5000,) and labels.dtype in [np.int32, np.int64]
-    # assert np.min(images) == 0 and np.max(images) == 255
-    # assert np.min(labels) == 0 and np.max(labels) == 9
-    # max_idx = maybe_min(len(images), max_images)
 
     os.makedirs("/home/data/maggie/stl10", exist_ok=True)
     train_dataset = torchvision.datasets.STL10(                            
@@ -343,7 +273,7 @@ def open_stl10_64(tarball: str, *, max_images: Optional[int]):
     )
 
     trainset_len =len(train_dataloader.dataset)
-    # print("trainset_len:",trainset_len)
+    print("trainset_len:",trainset_len)
     max_idx = maybe_min(trainset_len, max_images)
     
     def iterate_images():

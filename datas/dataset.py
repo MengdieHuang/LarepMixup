@@ -10,6 +10,8 @@ from torchvision.transforms import transforms
 import torchvision.datasets
 import numpy as np
 import copy
+from robustness.tools.imagenet_helpers import common_superclass_wnid, ImageNetHierarchy
+import robustness.datasets
 
 
 class MaggieMNIST(torchvision.datasets.MNIST):
@@ -443,7 +445,7 @@ class MaggieDataset:
         elif self._args.dataset == 'cifar100':
             os.makedirs("/home/data/maggie/cifar100", exist_ok=True)  
             
-            train_dataset = MaggieCIFAR100(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            train_dataset = MaggieCIFAR100(                                            
                 "/home/data/maggie/cifar100",
                 train=True,                                             #   从training.pt创建数据集
                 download=True,                                          #   自动从网上下载数据集
@@ -484,27 +486,20 @@ class MaggieDataset:
             return train_dataset
 
         elif self._args.dataset == 'imagenetmixed10':
+            in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
+            in_info_path = "/home/data/ImageNet/info"
+            in_hier = ImageNetHierarchy(in_path, in_info_path)                  
 
-            os.makedirs("/home/data/ImageNet", exist_ok=True)
+            superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
+            class_ranges, label_map = in_hier.get_subclasses(superclass_wnid, balanced=True)
 
-            if self._args.cla_model == 'inception_v3':
-                crop_size = 229
-            else:
-                crop_size = 256 #224
-
-            train_dataset = MaggieImageNet(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
-                "/home/data/ImageNet",
-                split='train',
-                download=False,
-                transform=transforms.Compose(                               #   组合多个图像变换
-                    [
-                        transforms.Resize(crop_size),                       #   通过Resize(size, interpolation=Image.BILINEAR)函数将输入的图像转换为期望的尺寸，此处期望的输出size=img_size
-                        transforms.CenterCrop(crop_size),                    #   基于给定输入图像的中心，按照期望的尺寸（img_size）裁剪图像！！！解决了ImageNet数据集中个别样本size不符合3x256x256引发的问题
-                        transforms.ToTensor(),                                  #   将PIL图像或者ndArry数据转换为tensor
-                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
-                    ]     
-                ),
-            ) 
+            # num_workers =4
+            # batch_size =1
+            custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges)
+            print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
+            # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+            # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
+            train_dataset = custom_dataset
             return train_dataset
 
         elif self._args.dataset == 'lsun':
@@ -563,7 +558,7 @@ class MaggieDataset:
     def __loadtestdataset__(self):
         if self._args.dataset == 'mnist':
             os.makedirs("/home/data/maggie/mnist", exist_ok=True)
-            test_dataset = MaggieMNIST(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieMNIST(                                             
                 "/home/data/maggie/mnist",
                 train=False,                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
@@ -580,7 +575,7 @@ class MaggieDataset:
 
         elif self._args.dataset == 'kmnist':
             os.makedirs("/home/data/maggie/kmnist", exist_ok=True)
-            test_dataset = MaggieKMNIST(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieKMNIST(                                          
                 "/home/data/maggie/kmnist",
                 train=False,                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
@@ -597,7 +592,7 @@ class MaggieDataset:
 
         elif self._args.dataset == 'cifar10':
             os.makedirs("/home/data/maggie/cifar10", exist_ok=True)
-            test_dataset = MaggieCIFAR10(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieCIFAR10(                                             
                 "/home/data/maggie/cifar10",
                 train=False,                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
@@ -614,7 +609,7 @@ class MaggieDataset:
 
         elif self._args.dataset == 'cifar100':
             os.makedirs("/home/data/maggie/cifar100", exist_ok=True)
-            test_dataset = MaggieCIFAR100(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieCIFAR100(                                             
                 "/home/data/maggie/cifar100",
                 train=False,                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
@@ -639,7 +634,7 @@ class MaggieDataset:
             else:
                 crop_size = 256 #224
 
-            test_dataset = MaggieImageNet(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieImageNet(                                             
                 "/home/data/ImageNet",
                 split='val',
                 download=False,
@@ -653,6 +648,23 @@ class MaggieDataset:
                 ),
             )
             return test_dataset    
+
+        elif self._args.dataset == 'imagenetmixed10':
+            in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
+            in_info_path = "/home/data/ImageNet/info"
+            in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+
+            superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
+            class_ranges, label_map = in_hier.get_subclasses(superclass_wnid, balanced=True)
+
+            # num_workers =4
+            # batch_size =1
+            custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges)
+            # print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
+            # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+            # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
+            test_dataset = custom_dataset
+            return test_dataset
 
         elif self._args.dataset == 'lsun':
             os.makedirs("/home/data/maggie/lsun/20210413", exist_ok=True)
@@ -675,7 +687,7 @@ class MaggieDataset:
 
         elif self._args.dataset == 'stl10':
             os.makedirs("/home/data/maggie/stl10", exist_ok=True)
-            test_dataset = MaggieSTL10(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieSTL10(                                             
                 "/home/data/maggie/stl10",
                 split='test',                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
@@ -690,10 +702,9 @@ class MaggieDataset:
             )  
             return test_dataset    
         
-
         elif self._args.dataset == 'svhn':
             os.makedirs("/home/data/maggie/svhn", exist_ok=True)
-            test_dataset = MaggieSVHN(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            test_dataset = MaggieSVHN(                                             
                 "/home/data/maggie/svhn",
                 split='test',                                             #   从training.pt创建数据集
                 download=False,                                          #   自动从网上下载数据集
