@@ -272,27 +272,151 @@ class MaggieClassifier:
             print(f'{epoch_index:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
             print(f'{epoch_index:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
             
-            if epoch_index % 10 == 0 and epoch_index > 0:
+            if epoch_index % 12 == 0 and epoch_index > 0:
                 torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index:04d}.pkl')
             
             #-------------tensorboard实时画图-------------------
             
-            tensorboard_log_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
-            os.makedirs(tensorboard_log_dir,exist_ok=True)    
+            tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
+            os.makedirs(tensorboard_log_acc_dir,exist_ok=True)    
             # print("tensorboard_log_dir:",tensorboard_log_dir)   
             #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
 
-            writer = SummaryWriter(log_dir = tensorboard_log_dir, comment= '-'+'testacc')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer.add_scalar(tag = "epoch_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
-            writer.close()
+            writer_acc = SummaryWriter(log_dir = tensorboard_log_acc_dir, comment= '-'+'testacc')#  f'{self._args.dataset}-{self._args.cla_model}
+            writer_acc.add_scalar(tag = "epoch_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
+            writer_acc.close()
+            # raise error
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            
+            tensorboard_log_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss')
+            os.makedirs(tensorboard_log_loss_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_dir)   
+            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
+
+            writer_loss = SummaryWriter(log_dir = tensorboard_log_loss_dir, comment= '-'+'testloss')#  f'{self._args.dataset}-{self._args.cla_model}
+            writer_loss.add_scalar(tag = "epoch_loss", scalar_value = epoch_test_loss, global_step = epoch_index + 1 )
+            writer_loss.close()
             # raise error
             #--------------------------------------------------
 
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     
     def __adjustlearningrate__(self, epoch_index):
-        """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""#每隔30epoch除以一次10
-        lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   30//30=1 31//30=1 60//30=2 返回整数部分
+        """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""#   每隔10epoch除以一次10
+        # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   30//30=1 31//30=1 60//30=2 返回整数部分
+        # lr = self._args.lr * (0.1 ** (epoch_index // 5))                   #    每隔5epoch除以一次10
+
+        # if epoch_index<5:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5:
+        #     lr = self._args.lr * (0.1 ** (epoch_index // 5))    #   0.001
+        # elif epoch_index >= 10:
+        #     lr = self._args.lr * (0.1 ** (epoch_index // 10))   #   0.001
+        
+        # if epoch_index < 5:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index < 8:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 8 and epoch_index < 11:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 11 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index < 5:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index < 8:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 8 and epoch_index < 12:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 12 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index < 5:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index < 10:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 10 and epoch_index < 15:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 15 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index <= 4:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index <= 7:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 8 and epoch_index <= 10:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 11 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index <= 4:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index <= 7:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 8 and epoch_index <= 11:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 12 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index <= 4:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index <= 6:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 7 and epoch_index <= 8:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 9 and epoch_index <= 10:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 11 and epoch_index <= 12:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 13 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index <= 5:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 6 and epoch_index <= 8:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 9 and epoch_index <= 11:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 12 :
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        # if epoch_index <= 4:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 5 and epoch_index <= 7:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 8 and epoch_index <= 10:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 11 and epoch_index <= 13:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 13:
+        #     lr = self._args.lr * 0.01                            #   0.0001
+
+        # if epoch_index <= 9:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 10 and epoch_index <= 12:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 13:
+        #     lr = self._args.lr * 0.01                            #   0.0001
+
+        # if epoch_index <= 7:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 8 and epoch_index <= 10:
+        #     lr = self._args.lr * 0.1                            #   0.001
+        # elif epoch_index >= 11:
+        #     lr = self._args.lr * 0.01                            #   0.0001
+
+        # if epoch_index <= 9:
+        #     lr = self._args.lr                                  #   0.01
+        # elif epoch_index >= 10:
+        #     lr = self._args.lr * 0.1                            #   0.001
+
+        if epoch_index <= 7:
+            lr = self._args.lr                                  #   0.01
+        elif epoch_index >= 8:
+            lr = self._args.lr * 0.1                            #   0.001
+
         # lr2 = smooth_step(10,20,30,40,epoch_index)
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
