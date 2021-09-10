@@ -37,6 +37,117 @@ def smooth_step(a,b,c,d,epoch_index):
     if d < epoch_index:         #   40~50
         return 0.0001
 
+#--------------
+class CustomAlexnet(torch.nn.Module):
+    def __init__(self, name='alexnet',n_channels=3, n_outputs=10):
+        super(CustomAlexnet, self).__init__()
+
+        self.name = name
+        self.num_classes = n_outputs
+
+        self.conv1 = torch.nn.Conv2d(n_channels, 48, 5, stride=1, padding=2)
+        self.conv1.bias.data.normal_(0, 0.01)
+        self.conv1.bias.data.fill_(0) 
+        
+        self.relu = torch.nn.ReLU()        
+        self.lrn = torch.nn.LocalResponseNorm(2)        
+        self.pad = torch.nn.MaxPool2d(3, stride=2)
+        
+        self.batch_norm1 = torch.nn.BatchNorm2d(48, eps=0.001)
+        
+        self.conv2 = torch.nn.Conv2d(48, 128, 5, stride=1, padding=2)
+        self.conv2.bias.data.normal_(0, 0.01)
+        self.conv2.bias.data.fill_(1.0)  
+        
+        self.batch_norm2 = torch.nn.BatchNorm2d(128, eps=0.001)
+        
+        self.conv3 = torch.nn.Conv2d(128, 192, 3, stride=1, padding=1)
+        self.conv3.bias.data.normal_(0, 0.01)
+        self.conv3.bias.data.fill_(0)  
+        
+        self.batch_norm3 = torch.nn.BatchNorm2d(192, eps=0.001)
+        
+        self.conv4 = torch.nn.Conv2d(192, 192, 3, stride=1, padding=1)
+        self.conv4.bias.data.normal_(0, 0.01)
+        self.conv4.bias.data.fill_(1.0)  
+        
+        self.batch_norm4 = torch.nn.BatchNorm2d(192, eps=0.001)
+        
+        self.conv5 = torch.nn.Conv2d(192, 128, 3, stride=1, padding=1)
+        self.conv5.bias.data.normal_(0, 0.01)
+        self.conv5.bias.data.fill_(1.0)  
+        
+        self.batch_norm5 = torch.nn.BatchNorm2d(128, eps=0.001)
+        
+        self.fc1 = torch.nn.Linear(1152,512)
+        self.fc1.bias.data.normal_(0, 0.01)
+        self.fc1.bias.data.fill_(0) 
+        
+        self.drop = torch.nn.Dropout(p=0.5)
+        
+        self.batch_norm6 = torch.nn.BatchNorm1d(512, eps=0.001)
+        
+        self.fc2 = torch.nn.Linear(512,256)
+        self.fc2.bias.data.normal_(0, 0.01)
+        self.fc2.bias.data.fill_(0) 
+        
+        self.batch_norm7 = torch.nn.BatchNorm1d(256, eps=0.001)
+        
+        self.fc3 = torch.nn.Linear(256,self.num_classes)
+        self.fc3.bias.data.normal_(0, 0.01)
+        self.fc3.bias.data.fill_(0) 
+        
+        # self.soft = torch.nn.Softmax()    #去掉softmax层
+        
+    def forward(self, x):
+        layer1 = self.batch_norm1(self.pad(self.lrn(self.relu(self.conv1(x)))))
+        layer2 = self.batch_norm2(self.pad(self.lrn(self.relu(self.conv2(layer1)))))
+        layer3 = self.batch_norm3(self.relu(self.conv3(layer2)))
+        layer4 = self.batch_norm4(self.relu(self.conv4(layer3)))
+        layer5 = self.batch_norm5(self.pad(self.relu(self.conv5(layer4))))
+        flatten = layer5.view(-1, 128*3*3)
+        fully1 = self.relu(self.fc1(flatten))
+        fully1 = self.batch_norm6(self.drop(fully1))
+        fully2 = self.relu(self.fc2(fully1))
+        fully2 = self.batch_norm7(self.drop(fully2))
+        logits = self.fc3(fully2)
+        #softmax_val = self.soft(logits)
+
+        return logits
+
+class CustomVGG19(torch.nn.Module):
+    def __init__(self, name="VGG19", n_channels = 1, n_outputs = 10):
+        super(CustomVGG19, self).__init__()
+        self.name = name
+
+        self.n_channels = n_channels
+        self.features = self._make_layers([64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M'])
+        self.classifier = torch.nn.Linear(512, n_outputs)
+
+    def forward(self, x):
+        out = self.features(x)
+        out = out.view(out.size(0), -1)
+        out = torch.nn.functional.dropout(out, p = .5, training = self.training)
+        out = self.classifier(out)
+        return out
+
+    def _make_layers(self, configuration):
+        layers = []
+        in_channels = self.n_channels
+        for x in configuration:
+            if x == 'M':
+                layers += [ torch.nn.MaxPool2d(kernel_size = 2, stride = 2) ]
+            else:
+                layers += [
+                    torch.nn.Conv2d(in_channels, x, kernel_size = 3, padding = 1),
+                    torch.nn.BatchNorm2d(x),
+                    torch.nn.ReLU(inplace=True)
+                ]
+                in_channels = x
+        layers += [torch.nn.AvgPool2d(kernel_size = 1, stride = 1)]
+        return torch.nn.Sequential(*layers)
+#--------------
+
 class CustomNet(torch.nn.Module):
     def __init__(self):
         super(CustomNet, self).__init__()
@@ -106,41 +217,85 @@ class MaggieClassifier:
 
     def __getmodel__(self) -> "torchvision.models or CustomNet":
         model_name = self._args.cla_model
-        torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','alexnet','inception_v3']
+
+        # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','alexnet','inception_v3']    # 少 alexnet
+        # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','inception_v3','resnet18','googlenet']
+        torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet'] # 少 vgg19
+
         if model_name in torchvisionmodel_dict:
-            model = self.__gettorchvisionmodel__()
-        else:
-            model = self.__getlocalmodel__()
+            model = self.__gettorchvisionmodel__()      #   加载torchvision库model
+        else:   # alexnet
+            if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
+                model = self.__getlocalmodel__()
+            elif self._args.img_size > 32:
+                model = self.__gettorchvisionmodel__()      #   加载torchvision库model
         return model
 
     def __gettorchvisionmodel__(self) ->"torchvision.models":
+        # 3个输入变量 模型name, 类别num, 预训练flag
         model_name = self._args.cla_model
         classes_number = self._args.n_classes
         pretrain_flag = self._args.pretrained_on_imagenet
+        print("model_name:",model_name)
+        print("classes_number:",classes_number)
+        print("pretrain_flag:",pretrain_flag)   #  pretrain_flag: False
+
+        #   加载torchvision库中的原始模型
         torchvisionmodel =  torchvision.models.__dict__[model_name](pretrained=pretrain_flag)
-        
+
+        #   获取原始模型的最后一层信息
         last_name = list(torchvisionmodel._modules.keys())[-1]
         last_module = torchvisionmodel._modules[last_name]
-        print('last_name:',last_name)
-        print('last_module:',last_module)
+        # print('last_name:',last_name)               #   alexnet last_name: classifier
+        # print('last_module:',last_module)           #   alexnet last_module: Sequential
         
-        if isinstance(last_module, torch.nn.Linear):
+        #   修改最后一层信息
+        if isinstance(last_module, torch.nn.Linear):                                #   resnet,inception,googlenet、shfflenetv2 最后一层是nn.linear
             n_features = last_module.in_features
             torchvisionmodel._modules[last_name] = torch.nn.Linear(n_features, classes_number)
-        elif isinstance(last_module, torch.nn.Sequential):
-            seq_last_name = list(torchvisionmodel._modules.keys())[-1]
-            seq_last_module = torchvisionmodel._modules[seq_last_name]
-            print('seq_last_name:',seq_last_name)
-            print('seq_last_module:',seq_last_module)
+
+        elif isinstance(last_module, torch.nn.Sequential):                          #   alexnet、vgg、mobilenet、mnasnet 最后一模块是nn.Sequential
+            # 获取最后一模块的最后一层信息
+            # seq_last_name = list(torchvisionmodel._modules.keys())[-1]
+            # seq_last_module = torchvisionmodel._modules[seq_last_name]
+            seq_last_name = list(last_module._modules.keys())[-1]
+            seq_last_module = last_module._modules[seq_last_name]            
+            # print('seq_last_name:',seq_last_name)                       #   alexnet seq_last_name: 6
+            # print('seq_last_module:',seq_last_module)                   #   seq_last_module: Linear(in_features=4096, out_features=1000, bias=True)
+
             n_features = seq_last_module.in_features
             last_module._modules[seq_last_name] = torch.nn.Linear(n_features, classes_number)
         last = list(torchvisionmodel.named_modules())[-1][1]
-        print('torchvisionmodel.last:',last)
+        print('torchvisionmodel.last:',last)        #   torchvisionmodel.last: Linear(in_features=4096, out_features=10, bias=True)
+
+        # raise error
         return torchvisionmodel
 
     def __getlocalmodel__(self)->"CustomNet":
-        print('此处需自定义模型')
-        local_model = CustomNet()
+        print('使用自定义模型')
+        # 3个输入变量 模型name, 类别num, 预训练flag
+        model_name = self._args.cla_model
+        classes_number = self._args.n_classes
+        pretrain_flag = self._args.pretrained_on_imagenet
+        data_channels = self._args.channels
+        print("model_name:",model_name)                         #   model_name: alexnet
+        print("classes_number:",classes_number)
+        print("pretrain_flag:",pretrain_flag)                   #  pretrain_flag: False
+        print("self._args.channels:",self._args.channels)       #   self._args.channels: 3
+
+        if model_name == 'alexnet':
+            local_model = CustomAlexnet(name='alexnet',n_channels=data_channels, n_outputs=classes_number)
+        elif model_name == 'vgg19':
+            local_model = CustomVGG19(name='VGG19',n_channels=data_channels, n_outputs=classes_number)
+        else:
+            local_model = CustomNet()
+
+        #   获取原始模型的最后一层信息
+        last_name = list(local_model._modules.keys())[-1]
+        last_module = local_model._modules[last_name]
+        print('last_name:',last_name)               #   last_name: fc3
+        print('last_module:',last_module)           #   last_module: Linear(in_features=256, out_features=10, bias=True)
+        # raise error            
         return local_model
 
     def __getlossfunc__(self):
@@ -232,7 +387,13 @@ class MaggieClassifier:
                 batch_imgs = images.cuda()
                 batch_labs = labels.cuda()
                 self._optimizer.zero_grad()
-                output = self._model(batch_imgs)
+
+                if self._args.cla_model == 'inception_v3':
+                    output, aux = self._model(batch_imgs)
+                elif self._args.cla_model == 'googlenet':
+                    output, aux1, aux2 = self._model(batch_imgs)
+                else:
+                    output = self._model(batch_imgs)
 
                 # print("output:",output)                                     #   output: tensor([[-0.2694,  0.1577,  0.4321,  ...,  0.0562,  0.3836,  0.8319],
                 # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
@@ -243,7 +404,7 @@ class MaggieClassifier:
 
                 batch_loss = self._lossfunc(output,batch_labs)
                 # batch_loss = self._lossfunc(softmax_output,batch_labs)
-
+                # raise error
                 batch_loss.backward()
                 self._optimizer.step()
 
@@ -254,7 +415,7 @@ class MaggieClassifier:
                 epoch_correct_num += batch_correct_num                                     
                 epoch_total_loss += batch_loss
 
-                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index, self._args.epochs, batch_index, len(self._train_dataloader), batch_loss.item()))
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), batch_loss.item()))
 
             #--------当前epoch分类模型在当前训练集epoch上的准确率-------------            
             epoch_train_accuarcy = epoch_correct_num / self._trainset_len
@@ -263,20 +424,20 @@ class MaggieClassifier:
             global_train_loss.append(epoch_train_loss)
 
             #--------当前epoch分类模型在整体测试集上的准确率------------- 
-            epoch_test_accuracy, epoch_test_loss = EvaluateAccuracy(self._model, self._lossfunc, self._test_dataloader)
+            epoch_test_accuracy, epoch_test_loss = EvaluateAccuracy(self._model, self._lossfunc, self._test_dataloader,self._args.cla_model)
             global_test_acc.append(epoch_test_accuracy)   
             global_test_loss.append(epoch_test_loss)
 
             # print(f'{epoch_index:04d} epoch classifier accuary on the current epoch training examples:{epoch_train_accuarcy*100:.4f}%' )   
             # print(f'{epoch_index:04d} epoch classifier loss on the current epoch training examples:{epoch_train_loss:.4f}' )   
-            print(f'{epoch_index:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
-            print(f'{epoch_index:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
+            print(f'{epoch_index+1:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
+            print(f'{epoch_index+1:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
             
-            if epoch_index % 12 == 0 and epoch_index > 0:
-                torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index:04d}.pkl')
+            # if (epoch_index+1) % 11== 0 and epoch_index > 0:
+            if (epoch_index+1)  >= 9:
+                torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')
             
             #-------------tensorboard实时画图-------------------
-            
             tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
             os.makedirs(tensorboard_log_acc_dir,exist_ok=True)    
             # print("tensorboard_log_dir:",tensorboard_log_dir)   
@@ -289,7 +450,6 @@ class MaggieClassifier:
             #--------------------------------------------------
 
            #-------------tensorboard实时画图-------------------
-            
             tensorboard_log_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss')
             os.makedirs(tensorboard_log_loss_dir,exist_ok=True)    
             # print("tensorboard_log_dir:",tensorboard_log_dir)   
@@ -303,131 +463,13 @@ class MaggieClassifier:
 
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     
-    def __adjustlearningrate__(self, epoch_index):
-        """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""#   每隔10epoch除以一次10
-        # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   30//30=1 31//30=1 60//30=2 返回整数部分
-        # lr = self._args.lr * (0.1 ** (epoch_index // 5))                   #    每隔5epoch除以一次10
-
-        # if epoch_index<5:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5:
-        #     lr = self._args.lr * (0.1 ** (epoch_index // 5))    #   0.001
-        # elif epoch_index >= 10:
-        #     lr = self._args.lr * (0.1 ** (epoch_index // 10))   #   0.001
-        
-        # if epoch_index < 5:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index < 8:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 8 and epoch_index < 11:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 11 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index < 5:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index < 8:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 8 and epoch_index < 12:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 12 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index < 5:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index < 10:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 10 and epoch_index < 15:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 15 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index <= 4:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index <= 7:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 8 and epoch_index <= 10:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 11 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index <= 4:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index <= 7:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 8 and epoch_index <= 11:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 12 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index <= 4:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index <= 6:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 7 and epoch_index <= 8:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 9 and epoch_index <= 10:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 11 and epoch_index <= 12:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 13 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index <= 5:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 6 and epoch_index <= 8:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 9 and epoch_index <= 11:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 12 :
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        # if epoch_index <= 4:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 5 and epoch_index <= 7:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 8 and epoch_index <= 10:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 11 and epoch_index <= 13:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 13:
-        #     lr = self._args.lr * 0.01                            #   0.0001
-
-        # if epoch_index <= 9:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 10 and epoch_index <= 12:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 13:
-        #     lr = self._args.lr * 0.01                            #   0.0001
-
-        # if epoch_index <= 7:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 8 and epoch_index <= 10:
-        #     lr = self._args.lr * 0.1                            #   0.001
-        # elif epoch_index >= 11:
-        #     lr = self._args.lr * 0.01                            #   0.0001
-
-        # if epoch_index <= 9:
-        #     lr = self._args.lr                                  #   0.01
-        # elif epoch_index >= 10:
-        #     lr = self._args.lr * 0.1                            #   0.001
-
-        if epoch_index <= 7:
-            lr = self._args.lr                                  #   0.01
-        elif epoch_index >= 8:
-            lr = self._args.lr * 0.1                            #   0.001
-
-        # lr2 = smooth_step(10,20,30,40,epoch_index)
-        for param_group in self._optimizer.param_groups:
-            param_group['lr'] = lr
-        print(f'{epoch_index}epoch learning rate:{lr}')             #   0epoch learning rate:0.01
 
     def evaluatefromdataloader(self,model,test_dataloader) -> None:
         if torch.cuda.is_available():
             self._lossfunc.cuda()
             # self._model.cuda()    #             check
             model.cuda()
-        test_accuracy, test_loss = EvaluateAccuracy(model, self._lossfunc, test_dataloader)     
+        test_accuracy, test_loss = EvaluateAccuracy(model, self._lossfunc, test_dataloader,self._args.cla_model)     
         # print(f'classifier *accuary* on testset:{test_accuracy * 100:.4f}%' ) 
         # print(f'classifier *loss* on testset:{test_loss}' ) 
         #  
@@ -1067,3 +1109,94 @@ class MaggieClassifier:
         loss = lam * loss_a + (1 - lam) * loss_b
 
         return loss
+
+    def __adjustlearningrate__(self, epoch_index):
+        """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""#   每隔10epoch除以一次10
+        if self._args.dataset == 'cifar10':
+            if self._args.cla_model == 'resnet34':     
+                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
+
+                if epoch_index <= 7:
+                    lr = self._args.lr                                  #   0.01
+                elif epoch_index >= 8:
+                    lr = self._args.lr * 0.1                            #   0.001
+
+            elif self._args.cla_model == 'alexnet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+
+                # if epoch_index <= 8:
+                #     lr = self._args.lr                                  #   0.01
+                # elif epoch_index >= 9:
+                #     lr = self._args.lr * 0.1                            #   0.001
+
+            elif self._args.cla_model =='resnet18':
+                # lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                if epoch_index <= 5:
+                    lr = self._args.lr                                  #   0.01
+                elif epoch_index >= 6 and epoch_index <= 7:
+                    lr = self._args.lr * 0.1                            #   0.001
+                elif epoch_index >= 8:
+                    lr = self._args.lr * 0.01                            #   0.0001
+
+            elif self._args.cla_model =='resnet50':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='inception_v3':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='densenet169':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='googlenet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+        if self._args.dataset == 'svhn':
+            if self._args.cla_model == 'resnet34':     
+                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
+
+                if epoch_index <= 7:
+                    lr = self._args.lr                                  #   0.01
+                elif epoch_index >= 8:
+                    lr = self._args.lr * 0.1                            #   0.001
+
+            elif self._args.cla_model == 'alexnet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+
+                # if epoch_index <= 8:
+                #     lr = self._args.lr                                  #   0.01
+                # elif epoch_index >= 9:
+                #     lr = self._args.lr * 0.1                            #   0.001
+
+            elif self._args.cla_model =='resnet18':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                # if epoch_index <= 5:
+                #     lr = self._args.lr                                  #   0.01
+                # elif epoch_index >= 6 and epoch_index <= 7:
+                #     lr = self._args.lr * 0.1                            #   0.001
+                # elif epoch_index >= 8:
+                #     lr = self._args.lr * 0.01                            #   0.0001
+
+            elif self._args.cla_model =='resnet50':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='inception_v3':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='densenet169':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='googlenet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+        # lr2 = smooth_step(10,20,30,40,epoch_index)
+        for param_group in self._optimizer.param_groups:
+            param_group['lr'] = lr
+        print(f'{epoch_index}epoch learning rate:{lr}')             #   0epoch learning rate:0.01

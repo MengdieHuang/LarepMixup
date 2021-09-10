@@ -422,6 +422,12 @@ class MaggieDataset:
             return train_dataset
 
         elif self._args.dataset == 'cifar10':
+
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size
+
             print(f'load cifar10 dataset')
             os.makedirs("/home/data/maggie/cifar10", exist_ok=True)
             train_dataset = MaggieCIFAR10(                                             
@@ -430,8 +436,10 @@ class MaggieDataset:
                 download=False,                                          
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
                         # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
@@ -462,14 +470,12 @@ class MaggieDataset:
             return train_dataset
 
         elif self._args.dataset == 'imagenet':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size
 
             os.makedirs("/home/data/ImageNet", exist_ok=True)
-
-            if self._args.cla_model == 'inception_v3':
-                crop_size = 229
-            else:
-                crop_size = 256 #224
-
             train_dataset = MaggieImageNet(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
                 "/home/data/ImageNet",
                 split='train',
@@ -522,15 +528,22 @@ class MaggieDataset:
             return train_dataset
         
         elif self._args.dataset == 'svhn':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size
+
             os.makedirs("/home/data/maggie/svhn", exist_ok=True)
-            train_dataset = MaggieSVHN(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            train_dataset = MaggieSVHN(                                             
                 "/home/data/maggie/svhn",
                 split='train',                                             #   从training.pt创建数据集
                 download=True,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),                        
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -591,6 +604,12 @@ class MaggieDataset:
             return test_dataset    
 
         elif self._args.dataset == 'cifar10':
+
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size
+
             os.makedirs("/home/data/maggie/cifar10", exist_ok=True)
             test_dataset = MaggieCIFAR10(                                             
                 "/home/data/maggie/cifar10",
@@ -598,8 +617,10 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),                        
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
                         # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
@@ -704,6 +725,11 @@ class MaggieDataset:
             return test_dataset    
         
         elif self._args.dataset == 'svhn':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size
+
             os.makedirs("/home/data/maggie/svhn", exist_ok=True)
             test_dataset = MaggieSVHN(                                             
                 "/home/data/maggie/svhn",
@@ -711,8 +737,10 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),                        
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]

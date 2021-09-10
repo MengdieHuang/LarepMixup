@@ -592,8 +592,8 @@ class MaggieStylegan2ada:
 
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
 
         os.makedirs(exp_result_dir,exist_ok=True)    
 
@@ -766,9 +766,14 @@ class MaggieStylegan2ada:
         
         #   存原图
         # Save final projected frame and W vector.
+
+
         # -=-----maggie注释 不存原图
-        target_pil.save(f'{outdir}/original-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')                                            #   指的是原图
+        # target_pil.save(f'{outdir}/original-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')                                            #   指的是原图
         
+
+
+
         # raise error
         #-=-------------
         #   存投影
@@ -815,9 +820,13 @@ class MaggieStylegan2ada:
             synth_image = PIL.Image.fromarray(synth_image, 'L')
         # raise error
         # raise error
-        #-----maggie注释 不存投影
-        synth_image.save(f'{outdir}/projected-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')
+
+
+        #-----maggie注释 不存投影 20210909
+        # synth_image.save(f'{outdir}/projected-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')
         #---------------
+
+
 
         # print("projected_w.shape:",projected_w.shape)
 

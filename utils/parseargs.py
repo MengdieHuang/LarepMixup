@@ -34,18 +34,20 @@ def parse_arguments():
                 'vae-mnist','vae-kmnist','vae-cifar10','vae-cifar100','vae-lsun','vae-imagenet','vae-imagenetmixed10',
                 'stylegan2-mnist','stylegan2-kmnist','stylegan2-cifar10','stylegan2-cifar100','stylegan2-lsun','stylegan2-imagenet','stylegan2-imagenetmixed10',
                 'stylegan2ada-mnist','stylegan2ada-kmnist','stylegan2ada-cifar10','stylegan2ada-cifar100','stylegan2ada-lsun','stylegan2ada-imagenet','stylegan2ada-imagenetmixed10','stylegan2ada-svhn','stylegan2ada-stl10',
-                'resnet50-mnist', 'resnet50-kmnist','resnet50-cifar10','resnet50-cifar100','resnet50-lsun','resnet50-imagenet','resnet50-imagenetmixed10',
-                'vgg19-mnist','vgg19-kmnist', 'vgg19-cifar10','vgg19-cifar100', 'vgg19-lsun','vgg19-imagenet', 'vgg19-imagenetmixed10',
-                'alexnet-mnist','alexnet-kmnist', 'alexnet-cifar10','alexnet-cifar100', 'alexnet-lsun','alexnet-imagenet', 'alexnet-imagenetmixed10',
-                'densenet169-mnist','densenet169-kmnist', 'densenet169-cifar10','densenet169-cifar100', 'densenet169-lsun','densenet169-imagenet', 'densenet169-imagenetmixed10',
-                'inception_v3-mnist','inception_v3-kmnist', 'inception_v3-cifar10','inception_v3-cifar100', 'inception_v3-lsun','inception_v3-imagenet', 'inception_v3-imagenetmixed10',
-                'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenetmixed10','resnet34-svhn','resnet34-stl10'
+                'resnet50-mnist', 'resnet50-kmnist','resnet50-cifar10','resnet50-cifar100','resnet50-lsun','resnet50-imagenet','resnet50-imagenetmixed10','resnet50-svhn','resnet50-stl10',
+                'vgg19-mnist','vgg19-kmnist', 'vgg19-cifar10','vgg19-cifar100', 'vgg19-lsun','vgg19-imagenet', 'vgg19-imagenetmixed10','vgg19-svhn','vgg19-stl10',
+                'alexnet-mnist','alexnet-kmnist', 'alexnet-cifar10','alexnet-cifar100', 'alexnet-lsun','alexnet-imagenet', 'alexnet-imagenetmixed10','alexnet-svhn','alexnet-stl10',
+                'densenet169-mnist','densenet169-kmnist', 'densenet169-cifar10','densenet169-cifar100', 'densenet169-lsun','densenet169-imagenet', 'densenet169-imagenetmixed10','densenet169-svhn','densenet169-stl10',
+                'inception_v3-mnist','inception_v3-kmnist', 'inception_v3-cifar10','inception_v3-cifar100', 'inception_v3-lsun','inception_v3-imagenet', 'inception_v3-imagenetmixed10','inception_v3-svhn','inception_v3-stl10',
+                'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenetmixed10','resnet34-svhn','resnet34-stl10',
+                'resnet18-mnist','resnet18-kmnist','resnet18-mnist','resnet18-cifar10','resnet18-cifar100','resnet18-lsun','resnet18-imagenet','resnet18-imagenetmixed10','resnet18-svhn','resnet18-stl10',
+                'googlenet-mnist','googlenet-kmnist','googlenet-mnist','googlenet-cifar10','googlenet-cifar100','googlenet-lsun','googlenet-imagenet','googlenet-imagenetmixed10','googlenet-svhn','googlenet-stl10'
 
             ]  
 
         )
         parser_object.add_argument('--cla_model',type=str,default=None,
-            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3']
+            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet']
         )
 
         parser_object.add_argument('--gen_model',type=str,default=None,

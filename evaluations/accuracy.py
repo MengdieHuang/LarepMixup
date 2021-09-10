@@ -8,7 +8,7 @@ Place:  Xidian University
 import torch
 import torch.utils.data
 
-def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.DataLoader):
+def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.DataLoader,cla_model_name):
     
     #   计算准确率
     testset_total_num = len(test_dataloader.dataset)
@@ -39,7 +39,17 @@ def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.D
 
 
         with torch.no_grad():
+
             output = classifier(imgs)
+
+            if cla_model_name == 'inception_v3':
+                output, aux = classifier(imgs)
+            elif cla_model_name == 'googlenet':
+                output, aux1, aux2 = classifier(imgs)
+            else:
+                output = classifier(imgs)         
+            
+            
             # print("output:",output)                                     #   output: tensor([[-3.9918e+00, -4.0301e+00,  6.1573e+00,  ...,  1.5459e+00
             # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
             # softmax_output = torch.nn.functional.softmax(output, dim = 1)

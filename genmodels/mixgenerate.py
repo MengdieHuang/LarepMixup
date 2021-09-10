@@ -19,6 +19,7 @@ import genmodels.stylegan2
 import genmodels.stylegan2ada
 import numpy as np
 import os
+
 class CustomGenNet(torch.nn.Module):                                                                                            #   此处是自定义的GAN模型
     def __init__(self):
         super(CustomGenNet, self).__init__()
@@ -109,9 +110,6 @@ class MixGenerate:
     def __getlocalpkl__(self)->"CustomGenNet":
         local_model_pkl = "abc test"
         return local_model_pkl
-
-
-
 
     #   建立流形映射
     def projectmain(self,cle_train_dataloader):
