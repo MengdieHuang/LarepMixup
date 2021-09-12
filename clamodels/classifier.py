@@ -224,7 +224,7 @@ class MaggieClassifier:
 
         if model_name in torchvisionmodel_dict:
             model = self.__gettorchvisionmodel__()      #   加载torchvision库model
-        else:   # alexnet
+        else:   # alexnet, vgg19
             if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
                 model = self.__getlocalmodel__()
             elif self._args.img_size > 32:
@@ -1154,7 +1154,7 @@ class MaggieClassifier:
             elif self._args.cla_model =='googlenet':
                 lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-        if self._args.dataset == 'svhn':
+        elif self._args.dataset == 'svhn':
             if self._args.cla_model == 'resnet34':     
                 # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
 
@@ -1196,6 +1196,15 @@ class MaggieClassifier:
             elif self._args.cla_model =='googlenet':
                 lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+        elif self._args.dataset == 'imagenetmixed10':
+            if self._args.cla_model == 'alexnet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+
+
+
+
+
+                
         # lr2 = smooth_step(10,20,30,40,epoch_index)
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
