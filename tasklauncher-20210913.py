@@ -111,8 +111,8 @@ if __name__ == '__main__':
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-            # generate_model.projectmain(cle_train_dataloader) 
-            generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
+            generate_model.projectmain(cle_train_dataloader) 
+            # generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
 

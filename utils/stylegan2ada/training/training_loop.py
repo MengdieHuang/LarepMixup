@@ -147,6 +147,23 @@ def training_loop(
     if rank == 0:
         print('Loading training set...')
     training_set = dnnlib.util.construct_class_by_name(**training_set_kwargs) # subclass of training.dataset.Dataset
+
+    # #-------------maggie--------
+    # print("training_set.dict.__dict__.keys():",training_set.__dict__.keys())
+    # # training_set.dict.__dict__.keys(): dict_keys(['_path', '_zipfile', '_type', '_all_fnames', '_image_fnames', '_name', '_raw_shape', '_use_labels', '_raw_labels', '_label_shape', '_raw_idx', '_xflip'])
+    # # print("training_set.data:",training_set.data)
+    # # print("training_set._path:",training_set._path)
+    # # print("training_set._image_fnames:",training_set._image_fnames)
+    # # print("training_set._use_labels:",training_set._use_labels)
+    # # print("training_set._raw_labels:",training_set._raw_labels) #   training_set._raw_labels: None
+    # print("training_set.image_shape:",training_set.image_shape) #   training_set.image_shape: [1, 32, 32]
+    # print("training_set.label_shape:",training_set.label_shape) #   training_set.label_shape: [0]
+    # print("training_set.resolution:",training_set.resolution)   #   training_set.resolution: 32
+
+
+    # # raise Exception("maggie error")
+    # #---------------------------
+
     training_set_sampler = misc.InfiniteSampler(dataset=training_set, rank=rank, num_replicas=num_gpus, seed=random_seed)
     training_set_iterator = iter(torch.utils.data.DataLoader(dataset=training_set, sampler=training_set_sampler, batch_size=batch_size//num_gpus, **data_loader_kwargs))
     if rank == 0:
@@ -243,6 +260,25 @@ def training_loop(
     if rank == 0:
         print('Exporting sample images...')
         grid_size, images, labels = setup_snapshot_image_grid(training_set=training_set)
+
+        # #----------------maggie----
+        # print("grid_size:",grid_size)       #   grid_size: (32, 32)
+        # # print("images:",images)
+        # print("images.shape:",images.shape)  #   image.shape: (1024, 1, 32, 32)
+        # print("images[0][0][18]:",images[0][0][18])
+        # print("images[1][0][18]:",images[1][0][18])
+        # print("images[5][0][18]:",images[5][0][18])
+
+        # print("labels:",labels)                     #   labels: []
+        # print("labels.dtype:",labels.dtype)         #   labels.dtype: float32
+        # print("labels.type:",type(labels))          #   labels.type: <class 'numpy.ndarray'>
+        # print("labels[0:5]:",labels[0:5])           #   labels[0:5]: []
+        # print("labels.shape:",labels.shape)         #   labels.shape: (1024, 0)
+        # print("len(labels):",len(labels))   #   24
+        # # raise Exception("maggie error")
+
+        # #--------------------------
+
         save_image_grid(images, os.path.join(run_dir, 'reals.png'), drange=[0,255], grid_size=grid_size)
         grid_z = torch.randn([labels.shape[0], G.z_dim], device=device).split(batch_gpu)
         grid_c = torch.from_numpy(labels).to(device).split(batch_gpu)

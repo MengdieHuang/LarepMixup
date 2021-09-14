@@ -388,6 +388,11 @@ class MaggieDataset:
 
     def __loadtraindataset__(self):
         if self._args.dataset == 'mnist':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size            
+
             os.makedirs("/home/data/maggie/mnist", exist_ok=True)
             train_dataset = MaggieMNIST(                                             
                 "/home/data/maggie/mnist",
@@ -395,8 +400,8 @@ class MaggieDataset:
                 download=True,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -405,6 +410,11 @@ class MaggieDataset:
             return train_dataset
 
         elif self._args.dataset == 'kmnist':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size            
+            
             os.makedirs("/home/data/maggie/kmnist", exist_ok=True)
             train_dataset = MaggieKMNIST(                                            
                 "/home/data/maggie/kmnist",
@@ -412,8 +422,8 @@ class MaggieDataset:
                 download=True,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -462,8 +472,8 @@ class MaggieDataset:
                         transforms.Resize(self._args.img_size), 
                         transforms.CenterCrop(self._args.img_size),
                         transforms.ToTensor(), 
-                        # transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
                     ]
                 ),
             )
@@ -473,10 +483,10 @@ class MaggieDataset:
             if self._args.cla_model == 'inception_v3':
                 crop_size = 299
             else:
-                crop_size = self._args.img_size
+                crop_size = self._args.img_size # 256
 
             os.makedirs("/home/data/ImageNet", exist_ok=True)
-            train_dataset = MaggieImageNet(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            train_dataset = MaggieImageNet(                                             
                 "/home/data/ImageNet",
                 split='train',
                 download=False,
@@ -485,7 +495,7 @@ class MaggieDataset:
                         transforms.Resize(crop_size),                       #   通过Resize(size, interpolation=Image.BILINEAR)函数将输入的图像转换为期望的尺寸，此处期望的输出size=img_size
                         transforms.CenterCrop(crop_size),                    #   基于给定输入图像的中心，按照期望的尺寸（img_size）裁剪图像！！！解决了ImageNet数据集中个别样本size不符合3x256x256引发的问题
                         transforms.ToTensor(),                                  #   将PIL图像或者ndArry数据转换为tensor
-                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                     ]     
                 ),
             ) 
@@ -506,6 +516,30 @@ class MaggieDataset:
             # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
             # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
             train_dataset = custom_dataset
+
+            # if self._args.train_mode != 'cla-train':
+            #     custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges)
+            #     print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
+            #     # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+            #     # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
+
+            # elif self._args.train_mode == 'cla-train':
+            #     Maggie_TRAIN_TRANSFORMS_IMAGENET = transforms.Compose([
+            #             transforms.Resize((256, 256)),
+            #             transforms.CenterCrop(224),
+            #             transforms.ToTensor()
+            #         ])
+            #     Maggie_TEST_TRANSFORMS_IMAGENET = transforms.Compose([
+            #             transforms.Resize((256, 256)),
+            #             transforms.CenterCrop(224),
+            #             transforms.ToTensor()
+            #         ])                    
+
+            #     custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges, transform_train = Maggie_TRAIN_TRANSFORMS_IMAGENET, transform_test= Maggie_TEST_TRANSFORMS_IMAGENET)
+
+            # train_dataset = custom_dataset
+
+                # raise Exception("maggie error")
             return train_dataset
 
         elif self._args.dataset == 'lsun':
@@ -552,15 +586,21 @@ class MaggieDataset:
             return train_dataset            
 
         elif self._args.dataset == 'stl10':
+
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size    
+
             os.makedirs("/home/data/maggie/stl10", exist_ok=True)
-            train_dataset = MaggieSTL10(                                             #   用 torchvision.datasets.MNIST类的构造函数返回值给DataLoader的参数 dataset: torch.utils.data.dataset.Dataset[T_co]赋值 https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset
+            train_dataset = MaggieSTL10(                                             
                 "/home/data/maggie/stl10",
                 split='train',                                             #   从training.pt创建数据集
                 download=True,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -570,6 +610,11 @@ class MaggieDataset:
 
     def __loadtestdataset__(self):
         if self._args.dataset == 'mnist':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size    
+
             os.makedirs("/home/data/maggie/mnist", exist_ok=True)
             test_dataset = MaggieMNIST(                                             
                 "/home/data/maggie/mnist",
@@ -577,8 +622,8 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -587,6 +632,10 @@ class MaggieDataset:
             return test_dataset    
 
         elif self._args.dataset == 'kmnist':
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size               
             os.makedirs("/home/data/maggie/kmnist", exist_ok=True)
             test_dataset = MaggieKMNIST(                                          
                 "/home/data/maggie/kmnist",
@@ -594,8 +643,8 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]
@@ -640,8 +689,8 @@ class MaggieDataset:
                         transforms.Resize(self._args.img_size), 
                         transforms.CenterCrop(self._args.img_size),
                         transforms.ToTensor(), 
-                        # transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
                     ]
                 ),
             )
@@ -652,9 +701,10 @@ class MaggieDataset:
             os.makedirs("/home/data/ImageNet", exist_ok=True)
 
             if self._args.cla_model == 'inception_v3':
-                crop_size = 229
+                crop_size = 299
             else:
-                crop_size = 256 #224
+                crop_size = self._args.img_size # 256
+                # crop_size = 1024
 
             test_dataset = MaggieImageNet(                                             
                 "/home/data/ImageNet",
@@ -663,7 +713,7 @@ class MaggieDataset:
                 transform=transforms.Compose(                               #   组合多个图像变换
                     [
                         transforms.Resize(crop_size),                       #   通过Resize(size, interpolation=Image.BILINEAR)函数将输入的图像转换为期望的尺寸，此处期望的输出size=img_size
-                        transforms.CenterCrop(crop_size),                    #   基于给定输入图像的中心，按照期望的尺寸（img_size）裁剪图像！！！解决了ImageNet数据集中个别样本size不符合3x256x256引发的问题
+                        transforms.CenterCrop(crop_size),                    #   基于给定输入图像的中心，按照期望的尺寸（img_size）裁剪图像！！！解决了ImageNet数据集中个别样本size不符合3x256x256
                         transforms.ToTensor(),                                  #   将PIL图像或者ndArry数据转换为tensor                    
                         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                     ]     
@@ -681,11 +731,35 @@ class MaggieDataset:
 
             # num_workers =4
             # batch_size =1
+
             custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges)
             # print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
             # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
             # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
             test_dataset = custom_dataset
+
+            # if self._args.train_mode != 'cla-train':
+            #     custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges)
+            #     # print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
+            #     # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+            #     # train_loader, test_loader = custom_dataset.make_loaders(workers=num_workers, batch_size=batch_size)
+
+            # elif self._args.train_mode == 'cla-train':
+            #     Maggie_TRAIN_TRANSFORMS_IMAGENET = transforms.Compose([
+            #             transforms.Resize((256, 256)),
+            #             transforms.CenterCrop(224),
+            #             transforms.ToTensor()
+            #         ])
+            #     Maggie_TEST_TRANSFORMS_IMAGENET = transforms.Compose([
+            #             transforms.Resize((256, 256)),
+            #             transforms.CenterCrop(224),
+            #             transforms.ToTensor()
+            #         ])                    
+
+            #     custom_dataset = robustness.datasets.CustomImageNet(in_path, class_ranges, transform_train = Maggie_TRAIN_TRANSFORMS_IMAGENET, transform_test= Maggie_TEST_TRANSFORMS_IMAGENET)
+
+            # test_dataset = custom_dataset
+
             return test_dataset
 
         elif self._args.dataset == 'lsun':
@@ -708,6 +782,11 @@ class MaggieDataset:
             return test_dataset    
 
         elif self._args.dataset == 'stl10':
+
+            if self._args.cla_model == 'inception_v3':
+                crop_size = 299
+            else:
+                crop_size = self._args.img_size                
             os.makedirs("/home/data/maggie/stl10", exist_ok=True)
             test_dataset = MaggieSTL10(                                             
                 "/home/data/maggie/stl10",
@@ -715,8 +794,8 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        transforms.Resize(self._args.img_size), 
-                        transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
                         transforms.ToTensor(), 
                         transforms.Normalize([0.5], [0.5])
                     ]

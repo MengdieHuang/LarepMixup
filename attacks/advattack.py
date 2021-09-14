@@ -49,7 +49,8 @@ class AdvAttack(MaggieClassifier):
 
         # initilize the target model to be attacked
         self._targetmodel = copy.deepcopy(learned_model)    #深拷贝
-        print('self._targetmodel:',self._targetmodel.fc)
+        # print('self._targetmodel:',self._targetmodel.fc)
+        # print('self._targetmodel:',self._targetmodel)
 
         # initilize the attack model used to generate adversarial examples
         self._whitebox = True                       #   white box attack or black box attack
@@ -59,7 +60,8 @@ class AdvAttack(MaggieClassifier):
         elif self._whitebox == False:
             self._model = torchvision.models.resnet34(pretrained=True)
             raise Exception("balck box attack error!")
-        print('self._attackmodel',self._model.fc)
+        # print('self._attackmodel',self._model.fc)
+        # print('self._attackmodel',self._model)
 
         # initilize the art format attack model
         self._artmodel = self.__getartmodel__()
@@ -97,7 +99,10 @@ class AdvAttack(MaggieClassifier):
         
         if self._args.attack_mode == 'fgsm':                              #   FGSM攻击
             print('Get FGSM examples generate model')
-            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=0.2, targeted=False)    #   estimator: A trained classifier. eps: Attack step size (input variation).
+            # advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=0.2, targeted=False)    #   estimator: A trained classifier. eps: Attack step size (input variation).
+            print("self._args.attack_eps:",self._args.attack_eps)
+            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)    #   estimator: A trained classifier. eps: Attack step size (input variation).
+
         elif self._args.attack_mode =='deepfool':                         #   DeepFool攻击
             print('Get DeepFool examples generate model')
             advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=0.2)                         #   estimator: A trained classifier. eps: Attack step size (input variation).

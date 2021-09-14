@@ -155,14 +155,14 @@ def parse_arguments():
         parser_object.add_argument('--projected_dataset', help = 'The projected w dataset path of target png images to interpolate', type = str, default = None)
 
         #-------------------------arguments for classifier train-------------------------
-        parser_object.add_argument('--train_mode', help='standard train or adversarial train', type=str, default='cla-train',choices=['gen-train','cla-train'])
+        parser_object.add_argument('--train_mode', help='standard train or adversarial train', type=str, default=None,choices=['gen-train','cla-train'])
         parser_object.add_argument('--test_mode', help='test', type=str, default='classifier-test',choices=['gen-test','classifier-test','classifier-advtest'])
         parser_object.add_argument('--pretrained_on_imagenet', help='pretrain', type= bool, default= False)
         
         #-------------------------arguments for classifier attack-------------------------
-        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw'])
+        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd'])
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
-
+        parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
 
         #-------------------------arguments for classifier defense-------------------------
         parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat'])

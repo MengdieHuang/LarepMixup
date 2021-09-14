@@ -59,6 +59,7 @@ if __name__ == '__main__':
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
             
+            
             # cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)                    #   测试一下evaluate和EvaluateClassifier计算结果是否一致
             # print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
             # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
@@ -77,7 +78,7 @@ if __name__ == '__main__':
             print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
 
             accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
+            txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
             accuracy_txt.write(str(txt_content))
         
             loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
@@ -111,8 +112,8 @@ if __name__ == '__main__':
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-            # generate_model.projectmain(cle_train_dataloader) 
-            generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
+            generate_model.projectmain(cle_train_dataloader) 
+            # generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
 

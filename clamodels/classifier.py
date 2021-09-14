@@ -232,41 +232,55 @@ class MaggieClassifier:
         return model
 
     def __gettorchvisionmodel__(self) ->"torchvision.models":
-        # 3个输入变量 模型name, 类别num, 预训练flag
+        print('使用pytorch库模型')
         model_name = self._args.cla_model
         classes_number = self._args.n_classes
         pretrain_flag = self._args.pretrained_on_imagenet
+        img_channels = self._args.channels
         print("model_name:",model_name)
         print("classes_number:",classes_number)
         print("pretrain_flag:",pretrain_flag)   #  pretrain_flag: False
+        print("img_channels:",img_channels)   #  pretrain_flag: False
 
-        #   加载torchvision库中的原始模型
-        torchvisionmodel =  torchvision.models.__dict__[model_name](pretrained=pretrain_flag)
+        if pretrain_flag is True and self._args.dataset == 'imagenet':
+            #   加载torchvision库中的原始模型
+            torchvisionmodel =  torchvision.models.__dict__[model_name](pretrained=pretrain_flag)
+            last = list(torchvisionmodel.named_modules())[-1][1]
+            print('original torchvisionmodel.last:',last)        #   torchvisionmodel.last: Linear(in_features=4096, out_features=10, bias=True)
 
-        #   获取原始模型的最后一层信息
-        last_name = list(torchvisionmodel._modules.keys())[-1]
-        last_module = torchvisionmodel._modules[last_name]
-        # print('last_name:',last_name)               #   alexnet last_name: classifier
-        # print('last_module:',last_module)           #   alexnet last_module: Sequential
-        
-        #   修改最后一层信息
-        if isinstance(last_module, torch.nn.Linear):                                #   resnet,inception,googlenet、shfflenetv2 最后一层是nn.linear
-            n_features = last_module.in_features
-            torchvisionmodel._modules[last_name] = torch.nn.Linear(n_features, classes_number)
+        else:
+            # #   加载torchvision库中的原始模型
+            # torchvisionmodel =  torchvision.models.__dict__[model_name](pretrained=pretrain_flag)
+                
+            # #   获取原始模型的最后一层信息
+            # last_name = list(torchvisionmodel._modules.keys())[-1]
+            # last_module = torchvisionmodel._modules[last_name]
+            # # print('last_name:',last_name)               #   alexnet last_name: classifier
+            # # print('last_module:',last_module)           #   alexnet last_module: Sequential
+            
+            # #   修改最后一层信息
+            # if isinstance(last_module, torch.nn.Linear):                                #   resnet,inception,googlenet、shfflenetv2 最后一层是nn.linear
+            #     n_features = last_module.in_features
+            #     torchvisionmodel._modules[last_name] = torch.nn.Linear(n_features, classes_number)
 
-        elif isinstance(last_module, torch.nn.Sequential):                          #   alexnet、vgg、mobilenet、mnasnet 最后一模块是nn.Sequential
-            # 获取最后一模块的最后一层信息
-            # seq_last_name = list(torchvisionmodel._modules.keys())[-1]
-            # seq_last_module = torchvisionmodel._modules[seq_last_name]
-            seq_last_name = list(last_module._modules.keys())[-1]
-            seq_last_module = last_module._modules[seq_last_name]            
-            # print('seq_last_name:',seq_last_name)                       #   alexnet seq_last_name: 6
-            # print('seq_last_module:',seq_last_module)                   #   seq_last_module: Linear(in_features=4096, out_features=1000, bias=True)
+            # elif isinstance(last_module, torch.nn.Sequential):                          #   alexnet、vgg、mobilenet、mnasnet 最后一模块是nn.Sequential
+            #     # 获取最后一模块的最后一层信息
+            #     # seq_last_name = list(torchvisionmodel._modules.keys())[-1]
+            #     # seq_last_module = torchvisionmodel._modules[seq_last_name]
+            #     seq_last_name = list(last_module._modules.keys())[-1]
+            #     seq_last_module = last_module._modules[seq_last_name]            
+            #     # print('seq_last_name:',seq_last_name)                       #   alexnet seq_last_name: 6
+            #     # print('seq_last_module:',seq_last_module)                   #   seq_last_module: Linear(in_features=4096, out_features=1000, bias=True)
 
-            n_features = seq_last_module.in_features
-            last_module._modules[seq_last_name] = torch.nn.Linear(n_features, classes_number)
-        last = list(torchvisionmodel.named_modules())[-1][1]
-        print('torchvisionmodel.last:',last)        #   torchvisionmodel.last: Linear(in_features=4096, out_features=10, bias=True)
+            #     n_features = seq_last_module.in_features
+            #     last_module._modules[seq_last_name] = torch.nn.Linear(n_features, classes_number)
+            
+            torchvisionmodel =  torchvision.models.__dict__[model_name](pretrained=pretrain_flag, num_classes = classes_number, n_channels = img_channels)
+
+            last = list(torchvisionmodel.named_modules())[-1][1]
+            print('modified torchvisionmodel.last:',last)        #   torchvisionmodel.last: Linear(in_features=4096, out_features=10, bias=True)
+            # raise error 
+
 
         # raise error
         return torchvisionmodel
@@ -342,6 +356,13 @@ class MaggieClassifier:
         self._trainset_len = len(self._train_dataloader.dataset)
         self._trainbatch_num = len(self._train_dataloader)
         self._exp_result_dir = exp_result_dir
+        print("self._trainset_len:",self._trainset_len)                 #   77237
+        print("self._trainbatch_num:",self._trainbatch_num)
+        print("self._testset_len:",len( self._test_dataloader.dataset))     #   self._testset_len: 3000
+        # print("self._train_dataloader.dataset[0][0][0].shape:",self._train_dataloader.dataset[0][0][0].shape)
+        # print("self._test_dataloader.dataset[0][0][0].shape:",self._test_dataloader.dataset[0][0][0].shape)
+
+        # raise error
 
         self._exp_result_dir = os.path.join(self._exp_result_dir,f'train-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True)    
@@ -508,40 +529,125 @@ class MaggieClassifier:
             classifier.cuda()             
 
         self._lossfunc = torch.nn.CrossEntropyLoss()
-
-        x_set = x_set.cuda()
-        y_set = y_set.cuda()
-
-        # print("x_set.type: ",type(x_set))                   #   x_set.type:  <class 'torch.Tensor'>
-        # print("x_set.shape: ",x_set.shape)                  #   x_set.shape:  torch.Size([10000, 3, 32, 32])
-        # print("y_set.type: ",type(y_set))                   #   y_set.type:  <class 'torch.Tensor'>
-        # print("y_set.shape: ",y_set.shape)                  #   y_set.shape:  torch.Size([10000])
-
-        testset_total_num = len(y_set)
-        print("test set total_num:",testset_total_num)
         
-        correct_num = 0
-        total_loss = 0
+        #---------------maggie------
 
-        with torch.no_grad():
-            # print("flag A x_set[0][0]:",x_set[0][0])                             #   [ 0.6338,  0.6531,  0.7694,  ...,  0.2267,  0.0134, -0.1804]...
-            # print("flag A y_set[0]:",y_set[0])                                   #   [3, 8, 8,  ..., 5, 1, 7]tensor
+        batch_size = self._args.batch_size
+        testset_total_num = len(x_set)
+        batch_num = int( np.ceil( int(testset_total_num) / float(batch_size) ) )
 
-            output = classifier(x_set)
-            # print("output:",output)
-            loss = self._lossfunc(output,y_set)
-            _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index
-            correct_num = (predicted_label_index == y_set).sum().item()
-            total_loss += loss
+        # print("x_set.shape:",x_set.shape)           #   x_set.shape: torch.Size([26032, 3, 32, 32])
+        print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
+        print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
+        print("batch_num:",batch_num)                   #   batch_num: 813.5
+        print("batch_size:",batch_size)       #  
+
+
+        cla_model_name=self._args.cla_model
+        print("cla_model_name:",cla_model_name)       #   cla_model_name: alexnet
+        # raise error
+
+        classify_loss = self._lossfunc
+        epoch_correct_num = 0
+        epoch_total_loss = 0
+
+        for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
+            images = x_set[batch_index * batch_size : (batch_index + 1) * batch_size]
+            labels = y_set[batch_index * batch_size : (batch_index + 1) * batch_size]                                                
+            # print("images.shape:",images.shape)         # images.shape: torch.Size([32, 3, 32, 32])
+            # print("labels.shape:",labels.shape)         #   labels.shape: torch.Size([32])
+
+
+            # print("cle_x_trainbatch.type:",type(cle_x_trainbatch))                          #   cle_x_trainbatch.type: <class 'numpy.ndarray'>
+            # print("cle_x_trainbatch:",cle_x_trainbatch)                                     #   cle_x_trainbatch: [[[[ 59  62  63][ 43  46  45]
+            # print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)                         #   cle_x_trainbatch.shape: (256, 32, 32, 3)
+            # print("cle_y_trainbatch.type:",type(cle_y_trainbatch))                          #   cle_y_trainbatch.type: <class 'list'>
+            # print("cle_y_trainbatch:",cle_y_trainbatch)                                     #   cle_y_trainbatch: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7,
+            # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))                            #   cle_y_trainbatch.len: 256
+
+            imgs = images.cuda()
+            labs = labels.cuda()
+
+
+            with torch.no_grad():
+
+                output = classifier(imgs)
+
+                if cla_model_name == 'inception_v3':
+                    output, aux = classifier(imgs)
+                elif cla_model_name == 'googlenet':
+                    if images.size(-1) == 256:  #   只有imagenet搭配googlenet时是返回一个值
+                        output = classifier(imgs)
+                    else:
+                        output, aux1, aux2 = classifier(imgs)
+                else:
+                    output = classifier(imgs)         
+                
+                
+                # print("output:",output)                                     #   output: tensor([[-3.9918e+00, -4.0301e+00,  6.1573e+00,  ...,  1.5459e+00
+                # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
+                # softmax_output = torch.nn.functional.softmax(output, dim = 1)
+                # print("softmax_output:",softmax_output)                     #   softmax_output: tensor([[2.6576e-05, 2.5577e-05, 6.7951e-01,  ..., 6.7526e-03, 4.7566e-05,,
+                # print("softmax_output.shape:",softmax_output.shape)         #   softmax_output.shape: torch.Size([256, 10])              
+                # raise Exception("maggie error 20210906")
+
+                loss = classify_loss(output,labs)
+                _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
+                
+                # loss = classify_loss(softmax_output,labs)
+                # _, predicted_label_index = torch.max(softmax_output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
+                            
+                
+                # print("predicted_label_index:",predicted_label_index)                                                           #   predicted_label_index: tensor([1, 4, 0, 6, 0, 0, 7, 8, 0, 3, 3, 0, 7, 4, 9, 3], device='cuda:0')
+                # print("labs:",labs)                                                                                             #   labs: tensor([1, 6, 8, 2, 8, 8, 5, 0, 1, 1, 9, 0, 7, 4, 1, 2], device='cuda:0')
+                batch_same_num = (predicted_label_index == labs).sum().item()
+                epoch_correct_num += batch_same_num
+                epoch_total_loss += loss
+
+
+        test_accuracy = epoch_correct_num / testset_total_num
+        test_loss = epoch_total_loss / batch_num                  
+        #---------------------------
+
+
+        # x_set = x_set.cuda()
+        # y_set = y_set.cuda()
+
+        # # print("x_set.type: ",type(x_set))                   #   x_set.type:  <class 'torch.Tensor'>
+        # # print("x_set.shape: ",x_set.shape)                  #   x_set.shape:  torch.Size([10000, 3, 32, 32])
+        # # print("y_set.type: ",type(y_set))                   #   y_set.type:  <class 'torch.Tensor'>
+        # # print("y_set.shape: ",y_set.shape)                  #   y_set.shape:  torch.Size([10000])
+
+        # testset_total_num = len(y_set)
+        # print("test set total_num:",testset_total_num)                              #   test set total_num: 26032
+        
+        # correct_num = 0
+        # total_loss = 0
+
+        # with torch.no_grad():
+        #     # print("flag A x_set[0][0]:",x_set[0][0])                             #   [ 0.6338,  0.6531,  0.7694,  ...,  0.2267,  0.0134, -0.1804]...
+        #     # print("flag A y_set[0]:",y_set[0])                                   #   [3, 8, 8,  ..., 5, 1, 7]tensor
+
+        #     output = classifier(x_set)
+        #     # print("output:",output)
+        #     loss = self._lossfunc(output,y_set)
+        #     _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index
+        #     correct_num = (predicted_label_index == y_set).sum().item()
+        #     total_loss += loss
             
-            # print("测试样本总数：",testset_total_num)
-            # print("预测正确总数：",correct_num)
-            # print("预测总损失：",total_loss)
+        #     # print("测试样本总数：",testset_total_num)
+        #     # print("预测正确总数：",correct_num)
+        #     # print("预测总损失：",total_loss)
 
-            test_accuracy = correct_num / testset_total_num
-            test_loss = total_loss / testset_total_num                
+        #     test_accuracy = correct_num / testset_total_num
+        #     test_loss = total_loss / testset_total_num                
         
-        # del x_set_tensor
+        # # del x_set_tensor
+
+
+
+
+
         
         return test_accuracy, test_loss
 
@@ -1198,13 +1304,105 @@ class MaggieClassifier:
 
         elif self._args.dataset == 'imagenetmixed10':
             if self._args.cla_model == 'alexnet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 20))  
+
+            elif self._args.cla_model == 'vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 20))  
+
+        elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
+            if self._args.cla_model == 'alexnet':
                 lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet18':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet34':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet50':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model =='vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='inception_v3':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='densenet169':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='googlenet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+        elif self._args.dataset == 'cifar100':
+            if self._args.cla_model == 'resnet34':     
+                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
+
+                if epoch_index <= 7:
+                    lr = self._args.lr                                  #   0.01
+                elif epoch_index >= 8:
+                    lr = self._args.lr * 0.1                            #   0.001
+                elif epoch_index >= 15:
+                    lr = self._args.lr * 0.01                            #   0.0001
+
+            elif self._args.cla_model == 'alexnet':
+                # lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+
+                if epoch_index <= 11:
+                    lr = self._args.lr                                  #   0.01
+                elif epoch_index >= 12:
+                    lr = self._args.lr * 0.1                            #   0.001
 
 
+            elif self._args.cla_model =='resnet18':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                # if epoch_index <= 5:
+                #     lr = self._args.lr                                  #   0.01
+                # elif epoch_index >= 6 and epoch_index <= 7:
+                #     lr = self._args.lr * 0.1                            #   0.001
+                # elif epoch_index >= 8:
+                #     lr = self._args.lr * 0.01                            #   0.0001
 
+            elif self._args.cla_model =='resnet50':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='inception_v3':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-                
+            elif self._args.cla_model =='densenet169':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='googlenet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+        elif self._args.dataset == 'stl10':
+            if self._args.cla_model == 'alexnet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet18':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet34':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model == 'resnet50':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+            
+            elif self._args.cla_model =='vgg19':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+            
+            elif self._args.cla_model =='inception_v3':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='densenet169':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.cla_model =='googlenet':
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))
         # lr2 = smooth_step(10,20,30,40,epoch_index)
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
