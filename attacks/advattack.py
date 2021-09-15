@@ -48,7 +48,11 @@ class AdvAttack(MaggieClassifier):
         """
 
         # initilize the target model to be attacked
+        # print("before learned_model:",learned_model)
         self._targetmodel = copy.deepcopy(learned_model)    #深拷贝
+        # print("self._targetmodel:",self._targetmodel)
+        # print("after learned_model:",learned_model)
+
         # print('self._targetmodel:',self._targetmodel.fc)
         # print('self._targetmodel:',self._targetmodel)
 
@@ -112,6 +116,8 @@ class AdvAttack(MaggieClassifier):
         elif self._args.attack_mode =='cw':                               #   CW攻击
             print('Get CW examples generate model')
             advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
+        elif self._args.attack_mode =='pgd': 
+            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.2, targeted=False)   #默认eps是0.3
         elif self._args.attack_mode == None:
             raise Exception('please input the attack mode')           
         return advgenmodel

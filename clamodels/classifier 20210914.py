@@ -750,57 +750,26 @@ class MaggieClassifier:
         # print("y_train_adv.shape:",y_train_adv.shape)           #   y_train_adv.shape: torch.Size([50000])
 
 
-        # #扩增对抗样本: 50000 x_train_adv
-        # aug_x_train = cle_x_train
-        # aug_y_train = cle_y_train
+        # #   扩增对抗样本: 50000 cle_x_train + 50000 x_train_adv
+        # aug_x_train = torch.cat([cle_x_train, x_train_adv], dim=0)
+        # aug_y_train = torch.cat([cle_y_train, y_train_adv], dim=0)
 
-        #   #扩增对抗样本: 50000 x_train_adv
-        # aug_x_train = x_train_adv
-        # aug_y_train = y_train_adv
-        
-        #   扩增对抗样本: 50000 cle_x_train + 50000 x_train_adv
-        print("cle_x_train.dtype:",cle_x_train.dtype)       #   cle_x_train.dtype: torch.float32
-        print("cle_y_train.dtype:",cle_y_train.dtype)       #   cle_y_train.dtype: torch.int64
-        print("x_train_adv.dtype:",x_train_adv.dtype)       #   x_train_adv.dtype: torch.float32
-        print("y_train_adv.dtype:",y_train_adv.dtype)       #   y_train_adv.dtype: torch.int64
-
-        if args.aug_adv_num is None:
-            select_num = len(cle_y_train)
-        else:
-            select_num = args.aug_adv_num
-
-        cle_x_train = cle_x_train[:select_num]
-        cle_y_train = cle_y_train[:select_num]
-        x_train_adv = x_train_adv[:select_num]
-        y_train_adv = y_train_adv[:select_num]
-
-        # cle_x_train.cuda()
-        # cle_y_train.cuda()
-        # x_train_adv.cuda()
-        # y_train_adv.cuda() 
-
-        # print("cle_x_train.shape:",cle_x_train.shape)       #   cle_x_train.shape: torch.Size([73257, 3, 32, 32])
-        # print("cle_y_train.shape:",cle_y_train.shape)       #   
-        # print("x_train_adv.shape:",x_train_adv.shape)       #   x_train_adv.shape: torch.Size([5000, 3, 32, 32])
-        # print("y_train_adv.shape:",y_train_adv.shape)       #   
-
-        aug_x_train = torch.cat([cle_x_train, x_train_adv], dim=0)
-        aug_y_train = torch.cat([cle_y_train, y_train_adv], dim=0)
-      
+        #   扩增对抗样本: 50000 x_train_adv
+        aug_x_train = x_train_adv
+        aug_y_train = y_train_adv
 
         # print("aug_x_train.type:",type(aug_x_train))            #   aug_x_train.type: <class 'torch.Tensor'>
-        print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: torch.Size([78257, 3, 32, 32])
+        # print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: torch.Size([100000, 3, 32, 32])
         # print("aug_y_train.type:",type(aug_y_train))            #   aug_y_train.type: <class 'torch.Tensor'>
-        print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: torch.Size([78257])
-        # raise Exception("maggie error")    
+        # print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: torch.Size([100000])
 
         # tensor转numpy
         aug_x_train = aug_x_train.cpu().numpy()
         aug_y_train = aug_y_train.cpu().numpy()
-        # print("aug_x_train.type:",type(aug_x_train))            #   aug_x_train.type: <class 'numpy.ndarray'>
-        # print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: (100000, 3, 32, 32)
-        # print("aug_y_train.type:",type(aug_y_train))            #   aug_y_train.type: <class 'numpy.ndarray'>
-        # print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: (100000,)
+        print("aug_x_train.type:",type(aug_x_train))            #   aug_x_train.type: <class 'numpy.ndarray'>
+        print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: (100000, 3, 32, 32)
+        print("aug_y_train.type:",type(aug_y_train))            #   aug_y_train.type: <class 'numpy.ndarray'>
+        print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: (100000,)
 
 
         #   对抗训练    
@@ -820,16 +789,16 @@ class MaggieClassifier:
 
 
         # print("x_train_mix.type: ", type(x_train_mix))                                                              #   x_train_mix.type:  <class 'torch.Tensor'>   
-        # print("x_train_mix.shape: ", x_train_mix.shape)                                                             #   x_train_mix.shape:  torch.Size([29127, 3, 32, 32])
+        print("x_train_mix.shape: ", x_train_mix.shape)                                                             #   x_train_mix.shape:  torch.Size([29127, 3, 32, 32])
         # print("x_train_mix[0][0]:",x_train_mix[0][0])                                                               #   device='cuda:0') GPU tensor
         
         # print("y_train_mix.type: ", type(y_train_mix))                                                              #   y_train_mix.type:  <class 'torch.Tensor'>
-        # print("y_train_mix.shape: ", y_train_mix.shape)                                                             #   y_train_mix.shape:  torch.Size([29127, 10])
+        print("y_train_mix.shape: ", y_train_mix.shape)                                                             #   y_train_mix.shape:  torch.Size([29127, 10])
         # print("y_train_mix[0]:",x_train_mix[0])                                                                     #   device='cuda:0') GPU tensor
         
         #   原始样本标签转one hot
         # print("cle_x_train.type: ", type(cle_x_train))                                                              #   cle_x_train.type:  <class 'torch.Tensor'>
-        # print("cle_x_train.shape: ", cle_x_train.shape)                                                             #   cle_x_train.shape:  torch.Size([50000, 3, 32, 32])
+        print("cle_x_train.shape: ", cle_x_train.shape)                                                             #   cle_x_train.shape:  torch.Size([50000, 3, 32, 32])
         # print("cle_x_train[0][0]:",cle_x_train[0][0])                                                               #   device='cuda:0') GPU tensor
         
         # print("cle_y_train.type: ", type(cle_y_train))                                                              #   cle_y_train.type:  <class 'torch.Tensor'>
@@ -841,41 +810,37 @@ class MaggieClassifier:
         # print("cle_y_train_onehot.shape: ", cle_y_train_onehot.shape)                                               #   cle_y_train_onehot.shape:  torch.Size([50000, 10])
         # print("cle_y_train_onehot[0]:",cle_y_train_onehot[0])                                                       #   device='cuda:0') GPU tensor
 
-        # # #   扩增混合样本： 只有干净样本
-        # aug_x_train = cle_x_train
-        # aug_y_train = cle_y_train_onehot
+        #   扩增混合样本：aug 50000cle + 100mix
+        # cle_x_train.cuda()
+        # x_train_mix.cuda()
+        # y_train_mix.cuda()
+        # aug_x_train = torch.cat([cle_x_train[:7588], x_train_mix], dim=0)
+        # aug_y_train = torch.cat([cle_y_train_onehot[:7588], y_train_mix], dim=0)
 
-        # # #   扩增混合样本： 只有混合样本
-        # aug_x_train = x_train_mix
-        # aug_y_train = y_train_mix
+        # #   扩增混合样本：100mix 只有混合样本
+        aug_x_train = x_train_mix
+        aug_y_train = y_train_mix
 
+        # print("aug_x_train.type:",type(aug_x_train))                                                                #   aug_x_train.type: <class 'torch.Tensor'>
+        # print("aug_x_train.shape:",aug_x_train.shape)                                                               #   aug_x_train.shape: torch.Size([50003, 3, 32, 32])
+        # print("aug_x_train[0][0]:",aug_x_train[0][0])                                                               #   device='cuda:0') GPU tensor
 
-        #   扩增混合样本：aug cle + mix
-        if args.aug_mix_num is None:
-            select_num = len(cle_y_train)
-        else:
-            select_num = args.aug_mix_num
-
-        cle_x_train = cle_x_train[:select_num]
-        cle_y_train_onehot = cle_y_train_onehot[:select_num]
-        x_train_mix = x_train_mix[:select_num]
-        y_train_mix = y_train_mix[:select_num]
-        print("y_train_mix.shape:",y_train_mix.shape)           #   
-        aug_x_train = torch.cat([cle_x_train, x_train_mix], dim=0)
-        aug_y_train = torch.cat([cle_y_train_onehot, y_train_mix], dim=0)
-      
+        # print("aug_y_train.type:",type(aug_y_train))                                                                #   aug_y_train.type: <class 'torch.Tensor'>
+        # print("aug_y_train.shape:",aug_y_train.shape)                                                               #   aug_y_train.shape: torch.Size([50003, 10])
+        # print("aug_y_train[0]:",aug_y_train[0])                                                                     #   device='cuda:0') GPU tensor
+        
         # tensor转numpy
         aug_x_train = aug_x_train.cpu().numpy()
         aug_y_train = aug_y_train.cpu().numpy()
- 
+        print("aug_x_train.type:",type(aug_x_train))                                                                #   aug_x_train.type: <class 'numpy.ndarray'>
         print("aug_x_train.shape:",aug_x_train.shape)                                                               #   aug_x_train.shape: (50003, 3, 32, 32)
-  
+        print("aug_y_train.type:",type(aug_y_train))                                                                #   aug_y_train.type: <class 'numpy.ndarray'>
         print("aug_y_train.shape:",aug_y_train.shape)                                                               #   aug_y_train.shape: (50003, 10)
         
-        # 混合训练（MMAT） 
+        # raise error
+        #   混合训练（MMAT） 
         # classify_model.fit(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)
         # mmat使用以下两种训练代码
-
         classify_model.fit_softlabel(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)
         # self.__traintensorset__(aug_x_train,aug_y_train,x_test_adv, y_test_adv,exp_result_dir)
 
@@ -898,10 +863,7 @@ class MaggieClassifier:
 
         adv_xset_tensor = []
         adv_yset_tensor = []
-
         for index, filename in enumerate(filenames):
-            #----------控制对抗样本与干净样本的混合比例------- 读取5000对抗样本
-            # if index < 50:        #   测试完删掉
             adv_npz_path = os.path.join(adv_dataset_path,filename)
 
             load_adv_img = np.load(adv_npz_path)['w']            
@@ -925,8 +887,7 @@ class MaggieClassifier:
         print("adv_yset_tensor.shape:",adv_yset_tensor.shape)                                                   #   adv_yset_tensor.shape: torch.Size([10000])
         # print("adv_yset_tensor:",adv_yset_tensor)                                                               #   adv_yset_tensor[0]: tensor(3)
 
-        # return adv_xset_tensor, adv_yset_tensor     
-        return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+        return adv_xset_tensor, adv_yset_tensor     
 
     def __traintensorset__(self,train_tensorset_x,train_tensorset_y,test_tensorset_x,test_tensorset_y,exp_result_dir):
             print("输入张量集训练")
@@ -1050,7 +1011,6 @@ class MaggieClassifier:
 
                 # raise error
                 batch_loss = self._lossfunc(softmax_outputs,batch_labs)
-
                 # batch_loss = self.__mixuplossfunc__(softmax_outputs,batch_labs)
                 batch_loss.backward()
                 self._optimizer.step()
@@ -1146,6 +1106,7 @@ class MaggieClassifier:
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
 
     def __evaluatesoftlabelfromtensor__(self, classifier, x_set:Tensor, y_set:Tensor):
+    # def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):
         if torch.cuda.is_available():
             classifier.cuda()             
 
@@ -1270,47 +1231,37 @@ class MaggieClassifier:
     #-----------------------------
 
     def __mixuplossfunc__(self,softmax_outputs,batch_labs):
-        
-        #   计算two-hot标签的混合系数
+        criterion =  torch.nn.CrossEntropyLoss()
+        print("batch_labs:",batch_labs)                                          #  batch_labs.shape:torch.Size([256, 10])  batch_labs_maxindex.shape: torch.Size([256])
        
-        #   求第一大概率标签的混合系数 alpha_1
-        alpha_1, w1_label_index = torch.max(batch_labs, 1)                            #  torch.Size[256]
+        lam, w1_label_index = torch.max(batch_labs, 1)                            #  torch.Size[256]
+        print(f'w1_label_index = {int(w1_label_index)}')
+        print(f'lam = {lam}')
         
-        print("batch_labs:",batch_labs)
-        print("w1_label_index:",int(w1_label_index))
-        print("w1_label_index.size():",w1_label_index.size())
-        print("alpha_1:",alpha_1)
-        print("alpha_1.size():",alpha_1.size())
-
-        raise error
-        
-
-        #   求第二大概率标签的混合系数 alpha_2
         modified_mixed_label = copy.deepcopy(batch_labs)
 
         for i in range(self._args.batch_size):
             modified_mixed_label[i][w1_label_index[i]] = 0                             
+        print("modified_mixed_label:",modified_mixed_label)                                                                 #   [[0,0,0,...,0]] modified_mixed_label.shape=[1,10]
+        
+        # 当两个样本是同一类时,将最大置零后，会使得标签2被随机分配为label 0，例如[0,0,0,1,0,0]
 
+        # print("torch.nonzero(modified_mixed_label[0]): ",torch.nonzero(modified_mixed_label[0]))                            #   torch.nonzero([0,0,0,...,0]) = tensor[] 其中size(0,1)
+        # print("torch.nonzero(modified_mixed_label[0]).size(0): ",torch.nonzero(modified_mixed_label[0]).size(0))            #   torch.size(0,1)
+        
+
+        lam_b, w2_label_index = torch.max(modified_mixed_label, 1)
+        print(f'w2_label_index = {int(w2_label_index)}')
+        print(f'lam_b = {lam_b}')
+
+        for i in range(self._args.batch_size):
             if torch.nonzero(modified_mixed_label[i]).size(0) == 0:
-                # print("混合label的最大值维度置零后，其他全为0！")
                 w2_label_index[i] = w1_label_index[i]
-                alpha_2[i] = 0
-                # raise Exception("maggie stop here")
-            else:
-                alpha_2[i], w2_label_index[i] = torch.max(modified_mixed_label[i], 1)
-                # print(f'w2_label_index = {int(w2_label_index)}')
-
-
-        print("w2_label_index:",int(w2_label_index))
-        print("w2_label_index.size():",w2_label_index.size())
-        print("alpha_2:",alpha_2)
-        print("alpha_2.size():",alpha_2.size())
-
-        cla_loss =  torch.nn.CrossEntropyLoss()
+            print(" test ")
         
         loss_a = criterion(softmax_outputs, w1_label_index)
         loss_b = criterion(softmax_outputs, w2_label_index)
-        loss = alpha_1 * loss_a + alpha_2 * loss_b
+        loss = lam * loss_a + (1 - lam) * loss_b
 
         return loss
 

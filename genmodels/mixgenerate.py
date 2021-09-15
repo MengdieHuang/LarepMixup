@@ -397,15 +397,17 @@ class MixGenerate:
         label_filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[-9:-4] == 'label']           
         
         # print("img_filenames:",img_filenames)                                                                   #   img_filenames: ['00000000-9-truck+6-frog-mixed-image.npz']
-        print("label_filenames[0]:",label_filenames[0])                                     #   label_filenames[0]: 00000000-6-frog+00000001-9-truck-mixed_label.npz
-        print("label_filenames.len:",len(label_filenames))                                  #   label_filenames.len: 42358
+        # print("label_filenames[0]:",label_filenames[0])                                     #   label_filenames[0]: 00000000-6-frog+00000001-9-truck-mixed_label.npz
+        # print("label_filenames.len:",len(label_filenames))                                  #   label_filenames.len: 42358
         
         mix_xset_tensor = []
 
-        print("test here")
-        for _, img_filename in enumerate(img_filenames):
-            print("img_filename:",img_filename)
-            print('in..........')
+        # print("test here")
+        for miximg_index, img_filename in enumerate(img_filenames):
+
+
+            # print("img_filename:",img_filename)
+            # print('in..........')
             mix_img_npz_path = os.path.join(mix_dataset_path,img_filename)
             # print("mix_img_npz_path:",mix_img_npz_path)
             load_mix_img = np.load(mix_img_npz_path)['w']            
@@ -415,16 +417,17 @@ class MixGenerate:
             # raise error
 
         mix_yset_tensor = []
-        for _, lab_filename in enumerate(label_filenames):
-         
+        for mixy_index, lab_filename in enumerate(label_filenames):
+
+                
             mix_lab_npz_path = os.path.join(mix_dataset_path,lab_filename)
 
             load_mix_lab = np.load(mix_lab_npz_path)['w']            
             load_mix_lab = torch.tensor(load_mix_lab)
             mix_yset_tensor.append(load_mix_lab)
 
-        print("mix_xset_tensor.len",len(mix_xset_tensor))
-        print("mix_xset_tensor[0]",mix_xset_tensor[0])          #0 
+        # print("mix_xset_tensor.len",len(mix_xset_tensor))
+        # print("mix_xset_tensor[0]",mix_xset_tensor[0])          #0 
         # raise error
         mix_xset_tensor = torch.stack(mix_xset_tensor)                                                                         
         mix_yset_tensor = torch.stack(mix_yset_tensor)   
