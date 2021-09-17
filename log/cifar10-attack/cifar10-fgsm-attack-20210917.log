@@ -1,0 +1,220 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/alexnet-cifar10/20210908/00015-testacc-0.8355/train-cifar10-dataset/standard-trained-classifier-alexnet-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:7.0800%
+standard trained classifier loss on adversarial testset:6.148881435394287
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/resnet18-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/resnet18-cifar10/20210908/00017-testacc-0.7779/train-cifar10-dataset/standard-trained-classifier-resnet18-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:3.8200%
+standard trained classifier loss on adversarial testset:8.518218994140625
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/resnet34-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/resnet34-cifar10/20210907/00030-testscc-0.7739/train-cifar10-dataset/standard-trained-classifier-resnet34-on-clean-cifar10-finished.pkl
+Traceback (most recent call last):
+  File "tasklauncher-20210917.py", line 72, in <module>
+    learned_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 579, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/train/cla-train/resnet34-cifar10/20210907/00030-testscc-0.7739/train-cifar10-dataset/standard-trained-classifier-resnet34-on-clean-cifar10-finished.pkl'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/resnet50-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00001-testacc-0.7666/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-epoch-0011.pkl
+Traceback (most recent call last):
+  File "tasklauncher-20210917.py", line 72, in <module>
+    learned_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 579, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00001-testacc-0.7666/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-epoch-0011.pkl'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:14.5400%
+standard trained classifier loss on adversarial testset:5.738091468811035
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/densenet169-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/densenet169-cifar10/20210909/00003-testacc-0.7929/train-cifar10-dataset/standard-trained-classifier-densenet169-on-clean-cifar10-epoch-0012.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:4.4700%
+standard trained classifier loss on adversarial testset:7.974355697631836
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/googlenet-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/googlenet-cifar10/20210909/00001-testacc-0.8016/train-cifar10-dataset/standard-trained-classifier-googlenet-on-clean-cifar10-epoch-0011.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20210917.py", line 77, in <module>
+    adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 561, in evaluatefromtensor
+    output, aux1, aux2 = classifier(imgs)
+ValueError: too many values to unpack (expected 3)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/resnet34-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/resnet34-cifar10/20210907/00030-testacc-0.7739/train-cifar10-dataset/standard-trained-classifier-resnet34-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:3.3100%
+standard trained classifier loss on adversarial testset:6.986446380615234
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/resnet50-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:5.2800%
+standard trained classifier loss on adversarial testset:7.534492492675781
+---------------------------------------
+
+

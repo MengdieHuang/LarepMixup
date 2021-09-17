@@ -1,0 +1,19 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-kmnist/20210917/00000
+initilize the dataset loading parameters
+Loading *kmnist* train dataloader finished !
+Loading *kmnist* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/alexnet-kmnist/20210912/00000-testacc-0.9789/train-kmnist-dataset/standard-trained-classifier-alexnet-on-clean-kmnist-finished.pkl
+initlize classifier
+learned calssify model != None
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/1875 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:   0%|          | 1/1875 [00:01<40:47,  1.31s/it]PGD - Batches:   0%|          | 2/1875 [00:02<40:54,  1.31s/it]PGD - Batches:   0%|          | 3/1875 [00:03<40:56,  1.31s/it]PGD - Batches:   0%|          | 4/1875 [00:05<40:51,  1.31s/it]PGD - Batches:   0%|          | 5/1875 [00:06<41:16,  1.32s/it]PGD - Batches:   0%|          | 6/1875 [00:07<40:52,  1.31s/it]PGD - Batches:   0%|          | 7/1875 [00:09<40:23,  1.30s/it]PGD - Batches:   0%|          | 8/1875 [00:10<40:01,  1.29s/it]PGD - Batches:   0%|          | 9/1875 [00:11<39:54,  1.28s/it]PGD - Batches:   1%|          | 10/1875 [00:12<40:03,  1.29s/it]PGD - Batches:   1%|          | 11/1875 [00:14<40:00,  1.29s/it]PGD - Batches:   1%|          | 12/1875 [00:15<39:58,  1.29s/it]PGD - Batches:   1%|          | 13/1875 [00:16<39:47,  1.28s/it]PGD - Batches:   1%|          | 14/1875 [00:18<39:41,  1.28s/it]PGD - Batches:   1%|          | 15/1875 [00:19<43:18,  1.40s/it]PGD - Batches:   1%|          | 16/1875 [00:22<52:37,  1.70s/it]PGD - Batches:   1%|          | 17/1875 [00:23<48:41,  1.57s/it]PGD - Batches:   1%|          | 18/1875 [00:24<45:57,  1.49s/it]PGD - Batches:   1%|          | 19/1875 [00:26<44:20,  1.43s/it]PGD - Batches:   1%|          | 20/1875 [00:27<42:52,  1.39s/it]PGD - Batches:   1%|          | 21/1875 [00:28<42:23,  1.37s/it]PGD - Batches:   1%|          | 22/1875 [00:30<42:13,  1.37s/it]PGD - Batches:   1%|          | 23/1875 [00:31<42:02,  1.36s/it]PGD - Batches:   1%|▏         | 24/1875 [00:32<41:07,  1.33s/it]PGD - Batches:   1%|▏         | 25/1875 [00:33<40:24,  1.31s/it]PGD - Batches:   1%|▏         | 26/1875 [00:35<39:48,  1.29s/it]PGD - Batches:   1%|▏         | 27/1875 [00:36<39:16,  1.28s/it]PGD - Batches:   1%|▏         | 28/1875 [00:37<39:13,  1.27s/it]PGD - Batches:   2%|▏         | 29/1875 [00:38<39:04,  1.27s/it]PGD - Batches:   2%|▏         | 30/1875 [00:40<39:09,  1.27s/it]PGD - Batches:   2%|▏         | 31/1875 [00:41<39:22,  1.28s/it]PGD - Batches:   2%|▏         | 32/1875 [00:42<39:26,  1.28s/it]PGD - Batches:   2%|▏         | 33/1875 [00:44<39:36,  1.29s/it]PGD - Batches:   2%|▏         | 34/1875 [00:45<39:32,  1.29s/it]PGD - Batches:   2%|▏         | 35/1875 [00:46<39:22,  1.28s/it]PGD - Batches:   2%|▏         | 36/1875 [00:47<39:18,  1.28s/it]PGD - Batches:   2%|▏         | 37/1875 [00:49<39:18,  1.28s/it]PGD - Batches:   2%|▏         | 38/1875 [00:50<39:05,  1.28s/it]PGD - Batches:   2%|▏         | 39/1875 [00:51<38:56,  1.27s/it]

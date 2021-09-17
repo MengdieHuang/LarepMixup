@@ -597,23 +597,6 @@ class MaggieClassifier:
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)                                                                         
-            
-            # print("xset_tensor.type:", type(xset_tensor))                           #   xset_tensor.type: <class 'torch.Tensor'>                                                             
-            # print("xset_tensor.shape:",xset_tensor.shape)                           #   xset_tensor.shape: torch.Size([50000, 3, 32, 32])
-            # print("xset_tensor[0]: ",xset_tensor[0])                                #   xset_tensor[0]:  tensor([[[-1.2854e+00, -1.5955e+00, -1.4598e+00,  ...,  6.3375e-01                                                                
-            # print("xset_tensor[0].shape: ",xset_tensor[0].shape)                    #   xset_tensor[0].shape:  torch.Size([3, 32, 32])
-
-            # img = xset_tensor[0].unsqueeze(0)
-            # print("img.shape: ",img.shape)                                          #   img.shape:  torch.Size([1, 3, 32, 32])
-
-            # img = (img + 1) * (255/2)                                                                                 
-            # img = img.permute(0, 2, 3, 1).clamp(0, 255).to(torch.uint8)[0]          #   img.type: <class 'torch.Tensor'>                        
-            # print("img.type:", type(img))                                                                   
-            # print("img.shape:",img.shape)                                           #   img.shape: torch.Size([32, 32, 3])
-            # print("img:",img)                                                       #   img: tensor([[[  0,   0,   0],[  0,   0,   0],
-
-
-            # raise Exception("maggie stop here")                                    
 
         elif self._args.dataset == 'cifar100':
             xset_tensor = []
@@ -624,17 +607,6 @@ class MaggieClassifier:
 
         elif self._args.dataset == 'imagenet':
             jieduan_num = 1000
-            # x_ndarray = []                                             #   shape是（50000，32，32，3）
-            # dataset_len = len(dataloader.dataset)
-            # print('dataset len:',dataset_len)
-            # for index in range(jieduan_num):
-            # # for index in range(dataset_len):
-            #     img, _ = dataloader.dataset.__getitem__(index)
-            #     x_ndarray.append(img)
-            # x_ndarray = torch.stack(x_ndarray) 
-            # print("x_ndarray shape:",x_ndarray.shape)                   #   torch.Size([10000, 3, 256, 256])
-            # x_ndarray = x_ndarray.numpy()
-            # print("x_ndarray shape:",x_ndarray.shape)                   #   (10000, 3, 256, 256)
 
             xset_tensor = []
             # for img_index in range(len(dataloader.dataset)):
@@ -642,23 +614,19 @@ class MaggieClassifier:
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)                                                                          
             
-            # print("x_ndarray.type:", type(x_ndarray))                           
-            # print("x_ndarray.shape:",x_ndarray.shape)                                                                   #   x_ndarray.shape: torch.Size([1000, 3, 256, 256])
-            # print("flag A x_ndarray[0][0]: ",x_ndarray[0][0])                                                         
-            # print("flag A x_ndarray[0][0].shape: ",x_ndarray[0][0].shape)                                               #   flag A x_ndarray[0][0].shape:  torch.Size([256, 256])                                              
-
         elif self._args.dataset == 'svhn':
 
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
-            xset_tensor = torch.stack(xset_tensor)                                                                         
-            
-            # print("xset_tensor.type:", type(xset_tensor))                                                                   
-            # print("xset_tensor.shape:",xset_tensor.shape)    
-            # print("xset_tensor[0]:",xset_tensor[0])        
-            # print("flag A xset_tensor[0][0]: ",xset_tensor[0][0])                       # normalized                                                
-            # print("flag A xset_tensor[0][0].shape: ",xset_tensor[0][0].shape)           # [3,32,32]               ->[32,32]             
+            xset_tensor = torch.stack(xset_tensor)   
+
+        elif self._args.dataset == 'kmnist':
+
+            xset_tensor = []
+            for img_index in range(len(dataloader.dataset)):
+                xset_tensor.append(dataloader.dataset[img_index][0])
+            xset_tensor = torch.stack(xset_tensor)  
 
         return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
 
@@ -710,6 +678,20 @@ class MaggieClassifier:
             # print("yset_tensor.shape:", yset_tensor.shape)                      #   yset_tensor.shape: torch.Size([1000])
 
         elif self._args.dataset == 'svhn':
+        #     y_ndarray = dataloader.dataset.targets
+        #     print("y_ndarray.type:", type(y_ndarray))
+
+            # y_ndarray = y_ndarray[:jieduan_num]
+
+            yset_tensor = []
+            for img_index in range(len(dataloader.dataset)):
+                yset_tensor.append(dataloader.dataset[img_index][1])
+
+            yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
+            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
+            # print("yset_tensor.shape:", yset_tensor.shape)
+
+        elif self._args.dataset == 'kmnist':
         #     y_ndarray = dataloader.dataset.targets
         #     print("y_ndarray.type:", type(y_ndarray))
 
