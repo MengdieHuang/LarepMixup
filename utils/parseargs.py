@@ -85,7 +85,7 @@ def parse_arguments():
         parser_object.add_argument('--batch_size',type=int,default=32,help='Batch size of the dataset setting for the training process')
         parser_object.add_argument('--epochs',type=int,default=20,help='Epochs number setting for the training process')
         parser_object.add_argument('--lr',type=float,default=0.01,help='Learning rate setting for the training process')
-        parser_object.add_argument('--save_path',type=str,default='result',help='Output path for saving results')
+        parser_object.add_argument('--save_path',type=str,default='/home/maggie/mmat/result',help='Output path for saving results')
         parser_object.add_argument('--cpus',type=int,default=4,help='Number of CPUs to use')
         parser_object.add_argument('--gpus',type=int,default=1,help='Number of GPUS to use')
 
@@ -153,6 +153,9 @@ def parse_arguments():
         parser_object.add_argument('--mix_w_num', help='number of the projected w for mixup', type=int, default=2)
         parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='uniformsampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2'])
         parser_object.add_argument('--projected_dataset', help = 'The projected w dataset path of target png images to interpolate', type = str, default = None)
+        parser_object.add_argument('--mix_img_num', help='number of the mixed images', type=int, default=None)
+
+
 
         #-------------------------arguments for classifier train-------------------------
         parser_object.add_argument('--train_mode', help='standard train or adversarial train', type=str, default=None,choices=['gen-train','cla-train'])
@@ -169,8 +172,8 @@ def parse_arguments():
         parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
-        parser_object.add_argument('--aug_mix_num',type=int, default=None)
-
+        parser_object.add_argument('--aug_num',type=int, default=None)
+        parser_object.add_argument('--aug_mix_rate',type=float, default=None)
 
 
         #-------------------------other arguments-------------------------
@@ -225,10 +228,10 @@ def check_arguments(args):
 def set_exp_result_dir(args):
 
     if args.seed == 0:
-        print('args.seed=%i' % args.seed)
+        # print('args.seed=%i' % args.seed)
         save_path = args.save_path                                                                                  #   save_path=/mmat/result/
     else:
-        print('args.seed=%i' % args.seed)
+        # print('args.seed=%i' % args.seed)
         save_path = f'{args.save_path}/{args.seed}'
 
     cur=datetime.datetime.now()
@@ -286,7 +289,7 @@ def correct_args_dictionary(args,args_dictionary,DO_NOT_EXPORT):
         print('args_dictionary from load yaml file =%s' % args_dictionary)      
 
     elif args.subcommand == 'run':
-        print('args.subcommand=%s,run the command line' % args.subcommand)
+        print('args.subcommand=%s, run the command line' % args.subcommand)
     elif args.subcommand == None:
         raise Exception('args.subcommand=%s,please input the subcommand !' % args.subcommand)   
     else:
@@ -320,7 +323,7 @@ def main():
     # get arguments dictionary
     args = parse_arguments()
     args_dictionary = vars(args)                                                                                    #   转换args为字典类型的对象
-    print('args_dictionary=%s' % args_dictionary)        
+    # print('args_dictionary=%s' % args_dictionary)        
 
     # from command yaml file import configure dictionary
     DO_NOT_EXPORT = ['maggie','xieldy'] 

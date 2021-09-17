@@ -1,0 +1,19 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/alexnet-cifar10/20210908/00015-testacc-0.8355/train-cifar10-dataset/standard-trained-classifier-alexnet-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...

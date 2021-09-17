@@ -281,7 +281,6 @@ class MaggieClassifier:
             print('modified torchvisionmodel.last:',last)        #   torchvisionmodel.last: Linear(in_features=4096, out_features=10, bias=True)
             # raise error 
 
-
         # raise error
         return torchvisionmodel
 
@@ -484,7 +483,6 @@ class MaggieClassifier:
 
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     
-
     def evaluatefromdataloader(self,model,test_dataloader) -> None:
         if torch.cuda.is_available():
             self._lossfunc.cuda()
@@ -534,11 +532,11 @@ class MaggieClassifier:
         cla_model_name=self._args.cla_model
 
         # print("x_set.shape:",x_set.shape)           #   x_set.shape: torch.Size([26032, 3, 32, 32])
-        print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
-        print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
-        print("batch_num:",batch_num)                   #   batch_num: 813.5
-        print("batch_size:",batch_size)       #  
-        print("cla_model_name:",cla_model_name)       #   cla_model_name: alexnet
+        # print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
+        # print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
+        # print("batch_num:",batch_num)                   #   batch_num: 813.5
+        # print("batch_size:",batch_size)       #  
+        # print("cla_model_name:",cla_model_name)       #   cla_model_name: alexnet
 
         eva_loss = torch.nn.CrossEntropyLoss()
         epoch_correct_num = 0
@@ -657,7 +655,8 @@ class MaggieClassifier:
             xset_tensor = torch.stack(xset_tensor)                                                                         
             
             # print("xset_tensor.type:", type(xset_tensor))                                                                   
-            # print("xset_tensor.shape:",xset_tensor.shape)           
+            # print("xset_tensor.shape:",xset_tensor.shape)    
+            # print("xset_tensor[0]:",xset_tensor[0])        
             # print("flag A xset_tensor[0][0]: ",xset_tensor[0][0])                       # normalized                                                
             # print("flag A xset_tensor[0][0].shape: ",xset_tensor[0][0].shape)           # [3,32,32]               ->[32,32]             
 
@@ -727,10 +726,44 @@ class MaggieClassifier:
 
         return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
 
+    def getadvset(self,adv_dataset_path):
+        adv_xset_tensor, adv_yset_tensor = self.__getadvsettensor__(adv_dataset_path)
+        return adv_xset_tensor, adv_yset_tensor     
+        
+    def __getadvsettensor__(self,adv_dataset_path):
+
+        file_dir=os.listdir(adv_dataset_path)
+        file_dir.sort()
+        # '00000000-adv-3-cat.npz'
+        filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
+
+        adv_xset_tensor = []
+        adv_yset_tensor = []
+
+        for index, filename in enumerate(filenames):
+            adv_npz_path = os.path.join(adv_dataset_path,filename)
+
+            load_adv_img = np.load(adv_npz_path)['w']            
+            load_adv_img = torch.tensor(load_adv_img)
+            
+            load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
+            load_adv_label = torch.tensor(load_adv_label)
+
+            adv_xset_tensor.append(load_adv_img)
+            adv_yset_tensor.append(load_adv_label)
+
+        adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
+        adv_yset_tensor = torch.stack(adv_yset_tensor)   
+
+        return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+
     def adversarialtrain(self,
         args,
         cle_x_train,
         cle_y_train,
+        cle_x_test,
+        cle_y_test,
+
         x_train_adv,
         y_train_adv,
         x_test_adv, 
@@ -759,10 +792,10 @@ class MaggieClassifier:
         # aug_y_train = y_train_adv
         
         #   扩增对抗样本: 50000 cle_x_train + 50000 x_train_adv
-        print("cle_x_train.dtype:",cle_x_train.dtype)       #   cle_x_train.dtype: torch.float32
-        print("cle_y_train.dtype:",cle_y_train.dtype)       #   cle_y_train.dtype: torch.int64
-        print("x_train_adv.dtype:",x_train_adv.dtype)       #   x_train_adv.dtype: torch.float32
-        print("y_train_adv.dtype:",y_train_adv.dtype)       #   y_train_adv.dtype: torch.int64
+        # print("cle_x_train.dtype:",cle_x_train.dtype)       #   cle_x_train.dtype: torch.float32
+        # print("cle_y_train.dtype:",cle_y_train.dtype)       #   cle_y_train.dtype: torch.int64
+        # print("x_train_adv.dtype:",x_train_adv.dtype)       #   x_train_adv.dtype: torch.float32
+        # print("y_train_adv.dtype:",y_train_adv.dtype)       #   y_train_adv.dtype: torch.int64
 
         if args.aug_adv_num is None:
             select_num = len(cle_y_train)
@@ -789,9 +822,9 @@ class MaggieClassifier:
       
 
         # print("aug_x_train.type:",type(aug_x_train))            #   aug_x_train.type: <class 'torch.Tensor'>
-        print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: torch.Size([78257, 3, 32, 32])
+        # print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: torch.Size([78257, 3, 32, 32])
         # print("aug_y_train.type:",type(aug_y_train))            #   aug_y_train.type: <class 'torch.Tensor'>
-        print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: torch.Size([78257])
+        # print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: torch.Size([78257])
         # raise Exception("maggie error")    
 
         # tensor转numpy
@@ -801,10 +834,10 @@ class MaggieClassifier:
         # print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: (100000, 3, 32, 32)
         # print("aug_y_train.type:",type(aug_y_train))            #   aug_y_train.type: <class 'numpy.ndarray'>
         # print("aug_y_train.shape:",aug_y_train.shape)           #   aug_y_train.shape: (100000,)
+    
+        # classify_model.fit(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)            
 
-
-        #   对抗训练    
-        classify_model.fit(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)            
+        classify_model.fit(aug_x_train, aug_y_train, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)
 
     def mmat(self,
         args,
@@ -812,135 +845,94 @@ class MaggieClassifier:
         cle_y_train,
         x_train_mix,
         y_train_mix,
+
+        cle_x_test, 
+        cle_y_test,
         x_test_adv, 
         y_test_adv, 
-        classify_model: "PyTorchClassifier",
-        exp_result_dir
+
+        exp_result_dir,
+        classify_model = None #: ART中的"PyTorchClassifier"
     ):
+        # print("cle_x_train.shape:",cle_x_train.shape)
+        # print("cle_y_train.shape:",cle_y_train.shape)
 
+        # print("x_train_mix.shape:",x_train_mix.shape)
+        # print("y_train_mix.shape:",y_train_mix.shape)
 
-        # print("x_train_mix.type: ", type(x_train_mix))                                                              #   x_train_mix.type:  <class 'torch.Tensor'>   
-        # print("x_train_mix.shape: ", x_train_mix.shape)                                                             #   x_train_mix.shape:  torch.Size([29127, 3, 32, 32])
-        # print("x_train_mix[0][0]:",x_train_mix[0][0])                                                               #   device='cuda:0') GPU tensor
-        
-        # print("y_train_mix.type: ", type(y_train_mix))                                                              #   y_train_mix.type:  <class 'torch.Tensor'>
-        # print("y_train_mix.shape: ", y_train_mix.shape)                                                             #   y_train_mix.shape:  torch.Size([29127, 10])
-        # print("y_train_mix[0]:",x_train_mix[0])                                                                     #   device='cuda:0') GPU tensor
-        
-        #   原始样本标签转one hot
-        # print("cle_x_train.type: ", type(cle_x_train))                                                              #   cle_x_train.type:  <class 'torch.Tensor'>
-        # print("cle_x_train.shape: ", cle_x_train.shape)                                                             #   cle_x_train.shape:  torch.Size([50000, 3, 32, 32])
-        # print("cle_x_train[0][0]:",cle_x_train[0][0])                                                               #   device='cuda:0') GPU tensor
-        
-        # print("cle_y_train.type: ", type(cle_y_train))                                                              #   cle_y_train.type:  <class 'torch.Tensor'>
-        # print("cle_y_train.shape: ", cle_y_train.shape)                                                             #   cle_y_train.shape:  torch.Size([5000])
+        # print("cle_x_test.shape:",cle_x_test.shape)
+        # print("cle_y_test.shape:",cle_y_test.shape)
+
+        # print("x_test_adv.shape:",x_test_adv.shape)
+        # print("y_test_adv.shape:",y_test_adv.shape)
         
         cle_y_train_onehot = torch.nn.functional.one_hot(cle_y_train, args.n_classes).float().cuda()  
-        # print("cle_y_train_onehot.shape: ", cle_y_train_onehot.shape)                                               #   cle_y_train_onehot.shape:  torch.Size([50000, 10])        
-        # print("cle_y_train_onehot.type: ", type(cle_y_train_onehot))                                                #   cle_y_train_onehot.type:  <class 'torch.Tensor'>
-        # print("cle_y_train_onehot.shape: ", cle_y_train_onehot.shape)                                               #   cle_y_train_onehot.shape:  torch.Size([50000, 10])
-        # print("cle_y_train_onehot[0]:",cle_y_train_onehot[0])                                                       #   device='cuda:0') GPU tensor
 
-        # # #   扩增混合样本： 只有干净样本
-        # aug_x_train = cle_x_train
-        # aug_y_train = cle_y_train_onehot
-
-        # # #   扩增混合样本： 只有混合样本
-        # aug_x_train = x_train_mix
-        # aug_y_train = y_train_mix
-
-
-        #   扩增混合样本：aug cle + mix
-        if args.aug_mix_num is None:
-            select_num = len(cle_y_train)
+        if args.aug_num is None or args.aug_mix_rate is None:
+            # select_num = len(cle_y_train)
+            raise Exception("input aug_num and aug_mix_rate")
         else:
-            select_num = args.aug_mix_num
+            aug_num = args.aug_num           #   共要扩增多少样本
+            aug_rate = args.aug_mix_rate
+            select_cle_num = int( (1-aug_rate) * aug_num )
+            select_mix_num = int( aug_rate * aug_num )
 
-        cle_x_train = cle_x_train[:select_num]
-        cle_y_train_onehot = cle_y_train_onehot[:select_num]
-        x_train_mix = x_train_mix[:select_num]
-        y_train_mix = y_train_mix[:select_num]
-        print("y_train_mix.shape:",y_train_mix.shape)           #   
-        aug_x_train = torch.cat([cle_x_train, x_train_mix], dim=0)
-        aug_y_train = torch.cat([cle_y_train_onehot, y_train_mix], dim=0)
-      
-        # tensor转numpy
+        if aug_rate == 0:
+            print("only using clean samples")
+            # select_cle_num = int( (1-aug_rate) * aug_num ) 
+            aug_x_train = cle_x_train[:select_cle_num]
+            aug_y_train = cle_y_train_onehot[:select_cle_num]
+
+        elif aug_rate == 1:
+            print("only using mixed samples")
+            # select_mix_num = int( aug_rate * aug_num )
+            aug_x_train = x_train_mix[:select_mix_num]
+            aug_y_train = y_train_mix[:select_mix_num]
+
+        elif aug_rate == 0.5:
+            print("using clean sampels and mixed samples")
+            aug_rate = 0.5
+            # select_mix_num = int( aug_rate * aug_num )
+            # select_cle_num = int( (1-aug_rate) * aug_num )
+
+            cle_x_train         = cle_x_train[:select_cle_num]
+            cle_y_train_onehot  = cle_y_train_onehot[:select_cle_num]
+            x_train_mix         = x_train_mix[:select_mix_num]
+            y_train_mix         = y_train_mix[:select_mix_num]
+
+            print("cle_x_train.shape:",cle_x_train.shape)
+            print("cle_y_train.shape:",cle_y_train.shape)
+
+            print("x_train_mix.shape:",x_train_mix.shape)
+            print("cle_y_train_onehot.shape:",cle_y_train_onehot.shape)
+
+            aug_x_train = torch.cat([cle_x_train, x_train_mix], dim=0)
+            aug_y_train = torch.cat([cle_y_train_onehot, y_train_mix], dim=0)
+
+        elif args.aug_mix_rate is None:
+            raise Exception("input augmentation rate please")
+        
         aug_x_train = aug_x_train.cpu().numpy()
         aug_y_train = aug_y_train.cpu().numpy()
- 
-        print("aug_x_train.shape:",aug_x_train.shape)                                                               #   aug_x_train.shape: (50003, 3, 32, 32)
-  
-        print("aug_y_train.shape:",aug_y_train.shape)                                                               #   aug_y_train.shape: (50003, 10)
+        print("aug_x_train.shape:",aug_x_train.shape)           #   aug_x_train.shape: (42588, 3, 32, 32)                                                    
+        print("aug_y_train.shape:",aug_y_train.shape) 
+        # raise error                                                              
+        print(f"use {select_cle_num}/{aug_num} clean sampels，{select_mix_num}/{aug_num} mixed samples")
         
-        # 混合训练（MMAT） 
-        # classify_model.fit(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)
-        # mmat使用以下两种训练代码
-
-        classify_model.fit_softlabel(aug_x_train, aug_y_train, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs, batch_size=args.batch_size)
-        # self.__traintensorset__(aug_x_train,aug_y_train,x_test_adv, y_test_adv,exp_result_dir)
-
-    def getadvset(self,adv_dataset_path):
-        adv_xset_tensor, adv_yset_tensor = self.__getadvsettensor__(adv_dataset_path)
-        return adv_xset_tensor, adv_yset_tensor     
+        self.__softtrain__(aug_x_train, aug_y_train, cle_x_test, cle_y_test,  x_test_adv, y_test_adv, exp_result_dir)
         
-    def __getadvsettensor__(self,adv_dataset_path):
+        # classify_model.fit_softlabel( aug_x_train, aug_y_train, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir, args, nb_epochs=args.epochs,batch_size=args.batch_size)
 
-        file_dir=os.listdir(adv_dataset_path)
-        file_dir.sort()
-        # print("file_dir:",file_dir)                                                                               #   file_dir: ['00000000-adv-3-cat.npz', '00000000-adv-3-cat.png',
-        # print("file_dir[0][9:12] :",file_dir[0][9:12])                                                            #   file_dir[0][9:12] : adv
-        
-        # filenames1 = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz'] 
-        # print("filenames1:",filenames1)                                                                           #   filenames1: ['00000000-adv-3-cat.npz', '00000000-cle-3-cat.npz', '00000001-adv-8-ship.npz', '00000001-cle-8-ship.npz',
-        filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
-        # print("filenames:",filenames)                                                                               #   filenames: ['00000000-adv-3-cat.npz', '00000001-adv-8-ship.npz', '00000002-adv-8-ship.npz'
-        # raise Exception("maggie stop here")
+    def __softtrain__(self, aug_x_train, aug_y_train, cle_x_test, cle_y_test, x_test_adv, y_test_adv,exp_result_dir):
+            self._train_tensorset_x = torch.tensor(aug_x_train)
+            self._train_tensorset_y = torch.tensor(aug_y_train)
 
-        adv_xset_tensor = []
-        adv_yset_tensor = []
+            self._adv_test_tensorset_x = torch.tensor(x_test_adv)
+            self._adv_test_tensorset_y = torch.tensor(y_test_adv)
 
-        for index, filename in enumerate(filenames):
-            #----------控制对抗样本与干净样本的混合比例------- 读取5000对抗样本
-            # if index < 50:        #   测试完删掉
-            adv_npz_path = os.path.join(adv_dataset_path,filename)
+            self._cle_test_tensorset_x = torch.tensor(cle_x_test)
+            self._cle_test_tensorset_y = torch.tensor(cle_y_test)
 
-            load_adv_img = np.load(adv_npz_path)['w']            
-            load_adv_img = torch.tensor(load_adv_img)
-            
-            load_adv_label = int(filename[13:14])
-            load_adv_label = torch.tensor(load_adv_label)
-
-            adv_xset_tensor.append(load_adv_img)
-            adv_yset_tensor.append(load_adv_label)
-
-        adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
-        adv_yset_tensor = torch.stack(adv_yset_tensor)   
-
-        # print("adv_xset_tensor.type:",type(adv_xset_tensor))                                                    #   adv_xset_tensor.type: <class 'torch.Tensor'>                                                      
-        print("adv_xset_tensor.shape:",adv_xset_tensor.shape)                                                   #   adv_xset_tensor.shape: torch.Size([10000, 3, 32, 32])
-        # print("adv_xset_tensor[0][0]:",adv_xset_tensor[0][0])                                                   #   adv_xset_tensor[0][0]: tensor([[ 0.8338,  0.8531,  0.9694,  ...,  0.0267,  0.0000,  0.0196]
-        
-        
-        # print("adv_yset_tensor.type:",type(adv_yset_tensor))                                                    #   adv_yset_tensor.type: <class 'torch.Tensor'>                                   
-        print("adv_yset_tensor.shape:",adv_yset_tensor.shape)                                                   #   adv_yset_tensor.shape: torch.Size([10000])
-        # print("adv_yset_tensor:",adv_yset_tensor)                                                               #   adv_yset_tensor[0]: tensor(3)
-
-        # return adv_xset_tensor, adv_yset_tensor     
-        return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
-
-    def __traintensorset__(self,train_tensorset_x,train_tensorset_y,test_tensorset_x,test_tensorset_y,exp_result_dir):
-            print("输入张量集训练")
-
-            self._train_tensorset_x = torch.tensor(train_tensorset_x)
-            self._train_tensorset_y = torch.tensor(train_tensorset_y)
-            print("self._train_tensorset_x.shape:",self._train_tensorset_x.shape)                       #  self._train_tensorset.shape: torch.Size([5223, 3, 32, 32])
-            print("self._train_tensorset_y.shape:",self._train_tensorset_y.shape)                         #   self._test_tensorset.shape: torch.Size([5223, 10])
-
-            self._test_tensorset_x = torch.tensor(test_tensorset_x)
-            self._test_tensorset_y = torch.tensor(test_tensorset_y)
-            print("self._test_tensorset_x.shape:",self._test_tensorset_x.shape)                       #  self._train_tensorset.shape: torch.Size([5223, 3, 32, 32])
-            print("self._test_tensorset_y.shape:",self._test_tensorset_y.shape)                         #   self._test_tensorset.shape: torch.Size([5223, 10])
-                
 
             self._exp_result_dir = exp_result_dir
             if self._args.defense_mode == "mmat":
@@ -951,56 +943,50 @@ class MaggieClassifier:
             os.makedirs(self._exp_result_dir,exist_ok=True)            
 
 
-            self._lossfunc = torch.nn.MSELoss() # 支持softlabel计算的函数
-
             if torch.cuda.is_available():
                 self._lossfunc.cuda()
-                self._model.cuda()       
+                self._model.cuda()          #   self._model在初始化时被赋值为了读入的模型
 
-            global_train_acc, global_test_acc, global_train_loss, global_test_loss = self.__traintensorsetloop__()
+            global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss = self.__traintensorsetloop__()
             
             if self._args.defense_mode == "mmat":
-                accuracy_png_name = f'manifold mixup adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
-                loss_png_name = f'manifold mixup adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
-        
-            elif self._args.defense_mode == "at":
-                accuracy_png_name = f'adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
-                loss_png_name = f'adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
-                
-            SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_test_acc, accuracy_png_name)
+                accuracy_png_name_adv   = f'mmat trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
+                loss_png_name_adv       = f'mmat trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
+                accuracy_png_name_cle   = f'mmat trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
+                loss_png_name_cle       = f'mmat trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
 
-            SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_test_loss, loss_png_name)
+            elif self._args.defense_mode == "at":
+                accuracy_png_name_adv   = f'adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
+                loss_png_name_adv       = f'adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
+                accuracy_png_name_cle   = f'adversarial trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
+                loss_png_name_cle       = f'adversarial trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
+            
+            # SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_adv_test_acc, accuracy_png_name_adv)
+            # SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_adv_test_loss, loss_png_name_adv)
+            # SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, accuracy_png_name_cle)
+            # SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, loss_png_name_cle)
 
     def __traintensorsetloop__(self):
 
-        print("self._train_tensorset_x.type:",type(self._train_tensorset_x))            #   self._train_tensorset.type: <class 'torch.Tensor'>
-        print("self._train_tensorset_x.shape:",self._train_tensorset_x.shape)           #   self._train_tensorset.shape: torch.Size([5223, 3, 32, 32])
-        print("self._train_tensorset_x.size:",self._train_tensorset_x.size)             #   self._train_tensorset.size: <built-in method size of Tensor object at 0x7fb4d6833550>
-        
         trainset_len = len(self._train_tensorset_x)
         epoch_num = self._args.epochs                                               
         batchsize = self._args.batch_size
         batch_size = batchsize
         batch_num = int(np.ceil(trainset_len / float(batch_size)))
-        print("trainset_len:",trainset_len)                                         #   trainset_len: 5223
-        print("epoch_num:",epoch_num)                                               #   epoch_num: 12
-        print("batch_size:",batch_size)                                             #   batch_size: 256
-        print("batch_num:",batch_num)                                               #   batch_num: 21
 
         shuffle_index = np.arange(trainset_len)
         shuffle_index = torch.tensor(shuffle_index)
-        print("shuffle_index:",shuffle_index)                                       #   shuffle_index: tensor([   0,    1,    2,  ..., 5220, 5221, 5222])
 
         global_train_acc = []
-        global_test_acc = []
-        global_train_loss = []
-        global_test_loss = []
+        global_train_loss = []        
+        global_adv_test_acc = []
+        global_adv_test_loss = []
+        global_cle_test_acc = []
+        global_cle_test_loss = []
 
         for epoch_index in range (epoch_num):
 
             random.shuffle(shuffle_index)
-            print("shuffle_index:",shuffle_index)                                       #   shuffle_index: tensor([   0,    1,    2,  ..., 5220, 5221, 5222])
-
             self.__adjustlearningrate__(epoch_index)     
 
             epoch_correct_num = 0
@@ -1008,142 +994,107 @@ class MaggieClassifier:
 
             for batch_index in range (batch_num):
 
-                # x_trainbatch = self._train_tensorset_x[batch_index * batch_size : (batch_index + 1) * batch_size]
-                # y_trainbatch = self._train_tensorset_y[batch_index * batch_size : (batch_index + 1) * batch_size]                                                
-                
-                # print("x_trainbatch.type:",type(x_trainbatch))                          #   x_trainbatch.type: <class 'torch.Tensor'>
-                # print("x_trainbatch:",x_trainbatch)                                     #   x_trainbatch: tensor([[[[ 0.9651,  0.9620,  0.9408,  ..., -0.0720, -0.1872, -0.3096]
-                # print("x_trainbatch.shape:",x_trainbatch.shape)                         #   x_trainbatch.shape: torch.Size([256, 3, 32, 32])
-                # print("y_trainbatch.type:",type(y_trainbatch))                          #   y_trainbatch.type: <class 'torch.Tensor'>
-                # print("y_trainbatch:",y_trainbatch)                                     #   y_trainbatch: tensor([[0.0000, 0.0000, 0.0000,  ..., 0.0000, 0.0000, 0.8523],
-                # print("y_trainbatch.shape:",y_trainbatch.shape)                            #   y_trainbatch.shape: torch.Size([256, 10])
-
                 x_trainbatch = self._train_tensorset_x[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]
                 y_trainbatch = self._train_tensorset_y[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]                                                
-
-                # print("x_trainbatch.type:",type(x_trainbatch))                          #   x_trainbatch.type: <class 'torch.Tensor'>
-                # print("x_trainbatch:",x_trainbatch)                                     #   x_trainbatch: tensor([[[[ 0.9651,  0.9620,  0.9408,  ..., -0.0720, -0.1872, -0.3096],
-                # print("x_trainbatch.shape:",x_trainbatch.shape)                         #   x_trainbatch.shape: torch.Size([256, 3, 32, 32])
-                # print("y_trainbatch.type:",type(y_trainbatch))                          #   
-                # print("y_trainbatch:",y_trainbatch)                                     
-                # print("y_trainbatch.shape:",y_trainbatch.shape)                             #   y_trainbatch.shape: torch.Size([256, 10])  
-
-
 
                 batch_imgs = x_trainbatch.cuda()
                 batch_labs = y_trainbatch.cuda()
 
                 self._optimizer.zero_grad()
                 output = self._model(batch_imgs)
-                # print("output.type：",type(output))                         #   output.type： <class 'torch.Tensor'>
-                # print("output.shape",output.shape)                          #   output.shape torch.Size([256, 10])
-                # print("output",output)                                      #   output tensor([[ -5.2418,  -4.3187,  -4.6751,  ...,  -5.0795,  -0.7883,   4.9619],
 
-                softmax_outputs = torch.nn.functional.softmax(output, dim = 1)          #   对每一行进行softmax
-                
-                # print("softmax_outputs.type：",type(softmax_outputs))                   #   
-                print("softmax_outputs.shape",softmax_outputs.shape)                    #   softmax_outputs.shape torch.Size([256, 10])
-                # print("softmax_outputs",softmax_outputs)                                #   softmax_outputs tensor([[4.6068e-05, 5.4200e-05, 2.3084e-04,  ..., 3.3534e-05, 5.0451e-03,
-                # print("self._lossfunc:",self._lossfunc)
-                # print("batch_labs.shape:",batch_labs.shape)
-                # print("batch_labs:",batch_labs)
+                #   计算损失
+                lossfunction = 'ce'
+                if lossfunction == 'mse':
+                    softmax_outputs = torch.nn.functional.softmax(output, dim = 1)                              #   对每一行进行softmax
+                    cla_loss = torch.nn.MSELoss()
+                    batch_loss = cla_loss(softmax_outputs, batch_labs) 
 
-                # raise error
-                batch_loss = self._lossfunc(softmax_outputs,batch_labs)
+                elif lossfunction == 'ce':
+                    batch_loss = self.__CustomSoftlossFunction__(output, batch_labs)
 
-                # batch_loss = self.__mixuplossfunc__(softmax_outputs,batch_labs)
+                elif lossfunction == 'cosine':
+                    softmax_outputs = torch.nn.functional.softmax(output, dim = 1)    
+                    cla_loss = torch.cosine_similarity                                                          #   越接近1表明越相似
+                    batch_loss = cla_loss(softmax_outputs, batch_labs) 
+                    batch_loss = 1 - batch_loss         
+                    batch_loss = batch_loss.mean()
+
                 batch_loss.backward()
                 self._optimizer.step()
 
+
+                #   Top1 accuracy
                 _, predicted_label_index = torch.max(output.data, 1)    
                 # print("predicted_label_index.type:",type(predicted_label_index))            #   predicted_label_index.type: <class 'torch.Tensor'>
                 # print("predicted_label_index.shape:",predicted_label_index.shape)           #   predicted_label_index.shape: torch.Size([256]) 给出每一个softlabel中最大的位置index
                 # print("predicted_label_index:",predicted_label_index)                       #   predicted_label_index: tensor([9, 9, 9, 4, 4, 9, 9, 7, 3, 9, 4, 3, 3, 3, 4, 4, 1, 1,
-
-
                 _, batch_labs_maxindex = torch.max(batch_labs, 1)
                 # print("batch_labs_maxindex.type:",type(batch_labs_maxindex))                #   batch_labs_maxindex.type: <class 'torch.Tensor'>        
                 # print("batch_labs_maxindex.shape:",batch_labs_maxindex.shape)               #   batch_labs_maxindex.shape: torch.Size([256])
                 # print("batch_labs_maxindex:",batch_labs_maxindex)                           #   batch_labs_maxindex: tensor([9, 9, 9, 4, 4, 9, 9, 7, 3, 9, 4, 3, 3, 3, 4, 4, 1,
 
                 batch_correct_num = (predicted_label_index == batch_labs_maxindex).sum().item()     
-
                 epoch_correct_num += batch_correct_num                                     
                 epoch_total_loss += batch_loss
-
-                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index, epoch_num, batch_index, batch_num, batch_loss.item()))
-                # raise error
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, epoch_num, batch_index+1, batch_num, batch_loss.item()))
                 
-            # #--------当前epoch分类模型在当前训练集epoch上的准确率-------------            
-            # epoch_train_accuarcy = epoch_correct_num / trainset_len
-            # global_train_acc.append(epoch_train_accuarcy)   #   每个epoch训练完后的最新准确率list                  
-            # epoch_train_loss = epoch_total_loss / batch_num
-            # global_train_loss.append(epoch_train_loss)
-
-            # #--------当前epoch分类模型在整体测试集上的准确率------------- 
-            # epoch_test_accuracy, epoch_test_loss = EvaluateAccuracy(self._model, self._lossfunc, self._test_dataloader)
-            # global_test_acc.append(epoch_test_accuracy)   
-            # global_test_loss.append(epoch_test_loss)
-
-            # # print(f'{epoch_index:04d} epoch classifier accuary on the current epoch training examples:{epoch_train_accuarcy*100:.4f}%' )   
-            # # print(f'{epoch_index:04d} epoch classifier loss on the current epoch training examples:{epoch_train_loss:.4f}' )   
-            # print(f'{epoch_index:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
-            # print(f'{epoch_index:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
-
-
-            #--------maggie add---------
             #   当前epoch分类模型在当前训练集epoch上的准确率    
             epoch_train_accuarcy = epoch_correct_num / trainset_len
-            global_train_acc.append(epoch_train_accuarcy)   #   每个epoch训练完后的最新准确率list                  
+            global_train_acc.append(epoch_train_accuarcy)                                   #   每个epoch训练完后的最新准确率list                  
             epoch_train_loss = epoch_total_loss / batch_num
             global_train_loss.append(epoch_train_loss)
 
-            #   当前epoch分类模型在整体测试集上的准确率
-            epoch_test_accuracy, epoch_test_loss = self.__evaluatesoftlabelfromtensor__(self._model, self._test_tensorset_x, self._test_tensorset_y)
+            #   当前epoch分类模型在对抗测试集上的准确率
+            epoch_adv_test_accuracy, epoch_adv_test_loss = self.__evaluatesoftlabelfromtensor__(self._model, self._adv_test_tensorset_x, self._adv_test_tensorset_y)
+            global_adv_test_acc.append(epoch_adv_test_accuracy)   
+            global_adv_test_loss.append(epoch_adv_test_loss)
+            print(f'{epoch_index+1:04d} epoch mmat trained classifier accuary on the adversarial testing examples:{epoch_adv_test_accuracy*100:.4f}%' )  
+            # print(f'{epoch_index+1:04d} epoch mmat trained classifier loss on the adversarial testing examples:{epoch_adv_test_loss:.4f}' )  
 
-            # epoch_test_accuracy, epoch_test_loss = self.evaluatefromtensor(self._model, self._test_tensorset_x, self._test_tensorset_y)
+            #   当前epoch分类模型在干净测试集上的准确率
+            epoch_cle_test_accuracy, epoch_cle_test_loss = self.__evaluatesoftlabelfromtensor__(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
+            global_cle_test_acc.append(epoch_cle_test_accuracy)   
+            global_cle_test_loss.append(epoch_cle_test_loss)
+            print(f'{epoch_index+1:04d} epoch mmat trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
+            # print(f'{epoch_index+1:04d} epoch mmat trained classifier loss on the clean testing examples:{epoch_adv_test_loss:.4f}' )              
 
-            
-            global_test_acc.append(epoch_test_accuracy)   
-            global_test_loss.append(epoch_test_loss)
-
-            # print(f'{epoch_index:04d} epoch classifier accuary on the current epoch training examples:{epoch_train_accuarcy*100:.4f}%' )   
-            # print(f'{epoch_index:04d} epoch classifier loss on the current epoch training examples:{epoch_train_loss:.4f}' )   
-            print(f'{epoch_index:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
-            print(f'{epoch_index:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
-
-
-            # if (epoch_index+1) % 11== 0 and epoch_index > 0:
-            if (epoch_index+1)  == 10:
-                torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')
-            
             #-------------tensorboard实时画图-------------------
-            tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
-            os.makedirs(tensorboard_log_acc_dir,exist_ok=True)    
-            print("tensorboard_log_dir:",tensorboard_log_acc_dir)   
-            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
+            tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
+            os.makedirs(tensorboard_log_adv_acc_dir,exist_ok=True)    
+            print("tensorboard_log_dir:",tensorboard_log_adv_acc_dir)   
+            writer_adv_acc = SummaryWriter(log_dir = tensorboard_log_adv_acc_dir, comment= '-'+'advtestacc') 
+            writer_adv_acc.add_scalar(tag = "epoch_adv_acc", scalar_value = epoch_adv_test_accuracy, global_step = epoch_index + 1 )
+            writer_adv_acc.close()
+            #--------------------------------------------------
 
-            writer_acc = SummaryWriter(log_dir = tensorboard_log_acc_dir, comment= '-'+'testacc')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer_acc.add_scalar(tag = "epoch_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
-            writer_acc.close()
-            # raise error
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-cle')
+            os.makedirs(tensorboard_log_cle_acc_dir,exist_ok=True)    
+            print("tensorboard_log_dir:",tensorboard_log_cle_acc_dir)   
+            writer_cle_acc = SummaryWriter(log_dir = tensorboard_log_cle_acc_dir, comment= '-'+'cletestacc') 
+            writer_cle_acc.add_scalar(tag = "epoch_cle_acc", scalar_value = epoch_cle_test_accuracy, global_step = epoch_index + 1 )
+            writer_cle_acc.close()
+            #--------------------------------------------------
+
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-adv')
+            os.makedirs(tensorboard_log_adv_loss_dir,exist_ok=True)    
+            writer_adv_loss = SummaryWriter(log_dir = tensorboard_log_adv_loss_dir, comment= '-'+'advtestloss') 
+            writer_adv_loss.add_scalar(tag = "epoch_adv_loss", scalar_value = epoch_adv_test_loss, global_step = epoch_index + 1 )
+            writer_adv_loss.close()
             #--------------------------------------------------
 
            #-------------tensorboard实时画图-------------------
-            tensorboard_log_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss')
-            os.makedirs(tensorboard_log_loss_dir,exist_ok=True)    
-            # print("tensorboard_log_dir:",tensorboard_log_dir)   
-            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
-
-            writer_loss = SummaryWriter(log_dir = tensorboard_log_loss_dir, comment= '-'+'testloss')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer_loss.add_scalar(tag = "epoch_loss", scalar_value = epoch_test_loss, global_step = epoch_index + 1 )
-            writer_loss.close()
-            # raise error
+            tensorboard_log_cle_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-cle')
+            os.makedirs(tensorboard_log_cle_loss_dir,exist_ok=True)    
+            writer_cle_loss = SummaryWriter(log_dir = tensorboard_log_cle_loss_dir, comment= '-'+'cletestloss') 
+            writer_cle_loss.add_scalar(tag = "epoch_cle_loss", scalar_value = epoch_cle_test_loss, global_step = epoch_index + 1 )
+            writer_cle_loss.close()
             #--------------------------------------------------
 
-
-
-        return global_train_acc, global_test_acc, global_train_loss, global_test_loss
+        return global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss
 
     def __evaluatesoftlabelfromtensor__(self, classifier, x_set:Tensor, y_set:Tensor):
         if torch.cuda.is_available():
@@ -1267,245 +1218,255 @@ class MaggieClassifier:
         #     test_loss = total_loss / testset_total_num                
         
         return test_accuracy, test_loss
-    #-----------------------------
-
-    def __mixuplossfunc__(self,softmax_outputs,batch_labs):
-        
-        #   计算two-hot标签的混合系数
-       
-        #   求第一大概率标签的混合系数 alpha_1
-        alpha_1, w1_label_index = torch.max(batch_labs, 1)                            #  torch.Size[256]
-        
-        print("batch_labs:",batch_labs)
-        print("w1_label_index:",int(w1_label_index))
-        print("w1_label_index.size():",w1_label_index.size())
-        print("alpha_1:",alpha_1)
-        print("alpha_1.size():",alpha_1.size())
-
-        raise error
-        
-
-        #   求第二大概率标签的混合系数 alpha_2
-        modified_mixed_label = copy.deepcopy(batch_labs)
-
-        for i in range(self._args.batch_size):
-            modified_mixed_label[i][w1_label_index[i]] = 0                             
-
-            if torch.nonzero(modified_mixed_label[i]).size(0) == 0:
-                # print("混合label的最大值维度置零后，其他全为0！")
-                w2_label_index[i] = w1_label_index[i]
-                alpha_2[i] = 0
-                # raise Exception("maggie stop here")
-            else:
-                alpha_2[i], w2_label_index[i] = torch.max(modified_mixed_label[i], 1)
-                # print(f'w2_label_index = {int(w2_label_index)}')
-
-
-        print("w2_label_index:",int(w2_label_index))
-        print("w2_label_index.size():",w2_label_index.size())
-        print("alpha_2:",alpha_2)
-        print("alpha_2.size():",alpha_2.size())
-
-        cla_loss =  torch.nn.CrossEntropyLoss()
-        
-        loss_a = criterion(softmax_outputs, w1_label_index)
-        loss_b = criterion(softmax_outputs, w2_label_index)
-        loss = alpha_1 * loss_a + alpha_2 * loss_b
-
-        return loss
 
     def __adjustlearningrate__(self, epoch_index):
         """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""#   每隔10epoch除以一次10
-        if self._args.dataset == 'cifar10':
-            if self._args.cla_model == 'resnet34':     
-                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
 
-                if epoch_index <= 7:
-                    lr = self._args.lr                                  #   0.01
-                elif epoch_index >= 8:
-                    lr = self._args.lr * 0.1                            #   0.001
+        if self._args.train_mode == 'cla-train':
 
-            elif self._args.cla_model == 'alexnet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+            if self._args.dataset == 'cifar10':
+                if self._args.cla_model == 'resnet34':     
+                    # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
 
-                # if epoch_index <= 8:
-                #     lr = self._args.lr                                  #   0.01
-                # elif epoch_index >= 9:
-                #     lr = self._args.lr * 0.1                            #   0.001
+                    if epoch_index <= 7:
+                        lr = self._args.lr                                  #   0.01
+                    elif epoch_index >= 8:
+                        lr = self._args.lr * 0.1                            #   0.001
 
-            elif self._args.cla_model =='resnet18':
-                # lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                elif self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))              
 
-                if epoch_index <= 5:
-                    lr = self._args.lr                                  #   0.01
-                elif epoch_index >= 6 and epoch_index <= 7:
-                    lr = self._args.lr * 0.1                            #   0.001
-                elif epoch_index >= 8:
-                    lr = self._args.lr * 0.01                            #   0.0001
+                    # if epoch_index <= 8:
+                    #     lr = self._args.lr                                  #   0.01
+                    # elif epoch_index >= 9:
+                    #     lr = self._args.lr * 0.1                            #   0.001
 
-            elif self._args.cla_model =='resnet50':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                elif self._args.cla_model =='resnet18':
+                    # lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                    if epoch_index <= 5:
+                        lr = self._args.lr                                  #   0.01
+                    elif epoch_index >= 6 and epoch_index <= 7:
+                        lr = self._args.lr * 0.1                            #   0.001
+                    elif epoch_index >= 8:
+                        lr = self._args.lr * 0.01                            #   0.0001
+
+                elif self._args.cla_model =='resnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='inception_v3':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='densenet169':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.dataset == 'svhn':
+                if self._args.cla_model == 'resnet34':     
+                    # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
+
+                    if epoch_index <= 7:
+                        lr = self._args.lr                                  #   0.01
+                    elif epoch_index >= 8:
+                        lr = self._args.lr * 0.1                            #   0.001
+
+                elif self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+
+                    # if epoch_index <= 8:
+                    #     lr = self._args.lr                                  #   0.01
+                    # elif epoch_index >= 9:
+                    #     lr = self._args.lr * 0.1                            #   0.001
+
+                elif self._args.cla_model =='resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                    # if epoch_index <= 5:
+                    #     lr = self._args.lr                                  #   0.01
+                    # elif epoch_index >= 6 and epoch_index <= 7:
+                    #     lr = self._args.lr * 0.1                            #   0.001
+                    # elif epoch_index >= 8:
+                    #     lr = self._args.lr * 0.01                            #   0.0001
+
+                elif self._args.cla_model =='resnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='inception_v3':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='densenet169':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.dataset == 'imagenetmixed10':
+                if self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 20))  
+
+                elif self._args.cla_model == 'vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 20))  
+
+            elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
+                if self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model =='vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='inception_v3':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='densenet169':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.dataset == 'cifar100':
+                if self._args.cla_model == 'resnet34':     
+                    # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
+
+                    if epoch_index <= 7:
+                        lr = self._args.lr                                  #   0.01
+                    elif epoch_index >= 8:
+                        lr = self._args.lr * 0.1                            #   0.001
+                    elif epoch_index >= 15:
+                        lr = self._args.lr * 0.01                            #   0.0001
+
+                elif self._args.cla_model == 'alexnet':
+                    # lr = self._args.lr * (0.1 ** (epoch_index // 10))              
+
+                    if epoch_index <= 11:
+                        lr = self._args.lr                                  #   0.01
+                    elif epoch_index >= 12:
+                        lr = self._args.lr * 0.1                            #   0.001
+
+
+                elif self._args.cla_model =='resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                    # if epoch_index <= 5:
+                    #     lr = self._args.lr                                  #   0.01
+                    # elif epoch_index >= 6 and epoch_index <= 7:
+                    #     lr = self._args.lr * 0.1                            #   0.001
+                    # elif epoch_index >= 8:
+                    #     lr = self._args.lr * 0.01                            #   0.0001
+
+                elif self._args.cla_model =='resnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='inception_v3':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='densenet169':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+            elif self._args.dataset == 'stl10':
+                if self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model == 'resnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))  
+                
+                elif self._args.cla_model =='vgg19':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                
+                elif self._args.cla_model =='inception_v3':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='densenet169':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
             
-            elif self._args.cla_model =='vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='inception_v3':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+        elif self._args.defense_mode == 'mmat':
+            if self._args.dataset == 'svhn':
+                if self._args.cla_model == 'alexnet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-            elif self._args.cla_model =='densenet169':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                    # if epoch_index <= 3:
+                    #     lr = self._args.lr                                  #   0.1
+                    # elif epoch_index >= 4 and epoch_index <= 5:
+                    #     lr = self._args.lr * 0.1                            #   0.01 
+                    # elif epoch_index >= 6 and epoch_index <= 10:
+                    #     lr = self._args.lr * 0.1                            #   0.001   
+                    # elif epoch_index >= 11:
+                    #     lr = self._args.lr * 0.1                            #   0.0001   
 
-            elif self._args.cla_model =='googlenet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-        elif self._args.dataset == 'svhn':
-            if self._args.cla_model == 'resnet34':     
-                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
-
-                if epoch_index <= 7:
-                    lr = self._args.lr                                  #   0.01
-                elif epoch_index >= 8:
-                    lr = self._args.lr * 0.1                            #   0.001
-
-            elif self._args.cla_model == 'alexnet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))              
-
-                # if epoch_index <= 8:
-                #     lr = self._args.lr                                  #   0.01
-                # elif epoch_index >= 9:
-                #     lr = self._args.lr * 0.1                            #   0.001
-
-            elif self._args.cla_model =='resnet18':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-                # if epoch_index <= 5:
-                #     lr = self._args.lr                                  #   0.01
-                # elif epoch_index >= 6 and epoch_index <= 7:
-                #     lr = self._args.lr * 0.1                            #   0.001
-                # elif epoch_index >= 8:
-                #     lr = self._args.lr * 0.01                            #   0.0001
-
-            elif self._args.cla_model =='resnet50':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='inception_v3':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='densenet169':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='googlenet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-        elif self._args.dataset == 'imagenetmixed10':
-            if self._args.cla_model == 'alexnet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 20))  
-
-            elif self._args.cla_model == 'vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 20))  
-
-        elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
-            if self._args.cla_model == 'alexnet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet18':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet34':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet50':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model =='vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='inception_v3':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='densenet169':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='googlenet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-        elif self._args.dataset == 'cifar100':
-            if self._args.cla_model == 'resnet34':     
-                # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
-
-                if epoch_index <= 7:
-                    lr = self._args.lr                                  #   0.01
-                elif epoch_index >= 8:
-                    lr = self._args.lr * 0.1                            #   0.001
-                elif epoch_index >= 15:
-                    lr = self._args.lr * 0.01                            #   0.0001
-
-            elif self._args.cla_model == 'alexnet':
-                # lr = self._args.lr * (0.1 ** (epoch_index // 10))              
-
-                if epoch_index <= 11:
-                    lr = self._args.lr                                  #   0.01
-                elif epoch_index >= 12:
-                    lr = self._args.lr * 0.1                            #   0.001
-
-
-            elif self._args.cla_model =='resnet18':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-                # if epoch_index <= 5:
-                #     lr = self._args.lr                                  #   0.01
-                # elif epoch_index >= 6 and epoch_index <= 7:
-                #     lr = self._args.lr * 0.1                            #   0.001
-                # elif epoch_index >= 8:
-                #     lr = self._args.lr * 0.01                            #   0.0001
-
-            elif self._args.cla_model =='resnet50':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='inception_v3':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='densenet169':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='googlenet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-        elif self._args.dataset == 'stl10':
-            if self._args.cla_model == 'alexnet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet18':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet34':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model == 'resnet50':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))  
-            
-            elif self._args.cla_model =='vgg19':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-            
-            elif self._args.cla_model =='inception_v3':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='densenet169':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
-            elif self._args.cla_model =='googlenet':
-                lr = self._args.lr * (0.1 ** (epoch_index // 10))
-        # lr2 = smooth_step(10,20,30,40,epoch_index)
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
+
+
         print(f'{epoch_index}epoch learning rate:{lr}')             #   0epoch learning rate:0.01
 
+    def __CustomSoftlossFunction__(self, batch_outputs, o_batch):       
+        #   求第一大概率标签的混合系数 alpha_1
+        alpha_1, w1_label_index = torch.max(o_batch, 1)                            
 
+        #   求第二大概率标签的混合系数 alpha_2
+        modified_mixed_label = copy.deepcopy(o_batch)
 
+        alpha_2 = []
+        w2_label_index = []
+        for i in range(len(o_batch)):
+
+            modified_mixed_label[i][w1_label_index[i]] = 0        
+            
+            if torch.nonzero(modified_mixed_label[i]).size(0) == 0:
+                # print("混合label的最大值维度置零后，其他全为0！")
+                ind = w1_label_index[i].unsqueeze(0).cuda() #   第二大label设置为和第一大label一样
+                val = torch.zeros(1, dtype = torch.float32).cuda()
+                alpha_2.append(val)
+                w2_label_index.append(ind)
+                # raise error
+                            
+            else:
+                # print("混合label的最大值维度置零后，其他不全为0！")
+                mix_label = modified_mixed_label[i]
+                mix_label = mix_label.unsqueeze(0)
+                val, ind = torch.max(mix_label, 1)
+                alpha_2.append(val)
+                w2_label_index.append(ind)
+
+        w2_label_index = torch.cat(w2_label_index) 
+        alpha_2 = torch.cat(alpha_2) 
+
+        cla_loss =  torch.nn.CrossEntropyLoss(reduction = 'none')
+        loss_a = cla_loss(batch_outputs, w1_label_index)
+        loss_b = cla_loss(batch_outputs, w2_label_index)
+        loss = alpha_1 * loss_a + alpha_2 * loss_b
+        loss = loss.mean()
+
+        return loss
 

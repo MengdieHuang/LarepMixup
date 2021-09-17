@@ -1308,152 +1308,312 @@ class MaggieStylegan2ada:
         exp_result_dir = os.path.join(exp_result_dir,f'interpolate-{opt.dataset}-trainset')
         os.makedirs(exp_result_dir,exist_ok=True)    
 
-        # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
         classification = self.__labelnames__() 
         print("classification label name:",classification)
         # raise error
 
         #------maggie add----------
+        # 注意空间使用
         interpolated_w_set = []
         interpolated_y_set = []
         #--------------------------
         print("projected_w_set_x.shape:",projected_w_set_x.shape)           #   projected_w_set_x.shape: torch.Size([38, 10, 512])
         print("projected_w_set_y.shape:",projected_w_set_y.shape)
-
-        if opt.mix_w_num == 2:
-            print("Dual mixup----------------------")
-            #----------前后两样本混合-----------------------------------------
+        
+        mix_num = 0
+        if opt.mix_w_num == 2:      
+            print("--------------------Dual mixup----------------------")
             for i in range(len(projected_w_set_x)):                                                                                 #   projected_w_set列表共有72个张量
-                
-                if i+1 < len(projected_w_set_x):
-                    
-                    # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
-                    w1 = projected_w_set_x[i][-1].unsqueeze(0)
-                    y1 = projected_w_set_y[i][-1].unsqueeze(0)
-                    # print("w1.shape: ",w1.shape)                                                                                    #   w1.shape:  torch.Size([1, 512]
-                    # print("y1.shape: ",y1.shape)                                                                                    #   y1.shape:  torch.Size([1, 10])
+                for j in range(len(projected_w_set_x)):
+                    if j != i:
+                        if mix_num < opt.mix_img_num:       #   mix_img_num指定混合多少样本
+                            # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
+                            w1 = projected_w_set_x[i][-1].unsqueeze(0)
+                            y1 = projected_w_set_y[i][-1].unsqueeze(0)
+                            # print("w1.shape: ",w1.shape)                                                                                    #   w1.shape:  torch.Size([1, 512]
+                            # print("y1.shape: ",y1.shape)                            
+                            
+                            # print(f"projected_w_set_x[{j}]:{projected_w_set_x[j]}")
+                            w2 = projected_w_set_x[j][-1].unsqueeze(0)
+                            y2 = projected_w_set_y[j][-1].unsqueeze(0) 
+                            # print("w2.shape: ",w2.shape)                                                                                    #   w2.shape:  torch.Size([1, 512])
+                            # print("y2.shape: ",y2.shape)      
 
-                    # print(f"projected_w_set_x[{i+1}]:{projected_w_set_x[i+1]}")
-                    w2 = projected_w_set_x[i+1][-1].unsqueeze(0)
-                    y2 = projected_w_set_y[i+1][-1].unsqueeze(0) 
-                    # print("w2.shape: ",w2.shape)                                                                                    #   w2.shape:  torch.Size([1, 512])
-                    # print("y2.shape: ",y2.shape)                                                                                    #   y2.shape:  torch.Size([1, 10])
+                            _, w1_label_index = torch.max(y1, 1)    
+                            _, w2_label_index = torch.max(y2, 1)  
 
-                    #------------执行混合算法------------------
-                    # print("opt.mix_mode:",opt.mix_mode)
-                    if opt.mix_mode == 'basemixup':
-                        w_mixed, y_mixed = self.__BaseMixup2__(w1,w2,opt.sample_mode,y1,y2)
-                    elif opt.mix_mode == 'maskmixup':
-                        w_mixed, y_mixed = self.__MaskMixup2__(w1,w2,opt.sample_mode,y1,y2)
-                    elif opt.mix_mode == 'adversarialmixup':
-                        w_mixed = self.__AdversarialMixup2__(w1,w2,opt.sample_mode)
-                    else:
-                        raise Exception('please input valid mix_mode')
-                
-                    # print("w_mixed.shape: ",w_mixed.shape)                                                                          #   w_mixed.shape:  torch.Size([1, 512]) 
-                    # print("y_mixed.shape: ",y_mixed.shape)                                                                          #   y_mixed.shape:  torch.Size([1, 10])
-                    # print("projected_w_set_x.size(1):",projected_w_set_x.size(1))       #   stl10, projected_w_set_x.size(1): 10   cifar10: projected_w_set_x.size(1): 8
-                    # print("projected_w_set_y.size(1):",projected_w_set_y.size(1))       #   projected_w_set_y.size(1): 10 projected_w_set_y.size(1): 8
-                    repeat_num = projected_w_set_x.size(1)
-                    # raise error
-                    # w_mixed = w_mixed.repeat([8,1])       
-                    # y_mixed = y_mixed.repeat([8,1])
-                    w_mixed = w_mixed.repeat([repeat_num,1])       
-                    y_mixed = y_mixed.repeat([repeat_num,1])                    
-                    # print("w_mixed: ",w_mixed)                             
-                    # print("w_mixed.shape: ",w_mixed.shape)                                                                      #   w_mixed.shape:  torch.Size([8,512])
-                    # print("y_mixed: ",y_mixed)                             
-                    # print("y_mixed.shape: ",y_mixed.shape)                                                                      #   y_mixed.shape:  torch.Size([8,10])
+                            #   存储图片
+                            w1_label_name = f"{classification[int(w1_label_index)]}"
+                            w2_label_name = f"{classification[int(w2_label_index)]}"
+                            # print("w1_label_index.type:",type(w1_label_index)) 
+                            # print("w1_label_index:",w1_label_index)  
+                            # print("w2_label_index.type:",type(w2_label_index))  
+                            # print("w2_label_index:",w2_label_index)  
 
-                    #-----maggie------------
-                    _, w1_label_index = torch.max(y1, 1)    
-                    _, w2_label_index = torch.max(y2, 1)  
+                            if w1_label_name == w2_label_name:
+                                print("mixup same class")
+                            else:
+                                print("mixup different classes")
 
-                    #   存储图片
-                    w1_label_name = f"{classification[int(w1_label_index)]}"
-                    w2_label_name = f"{classification[int(w2_label_index)]}"
+                            print("w1_label_name:",w1_label_name)
+                            print("w2_label_name:",w2_label_name)
+                            
 
-                    # print("w1_label_index.type:",type(w1_label_index)) 
-                    # print("w1_label_index:",w1_label_index)  
-                    # print("w2_label_index.type:",type(w2_label_index))  
-                    # print("w2_label_index:",w2_label_index)  
-                    #-----------------------
+                            #------------执行混合算法------------------
+                            if opt.mix_mode == 'basemixup':
+                                w_mixed, y_mixed = self.__BaseMixup2__(w1,w2,opt.sample_mode,y1,y2)
+                            elif opt.mix_mode == 'maskmixup':
+                                w_mixed, y_mixed = self.__MaskMixup2__(w1,w2,opt.sample_mode,y1,y2)
+                            elif opt.mix_mode == 'adversarialmixup':
+                                w_mixed = self.__AdversarialMixup2__(w1,w2,opt.sample_mode)
+                            else:
+                                raise Exception('please input valid mix_mode')
+                        
+                            # print("w_mixed.shape: ",w_mixed.shape)                                                                          #   w_mixed.shape:  torch.Size([1, 512]) 
+                            # print("y_mixed.shape: ",y_mixed.shape)                                                                          #   y_mixed.shape:  torch.Size([1, 10])
+                            # print("projected_w_set_x.size(1):",projected_w_set_x.size(1))       #   stl10, projected_w_set_x.size(1): 10   cifar10: projected_w_set_x.size(1): 8
+                            # print("projected_w_set_y.size(1):",projected_w_set_y.size(1))       #   projected_w_set_y.size(1): 10 projected_w_set_y.size(1): 8
+                            repeat_num = projected_w_set_x.size(1)
+                            # w_mixed = w_mixed.repeat([8,1])       
+                            # y_mixed = y_mixed.repeat([8,1])
+                            w_mixed = w_mixed.repeat([repeat_num,1])       
+                            y_mixed = y_mixed.repeat([repeat_num,1])                    
+                            # print("w_mixed: ",w_mixed)                             
+                            # print("w_mixed.shape: ",w_mixed.shape)                                                                      #   w_mixed.shape:  torch.Size([8,512])
+                            # print("y_mixed: ",y_mixed)                             
+                            # print("y_mixed.shape: ",y_mixed.shape)                                                                      #   y_mixed.shape:  torch.Size([8,10])
 
-                    #------------写成npz文件-------------------
-                    np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
-                    np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
 
-                    interpolated_w_set.append(w_mixed)
-                    interpolated_y_set.append(y_mixed)
+
+                            #------------写成npz文件-------------------
+                            # 当前样本编号：
+                            np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{j:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())                   #   将latent code w 存为 outdir定义的输出路径下的projected_w.npz文件
+                            np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{j:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())               #   将latent code w 存为 outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
+
+                            interpolated_w_set.append(w_mixed)
+                            interpolated_y_set.append(y_mixed)
+
+                            mix_num = mix_num + 1
 
         elif opt.mix_w_num == 3:
-            print("Ternary mixup----------------------")
+            print("-------------------Ternary mixup----------------------")
             for i in range(len(projected_w_set_x)):
-                if i+2 < len(projected_w_set_x):
-            
-                    # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
-                    w1 = projected_w_set_x[i][-1].unsqueeze(0)
-                    y1 = projected_w_set_y[i][-1].unsqueeze(0)
-                    # print("w1.shape: ",w1.shape)                                                               #   w1.shape:  torch.Size([1, 512]
-                    # print("y1.shape: ",y1.shape)                                                               #   y1.shape:  torch.Size([1, 10])
+                for j in range(len(projected_w_set_x)):
+                    for k in range(len(projected_w_set_x)):
+                        if k != j and j != i :
+                            if mix_num < opt.mix_img_num:
+                                # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
+                                w1 = projected_w_set_x[i][-1].unsqueeze(0)
+                                y1 = projected_w_set_y[i][-1].unsqueeze(0)
+                                # print("w1.shape: ",w1.shape)                                                               #   w1.shape:  torch.Size([1, 512]
+                                # print("y1.shape: ",y1.shape)                                                               #   y1.shape:  torch.Size([1, 10])
 
-                    # print(f"projected_w_set_x[{i+1}]:{projected_w_set_x[i+1]}")
-                    w2 = projected_w_set_x[i+1][-1].unsqueeze(0)
-                    y2 = projected_w_set_y[i+1][-1].unsqueeze(0) 
-                    # print("w2.shape: ",w2.shape)                                                               #   w2.shape:  torch.Size([1, 512])
-                    # print("y2.shape: ",y2.shape)                                                               #   y2.shape:  torch.Size([1, 10])
+                                # print(f"projected_w_set_x[{j}]:{projected_w_set_x[j]}")
+                                w2 = projected_w_set_x[j][-1].unsqueeze(0)
+                                y2 = projected_w_set_y[j][-1].unsqueeze(0) 
+                                # print("w2.shape: ",w2.shape)                                                               #   w2.shape:  torch.Size([1, 512])
+                                # print("y2.shape: ",y2.shape)                                                               #   y2.shape:  torch.Size([1, 10])
 
-                   # print(f"projected_w_set_x[{i+2}]:{projected_w_set_x[i+2]}")
-                    w3 = projected_w_set_x[i+2][-1].unsqueeze(0)
-                    y3 = projected_w_set_y[i+2][-1].unsqueeze(0) 
-                    # print("w3.shape: ",w3.shape)                                                               #   w3.shape:  torch.Size([1, 512])
-                    # print("y3.shape: ",y3.shape)                                                               #   y3.shape:  torch.Size([1, 10])
+                                # print(f"projected_w_set_x[{k}]:{projected_w_set_x[k]}")
+                                w3 = projected_w_set_x[k][-1].unsqueeze(0)
+                                y3 = projected_w_set_y[k][-1].unsqueeze(0) 
+                                # print("w3.shape: ",w3.shape)                                                               #   w3.shape:  torch.Size([1, 512])
+                                # print("y3.shape: ",y3.shape)   
+                            
+
+                                #-----maggie------------
+                                _, w1_label_index = torch.max(y1, 1)    
+                                _, w2_label_index = torch.max(y2, 1)  
+                                _, w3_label_index = torch.max(y3, 1)    
+                                #   存储图片
+                                w1_label_name = f"{classification[int(w1_label_index)]}"
+                                w2_label_name = f"{classification[int(w2_label_index)]}"
+                                w3_label_name = f"{classification[int(w3_label_index)]}"
+
+                                # print("w1_label_index.type:",type(w1_label_index)) 
+                                # print("w1_label_index:",w1_label_index)  
+                                # print("w2_label_index.type:",type(w2_label_index))  
+                                # print("w2_label_index:",w2_label_index)  
+                                #-----------------------
+
+                                if w1_label_name == w2_label_name and w2_label_name == w3_label_name:
+                                    print("mixup same class")
+
+                                else:
+                                    print("mixup different classes")
+
+                                print("w1_label_name:",w1_label_name)
+                                print("w2_label_name:",w2_label_name)
+                                print("w3_label_name:",w2_label_name)
+                                
+                                #------------执行混合算法------------------
+                                # print("opt.mix_mode:",opt.mix_mode)
+                                if opt.mix_mode == 'basemixup':
+                                    w_mixed, y_mixed = self.__BaseMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
+                                elif opt.mix_mode == 'maskmixup':
+                                    w_mixed, y_mixed = self.__MaskMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
+                                else:
+                                    raise Exception('please input valid mix_mode')
+                            
+                                # print("w_mixed.shape: ",w_mixed.shape)                                                       #   w_mixed.shape:  torch.Size([1, 512]) 
+                                # print("y_mixed.shape: ",y_mixed.shape)                                                       #   y_mixed.shape:  torch.Size([1, 10])
+
+                                repeat_num = projected_w_set_x.size(1)
+                                # raise error
+                                # w_mixed = w_mixed.repeat([8,1])       
+                                # y_mixed = y_mixed.repeat([8,1])
+                                w_mixed = w_mixed.repeat([repeat_num,1])       
+                                y_mixed = y_mixed.repeat([repeat_num,1]) 
+                                # print("w_mixed: ",w_mixed)                             
+                                # print("w_mixed.shape: ",w_mixed.shape)                                                        #   w_mixed.shape:  torch.Size([8,512])
+                                # print("y_mixed: ",y_mixed)                             
+                                # print("y_mixed.shape: ",y_mixed.shape)                                                        #   y_mixed.shape:  torch.Size([8,10])
 
 
-                    #------------执行混合算法------------------
-                    # print("opt.mix_mode:",opt.mix_mode)
-                    if opt.mix_mode == 'basemixup':
-                        w_mixed, y_mixed = self.__BaseMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
-                    elif opt.mix_mode == 'maskmixup':
-                        w_mixed, y_mixed = self.__MaskMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
-                    else:
-                        raise Exception('please input valid mix_mode')
+
+                                #------------写成npz文件-------------------
+                                np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{j:08d}-{int(w2_label_index)}-{w2_label_name}+{k:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
+                                np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{j:08d}-{int(w2_label_index)}-{w2_label_name}+{k:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
+
+                                interpolated_w_set.append(w_mixed)
+                                interpolated_y_set.append(y_mixed)           
+
+                                mix_num = mix_num + 1                       
+
+        # if opt.mix_w_num == 2:
+        #     print("Dual mixup----------------------")
+        #     #----------前后两样本混合-----------------------------------------
+        #     for i in range(len(projected_w_set_x)):                                                                                 #   projected_w_set列表共有72个张量
                 
-                    # print("w_mixed.shape: ",w_mixed.shape)                                                       #   w_mixed.shape:  torch.Size([1, 512]) 
-                    # print("y_mixed.shape: ",y_mixed.shape)                                                       #   y_mixed.shape:  torch.Size([1, 10])
+        #         if i+1 < len(projected_w_set_x):
+                    
+        #             # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
+        #             w1 = projected_w_set_x[i][-1].unsqueeze(0)
+        #             y1 = projected_w_set_y[i][-1].unsqueeze(0)
+        #             # print("w1.shape: ",w1.shape)                                                                                    #   w1.shape:  torch.Size([1, 512]
+        #             # print("y1.shape: ",y1.shape)                                                                                    #   y1.shape:  torch.Size([1, 10])
 
-                    repeat_num = projected_w_set_x.size(1)
-                    # raise error
-                    # w_mixed = w_mixed.repeat([8,1])       
-                    # y_mixed = y_mixed.repeat([8,1])
-                    w_mixed = w_mixed.repeat([repeat_num,1])       
-                    y_mixed = y_mixed.repeat([repeat_num,1]) 
-                    # print("w_mixed: ",w_mixed)                             
-                    # print("w_mixed.shape: ",w_mixed.shape)                                                        #   w_mixed.shape:  torch.Size([8,512])
-                    # print("y_mixed: ",y_mixed)                             
-                    # print("y_mixed.shape: ",y_mixed.shape)                                                        #   y_mixed.shape:  torch.Size([8,10])
+        #             # print(f"projected_w_set_x[{i+1}]:{projected_w_set_x[i+1]}")
+        #             w2 = projected_w_set_x[i+1][-1].unsqueeze(0)
+        #             y2 = projected_w_set_y[i+1][-1].unsqueeze(0) 
+        #             # print("w2.shape: ",w2.shape)                                                                                    #   w2.shape:  torch.Size([1, 512])
+        #             # print("y2.shape: ",y2.shape)                                                                                    #   y2.shape:  torch.Size([1, 10])
 
-                    #-----maggie------------
-                    _, w1_label_index = torch.max(y1, 1)    
-                    _, w2_label_index = torch.max(y2, 1)  
-                    _, w3_label_index = torch.max(y3, 1)    
-                    #   存储图片
-                    w1_label_name = f"{classification[int(w1_label_index)]}"
-                    w2_label_name = f"{classification[int(w2_label_index)]}"
-                    w3_label_name = f"{classification[int(w3_label_index)]}"
+        #             #------------执行混合算法------------------
+        #             # print("opt.mix_mode:",opt.mix_mode)
+        #             if opt.mix_mode == 'basemixup':
+        #                 w_mixed, y_mixed = self.__BaseMixup2__(w1,w2,opt.sample_mode,y1,y2)
+        #             elif opt.mix_mode == 'maskmixup':
+        #                 w_mixed, y_mixed = self.__MaskMixup2__(w1,w2,opt.sample_mode,y1,y2)
+        #             elif opt.mix_mode == 'adversarialmixup':
+        #                 w_mixed = self.__AdversarialMixup2__(w1,w2,opt.sample_mode)
+        #             else:
+        #                 raise Exception('please input valid mix_mode')
+                
+        #             # print("w_mixed.shape: ",w_mixed.shape)                                                                          #   w_mixed.shape:  torch.Size([1, 512]) 
+        #             # print("y_mixed.shape: ",y_mixed.shape)                                                                          #   y_mixed.shape:  torch.Size([1, 10])
+        #             # print("projected_w_set_x.size(1):",projected_w_set_x.size(1))       #   stl10, projected_w_set_x.size(1): 10   cifar10: projected_w_set_x.size(1): 8
+        #             # print("projected_w_set_y.size(1):",projected_w_set_y.size(1))       #   projected_w_set_y.size(1): 10 projected_w_set_y.size(1): 8
+        #             repeat_num = projected_w_set_x.size(1)
+        #             # raise error
+        #             # w_mixed = w_mixed.repeat([8,1])       
+        #             # y_mixed = y_mixed.repeat([8,1])
+        #             w_mixed = w_mixed.repeat([repeat_num,1])       
+        #             y_mixed = y_mixed.repeat([repeat_num,1])                    
+        #             # print("w_mixed: ",w_mixed)                             
+        #             # print("w_mixed.shape: ",w_mixed.shape)                                                                      #   w_mixed.shape:  torch.Size([8,512])
+        #             # print("y_mixed: ",y_mixed)                             
+        #             # print("y_mixed.shape: ",y_mixed.shape)                                                                      #   y_mixed.shape:  torch.Size([8,10])
 
-                    # print("w1_label_index.type:",type(w1_label_index)) 
-                    # print("w1_label_index:",w1_label_index)  
-                    # print("w2_label_index.type:",type(w2_label_index))  
-                    # print("w2_label_index:",w2_label_index)  
-                    #-----------------------
+        #             #-----maggie------------
+        #             _, w1_label_index = torch.max(y1, 1)    
+        #             _, w2_label_index = torch.max(y2, 1)  
 
-                    #------------写成npz文件-------------------
-                    np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}+{i+2:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
-                    np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}+{i+2:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
+        #             #   存储图片
+        #             w1_label_name = f"{classification[int(w1_label_index)]}"
+        #             w2_label_name = f"{classification[int(w2_label_index)]}"
 
-                    interpolated_w_set.append(w_mixed)
-                    interpolated_y_set.append(y_mixed)                    
+        #             # print("w1_label_index.type:",type(w1_label_index)) 
+        #             # print("w1_label_index:",w1_label_index)  
+        #             # print("w2_label_index.type:",type(w2_label_index))  
+        #             # print("w2_label_index:",w2_label_index)  
+        #             #-----------------------
+
+        #             #------------写成npz文件-------------------
+        #             np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
+        #             np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
+
+        #             interpolated_w_set.append(w_mixed)
+        #             interpolated_y_set.append(y_mixed)
+
+        # elif opt.mix_w_num == 3:
+        #     print("Ternary mixup----------------------")
+        #     for i in range(len(projected_w_set_x)):
+        #         if i+2 < len(projected_w_set_x):
+            
+        #             # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
+        #             w1 = projected_w_set_x[i][-1].unsqueeze(0)
+        #             y1 = projected_w_set_y[i][-1].unsqueeze(0)
+        #             # print("w1.shape: ",w1.shape)                                                               #   w1.shape:  torch.Size([1, 512]
+        #             # print("y1.shape: ",y1.shape)                                                               #   y1.shape:  torch.Size([1, 10])
+
+        #             # print(f"projected_w_set_x[{i+1}]:{projected_w_set_x[i+1]}")
+        #             w2 = projected_w_set_x[i+1][-1].unsqueeze(0)
+        #             y2 = projected_w_set_y[i+1][-1].unsqueeze(0) 
+        #             # print("w2.shape: ",w2.shape)                                                               #   w2.shape:  torch.Size([1, 512])
+        #             # print("y2.shape: ",y2.shape)                                                               #   y2.shape:  torch.Size([1, 10])
+
+        #            # print(f"projected_w_set_x[{i+2}]:{projected_w_set_x[i+2]}")
+        #             w3 = projected_w_set_x[i+2][-1].unsqueeze(0)
+        #             y3 = projected_w_set_y[i+2][-1].unsqueeze(0) 
+        #             # print("w3.shape: ",w3.shape)                                                               #   w3.shape:  torch.Size([1, 512])
+        #             # print("y3.shape: ",y3.shape)                                                               #   y3.shape:  torch.Size([1, 10])
+
+
+        #             #------------执行混合算法------------------
+        #             # print("opt.mix_mode:",opt.mix_mode)
+        #             if opt.mix_mode == 'basemixup':
+        #                 w_mixed, y_mixed = self.__BaseMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
+        #             elif opt.mix_mode == 'maskmixup':
+        #                 w_mixed, y_mixed = self.__MaskMixup3__(w1,w2,w3,opt.sample_mode,y1,y2,y3)
+        #             else:
+        #                 raise Exception('please input valid mix_mode')
+                
+        #             # print("w_mixed.shape: ",w_mixed.shape)                                                       #   w_mixed.shape:  torch.Size([1, 512]) 
+        #             # print("y_mixed.shape: ",y_mixed.shape)                                                       #   y_mixed.shape:  torch.Size([1, 10])
+
+        #             repeat_num = projected_w_set_x.size(1)
+        #             # raise error
+        #             # w_mixed = w_mixed.repeat([8,1])       
+        #             # y_mixed = y_mixed.repeat([8,1])
+        #             w_mixed = w_mixed.repeat([repeat_num,1])       
+        #             y_mixed = y_mixed.repeat([repeat_num,1]) 
+        #             # print("w_mixed: ",w_mixed)                             
+        #             # print("w_mixed.shape: ",w_mixed.shape)                                                        #   w_mixed.shape:  torch.Size([8,512])
+        #             # print("y_mixed: ",y_mixed)                             
+        #             # print("y_mixed.shape: ",y_mixed.shape)                                                        #   y_mixed.shape:  torch.Size([8,10])
+
+        #             #-----maggie------------
+        #             _, w1_label_index = torch.max(y1, 1)    
+        #             _, w2_label_index = torch.max(y2, 1)  
+        #             _, w3_label_index = torch.max(y3, 1)    
+        #             #   存储图片
+        #             w1_label_name = f"{classification[int(w1_label_index)]}"
+        #             w2_label_name = f"{classification[int(w2_label_index)]}"
+        #             w3_label_name = f"{classification[int(w3_label_index)]}"
+
+        #             # print("w1_label_index.type:",type(w1_label_index)) 
+        #             # print("w1_label_index:",w1_label_index)  
+        #             # print("w2_label_index.type:",type(w2_label_index))  
+        #             # print("w2_label_index:",w2_label_index)  
+        #             #-----------------------
+
+        #             #------------写成npz文件-------------------
+        #             np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}+{i+2:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_projected_w.npz', w=w_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
+        #             np.savez(f'{exp_result_dir}/{i:08d}-{int(w1_label_index)}-{w1_label_name}+{i+1:08d}-{int(w2_label_index)}-{w2_label_name}+{i+2:08d}-{int(w3_label_index)}-{w3_label_name}-mixed_label.npz', w = y_mixed.unsqueeze(0).cpu().numpy())      #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件 存成了(1,8,10)
+
+        #             interpolated_w_set.append(w_mixed)
+        #             interpolated_y_set.append(y_mixed)                    
 
         return interpolated_w_set, interpolated_y_set
 
@@ -1774,49 +1934,23 @@ class MaggieStylegan2ada:
         return interpolated_w_set, interpolated_y_set
 
     def __DatasetMixup__(self,opt,exp_result_dir):
-        # print('projected_dataset=%s'% opt.projected_dataset)                                                                    #   projected_dataset是一个路径
-        # print('exp_result_dir=%s'% exp_result_dir)
-
         file_dir=os.listdir(opt.projected_dataset)                                                                              #   提取npz文件所在目录下所有文件
         file_dir.sort()                                                                                                         #   排序
 
-        #-----------maggie---------
-        # print(file_dir)
-        #--------------------------
-
-        #----提取projected_w的npz文件--------------------
         npzfile_name = []
-        # npzfile_path = []
-
-
         for name in file_dir:                                                                                                   #   选择指定目录下的.npz文件名
             if os.path.splitext(name)[-1] == '.npz':
-                npzfile_name.append(name)                                                                                       #   name指代了list中的object
-
+                npzfile_name.append(name)                                                                                       #   name指代了list中的object 
+                # 00000000-1-1-projected_w.npz
+                # 00000000-1-1-label.npz
         projected_w_npz_paths =[]
         label_npz_paths = []
         for name in npzfile_name:
-            # projected_w-00000051-5-dog.npz
-            # subfoldernumber = name[15:20]
-            # npzfile_path.append(f'{opt.projected_dataset}/{subfoldernumber}/{name}')                                          #   没有subfolder
-            # print("name[-9:-4]:",name[-9:-4])
-            # print("name[-15:-4]:",name[-15:-4])
-
-            if name[-15:-4] == 'projected_w':
+            if name[-15:-4] == 'projected_w':   #   倒数几位
                 projected_w_npz_paths.append(f'{opt.projected_dataset}/{name}')
 
             elif name[-9:-4] == 'label':
                 label_npz_paths.append(f'{opt.projected_dataset}/{name}')
-
-        # for i in range(len(npzfile_path)):
-        #     print('npzfile_path[%s]=%s'% (i,npzfile_path[i]))  
-
-
-        #-----从npzfile_path列表中读取projected_w----------------------
-        # if opt.mix_w_num == 2:
-        #     interpolated_w_set, interpolated_y_set = self.__DatasetTwoMixup__(opt,exp_result_dir,npzfile_path,npzfile_name)
-        # elif opt.mix_x_num == 3:
-        #     interpolated_w_set, interpolated_y_set = self.__DatasetThreeMixup__(opt,exp_result_dir,npzfile_path)
 
         if opt.mix_w_num == 2:
             print("flag: DatasetTwoMixup")
@@ -1830,35 +1964,33 @@ class MaggieStylegan2ada:
             raise Exception('please input valid w_num: 2 or 3')
 
         device = torch.device('cuda')
+
+        #   注意空间使用
         projected_w_set_x = []       
         for projected_w_path in projected_w_npz_paths:                                                                                   
             w = np.load(projected_w_path)['w']
             w = torch.tensor(w, device=device)                                                                                 
-            # print("w.shape:",w.shape)
-            w = w[-1]                                                                                                           #   w.shape: torch.Size([1, 8,512]))         
+            w = w[-1]                                                                                       #   w.shape: torch.Size([1, 8,512]))         
             projected_w_set_x.append(w)                                                                                         
         projected_w_set_x = torch.stack(projected_w_set_x)           
-        # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                               #   projected_w_set_x.shape: torch.Size([37, 8, 512])   #stl10 projected_w_set_x.shape: torch.Size([38, 10, 512])
+        # print("projected_w_set_x.shape:",projected_w_set_x.shape)                                         #   projected_w_set_x.shape: torch.Size([37, 8, 512])
+                                                                                                            #   stl10 projected_w_set_x.shape: torch.Size([38, 10, 512])
 
         projected_w_set_y = []       
         for label_npz_path in label_npz_paths:                                                                                  
             y = np.load(label_npz_path)['w']
             y = torch.tensor(y, device=device)                                                                                 
-            # print("y.shape:",y.shape)
-            y = y[-1]                                                                                                           #   y.shape: torch.Size([1, 8]))
+            y = y[-1]                                                                                       #   y.shape: torch.Size([1, 8]))
             projected_w_set_y.append(y)
         projected_w_set_y = torch.stack(projected_w_set_y)           
-        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])  #   projected_w_set_y.shape: torch.Size([38, 10])
+        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8])  
+                                                                                                            #   projected_w_set_y.shape: torch.Size([38, 10])
         projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)                           
-        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                       #   projected_w_set_y.shape: torch.Size([37, 8, 10])    #projected_w_set_y.shape: torch.Size([38, 10, 10])
-
-        # raise error
+        # print("projected_w_set_y.shape:",projected_w_set_y.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8, 10])
+                                                                                                            #   projected_w_set_y.shape: torch.Size([38, 10, 10])
         interpolated_w_set, interpolated_y_set = self.__getmixededwy__(opt, projected_w_set_x,projected_w_set_y,exp_result_dir)
-        # return interpolated_w_set, interpolated_y_set
 
-        #------maggie add----------
         return interpolated_w_set, interpolated_y_set
-        #--------------------------
 
 #-----------------生成--------------------
     def genxyset(self):

@@ -343,24 +343,6 @@ class MixGenerate:
         print(f"Finished generate {self._args.dataset} {len(self.mix_w_train)} interpolated samples!")
 
     def mixgenerate(self,cle_train_dataloader) -> "tensor" :
-     
-        # print(f"Attributes of *{self._args.dataset}* cle_train_dataset:{cle_train_dataloader.dataset.__dict__.keys()}")
-
-        # self.cle_x_train = cle_train_dataloader.dataset.data
-        # self.cle_y_train = cle_train_dataloader.dataset.targets
-
-        # print("self.cle_x_train.type:",type(self.cle_x_train))
-        # print("self.cle_x_train:",self.cle_x_train)        
-        # print("self.cle_y_train.type:",type(self.cle_y_train))
-        # print("self.cle_y_train:",self.cle_y_train)        
-
-        # if self._args.projected_dataset == None:
-        #     #   投影
-        #     cle_w_train, cle_y_train = self.project()                                                                               #   numpy
-        #     self.cle_w_train = cle_w_train
-        #     self.cle_y_train = cle_y_train
-        # else:
-        #     print("使用事先准备好的投影!")
 
         if self._args.mix_dataset == None:     
             #   混合
@@ -373,7 +355,7 @@ class MixGenerate:
             self.generated_x_train = generated_x_train
             self.generated_y_train = generated_y_train
         else:
-            print("使用事先准备好的插值样本!")
+            print(f"load mixed sampels from {self._args.mix_dataset}")
 
     def generatedset(self):
         if self._args.mix_dataset == None:
@@ -388,58 +370,36 @@ class MixGenerate:
         
         file_dir=os.listdir(mix_dataset_path)
         file_dir.sort()
-        # print("file_dir:",file_dir)                                                                               #   file_dir: ['00000000-adv-3-cat.npz', '00000000-adv-3-cat.png',
-        # print("file_dir[0][-9:-4] :",file_dir[0][-9:-4])                                                            #   file_dir[0][9:12] : adv
-        # print("file_dir[0][-9:4] :",file_dir[0][-9:-4])                                                            #   file_dir[0][9:12] : adv
-        
-        # filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz'] 
+        # 00000000-2-+5-5-mixed-image.npz
+        # 00000000-2-2+5-5-mixed-label.npz
+
         img_filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[-9:-4] == 'image']           
         label_filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[-9:-4] == 'label']           
         
-        # print("img_filenames:",img_filenames)                                                                   #   img_filenames: ['00000000-9-truck+6-frog-mixed-image.npz']
-        # print("label_filenames[0]:",label_filenames[0])                                     #   label_filenames[0]: 00000000-6-frog+00000001-9-truck-mixed_label.npz
-        # print("label_filenames.len:",len(label_filenames))                                  #   label_filenames.len: 42358
+        select_mix_num = int( self._args.aug_mix_rate * self._args.aug_num )
+        print(f"共使用 {select_mix_num} 个混合样本")
         
         mix_xset_tensor = []
-
-        # print("test here")
         for miximg_index, img_filename in enumerate(img_filenames):
-
-
-            # print("img_filename:",img_filename)
-            # print('in..........')
-            mix_img_npz_path = os.path.join(mix_dataset_path,img_filename)
-            # print("mix_img_npz_path:",mix_img_npz_path)
-            load_mix_img = np.load(mix_img_npz_path)['w']            
-            load_mix_img = torch.tensor(load_mix_img)
-            # print("load_mix_img.shape",load_mix_img.shape)
-            mix_xset_tensor.append(load_mix_img)
-            # raise error
+            if miximg_index < select_mix_num:
+                mix_img_npz_path = os.path.join(mix_dataset_path,img_filename)
+                load_mix_img = np.load(mix_img_npz_path)['w']            
+                load_mix_img = torch.tensor(load_mix_img)
+                mix_xset_tensor.append(load_mix_img)
 
         mix_yset_tensor = []
         for mixy_index, lab_filename in enumerate(label_filenames):
+            if mixy_index < select_mix_num:  
+                mix_lab_npz_path = os.path.join(mix_dataset_path,lab_filename)
+                load_mix_lab = np.load(mix_lab_npz_path)['w']            
+                load_mix_lab = torch.tensor(load_mix_lab)
+                mix_yset_tensor.append(load_mix_lab)
 
-                
-            mix_lab_npz_path = os.path.join(mix_dataset_path,lab_filename)
-
-            load_mix_lab = np.load(mix_lab_npz_path)['w']            
-            load_mix_lab = torch.tensor(load_mix_lab)
-            mix_yset_tensor.append(load_mix_lab)
-
-        # print("mix_xset_tensor.len",len(mix_xset_tensor))
-        # print("mix_xset_tensor[0]",mix_xset_tensor[0])          #0 
-        # raise error
         mix_xset_tensor = torch.stack(mix_xset_tensor)                                                                         
-        mix_yset_tensor = torch.stack(mix_yset_tensor)   
+        mix_yset_tensor = torch.stack(mix_yset_tensor)  
 
-        # print("mix_xset_tensor.type:",type(mix_xset_tensor))                                                    #  mix_xset_tensor[0][0]: tensor([[ 1.0653,  0.9195,  0.6705,  ...,  0.1975,  0.2704,  0.0212]                                                     
-        # print("mix_xset_tensor.shape:",mix_xset_tensor.shape)                                                   #  mix_xset_tensor.shape: torch.Size([1, 3, 32, 32]) 
-        # print("mix_xset_tensor[0][0]:",mix_xset_tensor[0][0])                                                   #  
-        
-        
-        # print("mix_yset_tensor.type:",type(mix_yset_tensor))                                                    # mix_yset_tensor: tensor([[0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.3126, 0.0000, 0.0000, 0.6874]])                              
-        # print("mix_yset_tensor.shape:",mix_yset_tensor.shape)                                                   #  mix_yset_tensor.shape: torch.Size([1, 10])
-        # print("mix_yset_tensor:",mix_yset_tensor)                                                               #   
+        # print("mix_xset_tensor.shape:",mix_xset_tensor) 
+        # print("mix_yset_tensor.shape:",mix_yset_tensor) 
 
         # raise error
 
@@ -503,7 +463,7 @@ class MixGenerate:
                 if self._args.generate_seeds is not None:
                     self._model.generate(self._exp_result_dir)
                 else:
-                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #都从这里进入
             elif self._args.mixed_dataset !=None:
                 print("有 mix dataset path")
                 self._model.generate(self._exp_result_dir)

@@ -28,8 +28,7 @@ def SaveLossTxt(pretrain,model,dataset,exp_result_dir,loss):
 
 
    
-def SaveTxt(args,
-    exp_result_dir,
+def SaveTxt(args,exp_result_dir,
     cle_test_accuracy, 
     adv_test_accuracy, 
     trained_adv_test_accuracy,
@@ -43,69 +42,63 @@ def SaveTxt(args,
     if args.defense_mode == "at":
         if args.pretrained_on_imagenet == True:
             accuracy_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-clean-{args.dataset}-testset = {cle_test_accuracy} \n'
-            txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
+            txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {cle_test_accuracy} \n'
             txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy}\n'
-
+            txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
+            txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
             accuracy_txt.write(str(txt_content))
         
             loss_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
             loss_txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-loss-on-clean-imagenet-testset = {cle_test_loss}\n'
+            loss_txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
             loss_txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
             loss_txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
-
             loss_txt.write(str(loss_txt_content))    
         
         elif args.pretrained_on_imagenet == False:
-            accuracy_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-accuracy-on-clean-{args.dataset}-testset = {cle_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy}\n'
-
+            accuracy_txt=open(f'{exp_result_dir}/{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
+            txt_content = f'{exp_result_dir}/standard-trained-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {cle_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/adversarial-trained-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/standard-trained-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/adversarial-trained-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy:08f}\n'
             accuracy_txt.write(str(txt_content))
 
-            loss_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
-            loss_txt_content = f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset = {cle_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
-
+            loss_txt=open(f'{exp_result_dir}/{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
+            loss_txt_content = f'{exp_result_dir}/standard-trained-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {cle_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/adversarial-trained-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/standard-trained-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/adversarial-trained-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss:08f}\n'
             loss_txt.write(str(loss_txt_content))
             
     elif args.defense_mode == "mmat":
         if args.pretrained_on_imagenet == True:
             accuracy_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-clean-{args.dataset}-testset = {cle_test_accuracy} \n'
-            txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
+            txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {cle_test_accuracy} \n'
             txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy}\n'
+            txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
+            txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
 
             accuracy_txt.write(str(txt_content))
         
             loss_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
-            loss_txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-loss-on-clean-imagenet-testset = {cle_test_loss}\n'
+            loss_txt_content = f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-loss-on-cle-imagenet-testset = {cle_test_loss}\n'
+            loss_txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
             loss_txt_content += f'{exp_result_dir}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
             loss_txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
-
             loss_txt.write(str(loss_txt_content))    
         
-        elif args.pretrained_on_imagenet == False:
-            accuracy_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-accuracy-on-clean-{args.dataset}-testset = {cle_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy}\n'
-            txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy}\n'
-
+        elif args.pretrained_on_imagenet == False:     #    绝大多数用这个
+            accuracy_txt=open(f'{exp_result_dir}/{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
+            txt_content = f'{exp_result_dir}/standard-trained-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {cle_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/mmat-trained-{args.cla_model}-accuracy-on-cle-{args.dataset}-testset = {trained_cle_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/standard-trained-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy:08f}\n'
+            txt_content += f'{exp_result_dir}/mmat-trained-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {trained_adv_test_accuracy:08f}\n'
             accuracy_txt.write(str(txt_content))
 
-            loss_txt=open(f'{exp_result_dir}/classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
-            loss_txt_content = f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset = {cle_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/standard-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss}\n'
-            loss_txt_content += f'{exp_result_dir}/manifold mixup adversarial-trained-classifier-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss}\n'
+            loss_txt=open(f'{exp_result_dir}/{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
+            loss_txt_content = f'{exp_result_dir}/standard-trained-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {cle_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/mmat-trained-{args.cla_model}-loss-on-cle-{args.dataset}-testset = {trained_cle_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/standard-trained-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss:08f}\n'
+            loss_txt_content += f'{exp_result_dir}/mmat-trained-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {trained_adv_test_loss:08f}\n'
 
             loss_txt.write(str(loss_txt_content))

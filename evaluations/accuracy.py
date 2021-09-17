@@ -12,8 +12,8 @@ def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.D
     
     #   计算准确率
     testset_total_num = len(test_dataloader.dataset)
-    print("flag B test set total_num:",testset_total_num)                                                       #   test set total_num: 10000 样本总数
-    print("flag B test_dataloader.len:",len(test_dataloader))                                                   #   test_dataloader.len: 40 batch数目（batchsize256）
+    # print("flag B test set total_num:",testset_total_num)                                                       #   test set total_num: 10000 样本总数
+    # print("flag B test_dataloader.len:",len(test_dataloader))                                                   #   test_dataloader.len: 40 batch数目（batchsize256）
 
     # print("flag B test_dataloader.dataset[0][0][0]:",test_dataloader.dataset[0][0][0])                                #   归一化的
     # print("flag B test_dataloader.dataset[0][1]:",test_dataloader.dataset[0][1])                                  #   

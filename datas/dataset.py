@@ -369,14 +369,14 @@ class MaggieSTL10(torchvision.datasets.STL10):
 
 class MaggieDataset:
     def __init__(self,args, custom_traindataset = None, custom_testdataset =None) -> None:
-        print(f'initilize the parameters')
+        print(f'initilize the dataset loading parameters')
         self._args = args 
         if custom_traindataset == None:
-            print("dataset from pytorch")
+            # print("dataset from pytorch")
             self._traindataset = self.__loadtraindataset__()  
             self._testdataset = self.__loadtestdataset__() 
         else:
-            print("dataset from custom")
+            # print("dataset from custom")
             self._traindataset = custom_traindataset
             self._testdataset = custom_testdataset
 
