@@ -71,9 +71,11 @@ if __name__ == '__main__':
             print("local cla_network_pkl:",args.cla_network_pkl)
             learned_model = torch.load(args.cla_network_pkl)
             
-            target_model = learned_model
-            attack_classifier = AdvAttack(args,target_model)
-            x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(cle_train_dataloader,cle_test_dataloader,exp_result_dir)          #     GPU Tensor
+            attack_classifier = AdvAttack(args,learned_model)
+            target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
+
+            x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+            
             adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
             print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
             print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
@@ -95,8 +97,12 @@ if __name__ == '__main__':
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
             
-            target_model = target_classifier.model()
-            attack_classifier = AdvAttack(args,target_model)
+            # target_model = target_classifier.model()
+            
+            learned_model = target_classifier.model()
+            attack_classifier = AdvAttack(args,learned_model)
+            target_model  = attack_classifier.targetmodel()     #   attack_classifier.targetmodel()返回的是深拷贝后的learned_model
+
             x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(cle_train_dataloader,cle_test_dataloader,exp_result_dir)          #     GPU Tensor
             
             adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
@@ -150,13 +156,13 @@ if __name__ == '__main__':
         x_test_adv, y_test_adv = target_classifier.getadvset(adv_testset_path)
     
         # #-----------测试准确率------------
-        # adv_test_accuracy, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),x_test_adv,y_test_adv)
-        # print(f'standard trained classifier *accuary* on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
-        # # print(f'standard trained classifier *loss* on adversarial testset:{adv_test_loss}' )  
+        adv_test_accuracy, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),x_test_adv,y_test_adv)
+        print(f'standard trained classifier *accuary* on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
+        # print(f'standard trained classifier *loss* on adversarial testset:{adv_test_loss}' )  
 
-        # cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
-        # print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )               
-        # # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
+        cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
+        print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )               
+        # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
 
         # cle_test_accuracy = 0.9470
         # cle_test_loss = 0
@@ -194,16 +200,23 @@ if __name__ == '__main__':
             #------------混合训练---------
             # target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir, target_classifier.artmodel())   
             target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir) 
+           
 
-            mmat_adv_test_accuracy, mmat_adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),x_test_adv,y_test_adv)
-            print(f'manifold mixup adversarial trained classifier accuary on adversarial testset:{mmat_adv_test_accuracy * 100:.4f}%' ) 
-            # print(f'manifold mixup adversarial trained classifier loss on adversarial testset:{mmat_adv_test_loss}' )         
+           #    生成对抗样本
+            mmat_learned_model= target_classifier.model()
+            attack_classifier = AdvAttack(args, mmat_learned_model)
+            mmat_target_model = attack_classifier.targetmodel()
+  
+            # mmat_x_test_adv, mmat_y_test_adv = attack_classifier.generate(exp_result_dir,cle_test_dataloader)          #     只生成testset对抗样本
+            mmat_x_test_adv, mmat_y_test_adv = attack_classifier.generateadvfromtestsettensor(exp_result_dir, cle_x_test, cle_y_test)
 
-            mmat_cle_test_accuracy, mmat_cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
-            print(f'manifold mixup adversarial trained classifier accuary on clean testset:{mmat_cle_test_accuracy * 100:.4f}%' ) 
-            # print(f'manifold mixup adversarial trained classifier loss on clean testset:{mmat_cle_test_loss}' ) 
-
-            # SaveTxt(args, exp_result_dir, cle_test_accuracy, adv_test_accuracy, mmat_adv_test_accuracy, mmat_cle_test_accuracy, cle_test_loss, adv_test_loss, mmat_adv_test_loss, mmat_cle_test_loss)
+            mmat_adv_test_accuracy, mmat_adv_test_loss = target_classifier.evaluatefromtensor(mmat_target_model,mmat_x_test_adv,mmat_y_test_adv)
+            print(f'mmat trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
+            print(f'mmat trained classifier loss on adversarial testset:{adv_test_loss}' )    
+            mmat_cle_test_accuracy, mmat_cle_test_loss = target_classifier.evaluatefromtensor(mmat_target_model,cle_x_test,cle_y_test)
+            print(f'mmat trained classifier accuary on clean testset:{mmat_cle_test_accuracy * 100:.4f}%' ) 
+            print(f'mmat trained classifier loss on clean testset:{mmat_cle_test_loss}' ) 
+            SaveTxt(args, exp_result_dir, cle_test_accuracy, adv_test_accuracy, mmat_adv_test_accuracy, mmat_cle_test_accuracy, cle_test_loss, adv_test_loss, mmat_adv_test_loss, mmat_cle_test_loss)
     
     
     print("---------------------------------------")

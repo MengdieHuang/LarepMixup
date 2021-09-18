@@ -1,0 +1,195 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210918
+Experiment result save dir: /home/maggie/mmat/result/defense/mmat/fgsm/basemixup-uniformsampler/resnet18-svhn/20210918/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+standard trained classifier *accuary* on adversarial testset:56.9491%
+standard trained classifier *accuary* on clean testset:94.6489%
+gen_network_pkl:  abc test
+load mixed sampels from /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+only using clean samples
+aug_x_train.shape: (70000, 3, 32, 32)
+aug_y_train.shape: (70000, 10)
+use 70000/70000 clean sampels，0/70000 mixed samples
+/home/maggie/mmat/clamodels/classifier.py:913: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_x = torch.tensor(x_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:914: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_y = torch.tensor(y_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:916: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_x = torch.tensor(cle_x_test)
+/home/maggie/mmat/clamodels/classifier.py:917: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_y = torch.tensor(cle_y_test)
+self._train_tensorset_x.shape: torch.Size([70000, 3, 32, 32])
+self._train_tensorset_y.shape: torch.Size([70000, 10])
+self._adv_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._adv_test_tensorset_y.shape: torch.Size([26032])
+self._cle_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._cle_test_tensorset_y.shape: torch.Size([26032])
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+before mmat trained classifier accuary on adversarial testset:40.2774%
+before mmat trained classifier loss on adversarial testset:4.530026912689209
+Traceback (most recent call last):
+  File "tasklauncher-20210918.py", line 202, in <module>
+    target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir) 
+  File "/home/maggie/mmat/clamodels/classifier.py", line 905, in mmat
+    self.__softtrain__(aug_x_train, aug_y_train, cle_x_test, cle_y_test,  x_test_adv, y_test_adv, exp_result_dir)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 934, in __softtrain__
+    global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss = self.__traintensorsetloop__()
+  File "/home/maggie/mmat/clamodels/classifier.py", line 995, in __traintensorsetloop__
+    self.__adjustlearningrate__(epoch_index)     
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1437, in __adjustlearningrate__
+    param_group['lr'] = lr
+UnboundLocalError: local variable 'lr' referenced before assignment
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210918
+Experiment result save dir: /home/maggie/mmat/result/defense/mmat/fgsm/basemixup-uniformsampler/resnet18-svhn/20210918/00001
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+standard trained classifier *accuary* on adversarial testset:56.9376%
+standard trained classifier *accuary* on clean testset:94.7565%
+gen_network_pkl:  abc test
+load mixed sampels from /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset
+共使用 70000 个混合样本
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+only using mixed samples
+aug_x_train.shape: (70000, 3, 32, 32)
+aug_y_train.shape: (70000, 10)
+use 0/70000 clean sampels，70000/70000 mixed samples
+/home/maggie/mmat/clamodels/classifier.py:913: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_x = torch.tensor(x_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:914: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_y = torch.tensor(y_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:916: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_x = torch.tensor(cle_x_test)
+/home/maggie/mmat/clamodels/classifier.py:917: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_y = torch.tensor(cle_y_test)
+self._train_tensorset_x.shape: torch.Size([70000, 3, 32, 32])
+self._train_tensorset_y.shape: torch.Size([70000, 10])
+self._adv_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._adv_test_tensorset_y.shape: torch.Size([26032])
+self._cle_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._cle_test_tensorset_y.shape: torch.Size([26032])
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+before mmat trained classifier accuary on adversarial testset:40.0661%
+before mmat trained classifier loss on adversarial testset:4.5232086181640625
+Traceback (most recent call last):
+  File "tasklauncher-20210918.py", line 202, in <module>
+    target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir) 
+  File "/home/maggie/mmat/clamodels/classifier.py", line 905, in mmat
+    self.__softtrain__(aug_x_train, aug_y_train, cle_x_test, cle_y_test,  x_test_adv, y_test_adv, exp_result_dir)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 934, in __softtrain__
+    global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss = self.__traintensorsetloop__()
+  File "/home/maggie/mmat/clamodels/classifier.py", line 995, in __traintensorsetloop__
+    self.__adjustlearningrate__(epoch_index)     
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1437, in __adjustlearningrate__
+    param_group['lr'] = lr
+UnboundLocalError: local variable 'lr' referenced before assignment
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210918
+Experiment result save dir: /home/maggie/mmat/result/defense/mmat/fgsm/basemixup-uniformsampler/resnet18-svhn/20210918/00002
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+standard trained classifier *accuary* on adversarial testset:56.9952%
+standard trained classifier *accuary* on clean testset:94.7219%
+gen_network_pkl:  abc test
+load mixed sampels from /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset
+共使用 35000 个混合样本
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+using clean sampels and mixed samples
+cle_x_train.shape: torch.Size([35000, 3, 32, 32])
+cle_y_train.shape: torch.Size([73257])
+x_train_mix.shape: torch.Size([35000, 3, 32, 32])
+cle_y_train_onehot.shape: torch.Size([35000, 10])
+aug_x_train.shape: (70000, 3, 32, 32)
+aug_y_train.shape: (70000, 10)
+use 35000/70000 clean sampels，35000/70000 mixed samples
+/home/maggie/mmat/clamodels/classifier.py:913: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_x = torch.tensor(x_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:914: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._adv_test_tensorset_y = torch.tensor(y_test_adv)
+/home/maggie/mmat/clamodels/classifier.py:916: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_x = torch.tensor(cle_x_test)
+/home/maggie/mmat/clamodels/classifier.py:917: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  self._cle_test_tensorset_y = torch.tensor(cle_y_test)
+self._train_tensorset_x.shape: torch.Size([70000, 3, 32, 32])
+self._train_tensorset_y.shape: torch.Size([70000, 10])
+self._adv_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._adv_test_tensorset_y.shape: torch.Size([26032])
+self._cle_test_tensorset_x.shape: torch.Size([26032, 3, 32, 32])
+self._cle_test_tensorset_y.shape: torch.Size([26032])
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+before mmat trained classifier accuary on adversarial testset:40.2889%
+before mmat trained classifier loss on adversarial testset:4.519876480102539
+Traceback (most recent call last):
+  File "tasklauncher-20210918.py", line 202, in <module>
+    target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir) 
+  File "/home/maggie/mmat/clamodels/classifier.py", line 905, in mmat
+    self.__softtrain__(aug_x_train, aug_y_train, cle_x_test, cle_y_test,  x_test_adv, y_test_adv, exp_result_dir)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 934, in __softtrain__
+    global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss = self.__traintensorsetloop__()
+  File "/home/maggie/mmat/clamodels/classifier.py", line 995, in __traintensorsetloop__
+    self.__adjustlearningrate__(epoch_index)     
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1437, in __adjustlearningrate__
+    param_group['lr'] = lr
+UnboundLocalError: local variable 'lr' referenced before assignment
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210918
+Experiment result save dir: /home/maggie/mmat/result/defense/mmat/fgsm/basemixup-uniformsampler/resnet18-svhn/20210918/00003
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+standard trained classifier *accuary* on adversarial testset:56.9453%
+standard trained classifier *accuary* on clean testset:94.6527%
+gen_network_pkl:  abc test
+load mixed sampels from /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset
+共使用 70000 个混合样本

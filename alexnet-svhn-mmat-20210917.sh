@@ -35,7 +35,7 @@ source /home/xieyi/anaconda3/bin/activate mmat
 
 
 # svhn alexnet mmat 20210917017--aug_mix_rate 0.5 --aug_num 140000
-CUDA_VISIBLE_DEVICES=0 python -u tasklauncher-20210917.py run --mode defense --defense_mode mmat --exp_name alexnet-svhn --cla_model alexnet --cla_network_pkl /home/maggie/mmat/result/train/cla-train/alexnet-svhn/20210909/00003-testacc-0.9475/train-svhn-dataset/standard-trained-classifier-alexnet-on-clean-svhn-epoch-0011.pkl --dataset svhn --mix_dataset /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset --adv_dataset /home/maggie/mmat/result/attack/fgsm/alexnet-svhn/20210914/00000-attackacc-0.373387/attack-svhn-dataset/samples --batch_size 256 --epochs 20 --lr 0.01 --aug_mix_rate 0 --aug_num 73257 >> /home/maggie/mmat/log/alexnet-avhn-mmat/alexnet-avhn-mmat-20210917.log 2>&1
+# CUDA_VISIBLE_DEVICES=0 python -u tasklauncher-20210917.py run --mode defense --defense_mode mmat --exp_name alexnet-svhn --cla_model alexnet --cla_network_pkl /home/maggie/mmat/result/train/cla-train/alexnet-svhn/20210909/00003-testacc-0.9475/train-svhn-dataset/standard-trained-classifier-alexnet-on-clean-svhn-epoch-0011.pkl --dataset svhn --mix_dataset /home/maggie/mmat/result/interpolate/2mixup/basemixup/uniformsampler/stylegan2ada-svhn/20210917/00000/generate-svhn-trainset --adv_dataset /home/maggie/mmat/result/attack/fgsm/alexnet-svhn/20210914/00000-attackacc-0.373387/attack-svhn-dataset/samples --batch_size 256 --epochs 20 --lr 0.01 --aug_mix_rate 0 --aug_num 73257 >> /home/maggie/mmat/log/alexnet-avhn-mmat/alexnet-avhn-mmat-20210917.log 2>&1
 
 
 
