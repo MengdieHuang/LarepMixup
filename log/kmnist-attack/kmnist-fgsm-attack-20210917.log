@@ -308,3 +308,61 @@ initlize classifier
 learned calssify model != None
 Get FGSM examples generate model
 self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving kmnist trainset  adversarial examples...
+Saving kmnist testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:70.2100%
+standard trained classifier loss on adversarial testset:1.5837883949279785
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/googlenet-kmnist/20210917/00000
+initilize the dataset loading parameters
+Loading *kmnist* train dataloader finished !
+Loading *kmnist* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/googlenet-kmnist/20210913/00003-testacc-0.9804/train-kmnist-dataset/standard-trained-classifier-googlenet-on-clean-kmnist-epoch-0015.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving kmnist trainset  adversarial examples...
+Saving kmnist testset  adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20210917.py", line 77, in <module>
+    adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 561, in evaluatefromtensor
+    output, aux1, aux2 = classifier(imgs)
+ValueError: too many values to unpack (expected 3)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/googlenet-kmnist/20210917/00000
+initilize the dataset loading parameters
+Loading *kmnist* train dataloader finished !
+Loading *kmnist* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/googlenet-kmnist/20210913/00003-testacc-0.9804/train-kmnist-dataset/standard-trained-classifier-googlenet-on-clean-kmnist-epoch-0015.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving kmnist trainset  adversarial examples...
+Saving kmnist testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:81.0000%
+standard trained classifier loss on adversarial testset:0.9429131150245667
+---------------------------------------
+
+

@@ -218,3 +218,28 @@ standard trained classifier loss on adversarial testset:7.534492492675781
 ---------------------------------------
 
 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210917
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/googlenet-cifar10/20210917/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+local cla_network_pkl: /home/maggie/mmat/result/train/cla-train/googlenet-cifar10/20210909/00001-testacc-0.8016/train-cifar10-dataset/standard-trained-classifier-googlenet-on-clean-cifar10-epoch-0011.pkl
+initlize classifier
+learned calssify model != None
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset  adversarial examples...
+standard trained classifier accuary on adversarial testset:6.6400%
+standard trained classifier loss on adversarial testset:6.402246475219727
+---------------------------------------
+
+
