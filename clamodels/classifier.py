@@ -837,18 +837,8 @@ class MaggieClassifier:
         exp_result_dir,
         classify_model = None #: ART中的"PyTorchClassifier"
     ):
-        # print("cle_x_train.shape:",cle_x_train.shape)
-        # print("cle_y_train.shape:",cle_y_train.shape)
-
-        # print("x_train_mix.shape:",x_train_mix.shape)
-        # print("y_train_mix.shape:",y_train_mix.shape)
-
-        print("cle_x_test.shape:",cle_x_test.shape)
-        print("cle_y_test.shape:",cle_y_test.shape)
-
-        # print("x_test_adv.shape:",x_test_adv.shape)
-        # print("y_test_adv.shape:",y_test_adv.shape)
-        
+        # print("cle_x_test.shape:",cle_x_test.shape)
+        # print("cle_y_test.shape:",cle_y_test.shape)
         cle_y_train_onehot = torch.nn.functional.one_hot(cle_y_train, args.n_classes).float().cuda()  
 
         if args.aug_num is None or args.aug_mix_rate is None:
@@ -861,22 +851,20 @@ class MaggieClassifier:
             select_mix_num = int( aug_rate * aug_num )
 
         if aug_rate == 0:
-            print("only using clean samples")
+            print("*only using clean samples*")
             # select_cle_num = int( (1-aug_rate) * aug_num ) 
             aug_x_train = cle_x_train[:select_cle_num]
             aug_y_train = cle_y_train_onehot[:select_cle_num]
 
         elif aug_rate == 1:
-            print("only using mixed samples")
+            print("*only using mixed samples*")
             # select_mix_num = int( aug_rate * aug_num )
             aug_x_train = x_train_mix[:select_mix_num]
             aug_y_train = y_train_mix[:select_mix_num]
 
         elif aug_rate == 0.5:
-            print("using clean sampels and mixed samples")
+            print("*using clean sampels and mixed samples*")
             aug_rate = 0.5
-            # select_mix_num = int( aug_rate * aug_num )
-            # select_cle_num = int( (1-aug_rate) * aug_num )
 
             cle_x_train         = cle_x_train[:select_cle_num]
             cle_y_train_onehot  = cle_y_train_onehot[:select_cle_num]
@@ -885,7 +873,6 @@ class MaggieClassifier:
 
             print("cle_x_train.shape:",cle_x_train.shape)
             print("cle_y_train.shape:",cle_y_train.shape)
-
             print("x_train_mix.shape:",x_train_mix.shape)
             print("cle_y_train_onehot.shape:",cle_y_train_onehot.shape)
 
@@ -933,17 +920,17 @@ class MaggieClassifier:
 
             global_train_acc, global_adv_test_acc, global_cle_test_acc, global_train_loss, global_adv_test_loss, global_cle_test_loss = self.__traintensorsetloop__()
             
-            if self._args.defense_mode == "mmat":
-                accuracy_png_name_adv   = f'mmat trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
-                loss_png_name_adv       = f'mmat trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
-                accuracy_png_name_cle   = f'mmat trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
-                loss_png_name_cle       = f'mmat trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
+            # if self._args.defense_mode == "mmat":
+            #     accuracy_png_name_adv   = f'mmat trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
+            #     loss_png_name_adv       = f'mmat trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
+            #     accuracy_png_name_cle   = f'mmat trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
+            #     loss_png_name_cle       = f'mmat trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
 
-            elif self._args.defense_mode == "at":
-                accuracy_png_name_adv   = f'adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
-                loss_png_name_adv       = f'adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
-                accuracy_png_name_cle   = f'adversarial trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
-                loss_png_name_cle       = f'adversarial trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
+            # elif self._args.defense_mode == "at":
+            #     accuracy_png_name_adv   = f'adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
+            #     loss_png_name_adv       = f'adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'   
+            #     accuracy_png_name_cle   = f'adversarial trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
+            #     loss_png_name_cle       = f'adversarial trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'               
             
             # SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_adv_test_acc, accuracy_png_name_adv)
             # SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_adv_test_loss, loss_png_name_adv)
@@ -960,6 +947,13 @@ class MaggieClassifier:
 
         print("self._cle_test_tensorset_x.shape:",self._cle_test_tensorset_x.shape)
         print("self._cle_test_tensorset_y.shape:",self._cle_test_tensorset_y.shape) #   hard label self._cle_test_tensorset_y.shape: torch.Size([26032])
+
+        # print("self._train_tensorset_x[0]:",self._train_tensorset_x[0])
+        # print("self._train_tensorset_y[0]:",self._train_tensorset_y[0])     
+        # #   self._train_tensorset_y[0]: tensor([0.0000, 0.0000, 0.9842, 0.0000, 0.0000, 0.0158, 0.0000, 0.0000, 0.0000, 0.0000])
+        # print("self._train_tensorset_x[10]:",self._train_tensorset_x[10])
+        # print("self._train_tensorset_y[10]:",self._train_tensorset_y[10])        
+        # #   self._train_tensorset_y[10]: tensor([0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.8651, 0.1349, 0.0000, 0.0000, 0.0000])
         # raise error
         
         #  当前epoch分类模型在白盒对抗测试集上的准确率
@@ -987,7 +981,6 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cle_test_acc = []
         global_cle_test_loss = []
-
 
         for epoch_index in range (epoch_num):
 
@@ -1030,18 +1023,17 @@ class MaggieClassifier:
 
                 #   Top1 accuracy
                 _, predicted_label_index = torch.max(output.data, 1)    
-                # print("predicted_label_index.type:",type(predicted_label_index))            #   predicted_label_index.type: <class 'torch.Tensor'>
-                # print("predicted_label_index.shape:",predicted_label_index.shape)           #   predicted_label_index.shape: torch.Size([256]) 给出每一个softlabel中最大的位置index
-                # print("predicted_label_index:",predicted_label_index)                       #   predicted_label_index: tensor([9, 9, 9, 4, 4, 9, 9, 7, 3, 9, 4, 3, 3, 3, 4, 4, 1, 1,
+
                 _, batch_labs_maxindex = torch.max(batch_labs, 1)
-                # print("batch_labs_maxindex.type:",type(batch_labs_maxindex))                #   batch_labs_maxindex.type: <class 'torch.Tensor'>        
-                # print("batch_labs_maxindex.shape:",batch_labs_maxindex.shape)               #   batch_labs_maxindex.shape: torch.Size([256])
-                # print("batch_labs_maxindex:",batch_labs_maxindex)                           #   batch_labs_maxindex: tensor([9, 9, 9, 4, 4, 9, 9, 7, 3, 9, 4, 3, 3, 3, 4, 4, 1,
+
 
                 batch_correct_num = (predicted_label_index == batch_labs_maxindex).sum().item()     
                 epoch_correct_num += batch_correct_num                                     
+                
                 epoch_total_loss += batch_loss
-                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, epoch_num, batch_index+1, batch_num, batch_loss.item()))
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, epoch_num, batch_index+1, batch_num, 
+                
+                batch_loss.item()))
                 
             #-------------------------------------------------------------------------    
             #   当前epoch分类模型在当前训练集epoch上的准确率    
@@ -1060,7 +1052,7 @@ class MaggieClassifier:
             #  当前epoch分类模型在白盒对抗测试集上的准确率
             learned_model= self._model
             epoch_attack_classifier = AdvAttack(self._args, learned_model)    #   AdvAttack是MaggieClasssifier的子类
-            target_model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model
+            target_model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
 
             epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._exp_result_dir, self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
             
@@ -1427,11 +1419,14 @@ class MaggieClassifier:
                     #     lr = 0.01
                     # elif epoch_index >= 11 and epoch_index <= 20:
                     #     lr = 0.001
+                elif self._args.cla_model == 'resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
             if self._args.dataset == 'cifar10':
                 if self._args.cla_model == 'alexnet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
-
+                elif self._args.cla_model == 'resnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
@@ -1470,6 +1465,12 @@ class MaggieClassifier:
 
         w2_label_index = torch.cat(w2_label_index) 
         alpha_2 = torch.cat(alpha_2) 
+
+        print("batch_outputs[0]:",batch_outputs[0])
+        print("alpha_1[0]:",alpha_1[0])
+        print("alpha_2[0]:",alpha_2[0])
+        print("w1_label_index[0]:",w1_label_index[0])
+        print("w2_label_index[0]:",w2_label_index[0])
 
         cla_loss =  torch.nn.CrossEntropyLoss(reduction = 'none')
         loss_a = cla_loss(batch_outputs, w1_label_index)
