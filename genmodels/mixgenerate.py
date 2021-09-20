@@ -85,9 +85,9 @@ class MixGenerate:
         #   initialize the model
         if self._args.gen_network_pkl == None:           
             self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
-            print("gen_network_pkl: " , self._args.gen_network_pkl)
+            # print("gen_network_pkl: " , self._args.gen_network_pkl)
         elif self._args.gen_network_pkl != None:
-            print("gen_network_pkl: " , self._args.gen_network_pkl)
+            print("\n")
 
     def __getpkl__(self):
         genmodel_dict = ['gan', 'acgan', 'aae', 'vae','stylegan2','stylegan2ada']        
@@ -436,24 +436,44 @@ class MixGenerate:
     def interpolate(self):
         if self._args.gen_model == "stylegan2ada":
             
-            print("self._args.projected_dataset:",self._args.projected_dataset )    #   self._args.projected_dataset: None
-            print("self._args.projected_w1:",self._args.projected_w1)
+            # print("self._args.projected_dataset:",self._args.projected_dataset )    #   self._args.projected_dataset: None
+            # print("self._args.projected_w1:",self._args.projected_w1)
             
-            if self._args.projected_dataset is None and self._args.projected_w1 is None :        # 从内存中加载待投影x,y
+            """
+            self._args.projected_w1: None
+            self.cle_w_train.shape: torch.Size([4, 8, 512])
+            self.cle_y_train.shape: torch.Size([4, 8, 10])
+            """
+            if self._args.defense_mode == 'rmt':
+                # print("self.cle_w_train.shape:",self.cle_w_train.shape)
+                # print("self.cle_y_train.shape:",self.cle_y_train.shape)
                 self._model.interpolate(self._exp_result_dir, self.cle_w_train, self.cle_y_train)
-            
-            elif self._args.projected_dataset is not None or self._args.projected_w1 is not None:   #从本地npz数据集中加载待投影x,y   或 从本地2个npz文件中加载待投影x,y 
-                self._model.interpolate(self._exp_result_dir)                                                                     #   测试读取本地个别npz投影
+                mix_w_train, mix_y_train = self._model.mixwyset()                                                                   #   当采用整个batch采样时，返回的直接就是tensor,不需要torch.stack从list转tensor
 
-            mix_w_train, mix_y_train = self._model.mixwyset()                                                                   #   tensor的list， int的list
-               
-            mix_w_train = torch.stack(mix_w_train)                                                                              #   torch.Tensor GPU Tensor       
-            print('mix_w_train.shape:',mix_w_train.shape)                                                                       #   mix_w_train.shape: torch.Size([3, 8, 512])
-        
-            mix_y_train = torch.stack(mix_y_train)                                                                              #   torch.Tensor GPU Tensor       
-            print('mix_y_train.shape:',mix_y_train.shape)                                                                       #   mix_y_train.shape: torch.Size([3, 8, 10])
+            else:
+                if self._args.projected_dataset is None and self._args.projected_w1 is None :        # 从内存中加载待投影x,y
+                    self._model.interpolate(self._exp_result_dir, self.cle_w_train, self.cle_y_train)
+                
+                elif self._args.projected_dataset is not None or self._args.projected_w1 is not None:   #从本地npz数据集中加载待投影x,y   或 从本地2个npz文件中加载待投影x,y 
+                    self._model.interpolate(self._exp_result_dir)                                                                     #   测试读取本地个别npz投影
 
-        return mix_w_train, mix_y_train                        
+                #   读取mix样本
+                mix_w_train, mix_y_train = self._model.mixwyset()                                                                   #   tensor的list， int的list
+
+                mix_w_train = torch.stack(mix_w_train)                                                                              #   torch.Tensor GPU Tensor             
+                mix_y_train = torch.stack(mix_y_train)                                                                              #   torch.Tensor GPU Tensor       
+
+                # print('mix_w_train:',mix_w_train)                                                                       #   mix_w_train.shape: torch.Size([3, 8, 512])            
+                # print('mix_y_train:',mix_y_train)                                                                       #   mix_y_train.shape: torch.Size([3, 8, 10])
+                # print('mix_w_train.shape:',mix_w_train.shape)                                           #   mix_w_train.shape: torch.Size([3, 8, 512])            
+                # print('mix_y_train.shape:',mix_y_train.shape)                                           #   mix_y_train.shape: torch.Size([3, 8, 10])
+
+                """
+                mix_w_train.shape: torch.Size([4, 8, 512])
+                mix_y_train.shape: torch.Size([4, 8, 10])
+                """
+
+            return mix_w_train, mix_y_train                        
 
     def generate(self):
         if self._args.gen_model == "stylegan2ada":
@@ -463,7 +483,9 @@ class MixGenerate:
                 if self._args.generate_seeds is not None:
                     self._model.generate(self._exp_result_dir)
                 else:
-                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #都从这里进入
+                    # print("maggie flag 20210920")
+                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #    都从这里进入
+
             elif self._args.mixed_dataset !=None:
                 print("有 mix dataset path")
                 self._model.generate(self._exp_result_dir)
@@ -471,10 +493,13 @@ class MixGenerate:
             generated_x_train, generated_y_train = self._model.genxyset() 
             
             generated_x_train = torch.stack(generated_x_train)                                                                  #   torch.Tensor GPU Tensor           
-            print('generated_x_train.shape:',generated_x_train.shape)                                                           #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
-            
+
             generated_y_train = torch.stack(generated_y_train)                                                                  #   torch.Tensor GPU Tensor   
-            print('generated_y_train.shape:',generated_y_train.shape)                                                           #   generated_y_train.shape: torch.Size([3, 10])
+            # print('generated_x_train:',generated_x_train)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
+            # print('generated_y_train:',generated_y_train)                                  #   generated_y_train.shape: torch.Size([3, 10])
+            
+            # print('generated_x_train.shape:',generated_x_train.shape)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
+            # print('generated_y_train.shape:',generated_y_train.shape)                                  #   generated_y_train.shape: torch.Size([3, 10])
 
         return generated_x_train, generated_y_train    
     

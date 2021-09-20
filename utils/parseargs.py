@@ -166,9 +166,9 @@ def parse_arguments():
         parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd'])
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
-
+        parser_object.add_argument('--whitebox', help='white box attack or black box attack', type=bool, default= None)
         #-------------------------arguments for classifier defense-------------------------
-        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat'])
+        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt'])
         parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
@@ -252,6 +252,8 @@ def set_exp_result_dir(args):
         if args.defense_mode == "at":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{date}'
         elif args.defense_mode == "mmat":
+            exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
+        elif args.defense_mode == "rmt":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
 
 
