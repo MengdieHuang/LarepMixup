@@ -1,0 +1,5 @@
+source ~/.bashrc
+source /home/xieyi/anaconda3/bin/activate mmat
+
+# resnet18 cifar10 rmt 20210920000 only mix
+CUDA_VISIBLE_DEVICES=0 python -u tasklauncher-20210920.py run --mode defense --defense_mode rmt --attack_mode fgsm --attack_eps 0.3 --whitebox True --exp_name resnet18-cifar10 --cla_model resnet18 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/alexnet-cifar10/20210908/00015-testacc-0.8355/train-cifar10-dataset/standard-trained-classifier-alexnet-on-clean-cifar10-finished.pkl --gen_model stylegan2ada --gen_network_pkl /home/maggie/mmat/result/train/gen-train/stylegan2ada-cifar10/20210702/00000/cifar10-auto1-batch64-ada-bgc-noresume/network-snapshot-023063.pkl --dataset cifar10 --projected_dataset /home/maggie/mmat/result/project/stylegan2ada-cifar10/20210913/00000/project-cifar10-trainset --adv_dataset /home/maggie/mmat/result/attack/fgsm/resnet18-cifar10/20210917/00000-attackacc-0.038200/attack-cifar10-dataset/samples --batch_size 1024 --epochs 200 --lr 0.1 >> /home/maggie/mmat/log/resnet18-cifar10-rmt/resnet18-cifar10-rmt-20210920.log 2>&1

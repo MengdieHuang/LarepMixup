@@ -1,0 +1,135 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210920
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-uniformsampler/resnet18-kmnist/20210920/00000
+initilize the dataset loading parameters
+Loading *kmnist* train dataloader finished !
+Loading *kmnist* test dataloader finished !
+initlize classifier
+learned calssify model != None
+cle_w_train.shape: torch.Size([13167, 8, 512])
+cle_y_train.shape: torch.Size([13167, 8])
+cle_x_test.shape: torch.Size([10000, 1, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 1, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+Accuary of before rmt trained classifier on adversarial testset:81.3500%
+Loss of before mmat trained classifier on adversarial testset:1.3336831331253052
+epoch_num: 200
+batch_num: 13
+
+
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 161, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1344, in rmt
+    self.__adjustlearningrate__(epoch_index)     
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1711, in __adjustlearningrate__
+    param_group['lr'] = lr
+UnboundLocalError: local variable 'lr' referenced before assignment
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210920
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-uniformsampler/resnet18-kmnist/20210920/00001
+initilize the dataset loading parameters
+Loading *kmnist* train dataloader finished !
+Loading *kmnist* test dataloader finished !
+initlize classifier
+learned calssify model != None
+cle_w_train.shape: torch.Size([13170, 8, 512])
+cle_y_train.shape: torch.Size([13170, 8])
+cle_x_test.shape: torch.Size([10000, 1, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 1, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+Accuary of before rmt trained classifier on adversarial testset:81.3500%
+Loss of before mmat trained classifier on adversarial testset:1.3336831331253052
+epoch_num: 200
+batch_num: 13
+
+
+0epoch learning rate:0.1
+
+
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 161, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1363, in rmt
+    inputs, targets = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets)      #   混合样本 two-hot标签
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1742, in mixup_data
+    mix_x_train, mix_y_train = generate_model.generate()
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 487, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #    都从这里进入
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1908, in generate
+    generated_x_set, generated_y_set = self.__generatemain__(self._args, self._exp_result_dir, interpolated_w_set, interpolated_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1919, in __generatemain__
+    generated_x_set, generated_y_set = self.__generatefromntensor__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1996, in __generatefromntensor__
+    interpolated_w_index = i
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2021, in __imagegeneratefromwset__
+    G = legacy.load_network_pkl(f)['G_ema'].to(device)                                                                  #   type: ignore
+  File "/home/maggie/mmat/utils/stylegan2ada/legacy.py", line 25, in load_network_pkl
+    data = _LegacyUnpickler(f).load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/storage.py", line 160, in _load_from_bytes
+    def _load_from_bytes(b):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+ImportError: numpy.core.multiarray failed to import

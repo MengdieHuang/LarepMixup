@@ -1,0 +1,1202 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210920
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-uniformsampler/resnet18-svhn/20210920/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+cle_w_train.shape: torch.Size([12048, 8, 512])
+cle_y_train.shape: torch.Size([12048, 8])
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+adv_x_test.shape: torch.Size([26032, 3, 32, 32])
+adv_y_test.shape: torch.Size([26032])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 161, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1318, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 283, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/fast_gradient.py", line 239, in generate
+    adv_x = self._compute(x, x, y, mask, self.eps, self.eps, self._project, self.num_random_init > 0,)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/fast_gradient.py", line 440, in _compute
+    perturbation = self._compute_perturbation(batch, batch_labels, mask_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/fast_gradient.py", line 341, in _compute_perturbation
+    grad = self.estimator.loss_gradient(batch, batch_labels) * (1 - 2 * int(self.targeted))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 1164, in loss_gradient
+    model_outputs = self._model(inputs_t)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 1393, in forward
+    x = self._model(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 255, in forward
+    return self._forward_impl(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 246, in _forward_impl
+    x = self.layer4(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 81, in forward
+    out = self.relu(out)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 868, in _call_impl
+    full_backward_hooks, non_full_backward_hooks = [], []
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210922
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-uniformsampler/resnet18-svhn/20210922/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+Accuary of rmt trained classifier on clean testset:93.3390%
+Loss of rmt trained classifier on clean testset:0.2598969042301178
+cle_w_train.shape: torch.Size([13994, 8, 512])
+cle_y_train.shape: torch.Size([13994, 8])
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+adv_x_test.shape: torch.Size([26032, 3, 32, 32])
+adv_y_test.shape: torch.Size([26032])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+Accuary of before rmt trained classifier on adversarial testset:31.7110%
+Loss of before mmat trained classifier on adversarial testset:5.652229309082031
+epoch_num: 50
+batch_num: 14
+
+
+0epoch learning rate:0.1
+
+
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 1/14] [Batch classify loss: 4.077729]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 2/14] [Batch classify loss: 6.782005]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 3/14] [Batch classify loss: 9.639251]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 4/14] [Batch classify loss: 7.431978]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 5/14] [Batch classify loss: 7.102804]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 6/14] [Batch classify loss: 7.194939]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 7/14] [Batch classify loss: 8.117954]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 8/14] [Batch classify loss: 5.603520]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 9/14] [Batch classify loss: 4.909425]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 10/14] [Batch classify loss: 3.577607]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 11/14] [Batch classify loss: 3.702425]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 12/14] [Batch classify loss: 3.384125]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 1/50] [Batch 13/14] [Batch classify loss: 2.784897]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 1/50] [Batch 14/14] [Batch classify loss: 2.364101]
+0001 epoch rmt trained classifier accuary on the clean testing examples:19.4146%
+0001 epoch rmt trained classifier loss on the clean testing examples:2.6751
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0001 epoch rmt trained classifier accuary on adversarial testset:19.4299%
+0001 epoch rmt trained classifier loss on adversarial testset:2.6798229217529297
+
+
+1epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 1/14] [Batch classify loss: 2.799345]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 2/14] [Batch classify loss: 2.445040]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 3/14] [Batch classify loss: 2.539438]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 4/14] [Batch classify loss: 2.400479]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 5/14] [Batch classify loss: 2.370310]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 6/14] [Batch classify loss: 2.378265]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 7/14] [Batch classify loss: 2.412359]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 8/14] [Batch classify loss: 2.314265]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 9/14] [Batch classify loss: 2.351289]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 10/14] [Batch classify loss: 2.321797]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 11/14] [Batch classify loss: 2.278836]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 12/14] [Batch classify loss: 2.300009]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 2/50] [Batch 13/14] [Batch classify loss: 2.333338]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 2/50] [Batch 14/14] [Batch classify loss: 2.301596]
+0002 epoch rmt trained classifier accuary on the clean testing examples:19.4568%
+0002 epoch rmt trained classifier loss on the clean testing examples:2.3013
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0002 epoch rmt trained classifier accuary on adversarial testset:19.4722%
+0002 epoch rmt trained classifier loss on adversarial testset:2.301276445388794
+
+
+2epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 1/14] [Batch classify loss: 2.300764]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 2/14] [Batch classify loss: 2.353312]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 3/14] [Batch classify loss: 2.229395]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 4/14] [Batch classify loss: 2.253980]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 5/14] [Batch classify loss: 2.301576]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 6/14] [Batch classify loss: 2.221938]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 7/14] [Batch classify loss: 2.203213]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 8/14] [Batch classify loss: 2.224491]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 9/14] [Batch classify loss: 2.326141]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 10/14] [Batch classify loss: 2.298111]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 11/14] [Batch classify loss: 2.348913]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 12/14] [Batch classify loss: 2.255595]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 3/50] [Batch 13/14] [Batch classify loss: 2.250475]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 3/50] [Batch 14/14] [Batch classify loss: 2.469476]
+0003 epoch rmt trained classifier accuary on the clean testing examples:19.5337%
+0003 epoch rmt trained classifier loss on the clean testing examples:2.2860
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0003 epoch rmt trained classifier accuary on adversarial testset:19.5375%
+0003 epoch rmt trained classifier loss on adversarial testset:2.286489486694336
+
+
+3epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 1/14] [Batch classify loss: 2.252757]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 2/14] [Batch classify loss: 2.287529]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 3/14] [Batch classify loss: 2.245765]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 4/14] [Batch classify loss: 2.219891]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 5/14] [Batch classify loss: 2.219033]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 6/14] [Batch classify loss: 2.237924]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 7/14] [Batch classify loss: 2.196769]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 8/14] [Batch classify loss: 2.203559]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 9/14] [Batch classify loss: 2.253269]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 10/14] [Batch classify loss: 2.275828]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 11/14] [Batch classify loss: 2.282363]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 12/14] [Batch classify loss: 2.220449]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 4/50] [Batch 13/14] [Batch classify loss: 2.225883]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 4/50] [Batch 14/14] [Batch classify loss: 2.242931]
+0004 epoch rmt trained classifier accuary on the clean testing examples:19.2379%
+0004 epoch rmt trained classifier loss on the clean testing examples:2.3222
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0004 epoch rmt trained classifier accuary on adversarial testset:19.3147%
+0004 epoch rmt trained classifier loss on adversarial testset:2.3140244483947754
+
+
+4epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 1/14] [Batch classify loss: 2.234988]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 2/14] [Batch classify loss: 2.169660]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 3/14] [Batch classify loss: 2.160324]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 4/14] [Batch classify loss: 2.198349]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 5/14] [Batch classify loss: 2.208044]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 6/14] [Batch classify loss: 2.229857]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 7/14] [Batch classify loss: 2.199120]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 8/14] [Batch classify loss: 2.235615]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 9/14] [Batch classify loss: 2.187093]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 10/14] [Batch classify loss: 2.214293]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 11/14] [Batch classify loss: 2.255599]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 12/14] [Batch classify loss: 2.234125]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 5/50] [Batch 13/14] [Batch classify loss: 2.210784]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 5/50] [Batch 14/14] [Batch classify loss: 2.262697]
+0005 epoch rmt trained classifier accuary on the clean testing examples:19.5029%
+0005 epoch rmt trained classifier loss on the clean testing examples:2.2992
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0005 epoch rmt trained classifier accuary on adversarial testset:19.4837%
+0005 epoch rmt trained classifier loss on adversarial testset:2.299548387527466
+
+
+5epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 1/14] [Batch classify loss: 2.059962]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 2/14] [Batch classify loss: 2.111946]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 3/14] [Batch classify loss: 2.136451]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 4/14] [Batch classify loss: 2.145436]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 5/14] [Batch classify loss: 2.145178]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 6/14] [Batch classify loss: 2.129052]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 7/14] [Batch classify loss: 2.132041]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 8/14] [Batch classify loss: 2.189260]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 9/14] [Batch classify loss: 2.200527]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 10/14] [Batch classify loss: 2.186411]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 11/14] [Batch classify loss: 2.176802]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 12/14] [Batch classify loss: 2.179901]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 6/50] [Batch 13/14] [Batch classify loss: 2.186221]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 6/50] [Batch 14/14] [Batch classify loss: 2.173956]
+0006 epoch rmt trained classifier accuary on the clean testing examples:19.1303%
+0006 epoch rmt trained classifier loss on the clean testing examples:2.3570
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0006 epoch rmt trained classifier accuary on adversarial testset:19.1303%
+0006 epoch rmt trained classifier loss on adversarial testset:2.3582823276519775
+
+
+6epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 1/14] [Batch classify loss: 1.815516]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 2/14] [Batch classify loss: 1.921477]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 3/14] [Batch classify loss: 1.972760]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 4/14] [Batch classify loss: 1.997099]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 5/14] [Batch classify loss: 1.985224]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 6/14] [Batch classify loss: 2.083983]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 7/14] [Batch classify loss: 2.099387]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 8/14] [Batch classify loss: 2.074984]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 9/14] [Batch classify loss: 2.088488]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 10/14] [Batch classify loss: 2.152117]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 11/14] [Batch classify loss: 2.180606]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 12/14] [Batch classify loss: 2.115842]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 7/50] [Batch 13/14] [Batch classify loss: 2.126883]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 7/50] [Batch 14/14] [Batch classify loss: 2.166440]
+0007 epoch rmt trained classifier accuary on the clean testing examples:9.3231%
+0007 epoch rmt trained classifier loss on the clean testing examples:2.4705
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0007 epoch rmt trained classifier accuary on adversarial testset:9.0619%
+0007 epoch rmt trained classifier loss on adversarial testset:2.4702930450439453
+
+
+7epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 1/14] [Batch classify loss: 1.537558]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 2/14] [Batch classify loss: 1.628498]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 3/14] [Batch classify loss: 1.604830]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 4/14] [Batch classify loss: 1.720144]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 5/14] [Batch classify loss: 1.805415]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 6/14] [Batch classify loss: 1.856760]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 7/14] [Batch classify loss: 1.928261]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 8/14] [Batch classify loss: 1.943043]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 9/14] [Batch classify loss: 1.916020]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 10/14] [Batch classify loss: 2.032080]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 11/14] [Batch classify loss: 2.036232]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 12/14] [Batch classify loss: 1.969913]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 8/50] [Batch 13/14] [Batch classify loss: 2.035066]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 8/50] [Batch 14/14] [Batch classify loss: 1.982813]
+0008 epoch rmt trained classifier accuary on the clean testing examples:6.2001%
+0008 epoch rmt trained classifier loss on the clean testing examples:2.6880
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0008 epoch rmt trained classifier accuary on adversarial testset:6.1732%
+0008 epoch rmt trained classifier loss on adversarial testset:2.7208235263824463
+
+
+8epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 1/14] [Batch classify loss: 1.395358]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 2/14] [Batch classify loss: 1.391475]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 3/14] [Batch classify loss: 1.474275]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 4/14] [Batch classify loss: 1.345939]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 5/14] [Batch classify loss: 1.499534]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 6/14] [Batch classify loss: 1.640801]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 7/14] [Batch classify loss: 1.696926]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 8/14] [Batch classify loss: 1.606199]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 9/14] [Batch classify loss: 1.650406]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 10/14] [Batch classify loss: 1.681583]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 11/14] [Batch classify loss: 1.587430]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 12/14] [Batch classify loss: 1.634389]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 9/50] [Batch 13/14] [Batch classify loss: 1.633893]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 9/50] [Batch 14/14] [Batch classify loss: 1.636491]
+0009 epoch rmt trained classifier accuary on the clean testing examples:14.4937%
+0009 epoch rmt trained classifier loss on the clean testing examples:2.9558
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0009 epoch rmt trained classifier accuary on adversarial testset:13.6947%
+0009 epoch rmt trained classifier loss on adversarial testset:2.962392568588257
+
+
+9epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 1/14] [Batch classify loss: 1.396035]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 2/14] [Batch classify loss: 1.240627]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 3/14] [Batch classify loss: 1.116415]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 4/14] [Batch classify loss: 1.058859]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 5/14] [Batch classify loss: 1.189531]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 6/14] [Batch classify loss: 1.315215]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 7/14] [Batch classify loss: 1.253423]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 8/14] [Batch classify loss: 1.211829]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 9/14] [Batch classify loss: 1.245217]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 10/14] [Batch classify loss: 1.214334]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 11/14] [Batch classify loss: 1.271740]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 12/14] [Batch classify loss: 1.260962]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 10/50] [Batch 13/14] [Batch classify loss: 1.206963]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 10/50] [Batch 14/14] [Batch classify loss: 1.322943]
+0010 epoch rmt trained classifier accuary on the clean testing examples:14.9585%
+0010 epoch rmt trained classifier loss on the clean testing examples:4.5661
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0010 epoch rmt trained classifier accuary on adversarial testset:11.8546%
+0010 epoch rmt trained classifier loss on adversarial testset:4.5452470779418945
+
+
+10epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 1/14] [Batch classify loss: 0.954871]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 2/14] [Batch classify loss: 0.772760]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 3/14] [Batch classify loss: 0.901744]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 4/14] [Batch classify loss: 0.762693]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 5/14] [Batch classify loss: 0.999695]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 6/14] [Batch classify loss: 0.855779]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 7/14] [Batch classify loss: 0.913721]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 8/14] [Batch classify loss: 0.982085]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 9/14] [Batch classify loss: 0.959738]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 10/14] [Batch classify loss: 0.902416]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 11/14] [Batch classify loss: 0.908437]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 12/14] [Batch classify loss: 0.982451]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 11/50] [Batch 13/14] [Batch classify loss: 1.009164]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 11/50] [Batch 14/14] [Batch classify loss: 1.010469]
+0011 epoch rmt trained classifier accuary on the clean testing examples:12.6268%
+0011 epoch rmt trained classifier loss on the clean testing examples:5.6433
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0011 epoch rmt trained classifier accuary on adversarial testset:9.3692%
+0011 epoch rmt trained classifier loss on adversarial testset:5.817254543304443
+
+
+11epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 1/14] [Batch classify loss: 1.179783]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 2/14] [Batch classify loss: 0.439028]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 3/14] [Batch classify loss: 0.365461]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 4/14] [Batch classify loss: 0.637497]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 5/14] [Batch classify loss: 0.542673]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 6/14] [Batch classify loss: 0.545754]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 7/14] [Batch classify loss: 0.746393]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 8/14] [Batch classify loss: 0.695050]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 9/14] [Batch classify loss: 0.747724]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 10/14] [Batch classify loss: 0.616501]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 11/14] [Batch classify loss: 0.706917]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 12/14] [Batch classify loss: 0.679586]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 12/50] [Batch 13/14] [Batch classify loss: 0.666427]
+
+
+inputs.shape: torch.Size([682, 3, 32, 32])
+targets.shape: torch.Size([682, 10])
+[Epoch 12/50] [Batch 14/14] [Batch classify loss: 0.701523]
+0012 epoch rmt trained classifier accuary on the clean testing examples:12.6191%
+0012 epoch rmt trained classifier loss on the clean testing examples:7.3616
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0012 epoch rmt trained classifier accuary on adversarial testset:10.4909%
+0012 epoch rmt trained classifier loss on adversarial testset:7.697818279266357
+
+
+12epoch learning rate:0.1
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 1/14] [Batch classify loss: 0.344387]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 2/14] [Batch classify loss: 0.366605]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 3/14] [Batch classify loss: 0.374969]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 4/14] [Batch classify loss: 0.322079]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 5/14] [Batch classify loss: 0.377607]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 6/14] [Batch classify loss: 0.344724]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 7/14] [Batch classify loss: 0.366524]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 8/14] [Batch classify loss: 0.404421]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 9/14] [Batch classify loss: 0.372782]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 10/14] [Batch classify loss: 0.425297]
+
+
+inputs.shape: torch.Size([1024, 3, 32, 32])
+targets.shape: torch.Size([1024, 10])
+[Epoch 13/50] [Batch 11/14] [Batch classify loss: 0.500724]
+
+
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 165, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1363, in rmt
+    
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1742, in mixup_data
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 487, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #    都从这里进入
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1908, in generate
+    
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1919, in __generatemain__
+    def __generatemain__(self, opt, exp_result_dir, interpolated_w_set, interpolated_y_set):
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1996, in __generatefromntensor__
+    seeds = [500, 501, 502, 503, 504, 505],
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2021, in __imagegeneratefromwset__
+    interpolated_w_index: int                                     
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 673, in to
+    return self._apply(convert)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 671, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+KeyboardInterrupt

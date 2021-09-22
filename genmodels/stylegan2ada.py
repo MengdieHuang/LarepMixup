@@ -1242,6 +1242,7 @@ class MaggieStylegan2ada:
             # print("shuffled_projected_w_set_y: ",shuffled_projected_w_set_y) 
 
             #------------执行混合算法------------------
+            #   关键问题就是这里的alpha取值for beta(alpha,alpha)
             if opt.mix_mode == 'basemixup':
                 interpolated_w_set, interpolated_y_set = self.__BaseMixup2__(projected_w_set_x, shuffled_projected_w_set_x, opt.sample_mode, projected_w_set_y, shuffled_projected_w_set_y)
             elif opt.mix_mode == 'maskmixup':
@@ -1542,6 +1543,7 @@ class MaggieStylegan2ada:
         is_2d = True if len(w1.size()) == 2 else False                                                                          #   即w1的shape元组是二维时,is_2d = true
         # print("is_2d=%s" % is_2d)
 
+        #   beta分布采样
         if sample_mode == 'uniformsampler':
             # print('sample_mode = uniformsampler, set the same alpha value for each dimension of the 512 dimensions values of projected w !')
             alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None)                                         #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
@@ -1549,9 +1551,14 @@ class MaggieStylegan2ada:
         elif sample_mode == 'uniformsampler2':
             # print('sample_mode = uniformsampler2,set different alpha values for each dimension of the 512 dimensions values of projected w !')
             alpha = utils.sampler.UniformSampler2(w1.size(0), w1.size(1), is_2d, p=None)
+        #   修改后的混合模式
+        elif sample_mode == 'betasampler':
+            alpha = utils.sampler.BetaSampler(w1.size(0), w1.size(1), is_2d, p=None, beta_alpha = self._args.beta_alpha)
+
+
 
         # print('alpha=%s' % alpha)                                                                                             #   alpha=tensor([[0.5488]], device='cuda:0')
-        # print('alpha.shape:', alpha.shape)                                                                                      #   torch.size[8]
+        # print('alpha.shape:', alpha.shape)  (batchsize,1)                                                                                    #   torch.size[8]
 
         w_mixed = alpha*w1 + (1.-alpha)*w2
         y_mixed = alpha*y1 + (1.-alpha)*y2
@@ -1639,12 +1646,12 @@ class MaggieStylegan2ada:
         is_2d = True if len(w1.size()) == 2 else False                                                                          #   即w1的shape元组是二维时,is_2d = true
         # print("is_2d=%s" % is_2d)
 
-        if sample_mode == 'uniformsampler' or sample_mode == 'uniformsampler2':
+        if sample_mode == 'uniformsampler' or sample_mode == 'uniformsampler2' or sample_mode =='dirichletsampler':
             # print('sample_mode = uniformsampler, set the same alpha value for each dimension of the 512 dimensions values of projected w !')
             # alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None)                                         #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
             #                     # UniformSampler(bs, f, is_2d, p=None)
 
-            alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d)
+            alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama)
 
 
         # elif sample_mode == 'uniformsampler2':

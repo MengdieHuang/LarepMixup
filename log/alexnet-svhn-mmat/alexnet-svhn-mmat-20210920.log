@@ -3683,3 +3683,586 @@ Interpolate projectors from projectors numpy ndarray !
   projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
 projected_w_set_x.shape:  torch.Size([256, 8, 512])
 projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.3434,  0.7162,  0.9158,  0.9166, -1.4010, -0.2136, -2.6331, -1.1412,
+         0.0108,  6.6936], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9219, device='cuda:0')
+alpha_2[0]: tensor(0.0781, device='cuda:0')
+w1_label_index[0]: tensor(9, device='cuda:0')
+w2_label_index[0]: tensor(6, device='cuda:0')
+[Epoch 4/12] [Batch 19/47] [Batch classify loss: 1.383104]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.3951, -0.0781, -0.1409,  0.0882,  1.7196, -0.8101,  0.3011, -1.4099,
+         0.7690, -0.3072], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.7193, device='cuda:0')
+alpha_2[0]: tensor(0.2807, device='cuda:0')
+w1_label_index[0]: tensor(4, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 20/47] [Batch classify loss: 1.296318]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.7974,  0.8235, -0.2473,  5.6709, -0.4092,  0.3393, -3.0837, -1.4940,
+         1.3251, -1.0052], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9876, device='cuda:0')
+alpha_2[0]: tensor(0.0124, device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(8, device='cuda:0')
+[Epoch 4/12] [Batch 21/47] [Batch classify loss: 1.310982]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.5159,  0.0437,  1.4119,  1.9982,  0.6580,  0.1235, -1.0284, -0.5641,
+        -0.6224, -0.5690], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.7044, device='cuda:0')
+alpha_2[0]: tensor(0.2956, device='cuda:0')
+w1_label_index[0]: tensor(2, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 22/47] [Batch classify loss: 1.233945]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.8434,  0.1634,  1.8867,  1.5421,  0.2031, -0.2773, -0.9458, -0.9402,
+         0.0802,  0.1562], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.7228, device='cuda:0')
+alpha_2[0]: tensor(0.2772, device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 23/47] [Batch classify loss: 1.204661]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.1834,  0.1581,  1.2044,  0.1392, -0.0881, -0.4305, -0.8081, -0.6355,
+        -0.3691,  1.6610], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.8493, device='cuda:0')
+alpha_2[0]: tensor(0.1507, device='cuda:0')
+w1_label_index[0]: tensor(9, device='cuda:0')
+w2_label_index[0]: tensor(3, device='cuda:0')
+[Epoch 4/12] [Batch 24/47] [Batch classify loss: 1.288281]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-3.0000,  0.2541,  1.6064,  3.0272, -0.5204,  0.0031, -1.4229, -0.5291,
+         0.4787, -0.6582], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9907, device='cuda:0')
+alpha_2[0]: tensor(0.0093, device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(1, device='cuda:0')
+[Epoch 4/12] [Batch 25/47] [Batch classify loss: 1.453029]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.5042e+00,  1.1286e+00, -1.4457e-01,  3.2471e-01,  9.6443e-04,
+         7.5753e-01,  3.8813e-01, -1.2074e+00, -4.5361e-01, -3.4335e-01],
+       device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6922, device='cuda:0')
+alpha_2[0]: tensor(0.3078, device='cuda:0')
+w1_label_index[0]: tensor(6, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 26/47] [Batch classify loss: 1.364859]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.4553,  0.2267, -0.3615,  1.2714, -0.4872,  1.2487,  0.0929, -0.9793,
+         0.4906, -0.9620], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(1., device='cuda:0')
+alpha_2[0]: tensor(0., device='cuda:0')
+w1_label_index[0]: tensor(5, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 27/47] [Batch classify loss: 1.335890]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-2.0703,  4.1099,  0.7480, -0.2237,  0.1333, -0.5300, -2.3199, -0.1131,
+        -0.3765, -0.8019], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.8751, device='cuda:0')
+alpha_2[0]: tensor(0.1249, device='cuda:0')
+w1_label_index[0]: tensor(1, device='cuda:0')
+w2_label_index[0]: tensor(7, device='cuda:0')
+[Epoch 4/12] [Batch 28/47] [Batch classify loss: 1.404592]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.1920, -0.1038,  0.3437,  1.0959, -0.6009, -0.3215, -0.2264, -0.8914,
+         1.1199,  0.2224], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6088, device='cuda:0')
+alpha_2[0]: tensor(0.3912, device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(8, device='cuda:0')
+[Epoch 4/12] [Batch 29/47] [Batch classify loss: 1.319626]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.8620,  0.1520,  0.5048, -0.2443,  1.0673,  0.6939,  0.3307, -0.8228,
+        -0.5782, -0.9258], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9796, device='cuda:0')
+alpha_2[0]: tensor(0.0204, device='cuda:0')
+w1_label_index[0]: tensor(5, device='cuda:0')
+w2_label_index[0]: tensor(9, device='cuda:0')
+[Epoch 4/12] [Batch 30/47] [Batch classify loss: 1.389062]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.7109,  2.0762, -0.6301, -0.0302,  4.8800,  0.4464, -0.2321, -1.7176,
+        -0.5783,  0.3501], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9463, device='cuda:0')
+alpha_2[0]: tensor(0.0537, device='cuda:0')
+w1_label_index[0]: tensor(4, device='cuda:0')
+w2_label_index[0]: tensor(9, device='cuda:0')
+[Epoch 4/12] [Batch 31/47] [Batch classify loss: 1.294892]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.3930, -0.2288,  1.0648, -0.3800,  0.5801, -0.9127, -0.2148, -1.5445,
+         0.2907,  0.8812], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.7583, device='cuda:0')
+alpha_2[0]: tensor(0.2417, device='cuda:0')
+w1_label_index[0]: tensor(9, device='cuda:0')
+w2_label_index[0]: tensor(4, device='cuda:0')
+[Epoch 4/12] [Batch 32/47] [Batch classify loss: 1.316165]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.9595,  0.5640, -0.0494,  5.1668, -0.7054,  1.6700, -2.0325, -0.8098,
+         0.3998, -1.1393], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(1., device='cuda:0')
+alpha_2[0]: tensor(0., device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(3, device='cuda:0')
+[Epoch 4/12] [Batch 33/47] [Batch classify loss: 1.297436]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.3685,  1.4057, -0.8481, -0.3781,  1.1518,  0.0271,  0.1033, -1.4057,
+        -0.4363,  0.2868], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6022, device='cuda:0')
+alpha_2[0]: tensor(0.3978, device='cuda:0')
+w1_label_index[0]: tensor(4, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 34/47] [Batch classify loss: 1.401553]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.0903,  1.7886,  0.4097, -0.1842, -0.4078, -0.4535,  0.0156, -0.9159,
+        -0.5409, -0.4249], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.5356, device='cuda:0')
+alpha_2[0]: tensor(0.4644, device='cuda:0')
+w1_label_index[0]: tensor(3, device='cuda:0')
+w2_label_index[0]: tensor(2, device='cuda:0')
+[Epoch 4/12] [Batch 35/47] [Batch classify loss: 1.394738]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.5030,  0.7079, -0.6807,  1.0993, -0.2095,  2.3512, -0.5254, -1.0934,
+        -0.2360, -0.8559], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.5297, device='cuda:0')
+alpha_2[0]: tensor(0.4703, device='cuda:0')
+w1_label_index[0]: tensor(1, device='cuda:0')
+w2_label_index[0]: tensor(5, device='cuda:0')
+[Epoch 4/12] [Batch 36/47] [Batch classify loss: 1.327746]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([ 1.4669,  0.3503,  0.3510,  2.1739,  0.1006, -1.0856, -2.1042, -1.1459,
+        -0.1673, -0.5568], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.8117, device='cuda:0')
+alpha_2[0]: tensor(0.1883, device='cuda:0')
+w1_label_index[0]: tensor(0, device='cuda:0')
+w2_label_index[0]: tensor(4, device='cuda:0')
+[Epoch 4/12] [Batch 37/47] [Batch classify loss: 1.438941]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.8581,  0.5316,  3.9223,  0.8146, -0.6292,  0.0352, -1.2203,  0.9755,
+        -0.7871, -0.8221], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9616, device='cuda:0')
+alpha_2[0]: tensor(0.0384, device='cuda:0')
+w1_label_index[0]: tensor(2, device='cuda:0')
+w2_label_index[0]: tensor(4, device='cuda:0')
+[Epoch 4/12] [Batch 38/47] [Batch classify loss: 1.321698]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.4167,  0.6194,  1.4859, -0.1950,  0.0712, -0.6817, -0.4862, -0.7706,
+        -0.6501,  0.6628], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6746, device='cuda:0')
+alpha_2[0]: tensor(0.3254, device='cuda:0')
+w1_label_index[0]: tensor(2, device='cuda:0')
+w2_label_index[0]: tensor(9, device='cuda:0')
+[Epoch 4/12] [Batch 39/47] [Batch classify loss: 1.360065]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.5162,  0.0820,  2.5075,  0.5111,  0.3388, -0.6283, -0.3791, -1.6689,
+        -0.2091,  0.7425], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6283, device='cuda:0')
+alpha_2[0]: tensor(0.3717, device='cuda:0')
+w1_label_index[0]: tensor(2, device='cuda:0')
+w2_label_index[0]: tensor(9, device='cuda:0')
+[Epoch 4/12] [Batch 40/47] [Batch classify loss: 1.361705]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.2293,  1.4477, -0.3226, -0.3824,  2.0668, -0.3448, -0.4087, -0.1695,
+        -1.3125, -0.6305], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.8229, device='cuda:0')
+alpha_2[0]: tensor(0.1771, device='cuda:0')
+w1_label_index[0]: tensor(4, device='cuda:0')
+w2_label_index[0]: tensor(3, device='cuda:0')
+[Epoch 4/12] [Batch 41/47] [Batch classify loss: 1.304448]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-2.0612,  3.0946,  0.9876, -0.9114, -0.0684, -0.6909, -1.2653, -0.3604,
+        -0.0355, -0.5048], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9472, device='cuda:0')
+alpha_2[0]: tensor(0.0528, device='cuda:0')
+w1_label_index[0]: tensor(1, device='cuda:0')
+w2_label_index[0]: tensor(7, device='cuda:0')
+[Epoch 4/12] [Batch 42/47] [Batch classify loss: 1.361853]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-1.0814,  1.0080, -0.1272, -0.5234,  0.5762,  0.7464, -0.3087, -0.2959,
+        -0.3566,  0.0138], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.6706, device='cuda:0')
+alpha_2[0]: tensor(0.3294, device='cuda:0')
+w1_label_index[0]: tensor(0, device='cuda:0')
+w2_label_index[0]: tensor(2, device='cuda:0')
+[Epoch 4/12] [Batch 43/47] [Batch classify loss: 1.365411]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([ 0.6115,  0.2466, -0.1774, -0.4645,  1.0131, -0.4601,  0.2699, -1.3329,
+        -0.3126,  0.5180], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.5931, device='cuda:0')
+alpha_2[0]: tensor(0.4069, device='cuda:0')
+w1_label_index[0]: tensor(8, device='cuda:0')
+w2_label_index[0]: tensor(1, device='cuda:0')
+[Epoch 4/12] [Batch 44/47] [Batch classify loss: 1.412948]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.8572, -0.2181,  1.2023,  0.1777, -0.7289, -0.6680, -0.0321, -1.7782,
+         2.6929, -0.3130], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(1., device='cuda:0')
+alpha_2[0]: tensor(0., device='cuda:0')
+w1_label_index[0]: tensor(8, device='cuda:0')
+w2_label_index[0]: tensor(8, device='cuda:0')
+[Epoch 4/12] [Batch 45/47] [Batch classify loss: 1.302771]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([256, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([256, 8, 512])
+projected_w_set_y.shape:  torch.Size([256, 8, 10])
+inputs.shape: torch.Size([256, 3, 32, 32])
+targets.shape: torch.Size([256, 10])
+batch_outputs[0]: tensor([-0.1832,  0.8092,  0.4615, -0.2431,  2.5202, -0.1329, -0.0520, -0.2549,
+        -0.6732, -1.4234], device='cuda:0', grad_fn=<SelectBackward>)
+alpha_1[0]: tensor(0.9808, device='cuda:0')
+alpha_2[0]: tensor(0.0192, device='cuda:0')
+w1_label_index[0]: tensor(4, device='cuda:0')
+w2_label_index[0]: tensor(9, device='cuda:0')
+[Epoch 4/12] [Batch 46/47] [Batch classify loss: 1.343297]
+gen_network_pkl:  /home/maggie/mmat/result/train/gen-train/stylegan2ada-svhn/20210718/00000/svhn-auto1-batch64-ada-bgc-noresume/network-snapshot-025000.pkl
+generate_model.cle_w_train.shape: torch.Size([72, 8, 512])
+generate_model.cle_y_train.shape: torch.Size([72, 8])
+running interpolate main()..............
+Interpolate projectors from projectors numpy ndarray !
+/home/maggie/mmat/genmodels/stylegan2ada.py:1168: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
+/home/maggie/mmat/genmodels/stylegan2ada.py:1169: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  projected_w_set_y = torch.tensor(self.projected_y_set).to(device)                                                       #   numpy数组里是int型label编号，要转成one hot
+projected_w_set_x.shape:  torch.Size([72, 8, 512])
+projected_w_set_y.shape:  torch.Size([72, 8, 10])
+Traceback (most recent call last):
+  File "tasklauncher-20210920.py", line 161, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1365, in rmt
+    print("inputs.shape:",inputs.shape)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1741, in mixup_data
+    
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 484, in generate
+    self._model.generate(self._exp_result_dir)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1848, in generate
+    if os.path.splitext(name)[-1] == '.npz':
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1859, in __generatemain__
+    label_npz_paths.append(f'{opt.projected_dataset}/{name}')
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1936, in __generatefromntensor__
+    truncation_psi = opt.truncation_psi,
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1961, in __imagegeneratefromwset__
+    return generated_x_set, generated_y_set
+  File "/home/maggie/mmat/utils/stylegan2ada/legacy.py", line 25, in load_network_pkl
+    data = _LegacyUnpickler(f).load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/storage.py", line 160, in _load_from_bytes
+    def _load_from_bytes(b):
+KeyboardInterrupt

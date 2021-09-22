@@ -38,39 +38,26 @@ if __name__ == '__main__':
 
 
     if args.mode == 'train':
-        #   train stylegan2ada  存到本地            //mmat/result/train/gen-train/...
         if args.train_mode =="gen-train":                                               
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
         
-        #   train resnet-34     存到本地            //mmat/result/train/cla-train/...
         elif args.train_mode =="cla-train":    
             target_classifier = MaggieClassifier(args)
             # cle_x_train, cle_y_train = target_classifier.settensor(cle_train_dataloader)
             # cle_x_test, cle_y_test = target_classifier.settensor(cle_test_dataloader)
 
             if args.pretrained_on_imagenet == False:
-                target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  #   自定义的训练法
-                # target_classifier.artmodel().fit(cle_x_train, cle_y_train, nb_epochs=args.epochs, batch_size=args.batch_size)                             #   art的训练法
+                target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  
             elif args.pretrained_on_imagenet == True:
                 target_classifier = target_classifier
 
-            # print("args.pretrained_on_imagenet:",args.pretrained_on_imagenet)
-            # target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  #   自定义的训练法
-                
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
-            
-            
-            # cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)                    #   测试一下evaluate和EvaluateClassifier计算结果是否一致
-            # print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
-            # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
 
     elif args.mode == 'attack':
         if args.cla_network_pkl != None:
-            print("local cla_network_pkl:",args.cla_network_pkl)
             learned_model = torch.load(args.cla_network_pkl)
-            
             attack_classifier = AdvAttack(args,learned_model)
             target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
@@ -87,46 +74,18 @@ if __name__ == '__main__':
             loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
             loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
             loss_txt.write(str(loss_txt_content))    
+        else:
+            raise Exception("There is no gen_network_pkl, please train generative model first!")    
                     
-        elif args.cla_network_pkl == None:
-            target_classifier = MaggieClassifier(args)
-            if args.pretrained_on_imagenet == False:
-                target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  #   自定义的训练法
-            
-            cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
-            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                                #   *accuary* on testset:75.6900%
-            print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
-            
-            # target_model = target_classifier.model()
-            
-            learned_model = target_classifier.model()
-            attack_classifier = AdvAttack(args,learned_model)
-            target_model  = attack_classifier.targetmodel()     #   attack_classifier.targetmodel()返回的是深拷贝后的learned_model
-
-            x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(cle_train_dataloader,cle_test_dataloader,exp_result_dir)          #     GPU Tensor
-            
-            adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
-            print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
-            print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
-
-            accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-            txt_content = f'{attack_classifier.getexpresultdir()}/standard-trained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-            accuracy_txt.write(str(txt_content))
-
-            loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-clean-{args.dataset}-testset.txt', "w")    
-            loss_txt_content = f'{attack_classifier.getexpresultdir()}/standard-trained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
-
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
             generate_model.projectmain(cle_train_dataloader) 
-            # generate_model.projectmain(cle_test_dataloader)     #同时修改stylegan2ada.py的line596
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
 
     elif args.mode == 'interpolate':
         if args.gen_network_pkl != None:     
-            # if args.projected_dataset != None:    
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
             generate_model.interpolatemain() 
         else:
@@ -136,6 +95,8 @@ if __name__ == '__main__':
         if args.gen_network_pkl != None:     
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)                        
             generate_model.generatemain()
+        else:
+            raise Exception("There is no gen_network_pkl, please train generative model first!")    
 
     elif args.mode == 'defense':        
         if args.defense_mode == "rmt":
@@ -157,9 +118,8 @@ if __name__ == '__main__':
 
             # clean pixel testset acc and loss
             cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
-            print(f'Accuary of rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            print(f'Loss of rmt trained classifier on clean testset:{cle_test_loss}' ) 
-
+            print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before mmat trained classifier clean testset:{cle_test_loss}' ) 
 
             # train
             target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
@@ -173,19 +133,9 @@ if __name__ == '__main__':
             # adversarial pixel testset acc and loss
             if args.whitebox == True:
                 # white box adversarial pixel testset acc and loss
-
-                print("target_classifier.model().parameters()[:10];",target_classifier.model().parameters()[:10])
                 attack_classifier = AdvAttack(args, target_classifier.model())
                 target_model = attack_classifier.targetmodel()
                 adv_x_test, adv_y_test = attack_classifier.generateadvfromtestsettensor(exp_result_dir, cle_x_test, cle_y_test)
-                print("target_classifier.model().parameters()[:10];",target_classifier.model().parameters()[:10])
-
-                print("attack_classifier.targetmodel().parameters()[:10];",attack_classifier.targetmodel().parameters()[:10])
-
-                print("attack_classifier.model().parameters()[:10];",attack_classifier.model().parameters()[:10])
-
-
-
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_model,adv_x_test,adv_y_test)
                 print(f'Accuary of rmt trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
@@ -196,19 +146,6 @@ if __name__ == '__main__':
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of rmt trained classifier on black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of rmt trained classifier on black-box adv testset:{adv_test_loss}' ) 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         else:
             learned_model = torch.load(args.cla_network_pkl)

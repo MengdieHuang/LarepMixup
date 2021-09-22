@@ -22,7 +22,6 @@ import math
 import random
 import copy
 from attacks.advattack import AdvAttack
-from clamodels import comparemodels
 
 from tensorboardX import SummaryWriter
 
@@ -223,11 +222,9 @@ class MaggieClassifier:
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','alexnet','inception_v3']    # 少 alexnet
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','inception_v3','resnet18','googlenet']
         torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet'] # 少 vgg19
-        comparemodel_dict = ['preactresnet18','preactresnet34','preactresnet50','wideresnet2810']
+
         if model_name in torchvisionmodel_dict:
             model = self.__gettorchvisionmodel__()      #   加载torchvision库model
-        elif model_name in comparemodel_dict:
-            model = self.__getcomparemodel__()
         else:   # alexnet, vgg19
             if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
                 model = self.__getlocalmodel__()
@@ -287,20 +284,6 @@ class MaggieClassifier:
 
         # raise error
         return torchvisionmodel
-
-
-    def __getcomparemodel__(self):
-        print('使用文献对比模型')
-        model_name = self._args.cla_model
-        classes_number = self._args.n_classes
-        pretrain_flag = self._args.pretrained_on_imagenet
-        img_channels = self._args.channels
-        print("model_name:",model_name)
-        print("classes_number:",classes_number)
-        print("pretrain_flag:",pretrain_flag)   #  pretrain_flag: False
-        print("img_channels:",img_channels)   #  pretrain_flag: False
-
-        net = comparemodels.__dict__[model_name]()
 
     def __getlocalmodel__(self)->"CustomNet":
         print('使用自定义模型')
@@ -1330,6 +1313,11 @@ class MaggieClassifier:
         print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch__adv_test_accuracy * 100:.4f}%' ) 
         print(f'Loss of before mmat trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
 
+        """
+        Accuary of before rmt trained classifier on adversarial testset:40.0545%
+        Loss of before mmat trained classifier on adversarial testset:4.552259922027588
+        """
+
         trainset_len = len(self._train_tensorset_x)
         epoch_num = self._args.epochs                                               
         batch_size = self._args.batch_size
@@ -1338,8 +1326,8 @@ class MaggieClassifier:
         shuffle_index = np.arange(trainset_len)
         shuffle_index = torch.tensor(shuffle_index)
 
-        # print("epoch_num:",epoch_num)
-        # print("batch_num:",batch_num)
+        print("epoch_num:",epoch_num)
+        print("batch_num:",batch_num)
 
 
         for epoch_index in range (epoch_num):
@@ -1357,13 +1345,11 @@ class MaggieClassifier:
                 y_trainbatch = self._train_tensorset_y[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]                                                
 
                 inputs = x_trainbatch.cuda()
-                targets = y_trainbatch.cuda()       
-
-                #   改成GPU cuda
-                print("inputs:",inputs)
-                print("inputs.shape:",inputs.shape)                 #   inputs.shape: torch.Size([4, 8, 512])
-                print("targets:",targets)
-                print("targets.shape:",targets.shape)               #   targets.shape: torch.Size([4, 8, 10])
+                targets = y_trainbatch.cuda()
+                # print("inputs:",inputs)
+                # print("inputs.shape:",inputs.shape)                 #   inputs.shape: torch.Size([4, 8, 512])
+                # print("targets:",targets)
+                # print("targets.shape:",targets.shape)               #   targets.shape: torch.Size([4, 8, 10])
 
                 # mixup representation                                #     [4,8,512]
                 inputs, targets = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets)      #   混合样本 two-hot标签

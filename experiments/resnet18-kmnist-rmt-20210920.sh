@@ -1,0 +1,5 @@
+source ~/.bashrc
+source /home/xieyi/anaconda3/bin/activate mmat
+
+# resnet18 cifar10 rmt 20210920000 only mix
+CUDA_VISIBLE_DEVICES=0 python -u tasklauncher-20210920.py run --mode defense --defense_mode rmt --attack_mode fgsm --attack_eps 0.3 --whitebox True --exp_name resnet18-kmnist --cla_model resnet18 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/resnet18-kmnist/20210912/00000-testacc-0.9732/train-kmnist-dataset/standard-trained-classifier-resnet18-on-clean-kmnist-epoch-0018.pkl --gen_model stylegan2ada --gen_network_pkl /home/maggie/mmat/result/train/gen-train/stylegan2ada-kmnist/20210829/00000/kmnist-auto1-batch64-ada-bgc-noresume/network-snapshot-020240.pkl --dataset kmnist --projected_dataset /home/maggie/mmat/result/project/stylegan2ada-kmnist/20210913/00000/project-kmnist-trainset --adv_dataset /home/maggie/mmat/result/attack/fgsm/resnet18-kmnist/20210917/00000-attackacc-0.78930/attack-kmnist-dataset/samples --batch_size 1024 --epochs 50 --lr 0.1 >> /home/maggie/mmat/log/resnet18-kmnist-rmt/resnet18-kmnist-rmt-20210920.log 2>&1

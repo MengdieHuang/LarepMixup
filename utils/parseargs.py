@@ -41,13 +41,17 @@ def parse_arguments():
                 'inception_v3-mnist','inception_v3-kmnist', 'inception_v3-cifar10','inception_v3-cifar100', 'inception_v3-lsun','inception_v3-imagenet', 'inception_v3-imagenetmixed10','inception_v3-svhn','inception_v3-stl10',
                 'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenetmixed10','resnet34-svhn','resnet34-stl10',
                 'resnet18-mnist','resnet18-kmnist','resnet18-mnist','resnet18-cifar10','resnet18-cifar100','resnet18-lsun','resnet18-imagenet','resnet18-imagenetmixed10','resnet18-svhn','resnet18-stl10',
-                'googlenet-mnist','googlenet-kmnist','googlenet-mnist','googlenet-cifar10','googlenet-cifar100','googlenet-lsun','googlenet-imagenet','googlenet-imagenetmixed10','googlenet-svhn','googlenet-stl10'
+                'googlenet-mnist','googlenet-kmnist','googlenet-mnist','googlenet-cifar10','googlenet-cifar100','googlenet-lsun','googlenet-imagenet','googlenet-imagenetmixed10','googlenet-svhn','googlenet-stl10',
+                'preactresnet18-kmnist', 'preactresnet18-svhn', 'preactresnet18-cifar10',
+                'preactresnet34-kmnist', 'preactresnet34-svhn', 'preactresnet34-cifar10',
+                'preactresnet50-kmnist', 'preactresnet50-svhn', 'preactresnet50-cifar10',
+                'wideresnet2810-kmnist', 'wideresnet2810-svhn', 'wideresnet2810-cifar10'
 
             ]  
 
         )
         parser_object.add_argument('--cla_model',type=str,default=None,
-            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet']
+            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet2810']
         )
 
         parser_object.add_argument('--gen_model',type=str,default=None,
@@ -151,7 +155,7 @@ def parse_arguments():
 
         parser_object.add_argument('--mix_mode', help='mix mode of the projected w', type=str, default='basemixup', choices=['basemixup', 'maskmixup', 'adversarialmixup'])
         parser_object.add_argument('--mix_w_num', help='number of the projected w for mixup', type=int, default=2)
-        parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='uniformsampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2'])
+        parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='uniformsampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2', 'betasampler', 'dirichletsampler'])
         parser_object.add_argument('--projected_dataset', help = 'The projected w dataset path of target png images to interpolate', type = str, default = None)
         parser_object.add_argument('--mix_img_num', help='number of the mixed images', type=int, default=None)
 
