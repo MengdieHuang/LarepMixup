@@ -1172,14 +1172,32 @@ class MaggieStylegan2ada:
 
         if self._args.defense_mode == 'rmt':
 
-            projected_w_set_x = self.projected_w_set.to(device)                                                       #   numpy -> tensor
-            projected_w_set_y = self.projected_y_set.to(device)   
+            # print("D self.projected_w_set:",self.projected_w_set)           #   CPU tensor
+            # print("D self.projected_y_set:",self.projected_y_set)
+            # projected_w_set_x = self.projected_w_set.to(device)           #   CPU tensor --> GPPU tensor                                            #   numpy -> tensor
+            # projected_w_set_y = self.projected_y_set.to(device)   
+
+            projected_w_set_x = self.projected_w_set                                                       #   numpy -> tensor
+            projected_w_set_y = self.projected_y_set               
+            # print("E projected_w_set_x:",projected_w_set_x)                 #   CPU tensor --> CPU tensor
+            # print("E projected_w_set_y:",projected_w_set_y)         
+            
+            
+            
+            # raise error
+
 
             # print("projected_w_set_x.shape: ",self.projected_w_set.shape)                                                              
             # print("projected_w_set_y.shape: ",self.projected_y_set.shape)                                                              
             # raise error
-            projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)
+
+            # projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)
+            projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float()           #   CPU tensor 
+
             interpolated_w_set, interpolated_y_set = self.__getmixedbatchwy__(opt, projected_w_set_x, projected_w_set_y)
+            # print("F interpolated_w_set:",interpolated_w_set)                 #   CPU tensor    
+            # print("F interpolated_y_set:",interpolated_y_set)   
+            # raise error
 
         else:
             projected_w_set_x = torch.tensor(self.projected_w_set).to(device)                                                       #   numpy -> tensor
@@ -1190,8 +1208,8 @@ class MaggieStylegan2ada:
 
             projected_w_set_y = torch.nn.functional.one_hot(projected_w_set_y, opt.n_classes).float().to(device)                    #   y成了gpu tensor
             interpolated_w_set, interpolated_y_set = self.__getmixededwy__(opt, projected_w_set_x,projected_w_set_y,exp_result_dir)
-
-        return interpolated_w_set, interpolated_y_set
+            
+        return interpolated_w_set, interpolated_y_set   
 
     def __getmixedbatchwy__(self, opt, projected_w_set_x, projected_w_set_y):
 
@@ -1204,11 +1222,13 @@ class MaggieStylegan2ada:
         if opt.mix_w_num == 2:
             batch_size = projected_w_set_x.size()[0]
 
-            use_cuda = torch.cuda.is_available()
-            if use_cuda:
-                shuffle_index = torch.randperm(batch_size).cuda()   #表示从batch中随机选一个待混合的样本x[index, :]
-            else:
-                shuffle_index = torch.randperm(batch_size)
+            # use_cuda = torch.cuda.is_available()
+            # if use_cuda:
+            #     shuffle_index = torch.randperm(batch_size).cuda()   #表示从batch中随机选一个待混合的样本x[index, :]
+            # else:
+            #     shuffle_index = torch.randperm(batch_size)
+            shuffle_index = torch.randperm(batch_size)
+
 
             # print("shuffle_index:",shuffle_index)
             # print("shuffle_index.size():",shuffle_index.size())
@@ -1223,10 +1243,10 @@ class MaggieStylegan2ada:
             # print("shuffled_projected_w_set_y.shape: ",shuffled_projected_w_set_y.shape) 
 
             
-            projected_w_set_x = projected_w_set_x[:, 0, :].squeeze(1)                           #   [4,1,512] --> [4,512]
-            shuffled_projected_w_set_x = shuffled_projected_w_set_x[:, 0, :].squeeze(1)         #   [4,1,512] --> [4,512]
+            projected_w_set_x = projected_w_set_x[:, 0, :].squeeze(1)                           #   [4,8,512] --> [4,1,512] --> [4,512]
+            shuffled_projected_w_set_x = shuffled_projected_w_set_x[:, 0, :].squeeze(1)         #   [4,8,512] --> [4,1,512] --> [4,512]
 
-            projected_w_set_y = projected_w_set_y[:, 0, :].squeeze(1)                           #   [4,1,10] --> [4,10]
+            projected_w_set_y = projected_w_set_y[:, 0, :].squeeze(1)                           #   [4,8,10] --> [4,1,10] --> [4,10]
             shuffled_projected_w_set_y = shuffled_projected_w_set_y[:, 0, :].squeeze(1)
 
             # print("projected_w_set_x.shape: ",projected_w_set_x.shape)                          #   projected_w_set_x.shape:  torch.Size([4, 512])
@@ -1982,31 +2002,126 @@ class MaggieStylegan2ada:
         self.interpolated_w_set.shape: torch.Size([4, 8, 512])
         self.interpolated_y_set.shape: torch.Size([4, 8, 10])
         """
+
+        # print("self.interpolated_w_set:",self.interpolated_w_set)       #   CPU tensor
+
         interpolated_w_set = self.interpolated_w_set
         interpolated_y_set = self.interpolated_y_set
-        #----------maggie add----------
-        generated_x_set = []
-        generated_y_set = []
-        #------------------------------
 
-        for i in range(len(interpolated_w_set)):
-            generated_x, generated_y = self.__imagegeneratefromwset__(
-                ctx = click.Context, #  没调试好
-                network_pkl = opt.gen_network_pkl,
-                seeds = [500, 501, 502, 503, 504, 505],
-                truncation_psi = opt.truncation_psi,
-                noise_mode = opt.noise_mode,
-                outdir = exp_result_dir,
-                class_idx = opt.class_idx,
-                interpolated_w = interpolated_w_set[i],
-                interpolated_y = interpolated_y_set[i],
-                interpolated_w_index = i
-            )
+        # interpolated_w_set = self.interpolated_w_set.cuda()
+        # interpolated_y_set = self.interpolated_y_set.cuda()
 
-            generated_x_set.append(generated_x)
-            generated_y_set.append(generated_y)
+        # print("interpolated_w_set:",interpolated_w_set)                 #   GPU tensor 一个batch的值
+        # raise error
+
+
+        if self._args.defense_mode == 'rmt':
+
+            generated_x_set, generated_y_set = self.__getgeneratedbatchxy__(            #   按batch整体生成样本
+                    ctx = click.Context, #  没调试好
+                    network_pkl = opt.gen_network_pkl,
+                    seeds = [500, 501, 502, 503, 504, 505],
+                    truncation_psi = opt.truncation_psi,
+                    noise_mode = opt.noise_mode,
+                    outdir = exp_result_dir,
+                    class_idx = opt.class_idx,
+                    interpolated_w = interpolated_w_set,
+                    interpolated_y = interpolated_y_set,
+                )
+
+        else:
+                
+            #----------maggie add----------
+            generated_x_set = []
+            generated_y_set = []
+            #------------------------------
+
+            for i in range(len(interpolated_w_set)):
+                generated_x, generated_y = self.__imagegeneratefromwset__(          #   逐个生成样本
+                    ctx = click.Context, #  没调试好
+                    network_pkl = opt.gen_network_pkl,
+                    seeds = [500, 501, 502, 503, 504, 505],
+                    truncation_psi = opt.truncation_psi,
+                    noise_mode = opt.noise_mode,
+                    outdir = exp_result_dir,
+                    class_idx = opt.class_idx,
+                    interpolated_w = interpolated_w_set[i],
+                    interpolated_y = interpolated_y_set[i],
+                    interpolated_w_index = i
+                )
+
+                generated_x_set.append(generated_x)
+                generated_y_set.append(generated_y)
 
         return generated_x_set, generated_y_set
+
+    def __getgeneratedbatchxy__(self,                                 
+        ctx: click.Context,
+        network_pkl: str,
+        seeds: Optional[List[int]],
+        truncation_psi: float,
+        noise_mode: str,
+        outdir: str,
+        class_idx: Optional[int],
+        interpolated_w: torch.tensor,
+        interpolated_y: torch.tensor     
+    ):
+        # print(f"generating batch images")
+
+        device = torch.device('cuda')
+        with dnnlib.util.open_url(network_pkl) as f:
+            G = legacy.load_network_pkl(f)['G_ema'].to(device)                                                                  #   type: ignore
+
+        if interpolated_w is not None:
+            
+            ws = interpolated_w                                                #   ws.shape: torch.Size([256, 8, 512]) ws里本来可能有一个batch的w,现在只有1个w
+            # print("ws:",ws)
+            # print("ws.shape: ",ws.shape)                                                    #   ws.shape:  torch.Size([256, 8, 512])      #   ws.shape:  torch.Size([1, 8, 512])
+
+            mixed_label = interpolated_y    
+            # print("flag A mixed_label:",mixed_label)                                                              #   mixed_label.shape: torch.Size([256, 8, 10])
+            # print("flag A mixed_label.shape:",mixed_label.shape)                                                              #   mixed_label.shape: torch.Size([256, 8, 10])
+            
+            mixed_label = mixed_label[:,0,:].squeeze(1)
+            # print("mixed_label:",mixed_label)                                                                       #   mixed_label.shape: torch.Size([256, 10])
+            # print("mixed_label.shape:",mixed_label.shape)                                                                       #   mixed_label.shape: torch.Size([256, 10])
+
+            assert ws.shape[1:] == (G.num_ws, G.w_dim)                                                                          #   断言的功能是，在满足条件时，程序go on，在不满足条件时，报错
+            
+            generated_x = []
+            for _, w in enumerate(ws):
+
+                # print("w:",w) # cpu tensor
+                w = w.cuda()
+                # print("w:",w) #    gpu tensor
+
+                img = G.synthesis(w.unsqueeze(0), noise_mode=noise_mode).cpu()
+
+                # print("flag 1: generated img: ",img)                                                                          #   normalized [0,1] float
+                # print("flag 1: generated img.type: ",type(img))                                                               #   torch.tensor
+                # print("flag 1: generated img.shape: ",img.shape)                                     #   flag 1: generated img.shape:  torch.Size([1, 1, 32, 32])cifar10数据集
+                #   flag 1: generated img.shape:  torch.Size([1, 3, 32, 32])
+                # raise error
+                #-----------------maggie add-----------
+                # generated_x = img[-1]            
+                # print("generated_x[0]: ",generated_x[0])                                                                        #   generated_x[0]:  tensor([[ 0.0170, -0.2638, -0.4614,  ...,  0.6033,  0.4530, -0.0071]
+                # print("generated_x.type: ",type(generated_x))                                                                   #   generated_x.type:  <class 'torch.Tensor'>
+                # print("generated_x.shape: ",generated_x.shape)                                        #   generated_x.shape:  torch.Size([1, 32, 32]) generated_x.shape:  torch.Size([256, 3, 32, 32])
+                generated_x.append(img)
+            
+            
+            generated_x = torch.cat(generated_x,dim=0)
+            generated_y = mixed_label
+            
+            # print("generated_x:",generated_x)                   #   cpu tensor
+            # print("generated_x.shape:",generated_x.shape)       #   generated_x.shape: torch.Size([4, 3, 32, 32])
+            # print("generated_y:",generated_y)                   #   cpu tensor
+            # print("generated_y.shape:",generated_y.shape)       #   generated_y.shape: torch.Size([4, 10])
+            # raise error
+            #------------maggie add----------------
+            return generated_x, generated_y
+            #--------------------------------------
+
 
     def __imagegeneratefromwset__(self,                                 #   和self.__generate_images__()的区别在于输入不是w的文件路径而是w的张量
         ctx: click.Context,
@@ -2030,7 +2145,7 @@ class MaggieStylegan2ada:
         # Synthesize the result of a W projection.                                #   投影合成,如果投影向量不为空，就根据投影向量生成样本；否则根据随机数种子生成样本
         if interpolated_w is not None:
             
-            ws = interpolated_w.unsqueeze(0)                                                                                    #   ws.shape: torch.Size([1, 8, 512]) ws里本来可能有一个batch的w,现在只有1个w
+            ws = interpolated_w.unsqueeze(0)                                             #   ws.shape: torch.Size([1, 8, 512]) ws里本来可能有一个batch的w,现在只有1个w
             # print("ws:",ws)
             # print("ws.shape: ",ws.shape)    #   ws.shape:  torch.Size([1, 8, 512])      #   ws.shape:  torch.Size([1, 8, 512])
 
@@ -2054,39 +2169,10 @@ class MaggieStylegan2ada:
             
 
             if self._args.mix_w_num == 2:
-            
-                # #------------maggie------------------------------------ 
-                # ws = interpolated_w.unsqueeze(0)                                                                                    #   ws.shape: torch.Size([1, 8, 512]) ws里本来可能有一个batch的w,现在只有1个w
-                # # print("ws:",ws)
-                # # print("ws.shape: ",ws.shape)
 
-                # mixed_label = interpolated_y.unsqueeze(0)                                                   
-                # # print("flag A mixed_label.shape:",mixed_label.shape)                                                              #   mixed_label.shape: torch.Size([1, 8, 10])
-                # mixed_label = mixed_label[-1]
-                # # print("mixed_label:",mixed_label)
-                # # print("flag B mixed_label.shape:",mixed_label.shape)                                                              #   mixed_label.shape: torch.Size([8, 10])
-                # #------------------------------------------------------
-
-                # #------maggie add----------
-                # # print("计算混合label")
-                # mixed_label = mixed_label[-1].unsqueeze(0)                                                                          #   mixed_label.shape: torch.Size([1, 10]) [[1,0,0,...,0]
-                
-                # # print("mixed_label:",mixed_label)   
-                # # print("mixed_label.shape:",mixed_label.shape)                                                                       #   mixed_label.shape: torch.Size([1, 10])
-
-                # #   求第一大概率标签
-                # _, w1_label_index = torch.max(mixed_label, 1)       
-                # # print(f'w1_label_index = {int(w1_label_index)}')
-                
-                #   求第二大概率标签
                 modified_mixed_label = copy.deepcopy(mixed_label)
                 modified_mixed_label[0][w1_label_index] = 0                             
-                # print("modified_mixed_label:",modified_mixed_label)                                                                 #   [[0,0,0,...,0]] modified_mixed_label.shape=[1,10]
-                
-                # 当两个样本是同一类时,将最大置零后，会使得标签2被随机分配为label 0，例如[0,0,0,1,0,0]
-    
-                # print("torch.nonzero(modified_mixed_label[0]): ",torch.nonzero(modified_mixed_label[0]))                            #   torch.nonzero([0,0,0,...,0]) = tensor[] 其中size(0,1)
-                # print("torch.nonzero(modified_mixed_label[0]).size(0): ",torch.nonzero(modified_mixed_label[0]).size(0))            #   torch.size(0,1)
+
                 if torch.nonzero(modified_mixed_label[0]).size(0) == 0:
                     # print("混合label的最大值维度置零后，其他全为0！")
                     w2_label_index = w1_label_index
@@ -2099,11 +2185,6 @@ class MaggieStylegan2ada:
                 # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
                 classification = self.__labelnames__()
 
-                #--------------------------
-                # print("G.num_ws: ", G.num_ws)                                                                                     #   G.num_ws:  8          #   G.num_ws:  10
-                # print("G.w_dim: ", G.w_dim)                                                                                       #   G.w_dim:  512         #   G.w_dim:  512
-                # print("ws.shape[1:]:",ws.shape[1:])                                                                                 #   ws.shape[1:]: torch.Size([8, 512])
-                # # raise error
                 assert ws.shape[1:] == (G.num_ws, G.w_dim)                                                                          #   断言的功能是，在满足条件时，程序go on，在不满足条件时，报错
                 for _, w in enumerate(ws):
 

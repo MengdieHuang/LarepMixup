@@ -9,7 +9,7 @@ import torch
 import torch.utils.data
 
 def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.DataLoader,cla_model_name):
-    
+    classifier.eval()     #   eval mode
     #   计算准确率
     testset_total_num = len(test_dataloader.dataset)
     # print("flag B test set total_num:",testset_total_num)                                                       #   test set total_num: 10000 样本总数
@@ -37,7 +37,7 @@ def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.D
         #     print("flag B imgs[0][0]:",images[0][0])                                                                        #   归一化的 但和test_dataloader.dataset[0][0]不一样
         #     print("flag B labs[0]:",labs[0])                                                                             #   labs.shape: torch.Size([256])
 
-
+        
         with torch.no_grad():
 
             output = classifier(imgs)

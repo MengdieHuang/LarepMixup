@@ -86,8 +86,8 @@ class MixGenerate:
         if self._args.gen_network_pkl == None:           
             self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
             # print("gen_network_pkl: " , self._args.gen_network_pkl)
-        elif self._args.gen_network_pkl != None:
-            print("\n")
+        # elif self._args.gen_network_pkl != None:
+        #     print("\n")
 
     def __getpkl__(self):
         genmodel_dict = ['gan', 'acgan', 'aae', 'vae','stylegan2','stylegan2ada']        
@@ -477,29 +477,39 @@ class MixGenerate:
 
     def generate(self):
         if self._args.gen_model == "stylegan2ada":
-            
-            if self._args.mixed_dataset ==None:
-                
-                if self._args.generate_seeds is not None:
+
+            if self._args.defense_mode == 'rmt':
+
+                self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+                generated_x_train, generated_y_train = self._model.genxyset()                                                                    #   当采用整个batch采样时，返回的直接就是tensor,不需要torch.stack从list转tensor
+                # print('generated_x_train.shape:',generated_x_train.shape)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
+                # print('generated_y_train.shape:',generated_y_train.shape)                                  #   generated_y_train.shape: torch.Size([3, 10])
+                               
+                # raise error
+            else:
+
+                if self._args.mixed_dataset ==None:
+                    
+                    if self._args.generate_seeds is not None:
+                        self._model.generate(self._exp_result_dir)
+                    else:
+                        # print("maggie flag 20210920")
+                        self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #    都从这里进入
+
+                elif self._args.mixed_dataset !=None:
+                    print("有 mix dataset path")
                     self._model.generate(self._exp_result_dir)
-                else:
-                    # print("maggie flag 20210920")
-                    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train) #    都从这里进入
 
-            elif self._args.mixed_dataset !=None:
-                print("有 mix dataset path")
-                self._model.generate(self._exp_result_dir)
+                generated_x_train, generated_y_train = self._model.genxyset() 
+                
+                generated_x_train = torch.stack(generated_x_train)                                                                  #   torch.Tensor GPU Tensor           
 
-            generated_x_train, generated_y_train = self._model.genxyset() 
-            
-            generated_x_train = torch.stack(generated_x_train)                                                                  #   torch.Tensor GPU Tensor           
-
-            generated_y_train = torch.stack(generated_y_train)                                                                  #   torch.Tensor GPU Tensor   
-            # print('generated_x_train:',generated_x_train)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
-            # print('generated_y_train:',generated_y_train)                                  #   generated_y_train.shape: torch.Size([3, 10])
-            
-            # print('generated_x_train.shape:',generated_x_train.shape)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
-            # print('generated_y_train.shape:',generated_y_train.shape)                                  #   generated_y_train.shape: torch.Size([3, 10])
+                generated_y_train = torch.stack(generated_y_train)                                                                  #   torch.Tensor GPU Tensor   
+                # print('generated_x_train:',generated_x_train)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
+                # print('generated_y_train:',generated_y_train)                                  #   generated_y_train.shape: torch.Size([3, 10])
+                
+                # print('generated_x_train.shape:',generated_x_train.shape)                                  #   generated_x_train.shape: torch.Size([3, 3, 32, 32])
+                # print('generated_y_train.shape:',generated_y_train.shape)                                  #   generated_y_train.shape: torch.Size([3, 10])
 
         return generated_x_train, generated_y_train    
     

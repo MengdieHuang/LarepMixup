@@ -223,7 +223,7 @@ class MaggieClassifier:
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','alexnet','inception_v3']    # 少 alexnet
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','inception_v3','resnet18','googlenet']
         torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet'] # 少 vgg19
-        comparemodel_dict = ['preactresnet18','preactresnet34','preactresnet50','wideresnet2810']
+        comparemodel_dict = ['preactresnet18','preactresnet34','preactresnet50']    #   ,'wideresnet2810'
         if model_name in torchvisionmodel_dict:
             model = self.__gettorchvisionmodel__()      #   加载torchvision库model
         elif model_name in comparemodel_dict:
@@ -288,7 +288,6 @@ class MaggieClassifier:
         # raise error
         return torchvisionmodel
 
-
     def __getcomparemodel__(self):
         print('使用文献对比模型')
         model_name = self._args.cla_model
@@ -301,6 +300,14 @@ class MaggieClassifier:
         print("img_channels:",img_channels)   #  pretrain_flag: False
 
         net = comparemodels.__dict__[model_name]()
+
+        #   获取原始模型的最后一层信息
+        last_name = list(net._modules.keys())[-1]
+        last_module = net._modules[last_name]
+        print('last_name:',last_name)               #   last_name: fc3
+        print('last_module:',last_module)           #   last_module: Linear(in_features=256, out_features=10, bias=True)
+        # raise error            
+        return net
 
     def __getlocalmodel__(self)->"CustomNet":
         print('使用自定义模型')
@@ -428,6 +435,7 @@ class MaggieClassifier:
                 batch_labs = labels.cuda()
                 self._optimizer.zero_grad()
 
+                self._model.train()     #   train mode
                 if self._args.cla_model == 'inception_v3':
                     output, aux = self._model(batch_imgs)
                 elif self._args.cla_model == 'googlenet':
@@ -543,6 +551,7 @@ class MaggieClassifier:
         return artmodel
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):
+        classifier.eval()   #   eval mode
         if torch.cuda.is_available():
             classifier.cuda()             
         
@@ -551,24 +560,30 @@ class MaggieClassifier:
         batch_num = int( np.ceil( int(testset_total_num) / float(batch_size) ) )
         cla_model_name=self._args.cla_model
 
-        # print("x_set.shape:",x_set.shape)           #   x_set.shape: torch.Size([26032, 3, 32, 32])
-        # print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
-        # print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
-        # print("batch_num:",batch_num)                   #   batch_num: 813.5
-        # print("batch_size:",batch_size)       #  
-        # print("cla_model_name:",cla_model_name)       #   cla_model_name: alexnet
+        print("x_set.shape:",x_set.shape)           #   x_set.shape: torch.Size([26032, 3, 32, 32])
+        print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
+        print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
+        print("batch_num:",batch_num)                   #   batch_num: 
+        print("batch_size:",batch_size)       #  
+        # print("cla_model_name:",cla_model_name)       #   cla_model_name: 
 
         eva_loss = torch.nn.CrossEntropyLoss()
         epoch_correct_num = 0
         epoch_total_loss = 0
 
+        # batch_same_num = 0
+
         for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
-            images = x_set[batch_index * batch_size : (batch_index + 1) * batch_size]
-            labels = y_set[batch_index * batch_size : (batch_index + 1) * batch_size]                                                
+            right_index = min((batch_index + 1) * batch_size, testset_total_num)
+            # print("right_index:",right_index)
+            images = x_set[batch_index * batch_size : right_index]
+            labels = y_set[batch_index * batch_size : right_index]                                                
 
             imgs = images.cuda()
             labs = labels.cuda()
+            eva_loss = eva_loss.cuda()
 
+            
             with torch.no_grad():
 
                 if cla_model_name == 'inception_v3':
@@ -579,20 +594,25 @@ class MaggieClassifier:
                         output = classifier(imgs)
                     else:
                         output, aux1, aux2 = classifier(imgs)
-                else:
+                else:   # resnet alexent densenet 
                     output = classifier(imgs)         
                                 
                 loss = eva_loss(output,labs)
                 _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
                 
-                batch_same_num = (predicted_label_index == labs).sum().item()
+                assert len(predicted_label_index) == len(labs)
+                # batch_same_num = (predicted_label_index == labs).sum().item()
+                batch_same_num = predicted_label_index.cpu().eq(labs.cpu()).sum()
+
+                # same_lables += student_labels.cpu().eq(labels.cpu()).sum()
                 epoch_correct_num += batch_same_num
                 epoch_total_loss += loss
 
+        print("epoch_correct_num:",epoch_correct_num)
 
         test_accuracy = epoch_correct_num / testset_total_num
         test_loss = epoch_total_loss / batch_num                  
-
+        classifier.train()
         return test_accuracy, test_loss
 
     #   get clean set tensor format
@@ -649,7 +669,8 @@ class MaggieClassifier:
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)  
 
-        return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        # return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        return xset_tensor.cpu()
 
     def __getysettensor__(self,dataloader)->"Tensor":
 
@@ -727,7 +748,8 @@ class MaggieClassifier:
             # print("yset_tensor.shape:", yset_tensor.shape)
 
 
-        return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        # return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        return yset_tensor.cpu()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
 
     #   get adv set tensor format
     def getadvset(self,adv_dataset_path):
@@ -759,7 +781,8 @@ class MaggieClassifier:
         adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
         adv_yset_tensor = torch.stack(adv_yset_tensor)   
 
-        return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+        # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+        return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()     
 
     #   get representation set tensor format
     def getproset(self, pro_dataset_path):
@@ -817,7 +840,8 @@ class MaggieClassifier:
         # print("pro_yset_tensor.shape:",pro_yset_tensor.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8, 10])
         # print("pro_yset_tensor[0]:",pro_yset_tensor[0])                                         #   projected_w_set_y.shape: torch.Size([37, 8])  
 
-        return pro_wset_tensor.cuda(), pro_yset_tensor.cuda()     
+        # return pro_wset_tensor.cuda(), pro_yset_tensor.cuda()     
+        return pro_wset_tensor.cpu(), pro_yset_tensor.cpu()
 
     def adversarialtrain(self,
         args,
@@ -1281,6 +1305,7 @@ class MaggieClassifier:
 
         return loss
 
+    #   representation mixup training
     def rmt(self, args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs):
 
         print("cle_w_train.shape:",cle_w_train.shape)   
@@ -1356,14 +1381,20 @@ class MaggieClassifier:
                 x_trainbatch = self._train_tensorset_x[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]
                 y_trainbatch = self._train_tensorset_y[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]                                                
 
-                inputs = x_trainbatch.cuda()
-                targets = y_trainbatch.cuda()       
 
-                #   改成GPU cuda
-                print("inputs:",inputs)
-                print("inputs.shape:",inputs.shape)                 #   inputs.shape: torch.Size([4, 8, 512])
-                print("targets:",targets)
-                print("targets.shape:",targets.shape)               #   targets.shape: torch.Size([4, 8, 10])
+                # inputs = x_trainbatch.cuda()
+                # targets = y_trainbatch.cuda()       
+                inputs = x_trainbatch
+                targets = y_trainbatch    
+
+                # print("A inputs:",inputs)                              
+                # print("A targets:",targets)
+
+                # #   改成GPU cuda
+                # print("B inputs:",inputs)
+                # # print("inputs.shape:",inputs.shape)                 #   inputs.shape: torch.Size([4, 8, 512])
+                # print("B targets:",targets)
+                # # print("targets.shape:",targets.shape)               #   targets.shape: torch.Size([4, 8, 10])
 
                 # mixup representation                                #     [4,8,512]
                 inputs, targets = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets)      #   混合样本 two-hot标签
@@ -1377,9 +1408,15 @@ class MaggieClassifier:
                 # """
                 # generate mixed sampels                              #     [4, 3, 32, 32]
 
-
+                # raise error
                 # train
+
+                inputs = inputs.cuda()
+                targets = targets.cuda()   
+
                 self._optimizer.zero_grad()
+
+                self._model.train()     #   train mode
                 outputs = self._model(inputs)
                 
                #   计算损失
@@ -1708,11 +1745,13 @@ class MaggieClassifier:
 
                 elif self._args.cla_model == 'resnet18':
                     """decrease the learning rate at 100 and 150 epoch"""
-                    lr = self._args.lr
-                    if epoch_index >= 100:
-                        lr /= 10
-                    if epoch_index >= 150:
-                        lr /= 10
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                    # lr = self._args.lr
+                    # if epoch_index >= 100:
+                    #     lr /= 10
+                    # if epoch_index >= 150:
+                    #     lr /= 10
 
 
         for param_group in self._optimizer.param_groups:
@@ -1720,6 +1759,7 @@ class MaggieClassifier:
 
 
         print(f'{epoch_index}epoch learning rate:{lr}')             #   0epoch learning rate:0.01
+
 
 from genmodels.mixgenerate import MixGenerate
 
@@ -1740,9 +1780,16 @@ def mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets
 
         # generate_model.interpolate()
 
+        # print("C inputs:",inputs)
+        # print("C targets:",targets)
+
+
         mix_w_train, mix_y_train = generate_model.interpolate()                                                                           #   numpy
-        
-        generate_model.mix_w_train = mix_w_train
+
+        # print("G mix_w_train:",mix_w_train)         # CPU tensor
+        # print("G mix_y_train:",mix_y_train)        
+
+        generate_model.mix_w_train = mix_w_train    # CPU tensor
         generate_model.mix_y_train = mix_y_train
 
         mix_x_train, mix_y_train = generate_model.generate()
@@ -1751,7 +1798,11 @@ def mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets
         # print("mix_x_train:",mix_x_train)
         # print("mix_y_train:",mix_y_train)
 
+        # print("H mix_x_train:",mix_x_train)         #   CPU tensor
+        # print("H mix_y_train:",mix_y_train)
+
     else:
         raise Exception("There is no gen_network_pkl, please load generative model first!")   
+    
     
     return mix_x_train, mix_y_train

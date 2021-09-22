@@ -25,12 +25,12 @@ def BetaSampler(bs, f, is_2d, p=None, beta_alpha=1):  # 有四种采样函数, p
     alphas = np.asarray(alphas).reshape(shp)
     alphas = torch.from_numpy(alphas).float()
     
-    # print(alphas.shape)    
-    use_cuda = True if torch.cuda.is_available() else False
-    if use_cuda:
-        alphas = alphas.cuda()
-    # raise Exception("error")
-    return alphas
+    # # print(alphas.shape)    
+    # use_cuda = True if torch.cuda.is_available() else False
+    # if use_cuda:
+    #     alphas = alphas.cuda()
+    # # raise Exception("error")
+    return alphas       #   cpu tensor
 
 def UniformSampler(bs, f, is_2d, p=None):  # 有四种采样函数, p是伯努利参数，当p=None时，指示p从均匀分布U(0,1)中采样
     """Mixup sampling function
@@ -55,11 +55,12 @@ def UniformSampler(bs, f, is_2d, p=None):  # 有四种采样函数, p是伯努�
     alphas = np.asarray(alphas).reshape(shp)
     alphas = torch.from_numpy(alphas).float()
     
-    # print(alphas.shape)    
-    use_cuda = True if torch.cuda.is_available() else False
-    if use_cuda:
-        alphas = alphas.cuda()
-    # raise Exception("error")
+    # # print(alphas.shape)    
+    # use_cuda = True if torch.cuda.is_available() else False
+    # if use_cuda:
+    #     alphas = alphas.cuda()
+    # # raise Exception("error")
+
     return alphas
 
 def UniformSampler2(bs, f, is_2d, p=None):

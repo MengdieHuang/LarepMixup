@@ -108,18 +108,22 @@ if __name__ == '__main__':
             # data
             # clean representation trainset
             cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
-
+            # print("cle_w_train[:4],",cle_w_train[:4])
             # clean pixel testset
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
+            # print("cle_x_test[:4],",cle_x_test[:4])
 
             # adversarial pixel testset
             adv_testset_path = os.path.join(args.adv_dataset,'test')
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
+            # print("adv_x_test[:4],",adv_x_test[:4])
 
             # clean pixel testset acc and loss
-            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
+            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   bug
             print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of before mmat trained classifier clean testset:{cle_test_loss}' ) 
+            # print("cle_x_test[:4],",cle_x_test[:4])
+            # raise error
 
             # train
             target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
