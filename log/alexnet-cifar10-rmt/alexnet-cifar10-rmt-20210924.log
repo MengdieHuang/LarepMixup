@@ -1,0 +1,415 @@
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 23, in <module>
+    from ._utils_internal import get_file_path, prepare_multiprocessing_environment, \
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils_internal.py", line 3, in <module>
+    import inspect
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/inspect.py", line 35, in <module>
+    import dis
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/dis.py", line 185, in <module>
+    "opname opcode arg argval argrepr offset starts_line is_jump_target")
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/collections/__init__.py", line 394, in namedtuple
+    s = f'def __new__(_cls, {arg_list}): return _tuple_new(_cls, ({arg_list}))'
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 6, in <module>
+    from clamodels.classifier import MaggieClassifier
+  File "/home/maggie/mmat/clamodels/classifier.py", line 15, in <module>
+    from utils.saveplt import SaveAccuracyCurve
+  File "/home/maggie/mmat/utils/saveplt.py", line 8, in <module>
+    import matplotlib.pyplot as plt
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/pyplot.py", line 2320, in <module>
+    switch_backend(rcParams["backend"])
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/__init__.py", line 703, in __getitem__
+    plt.switch_backend(rcsetup._auto_backend_sentinel)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/pyplot.py", line 240, in switch_backend
+    switch_backend(candidate)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/pyplot.py", line 260, in switch_backend
+    class backend_mod(matplotlib.backend_bases._Backend):
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/pyplot.py", line 261, in backend_mod
+    locals().update(vars(importlib.import_module(backend_name)))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/matplotlib/backends/backend_qt5agg.py", line 11, in <module>
+    from .backend_qt5 import (
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 724, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 857, in get_code
+  File "<frozen importlib._bootstrap_external>", line 525, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210924
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/alexnet-cifar10/20210924/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+epoch_correct_num: tensor(8492)
+Accuary of before rmt trained classifier on clean testset:84.9200%
+Loss of before mmat trained classifier clean testset:0.5403244495391846
+cle_w_train.shape: torch.Size([20248, 8, 512])
+cle_y_train.shape: torch.Size([20248, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+epoch_correct_num: tensor(708)
+Accuary of before rmt trained classifier on adversarial testset:7.0800%
+Loss of before mmat trained classifier on adversarial testset:6.163607120513916
+w_trainset_len: 20248
+batch_size: 256
+w_batch_num: 80
+
+
+0epoch learning rate:0.1
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/50] [Batch 1/196] [Batch classify loss: 2.042950]
+right_index: 512
+[Epoch 1/50] [Batch 2/196] [Batch classify loss: 5.002150]
+right_index: 768
+[Epoch 1/50] [Batch 3/196] [Batch classify loss: 5.191812]
+right_index: 1024
+[Epoch 1/50] [Batch 4/196] [Batch classify loss: 4.586816]
+right_index: 1280
+[Epoch 1/50] [Batch 5/196] [Batch classify loss: 3.655786]
+right_index: 1536
+[Epoch 1/50] [Batch 6/196] [Batch classify loss: 3.323615]
+right_index: 1792
+[Epoch 1/50] [Batch 7/196] [Batch classify loss: 3.457810]
+right_index: 2048
+[Epoch 1/50] [Batch 8/196] [Batch classify loss: 3.396535]
+right_index: 2304
+[Epoch 1/50] [Batch 9/196] [Batch classify loss: 2.840195]
+right_index: 2560
+[Epoch 1/50] [Batch 10/196] [Batch classify loss: 3.051093]
+right_index: 2816
+[Epoch 1/50] [Batch 11/196] [Batch classify loss: 2.871060]
+right_index: 3072
+[Epoch 1/50] [Batch 12/196] [Batch classify loss: 2.615489]
+right_index: 3328
+[Epoch 1/50] [Batch 13/196] [Batch classify loss: 2.845787]
+right_index: 3584
+[Epoch 1/50] [Batch 14/196] [Batch classify loss: 2.523771]
+right_index: 3840
+[Epoch 1/50] [Batch 15/196] [Batch classify loss: 2.629275]
+right_index: 4096
+[Epoch 1/50] [Batch 16/196] [Batch classify loss: 2.433242]
+right_index: 4352
+[Epoch 1/50] [Batch 17/196] [Batch classify loss: 2.453203]
+right_index: 4608
+[Epoch 1/50] [Batch 18/196] [Batch classify loss: 2.479472]
+right_index: 4864
+[Epoch 1/50] [Batch 19/196] [Batch classify loss: 2.420666]
+right_index: 5120
+[Epoch 1/50] [Batch 20/196] [Batch classify loss: 2.229164]
+right_index: 5376
+[Epoch 1/50] [Batch 21/196] [Batch classify loss: 2.314037]
+right_index: 5632
+[Epoch 1/50] [Batch 22/196] [Batch classify loss: 2.316439]
+right_index: 5888
+[Epoch 1/50] [Batch 23/196] [Batch classify loss: 2.412442]
+right_index: 6144
+[Epoch 1/50] [Batch 24/196] [Batch classify loss: 2.305933]
+right_index: 6400
+[Epoch 1/50] [Batch 25/196] [Batch classify loss: 2.342691]
+right_index: 6656
+[Epoch 1/50] [Batch 26/196] [Batch classify loss: 2.256178]
+right_index: 6912
+[Epoch 1/50] [Batch 27/196] [Batch classify loss: 2.280251]
+right_index: 7168
+[Epoch 1/50] [Batch 28/196] [Batch classify loss: 2.249009]
+right_index: 7424
+[Epoch 1/50] [Batch 29/196] [Batch classify loss: 2.323907]
+right_index: 7680
+[Epoch 1/50] [Batch 30/196] [Batch classify loss: 2.263885]
+right_index: 7936
+[Epoch 1/50] [Batch 31/196] [Batch classify loss: 2.319292]
+right_index: 8192
+[Epoch 1/50] [Batch 32/196] [Batch classify loss: 2.316391]
+right_index: 8448
+[Epoch 1/50] [Batch 33/196] [Batch classify loss: 2.320307]
+right_index: 8704
+[Epoch 1/50] [Batch 34/196] [Batch classify loss: 2.259560]
+right_index: 8960
+[Epoch 1/50] [Batch 35/196] [Batch classify loss: 2.328304]
+right_index: 9216
+[Epoch 1/50] [Batch 36/196] [Batch classify loss: 2.272760]
+right_index: 9472
+[Epoch 1/50] [Batch 37/196] [Batch classify loss: 2.310545]
+right_index: 9728
+[Epoch 1/50] [Batch 38/196] [Batch classify loss: 2.252067]
+right_index: 9984
+[Epoch 1/50] [Batch 39/196] [Batch classify loss: 2.312044]
+right_index: 10240
+[Epoch 1/50] [Batch 40/196] [Batch classify loss: 2.287123]
+right_index: 10496
+[Epoch 1/50] [Batch 41/196] [Batch classify loss: 2.216807]
+right_index: 10752
+[Epoch 1/50] [Batch 42/196] [Batch classify loss: 2.227476]
+right_index: 11008
+[Epoch 1/50] [Batch 43/196] [Batch classify loss: 2.324080]
+right_index: 11264
+[Epoch 1/50] [Batch 44/196] [Batch classify loss: 2.236931]
+right_index: 11520
+[Epoch 1/50] [Batch 45/196] [Batch classify loss: 2.322021]
+right_index: 11776
+[Epoch 1/50] [Batch 46/196] [Batch classify loss: 2.242453]
+right_index: 12032
+[Epoch 1/50] [Batch 47/196] [Batch classify loss: 2.273229]
+right_index: 12288
+[Epoch 1/50] [Batch 48/196] [Batch classify loss: 2.247140]
+right_index: 12544
+[Epoch 1/50] [Batch 49/196] [Batch classify loss: 2.243303]
+right_index: 12800
+[Epoch 1/50] [Batch 50/196] [Batch classify loss: 2.221534]
+right_index: 13056
+[Epoch 1/50] [Batch 51/196] [Batch classify loss: 2.290189]
+right_index: 13312
+[Epoch 1/50] [Batch 52/196] [Batch classify loss: 2.241244]
+right_index: 13568
+[Epoch 1/50] [Batch 53/196] [Batch classify loss: 2.225151]
+right_index: 13824
+[Epoch 1/50] [Batch 54/196] [Batch classify loss: 2.232084]
+right_index: 14080
+[Epoch 1/50] [Batch 55/196] [Batch classify loss: 2.292064]
+right_index: 14336
+[Epoch 1/50] [Batch 56/196] [Batch classify loss: 2.282116]
+right_index: 14592
+[Epoch 1/50] [Batch 57/196] [Batch classify loss: 2.214702]
+right_index: 14848
+[Epoch 1/50] [Batch 58/196] [Batch classify loss: 2.222910]
+right_index: 15104
+[Epoch 1/50] [Batch 59/196] [Batch classify loss: 2.284875]
+right_index: 15360
+[Epoch 1/50] [Batch 60/196] [Batch classify loss: 2.212326]
+right_index: 15616
+[Epoch 1/50] [Batch 61/196] [Batch classify loss: 2.254951]
+right_index: 15872
+[Epoch 1/50] [Batch 62/196] [Batch classify loss: 2.256300]
+right_index: 16128
+[Epoch 1/50] [Batch 63/196] [Batch classify loss: 2.250907]
+right_index: 16384
+[Epoch 1/50] [Batch 64/196] [Batch classify loss: 2.281354]
+right_index: 16640
+[Epoch 1/50] [Batch 65/196] [Batch classify loss: 2.229067]
+right_index: 16896
+[Epoch 1/50] [Batch 66/196] [Batch classify loss: 2.263429]
+right_index: 17152
+[Epoch 1/50] [Batch 67/196] [Batch classify loss: 2.307921]
+right_index: 17408
+[Epoch 1/50] [Batch 68/196] [Batch classify loss: 2.261320]
+right_index: 17664
+[Epoch 1/50] [Batch 69/196] [Batch classify loss: 2.272596]
+right_index: 17920
+[Epoch 1/50] [Batch 70/196] [Batch classify loss: 2.274646]
+right_index: 18176
+[Epoch 1/50] [Batch 71/196] [Batch classify loss: 2.222662]
+right_index: 18432
+[Epoch 1/50] [Batch 72/196] [Batch classify loss: 2.223027]
+right_index: 18688
+[Epoch 1/50] [Batch 73/196] [Batch classify loss: 2.276727]
+right_index: 18944
+[Epoch 1/50] [Batch 74/196] [Batch classify loss: 2.203977]
+right_index: 19200
+[Epoch 1/50] [Batch 75/196] [Batch classify loss: 2.216926]
+right_index: 19456
+[Epoch 1/50] [Batch 76/196] [Batch classify loss: 2.223448]
+right_index: 19712
+[Epoch 1/50] [Batch 77/196] [Batch classify loss: 2.242977]
+right_index: 19968
+[Epoch 1/50] [Batch 78/196] [Batch classify loss: 2.182214]
+right_index: 20224
+[Epoch 1/50] [Batch 79/196] [Batch classify loss: 2.162570]
+right_index: 20248
+[Epoch 1/50] [Batch 80/196] [Batch classify loss: 2.116259]
+right_index: 256
+[Epoch 1/50] [Batch 81/196] [Batch classify loss: 2.178575]
+right_index: 512
+[Epoch 1/50] [Batch 82/196] [Batch classify loss: 2.164276]
+right_index: 768
+[Epoch 1/50] [Batch 83/196] [Batch classify loss: 2.132940]
+right_index: 1024
+[Epoch 1/50] [Batch 84/196] [Batch classify loss: 2.184941]
+right_index: 1280
+[Epoch 1/50] [Batch 85/196] [Batch classify loss: 2.108284]
+right_index: 1536
+[Epoch 1/50] [Batch 86/196] [Batch classify loss: 2.138531]
+right_index: 1792
+[Epoch 1/50] [Batch 87/196] [Batch classify loss: 2.151415]
+right_index: 2048
+[Epoch 1/50] [Batch 88/196] [Batch classify loss: 2.154921]
+right_index: 2304
+[Epoch 1/50] [Batch 89/196] [Batch classify loss: 2.144756]
+right_index: 2560
+[Epoch 1/50] [Batch 90/196] [Batch classify loss: 2.185981]
+right_index: 2816
+[Epoch 1/50] [Batch 91/196] [Batch classify loss: 2.110934]
+right_index: 3072
+[Epoch 1/50] [Batch 92/196] [Batch classify loss: 2.131799]
+right_index: 3328
+[Epoch 1/50] [Batch 93/196] [Batch classify loss: 2.178432]
+right_index: 3584
+[Epoch 1/50] [Batch 94/196] [Batch classify loss: 2.112555]
+right_index: 3840
+[Epoch 1/50] [Batch 95/196] [Batch classify loss: 2.103571]
+right_index: 4096
+[Epoch 1/50] [Batch 96/196] [Batch classify loss: 2.150718]
+right_index: 4352
+[Epoch 1/50] [Batch 97/196] [Batch classify loss: 2.179689]
+right_index: 4608
+[Epoch 1/50] [Batch 98/196] [Batch classify loss: 2.147165]
+right_index: 4864
+[Epoch 1/50] [Batch 99/196] [Batch classify loss: 2.168980]
+right_index: 5120
+[Epoch 1/50] [Batch 100/196] [Batch classify loss: 2.156898]
+right_index: 5376
+[Epoch 1/50] [Batch 101/196] [Batch classify loss: 2.142269]
+right_index: 5632
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 131, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1417, in rmt
+    mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, mix_img_batch, mix_lab_batch)      #   混合样本 two-hot标签
+  File "/home/maggie/mmat/clamodels/classifier.py", line 2007, in mixup_data
+    mix_x_train, mix_y_train = generate_model.generate()
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 483, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1935, in generate
+    generated_x_set, generated_y_set = self.__generatemain__(self._args, self._exp_result_dir, interpolated_w_set, interpolated_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1946, in __generatemain__
+    generated_x_set, generated_y_set = self.__generatefromntensor__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2029, in __generatefromntensor__
+    interpolated_y = interpolated_y_set,
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2098, in __getgeneratedbatchxy__
+    img = G.synthesis(w.unsqueeze(0), noise_mode=noise_mode).cpu()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 414, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 56, in modulated_conv2d
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 533, in __rdiv__
+    return self.reciprocal() * other
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 6, in <module>
+    from clamodels.classifier import MaggieClassifier
+  File "/home/maggie/mmat/clamodels/classifier.py", line 12, in <module>
+    import torchvision
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/__init__.py", line 7, in <module>
+    from torchvision import datasets
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/datasets/__init__.py", line 9, in <module>
+    from .fakedata import FakeData
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/datasets/fakedata.py", line 4, in <module>
+    from .. import transforms
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/__init__.py", line 1, in <module>
+    from .transforms import *
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 16, in <module>
+    from . import functional as F
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/functional.py", line 19, in <module>
+    from . import functional_tensor as F_t
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/functional_tensor.py", line 562, in <module>
+    def _cast_squeeze_in(img: Tensor, req_dtypes: List[torch.dtype]) -> Tuple[Tensor, bool, bool, torch.dtype]:
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/typing.py", line 751, in __getitem__
+    return self.__getitem_inner__(params)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/typing.py", line 251, in inner
+    return cached(*args, **kwds)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/typing.py", line 778, in __getitem_inner__
+    return self.copy_with(params)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/typing.py", line 640, in copy_with
+    return _GenericAlias(self.__origin__, params, name=self._name, inst=self._inst)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 23, in <module>
+    from ._utils_internal import get_file_path, prepare_multiprocessing_environment, \
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils_internal.py", line 3, in <module>
+    import inspect
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 725, in exec_module
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "tasklauncher-20210922.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 

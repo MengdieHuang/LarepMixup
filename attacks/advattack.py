@@ -219,9 +219,49 @@ class AdvAttack():
             # self.__saveadvpng__()
             return self._x_test_adv, self._y_test_adv         #   GPU tensor
 
+    def __labelnames__(self):
+        opt = self._args
+        # print("opt.dataset:",opt.dataset)
+        
+        label_names = []
+        
+        if opt.dataset == 'cifar10':
+            label_names = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
+            #   label_names = ['飞机'，'汽车'，'鸟'，'猫'，'鹿'，'狗'，'青蛙'，'马'，'船'，'卡车']
+
+        elif opt.dataset == 'cifar100': # = cle_train_dataloader.dataset.classes
+            label_names = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee', 'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus', 'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle', 'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch', 'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant', 'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house', 'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion', 'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle', 'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid', 'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree', 'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit', 'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal', 'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake', 'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper', 'table', 'tank', 'telephone', 'television', 'tiger', 'tractor', 'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale', 'willow_tree', 'wolf', 'woman', 'worm']
+        
+        elif opt.dataset =='svhn':
+            label_names = ['0','1','2','3','4','5','6','7','8','9']
+
+        elif opt.dataset =='kmnist':
+            label_names = ['0','1','2','3','4','5','6','7','8','9']
+        
+        elif opt.dataset =='stl10': # cle_train_dataloader.dataset.classes 标签序号是0-9, dataloader 已调整数字0的标签为0
+            label_names = ['airplane', 'bird', 'car', 'cat', 'deer', 'dog', 'horse', 'monkey', 'ship', 'truck']
+            #   label_names = ['飞机'，'鸟'，'汽车'，'猫'，'鹿'，'狗'，'马'，'猴子'，'船'，'卡车'] 
+        
+        elif opt.dataset =='imagenetmixed10':
+            label_names = ['dog,','bird','insect','monkey','car','feline','truck','fruit','fungus','boat']        
+            #   label_names = ['狗，'，'鸟'，'昆虫'，'猴子'，'汽车'，'猫'，'卡车'，'水果'，'真菌'，'船']
+        else:
+            raise Exception(" label name get wrong")            
+        
+        return label_names
+
+
     def __saveadvpng__(self):
 
-        classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
+        classification = self.__labelnames__() 
+        # print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+
+        # label_name = classification[int(laber_index)]
+        # print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
+
+
+
+        # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
         os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
         os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
@@ -239,8 +279,12 @@ class AdvAttack():
             save_cle_img = self._x_test[img_index]
             img_true_label = self._y_test_adv[img_index]
 
-            np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
-            # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
+            np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
+            
+            #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
+            # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
+            # 
+            # #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
 
             # load_adv_img = np.load(f'{self._exp_result_dir}/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz')['w']
             # load_cle_img = np.load(f'{self._exp_result_dir}/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz')['w']
@@ -297,6 +341,7 @@ class AdvAttack():
 
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):
+        classifier.eval()   #   eval mode        
         if torch.cuda.is_available():
             classifier.cuda()             
         
@@ -329,7 +374,8 @@ class AdvAttack():
                     output, aux = classifier(imgs)
                 
                 elif cla_model_name == 'googlenet':
-                    if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'svhn' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
+                    # if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'svhn' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
+                    if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
                         output = classifier(imgs)
                     else:
                         output, aux1, aux2 = classifier(imgs)
@@ -346,6 +392,7 @@ class AdvAttack():
 
         test_accuracy = epoch_correct_num / testset_total_num
         test_loss = epoch_total_loss / batch_num                  
+        classifier.train()
 
         return test_accuracy, test_loss
 

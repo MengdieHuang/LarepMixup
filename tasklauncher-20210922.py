@@ -111,6 +111,8 @@ if __name__ == '__main__':
             # print("cle_w_train[:4],",cle_w_train[:4])
             # clean pixel testset
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
+            # raw_x_train, raw_y_train = target_classifier.getrawset(cle_train_dataloader)
+
             # print("cle_x_test[:4],",cle_x_test[:4])
 
             # adversarial pixel testset
@@ -126,7 +128,7 @@ if __name__ == '__main__':
             # raise error
 
             # train
-            target_classifier.rmt(args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+            target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
 
             # test
             # clean pixel testset acc and loss
@@ -139,7 +141,7 @@ if __name__ == '__main__':
                 # white box adversarial pixel testset acc and loss
                 attack_classifier = AdvAttack(args, target_classifier.model())
                 target_model = attack_classifier.targetmodel()
-                adv_x_test, adv_y_test = attack_classifier.generateadvfromtestsettensor(exp_result_dir, cle_x_test, cle_y_test)
+                adv_x_test, adv_y_test = attack_classifier.generateadvfromtestsettensor(cle_x_test, cle_y_test)
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_model,adv_x_test,adv_y_test)
                 print(f'Accuary of rmt trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
