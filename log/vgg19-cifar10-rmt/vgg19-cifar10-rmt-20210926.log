@@ -1,0 +1,149 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210926
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/vgg19-cifar10/20210926/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+epoch_correct_num: tensor(8731)
+Accuary of before rmt trained classifier on clean testset:87.3100%
+Loss of before mmat trained classifier clean testset:0.5059452652931213
+cle_w_train.shape: torch.Size([23864, 8, 512])
+cle_y_train.shape: torch.Size([23864, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+epoch_correct_num: tensor(1454)
+Accuary of before rmt trained classifier on adversarial testset:14.5400%
+Loss of before mmat trained classifier on adversarial testset:5.765946865081787
+w_trainset_len: 23864
+batch_size: 256
+w_batch_num: 94
+
+
+0epoch learning rate:0.1
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/196] [Batch classify loss: 2.308613]
+right_index: 512
+[Epoch 1/40] [Batch 2/196] [Batch classify loss: 6.511813]
+right_index: 768
+[Epoch 1/40] [Batch 3/196] [Batch classify loss: 5.893100]
+right_index: 1024
+[Epoch 1/40] [Batch 4/196] [Batch classify loss: 5.735668]
+right_index: 1280
+[Epoch 1/40] [Batch 5/196] [Batch classify loss: 8.151216]
+right_index: 1536
+[Epoch 1/40] [Batch 6/196] [Batch classify loss: 5.425333]
+right_index: 1792
+[Epoch 1/40] [Batch 7/196] [Batch classify loss: 3.261521]
+right_index: 2048
+[Epoch 1/40] [Batch 8/196] [Batch classify loss: 5.037692]
+right_index: 2304
+[Epoch 1/40] [Batch 9/196] [Batch classify loss: 3.684981]
+right_index: 2560
+[Epoch 1/40] [Batch 10/196] [Batch classify loss: 3.271400]
+right_index: 2816
+[Epoch 1/40] [Batch 11/196] [Batch classify loss: 2.364921]
+right_index: 3072
+[Epoch 1/40] [Batch 12/196] [Batch classify loss: 2.301596]
+right_index: 3328
+[Epoch 1/40] [Batch 13/196] [Batch classify loss: 2.648844]
+right_index: 3584
+[Epoch 1/40] [Batch 14/196] [Batch classify loss: 3.026597]
+right_index: 3840
+[Epoch 1/40] [Batch 15/196] [Batch classify loss: 2.621623]
+right_index: 4096
+[Epoch 1/40] [Batch 16/196] [Batch classify loss: 3.562692]
+right_index: 4352
+[Epoch 1/40] [Batch 17/196] [Batch classify loss: 3.006392]
+right_index: 4608
+[Epoch 1/40] [Batch 18/196] [Batch classify loss: 2.576167]
+right_index: 4864
+[Epoch 1/40] [Batch 19/196] [Batch classify loss: 2.328036]
+right_index: 5120
+[Epoch 1/40] [Batch 20/196] [Batch classify loss: 2.393263]
+right_index: 5376
+[Epoch 1/40] [Batch 21/196] [Batch classify loss: 2.500185]
+right_index: 5632
+[Epoch 1/40] [Batch 22/196] [Batch classify loss: 2.737906]
+right_index: 5888
+[Epoch 1/40] [Batch 23/196] [Batch classify loss: 2.342240]
+right_index: 6144
+[Epoch 1/40] [Batch 24/196] [Batch classify loss: 2.652008]
+right_index: 6400
+[Epoch 1/40] [Batch 25/196] [Batch classify loss: 2.335766]
+right_index: 6656
+[Epoch 1/40] [Batch 26/196] [Batch classify loss: 2.328100]
+right_index: 6912
+[Epoch 1/40] [Batch 27/196] [Batch classify loss: 2.390145]
+right_index: 7168
+[Epoch 1/40] [Batch 28/196] [Batch classify loss: 2.379079]
+right_index: 7424
+[Epoch 1/40] [Batch 29/196] [Batch classify loss: 2.973434]
+right_index: 7680
+[Epoch 1/40] [Batch 30/196] [Batch classify loss: 2.455538]
+right_index: 7936
+[Epoch 1/40] [Batch 31/196] [Batch classify loss: 2.455436]
+right_index: 8192
+[Epoch 1/40] [Batch 32/196] [Batch classify loss: 2.461512]
+right_index: 8448
+[Epoch 1/40] [Batch 33/196] [Batch classify loss: 2.603398]
+right_index: 8704
+[Epoch 1/40] [Batch 34/196] [Batch classify loss: 2.653815]
+right_index: 8960
+[Epoch 1/40] [Batch 35/196] [Batch classify loss: 2.708097]
+right_index: 9216
+[Epoch 1/40] [Batch 36/196] [Batch classify loss: 2.453811]
+right_index: 9472
+[Epoch 1/40] [Batch 37/196] [Batch classify loss: 2.823847]
+right_index: 9728
