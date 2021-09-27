@@ -23990,3 +23990,77 @@ standard trained classifier *loss* on clean testset:1.1440584659576416
 ---------------------------------------
 
 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210926
+Experiment result save dir: /home/maggie/mmat/result/train/cla-train/preactresnet34-cifar10/20210926/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model = None
+使用文献对比模型
+model_name: preactresnet34
+classes_number: 10
+pretrain_flag: False
+img_channels: 3
+last_name: linear
+last_module: Linear(in_features=512, out_features=10, bias=True)
+self._trainset_len: 50000
+self._trainbatch_num: 196
+self._testset_len: 10000
+Traceback (most recent call last):
+  File "tasklauncher-20210924.py", line 50, in <module>
+    target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  
+  File "/home/maggie/mmat/clamodels/classifier.py", line 398, in train
+    self._model.cuda()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 491, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 491, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20210926
+Experiment result save dir: /home/maggie/mmat/result/train/cla-train/preactresnet34-cifar10/20210926/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model = None
+使用文献对比模型
+model_name: preactresnet34
+classes_number: 10
+pretrain_flag: False
+img_channels: 3
+last_name: linear
+last_module: Linear(in_features=512, out_features=10, bias=True)
+self._trainset_len: 50000
+self._trainbatch_num: 196
+self._testset_len: 10000
+Traceback (most recent call last):
+  File "tasklauncher-20210924.py", line 50, in <module>
+    target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  
+  File "/home/maggie/mmat/clamodels/classifier.py", line 398, in train
+    self._model.cuda()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 491, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 491, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+RuntimeError: CUDA error: out of memory
