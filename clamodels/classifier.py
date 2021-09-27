@@ -1456,7 +1456,15 @@ class MaggieClassifier:
                 
                 self._optimizer.zero_grad()
                 self._model.train()                 #   train mode
-                outputs = self._model(inputs)
+
+                # outputs = self._model(inputs)
+                if self._args.cla_model == 'inception_v3':
+                    outputs, aux = self._model(inputs)
+                elif self._args.cla_model == 'googlenet':
+                    outputs, aux1, aux2 = self._model(inputs)
+                else:
+                    outputs = self._model(inputs)
+
 
                #   计算损失
                 lossfunction = 'ce'
