@@ -1,0 +1,357 @@
+(null): can't open file 'tasklauncher-20211002.py': [Errno 2] No such file or directory
+python: can't open file 'tasklauncher-20211002.py': [Errno 2] No such file or directory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00005
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+ latent adversarial exampels
+generating testset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1379, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 411, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+AttributeError: 'AdvAttack' object has no attribute '_advgenmodel'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00006
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 185, in <module>
+    learned_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "tasklauncher-20211002.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 4, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211003
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211003/00007
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+epoch_correct_num: tensor(1471)
+Accuary of before rmt trained classifier on adversarial testset:14.7100%
+Loss of before mmat trained classifier on adversarial testset:6.937918186187744
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.1
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 211, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1449, in rmt
+    outputs = self._model(inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/comparemodels/resnet.py", line 158, in forward
+    out = self.layer1(out)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/comparemodels/resnet.py", line 65, in forward
+    out = F.relu(self.bn1(x))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 1206, in relu
+    result = torch.relu(input)
+RuntimeError: CUDA out of memory. Tried to allocate 128.00 MiB (GPU 0; 10.76 GiB total capacity; 882.73 MiB already allocated; 99.12 MiB free; 1.03 GiB reserved in total by PyTorch)

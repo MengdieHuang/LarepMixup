@@ -170,9 +170,9 @@ def parse_arguments():
         parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd'])
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
-        # parser_object.add_argument('--whitebox', help='white box attack or black box attack', type=bool,default= None)
-        parser_object.add_argument('--whitebox',action='store_true', help='white box attack', )
-        parser_object.add_argument('--blackbox',action='store_true', help='black box attack', )
+        parser_object.add_argument('--whitebox',action='store_true', help='white box attack')
+        parser_object.add_argument('--blackbox',action='store_true', help='black box attack')
+        parser_object.add_argument('--latentattack', action='store_true', help='latent adversarial attack')
 
         #-------------------------arguments for classifier defense-------------------------
         parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt'])

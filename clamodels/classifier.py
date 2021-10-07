@@ -1496,8 +1496,8 @@ class MaggieClassifier:
 
 
             # if (epoch_index+1) % 11== 0 and epoch_index > 0:
-            if epoch_adv_test_accuracy  >= 0.2:
-                torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
+            # if epoch_adv_test_accuracy  >= 0.2:
+            #     torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
 
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')

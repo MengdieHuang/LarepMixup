@@ -16,6 +16,8 @@ import copy
 import os
 from torch import LongTensor
 
+import advertorch.attacks
+
 Tensor = torch.Tensor
 
 class AdvAttack():
@@ -40,25 +42,53 @@ class AdvAttack():
     """
     def __init__(self, args, learned_model) -> None:                 
         print('initlize attack classifier')
+        if args.latentattack == False:    #  像素层对抗攻击
+            self._args = args
+            self._targetmodel = learned_model         
+            if self._args.whitebox == True:
+                self._model = copy.deepcopy(learned_model)
+            elif self._args.blackbox == True:
+                self._model = torchvision.models.resnet34(pretrained=True)
 
-        self._args = args
-        self._targetmodel = learned_model         
+            self._lossfunc = self.__getlossfunc__()
+            self._optimizer = self.__getoptimizer__()
 
-        if self._args.whitebox == True:
-            self._model = copy.deepcopy(learned_model)
-        else:
-            self._model = torchvision.models.resnet34(pretrained=True)
+            # initilize the art format attack model
+            self._artmodel = self.__getartmodel__()
 
-        self._lossfunc = self.__getlossfunc__()
-        self._optimizer = self.__getoptimizer__()
+            # initilize the generate model of the art format attack model
+            self._advgenmodel = self.__getadvgenmodel__()
 
-        # initilize the art format attack model
-        self._artmodel = self.__getartmodel__()
+        elif args.latentattack == True:
+            print(" latent adversarial exampels")
+            self._args = args
+            self._targetmodel = learned_model  
+            if self._args.whitebox == True:
+                self._model = copy.deepcopy(learned_model)
+            elif self._args.blackbox == True:
+                self._model = torchvision.models.resnet34(pretrained=True)
 
-        # initilize the generate model of the art format attack model
-        self._advgenmodel = self.__getadvgenmodel__()
-        
-    
+            self._attacker = self.__getadvertorchmodel__()
+
+    def __getadvertorchmodel__(self):   #潜层对抗攻击
+
+        if self._args.attack_mode =='pgd':
+            attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=0.02, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
+            
+        elif self._args.attack_mode =='fgsm':
+            attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+
+        elif self._args.attack_mode =='bim':
+            attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+
+        elif self._args.attack_mode =='cw':
+            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+
+        elif self._args.attack_mode =='deepfool':
+            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+
+        return attacker
+
     def __getlossfunc__(self):
         # torch.nn.L1Loss
         # torch.nn.KLDivLoss
@@ -99,6 +129,7 @@ class AdvAttack():
         return self._targetmodel
 
     def __getartmodel__(self) -> "PyTorchClassifier":
+
         if torch.cuda.is_available():
             self._lossfunc.cuda()
             self._model.cuda()      
@@ -119,6 +150,7 @@ class AdvAttack():
             input_shape=(self._args.channels, self._args.img_size, self._args.img_size),
             nb_classes=self._args.n_classes,
         )             
+
         return artmodel
 
     def __getadvgenmodel__(self) -> "art.attacks.evasion":
@@ -142,6 +174,7 @@ class AdvAttack():
             advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.3, targeted=False)   #默认eps是0.3
         elif self._args.attack_mode == None:
             raise Exception('please input the attack mode')           
+
         return advgenmodel
 
     def getexpresultdir(self):
@@ -219,6 +252,39 @@ class AdvAttack():
             # self.__saveadvpng__()
             return self._x_test_adv, self._y_test_adv         #   GPU tensor
 
+    def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test,gan_net):
+        self._exp_result_dir = exp_result_dir
+        self._exp_result_dir = os.path.join(self._exp_result_dir,f'attack-{self._args.dataset}-dataset')
+        os.makedirs(self._exp_result_dir,exist_ok=True)     
+        
+        print('generating latent adversarial examples...')
+        cle_w_test = cle_w_test.cuda()
+        cle_y_test = cle_y_test.cuda()  
+        adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)      
+        print("adv_w_test.shape:",adv_w_test.shape)
+        print("adv_w_test[:2]:",adv_w_test[:2])  
+
+        raise Exception("maggie flag")
+        adv_x_test = gan_net(adv_w_test)
+        print("adv_x_test.shape:",adv_x_test.shape)
+        print("adv_x_test[:2]:",adv_x_test[:2])  
+        raise Exception("maggie flag")
+
+        adv_y_test = cle_y_test
+        print("adv_y_test.shape:",adv_y_test.shape)
+        print("adv_y_test[:10]:",adv_y_test[:10]) 
+
+        self._x_test_adv = adv_x_test
+        self._y_test_adv = adv_y_test
+        print('finished generate latent adversarial examples !')
+
+        # numpy转tensor
+        self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
+        self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
+        self.__saveadvpng__()
+
+        return adv_x_test, adv_y_test
+
     def __labelnames__(self):
         opt = self._args
         # print("opt.dataset:",opt.dataset)
@@ -250,65 +316,56 @@ class AdvAttack():
         
         return label_names
 
-
     def __saveadvpng__(self):
 
-        classification = self.__labelnames__() 
-        # print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+        if self._args.latentattack == False:      # 像素层对抗样本
 
-        # label_name = classification[int(laber_index)]
-        # print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
+            classification = self.__labelnames__() 
+            # print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+            # label_name = classification[int(laber_index)]
+            # print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
+            # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
 
+            os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
+            os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-
-        # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
-        os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
-        os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
-
-        print(f"Saving {self._args.dataset} trainset  adversarial examples...")
-        for img_index, _ in enumerate(self._x_train_adv):
-            save_adv_img = self._x_train_adv[img_index]
-            save_cle_img = self._x_train[img_index]
-            img_true_label = self._y_train_adv[img_index]
+            print(f"Saving {self._args.dataset} trainset  adversarial examples...")
+            for img_index, _ in enumerate(self._x_train_adv):
+                save_adv_img = self._x_train_adv[img_index]
+                # save_cle_img = self._x_train[img_index]
+                img_true_label = self._y_train_adv[img_index]
+                
+                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
+        
+            print(f"Saving {self._args.dataset} testset  adversarial examples...")
             
-            np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
-       
-        print(f"Saving {self._args.dataset} testset  adversarial examples...")
-        for img_index, _ in enumerate(self._x_test_adv):
-            save_adv_img = self._x_test_adv[img_index]
-            save_cle_img = self._x_test[img_index]
-            img_true_label = self._y_test_adv[img_index]
+            for img_index, _ in enumerate(self._x_test_adv):
+                save_adv_img = self._x_test_adv[img_index]
+                # save_cle_img = self._x_test[img_index]
+                img_true_label = self._y_test_adv[img_index]
 
-            np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
-            
-            #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
-            # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
-            # 
-            # #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
+                np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
+                
+                #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
+                # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
+                # 
+                # #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
 
-            # load_adv_img = np.load(f'{self._exp_result_dir}/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz')['w']
-            # load_cle_img = np.load(f'{self._exp_result_dir}/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz')['w']
-            
-            # print("load_adv_img:",load_adv_img)                                                     
-            # print("load_adv_img.dtype:",load_adv_img.dtype)
-            # print("load_adv_img.shape:",load_adv_img.shape)
+                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
-            # print("load_cle_img:",load_cle_img)                                                     #   load_cle_img: [[[ 0.63375115  0.6531361   0.7694456  ...  0.22666796  0.01343373   -0.18041542]
-            # print("load_cle_img.dtype:",load_cle_img.dtype)                                         #   load_cle_img.dtype: float32
-            # print("load_cle_img.shape:",load_cle_img.shape)                                         #   load_cle_img.shape: (3, 32, 32)
+        elif self._args.latentattack == True: # 表征层对抗样本
+            classification = self.__labelnames__() 
+            os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # print("load_adv_img:",torch.tensor(load_adv_img))
-            # print("load_adv_img.dtype:",torch.tensor(load_adv_img).dtype)
-            # print("load_adv_img.shape:",torch.tensor(load_adv_img).shape)
+            print(f"Saving {self._args.dataset} testset  adversarial examples...")
+            for img_index, _ in enumerate(self._x_test_adv):
+                save_adv_img = self._x_test_adv[img_index]
+                # save_cle_img = self._x_test[img_index]
+                img_true_label = self._y_test_adv[img_index]
 
-            # print("load_cle_img:",torch.tensor(load_cle_img))                                       #   load_cle_img: tensor([[[ 0.6338,  0.6531,  0.7694,  ...,  0.2267,  0.0134, -0.1804],
-            # print("load_cle_img.dtype:",torch.tensor(load_cle_img).dtype)                           #   load_cle_img.dtype: torch.float32
-            # print("load_cle_img.shape:",torch.tensor(load_cle_img).shape)                           #   load_cle_img.shape: torch.Size([3, 32, 32])
-             
-            # raise Exception("maggie stop")
+                np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
 
-            # save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-            # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
         if exp_result_dir is not None:
