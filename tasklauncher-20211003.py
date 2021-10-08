@@ -84,8 +84,8 @@ if __name__ == '__main__':
                 learned_cla_model = torch.load(args.cla_network_pkl)
                 target_classifier = MaggieClassifier(args,learned_cla_model)
                 cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
-                # print("cle_w_test.shape:",cle_w_test.shape)
-                # print("cle_y_test.shape:",cle_y_test.shape)
+                print("cle_w_test.shape:",cle_w_test.shape)
+                print("cle_y_test.shape:",cle_y_test.shape)
                 """
                 cle_w_test.shape: torch.Size([25397, 8, 512])
                 cle_y_test.shape: torch.Size([25397, 8])                

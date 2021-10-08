@@ -1,0 +1,538 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
+  File "/home/maggie/mmat/attacks/advattack.py", line 270, in generatelatentadv
+    adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 64, in perturb
+    outputs = self.predict(xadv)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 406, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 64, in modulated_conv2d
+RuntimeError: CUDA out of memory. Tried to allocate 43.95 GiB (GPU 0; 10.76 GiB total capacity; 486.57 MiB already allocated; 2.51 GiB free; 608.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
+  File "/home/maggie/mmat/attacks/advattack.py", line 270, in generatelatentadv
+    adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 64, in perturb
+    outputs = self.predict(xadv)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 406, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 64, in modulated_conv2d
+RuntimeError: CUDA out of memory. Tried to allocate 43.95 GiB (GPU 0; 10.76 GiB total capacity; 486.57 MiB already allocated; 3.36 GiB free; 608.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
+  File "/home/maggie/mmat/attacks/advattack.py", line 270, in generatelatentadv
+    adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 64, in perturb
+    outputs = self.predict(xadv)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 406, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 64, in modulated_conv2d
+RuntimeError: CUDA out of memory. Tried to allocate 8.79 GiB (GPU 0; 10.76 GiB total capacity; 228.46 MiB already allocated; 2.66 GiB free; 450.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
+  File "/home/maggie/mmat/attacks/advattack.py", line 270, in generatelatentadv
+    adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 64, in perturb
+    outputs = self.predict(xadv)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 406, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 64, in modulated_conv2d
+RuntimeError: CUDA out of memory. Tried to allocate 4.39 GiB (GPU 0; 10.76 GiB total capacity; 196.19 MiB already allocated; 3.52 GiB free; 452.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+cle_w_test.shape: torch.Size([100, 8, 512])
+cle_y_test.shape: torch.Size([100, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
+  File "/home/maggie/mmat/attacks/advattack.py", line 270, in generatelatentadv
+    adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 64, in perturb
+    outputs = self.predict(xadv)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 413, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 66, in modulated_conv2d
+RuntimeError: CUDA out of memory. Tried to allocate 900.00 MiB (GPU 0; 10.76 GiB total capacity; 2.82 GiB already allocated; 888.12 MiB free; 3.08 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00005
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+cle_w_test.shape: torch.Size([2, 8, 512])
+cle_y_test.shape: torch.Size([2, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+standard trained classifier accuary on adversarial testset:100.0000%
+standard trained classifier loss on adversarial testset:0.04900050908327103
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 159, in <module>
+    raise error 
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00006
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+cle_w_test.shape: torch.Size([2, 8, 512])
+cle_y_test.shape: torch.Size([2, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+standard trained classifier accuary on adversarial testset:100.0000%
+standard trained classifier loss on adversarial testset:0.014873805455863476
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 159, in <module>
+    raise error 
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00007
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+cle_w_test.shape: torch.Size([2, 8, 512])
+cle_y_test.shape: torch.Size([2, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+standard trained classifier accuary on adversarial testset:100.0000%
+standard trained classifier loss on adversarial testset:0.0308881476521492
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 159, in <module>
+    raise error 
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20211008/00008
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([25397, 8, 512])
+cle_y_test.shape: torch.Size([25397, 8])
+cle_w_test.shape: torch.Size([2, 8, 512])
+cle_y_test.shape: torch.Size([2, 8])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+generating latent adversarial examples...
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+adv_x_test.shape: torch.Size([2, 3, 32, 32])
+adv_y_test.shape: torch.Size([2])
+standard trained classifier accuary on adversarial testset:100.0000%
+standard trained classifier loss on adversarial testset:0.01581464149057865
+Traceback (most recent call last):
+  File "tasklauncher-20211008.py", line 159, in <module>
+    raise error 
+TypeError: exceptions must derive from BaseException

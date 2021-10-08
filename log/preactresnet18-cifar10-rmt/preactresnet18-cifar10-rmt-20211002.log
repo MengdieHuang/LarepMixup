@@ -355,3 +355,396 @@ Traceback (most recent call last):
   File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 1206, in relu
     result = torch.relu(input)
 RuntimeError: CUDA out of memory. Tried to allocate 128.00 MiB (GPU 0; 10.76 GiB total capacity; 882.73 MiB already allocated; 99.12 MiB free; 1.03 GiB reserved in total by PyTorch)
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 6, in <module>
+    from clamodels.classifier import MaggieClassifier
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 724, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 857, in get_code
+  File "<frozen importlib._bootstrap_external>", line 525, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 724, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 857, in get_code
+  File "<frozen importlib._bootstrap_external>", line 525, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 16, in <module>
+    import ctypes
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/ctypes/__init__.py", line 160, in <module>
+    class c_short(_SimpleCData):
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 4, in <module>
+    import torch
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
+    from torch._C import *
+RuntimeError: KeyboardInterrupt: 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211008/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+epoch_correct_num: tensor(1471)
+Accuary of before rmt trained classifier on adversarial testset:14.7100%
+Loss of before mmat trained classifier on adversarial testset:6.937890529632568
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.1
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 213, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1449, in rmt
+    outputs = self._model(inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/comparemodels/resnet.py", line 158, in forward
+    out = self.layer1(out)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/comparemodels/resnet.py", line 65, in forward
+    out = F.relu(self.bn1(x))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 1206, in relu
+    result = torch.relu(input)
+RuntimeError: CUDA out of memory. Tried to allocate 128.00 MiB (GPU 0; 10.76 GiB total capacity; 1.61 GiB already allocated; 41.44 MiB free; 1.81 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211008/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 190, in <module>
+    cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 815, in getproset
+    pro_wset_tensor, pro_yset_tensor = self.__getprosettensor__(pro_dataset_path)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 856, in __getprosettensor__
+    y = np.load(label_npz_path)['w']
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 255, in __getitem__
+    pickle_kwargs=self.pickle_kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/format.py", line 715, in read_array
+    version = read_magic(fp)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/format.py", line 229, in read_magic
+    magic_str = _read_bytes(fp, MAGIC_LEN, "magic string")
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/format.py", line 892, in _read_bytes
+    r = fp.read(size - len(data))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/zipfile.py", line 926, in read
+    buf = self._readbuffer[self._offset:]
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211008/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+epoch_correct_num: tensor(8737)
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+epoch_correct_num: tensor(1471)
+Accuary of before rmt trained classifier on adversarial testset:14.7100%
+Loss of before mmat trained classifier on adversarial testset:6.937909126281738
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.1
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/196] [Batch classify loss: 2.638098]
+right_index: 512
+[Epoch 1/40] [Batch 2/196] [Batch classify loss: 45.865181]
+right_index: 768
+[Epoch 1/40] [Batch 3/196] [Batch classify loss: 51.299408]
+right_index: 1024
+[Epoch 1/40] [Batch 4/196] [Batch classify loss: 39.017830]
+right_index: 1280
+[Epoch 1/40] [Batch 5/196] [Batch classify loss: 29.517855]
+right_index: 1536
+[Epoch 1/40] [Batch 6/196] [Batch classify loss: 12.224546]
+right_index: 1792
+[Epoch 1/40] [Batch 7/196] [Batch classify loss: 20.926708]
+right_index: 2048
+[Epoch 1/40] [Batch 8/196] [Batch classify loss: 21.254215]
+right_index: 2304
+[Epoch 1/40] [Batch 9/196] [Batch classify loss: 8.065355]
+right_index: 2560
+[Epoch 1/40] [Batch 10/196] [Batch classify loss: 3.541810]
+right_index: 2816
+[Epoch 1/40] [Batch 11/196] [Batch classify loss: 4.019693]
+right_index: 3072
+[Epoch 1/40] [Batch 12/196] [Batch classify loss: 4.497942]
+right_index: 3328
+[Epoch 1/40] [Batch 13/196] [Batch classify loss: 12.944792]
+right_index: 3584
+[Epoch 1/40] [Batch 14/196] [Batch classify loss: 5.728901]
+right_index: 3840
+[Epoch 1/40] [Batch 15/196] [Batch classify loss: 6.387882]
+right_index: 4096
+[Epoch 1/40] [Batch 16/196] [Batch classify loss: 4.173880]
+right_index: 4352
+[Epoch 1/40] [Batch 17/196] [Batch classify loss: 5.276033]
+right_index: 4608
+[Epoch 1/40] [Batch 18/196] [Batch classify loss: 4.407842]
+right_index: 4864
+[Epoch 1/40] [Batch 19/196] [Batch classify loss: 4.396151]
+right_index: 5120
+[Epoch 1/40] [Batch 20/196] [Batch classify loss: 2.525350]
+right_index: 5376
+[Epoch 1/40] [Batch 21/196] [Batch classify loss: 5.056377]
+right_index: 5632
+[Epoch 1/40] [Batch 22/196] [Batch classify loss: 3.148688]
+right_index: 5888
+[Epoch 1/40] [Batch 23/196] [Batch classify loss: 6.024333]
+right_index: 6144
+[Epoch 1/40] [Batch 24/196] [Batch classify loss: 2.687214]
+right_index: 6400
+[Epoch 1/40] [Batch 25/196] [Batch classify loss: 3.314437]
+right_index: 6656
+[Epoch 1/40] [Batch 26/196] [Batch classify loss: 9.390691]
+right_index: 6912
+[Epoch 1/40] [Batch 27/196] [Batch classify loss: 5.249260]
+right_index: 7168
+[Epoch 1/40] [Batch 28/196] [Batch classify loss: 5.964976]
+right_index: 7424
+[Epoch 1/40] [Batch 29/196] [Batch classify loss: 3.500281]
+right_index: 7680
+[Epoch 1/40] [Batch 30/196] [Batch classify loss: 3.854582]
+right_index: 7936
+[Epoch 1/40] [Batch 31/196] [Batch classify loss: 2.803120]
+right_index: 8192
+[Epoch 1/40] [Batch 32/196] [Batch classify loss: 6.463827]
+right_index: 8448
+[Epoch 1/40] [Batch 33/196] [Batch classify loss: 5.130355]
+right_index: 8704
+[Epoch 1/40] [Batch 34/196] [Batch classify loss: 4.748903]
+right_index: 8960
+[Epoch 1/40] [Batch 35/196] [Batch classify loss: 3.923446]
+right_index: 9216
+[Epoch 1/40] [Batch 36/196] [Batch classify loss: 2.311472]
+right_index: 9472
+[Epoch 1/40] [Batch 37/196] [Batch classify loss: 3.318774]
+right_index: 9728
+[Epoch 1/40] [Batch 38/196] [Batch classify loss: 3.924256]
+right_index: 9984
+[Epoch 1/40] [Batch 39/196] [Batch classify loss: 5.396902]
+right_index: 10240
+[Epoch 1/40] [Batch 40/196] [Batch classify loss: 4.337669]
+right_index: 10496
+[Epoch 1/40] [Batch 41/196] [Batch classify loss: 2.980566]
+right_index: 10752
+[Epoch 1/40] [Batch 42/196] [Batch classify loss: 3.374060]
+right_index: 11008
+[Epoch 1/40] [Batch 43/196] [Batch classify loss: 4.120418]
+right_index: 11264
+[Epoch 1/40] [Batch 44/196] [Batch classify loss: 2.836914]
+right_index: 11520
+[Epoch 1/40] [Batch 45/196] [Batch classify loss: 2.588114]
+right_index: 11776
+[Epoch 1/40] [Batch 46/196] [Batch classify loss: 4.393323]
+right_index: 12032
+[Epoch 1/40] [Batch 47/196] [Batch classify loss: 3.118850]
+right_index: 12288
+[Epoch 1/40] [Batch 48/196] [Batch classify loss: 2.896048]
+right_index: 12544
+[Epoch 1/40] [Batch 49/196] [Batch classify loss: 3.761873]
+right_index: 12800
+[Epoch 1/40] [Batch 50/196] [Batch classify loss: 2.678493]
+right_index: 13056
+[Epoch 1/40] [Batch 51/196] [Batch classify loss: 2.860011]
+right_index: 13312
+[Epoch 1/40] [Batch 52/196] [Batch classify loss: 3.028363]
+right_index: 13568
+[Epoch 1/40] [Batch 53/196] [Batch classify loss: 2.988033]
+right_index: 13824
+[Epoch 1/40] [Batch 54/196] [Batch classify loss: 2.938246]
+right_index: 14080
+[Epoch 1/40] [Batch 55/196] [Batch classify loss: 2.922787]
+right_index: 14336
+[Epoch 1/40] [Batch 56/196] [Batch classify loss: 2.495630]
+right_index: 14592
+[Epoch 1/40] [Batch 57/196] [Batch classify loss: 3.022196]
+right_index: 14848
+[Epoch 1/40] [Batch 58/196] [Batch classify loss: 3.282048]
+right_index: 15104
+[Epoch 1/40] [Batch 59/196] [Batch classify loss: 2.695425]
+right_index: 15360
+[Epoch 1/40] [Batch 60/196] [Batch classify loss: 2.591052]
+right_index: 15616
+[Epoch 1/40] [Batch 61/196] [Batch classify loss: 2.852537]
+right_index: 15872
+[Epoch 1/40] [Batch 62/196] [Batch classify loss: 2.938612]
+right_index: 16128
+[Epoch 1/40] [Batch 63/196] [Batch classify loss: 2.612244]
+right_index: 16384
+[Epoch 1/40] [Batch 64/196] [Batch classify loss: 2.528667]
+right_index: 16640
+[Epoch 1/40] [Batch 65/196] [Batch classify loss: 2.879611]
+right_index: 16896
+[Epoch 1/40] [Batch 66/196] [Batch classify loss: 2.361428]
+right_index: 17152
+[Epoch 1/40] [Batch 67/196] [Batch classify loss: 2.445511]
+right_index: 17408
+[Epoch 1/40] [Batch 68/196] [Batch classify loss: 2.345614]
+right_index: 17664
+[Epoch 1/40] [Batch 69/196] [Batch classify loss: 2.338552]
+right_index: 17920
+[Epoch 1/40] [Batch 70/196] [Batch classify loss: 2.834078]
+right_index: 18176

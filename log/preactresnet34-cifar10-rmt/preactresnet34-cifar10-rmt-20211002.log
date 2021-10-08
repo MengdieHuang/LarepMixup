@@ -1,0 +1,22 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211008
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-betasampler/preactresnet34-cifar10/whitebox/20211008/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+Traceback (most recent call last):
+  File "tasklauncher-20211003.py", line 190, in <module>
+    cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 815, in getproset
+    pro_wset_tensor, pro_yset_tensor = self.__getprosettensor__(pro_dataset_path)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 847, in __getprosettensor__
+    w = torch.tensor(w, device=device)                                                                                 
+KeyboardInterrupt

@@ -43,6 +43,7 @@ class AdvAttack():
     def __init__(self, args, learned_model) -> None:                 
         print('initlize attack classifier')
         if args.latentattack == False:    #  像素层对抗攻击
+            print("generate pixel adversarial exampels")
             self._args = args
             self._targetmodel = learned_model         
             if self._args.whitebox == True:
@@ -60,7 +61,7 @@ class AdvAttack():
             self._advgenmodel = self.__getadvgenmodel__()
 
         elif args.latentattack == True:
-            print(" latent adversarial exampels")
+            print("generate latent adversarial exampels")
             self._args = args
             self._targetmodel = learned_model  
             if self._args.whitebox == True:
@@ -73,9 +74,11 @@ class AdvAttack():
     def __getadvertorchmodel__(self):   #潜层对抗攻击
 
         if self._args.attack_mode =='pgd':
+            print("latent pgd attack")
             attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=0.02, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
             
         elif self._args.attack_mode =='fgsm':
+            print("latent fgsm attack")
             attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
 
         elif self._args.attack_mode =='bim':
@@ -258,29 +261,35 @@ class AdvAttack():
         os.makedirs(self._exp_result_dir,exist_ok=True)     
         
         print('generating latent adversarial examples...')
+        
+        # print("cle_w_test.shape:",cle_w_test.shape)             # cle_w_test.shape: torch.Size([10, 8, 512])    
+        # print("cle_w_test[:2]:",cle_w_test[:2])  
+
         cle_w_test = cle_w_test.cuda()
         cle_y_test = cle_y_test.cuda()  
-        adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)      
-        print("adv_w_test.shape:",adv_w_test.shape)
-        print("adv_w_test[:2]:",adv_w_test[:2])  
+        adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
 
-        raise Exception("maggie flag")
+        # print("adv_w_test.shape:",adv_w_test.shape)             #   adv_w_test.shape: torch.Size([10, 8, 512])   
+        # print("adv_w_test[:2]:",adv_w_test[:2])  
+
+
+        # raise Exception("maggie flag")
         adv_x_test = gan_net(adv_w_test)
-        print("adv_x_test.shape:",adv_x_test.shape)
-        print("adv_x_test[:2]:",adv_x_test[:2])  
-        raise Exception("maggie flag")
+        print("adv_x_test.shape:",adv_x_test.shape)             #   adv_x_test.shape: torch.Size([10, 3, 32, 32])
+        # print("adv_x_test[:2]:",adv_x_test[:2])  
+        # raise Exception("maggie flag")
 
         adv_y_test = cle_y_test
         print("adv_y_test.shape:",adv_y_test.shape)
-        print("adv_y_test[:10]:",adv_y_test[:10]) 
+        # print("adv_y_test[:10]:",adv_y_test[:10]) 
 
         self._x_test_adv = adv_x_test
         self._y_test_adv = adv_y_test
         print('finished generate latent adversarial examples !')
 
         # numpy转tensor
-        self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
-        self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
+        # self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
+        # self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
         self.__saveadvpng__()
 
         return adv_x_test, adv_y_test
@@ -356,7 +365,10 @@ class AdvAttack():
 
         elif self._args.latentattack == True: # 表征层对抗样本
             classification = self.__labelnames__() 
-            os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
+            # os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
+            # os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
+            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
+
 
             print(f"Saving {self._args.dataset} testset  adversarial examples...")
             for img_index, _ in enumerate(self._x_test_adv):
@@ -364,8 +376,8 @@ class AdvAttack():
                 # save_cle_img = self._x_test[img_index]
                 img_true_label = self._y_test_adv[img_index]
 
-                np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-
+                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
         if exp_result_dir is not None:
