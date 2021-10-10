@@ -11,11 +11,9 @@ import torchvision
 import numpy as np
 import art.attacks.evasion
 from utils.savepng import save_image
-# from clamodels.classifier import MaggieClassifier
 import copy
 import os
 from torch import LongTensor
-
 import advertorch.attacks
 
 Tensor = torch.Tensor
@@ -75,20 +73,21 @@ class AdvAttack():
 
         if self._args.attack_mode =='pgd':
             print("latent pgd attack")
-            attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=0.02, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
+            attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
             
         elif self._args.attack_mode =='fgsm':
             print("latent fgsm attack")
-            attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+            print("eps：",self._args.attack_eps)
+            attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
         elif self._args.attack_mode =='bim':
-            attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+            attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
         elif self._args.attack_mode =='cw':
-            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
         elif self._args.attack_mode =='deepfool':
-            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=0.02,clip_min=None, clip_max=None)
+            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
         return attacker
 
@@ -260,36 +259,37 @@ class AdvAttack():
         self._exp_result_dir = os.path.join(self._exp_result_dir,f'attack-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True)     
         
-        print('generating latent adversarial examples...')
-        
-        # print("cle_w_test.shape:",cle_w_test.shape)             # cle_w_test.shape: torch.Size([10, 8, 512])    
-        # print("cle_w_test[:2]:",cle_w_test[:2])  
-
         cle_w_test = cle_w_test.cuda()
         cle_y_test = cle_y_test.cuda()  
-        adv_w_test = self._attacker.perturb(cle_w_test, cle_y_test)         
 
-        # print("adv_w_test.shape:",adv_w_test.shape)             #   adv_w_test.shape: torch.Size([10, 8, 512])   
-        # print("adv_w_test[:2]:",adv_w_test[:2])  
+        print("cle_w_test.shape:",cle_w_test.shape)                
+        print("cle_y_test.shape:",cle_y_test.shape)  
 
+        testset_total_num = int(cle_w_test.size(0))
+        batch_size = self._args.batch_size #32
+        batch_num = int( np.ceil( int(testset_total_num) / float(batch_size) ) )
+        print("testset_total_num:",testset_total_num)
+        print("batch_size:",batch_size)
+        print("batch_num:",batch_num)
+        
+        adv_x_test = []
+        for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
+            # print("batch_index:",batch_index)
+            cle_w_batch = cle_w_test[batch_index * batch_size : (batch_index + 1) * batch_size]
+            cle_y_batch = cle_y_test[batch_index * batch_size : (batch_index + 1) * batch_size] 
+            adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+            adv_x_batch = gan_net(adv_w_batch)            
+            adv_x_test.append(adv_x_batch)
 
-        # raise Exception("maggie flag")
-        adv_x_test = gan_net(adv_w_test)
-        print("adv_x_test.shape:",adv_x_test.shape)             #   adv_x_test.shape: torch.Size([10, 3, 32, 32])
-        # print("adv_x_test[:2]:",adv_x_test[:2])  
-        # raise Exception("maggie flag")
-
+        adv_x_test = torch.cat(adv_x_test, dim=0)        
         adv_y_test = cle_y_test
+        print("adv_x_test.shape:",adv_x_test.shape)             #   adv_x_test.shape: torch.Size([10, 3, 32, 32])
         print("adv_y_test.shape:",adv_y_test.shape)
-        # print("adv_y_test[:10]:",adv_y_test[:10]) 
 
         self._x_test_adv = adv_x_test
         self._y_test_adv = adv_y_test
         print('finished generate latent adversarial examples !')
 
-        # numpy转tensor
-        # self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
-        # self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
         self.__saveadvpng__()
 
         return adv_x_test, adv_y_test
@@ -377,7 +377,7 @@ class AdvAttack():
                 img_true_label = self._y_test_adv[img_index]
 
                 np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                #save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
         if exp_result_dir is not None:

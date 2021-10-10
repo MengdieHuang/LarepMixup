@@ -12,12 +12,7 @@ from genmodels.mixgenerate import MixGenerate
 import utils.stylegan2ada.dnnlib as dnnlib       
 import utils.stylegan2ada.legacy as legacy
 import os
-# from robustness import datasets
-# from robustness.tools.imagenet_helpers import common_superclass_wnid, ImageNetHierarchy
-# from robustness.tools.vis_tools import show_image_row
-
 import numpy as np
-
 
 if __name__ == '__main__':
     print("\n")
@@ -79,44 +74,17 @@ if __name__ == '__main__':
                 loss_txt.write(str(loss_txt_content))    
             
             elif args.latentattack == True:  #   表征层对抗攻击
-
                 print("latent adversarial attack.............")
-
                 learned_cla_model = torch.load(args.cla_network_pkl)
                 target_classifier = MaggieClassifier(args,learned_cla_model)
                 cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
-                print("cle_w_test.shape:",cle_w_test.shape)
-                print("cle_y_test.shape:",cle_y_test.shape)
-                """
-                cle_w_test.shape: torch.Size([25397, 8, 512])
-                cle_y_test.shape: torch.Size([25397, 8])                
-                """
-
                 cle_w_test = cle_w_test[:10000]
                 cle_y_test = cle_y_test[:10000]
-                # print("cle_w_test.shape:",cle_w_test.shape)                
-                # print("cle_y_test.shape:",cle_y_test.shape)   
-                """
-                cle_w_test.shape: torch.Size([10000, 8, 512])
-                cle_y_test.shape: torch.Size([10000, 8])                
-                """
-                # print("cle_w_test[:10]:",cle_w_test[:2])
-
                 cle_y_test = cle_y_test[:,0]
-                # print("cle_y_test.shape:",cle_y_test.shape)   
-                # print("cle_y_test[:10]:",cle_y_test[:2])
-                """
-                cle_y_test.shape: torch.Size([10000])
-                cle_y_test[:10]: tensor([6, 9, 9, 4, 1, 1, 2, 7, 8, 3])                
-                """
-
+       
                 cla_net = learned_cla_model
                 cla_net.cuda()
                 cla_net.eval()                
-
-                # cla_net_first_name = list(cla_net._modules.keys())[0]
-                # cla_net_first_module = cla_net._modules[cla_net_first_name]
-                # print("cla_net_first_module:",cla_net_first_module)
 
                 device = torch.device('cuda')
                 with dnnlib.util.open_url(args.gen_network_pkl) as fp:
@@ -125,40 +93,21 @@ if __name__ == '__main__':
                 gan_net = G.synthesis     
                 gan_net.cuda()
                 gan_net.eval()
-         
-                # gan_net_last_name = list(gan_net._modules.keys())[-1]
-                # gan_net_last_module = gan_net._modules[gan_net_last_name]
-                # print("gan_net_last_module:",gan_net_last_module)
 
                 merge_model = torch.nn.Sequential(gan_net, cla_net)
                 latent_attacker = AdvAttack(args,merge_model)
              
-                adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)
-
-                print("adv_x_test.shape:",adv_x_test.shape)
-                print("adv_y_test.shape:",adv_y_test.shape)
-
-                """
-                adv_x_test.shape: torch.Size([10, 3, 32, 32])
-                adv_y_test.shape: torch.Size([10])                
-                """
-                # raise error 
-                
+                adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
                 adv_test_accuracy, adv_test_loss = latent_attacker.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
                 print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
 
-
-
                 testset_total_num = int(cle_w_test.size(0))
-                batch_size = 64
+                batch_size = args.batch_size
                 batch_num = int(np.ceil( int(testset_total_num) / float(batch_size) ) )
-                # print("testset_total_num:",testset_total_num)
-                # print("batch_size:",batch_size)
-                # print("batch_num:",batch_num)
+
                 cle_x_test = []
                 for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
-                    # print("batch_index:",batch_index)
                     cle_w_batch = cle_w_test[batch_index * batch_size : (batch_index + 1) * batch_size]
                     cle_x_batch = gan_net(cle_w_batch.cuda())        
                     cle_x_test.append(cle_x_batch)
@@ -166,7 +115,6 @@ if __name__ == '__main__':
                 cle_x_test = torch.cat(cle_x_test, dim=0)        
                 print("cle_x_test.shape:",cle_x_test.shape)
                 print("cle_y_test.shape:",cle_y_test.shape)
-
                 cle_test_accuracy, cle_test_loss = latent_attacker.evaluatefromtensor(target_classifier.model(),cle_x_test, cle_y_test)
                 print(f'standard trained classifier accuary on clean testset:{cle_test_accuracy * 100:.4f}%' ) 
                 print(f'standard trained classifier loss on clean testset:{cle_test_loss}' )    
