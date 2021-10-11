@@ -78,8 +78,8 @@ if __name__ == '__main__':
                 learned_cla_model = torch.load(args.cla_network_pkl)
                 target_classifier = MaggieClassifier(args,learned_cla_model)
                 cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
-                cle_w_test = cle_w_test[:10000]
-                cle_y_test = cle_y_test[:10000]
+                cle_w_test = cle_w_test[:10]
+                cle_y_test = cle_y_test[:10]
                 cle_y_test = cle_y_test[:,0]
        
                 cla_net = learned_cla_model
@@ -167,7 +167,7 @@ if __name__ == '__main__':
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
             # raw_x_train, raw_y_train = target_classifier.getrawset(cle_train_dataloader)
 
-            # adversarial pixel testset
+            # adversarial testset
             print("args.adv_dataset：",args.adv_dataset)
             adv_testset_path = os.path.join(args.adv_dataset,'test')
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)

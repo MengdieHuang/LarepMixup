@@ -634,7 +634,7 @@ class MaggieClassifier:
                 epoch_correct_num += batch_same_num
                 epoch_total_loss += loss
 
-        print("epoch_correct_num:",epoch_correct_num)
+        # print("epoch_correct_num:",epoch_correct_num)
 
         test_accuracy = epoch_correct_num / testset_total_num
         test_loss = epoch_total_loss / batch_num                  

@@ -167,7 +167,7 @@ def parse_arguments():
         parser_object.add_argument('--pretrained_on_imagenet', help='pretrain', type= bool, default= False)
         
         #-------------------------arguments for classifier attack-------------------------
-        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd'])
+        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd'])
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
         parser_object.add_argument('--whitebox',action='store_true', help='white box attack')
