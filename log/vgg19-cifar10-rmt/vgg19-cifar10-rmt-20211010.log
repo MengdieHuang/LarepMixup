@@ -23623,3 +23623,4811 @@ right_index: 17664
 right_index: 17920
 [Epoch 19/40] [Batch 170/196] [Batch classify loss: 0.000697]
 right_index: 18176
+[Epoch 19/40] [Batch 171/196] [Batch classify loss: 0.000568]
+right_index: 18432
+[Epoch 19/40] [Batch 172/196] [Batch classify loss: 0.007252]
+right_index: 18688
+[Epoch 19/40] [Batch 173/196] [Batch classify loss: 0.005223]
+right_index: 18944
+[Epoch 19/40] [Batch 174/196] [Batch classify loss: 0.000430]
+right_index: 19200
+[Epoch 19/40] [Batch 175/196] [Batch classify loss: 0.000200]
+right_index: 19456
+[Epoch 19/40] [Batch 176/196] [Batch classify loss: 0.005527]
+right_index: 19712
+[Epoch 19/40] [Batch 177/196] [Batch classify loss: 0.000159]
+right_index: 19968
+[Epoch 19/40] [Batch 178/196] [Batch classify loss: 0.000215]
+right_index: 20224
+[Epoch 19/40] [Batch 179/196] [Batch classify loss: 0.002564]
+right_index: 20480
+[Epoch 19/40] [Batch 180/196] [Batch classify loss: 0.000185]
+right_index: 20736
+[Epoch 19/40] [Batch 181/196] [Batch classify loss: 0.000257]
+right_index: 20992
+[Epoch 19/40] [Batch 182/196] [Batch classify loss: 0.000210]
+right_index: 21248
+[Epoch 19/40] [Batch 183/196] [Batch classify loss: 0.005812]
+right_index: 21504
+[Epoch 19/40] [Batch 184/196] [Batch classify loss: 0.007977]
+right_index: 21760
+[Epoch 19/40] [Batch 185/196] [Batch classify loss: 0.000522]
+right_index: 22016
+[Epoch 19/40] [Batch 186/196] [Batch classify loss: 0.000609]
+right_index: 22272
+[Epoch 19/40] [Batch 187/196] [Batch classify loss: 0.002370]
+right_index: 22528
+[Epoch 19/40] [Batch 188/196] [Batch classify loss: 0.004551]
+right_index: 22784
+[Epoch 19/40] [Batch 189/196] [Batch classify loss: 0.000436]
+right_index: 23040
+[Epoch 19/40] [Batch 190/196] [Batch classify loss: 0.002478]
+right_index: 23296
+[Epoch 19/40] [Batch 191/196] [Batch classify loss: 0.000917]
+right_index: 23552
+[Epoch 19/40] [Batch 192/196] [Batch classify loss: 0.000347]
+right_index: 23808
+[Epoch 19/40] [Batch 193/196] [Batch classify loss: 0.000174]
+right_index: 24064
+[Epoch 19/40] [Batch 194/196] [Batch classify loss: 0.000245]
+right_index: 24320
+[Epoch 19/40] [Batch 195/196] [Batch classify loss: 0.000509]
+right_index: 24576
+[Epoch 19/40] [Batch 196/196] [Batch classify loss: 0.009062]
+0019 epoch rmt trained classifier accuary on the clean testing examples:88.2500%
+0019 epoch rmt trained classifier loss on the clean testing examples:0.7159
+0019 epoch rmt trained classifier accuary on adversarial testset:26.2200%
+0019 epoch rmt trained classifier loss on adversarial testset:6.25372314453125
+
+
+19epoch learning rate:0.0001
+right_index: 256
+[Epoch 20/40] [Batch 1/196] [Batch classify loss: 0.000230]
+right_index: 512
+[Epoch 20/40] [Batch 2/196] [Batch classify loss: 0.000320]
+right_index: 768
+[Epoch 20/40] [Batch 3/196] [Batch classify loss: 0.001180]
+right_index: 1024
+[Epoch 20/40] [Batch 4/196] [Batch classify loss: 0.000371]
+right_index: 1280
+[Epoch 20/40] [Batch 5/196] [Batch classify loss: 0.000207]
+right_index: 1536
+[Epoch 20/40] [Batch 6/196] [Batch classify loss: 0.000136]
+right_index: 1792
+[Epoch 20/40] [Batch 7/196] [Batch classify loss: 0.000324]
+right_index: 2048
+[Epoch 20/40] [Batch 8/196] [Batch classify loss: 0.000214]
+right_index: 2304
+[Epoch 20/40] [Batch 9/196] [Batch classify loss: 0.001342]
+right_index: 2560
+[Epoch 20/40] [Batch 10/196] [Batch classify loss: 0.000215]
+right_index: 2816
+[Epoch 20/40] [Batch 11/196] [Batch classify loss: 0.003248]
+right_index: 3072
+[Epoch 20/40] [Batch 12/196] [Batch classify loss: 0.000233]
+right_index: 3328
+[Epoch 20/40] [Batch 13/196] [Batch classify loss: 0.000194]
+right_index: 3584
+[Epoch 20/40] [Batch 14/196] [Batch classify loss: 0.000194]
+right_index: 3840
+[Epoch 20/40] [Batch 15/196] [Batch classify loss: 0.000308]
+right_index: 4096
+[Epoch 20/40] [Batch 16/196] [Batch classify loss: 0.001032]
+right_index: 4352
+[Epoch 20/40] [Batch 17/196] [Batch classify loss: 0.014195]
+right_index: 4608
+[Epoch 20/40] [Batch 18/196] [Batch classify loss: 0.000291]
+right_index: 4864
+[Epoch 20/40] [Batch 19/196] [Batch classify loss: 0.000278]
+right_index: 5120
+[Epoch 20/40] [Batch 20/196] [Batch classify loss: 0.000213]
+right_index: 5376
+[Epoch 20/40] [Batch 21/196] [Batch classify loss: 0.001716]
+right_index: 5632
+[Epoch 20/40] [Batch 22/196] [Batch classify loss: 0.000646]
+right_index: 5888
+[Epoch 20/40] [Batch 23/196] [Batch classify loss: 0.000479]
+right_index: 6144
+[Epoch 20/40] [Batch 24/196] [Batch classify loss: 0.000310]
+right_index: 6400
+[Epoch 20/40] [Batch 25/196] [Batch classify loss: 0.000361]
+right_index: 6656
+[Epoch 20/40] [Batch 26/196] [Batch classify loss: 0.000131]
+right_index: 6912
+[Epoch 20/40] [Batch 27/196] [Batch classify loss: 0.000182]
+right_index: 7168
+[Epoch 20/40] [Batch 28/196] [Batch classify loss: 0.000197]
+right_index: 7424
+[Epoch 20/40] [Batch 29/196] [Batch classify loss: 0.000153]
+right_index: 7680
+[Epoch 20/40] [Batch 30/196] [Batch classify loss: 0.000472]
+right_index: 7936
+[Epoch 20/40] [Batch 31/196] [Batch classify loss: 0.001689]
+right_index: 8192
+[Epoch 20/40] [Batch 32/196] [Batch classify loss: 0.000270]
+right_index: 8448
+[Epoch 20/40] [Batch 33/196] [Batch classify loss: 0.000329]
+right_index: 8704
+[Epoch 20/40] [Batch 34/196] [Batch classify loss: 0.000255]
+right_index: 8960
+[Epoch 20/40] [Batch 35/196] [Batch classify loss: 0.011007]
+right_index: 9216
+[Epoch 20/40] [Batch 36/196] [Batch classify loss: 0.000212]
+right_index: 9472
+[Epoch 20/40] [Batch 37/196] [Batch classify loss: 0.000280]
+right_index: 9728
+[Epoch 20/40] [Batch 38/196] [Batch classify loss: 0.000591]
+right_index: 9984
+[Epoch 20/40] [Batch 39/196] [Batch classify loss: 0.000306]
+right_index: 10240
+[Epoch 20/40] [Batch 40/196] [Batch classify loss: 0.000668]
+right_index: 10496
+[Epoch 20/40] [Batch 41/196] [Batch classify loss: 0.000469]
+right_index: 10752
+[Epoch 20/40] [Batch 42/196] [Batch classify loss: 0.005317]
+right_index: 11008
+[Epoch 20/40] [Batch 43/196] [Batch classify loss: 0.002610]
+right_index: 11264
+[Epoch 20/40] [Batch 44/196] [Batch classify loss: 0.000229]
+right_index: 11520
+[Epoch 20/40] [Batch 45/196] [Batch classify loss: 0.000295]
+right_index: 11776
+[Epoch 20/40] [Batch 46/196] [Batch classify loss: 0.002104]
+right_index: 12032
+[Epoch 20/40] [Batch 47/196] [Batch classify loss: 0.000167]
+right_index: 12288
+[Epoch 20/40] [Batch 48/196] [Batch classify loss: 0.000658]
+right_index: 12544
+[Epoch 20/40] [Batch 49/196] [Batch classify loss: 0.003077]
+right_index: 12800
+[Epoch 20/40] [Batch 50/196] [Batch classify loss: 0.000191]
+right_index: 13056
+[Epoch 20/40] [Batch 51/196] [Batch classify loss: 0.000142]
+right_index: 13312
+[Epoch 20/40] [Batch 52/196] [Batch classify loss: 0.000246]
+right_index: 13568
+[Epoch 20/40] [Batch 53/196] [Batch classify loss: 0.001895]
+right_index: 13824
+[Epoch 20/40] [Batch 54/196] [Batch classify loss: 0.000713]
+right_index: 14080
+[Epoch 20/40] [Batch 55/196] [Batch classify loss: 0.000215]
+right_index: 14336
+[Epoch 20/40] [Batch 56/196] [Batch classify loss: 0.000176]
+right_index: 14592
+[Epoch 20/40] [Batch 57/196] [Batch classify loss: 0.000616]
+right_index: 14848
+[Epoch 20/40] [Batch 58/196] [Batch classify loss: 0.000298]
+right_index: 15104
+[Epoch 20/40] [Batch 59/196] [Batch classify loss: 0.000221]
+right_index: 15360
+[Epoch 20/40] [Batch 60/196] [Batch classify loss: 0.000287]
+right_index: 15616
+[Epoch 20/40] [Batch 61/196] [Batch classify loss: 0.002201]
+right_index: 15872
+[Epoch 20/40] [Batch 62/196] [Batch classify loss: 0.000268]
+right_index: 16128
+[Epoch 20/40] [Batch 63/196] [Batch classify loss: 0.001223]
+right_index: 16384
+[Epoch 20/40] [Batch 64/196] [Batch classify loss: 0.000700]
+right_index: 16640
+[Epoch 20/40] [Batch 65/196] [Batch classify loss: 0.000290]
+right_index: 16896
+[Epoch 20/40] [Batch 66/196] [Batch classify loss: 0.000226]
+right_index: 17152
+[Epoch 20/40] [Batch 67/196] [Batch classify loss: 0.000190]
+right_index: 17408
+[Epoch 20/40] [Batch 68/196] [Batch classify loss: 0.000180]
+right_index: 17664
+[Epoch 20/40] [Batch 69/196] [Batch classify loss: 0.000379]
+right_index: 17920
+[Epoch 20/40] [Batch 70/196] [Batch classify loss: 0.000258]
+right_index: 18176
+[Epoch 20/40] [Batch 71/196] [Batch classify loss: 0.000139]
+right_index: 18432
+[Epoch 20/40] [Batch 72/196] [Batch classify loss: 0.000624]
+right_index: 18688
+[Epoch 20/40] [Batch 73/196] [Batch classify loss: 0.000216]
+right_index: 18944
+[Epoch 20/40] [Batch 74/196] [Batch classify loss: 0.002972]
+right_index: 19200
+[Epoch 20/40] [Batch 75/196] [Batch classify loss: 0.000522]
+right_index: 19456
+[Epoch 20/40] [Batch 76/196] [Batch classify loss: 0.002712]
+right_index: 19712
+[Epoch 20/40] [Batch 77/196] [Batch classify loss: 0.000160]
+right_index: 19968
+[Epoch 20/40] [Batch 78/196] [Batch classify loss: 0.000218]
+right_index: 20224
+[Epoch 20/40] [Batch 79/196] [Batch classify loss: 0.002811]
+right_index: 20480
+[Epoch 20/40] [Batch 80/196] [Batch classify loss: 0.006830]
+right_index: 20736
+[Epoch 20/40] [Batch 81/196] [Batch classify loss: 0.000279]
+right_index: 20992
+[Epoch 20/40] [Batch 82/196] [Batch classify loss: 0.000176]
+right_index: 21248
+[Epoch 20/40] [Batch 83/196] [Batch classify loss: 0.002043]
+right_index: 21504
+[Epoch 20/40] [Batch 84/196] [Batch classify loss: 0.002499]
+right_index: 21760
+[Epoch 20/40] [Batch 85/196] [Batch classify loss: 0.000206]
+right_index: 22016
+[Epoch 20/40] [Batch 86/196] [Batch classify loss: 0.008221]
+right_index: 22272
+[Epoch 20/40] [Batch 87/196] [Batch classify loss: 0.003360]
+right_index: 22528
+[Epoch 20/40] [Batch 88/196] [Batch classify loss: 0.000250]
+right_index: 22784
+[Epoch 20/40] [Batch 89/196] [Batch classify loss: 0.000158]
+right_index: 23040
+[Epoch 20/40] [Batch 90/196] [Batch classify loss: 0.000243]
+right_index: 23296
+[Epoch 20/40] [Batch 91/196] [Batch classify loss: 0.000224]
+right_index: 23552
+[Epoch 20/40] [Batch 92/196] [Batch classify loss: 0.000154]
+right_index: 23808
+[Epoch 20/40] [Batch 93/196] [Batch classify loss: 0.002585]
+right_index: 24064
+[Epoch 20/40] [Batch 94/196] [Batch classify loss: 0.000391]
+right_index: 24320
+[Epoch 20/40] [Batch 95/196] [Batch classify loss: 0.000311]
+right_index: 24576
+[Epoch 20/40] [Batch 96/196] [Batch classify loss: 0.000276]
+right_index: 24832
+[Epoch 20/40] [Batch 97/196] [Batch classify loss: 0.000249]
+right_index: 25088
+[Epoch 20/40] [Batch 98/196] [Batch classify loss: 0.000280]
+right_index: 25344
+[Epoch 20/40] [Batch 99/196] [Batch classify loss: 0.000630]
+right_index: 25397
+[Epoch 20/40] [Batch 100/196] [Batch classify loss: 0.032148]
+right_index: 256
+[Epoch 20/40] [Batch 101/196] [Batch classify loss: 0.000438]
+right_index: 512
+[Epoch 20/40] [Batch 102/196] [Batch classify loss: 0.000630]
+right_index: 768
+[Epoch 20/40] [Batch 103/196] [Batch classify loss: 0.000258]
+right_index: 1024
+[Epoch 20/40] [Batch 104/196] [Batch classify loss: 0.000676]
+right_index: 1280
+[Epoch 20/40] [Batch 105/196] [Batch classify loss: 0.000383]
+right_index: 1536
+[Epoch 20/40] [Batch 106/196] [Batch classify loss: 0.000221]
+right_index: 1792
+[Epoch 20/40] [Batch 107/196] [Batch classify loss: 0.000306]
+right_index: 2048
+[Epoch 20/40] [Batch 108/196] [Batch classify loss: 0.000180]
+right_index: 2304
+[Epoch 20/40] [Batch 109/196] [Batch classify loss: 0.000154]
+right_index: 2560
+[Epoch 20/40] [Batch 110/196] [Batch classify loss: 0.000150]
+right_index: 2816
+[Epoch 20/40] [Batch 111/196] [Batch classify loss: 0.000207]
+right_index: 3072
+[Epoch 20/40] [Batch 112/196] [Batch classify loss: 0.000228]
+right_index: 3328
+[Epoch 20/40] [Batch 113/196] [Batch classify loss: 0.000330]
+right_index: 3584
+[Epoch 20/40] [Batch 114/196] [Batch classify loss: 0.000314]
+right_index: 3840
+[Epoch 20/40] [Batch 115/196] [Batch classify loss: 0.000779]
+right_index: 4096
+[Epoch 20/40] [Batch 116/196] [Batch classify loss: 0.000227]
+right_index: 4352
+[Epoch 20/40] [Batch 117/196] [Batch classify loss: 0.000199]
+right_index: 4608
+[Epoch 20/40] [Batch 118/196] [Batch classify loss: 0.000150]
+right_index: 4864
+[Epoch 20/40] [Batch 119/196] [Batch classify loss: 0.000212]
+right_index: 5120
+[Epoch 20/40] [Batch 120/196] [Batch classify loss: 0.000254]
+right_index: 5376
+[Epoch 20/40] [Batch 121/196] [Batch classify loss: 0.000337]
+right_index: 5632
+[Epoch 20/40] [Batch 122/196] [Batch classify loss: 0.000153]
+right_index: 5888
+[Epoch 20/40] [Batch 123/196] [Batch classify loss: 0.000215]
+right_index: 6144
+[Epoch 20/40] [Batch 124/196] [Batch classify loss: 0.000170]
+right_index: 6400
+[Epoch 20/40] [Batch 125/196] [Batch classify loss: 0.000402]
+right_index: 6656
+[Epoch 20/40] [Batch 126/196] [Batch classify loss: 0.001859]
+right_index: 6912
+[Epoch 20/40] [Batch 127/196] [Batch classify loss: 0.000325]
+right_index: 7168
+[Epoch 20/40] [Batch 128/196] [Batch classify loss: 0.000208]
+right_index: 7424
+[Epoch 20/40] [Batch 129/196] [Batch classify loss: 0.000242]
+right_index: 7680
+[Epoch 20/40] [Batch 130/196] [Batch classify loss: 0.000187]
+right_index: 7936
+[Epoch 20/40] [Batch 131/196] [Batch classify loss: 0.000167]
+right_index: 8192
+[Epoch 20/40] [Batch 132/196] [Batch classify loss: 0.000267]
+right_index: 8448
+[Epoch 20/40] [Batch 133/196] [Batch classify loss: 0.000443]
+right_index: 8704
+[Epoch 20/40] [Batch 134/196] [Batch classify loss: 0.000214]
+right_index: 8960
+[Epoch 20/40] [Batch 135/196] [Batch classify loss: 0.002219]
+right_index: 9216
+[Epoch 20/40] [Batch 136/196] [Batch classify loss: 0.000140]
+right_index: 9472
+[Epoch 20/40] [Batch 137/196] [Batch classify loss: 0.005406]
+right_index: 9728
+[Epoch 20/40] [Batch 138/196] [Batch classify loss: 0.000316]
+right_index: 9984
+[Epoch 20/40] [Batch 139/196] [Batch classify loss: 0.000210]
+right_index: 10240
+[Epoch 20/40] [Batch 140/196] [Batch classify loss: 0.000161]
+right_index: 10496
+[Epoch 20/40] [Batch 141/196] [Batch classify loss: 0.000191]
+right_index: 10752
+[Epoch 20/40] [Batch 142/196] [Batch classify loss: 0.000284]
+right_index: 11008
+[Epoch 20/40] [Batch 143/196] [Batch classify loss: 0.002602]
+right_index: 11264
+[Epoch 20/40] [Batch 144/196] [Batch classify loss: 0.000242]
+right_index: 11520
+[Epoch 20/40] [Batch 145/196] [Batch classify loss: 0.000191]
+right_index: 11776
+[Epoch 20/40] [Batch 146/196] [Batch classify loss: 0.002548]
+right_index: 12032
+[Epoch 20/40] [Batch 147/196] [Batch classify loss: 0.000517]
+right_index: 12288
+[Epoch 20/40] [Batch 148/196] [Batch classify loss: 0.000136]
+right_index: 12544
+[Epoch 20/40] [Batch 149/196] [Batch classify loss: 0.003109]
+right_index: 12800
+[Epoch 20/40] [Batch 150/196] [Batch classify loss: 0.000179]
+right_index: 13056
+[Epoch 20/40] [Batch 151/196] [Batch classify loss: 0.000183]
+right_index: 13312
+[Epoch 20/40] [Batch 152/196] [Batch classify loss: 0.000147]
+right_index: 13568
+[Epoch 20/40] [Batch 153/196] [Batch classify loss: 0.001321]
+right_index: 13824
+[Epoch 20/40] [Batch 154/196] [Batch classify loss: 0.000186]
+right_index: 14080
+[Epoch 20/40] [Batch 155/196] [Batch classify loss: 0.000431]
+right_index: 14336
+[Epoch 20/40] [Batch 156/196] [Batch classify loss: 0.008006]
+right_index: 14592
+[Epoch 20/40] [Batch 157/196] [Batch classify loss: 0.000222]
+right_index: 14848
+[Epoch 20/40] [Batch 158/196] [Batch classify loss: 0.002637]
+right_index: 15104
+[Epoch 20/40] [Batch 159/196] [Batch classify loss: 0.000236]
+right_index: 15360
+[Epoch 20/40] [Batch 160/196] [Batch classify loss: 0.000288]
+right_index: 15616
+[Epoch 20/40] [Batch 161/196] [Batch classify loss: 0.001982]
+right_index: 15872
+[Epoch 20/40] [Batch 162/196] [Batch classify loss: 0.000527]
+right_index: 16128
+[Epoch 20/40] [Batch 163/196] [Batch classify loss: 0.000276]
+right_index: 16384
+[Epoch 20/40] [Batch 164/196] [Batch classify loss: 0.000201]
+right_index: 16640
+[Epoch 20/40] [Batch 165/196] [Batch classify loss: 0.000415]
+right_index: 16896
+[Epoch 20/40] [Batch 166/196] [Batch classify loss: 0.000232]
+right_index: 17152
+[Epoch 20/40] [Batch 167/196] [Batch classify loss: 0.000129]
+right_index: 17408
+[Epoch 20/40] [Batch 168/196] [Batch classify loss: 0.000358]
+right_index: 17664
+[Epoch 20/40] [Batch 169/196] [Batch classify loss: 0.000255]
+right_index: 17920
+[Epoch 20/40] [Batch 170/196] [Batch classify loss: 0.001986]
+right_index: 18176
+[Epoch 20/40] [Batch 171/196] [Batch classify loss: 0.000187]
+right_index: 18432
+[Epoch 20/40] [Batch 172/196] [Batch classify loss: 0.000642]
+right_index: 18688
+[Epoch 20/40] [Batch 173/196] [Batch classify loss: 0.000169]
+right_index: 18944
+[Epoch 20/40] [Batch 174/196] [Batch classify loss: 0.002127]
+right_index: 19200
+[Epoch 20/40] [Batch 175/196] [Batch classify loss: 0.000133]
+right_index: 19456
+[Epoch 20/40] [Batch 176/196] [Batch classify loss: 0.002604]
+right_index: 19712
+[Epoch 20/40] [Batch 177/196] [Batch classify loss: 0.000176]
+right_index: 19968
+[Epoch 20/40] [Batch 178/196] [Batch classify loss: 0.000156]
+right_index: 20224
+[Epoch 20/40] [Batch 179/196] [Batch classify loss: 0.003223]
+right_index: 20480
+[Epoch 20/40] [Batch 180/196] [Batch classify loss: 0.000191]
+right_index: 20736
+[Epoch 20/40] [Batch 181/196] [Batch classify loss: 0.001076]
+right_index: 20992
+[Epoch 20/40] [Batch 182/196] [Batch classify loss: 0.000196]
+right_index: 21248
+[Epoch 20/40] [Batch 183/196] [Batch classify loss: 0.002359]
+right_index: 21504
+[Epoch 20/40] [Batch 184/196] [Batch classify loss: 0.002649]
+right_index: 21760
+[Epoch 20/40] [Batch 185/196] [Batch classify loss: 0.000315]
+right_index: 22016
+[Epoch 20/40] [Batch 186/196] [Batch classify loss: 0.002221]
+right_index: 22272
+[Epoch 20/40] [Batch 187/196] [Batch classify loss: 0.002678]
+right_index: 22528
+[Epoch 20/40] [Batch 188/196] [Batch classify loss: 0.000262]
+right_index: 22784
+[Epoch 20/40] [Batch 189/196] [Batch classify loss: 0.000212]
+right_index: 23040
+[Epoch 20/40] [Batch 190/196] [Batch classify loss: 0.001626]
+right_index: 23296
+[Epoch 20/40] [Batch 191/196] [Batch classify loss: 0.000224]
+right_index: 23552
+[Epoch 20/40] [Batch 192/196] [Batch classify loss: 0.016478]
+right_index: 23808
+[Epoch 20/40] [Batch 193/196] [Batch classify loss: 0.002346]
+right_index: 24064
+[Epoch 20/40] [Batch 194/196] [Batch classify loss: 0.000136]
+right_index: 24320
+[Epoch 20/40] [Batch 195/196] [Batch classify loss: 0.000293]
+right_index: 24576
+[Epoch 20/40] [Batch 196/196] [Batch classify loss: 0.006945]
+0020 epoch rmt trained classifier accuary on the clean testing examples:88.4000%
+0020 epoch rmt trained classifier loss on the clean testing examples:0.7293
+0020 epoch rmt trained classifier accuary on adversarial testset:26.1300%
+0020 epoch rmt trained classifier loss on adversarial testset:6.445710182189941
+
+
+20epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 21/40] [Batch 1/196] [Batch classify loss: 0.000129]
+right_index: 512
+[Epoch 21/40] [Batch 2/196] [Batch classify loss: 0.000261]
+right_index: 768
+[Epoch 21/40] [Batch 3/196] [Batch classify loss: 0.000366]
+right_index: 1024
+[Epoch 21/40] [Batch 4/196] [Batch classify loss: 0.000125]
+right_index: 1280
+[Epoch 21/40] [Batch 5/196] [Batch classify loss: 0.000209]
+right_index: 1536
+[Epoch 21/40] [Batch 6/196] [Batch classify loss: 0.000188]
+right_index: 1792
+[Epoch 21/40] [Batch 7/196] [Batch classify loss: 0.000150]
+right_index: 2048
+[Epoch 21/40] [Batch 8/196] [Batch classify loss: 0.000199]
+right_index: 2304
+[Epoch 21/40] [Batch 9/196] [Batch classify loss: 0.000150]
+right_index: 2560
+[Epoch 21/40] [Batch 10/196] [Batch classify loss: 0.000162]
+right_index: 2816
+[Epoch 21/40] [Batch 11/196] [Batch classify loss: 0.000320]
+right_index: 3072
+[Epoch 21/40] [Batch 12/196] [Batch classify loss: 0.001310]
+right_index: 3328
+[Epoch 21/40] [Batch 13/196] [Batch classify loss: 0.000241]
+right_index: 3584
+[Epoch 21/40] [Batch 14/196] [Batch classify loss: 0.000299]
+right_index: 3840
+[Epoch 21/40] [Batch 15/196] [Batch classify loss: 0.005713]
+right_index: 4096
+[Epoch 21/40] [Batch 16/196] [Batch classify loss: 0.000220]
+right_index: 4352
+[Epoch 21/40] [Batch 17/196] [Batch classify loss: 0.000238]
+right_index: 4608
+[Epoch 21/40] [Batch 18/196] [Batch classify loss: 0.000551]
+right_index: 4864
+[Epoch 21/40] [Batch 19/196] [Batch classify loss: 0.000197]
+right_index: 5120
+[Epoch 21/40] [Batch 20/196] [Batch classify loss: 0.000212]
+right_index: 5376
+[Epoch 21/40] [Batch 21/196] [Batch classify loss: 0.000141]
+right_index: 5632
+[Epoch 21/40] [Batch 22/196] [Batch classify loss: 0.000317]
+right_index: 5888
+[Epoch 21/40] [Batch 23/196] [Batch classify loss: 0.000195]
+right_index: 6144
+[Epoch 21/40] [Batch 24/196] [Batch classify loss: 0.000445]
+right_index: 6400
+[Epoch 21/40] [Batch 25/196] [Batch classify loss: 0.000298]
+right_index: 6656
+[Epoch 21/40] [Batch 26/196] [Batch classify loss: 0.000334]
+right_index: 6912
+[Epoch 21/40] [Batch 27/196] [Batch classify loss: 0.000323]
+right_index: 7168
+[Epoch 21/40] [Batch 28/196] [Batch classify loss: 0.000178]
+right_index: 7424
+[Epoch 21/40] [Batch 29/196] [Batch classify loss: 0.000173]
+right_index: 7680
+[Epoch 21/40] [Batch 30/196] [Batch classify loss: 0.000142]
+right_index: 7936
+[Epoch 21/40] [Batch 31/196] [Batch classify loss: 0.000190]
+right_index: 8192
+[Epoch 21/40] [Batch 32/196] [Batch classify loss: 0.000181]
+right_index: 8448
+[Epoch 21/40] [Batch 33/196] [Batch classify loss: 0.000346]
+right_index: 8704
+[Epoch 21/40] [Batch 34/196] [Batch classify loss: 0.001403]
+right_index: 8960
+[Epoch 21/40] [Batch 35/196] [Batch classify loss: 0.000599]
+right_index: 9216
+[Epoch 21/40] [Batch 36/196] [Batch classify loss: 0.000168]
+right_index: 9472
+[Epoch 21/40] [Batch 37/196] [Batch classify loss: 0.000170]
+right_index: 9728
+[Epoch 21/40] [Batch 38/196] [Batch classify loss: 0.000188]
+right_index: 9984
+[Epoch 21/40] [Batch 39/196] [Batch classify loss: 0.000124]
+right_index: 10240
+[Epoch 21/40] [Batch 40/196] [Batch classify loss: 0.000278]
+right_index: 10496
+[Epoch 21/40] [Batch 41/196] [Batch classify loss: 0.001882]
+right_index: 10752
+[Epoch 21/40] [Batch 42/196] [Batch classify loss: 0.000450]
+right_index: 11008
+[Epoch 21/40] [Batch 43/196] [Batch classify loss: 0.000159]
+right_index: 11264
+[Epoch 21/40] [Batch 44/196] [Batch classify loss: 0.000116]
+right_index: 11520
+[Epoch 21/40] [Batch 45/196] [Batch classify loss: 0.000184]
+right_index: 11776
+[Epoch 21/40] [Batch 46/196] [Batch classify loss: 0.002756]
+right_index: 12032
+[Epoch 21/40] [Batch 47/196] [Batch classify loss: 0.000157]
+right_index: 12288
+[Epoch 21/40] [Batch 48/196] [Batch classify loss: 0.000192]
+right_index: 12544
+[Epoch 21/40] [Batch 49/196] [Batch classify loss: 0.003786]
+right_index: 12800
+[Epoch 21/40] [Batch 50/196] [Batch classify loss: 0.000390]
+right_index: 13056
+[Epoch 21/40] [Batch 51/196] [Batch classify loss: 0.000171]
+right_index: 13312
+[Epoch 21/40] [Batch 52/196] [Batch classify loss: 0.000236]
+right_index: 13568
+[Epoch 21/40] [Batch 53/196] [Batch classify loss: 0.000151]
+right_index: 13824
+[Epoch 21/40] [Batch 54/196] [Batch classify loss: 0.000189]
+right_index: 14080
+[Epoch 21/40] [Batch 55/196] [Batch classify loss: 0.000215]
+right_index: 14336
+[Epoch 21/40] [Batch 56/196] [Batch classify loss: 0.000144]
+right_index: 14592
+[Epoch 21/40] [Batch 57/196] [Batch classify loss: 0.000143]
+right_index: 14848
+[Epoch 21/40] [Batch 58/196] [Batch classify loss: 0.002388]
+right_index: 15104
+[Epoch 21/40] [Batch 59/196] [Batch classify loss: 0.000176]
+right_index: 15360
+[Epoch 21/40] [Batch 60/196] [Batch classify loss: 0.000215]
+right_index: 15616
+[Epoch 21/40] [Batch 61/196] [Batch classify loss: 0.000427]
+right_index: 15872
+[Epoch 21/40] [Batch 62/196] [Batch classify loss: 0.000243]
+right_index: 16128
+[Epoch 21/40] [Batch 63/196] [Batch classify loss: 0.000129]
+right_index: 16384
+[Epoch 21/40] [Batch 64/196] [Batch classify loss: 0.000196]
+right_index: 16640
+[Epoch 21/40] [Batch 65/196] [Batch classify loss: 0.000218]
+right_index: 16896
+[Epoch 21/40] [Batch 66/196] [Batch classify loss: 0.001430]
+right_index: 17152
+[Epoch 21/40] [Batch 67/196] [Batch classify loss: 0.012498]
+right_index: 17408
+[Epoch 21/40] [Batch 68/196] [Batch classify loss: 0.000167]
+right_index: 17664
+[Epoch 21/40] [Batch 69/196] [Batch classify loss: 0.000225]
+right_index: 17920
+[Epoch 21/40] [Batch 70/196] [Batch classify loss: 0.000145]
+right_index: 18176
+[Epoch 21/40] [Batch 71/196] [Batch classify loss: 0.000164]
+right_index: 18432
+[Epoch 21/40] [Batch 72/196] [Batch classify loss: 0.002475]
+right_index: 18688
+[Epoch 21/40] [Batch 73/196] [Batch classify loss: 0.000140]
+right_index: 18944
+[Epoch 21/40] [Batch 74/196] [Batch classify loss: 0.000458]
+right_index: 19200
+[Epoch 21/40] [Batch 75/196] [Batch classify loss: 0.000187]
+right_index: 19456
+[Epoch 21/40] [Batch 76/196] [Batch classify loss: 0.000184]
+right_index: 19712
+[Epoch 21/40] [Batch 77/196] [Batch classify loss: 0.000512]
+right_index: 19968
+[Epoch 21/40] [Batch 78/196] [Batch classify loss: 0.000227]
+right_index: 20224
+[Epoch 21/40] [Batch 79/196] [Batch classify loss: 0.000231]
+right_index: 20480
+[Epoch 21/40] [Batch 80/196] [Batch classify loss: 0.002851]
+right_index: 20736
+[Epoch 21/40] [Batch 81/196] [Batch classify loss: 0.000316]
+right_index: 20992
+[Epoch 21/40] [Batch 82/196] [Batch classify loss: 0.000128]
+right_index: 21248
+[Epoch 21/40] [Batch 83/196] [Batch classify loss: 0.000440]
+right_index: 21504
+[Epoch 21/40] [Batch 84/196] [Batch classify loss: 0.000218]
+right_index: 21760
+[Epoch 21/40] [Batch 85/196] [Batch classify loss: 0.000184]
+right_index: 22016
+[Epoch 21/40] [Batch 86/196] [Batch classify loss: 0.007301]
+right_index: 22272
+[Epoch 21/40] [Batch 87/196] [Batch classify loss: 0.000173]
+right_index: 22528
+[Epoch 21/40] [Batch 88/196] [Batch classify loss: 0.000173]
+right_index: 22784
+[Epoch 21/40] [Batch 89/196] [Batch classify loss: 0.000138]
+right_index: 23040
+[Epoch 21/40] [Batch 90/196] [Batch classify loss: 0.000326]
+right_index: 23296
+[Epoch 21/40] [Batch 91/196] [Batch classify loss: 0.000882]
+right_index: 23552
+[Epoch 21/40] [Batch 92/196] [Batch classify loss: 0.000134]
+right_index: 23808
+[Epoch 21/40] [Batch 93/196] [Batch classify loss: 0.000159]
+right_index: 24064
+[Epoch 21/40] [Batch 94/196] [Batch classify loss: 0.000163]
+right_index: 24320
+[Epoch 21/40] [Batch 95/196] [Batch classify loss: 0.000213]
+right_index: 24576
+[Epoch 21/40] [Batch 96/196] [Batch classify loss: 0.000123]
+right_index: 24832
+[Epoch 21/40] [Batch 97/196] [Batch classify loss: 0.000161]
+right_index: 25088
+[Epoch 21/40] [Batch 98/196] [Batch classify loss: 0.000130]
+right_index: 25344
+[Epoch 21/40] [Batch 99/196] [Batch classify loss: 0.000119]
+right_index: 25397
+[Epoch 21/40] [Batch 100/196] [Batch classify loss: 0.008677]
+right_index: 256
+[Epoch 21/40] [Batch 101/196] [Batch classify loss: 0.000287]
+right_index: 512
+[Epoch 21/40] [Batch 102/196] [Batch classify loss: 0.000381]
+right_index: 768
+[Epoch 21/40] [Batch 103/196] [Batch classify loss: 0.000307]
+right_index: 1024
+[Epoch 21/40] [Batch 104/196] [Batch classify loss: 0.000255]
+right_index: 1280
+[Epoch 21/40] [Batch 105/196] [Batch classify loss: 0.000364]
+right_index: 1536
+[Epoch 21/40] [Batch 106/196] [Batch classify loss: 0.000161]
+right_index: 1792
+[Epoch 21/40] [Batch 107/196] [Batch classify loss: 0.000331]
+right_index: 2048
+[Epoch 21/40] [Batch 108/196] [Batch classify loss: 0.000212]
+right_index: 2304
+[Epoch 21/40] [Batch 109/196] [Batch classify loss: 0.000183]
+right_index: 2560
+[Epoch 21/40] [Batch 110/196] [Batch classify loss: 0.000150]
+right_index: 2816
+[Epoch 21/40] [Batch 111/196] [Batch classify loss: 0.006565]
+right_index: 3072
+[Epoch 21/40] [Batch 112/196] [Batch classify loss: 0.000210]
+right_index: 3328
+[Epoch 21/40] [Batch 113/196] [Batch classify loss: 0.000161]
+right_index: 3584
+[Epoch 21/40] [Batch 114/196] [Batch classify loss: 0.000169]
+right_index: 3840
+[Epoch 21/40] [Batch 115/196] [Batch classify loss: 0.000169]
+right_index: 4096
+[Epoch 21/40] [Batch 116/196] [Batch classify loss: 0.000228]
+right_index: 4352
+[Epoch 21/40] [Batch 117/196] [Batch classify loss: 0.006305]
+right_index: 4608
+[Epoch 21/40] [Batch 118/196] [Batch classify loss: 0.000259]
+right_index: 4864
+[Epoch 21/40] [Batch 119/196] [Batch classify loss: 0.000331]
+right_index: 5120
+[Epoch 21/40] [Batch 120/196] [Batch classify loss: 0.009630]
+right_index: 5376
+[Epoch 21/40] [Batch 121/196] [Batch classify loss: 0.000417]
+right_index: 5632
+[Epoch 21/40] [Batch 122/196] [Batch classify loss: 0.000361]
+right_index: 5888
+[Epoch 21/40] [Batch 123/196] [Batch classify loss: 0.000113]
+right_index: 6144
+[Epoch 21/40] [Batch 124/196] [Batch classify loss: 0.000153]
+right_index: 6400
+[Epoch 21/40] [Batch 125/196] [Batch classify loss: 0.000161]
+right_index: 6656
+[Epoch 21/40] [Batch 126/196] [Batch classify loss: 0.000335]
+right_index: 6912
+[Epoch 21/40] [Batch 127/196] [Batch classify loss: 0.000730]
+right_index: 7168
+[Epoch 21/40] [Batch 128/196] [Batch classify loss: 0.000165]
+right_index: 7424
+[Epoch 21/40] [Batch 129/196] [Batch classify loss: 0.000155]
+right_index: 7680
+[Epoch 21/40] [Batch 130/196] [Batch classify loss: 0.000322]
+right_index: 7936
+[Epoch 21/40] [Batch 131/196] [Batch classify loss: 0.005211]
+right_index: 8192
+[Epoch 21/40] [Batch 132/196] [Batch classify loss: 0.000226]
+right_index: 8448
+[Epoch 21/40] [Batch 133/196] [Batch classify loss: 0.000220]
+right_index: 8704
+[Epoch 21/40] [Batch 134/196] [Batch classify loss: 0.000737]
+right_index: 8960
+[Epoch 21/40] [Batch 135/196] [Batch classify loss: 0.000166]
+right_index: 9216
+[Epoch 21/40] [Batch 136/196] [Batch classify loss: 0.000162]
+right_index: 9472
+[Epoch 21/40] [Batch 137/196] [Batch classify loss: 0.000258]
+right_index: 9728
+[Epoch 21/40] [Batch 138/196] [Batch classify loss: 0.000147]
+right_index: 9984
+[Epoch 21/40] [Batch 139/196] [Batch classify loss: 0.000152]
+right_index: 10240
+[Epoch 21/40] [Batch 140/196] [Batch classify loss: 0.000125]
+right_index: 10496
+[Epoch 21/40] [Batch 141/196] [Batch classify loss: 0.000227]
+right_index: 10752
+[Epoch 21/40] [Batch 142/196] [Batch classify loss: 0.000227]
+right_index: 11008
+[Epoch 21/40] [Batch 143/196] [Batch classify loss: 0.000144]
+right_index: 11264
+[Epoch 21/40] [Batch 144/196] [Batch classify loss: 0.000905]
+right_index: 11520
+[Epoch 21/40] [Batch 145/196] [Batch classify loss: 0.000449]
+right_index: 11776
+[Epoch 21/40] [Batch 146/196] [Batch classify loss: 0.002404]
+right_index: 12032
+[Epoch 21/40] [Batch 147/196] [Batch classify loss: 0.000142]
+right_index: 12288
+[Epoch 21/40] [Batch 148/196] [Batch classify loss: 0.000173]
+right_index: 12544
+[Epoch 21/40] [Batch 149/196] [Batch classify loss: 0.001964]
+right_index: 12800
+[Epoch 21/40] [Batch 150/196] [Batch classify loss: 0.004699]
+right_index: 13056
+[Epoch 21/40] [Batch 151/196] [Batch classify loss: 0.000180]
+right_index: 13312
+[Epoch 21/40] [Batch 152/196] [Batch classify loss: 0.000184]
+right_index: 13568
+[Epoch 21/40] [Batch 153/196] [Batch classify loss: 0.000264]
+right_index: 13824
+[Epoch 21/40] [Batch 154/196] [Batch classify loss: 0.003325]
+right_index: 14080
+[Epoch 21/40] [Batch 155/196] [Batch classify loss: 0.000155]
+right_index: 14336
+[Epoch 21/40] [Batch 156/196] [Batch classify loss: 0.002568]
+right_index: 14592
+[Epoch 21/40] [Batch 157/196] [Batch classify loss: 0.010694]
+right_index: 14848
+[Epoch 21/40] [Batch 158/196] [Batch classify loss: 0.003086]
+right_index: 15104
+[Epoch 21/40] [Batch 159/196] [Batch classify loss: 0.000254]
+right_index: 15360
+[Epoch 21/40] [Batch 160/196] [Batch classify loss: 0.000284]
+right_index: 15616
+[Epoch 21/40] [Batch 161/196] [Batch classify loss: 0.000229]
+right_index: 15872
+[Epoch 21/40] [Batch 162/196] [Batch classify loss: 0.000208]
+right_index: 16128
+[Epoch 21/40] [Batch 163/196] [Batch classify loss: 0.000255]
+right_index: 16384
+[Epoch 21/40] [Batch 164/196] [Batch classify loss: 0.000255]
+right_index: 16640
+[Epoch 21/40] [Batch 165/196] [Batch classify loss: 0.000252]
+right_index: 16896
+[Epoch 21/40] [Batch 166/196] [Batch classify loss: 0.000296]
+right_index: 17152
+[Epoch 21/40] [Batch 167/196] [Batch classify loss: 0.000279]
+right_index: 17408
+[Epoch 21/40] [Batch 168/196] [Batch classify loss: 0.000143]
+right_index: 17664
+[Epoch 21/40] [Batch 169/196] [Batch classify loss: 0.000196]
+right_index: 17920
+[Epoch 21/40] [Batch 170/196] [Batch classify loss: 0.000150]
+right_index: 18176
+[Epoch 21/40] [Batch 171/196] [Batch classify loss: 0.000143]
+right_index: 18432
+[Epoch 21/40] [Batch 172/196] [Batch classify loss: 0.002774]
+right_index: 18688
+[Epoch 21/40] [Batch 173/196] [Batch classify loss: 0.000167]
+right_index: 18944
+[Epoch 21/40] [Batch 174/196] [Batch classify loss: 0.000203]
+right_index: 19200
+[Epoch 21/40] [Batch 175/196] [Batch classify loss: 0.000275]
+right_index: 19456
+[Epoch 21/40] [Batch 176/196] [Batch classify loss: 0.000311]
+right_index: 19712
+[Epoch 21/40] [Batch 177/196] [Batch classify loss: 0.000142]
+right_index: 19968
+[Epoch 21/40] [Batch 178/196] [Batch classify loss: 0.000459]
+right_index: 20224
+[Epoch 21/40] [Batch 179/196] [Batch classify loss: 0.000612]
+right_index: 20480
+[Epoch 21/40] [Batch 180/196] [Batch classify loss: 0.002511]
+right_index: 20736
+[Epoch 21/40] [Batch 181/196] [Batch classify loss: 0.000152]
+right_index: 20992
+[Epoch 21/40] [Batch 182/196] [Batch classify loss: 0.000162]
+right_index: 21248
+[Epoch 21/40] [Batch 183/196] [Batch classify loss: 0.000238]
+right_index: 21504
+[Epoch 21/40] [Batch 184/196] [Batch classify loss: 0.000545]
+right_index: 21760
+[Epoch 21/40] [Batch 185/196] [Batch classify loss: 0.000311]
+right_index: 22016
+[Epoch 21/40] [Batch 186/196] [Batch classify loss: 0.000166]
+right_index: 22272
+[Epoch 21/40] [Batch 187/196] [Batch classify loss: 0.000145]
+right_index: 22528
+[Epoch 21/40] [Batch 188/196] [Batch classify loss: 0.000168]
+right_index: 22784
+[Epoch 21/40] [Batch 189/196] [Batch classify loss: 0.000331]
+right_index: 23040
+[Epoch 21/40] [Batch 190/196] [Batch classify loss: 0.000148]
+right_index: 23296
+[Epoch 21/40] [Batch 191/196] [Batch classify loss: 0.000515]
+right_index: 23552
+[Epoch 21/40] [Batch 192/196] [Batch classify loss: 0.000238]
+right_index: 23808
+[Epoch 21/40] [Batch 193/196] [Batch classify loss: 0.000253]
+right_index: 24064
+[Epoch 21/40] [Batch 194/196] [Batch classify loss: 0.000356]
+right_index: 24320
+[Epoch 21/40] [Batch 195/196] [Batch classify loss: 0.002715]
+right_index: 24576
+[Epoch 21/40] [Batch 196/196] [Batch classify loss: 0.003877]
+0021 epoch rmt trained classifier accuary on the clean testing examples:88.3300%
+0021 epoch rmt trained classifier loss on the clean testing examples:0.7317
+0021 epoch rmt trained classifier accuary on adversarial testset:26.2400%
+0021 epoch rmt trained classifier loss on adversarial testset:6.441590785980225
+
+
+21epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 22/40] [Batch 1/196] [Batch classify loss: 0.000435]
+right_index: 512
+[Epoch 22/40] [Batch 2/196] [Batch classify loss: 0.010224]
+right_index: 768
+[Epoch 22/40] [Batch 3/196] [Batch classify loss: 0.000251]
+right_index: 1024
+[Epoch 22/40] [Batch 4/196] [Batch classify loss: 0.000246]
+right_index: 1280
+[Epoch 22/40] [Batch 5/196] [Batch classify loss: 0.000114]
+right_index: 1536
+[Epoch 22/40] [Batch 6/196] [Batch classify loss: 0.000264]
+right_index: 1792
+[Epoch 22/40] [Batch 7/196] [Batch classify loss: 0.000240]
+right_index: 2048
+[Epoch 22/40] [Batch 8/196] [Batch classify loss: 0.000283]
+right_index: 2304
+[Epoch 22/40] [Batch 9/196] [Batch classify loss: 0.000124]
+right_index: 2560
+[Epoch 22/40] [Batch 10/196] [Batch classify loss: 0.000212]
+right_index: 2816
+[Epoch 22/40] [Batch 11/196] [Batch classify loss: 0.000192]
+right_index: 3072
+[Epoch 22/40] [Batch 12/196] [Batch classify loss: 0.000214]
+right_index: 3328
+[Epoch 22/40] [Batch 13/196] [Batch classify loss: 0.000187]
+right_index: 3584
+[Epoch 22/40] [Batch 14/196] [Batch classify loss: 0.000415]
+right_index: 3840
+[Epoch 22/40] [Batch 15/196] [Batch classify loss: 0.000128]
+right_index: 4096
+[Epoch 22/40] [Batch 16/196] [Batch classify loss: 0.000243]
+right_index: 4352
+[Epoch 22/40] [Batch 17/196] [Batch classify loss: 0.000175]
+right_index: 4608
+[Epoch 22/40] [Batch 18/196] [Batch classify loss: 0.000256]
+right_index: 4864
+[Epoch 22/40] [Batch 19/196] [Batch classify loss: 0.000221]
+right_index: 5120
+[Epoch 22/40] [Batch 20/196] [Batch classify loss: 0.000167]
+right_index: 5376
+[Epoch 22/40] [Batch 21/196] [Batch classify loss: 0.006600]
+right_index: 5632
+[Epoch 22/40] [Batch 22/196] [Batch classify loss: 0.000207]
+right_index: 5888
+[Epoch 22/40] [Batch 23/196] [Batch classify loss: 0.000147]
+right_index: 6144
+[Epoch 22/40] [Batch 24/196] [Batch classify loss: 0.000160]
+right_index: 6400
+[Epoch 22/40] [Batch 25/196] [Batch classify loss: 0.000191]
+right_index: 6656
+[Epoch 22/40] [Batch 26/196] [Batch classify loss: 0.000118]
+right_index: 6912
+[Epoch 22/40] [Batch 27/196] [Batch classify loss: 0.000118]
+right_index: 7168
+[Epoch 22/40] [Batch 28/196] [Batch classify loss: 0.000191]
+right_index: 7424
+[Epoch 22/40] [Batch 29/196] [Batch classify loss: 0.000659]
+right_index: 7680
+[Epoch 22/40] [Batch 30/196] [Batch classify loss: 0.000253]
+right_index: 7936
+[Epoch 22/40] [Batch 31/196] [Batch classify loss: 0.000969]
+right_index: 8192
+[Epoch 22/40] [Batch 32/196] [Batch classify loss: 0.000171]
+right_index: 8448
+[Epoch 22/40] [Batch 33/196] [Batch classify loss: 0.000352]
+right_index: 8704
+[Epoch 22/40] [Batch 34/196] [Batch classify loss: 0.000258]
+right_index: 8960
+[Epoch 22/40] [Batch 35/196] [Batch classify loss: 0.000244]
+right_index: 9216
+[Epoch 22/40] [Batch 36/196] [Batch classify loss: 0.000158]
+right_index: 9472
+[Epoch 22/40] [Batch 37/196] [Batch classify loss: 0.000250]
+right_index: 9728
+[Epoch 22/40] [Batch 38/196] [Batch classify loss: 0.000245]
+right_index: 9984
+[Epoch 22/40] [Batch 39/196] [Batch classify loss: 0.000668]
+right_index: 10240
+[Epoch 22/40] [Batch 40/196] [Batch classify loss: 0.000159]
+right_index: 10496
+[Epoch 22/40] [Batch 41/196] [Batch classify loss: 0.006269]
+right_index: 10752
+[Epoch 22/40] [Batch 42/196] [Batch classify loss: 0.000224]
+right_index: 11008
+[Epoch 22/40] [Batch 43/196] [Batch classify loss: 0.000190]
+right_index: 11264
+[Epoch 22/40] [Batch 44/196] [Batch classify loss: 0.000102]
+right_index: 11520
+[Epoch 22/40] [Batch 45/196] [Batch classify loss: 0.000429]
+right_index: 11776
+[Epoch 22/40] [Batch 46/196] [Batch classify loss: 0.000189]
+right_index: 12032
+[Epoch 22/40] [Batch 47/196] [Batch classify loss: 0.000189]
+right_index: 12288
+[Epoch 22/40] [Batch 48/196] [Batch classify loss: 0.000146]
+right_index: 12544
+[Epoch 22/40] [Batch 49/196] [Batch classify loss: 0.000192]
+right_index: 12800
+[Epoch 22/40] [Batch 50/196] [Batch classify loss: 0.002349]
+right_index: 13056
+[Epoch 22/40] [Batch 51/196] [Batch classify loss: 0.002097]
+right_index: 13312
+[Epoch 22/40] [Batch 52/196] [Batch classify loss: 0.000224]
+right_index: 13568
+[Epoch 22/40] [Batch 53/196] [Batch classify loss: 0.000113]
+right_index: 13824
+[Epoch 22/40] [Batch 54/196] [Batch classify loss: 0.000404]
+right_index: 14080
+[Epoch 22/40] [Batch 55/196] [Batch classify loss: 0.000241]
+right_index: 14336
+[Epoch 22/40] [Batch 56/196] [Batch classify loss: 0.000202]
+right_index: 14592
+[Epoch 22/40] [Batch 57/196] [Batch classify loss: 0.000166]
+right_index: 14848
+[Epoch 22/40] [Batch 58/196] [Batch classify loss: 0.000125]
+right_index: 15104
+[Epoch 22/40] [Batch 59/196] [Batch classify loss: 0.000175]
+right_index: 15360
+[Epoch 22/40] [Batch 60/196] [Batch classify loss: 0.000182]
+right_index: 15616
+[Epoch 22/40] [Batch 61/196] [Batch classify loss: 0.000196]
+right_index: 15872
+[Epoch 22/40] [Batch 62/196] [Batch classify loss: 0.000172]
+right_index: 16128
+[Epoch 22/40] [Batch 63/196] [Batch classify loss: 0.001141]
+right_index: 16384
+[Epoch 22/40] [Batch 64/196] [Batch classify loss: 0.000182]
+right_index: 16640
+[Epoch 22/40] [Batch 65/196] [Batch classify loss: 0.000231]
+right_index: 16896
+[Epoch 22/40] [Batch 66/196] [Batch classify loss: 0.000117]
+right_index: 17152
+[Epoch 22/40] [Batch 67/196] [Batch classify loss: 0.000150]
+right_index: 17408
+[Epoch 22/40] [Batch 68/196] [Batch classify loss: 0.000214]
+right_index: 17664
+[Epoch 22/40] [Batch 69/196] [Batch classify loss: 0.001583]
+right_index: 17920
+[Epoch 22/40] [Batch 70/196] [Batch classify loss: 0.003238]
+right_index: 18176
+[Epoch 22/40] [Batch 71/196] [Batch classify loss: 0.000921]
+right_index: 18432
+[Epoch 22/40] [Batch 72/196] [Batch classify loss: 0.000198]
+right_index: 18688
+[Epoch 22/40] [Batch 73/196] [Batch classify loss: 0.000395]
+right_index: 18944
+[Epoch 22/40] [Batch 74/196] [Batch classify loss: 0.000297]
+right_index: 19200
+[Epoch 22/40] [Batch 75/196] [Batch classify loss: 0.000237]
+right_index: 19456
+[Epoch 22/40] [Batch 76/196] [Batch classify loss: 0.000187]
+right_index: 19712
+[Epoch 22/40] [Batch 77/196] [Batch classify loss: 0.000447]
+right_index: 19968
+[Epoch 22/40] [Batch 78/196] [Batch classify loss: 0.000224]
+right_index: 20224
+[Epoch 22/40] [Batch 79/196] [Batch classify loss: 0.000164]
+right_index: 20480
+[Epoch 22/40] [Batch 80/196] [Batch classify loss: 0.000165]
+right_index: 20736
+[Epoch 22/40] [Batch 81/196] [Batch classify loss: 0.000176]
+right_index: 20992
+[Epoch 22/40] [Batch 82/196] [Batch classify loss: 0.000170]
+right_index: 21248
+[Epoch 22/40] [Batch 83/196] [Batch classify loss: 0.000219]
+right_index: 21504
+[Epoch 22/40] [Batch 84/196] [Batch classify loss: 0.000157]
+right_index: 21760
+[Epoch 22/40] [Batch 85/196] [Batch classify loss: 0.000178]
+right_index: 22016
+[Epoch 22/40] [Batch 86/196] [Batch classify loss: 0.000160]
+right_index: 22272
+[Epoch 22/40] [Batch 87/196] [Batch classify loss: 0.000945]
+right_index: 22528
+[Epoch 22/40] [Batch 88/196] [Batch classify loss: 0.000250]
+right_index: 22784
+[Epoch 22/40] [Batch 89/196] [Batch classify loss: 0.000205]
+right_index: 23040
+[Epoch 22/40] [Batch 90/196] [Batch classify loss: 0.000169]
+right_index: 23296
+[Epoch 22/40] [Batch 91/196] [Batch classify loss: 0.000139]
+right_index: 23552
+[Epoch 22/40] [Batch 92/196] [Batch classify loss: 0.000414]
+right_index: 23808
+[Epoch 22/40] [Batch 93/196] [Batch classify loss: 0.000236]
+right_index: 24064
+[Epoch 22/40] [Batch 94/196] [Batch classify loss: 0.000268]
+right_index: 24320
+[Epoch 22/40] [Batch 95/196] [Batch classify loss: 0.000162]
+right_index: 24576
+[Epoch 22/40] [Batch 96/196] [Batch classify loss: 0.000293]
+right_index: 24832
+[Epoch 22/40] [Batch 97/196] [Batch classify loss: 0.000242]
+right_index: 25088
+[Epoch 22/40] [Batch 98/196] [Batch classify loss: 0.000238]
+right_index: 25344
+[Epoch 22/40] [Batch 99/196] [Batch classify loss: 0.000188]
+right_index: 25397
+[Epoch 22/40] [Batch 100/196] [Batch classify loss: 0.015859]
+right_index: 256
+[Epoch 22/40] [Batch 101/196] [Batch classify loss: 0.000235]
+right_index: 512
+[Epoch 22/40] [Batch 102/196] [Batch classify loss: 0.000229]
+right_index: 768
+[Epoch 22/40] [Batch 103/196] [Batch classify loss: 0.000307]
+right_index: 1024
+[Epoch 22/40] [Batch 104/196] [Batch classify loss: 0.000247]
+right_index: 1280
+[Epoch 22/40] [Batch 105/196] [Batch classify loss: 0.000710]
+right_index: 1536
+[Epoch 22/40] [Batch 106/196] [Batch classify loss: 0.000161]
+right_index: 1792
+[Epoch 22/40] [Batch 107/196] [Batch classify loss: 0.000368]
+right_index: 2048
+[Epoch 22/40] [Batch 108/196] [Batch classify loss: 0.000336]
+right_index: 2304
+[Epoch 22/40] [Batch 109/196] [Batch classify loss: 0.000213]
+right_index: 2560
+[Epoch 22/40] [Batch 110/196] [Batch classify loss: 0.000230]
+right_index: 2816
+[Epoch 22/40] [Batch 111/196] [Batch classify loss: 0.000127]
+right_index: 3072
+[Epoch 22/40] [Batch 112/196] [Batch classify loss: 0.000206]
+right_index: 3328
+[Epoch 22/40] [Batch 113/196] [Batch classify loss: 0.000145]
+right_index: 3584
+[Epoch 22/40] [Batch 114/196] [Batch classify loss: 0.000117]
+right_index: 3840
+[Epoch 22/40] [Batch 115/196] [Batch classify loss: 0.000245]
+right_index: 4096
+[Epoch 22/40] [Batch 116/196] [Batch classify loss: 0.000190]
+right_index: 4352
+[Epoch 22/40] [Batch 117/196] [Batch classify loss: 0.000187]
+right_index: 4608
+[Epoch 22/40] [Batch 118/196] [Batch classify loss: 0.000186]
+right_index: 4864
+[Epoch 22/40] [Batch 119/196] [Batch classify loss: 0.000199]
+right_index: 5120
+[Epoch 22/40] [Batch 120/196] [Batch classify loss: 0.001037]
+right_index: 5376
+[Epoch 22/40] [Batch 121/196] [Batch classify loss: 0.000194]
+right_index: 5632
+[Epoch 22/40] [Batch 122/196] [Batch classify loss: 0.000574]
+right_index: 5888
+[Epoch 22/40] [Batch 123/196] [Batch classify loss: 0.000349]
+right_index: 6144
+[Epoch 22/40] [Batch 124/196] [Batch classify loss: 0.000237]
+right_index: 6400
+[Epoch 22/40] [Batch 125/196] [Batch classify loss: 0.000478]
+right_index: 6656
+[Epoch 22/40] [Batch 126/196] [Batch classify loss: 0.000239]
+right_index: 6912
+[Epoch 22/40] [Batch 127/196] [Batch classify loss: 0.000130]
+right_index: 7168
+[Epoch 22/40] [Batch 128/196] [Batch classify loss: 0.000171]
+right_index: 7424
+[Epoch 22/40] [Batch 129/196] [Batch classify loss: 0.000171]
+right_index: 7680
+[Epoch 22/40] [Batch 130/196] [Batch classify loss: 0.000211]
+right_index: 7936
+[Epoch 22/40] [Batch 131/196] [Batch classify loss: 0.000246]
+right_index: 8192
+[Epoch 22/40] [Batch 132/196] [Batch classify loss: 0.001475]
+right_index: 8448
+[Epoch 22/40] [Batch 133/196] [Batch classify loss: 0.000195]
+right_index: 8704
+[Epoch 22/40] [Batch 134/196] [Batch classify loss: 0.000357]
+right_index: 8960
+[Epoch 22/40] [Batch 135/196] [Batch classify loss: 0.000211]
+right_index: 9216
+[Epoch 22/40] [Batch 136/196] [Batch classify loss: 0.000214]
+right_index: 9472
+[Epoch 22/40] [Batch 137/196] [Batch classify loss: 0.000221]
+right_index: 9728
+[Epoch 22/40] [Batch 138/196] [Batch classify loss: 0.000139]
+right_index: 9984
+[Epoch 22/40] [Batch 139/196] [Batch classify loss: 0.000154]
+right_index: 10240
+[Epoch 22/40] [Batch 140/196] [Batch classify loss: 0.000216]
+right_index: 10496
+[Epoch 22/40] [Batch 141/196] [Batch classify loss: 0.000154]
+right_index: 10752
+[Epoch 22/40] [Batch 142/196] [Batch classify loss: 0.000102]
+right_index: 11008
+[Epoch 22/40] [Batch 143/196] [Batch classify loss: 0.000148]
+right_index: 11264
+[Epoch 22/40] [Batch 144/196] [Batch classify loss: 0.000200]
+right_index: 11520
+[Epoch 22/40] [Batch 145/196] [Batch classify loss: 0.000591]
+right_index: 11776
+[Epoch 22/40] [Batch 146/196] [Batch classify loss: 0.000205]
+right_index: 12032
+[Epoch 22/40] [Batch 147/196] [Batch classify loss: 0.000160]
+right_index: 12288
+[Epoch 22/40] [Batch 148/196] [Batch classify loss: 0.000288]
+right_index: 12544
+[Epoch 22/40] [Batch 149/196] [Batch classify loss: 0.000204]
+right_index: 12800
+[Epoch 22/40] [Batch 150/196] [Batch classify loss: 0.010011]
+right_index: 13056
+[Epoch 22/40] [Batch 151/196] [Batch classify loss: 0.000273]
+right_index: 13312
+[Epoch 22/40] [Batch 152/196] [Batch classify loss: 0.000216]
+right_index: 13568
+[Epoch 22/40] [Batch 153/196] [Batch classify loss: 0.000179]
+right_index: 13824
+[Epoch 22/40] [Batch 154/196] [Batch classify loss: 0.000356]
+right_index: 14080
+[Epoch 22/40] [Batch 155/196] [Batch classify loss: 0.000149]
+right_index: 14336
+[Epoch 22/40] [Batch 156/196] [Batch classify loss: 0.000201]
+right_index: 14592
+[Epoch 22/40] [Batch 157/196] [Batch classify loss: 0.000161]
+right_index: 14848
+[Epoch 22/40] [Batch 158/196] [Batch classify loss: 0.000121]
+right_index: 15104
+[Epoch 22/40] [Batch 159/196] [Batch classify loss: 0.000207]
+right_index: 15360
+[Epoch 22/40] [Batch 160/196] [Batch classify loss: 0.000146]
+right_index: 15616
+[Epoch 22/40] [Batch 161/196] [Batch classify loss: 0.005431]
+right_index: 15872
+[Epoch 22/40] [Batch 162/196] [Batch classify loss: 0.000166]
+right_index: 16128
+[Epoch 22/40] [Batch 163/196] [Batch classify loss: 0.000199]
+right_index: 16384
+[Epoch 22/40] [Batch 164/196] [Batch classify loss: 0.000233]
+right_index: 16640
+[Epoch 22/40] [Batch 165/196] [Batch classify loss: 0.001987]
+right_index: 16896
+[Epoch 22/40] [Batch 166/196] [Batch classify loss: 0.004248]
+right_index: 17152
+[Epoch 22/40] [Batch 167/196] [Batch classify loss: 0.000203]
+right_index: 17408
+[Epoch 22/40] [Batch 168/196] [Batch classify loss: 0.008334]
+right_index: 17664
+[Epoch 22/40] [Batch 169/196] [Batch classify loss: 0.002491]
+right_index: 17920
+[Epoch 22/40] [Batch 170/196] [Batch classify loss: 0.002719]
+right_index: 18176
+[Epoch 22/40] [Batch 171/196] [Batch classify loss: 0.000260]
+right_index: 18432
+[Epoch 22/40] [Batch 172/196] [Batch classify loss: 0.000243]
+right_index: 18688
+[Epoch 22/40] [Batch 173/196] [Batch classify loss: 0.000266]
+right_index: 18944
+[Epoch 22/40] [Batch 174/196] [Batch classify loss: 0.000192]
+right_index: 19200
+[Epoch 22/40] [Batch 175/196] [Batch classify loss: 0.000211]
+right_index: 19456
+[Epoch 22/40] [Batch 176/196] [Batch classify loss: 0.000270]
+right_index: 19712
+[Epoch 22/40] [Batch 177/196] [Batch classify loss: 0.000310]
+right_index: 19968
+[Epoch 22/40] [Batch 178/196] [Batch classify loss: 0.000179]
+right_index: 20224
+[Epoch 22/40] [Batch 179/196] [Batch classify loss: 0.000141]
+right_index: 20480
+[Epoch 22/40] [Batch 180/196] [Batch classify loss: 0.000179]
+right_index: 20736
+[Epoch 22/40] [Batch 181/196] [Batch classify loss: 0.000173]
+right_index: 20992
+[Epoch 22/40] [Batch 182/196] [Batch classify loss: 0.000200]
+right_index: 21248
+[Epoch 22/40] [Batch 183/196] [Batch classify loss: 0.001085]
+right_index: 21504
+[Epoch 22/40] [Batch 184/196] [Batch classify loss: 0.000131]
+right_index: 21760
+[Epoch 22/40] [Batch 185/196] [Batch classify loss: 0.000144]
+right_index: 22016
+[Epoch 22/40] [Batch 186/196] [Batch classify loss: 0.002293]
+right_index: 22272
+[Epoch 22/40] [Batch 187/196] [Batch classify loss: 0.000146]
+right_index: 22528
+[Epoch 22/40] [Batch 188/196] [Batch classify loss: 0.000268]
+right_index: 22784
+[Epoch 22/40] [Batch 189/196] [Batch classify loss: 0.000201]
+right_index: 23040
+[Epoch 22/40] [Batch 190/196] [Batch classify loss: 0.000151]
+right_index: 23296
+[Epoch 22/40] [Batch 191/196] [Batch classify loss: 0.000220]
+right_index: 23552
+[Epoch 22/40] [Batch 192/196] [Batch classify loss: 0.000163]
+right_index: 23808
+[Epoch 22/40] [Batch 193/196] [Batch classify loss: 0.007689]
+right_index: 24064
+[Epoch 22/40] [Batch 194/196] [Batch classify loss: 0.000148]
+right_index: 24320
+[Epoch 22/40] [Batch 195/196] [Batch classify loss: 0.000365]
+right_index: 24576
+[Epoch 22/40] [Batch 196/196] [Batch classify loss: 0.001461]
+0022 epoch rmt trained classifier accuary on the clean testing examples:88.3600%
+0022 epoch rmt trained classifier loss on the clean testing examples:0.7349
+0022 epoch rmt trained classifier accuary on adversarial testset:26.2800%
+0022 epoch rmt trained classifier loss on adversarial testset:6.461648464202881
+
+
+22epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 23/40] [Batch 1/196] [Batch classify loss: 0.000153]
+right_index: 512
+[Epoch 23/40] [Batch 2/196] [Batch classify loss: 0.000262]
+right_index: 768
+[Epoch 23/40] [Batch 3/196] [Batch classify loss: 0.004717]
+right_index: 1024
+[Epoch 23/40] [Batch 4/196] [Batch classify loss: 0.003319]
+right_index: 1280
+[Epoch 23/40] [Batch 5/196] [Batch classify loss: 0.000137]
+right_index: 1536
+[Epoch 23/40] [Batch 6/196] [Batch classify loss: 0.000162]
+right_index: 1792
+[Epoch 23/40] [Batch 7/196] [Batch classify loss: 0.000241]
+right_index: 2048
+[Epoch 23/40] [Batch 8/196] [Batch classify loss: 0.000145]
+right_index: 2304
+[Epoch 23/40] [Batch 9/196] [Batch classify loss: 0.000713]
+right_index: 2560
+[Epoch 23/40] [Batch 10/196] [Batch classify loss: 0.002696]
+right_index: 2816
+[Epoch 23/40] [Batch 11/196] [Batch classify loss: 0.000658]
+right_index: 3072
+[Epoch 23/40] [Batch 12/196] [Batch classify loss: 0.000230]
+right_index: 3328
+[Epoch 23/40] [Batch 13/196] [Batch classify loss: 0.005600]
+right_index: 3584
+[Epoch 23/40] [Batch 14/196] [Batch classify loss: 0.000219]
+right_index: 3840
+[Epoch 23/40] [Batch 15/196] [Batch classify loss: 0.000900]
+right_index: 4096
+[Epoch 23/40] [Batch 16/196] [Batch classify loss: 0.000883]
+right_index: 4352
+[Epoch 23/40] [Batch 17/196] [Batch classify loss: 0.000150]
+right_index: 4608
+[Epoch 23/40] [Batch 18/196] [Batch classify loss: 0.000215]
+right_index: 4864
+[Epoch 23/40] [Batch 19/196] [Batch classify loss: 0.000237]
+right_index: 5120
+[Epoch 23/40] [Batch 20/196] [Batch classify loss: 0.003043]
+right_index: 5376
+[Epoch 23/40] [Batch 21/196] [Batch classify loss: 0.000197]
+right_index: 5632
+[Epoch 23/40] [Batch 22/196] [Batch classify loss: 0.000159]
+right_index: 5888
+[Epoch 23/40] [Batch 23/196] [Batch classify loss: 0.000184]
+right_index: 6144
+[Epoch 23/40] [Batch 24/196] [Batch classify loss: 0.000162]
+right_index: 6400
+[Epoch 23/40] [Batch 25/196] [Batch classify loss: 0.000238]
+right_index: 6656
+[Epoch 23/40] [Batch 26/196] [Batch classify loss: 0.000344]
+right_index: 6912
+[Epoch 23/40] [Batch 27/196] [Batch classify loss: 0.000288]
+right_index: 7168
+[Epoch 23/40] [Batch 28/196] [Batch classify loss: 0.000176]
+right_index: 7424
+[Epoch 23/40] [Batch 29/196] [Batch classify loss: 0.000257]
+right_index: 7680
+[Epoch 23/40] [Batch 30/196] [Batch classify loss: 0.000177]
+right_index: 7936
+[Epoch 23/40] [Batch 31/196] [Batch classify loss: 0.000581]
+right_index: 8192
+[Epoch 23/40] [Batch 32/196] [Batch classify loss: 0.000214]
+right_index: 8448
+[Epoch 23/40] [Batch 33/196] [Batch classify loss: 0.000275]
+right_index: 8704
+[Epoch 23/40] [Batch 34/196] [Batch classify loss: 0.000133]
+right_index: 8960
+[Epoch 23/40] [Batch 35/196] [Batch classify loss: 0.000157]
+right_index: 9216
+[Epoch 23/40] [Batch 36/196] [Batch classify loss: 0.000216]
+right_index: 9472
+[Epoch 23/40] [Batch 37/196] [Batch classify loss: 0.000127]
+right_index: 9728
+[Epoch 23/40] [Batch 38/196] [Batch classify loss: 0.000188]
+right_index: 9984
+[Epoch 23/40] [Batch 39/196] [Batch classify loss: 0.000219]
+right_index: 10240
+[Epoch 23/40] [Batch 40/196] [Batch classify loss: 0.005525]
+right_index: 10496
+[Epoch 23/40] [Batch 41/196] [Batch classify loss: 0.000119]
+right_index: 10752
+[Epoch 23/40] [Batch 42/196] [Batch classify loss: 0.000342]
+right_index: 11008
+[Epoch 23/40] [Batch 43/196] [Batch classify loss: 0.000138]
+right_index: 11264
+[Epoch 23/40] [Batch 44/196] [Batch classify loss: 0.000240]
+right_index: 11520
+[Epoch 23/40] [Batch 45/196] [Batch classify loss: 0.000591]
+right_index: 11776
+[Epoch 23/40] [Batch 46/196] [Batch classify loss: 0.000152]
+right_index: 12032
+[Epoch 23/40] [Batch 47/196] [Batch classify loss: 0.000178]
+right_index: 12288
+[Epoch 23/40] [Batch 48/196] [Batch classify loss: 0.000189]
+right_index: 12544
+[Epoch 23/40] [Batch 49/196] [Batch classify loss: 0.000184]
+right_index: 12800
+[Epoch 23/40] [Batch 50/196] [Batch classify loss: 0.000349]
+right_index: 13056
+[Epoch 23/40] [Batch 51/196] [Batch classify loss: 0.007452]
+right_index: 13312
+[Epoch 23/40] [Batch 52/196] [Batch classify loss: 0.000126]
+right_index: 13568
+[Epoch 23/40] [Batch 53/196] [Batch classify loss: 0.000201]
+right_index: 13824
+[Epoch 23/40] [Batch 54/196] [Batch classify loss: 0.000173]
+right_index: 14080
+[Epoch 23/40] [Batch 55/196] [Batch classify loss: 0.000501]
+right_index: 14336
+[Epoch 23/40] [Batch 56/196] [Batch classify loss: 0.000123]
+right_index: 14592
+[Epoch 23/40] [Batch 57/196] [Batch classify loss: 0.000294]
+right_index: 14848
+[Epoch 23/40] [Batch 58/196] [Batch classify loss: 0.000220]
+right_index: 15104
+[Epoch 23/40] [Batch 59/196] [Batch classify loss: 0.000167]
+right_index: 15360
+[Epoch 23/40] [Batch 60/196] [Batch classify loss: 0.000234]
+right_index: 15616
+[Epoch 23/40] [Batch 61/196] [Batch classify loss: 0.000124]
+right_index: 15872
+[Epoch 23/40] [Batch 62/196] [Batch classify loss: 0.000237]
+right_index: 16128
+[Epoch 23/40] [Batch 63/196] [Batch classify loss: 0.000210]
+right_index: 16384
+[Epoch 23/40] [Batch 64/196] [Batch classify loss: 0.000283]
+right_index: 16640
+[Epoch 23/40] [Batch 65/196] [Batch classify loss: 0.000160]
+right_index: 16896
+[Epoch 23/40] [Batch 66/196] [Batch classify loss: 0.000185]
+right_index: 17152
+[Epoch 23/40] [Batch 67/196] [Batch classify loss: 0.000202]
+right_index: 17408
+[Epoch 23/40] [Batch 68/196] [Batch classify loss: 0.000118]
+right_index: 17664
+[Epoch 23/40] [Batch 69/196] [Batch classify loss: 0.000140]
+right_index: 17920
+[Epoch 23/40] [Batch 70/196] [Batch classify loss: 0.000180]
+right_index: 18176
+[Epoch 23/40] [Batch 71/196] [Batch classify loss: 0.002416]
+right_index: 18432
+[Epoch 23/40] [Batch 72/196] [Batch classify loss: 0.001219]
+right_index: 18688
+[Epoch 23/40] [Batch 73/196] [Batch classify loss: 0.000165]
+right_index: 18944
+[Epoch 23/40] [Batch 74/196] [Batch classify loss: 0.000149]
+right_index: 19200
+[Epoch 23/40] [Batch 75/196] [Batch classify loss: 0.000154]
+right_index: 19456
+[Epoch 23/40] [Batch 76/196] [Batch classify loss: 0.000218]
+right_index: 19712
+[Epoch 23/40] [Batch 77/196] [Batch classify loss: 0.000122]
+right_index: 19968
+[Epoch 23/40] [Batch 78/196] [Batch classify loss: 0.000396]
+right_index: 20224
+[Epoch 23/40] [Batch 79/196] [Batch classify loss: 0.000207]
+right_index: 20480
+[Epoch 23/40] [Batch 80/196] [Batch classify loss: 0.000224]
+right_index: 20736
+[Epoch 23/40] [Batch 81/196] [Batch classify loss: 0.000106]
+right_index: 20992
+[Epoch 23/40] [Batch 82/196] [Batch classify loss: 0.000177]
+right_index: 21248
+[Epoch 23/40] [Batch 83/196] [Batch classify loss: 0.000240]
+right_index: 21504
+[Epoch 23/40] [Batch 84/196] [Batch classify loss: 0.000226]
+right_index: 21760
+[Epoch 23/40] [Batch 85/196] [Batch classify loss: 0.000190]
+right_index: 22016
+[Epoch 23/40] [Batch 86/196] [Batch classify loss: 0.000478]
+right_index: 22272
+[Epoch 23/40] [Batch 87/196] [Batch classify loss: 0.000151]
+right_index: 22528
+[Epoch 23/40] [Batch 88/196] [Batch classify loss: 0.000171]
+right_index: 22784
+[Epoch 23/40] [Batch 89/196] [Batch classify loss: 0.000135]
+right_index: 23040
+[Epoch 23/40] [Batch 90/196] [Batch classify loss: 0.000128]
+right_index: 23296
+[Epoch 23/40] [Batch 91/196] [Batch classify loss: 0.000730]
+right_index: 23552
+[Epoch 23/40] [Batch 92/196] [Batch classify loss: 0.000104]
+right_index: 23808
+[Epoch 23/40] [Batch 93/196] [Batch classify loss: 0.000378]
+right_index: 24064
+[Epoch 23/40] [Batch 94/196] [Batch classify loss: 0.000184]
+right_index: 24320
+[Epoch 23/40] [Batch 95/196] [Batch classify loss: 0.000253]
+right_index: 24576
+[Epoch 23/40] [Batch 96/196] [Batch classify loss: 0.004472]
+right_index: 24832
+[Epoch 23/40] [Batch 97/196] [Batch classify loss: 0.000369]
+right_index: 25088
+[Epoch 23/40] [Batch 98/196] [Batch classify loss: 0.000247]
+right_index: 25344
+[Epoch 23/40] [Batch 99/196] [Batch classify loss: 0.000201]
+right_index: 25397
+[Epoch 23/40] [Batch 100/196] [Batch classify loss: 0.006946]
+right_index: 256
+[Epoch 23/40] [Batch 101/196] [Batch classify loss: 0.000120]
+right_index: 512
+[Epoch 23/40] [Batch 102/196] [Batch classify loss: 0.000171]
+right_index: 768
+[Epoch 23/40] [Batch 103/196] [Batch classify loss: 0.000153]
+right_index: 1024
+[Epoch 23/40] [Batch 104/196] [Batch classify loss: 0.000133]
+right_index: 1280
+[Epoch 23/40] [Batch 105/196] [Batch classify loss: 0.000236]
+right_index: 1536
+[Epoch 23/40] [Batch 106/196] [Batch classify loss: 0.000124]
+right_index: 1792
+[Epoch 23/40] [Batch 107/196] [Batch classify loss: 0.000189]
+right_index: 2048
+[Epoch 23/40] [Batch 108/196] [Batch classify loss: 0.000152]
+right_index: 2304
+[Epoch 23/40] [Batch 109/196] [Batch classify loss: 0.000450]
+right_index: 2560
+[Epoch 23/40] [Batch 110/196] [Batch classify loss: 0.000118]
+right_index: 2816
+[Epoch 23/40] [Batch 111/196] [Batch classify loss: 0.000195]
+right_index: 3072
+[Epoch 23/40] [Batch 112/196] [Batch classify loss: 0.000349]
+right_index: 3328
+[Epoch 23/40] [Batch 113/196] [Batch classify loss: 0.000234]
+right_index: 3584
+[Epoch 23/40] [Batch 114/196] [Batch classify loss: 0.000248]
+right_index: 3840
+[Epoch 23/40] [Batch 115/196] [Batch classify loss: 0.000335]
+right_index: 4096
+[Epoch 23/40] [Batch 116/196] [Batch classify loss: 0.000291]
+right_index: 4352
+[Epoch 23/40] [Batch 117/196] [Batch classify loss: 0.000127]
+right_index: 4608
+[Epoch 23/40] [Batch 118/196] [Batch classify loss: 0.000246]
+right_index: 4864
+[Epoch 23/40] [Batch 119/196] [Batch classify loss: 0.000236]
+right_index: 5120
+[Epoch 23/40] [Batch 120/196] [Batch classify loss: 0.000423]
+right_index: 5376
+[Epoch 23/40] [Batch 121/196] [Batch classify loss: 0.000222]
+right_index: 5632
+[Epoch 23/40] [Batch 122/196] [Batch classify loss: 0.001083]
+right_index: 5888
+[Epoch 23/40] [Batch 123/196] [Batch classify loss: 0.000135]
+right_index: 6144
+[Epoch 23/40] [Batch 124/196] [Batch classify loss: 0.000250]
+right_index: 6400
+[Epoch 23/40] [Batch 125/196] [Batch classify loss: 0.000212]
+right_index: 6656
+[Epoch 23/40] [Batch 126/196] [Batch classify loss: 0.000124]
+right_index: 6912
+[Epoch 23/40] [Batch 127/196] [Batch classify loss: 0.000135]
+right_index: 7168
+[Epoch 23/40] [Batch 128/196] [Batch classify loss: 0.000184]
+right_index: 7424
+[Epoch 23/40] [Batch 129/196] [Batch classify loss: 0.000168]
+right_index: 7680
+[Epoch 23/40] [Batch 130/196] [Batch classify loss: 0.000156]
+right_index: 7936
+[Epoch 23/40] [Batch 131/196] [Batch classify loss: 0.000176]
+right_index: 8192
+[Epoch 23/40] [Batch 132/196] [Batch classify loss: 0.000128]
+right_index: 8448
+[Epoch 23/40] [Batch 133/196] [Batch classify loss: 0.000187]
+right_index: 8704
+[Epoch 23/40] [Batch 134/196] [Batch classify loss: 0.000136]
+right_index: 8960
+[Epoch 23/40] [Batch 135/196] [Batch classify loss: 0.000195]
+right_index: 9216
+[Epoch 23/40] [Batch 136/196] [Batch classify loss: 0.000245]
+right_index: 9472
+[Epoch 23/40] [Batch 137/196] [Batch classify loss: 0.000170]
+right_index: 9728
+[Epoch 23/40] [Batch 138/196] [Batch classify loss: 0.003377]
+right_index: 9984
+[Epoch 23/40] [Batch 139/196] [Batch classify loss: 0.000358]
+right_index: 10240
+[Epoch 23/40] [Batch 140/196] [Batch classify loss: 0.000116]
+right_index: 10496
+[Epoch 23/40] [Batch 141/196] [Batch classify loss: 0.000142]
+right_index: 10752
+[Epoch 23/40] [Batch 142/196] [Batch classify loss: 0.000221]
+right_index: 11008
+[Epoch 23/40] [Batch 143/196] [Batch classify loss: 0.000152]
+right_index: 11264
+[Epoch 23/40] [Batch 144/196] [Batch classify loss: 0.000200]
+right_index: 11520
+[Epoch 23/40] [Batch 145/196] [Batch classify loss: 0.000155]
+right_index: 11776
+[Epoch 23/40] [Batch 146/196] [Batch classify loss: 0.000399]
+right_index: 12032
+[Epoch 23/40] [Batch 147/196] [Batch classify loss: 0.000141]
+right_index: 12288
+[Epoch 23/40] [Batch 148/196] [Batch classify loss: 0.000194]
+right_index: 12544
+[Epoch 23/40] [Batch 149/196] [Batch classify loss: 0.000133]
+right_index: 12800
+[Epoch 23/40] [Batch 150/196] [Batch classify loss: 0.000151]
+right_index: 13056
+[Epoch 23/40] [Batch 151/196] [Batch classify loss: 0.000121]
+right_index: 13312
+[Epoch 23/40] [Batch 152/196] [Batch classify loss: 0.000161]
+right_index: 13568
+[Epoch 23/40] [Batch 153/196] [Batch classify loss: 0.000192]
+right_index: 13824
+[Epoch 23/40] [Batch 154/196] [Batch classify loss: 0.000177]
+right_index: 14080
+[Epoch 23/40] [Batch 155/196] [Batch classify loss: 0.000290]
+right_index: 14336
+[Epoch 23/40] [Batch 156/196] [Batch classify loss: 0.000160]
+right_index: 14592
+[Epoch 23/40] [Batch 157/196] [Batch classify loss: 0.000225]
+right_index: 14848
+[Epoch 23/40] [Batch 158/196] [Batch classify loss: 0.000646]
+right_index: 15104
+[Epoch 23/40] [Batch 159/196] [Batch classify loss: 0.000129]
+right_index: 15360
+[Epoch 23/40] [Batch 160/196] [Batch classify loss: 0.000874]
+right_index: 15616
+[Epoch 23/40] [Batch 161/196] [Batch classify loss: 0.000169]
+right_index: 15872
+[Epoch 23/40] [Batch 162/196] [Batch classify loss: 0.000152]
+right_index: 16128
+[Epoch 23/40] [Batch 163/196] [Batch classify loss: 0.000251]
+right_index: 16384
+[Epoch 23/40] [Batch 164/196] [Batch classify loss: 0.000169]
+right_index: 16640
+[Epoch 23/40] [Batch 165/196] [Batch classify loss: 0.000158]
+right_index: 16896
+[Epoch 23/40] [Batch 166/196] [Batch classify loss: 0.000325]
+right_index: 17152
+[Epoch 23/40] [Batch 167/196] [Batch classify loss: 0.000148]
+right_index: 17408
+[Epoch 23/40] [Batch 168/196] [Batch classify loss: 0.000141]
+right_index: 17664
+[Epoch 23/40] [Batch 169/196] [Batch classify loss: 0.000427]
+right_index: 17920
+[Epoch 23/40] [Batch 170/196] [Batch classify loss: 0.000192]
+right_index: 18176
+[Epoch 23/40] [Batch 171/196] [Batch classify loss: 0.002668]
+right_index: 18432
+[Epoch 23/40] [Batch 172/196] [Batch classify loss: 0.000412]
+right_index: 18688
+[Epoch 23/40] [Batch 173/196] [Batch classify loss: 0.000194]
+right_index: 18944
+[Epoch 23/40] [Batch 174/196] [Batch classify loss: 0.000157]
+right_index: 19200
+[Epoch 23/40] [Batch 175/196] [Batch classify loss: 0.000199]
+right_index: 19456
+[Epoch 23/40] [Batch 176/196] [Batch classify loss: 0.000219]
+right_index: 19712
+[Epoch 23/40] [Batch 177/196] [Batch classify loss: 0.004932]
+right_index: 19968
+[Epoch 23/40] [Batch 178/196] [Batch classify loss: 0.000259]
+right_index: 20224
+[Epoch 23/40] [Batch 179/196] [Batch classify loss: 0.000233]
+right_index: 20480
+[Epoch 23/40] [Batch 180/196] [Batch classify loss: 0.002340]
+right_index: 20736
+[Epoch 23/40] [Batch 181/196] [Batch classify loss: 0.000337]
+right_index: 20992
+[Epoch 23/40] [Batch 182/196] [Batch classify loss: 0.000259]
+right_index: 21248
+[Epoch 23/40] [Batch 183/196] [Batch classify loss: 0.000556]
+right_index: 21504
+[Epoch 23/40] [Batch 184/196] [Batch classify loss: 0.000290]
+right_index: 21760
+[Epoch 23/40] [Batch 185/196] [Batch classify loss: 0.000167]
+right_index: 22016
+[Epoch 23/40] [Batch 186/196] [Batch classify loss: 0.000136]
+right_index: 22272
+[Epoch 23/40] [Batch 187/196] [Batch classify loss: 0.000190]
+right_index: 22528
+[Epoch 23/40] [Batch 188/196] [Batch classify loss: 0.000134]
+right_index: 22784
+[Epoch 23/40] [Batch 189/196] [Batch classify loss: 0.007627]
+right_index: 23040
+[Epoch 23/40] [Batch 190/196] [Batch classify loss: 0.000163]
+right_index: 23296
+[Epoch 23/40] [Batch 191/196] [Batch classify loss: 0.000324]
+right_index: 23552
+[Epoch 23/40] [Batch 192/196] [Batch classify loss: 0.000102]
+right_index: 23808
+[Epoch 23/40] [Batch 193/196] [Batch classify loss: 0.000166]
+right_index: 24064
+[Epoch 23/40] [Batch 194/196] [Batch classify loss: 0.000114]
+right_index: 24320
+[Epoch 23/40] [Batch 195/196] [Batch classify loss: 0.000224]
+right_index: 24576
+[Epoch 23/40] [Batch 196/196] [Batch classify loss: 0.008295]
+0023 epoch rmt trained classifier accuary on the clean testing examples:88.3000%
+0023 epoch rmt trained classifier loss on the clean testing examples:0.7330
+0023 epoch rmt trained classifier accuary on adversarial testset:26.3500%
+0023 epoch rmt trained classifier loss on adversarial testset:6.460164546966553
+
+
+23epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 24/40] [Batch 1/196] [Batch classify loss: 0.000161]
+right_index: 512
+[Epoch 24/40] [Batch 2/196] [Batch classify loss: 0.000178]
+right_index: 768
+[Epoch 24/40] [Batch 3/196] [Batch classify loss: 0.000138]
+right_index: 1024
+[Epoch 24/40] [Batch 4/196] [Batch classify loss: 0.000143]
+right_index: 1280
+[Epoch 24/40] [Batch 5/196] [Batch classify loss: 0.000255]
+right_index: 1536
+[Epoch 24/40] [Batch 6/196] [Batch classify loss: 0.000952]
+right_index: 1792
+[Epoch 24/40] [Batch 7/196] [Batch classify loss: 0.000146]
+right_index: 2048
+[Epoch 24/40] [Batch 8/196] [Batch classify loss: 0.000203]
+right_index: 2304
+[Epoch 24/40] [Batch 9/196] [Batch classify loss: 0.002524]
+right_index: 2560
+[Epoch 24/40] [Batch 10/196] [Batch classify loss: 0.000188]
+right_index: 2816
+[Epoch 24/40] [Batch 11/196] [Batch classify loss: 0.000141]
+right_index: 3072
+[Epoch 24/40] [Batch 12/196] [Batch classify loss: 0.000135]
+right_index: 3328
+[Epoch 24/40] [Batch 13/196] [Batch classify loss: 0.000176]
+right_index: 3584
+[Epoch 24/40] [Batch 14/196] [Batch classify loss: 0.000158]
+right_index: 3840
+[Epoch 24/40] [Batch 15/196] [Batch classify loss: 0.002265]
+right_index: 4096
+[Epoch 24/40] [Batch 16/196] [Batch classify loss: 0.000693]
+right_index: 4352
+[Epoch 24/40] [Batch 17/196] [Batch classify loss: 0.005424]
+right_index: 4608
+[Epoch 24/40] [Batch 18/196] [Batch classify loss: 0.000127]
+right_index: 4864
+[Epoch 24/40] [Batch 19/196] [Batch classify loss: 0.000163]
+right_index: 5120
+[Epoch 24/40] [Batch 20/196] [Batch classify loss: 0.000221]
+right_index: 5376
+[Epoch 24/40] [Batch 21/196] [Batch classify loss: 0.000220]
+right_index: 5632
+[Epoch 24/40] [Batch 22/196] [Batch classify loss: 0.000159]
+right_index: 5888
+[Epoch 24/40] [Batch 23/196] [Batch classify loss: 0.000177]
+right_index: 6144
+[Epoch 24/40] [Batch 24/196] [Batch classify loss: 0.000187]
+right_index: 6400
+[Epoch 24/40] [Batch 25/196] [Batch classify loss: 0.000349]
+right_index: 6656
+[Epoch 24/40] [Batch 26/196] [Batch classify loss: 0.000150]
+right_index: 6912
+[Epoch 24/40] [Batch 27/196] [Batch classify loss: 0.000130]
+right_index: 7168
+[Epoch 24/40] [Batch 28/196] [Batch classify loss: 0.000118]
+right_index: 7424
+[Epoch 24/40] [Batch 29/196] [Batch classify loss: 0.000168]
+right_index: 7680
+[Epoch 24/40] [Batch 30/196] [Batch classify loss: 0.000167]
+right_index: 7936
+[Epoch 24/40] [Batch 31/196] [Batch classify loss: 0.000188]
+right_index: 8192
+[Epoch 24/40] [Batch 32/196] [Batch classify loss: 0.000270]
+right_index: 8448
+[Epoch 24/40] [Batch 33/196] [Batch classify loss: 0.000214]
+right_index: 8704
+[Epoch 24/40] [Batch 34/196] [Batch classify loss: 0.000111]
+right_index: 8960
+[Epoch 24/40] [Batch 35/196] [Batch classify loss: 0.000134]
+right_index: 9216
+[Epoch 24/40] [Batch 36/196] [Batch classify loss: 0.000131]
+right_index: 9472
+[Epoch 24/40] [Batch 37/196] [Batch classify loss: 0.000156]
+right_index: 9728
+[Epoch 24/40] [Batch 38/196] [Batch classify loss: 0.000156]
+right_index: 9984
+[Epoch 24/40] [Batch 39/196] [Batch classify loss: 0.000204]
+right_index: 10240
+[Epoch 24/40] [Batch 40/196] [Batch classify loss: 0.000179]
+right_index: 10496
+[Epoch 24/40] [Batch 41/196] [Batch classify loss: 0.000127]
+right_index: 10752
+[Epoch 24/40] [Batch 42/196] [Batch classify loss: 0.000123]
+right_index: 11008
+[Epoch 24/40] [Batch 43/196] [Batch classify loss: 0.000204]
+right_index: 11264
+[Epoch 24/40] [Batch 44/196] [Batch classify loss: 0.000105]
+right_index: 11520
+[Epoch 24/40] [Batch 45/196] [Batch classify loss: 0.000107]
+right_index: 11776
+[Epoch 24/40] [Batch 46/196] [Batch classify loss: 0.000169]
+right_index: 12032
+[Epoch 24/40] [Batch 47/196] [Batch classify loss: 0.000930]
+right_index: 12288
+[Epoch 24/40] [Batch 48/196] [Batch classify loss: 0.000310]
+right_index: 12544
+[Epoch 24/40] [Batch 49/196] [Batch classify loss: 0.000317]
+right_index: 12800
+[Epoch 24/40] [Batch 50/196] [Batch classify loss: 0.000562]
+right_index: 13056
+[Epoch 24/40] [Batch 51/196] [Batch classify loss: 0.000157]
+right_index: 13312
+[Epoch 24/40] [Batch 52/196] [Batch classify loss: 0.000179]
+right_index: 13568
+[Epoch 24/40] [Batch 53/196] [Batch classify loss: 0.000252]
+right_index: 13824
+[Epoch 24/40] [Batch 54/196] [Batch classify loss: 0.000127]
+right_index: 14080
+[Epoch 24/40] [Batch 55/196] [Batch classify loss: 0.000200]
+right_index: 14336
+[Epoch 24/40] [Batch 56/196] [Batch classify loss: 0.000142]
+right_index: 14592
+[Epoch 24/40] [Batch 57/196] [Batch classify loss: 0.000131]
+right_index: 14848
+[Epoch 24/40] [Batch 58/196] [Batch classify loss: 0.000187]
+right_index: 15104
+[Epoch 24/40] [Batch 59/196] [Batch classify loss: 0.000789]
+right_index: 15360
+[Epoch 24/40] [Batch 60/196] [Batch classify loss: 0.000147]
+right_index: 15616
+[Epoch 24/40] [Batch 61/196] [Batch classify loss: 0.000203]
+right_index: 15872
+[Epoch 24/40] [Batch 62/196] [Batch classify loss: 0.000205]
+right_index: 16128
+[Epoch 24/40] [Batch 63/196] [Batch classify loss: 0.000124]
+right_index: 16384
+[Epoch 24/40] [Batch 64/196] [Batch classify loss: 0.000140]
+right_index: 16640
+[Epoch 24/40] [Batch 65/196] [Batch classify loss: 0.000271]
+right_index: 16896
+[Epoch 24/40] [Batch 66/196] [Batch classify loss: 0.000204]
+right_index: 17152
+[Epoch 24/40] [Batch 67/196] [Batch classify loss: 0.000120]
+right_index: 17408
+[Epoch 24/40] [Batch 68/196] [Batch classify loss: 0.000430]
+right_index: 17664
+[Epoch 24/40] [Batch 69/196] [Batch classify loss: 0.000154]
+right_index: 17920
+[Epoch 24/40] [Batch 70/196] [Batch classify loss: 0.000307]
+right_index: 18176
+[Epoch 24/40] [Batch 71/196] [Batch classify loss: 0.000281]
+right_index: 18432
+[Epoch 24/40] [Batch 72/196] [Batch classify loss: 0.000175]
+right_index: 18688
+[Epoch 24/40] [Batch 73/196] [Batch classify loss: 0.000184]
+right_index: 18944
+[Epoch 24/40] [Batch 74/196] [Batch classify loss: 0.000166]
+right_index: 19200
+[Epoch 24/40] [Batch 75/196] [Batch classify loss: 0.000109]
+right_index: 19456
+[Epoch 24/40] [Batch 76/196] [Batch classify loss: 0.000136]
+right_index: 19712
+[Epoch 24/40] [Batch 77/196] [Batch classify loss: 0.000201]
+right_index: 19968
+[Epoch 24/40] [Batch 78/196] [Batch classify loss: 0.000154]
+right_index: 20224
+[Epoch 24/40] [Batch 79/196] [Batch classify loss: 0.000161]
+right_index: 20480
+[Epoch 24/40] [Batch 80/196] [Batch classify loss: 0.000124]
+right_index: 20736
+[Epoch 24/40] [Batch 81/196] [Batch classify loss: 0.000900]
+right_index: 20992
+[Epoch 24/40] [Batch 82/196] [Batch classify loss: 0.000714]
+right_index: 21248
+[Epoch 24/40] [Batch 83/196] [Batch classify loss: 0.000130]
+right_index: 21504
+[Epoch 24/40] [Batch 84/196] [Batch classify loss: 0.000126]
+right_index: 21760
+[Epoch 24/40] [Batch 85/196] [Batch classify loss: 0.000123]
+right_index: 22016
+[Epoch 24/40] [Batch 86/196] [Batch classify loss: 0.000187]
+right_index: 22272
+[Epoch 24/40] [Batch 87/196] [Batch classify loss: 0.000276]
+right_index: 22528
+[Epoch 24/40] [Batch 88/196] [Batch classify loss: 0.001857]
+right_index: 22784
+[Epoch 24/40] [Batch 89/196] [Batch classify loss: 0.000145]
+right_index: 23040
+[Epoch 24/40] [Batch 90/196] [Batch classify loss: 0.000871]
+right_index: 23296
+[Epoch 24/40] [Batch 91/196] [Batch classify loss: 0.000199]
+right_index: 23552
+[Epoch 24/40] [Batch 92/196] [Batch classify loss: 0.000193]
+right_index: 23808
+[Epoch 24/40] [Batch 93/196] [Batch classify loss: 0.000221]
+right_index: 24064
+[Epoch 24/40] [Batch 94/196] [Batch classify loss: 0.000766]
+right_index: 24320
+[Epoch 24/40] [Batch 95/196] [Batch classify loss: 0.000155]
+right_index: 24576
+[Epoch 24/40] [Batch 96/196] [Batch classify loss: 0.000523]
+right_index: 24832
+[Epoch 24/40] [Batch 97/196] [Batch classify loss: 0.000124]
+right_index: 25088
+[Epoch 24/40] [Batch 98/196] [Batch classify loss: 0.000200]
+right_index: 25344
+[Epoch 24/40] [Batch 99/196] [Batch classify loss: 0.000168]
+right_index: 25397
+[Epoch 24/40] [Batch 100/196] [Batch classify loss: 0.012048]
+right_index: 256
+[Epoch 24/40] [Batch 101/196] [Batch classify loss: 0.000230]
+right_index: 512
+[Epoch 24/40] [Batch 102/196] [Batch classify loss: 0.000105]
+right_index: 768
+[Epoch 24/40] [Batch 103/196] [Batch classify loss: 0.000266]
+right_index: 1024
+[Epoch 24/40] [Batch 104/196] [Batch classify loss: 0.000136]
+right_index: 1280
+[Epoch 24/40] [Batch 105/196] [Batch classify loss: 0.000143]
+right_index: 1536
+[Epoch 24/40] [Batch 106/196] [Batch classify loss: 0.000437]
+right_index: 1792
+[Epoch 24/40] [Batch 107/196] [Batch classify loss: 0.005155]
+right_index: 2048
+[Epoch 24/40] [Batch 108/196] [Batch classify loss: 0.000160]
+right_index: 2304
+[Epoch 24/40] [Batch 109/196] [Batch classify loss: 0.000294]
+right_index: 2560
+[Epoch 24/40] [Batch 110/196] [Batch classify loss: 0.006855]
+right_index: 2816
+[Epoch 24/40] [Batch 111/196] [Batch classify loss: 0.004647]
+right_index: 3072
+[Epoch 24/40] [Batch 112/196] [Batch classify loss: 0.000478]
+right_index: 3328
+[Epoch 24/40] [Batch 113/196] [Batch classify loss: 0.000214]
+right_index: 3584
+[Epoch 24/40] [Batch 114/196] [Batch classify loss: 0.000205]
+right_index: 3840
+[Epoch 24/40] [Batch 115/196] [Batch classify loss: 0.000199]
+right_index: 4096
+[Epoch 24/40] [Batch 116/196] [Batch classify loss: 0.000482]
+right_index: 4352
+[Epoch 24/40] [Batch 117/196] [Batch classify loss: 0.000204]
+right_index: 4608
+[Epoch 24/40] [Batch 118/196] [Batch classify loss: 0.000261]
+right_index: 4864
+[Epoch 24/40] [Batch 119/196] [Batch classify loss: 0.000132]
+right_index: 5120
+[Epoch 24/40] [Batch 120/196] [Batch classify loss: 0.000124]
+right_index: 5376
+[Epoch 24/40] [Batch 121/196] [Batch classify loss: 0.000454]
+right_index: 5632
+[Epoch 24/40] [Batch 122/196] [Batch classify loss: 0.000163]
+right_index: 5888
+[Epoch 24/40] [Batch 123/196] [Batch classify loss: 0.000244]
+right_index: 6144
+[Epoch 24/40] [Batch 124/196] [Batch classify loss: 0.000131]
+right_index: 6400
+[Epoch 24/40] [Batch 125/196] [Batch classify loss: 0.000111]
+right_index: 6656
+[Epoch 24/40] [Batch 126/196] [Batch classify loss: 0.000120]
+right_index: 6912
+[Epoch 24/40] [Batch 127/196] [Batch classify loss: 0.000168]
+right_index: 7168
+[Epoch 24/40] [Batch 128/196] [Batch classify loss: 0.000184]
+right_index: 7424
+[Epoch 24/40] [Batch 129/196] [Batch classify loss: 0.000110]
+right_index: 7680
+[Epoch 24/40] [Batch 130/196] [Batch classify loss: 0.000149]
+right_index: 7936
+[Epoch 24/40] [Batch 131/196] [Batch classify loss: 0.000225]
+right_index: 8192
+[Epoch 24/40] [Batch 132/196] [Batch classify loss: 0.000419]
+right_index: 8448
+[Epoch 24/40] [Batch 133/196] [Batch classify loss: 0.000149]
+right_index: 8704
+[Epoch 24/40] [Batch 134/196] [Batch classify loss: 0.000158]
+right_index: 8960
+[Epoch 24/40] [Batch 135/196] [Batch classify loss: 0.000177]
+right_index: 9216
+[Epoch 24/40] [Batch 136/196] [Batch classify loss: 0.000301]
+right_index: 9472
+[Epoch 24/40] [Batch 137/196] [Batch classify loss: 0.009335]
+right_index: 9728
+[Epoch 24/40] [Batch 138/196] [Batch classify loss: 0.000405]
+right_index: 9984
+[Epoch 24/40] [Batch 139/196] [Batch classify loss: 0.000308]
+right_index: 10240
+[Epoch 24/40] [Batch 140/196] [Batch classify loss: 0.000458]
+right_index: 10496
+[Epoch 24/40] [Batch 141/196] [Batch classify loss: 0.000122]
+right_index: 10752
+[Epoch 24/40] [Batch 142/196] [Batch classify loss: 0.000116]
+right_index: 11008
+[Epoch 24/40] [Batch 143/196] [Batch classify loss: 0.000151]
+right_index: 11264
+[Epoch 24/40] [Batch 144/196] [Batch classify loss: 0.000134]
+right_index: 11520
+[Epoch 24/40] [Batch 145/196] [Batch classify loss: 0.000183]
+right_index: 11776
+[Epoch 24/40] [Batch 146/196] [Batch classify loss: 0.000156]
+right_index: 12032
+[Epoch 24/40] [Batch 147/196] [Batch classify loss: 0.000097]
+right_index: 12288
+[Epoch 24/40] [Batch 148/196] [Batch classify loss: 0.000100]
+right_index: 12544
+[Epoch 24/40] [Batch 149/196] [Batch classify loss: 0.000453]
+right_index: 12800
+[Epoch 24/40] [Batch 150/196] [Batch classify loss: 0.000125]
+right_index: 13056
+[Epoch 24/40] [Batch 151/196] [Batch classify loss: 0.000153]
+right_index: 13312
+[Epoch 24/40] [Batch 152/196] [Batch classify loss: 0.000119]
+right_index: 13568
+[Epoch 24/40] [Batch 153/196] [Batch classify loss: 0.000171]
+right_index: 13824
+[Epoch 24/40] [Batch 154/196] [Batch classify loss: 0.000150]
+right_index: 14080
+[Epoch 24/40] [Batch 155/196] [Batch classify loss: 0.000294]
+right_index: 14336
+[Epoch 24/40] [Batch 156/196] [Batch classify loss: 0.000306]
+right_index: 14592
+[Epoch 24/40] [Batch 157/196] [Batch classify loss: 0.000214]
+right_index: 14848
+[Epoch 24/40] [Batch 158/196] [Batch classify loss: 0.000322]
+right_index: 15104
+[Epoch 24/40] [Batch 159/196] [Batch classify loss: 0.000591]
+right_index: 15360
+[Epoch 24/40] [Batch 160/196] [Batch classify loss: 0.000304]
+right_index: 15616
+[Epoch 24/40] [Batch 161/196] [Batch classify loss: 0.000136]
+right_index: 15872
+[Epoch 24/40] [Batch 162/196] [Batch classify loss: 0.001860]
+right_index: 16128
+[Epoch 24/40] [Batch 163/196] [Batch classify loss: 0.000192]
+right_index: 16384
+[Epoch 24/40] [Batch 164/196] [Batch classify loss: 0.000131]
+right_index: 16640
+[Epoch 24/40] [Batch 165/196] [Batch classify loss: 0.000201]
+right_index: 16896
+[Epoch 24/40] [Batch 166/196] [Batch classify loss: 0.000159]
+right_index: 17152
+[Epoch 24/40] [Batch 167/196] [Batch classify loss: 0.000166]
+right_index: 17408
+[Epoch 24/40] [Batch 168/196] [Batch classify loss: 0.000185]
+right_index: 17664
+[Epoch 24/40] [Batch 169/196] [Batch classify loss: 0.000132]
+right_index: 17920
+[Epoch 24/40] [Batch 170/196] [Batch classify loss: 0.000720]
+right_index: 18176
+[Epoch 24/40] [Batch 171/196] [Batch classify loss: 0.000148]
+right_index: 18432
+[Epoch 24/40] [Batch 172/196] [Batch classify loss: 0.000552]
+right_index: 18688
+[Epoch 24/40] [Batch 173/196] [Batch classify loss: 0.003922]
+right_index: 18944
+[Epoch 24/40] [Batch 174/196] [Batch classify loss: 0.000358]
+right_index: 19200
+[Epoch 24/40] [Batch 175/196] [Batch classify loss: 0.000195]
+right_index: 19456
+[Epoch 24/40] [Batch 176/196] [Batch classify loss: 0.000204]
+right_index: 19712
+[Epoch 24/40] [Batch 177/196] [Batch classify loss: 0.000143]
+right_index: 19968
+[Epoch 24/40] [Batch 178/196] [Batch classify loss: 0.000231]
+right_index: 20224
+[Epoch 24/40] [Batch 179/196] [Batch classify loss: 0.000219]
+right_index: 20480
+[Epoch 24/40] [Batch 180/196] [Batch classify loss: 0.000216]
+right_index: 20736
+[Epoch 24/40] [Batch 181/196] [Batch classify loss: 0.001420]
+right_index: 20992
+[Epoch 24/40] [Batch 182/196] [Batch classify loss: 0.000269]
+right_index: 21248
+[Epoch 24/40] [Batch 183/196] [Batch classify loss: 0.005310]
+right_index: 21504
+[Epoch 24/40] [Batch 184/196] [Batch classify loss: 0.000222]
+right_index: 21760
+[Epoch 24/40] [Batch 185/196] [Batch classify loss: 0.000129]
+right_index: 22016
+[Epoch 24/40] [Batch 186/196] [Batch classify loss: 0.000239]
+right_index: 22272
+[Epoch 24/40] [Batch 187/196] [Batch classify loss: 0.000256]
+right_index: 22528
+[Epoch 24/40] [Batch 188/196] [Batch classify loss: 0.000221]
+right_index: 22784
+[Epoch 24/40] [Batch 189/196] [Batch classify loss: 0.000139]
+right_index: 23040
+[Epoch 24/40] [Batch 190/196] [Batch classify loss: 0.000177]
+right_index: 23296
+[Epoch 24/40] [Batch 191/196] [Batch classify loss: 0.000993]
+right_index: 23552
+[Epoch 24/40] [Batch 192/196] [Batch classify loss: 0.000118]
+right_index: 23808
+[Epoch 24/40] [Batch 193/196] [Batch classify loss: 0.000144]
+right_index: 24064
+[Epoch 24/40] [Batch 194/196] [Batch classify loss: 0.000209]
+right_index: 24320
+[Epoch 24/40] [Batch 195/196] [Batch classify loss: 0.000144]
+right_index: 24576
+[Epoch 24/40] [Batch 196/196] [Batch classify loss: 0.005848]
+0024 epoch rmt trained classifier accuary on the clean testing examples:88.2800%
+0024 epoch rmt trained classifier loss on the clean testing examples:0.7437
+0024 epoch rmt trained classifier accuary on adversarial testset:26.3600%
+0024 epoch rmt trained classifier loss on adversarial testset:6.509154796600342
+
+
+24epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 25/40] [Batch 1/196] [Batch classify loss: 0.000184]
+right_index: 512
+[Epoch 25/40] [Batch 2/196] [Batch classify loss: 0.000162]
+right_index: 768
+[Epoch 25/40] [Batch 3/196] [Batch classify loss: 0.000166]
+right_index: 1024
+[Epoch 25/40] [Batch 4/196] [Batch classify loss: 0.000118]
+right_index: 1280
+[Epoch 25/40] [Batch 5/196] [Batch classify loss: 0.000314]
+right_index: 1536
+[Epoch 25/40] [Batch 6/196] [Batch classify loss: 0.000304]
+right_index: 1792
+[Epoch 25/40] [Batch 7/196] [Batch classify loss: 0.000134]
+right_index: 2048
+[Epoch 25/40] [Batch 8/196] [Batch classify loss: 0.000170]
+right_index: 2304
+[Epoch 25/40] [Batch 9/196] [Batch classify loss: 0.000357]
+right_index: 2560
+[Epoch 25/40] [Batch 10/196] [Batch classify loss: 0.000685]
+right_index: 2816
+[Epoch 25/40] [Batch 11/196] [Batch classify loss: 0.000139]
+right_index: 3072
+[Epoch 25/40] [Batch 12/196] [Batch classify loss: 0.000306]
+right_index: 3328
+[Epoch 25/40] [Batch 13/196] [Batch classify loss: 0.000236]
+right_index: 3584
+[Epoch 25/40] [Batch 14/196] [Batch classify loss: 0.000136]
+right_index: 3840
+[Epoch 25/40] [Batch 15/196] [Batch classify loss: 0.000352]
+right_index: 4096
+[Epoch 25/40] [Batch 16/196] [Batch classify loss: 0.000232]
+right_index: 4352
+[Epoch 25/40] [Batch 17/196] [Batch classify loss: 0.000643]
+right_index: 4608
+[Epoch 25/40] [Batch 18/196] [Batch classify loss: 0.000182]
+right_index: 4864
+[Epoch 25/40] [Batch 19/196] [Batch classify loss: 0.000191]
+right_index: 5120
+[Epoch 25/40] [Batch 20/196] [Batch classify loss: 0.000201]
+right_index: 5376
+[Epoch 25/40] [Batch 21/196] [Batch classify loss: 0.000198]
+right_index: 5632
+[Epoch 25/40] [Batch 22/196] [Batch classify loss: 0.000165]
+right_index: 5888
+[Epoch 25/40] [Batch 23/196] [Batch classify loss: 0.000275]
+right_index: 6144
+[Epoch 25/40] [Batch 24/196] [Batch classify loss: 0.000134]
+right_index: 6400
+[Epoch 25/40] [Batch 25/196] [Batch classify loss: 0.000219]
+right_index: 6656
+[Epoch 25/40] [Batch 26/196] [Batch classify loss: 0.000174]
+right_index: 6912
+[Epoch 25/40] [Batch 27/196] [Batch classify loss: 0.000318]
+right_index: 7168
+[Epoch 25/40] [Batch 28/196] [Batch classify loss: 0.000212]
+right_index: 7424
+[Epoch 25/40] [Batch 29/196] [Batch classify loss: 0.000271]
+right_index: 7680
+[Epoch 25/40] [Batch 30/196] [Batch classify loss: 0.000109]
+right_index: 7936
+[Epoch 25/40] [Batch 31/196] [Batch classify loss: 0.000259]
+right_index: 8192
+[Epoch 25/40] [Batch 32/196] [Batch classify loss: 0.000197]
+right_index: 8448
+[Epoch 25/40] [Batch 33/196] [Batch classify loss: 0.000770]
+right_index: 8704
+[Epoch 25/40] [Batch 34/196] [Batch classify loss: 0.000146]
+right_index: 8960
+[Epoch 25/40] [Batch 35/196] [Batch classify loss: 0.000129]
+right_index: 9216
+[Epoch 25/40] [Batch 36/196] [Batch classify loss: 0.000155]
+right_index: 9472
+[Epoch 25/40] [Batch 37/196] [Batch classify loss: 0.001776]
+right_index: 9728
+[Epoch 25/40] [Batch 38/196] [Batch classify loss: 0.000174]
+right_index: 9984
+[Epoch 25/40] [Batch 39/196] [Batch classify loss: 0.000359]
+right_index: 10240
+[Epoch 25/40] [Batch 40/196] [Batch classify loss: 0.000270]
+right_index: 10496
+[Epoch 25/40] [Batch 41/196] [Batch classify loss: 0.000145]
+right_index: 10752
+[Epoch 25/40] [Batch 42/196] [Batch classify loss: 0.000189]
+right_index: 11008
+[Epoch 25/40] [Batch 43/196] [Batch classify loss: 0.000133]
+right_index: 11264
+[Epoch 25/40] [Batch 44/196] [Batch classify loss: 0.000262]
+right_index: 11520
+[Epoch 25/40] [Batch 45/196] [Batch classify loss: 0.000098]
+right_index: 11776
+[Epoch 25/40] [Batch 46/196] [Batch classify loss: 0.000353]
+right_index: 12032
+[Epoch 25/40] [Batch 47/196] [Batch classify loss: 0.000145]
+right_index: 12288
+[Epoch 25/40] [Batch 48/196] [Batch classify loss: 0.005353]
+right_index: 12544
+[Epoch 25/40] [Batch 49/196] [Batch classify loss: 0.000136]
+right_index: 12800
+[Epoch 25/40] [Batch 50/196] [Batch classify loss: 0.000274]
+right_index: 13056
+[Epoch 25/40] [Batch 51/196] [Batch classify loss: 0.000134]
+right_index: 13312
+[Epoch 25/40] [Batch 52/196] [Batch classify loss: 0.000321]
+right_index: 13568
+[Epoch 25/40] [Batch 53/196] [Batch classify loss: 0.000140]
+right_index: 13824
+[Epoch 25/40] [Batch 54/196] [Batch classify loss: 0.000240]
+right_index: 14080
+[Epoch 25/40] [Batch 55/196] [Batch classify loss: 0.000140]
+right_index: 14336
+[Epoch 25/40] [Batch 56/196] [Batch classify loss: 0.000107]
+right_index: 14592
+[Epoch 25/40] [Batch 57/196] [Batch classify loss: 0.000220]
+right_index: 14848
+[Epoch 25/40] [Batch 58/196] [Batch classify loss: 0.000217]
+right_index: 15104
+[Epoch 25/40] [Batch 59/196] [Batch classify loss: 0.000118]
+right_index: 15360
+[Epoch 25/40] [Batch 60/196] [Batch classify loss: 0.000310]
+right_index: 15616
+[Epoch 25/40] [Batch 61/196] [Batch classify loss: 0.000305]
+right_index: 15872
+[Epoch 25/40] [Batch 62/196] [Batch classify loss: 0.000128]
+right_index: 16128
+[Epoch 25/40] [Batch 63/196] [Batch classify loss: 0.000224]
+right_index: 16384
+[Epoch 25/40] [Batch 64/196] [Batch classify loss: 0.000183]
+right_index: 16640
+[Epoch 25/40] [Batch 65/196] [Batch classify loss: 0.000104]
+right_index: 16896
+[Epoch 25/40] [Batch 66/196] [Batch classify loss: 0.000153]
+right_index: 17152
+[Epoch 25/40] [Batch 67/196] [Batch classify loss: 0.000234]
+right_index: 17408
+[Epoch 25/40] [Batch 68/196] [Batch classify loss: 0.000140]
+right_index: 17664
+[Epoch 25/40] [Batch 69/196] [Batch classify loss: 0.000142]
+right_index: 17920
+[Epoch 25/40] [Batch 70/196] [Batch classify loss: 0.000284]
+right_index: 18176
+[Epoch 25/40] [Batch 71/196] [Batch classify loss: 0.000216]
+right_index: 18432
+[Epoch 25/40] [Batch 72/196] [Batch classify loss: 0.000208]
+right_index: 18688
+[Epoch 25/40] [Batch 73/196] [Batch classify loss: 0.000501]
+right_index: 18944
+[Epoch 25/40] [Batch 74/196] [Batch classify loss: 0.000152]
+right_index: 19200
+[Epoch 25/40] [Batch 75/196] [Batch classify loss: 0.000142]
+right_index: 19456
+[Epoch 25/40] [Batch 76/196] [Batch classify loss: 0.000146]
+right_index: 19712
+[Epoch 25/40] [Batch 77/196] [Batch classify loss: 0.000262]
+right_index: 19968
+[Epoch 25/40] [Batch 78/196] [Batch classify loss: 0.000201]
+right_index: 20224
+[Epoch 25/40] [Batch 79/196] [Batch classify loss: 0.000129]
+right_index: 20480
+[Epoch 25/40] [Batch 80/196] [Batch classify loss: 0.000196]
+right_index: 20736
+[Epoch 25/40] [Batch 81/196] [Batch classify loss: 0.000149]
+right_index: 20992
+[Epoch 25/40] [Batch 82/196] [Batch classify loss: 0.000169]
+right_index: 21248
+[Epoch 25/40] [Batch 83/196] [Batch classify loss: 0.000150]
+right_index: 21504
+[Epoch 25/40] [Batch 84/196] [Batch classify loss: 0.000143]
+right_index: 21760
+[Epoch 25/40] [Batch 85/196] [Batch classify loss: 0.000141]
+right_index: 22016
+[Epoch 25/40] [Batch 86/196] [Batch classify loss: 0.000791]
+right_index: 22272
+[Epoch 25/40] [Batch 87/196] [Batch classify loss: 0.000191]
+right_index: 22528
+[Epoch 25/40] [Batch 88/196] [Batch classify loss: 0.000245]
+right_index: 22784
+[Epoch 25/40] [Batch 89/196] [Batch classify loss: 0.000119]
+right_index: 23040
+[Epoch 25/40] [Batch 90/196] [Batch classify loss: 0.000349]
+right_index: 23296
+[Epoch 25/40] [Batch 91/196] [Batch classify loss: 0.000147]
+right_index: 23552
+[Epoch 25/40] [Batch 92/196] [Batch classify loss: 0.000374]
+right_index: 23808
+[Epoch 25/40] [Batch 93/196] [Batch classify loss: 0.000240]
+right_index: 24064
+[Epoch 25/40] [Batch 94/196] [Batch classify loss: 0.000120]
+right_index: 24320
+[Epoch 25/40] [Batch 95/196] [Batch classify loss: 0.000143]
+right_index: 24576
+[Epoch 25/40] [Batch 96/196] [Batch classify loss: 0.000234]
+right_index: 24832
+[Epoch 25/40] [Batch 97/196] [Batch classify loss: 0.000554]
+right_index: 25088
+[Epoch 25/40] [Batch 98/196] [Batch classify loss: 0.000150]
+right_index: 25344
+[Epoch 25/40] [Batch 99/196] [Batch classify loss: 0.000934]
+right_index: 25397
+[Epoch 25/40] [Batch 100/196] [Batch classify loss: 0.008401]
+right_index: 256
+[Epoch 25/40] [Batch 101/196] [Batch classify loss: 0.000136]
+right_index: 512
+[Epoch 25/40] [Batch 102/196] [Batch classify loss: 0.000166]
+right_index: 768
+[Epoch 25/40] [Batch 103/196] [Batch classify loss: 0.000229]
+right_index: 1024
+[Epoch 25/40] [Batch 104/196] [Batch classify loss: 0.000132]
+right_index: 1280
+[Epoch 25/40] [Batch 105/196] [Batch classify loss: 0.001612]
+right_index: 1536
+[Epoch 25/40] [Batch 106/196] [Batch classify loss: 0.000155]
+right_index: 1792
+[Epoch 25/40] [Batch 107/196] [Batch classify loss: 0.000678]
+right_index: 2048
+[Epoch 25/40] [Batch 108/196] [Batch classify loss: 0.000121]
+right_index: 2304
+[Epoch 25/40] [Batch 109/196] [Batch classify loss: 0.000103]
+right_index: 2560
+[Epoch 25/40] [Batch 110/196] [Batch classify loss: 0.000181]
+right_index: 2816
+[Epoch 25/40] [Batch 111/196] [Batch classify loss: 0.000293]
+right_index: 3072
+[Epoch 25/40] [Batch 112/196] [Batch classify loss: 0.000157]
+right_index: 3328
+[Epoch 25/40] [Batch 113/196] [Batch classify loss: 0.000153]
+right_index: 3584
+[Epoch 25/40] [Batch 114/196] [Batch classify loss: 0.002233]
+right_index: 3840
+[Epoch 25/40] [Batch 115/196] [Batch classify loss: 0.000121]
+right_index: 4096
+[Epoch 25/40] [Batch 116/196] [Batch classify loss: 0.000334]
+right_index: 4352
+[Epoch 25/40] [Batch 117/196] [Batch classify loss: 0.000230]
+right_index: 4608
+[Epoch 25/40] [Batch 118/196] [Batch classify loss: 0.000170]
+right_index: 4864
+[Epoch 25/40] [Batch 119/196] [Batch classify loss: 0.000133]
+right_index: 5120
+[Epoch 25/40] [Batch 120/196] [Batch classify loss: 0.000301]
+right_index: 5376
+[Epoch 25/40] [Batch 121/196] [Batch classify loss: 0.000149]
+right_index: 5632
+[Epoch 25/40] [Batch 122/196] [Batch classify loss: 0.000145]
+right_index: 5888
+[Epoch 25/40] [Batch 123/196] [Batch classify loss: 0.000634]
+right_index: 6144
+[Epoch 25/40] [Batch 124/196] [Batch classify loss: 0.000208]
+right_index: 6400
+[Epoch 25/40] [Batch 125/196] [Batch classify loss: 0.000327]
+right_index: 6656
+[Epoch 25/40] [Batch 126/196] [Batch classify loss: 0.000151]
+right_index: 6912
+[Epoch 25/40] [Batch 127/196] [Batch classify loss: 0.000211]
+right_index: 7168
+[Epoch 25/40] [Batch 128/196] [Batch classify loss: 0.000265]
+right_index: 7424
+[Epoch 25/40] [Batch 129/196] [Batch classify loss: 0.000236]
+right_index: 7680
+[Epoch 25/40] [Batch 130/196] [Batch classify loss: 0.000128]
+right_index: 7936
+[Epoch 25/40] [Batch 131/196] [Batch classify loss: 0.000234]
+right_index: 8192
+[Epoch 25/40] [Batch 132/196] [Batch classify loss: 0.000161]
+right_index: 8448
+[Epoch 25/40] [Batch 133/196] [Batch classify loss: 0.000128]
+right_index: 8704
+[Epoch 25/40] [Batch 134/196] [Batch classify loss: 0.000261]
+right_index: 8960
+[Epoch 25/40] [Batch 135/196] [Batch classify loss: 0.000199]
+right_index: 9216
+[Epoch 25/40] [Batch 136/196] [Batch classify loss: 0.000171]
+right_index: 9472
+[Epoch 25/40] [Batch 137/196] [Batch classify loss: 0.000126]
+right_index: 9728
+[Epoch 25/40] [Batch 138/196] [Batch classify loss: 0.000105]
+right_index: 9984
+[Epoch 25/40] [Batch 139/196] [Batch classify loss: 0.000133]
+right_index: 10240
+[Epoch 25/40] [Batch 140/196] [Batch classify loss: 0.000159]
+right_index: 10496
+[Epoch 25/40] [Batch 141/196] [Batch classify loss: 0.005881]
+right_index: 10752
+[Epoch 25/40] [Batch 142/196] [Batch classify loss: 0.000185]
+right_index: 11008
+[Epoch 25/40] [Batch 143/196] [Batch classify loss: 0.000120]
+right_index: 11264
+[Epoch 25/40] [Batch 144/196] [Batch classify loss: 0.000313]
+right_index: 11520
+[Epoch 25/40] [Batch 145/196] [Batch classify loss: 0.000245]
+right_index: 11776
+[Epoch 25/40] [Batch 146/196] [Batch classify loss: 0.000172]
+right_index: 12032
+[Epoch 25/40] [Batch 147/196] [Batch classify loss: 0.000181]
+right_index: 12288
+[Epoch 25/40] [Batch 148/196] [Batch classify loss: 0.000208]
+right_index: 12544
+[Epoch 25/40] [Batch 149/196] [Batch classify loss: 0.005400]
+right_index: 12800
+[Epoch 25/40] [Batch 150/196] [Batch classify loss: 0.003297]
+right_index: 13056
+[Epoch 25/40] [Batch 151/196] [Batch classify loss: 0.000126]
+right_index: 13312
+[Epoch 25/40] [Batch 152/196] [Batch classify loss: 0.000187]
+right_index: 13568
+[Epoch 25/40] [Batch 153/196] [Batch classify loss: 0.000168]
+right_index: 13824
+[Epoch 25/40] [Batch 154/196] [Batch classify loss: 0.000251]
+right_index: 14080
+[Epoch 25/40] [Batch 155/196] [Batch classify loss: 0.000186]
+right_index: 14336
+[Epoch 25/40] [Batch 156/196] [Batch classify loss: 0.000179]
+right_index: 14592
+[Epoch 25/40] [Batch 157/196] [Batch classify loss: 0.000108]
+right_index: 14848
+[Epoch 25/40] [Batch 158/196] [Batch classify loss: 0.000242]
+right_index: 15104
+[Epoch 25/40] [Batch 159/196] [Batch classify loss: 0.000379]
+right_index: 15360
+[Epoch 25/40] [Batch 160/196] [Batch classify loss: 0.000161]
+right_index: 15616
+[Epoch 25/40] [Batch 161/196] [Batch classify loss: 0.000338]
+right_index: 15872
+[Epoch 25/40] [Batch 162/196] [Batch classify loss: 0.000168]
+right_index: 16128
+[Epoch 25/40] [Batch 163/196] [Batch classify loss: 0.000140]
+right_index: 16384
+[Epoch 25/40] [Batch 164/196] [Batch classify loss: 0.000216]
+right_index: 16640
+[Epoch 25/40] [Batch 165/196] [Batch classify loss: 0.011342]
+right_index: 16896
+[Epoch 25/40] [Batch 166/196] [Batch classify loss: 0.004643]
+right_index: 17152
+[Epoch 25/40] [Batch 167/196] [Batch classify loss: 0.000176]
+right_index: 17408
+[Epoch 25/40] [Batch 168/196] [Batch classify loss: 0.000185]
+right_index: 17664
+[Epoch 25/40] [Batch 169/196] [Batch classify loss: 0.000165]
+right_index: 17920
+[Epoch 25/40] [Batch 170/196] [Batch classify loss: 0.000257]
+right_index: 18176
+[Epoch 25/40] [Batch 171/196] [Batch classify loss: 0.000205]
+right_index: 18432
+[Epoch 25/40] [Batch 172/196] [Batch classify loss: 0.001124]
+right_index: 18688
+[Epoch 25/40] [Batch 173/196] [Batch classify loss: 0.000160]
+right_index: 18944
+[Epoch 25/40] [Batch 174/196] [Batch classify loss: 0.000132]
+right_index: 19200
+[Epoch 25/40] [Batch 175/196] [Batch classify loss: 0.000240]
+right_index: 19456
+[Epoch 25/40] [Batch 176/196] [Batch classify loss: 0.000204]
+right_index: 19712
+[Epoch 25/40] [Batch 177/196] [Batch classify loss: 0.006618]
+right_index: 19968
+[Epoch 25/40] [Batch 178/196] [Batch classify loss: 0.000157]
+right_index: 20224
+[Epoch 25/40] [Batch 179/196] [Batch classify loss: 0.000258]
+right_index: 20480
+[Epoch 25/40] [Batch 180/196] [Batch classify loss: 0.000128]
+right_index: 20736
+[Epoch 25/40] [Batch 181/196] [Batch classify loss: 0.000342]
+right_index: 20992
+[Epoch 25/40] [Batch 182/196] [Batch classify loss: 0.000583]
+right_index: 21248
+[Epoch 25/40] [Batch 183/196] [Batch classify loss: 0.000335]
+right_index: 21504
+[Epoch 25/40] [Batch 184/196] [Batch classify loss: 0.000135]
+right_index: 21760
+[Epoch 25/40] [Batch 185/196] [Batch classify loss: 0.000173]
+right_index: 22016
+[Epoch 25/40] [Batch 186/196] [Batch classify loss: 0.000159]
+right_index: 22272
+[Epoch 25/40] [Batch 187/196] [Batch classify loss: 0.000121]
+right_index: 22528
+[Epoch 25/40] [Batch 188/196] [Batch classify loss: 0.000126]
+right_index: 22784
+[Epoch 25/40] [Batch 189/196] [Batch classify loss: 0.000219]
+right_index: 23040
+[Epoch 25/40] [Batch 190/196] [Batch classify loss: 0.000117]
+right_index: 23296
+[Epoch 25/40] [Batch 191/196] [Batch classify loss: 0.000190]
+right_index: 23552
+[Epoch 25/40] [Batch 192/196] [Batch classify loss: 0.000228]
+right_index: 23808
+[Epoch 25/40] [Batch 193/196] [Batch classify loss: 0.000207]
+right_index: 24064
+[Epoch 25/40] [Batch 194/196] [Batch classify loss: 0.000160]
+right_index: 24320
+[Epoch 25/40] [Batch 195/196] [Batch classify loss: 0.000132]
+right_index: 24576
+[Epoch 25/40] [Batch 196/196] [Batch classify loss: 0.001848]
+0025 epoch rmt trained classifier accuary on the clean testing examples:88.2600%
+0025 epoch rmt trained classifier loss on the clean testing examples:0.7407
+0025 epoch rmt trained classifier accuary on adversarial testset:26.1400%
+0025 epoch rmt trained classifier loss on adversarial testset:6.522803783416748
+
+
+25epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 26/40] [Batch 1/196] [Batch classify loss: 0.000164]
+right_index: 512
+[Epoch 26/40] [Batch 2/196] [Batch classify loss: 0.002076]
+right_index: 768
+[Epoch 26/40] [Batch 3/196] [Batch classify loss: 0.000128]
+right_index: 1024
+[Epoch 26/40] [Batch 4/196] [Batch classify loss: 0.000161]
+right_index: 1280
+[Epoch 26/40] [Batch 5/196] [Batch classify loss: 0.000145]
+right_index: 1536
+[Epoch 26/40] [Batch 6/196] [Batch classify loss: 0.000348]
+right_index: 1792
+[Epoch 26/40] [Batch 7/196] [Batch classify loss: 0.000148]
+right_index: 2048
+[Epoch 26/40] [Batch 8/196] [Batch classify loss: 0.001243]
+right_index: 2304
+[Epoch 26/40] [Batch 9/196] [Batch classify loss: 0.000256]
+right_index: 2560
+[Epoch 26/40] [Batch 10/196] [Batch classify loss: 0.000209]
+right_index: 2816
+[Epoch 26/40] [Batch 11/196] [Batch classify loss: 0.000133]
+right_index: 3072
+[Epoch 26/40] [Batch 12/196] [Batch classify loss: 0.000246]
+right_index: 3328
+[Epoch 26/40] [Batch 13/196] [Batch classify loss: 0.000190]
+right_index: 3584
+[Epoch 26/40] [Batch 14/196] [Batch classify loss: 0.000103]
+right_index: 3840
+[Epoch 26/40] [Batch 15/196] [Batch classify loss: 0.000163]
+right_index: 4096
+[Epoch 26/40] [Batch 16/196] [Batch classify loss: 0.000109]
+right_index: 4352
+[Epoch 26/40] [Batch 17/196] [Batch classify loss: 0.000373]
+right_index: 4608
+[Epoch 26/40] [Batch 18/196] [Batch classify loss: 0.000197]
+right_index: 4864
+[Epoch 26/40] [Batch 19/196] [Batch classify loss: 0.000251]
+right_index: 5120
+[Epoch 26/40] [Batch 20/196] [Batch classify loss: 0.000677]
+right_index: 5376
+[Epoch 26/40] [Batch 21/196] [Batch classify loss: 0.000343]
+right_index: 5632
+[Epoch 26/40] [Batch 22/196] [Batch classify loss: 0.000271]
+right_index: 5888
+[Epoch 26/40] [Batch 23/196] [Batch classify loss: 0.000127]
+right_index: 6144
+[Epoch 26/40] [Batch 24/196] [Batch classify loss: 0.000115]
+right_index: 6400
+[Epoch 26/40] [Batch 25/196] [Batch classify loss: 0.000123]
+right_index: 6656
+[Epoch 26/40] [Batch 26/196] [Batch classify loss: 0.000211]
+right_index: 6912
+[Epoch 26/40] [Batch 27/196] [Batch classify loss: 0.000246]
+right_index: 7168
+[Epoch 26/40] [Batch 28/196] [Batch classify loss: 0.000198]
+right_index: 7424
+[Epoch 26/40] [Batch 29/196] [Batch classify loss: 0.000127]
+right_index: 7680
+[Epoch 26/40] [Batch 30/196] [Batch classify loss: 0.000127]
+right_index: 7936
+[Epoch 26/40] [Batch 31/196] [Batch classify loss: 0.000333]
+right_index: 8192
+[Epoch 26/40] [Batch 32/196] [Batch classify loss: 0.000206]
+right_index: 8448
+[Epoch 26/40] [Batch 33/196] [Batch classify loss: 0.000171]
+right_index: 8704
+[Epoch 26/40] [Batch 34/196] [Batch classify loss: 0.000358]
+right_index: 8960
+[Epoch 26/40] [Batch 35/196] [Batch classify loss: 0.000140]
+right_index: 9216
+[Epoch 26/40] [Batch 36/196] [Batch classify loss: 0.004930]
+right_index: 9472
+[Epoch 26/40] [Batch 37/196] [Batch classify loss: 0.000231]
+right_index: 9728
+[Epoch 26/40] [Batch 38/196] [Batch classify loss: 0.000154]
+right_index: 9984
+[Epoch 26/40] [Batch 39/196] [Batch classify loss: 0.000404]
+right_index: 10240
+[Epoch 26/40] [Batch 40/196] [Batch classify loss: 0.017615]
+right_index: 10496
+[Epoch 26/40] [Batch 41/196] [Batch classify loss: 0.000162]
+right_index: 10752
+[Epoch 26/40] [Batch 42/196] [Batch classify loss: 0.000391]
+right_index: 11008
+[Epoch 26/40] [Batch 43/196] [Batch classify loss: 0.000156]
+right_index: 11264
+[Epoch 26/40] [Batch 44/196] [Batch classify loss: 0.000157]
+right_index: 11520
+[Epoch 26/40] [Batch 45/196] [Batch classify loss: 0.000146]
+right_index: 11776
+[Epoch 26/40] [Batch 46/196] [Batch classify loss: 0.000949]
+right_index: 12032
+[Epoch 26/40] [Batch 47/196] [Batch classify loss: 0.000293]
+right_index: 12288
+[Epoch 26/40] [Batch 48/196] [Batch classify loss: 0.001071]
+right_index: 12544
+[Epoch 26/40] [Batch 49/196] [Batch classify loss: 0.000166]
+right_index: 12800
+[Epoch 26/40] [Batch 50/196] [Batch classify loss: 0.000376]
+right_index: 13056
+[Epoch 26/40] [Batch 51/196] [Batch classify loss: 0.000209]
+right_index: 13312
+[Epoch 26/40] [Batch 52/196] [Batch classify loss: 0.001007]
+right_index: 13568
+[Epoch 26/40] [Batch 53/196] [Batch classify loss: 0.000210]
+right_index: 13824
+[Epoch 26/40] [Batch 54/196] [Batch classify loss: 0.000328]
+right_index: 14080
+[Epoch 26/40] [Batch 55/196] [Batch classify loss: 0.000250]
+right_index: 14336
+[Epoch 26/40] [Batch 56/196] [Batch classify loss: 0.005788]
+right_index: 14592
+[Epoch 26/40] [Batch 57/196] [Batch classify loss: 0.000294]
+right_index: 14848
+[Epoch 26/40] [Batch 58/196] [Batch classify loss: 0.000101]
+right_index: 15104
+[Epoch 26/40] [Batch 59/196] [Batch classify loss: 0.000180]
+right_index: 15360
+[Epoch 26/40] [Batch 60/196] [Batch classify loss: 0.000175]
+right_index: 15616
+[Epoch 26/40] [Batch 61/196] [Batch classify loss: 0.000402]
+right_index: 15872
+[Epoch 26/40] [Batch 62/196] [Batch classify loss: 0.000357]
+right_index: 16128
+[Epoch 26/40] [Batch 63/196] [Batch classify loss: 0.000149]
+right_index: 16384
+[Epoch 26/40] [Batch 64/196] [Batch classify loss: 0.000123]
+right_index: 16640
+[Epoch 26/40] [Batch 65/196] [Batch classify loss: 0.000968]
+right_index: 16896
+[Epoch 26/40] [Batch 66/196] [Batch classify loss: 0.000138]
+right_index: 17152
+[Epoch 26/40] [Batch 67/196] [Batch classify loss: 0.000103]
+right_index: 17408
+[Epoch 26/40] [Batch 68/196] [Batch classify loss: 0.000424]
+right_index: 17664
+[Epoch 26/40] [Batch 69/196] [Batch classify loss: 0.000206]
+right_index: 17920
+[Epoch 26/40] [Batch 70/196] [Batch classify loss: 0.000141]
+right_index: 18176
+[Epoch 26/40] [Batch 71/196] [Batch classify loss: 0.000318]
+right_index: 18432
+[Epoch 26/40] [Batch 72/196] [Batch classify loss: 0.000169]
+right_index: 18688
+[Epoch 26/40] [Batch 73/196] [Batch classify loss: 0.000272]
+right_index: 18944
+[Epoch 26/40] [Batch 74/196] [Batch classify loss: 0.000185]
+right_index: 19200
+[Epoch 26/40] [Batch 75/196] [Batch classify loss: 0.000386]
+right_index: 19456
+[Epoch 26/40] [Batch 76/196] [Batch classify loss: 0.000128]
+right_index: 19712
+[Epoch 26/40] [Batch 77/196] [Batch classify loss: 0.000157]
+right_index: 19968
+[Epoch 26/40] [Batch 78/196] [Batch classify loss: 0.000954]
+right_index: 20224
+[Epoch 26/40] [Batch 79/196] [Batch classify loss: 0.000182]
+right_index: 20480
+[Epoch 26/40] [Batch 80/196] [Batch classify loss: 0.000140]
+right_index: 20736
+[Epoch 26/40] [Batch 81/196] [Batch classify loss: 0.000223]
+right_index: 20992
+[Epoch 26/40] [Batch 82/196] [Batch classify loss: 0.000122]
+right_index: 21248
+[Epoch 26/40] [Batch 83/196] [Batch classify loss: 0.000114]
+right_index: 21504
+[Epoch 26/40] [Batch 84/196] [Batch classify loss: 0.000407]
+right_index: 21760
+[Epoch 26/40] [Batch 85/196] [Batch classify loss: 0.000132]
+right_index: 22016
+[Epoch 26/40] [Batch 86/196] [Batch classify loss: 0.000093]
+right_index: 22272
+[Epoch 26/40] [Batch 87/196] [Batch classify loss: 0.000328]
+right_index: 22528
+[Epoch 26/40] [Batch 88/196] [Batch classify loss: 0.000097]
+right_index: 22784
+[Epoch 26/40] [Batch 89/196] [Batch classify loss: 0.000189]
+right_index: 23040
+[Epoch 26/40] [Batch 90/196] [Batch classify loss: 0.000169]
+right_index: 23296
+[Epoch 26/40] [Batch 91/196] [Batch classify loss: 0.000237]
+right_index: 23552
+[Epoch 26/40] [Batch 92/196] [Batch classify loss: 0.000155]
+right_index: 23808
+[Epoch 26/40] [Batch 93/196] [Batch classify loss: 0.000384]
+right_index: 24064
+[Epoch 26/40] [Batch 94/196] [Batch classify loss: 0.000282]
+right_index: 24320
+[Epoch 26/40] [Batch 95/196] [Batch classify loss: 0.000151]
+right_index: 24576
+[Epoch 26/40] [Batch 96/196] [Batch classify loss: 0.000128]
+right_index: 24832
+[Epoch 26/40] [Batch 97/196] [Batch classify loss: 0.000116]
+right_index: 25088
+[Epoch 26/40] [Batch 98/196] [Batch classify loss: 0.000163]
+right_index: 25344
+[Epoch 26/40] [Batch 99/196] [Batch classify loss: 0.000400]
+right_index: 25397
+[Epoch 26/40] [Batch 100/196] [Batch classify loss: 0.019524]
+right_index: 256
+[Epoch 26/40] [Batch 101/196] [Batch classify loss: 0.000974]
+right_index: 512
+[Epoch 26/40] [Batch 102/196] [Batch classify loss: 0.000163]
+right_index: 768
+[Epoch 26/40] [Batch 103/196] [Batch classify loss: 0.000152]
+right_index: 1024
+[Epoch 26/40] [Batch 104/196] [Batch classify loss: 0.000164]
+right_index: 1280
+[Epoch 26/40] [Batch 105/196] [Batch classify loss: 0.000177]
+right_index: 1536
+[Epoch 26/40] [Batch 106/196] [Batch classify loss: 0.000103]
+right_index: 1792
+[Epoch 26/40] [Batch 107/196] [Batch classify loss: 0.000210]
+right_index: 2048
+[Epoch 26/40] [Batch 108/196] [Batch classify loss: 0.000151]
+right_index: 2304
+[Epoch 26/40] [Batch 109/196] [Batch classify loss: 0.000164]
+right_index: 2560
+[Epoch 26/40] [Batch 110/196] [Batch classify loss: 0.000254]
+right_index: 2816
+[Epoch 26/40] [Batch 111/196] [Batch classify loss: 0.000147]
+right_index: 3072
+[Epoch 26/40] [Batch 112/196] [Batch classify loss: 0.000117]
+right_index: 3328
+[Epoch 26/40] [Batch 113/196] [Batch classify loss: 0.000276]
+right_index: 3584
+[Epoch 26/40] [Batch 114/196] [Batch classify loss: 0.000095]
+right_index: 3840
+[Epoch 26/40] [Batch 115/196] [Batch classify loss: 0.000942]
+right_index: 4096
+[Epoch 26/40] [Batch 116/196] [Batch classify loss: 0.000175]
+right_index: 4352
+[Epoch 26/40] [Batch 117/196] [Batch classify loss: 0.000131]
+right_index: 4608
+[Epoch 26/40] [Batch 118/196] [Batch classify loss: 0.003307]
+right_index: 4864
+[Epoch 26/40] [Batch 119/196] [Batch classify loss: 0.000348]
+right_index: 5120
+[Epoch 26/40] [Batch 120/196] [Batch classify loss: 0.000271]
+right_index: 5376
+[Epoch 26/40] [Batch 121/196] [Batch classify loss: 0.000403]
+right_index: 5632
+[Epoch 26/40] [Batch 122/196] [Batch classify loss: 0.000185]
+right_index: 5888
+[Epoch 26/40] [Batch 123/196] [Batch classify loss: 0.000201]
+right_index: 6144
+[Epoch 26/40] [Batch 124/196] [Batch classify loss: 0.000222]
+right_index: 6400
+[Epoch 26/40] [Batch 125/196] [Batch classify loss: 0.000300]
+right_index: 6656
+[Epoch 26/40] [Batch 126/196] [Batch classify loss: 0.000281]
+right_index: 6912
+[Epoch 26/40] [Batch 127/196] [Batch classify loss: 0.000220]
+right_index: 7168
+[Epoch 26/40] [Batch 128/196] [Batch classify loss: 0.000193]
+right_index: 7424
+[Epoch 26/40] [Batch 129/196] [Batch classify loss: 0.000166]
+right_index: 7680
+[Epoch 26/40] [Batch 130/196] [Batch classify loss: 0.000125]
+right_index: 7936
+[Epoch 26/40] [Batch 131/196] [Batch classify loss: 0.000158]
+right_index: 8192
+[Epoch 26/40] [Batch 132/196] [Batch classify loss: 0.000145]
+right_index: 8448
+[Epoch 26/40] [Batch 133/196] [Batch classify loss: 0.000180]
+right_index: 8704
+[Epoch 26/40] [Batch 134/196] [Batch classify loss: 0.000103]
+right_index: 8960
+[Epoch 26/40] [Batch 135/196] [Batch classify loss: 0.000225]
+right_index: 9216
+[Epoch 26/40] [Batch 136/196] [Batch classify loss: 0.000126]
+right_index: 9472
+[Epoch 26/40] [Batch 137/196] [Batch classify loss: 0.000281]
+right_index: 9728
+[Epoch 26/40] [Batch 138/196] [Batch classify loss: 0.000153]
+right_index: 9984
+[Epoch 26/40] [Batch 139/196] [Batch classify loss: 0.000147]
+right_index: 10240
+[Epoch 26/40] [Batch 140/196] [Batch classify loss: 0.000181]
+right_index: 10496
+[Epoch 26/40] [Batch 141/196] [Batch classify loss: 0.000228]
+right_index: 10752
+[Epoch 26/40] [Batch 142/196] [Batch classify loss: 0.000185]
+right_index: 11008
+[Epoch 26/40] [Batch 143/196] [Batch classify loss: 0.000114]
+right_index: 11264
+[Epoch 26/40] [Batch 144/196] [Batch classify loss: 0.000534]
+right_index: 11520
+[Epoch 26/40] [Batch 145/196] [Batch classify loss: 0.000116]
+right_index: 11776
+[Epoch 26/40] [Batch 146/196] [Batch classify loss: 0.000222]
+right_index: 12032
+[Epoch 26/40] [Batch 147/196] [Batch classify loss: 0.000227]
+right_index: 12288
+[Epoch 26/40] [Batch 148/196] [Batch classify loss: 0.000153]
+right_index: 12544
+[Epoch 26/40] [Batch 149/196] [Batch classify loss: 0.000214]
+right_index: 12800
+[Epoch 26/40] [Batch 150/196] [Batch classify loss: 0.000284]
+right_index: 13056
+[Epoch 26/40] [Batch 151/196] [Batch classify loss: 0.000112]
+right_index: 13312
+[Epoch 26/40] [Batch 152/196] [Batch classify loss: 0.000140]
+right_index: 13568
+[Epoch 26/40] [Batch 153/196] [Batch classify loss: 0.000112]
+right_index: 13824
+[Epoch 26/40] [Batch 154/196] [Batch classify loss: 0.000156]
+right_index: 14080
+[Epoch 26/40] [Batch 155/196] [Batch classify loss: 0.000134]
+right_index: 14336
+[Epoch 26/40] [Batch 156/196] [Batch classify loss: 0.000123]
+right_index: 14592
+[Epoch 26/40] [Batch 157/196] [Batch classify loss: 0.000149]
+right_index: 14848
+[Epoch 26/40] [Batch 158/196] [Batch classify loss: 0.000130]
+right_index: 15104
+[Epoch 26/40] [Batch 159/196] [Batch classify loss: 0.000151]
+right_index: 15360
+[Epoch 26/40] [Batch 160/196] [Batch classify loss: 0.000182]
+right_index: 15616
+[Epoch 26/40] [Batch 161/196] [Batch classify loss: 0.000158]
+right_index: 15872
+[Epoch 26/40] [Batch 162/196] [Batch classify loss: 0.000114]
+right_index: 16128
+[Epoch 26/40] [Batch 163/196] [Batch classify loss: 0.000177]
+right_index: 16384
+[Epoch 26/40] [Batch 164/196] [Batch classify loss: 0.000110]
+right_index: 16640
+[Epoch 26/40] [Batch 165/196] [Batch classify loss: 0.000109]
+right_index: 16896
+[Epoch 26/40] [Batch 166/196] [Batch classify loss: 0.000151]
+right_index: 17152
+[Epoch 26/40] [Batch 167/196] [Batch classify loss: 0.000150]
+right_index: 17408
+[Epoch 26/40] [Batch 168/196] [Batch classify loss: 0.000238]
+right_index: 17664
+[Epoch 26/40] [Batch 169/196] [Batch classify loss: 0.001688]
+right_index: 17920
+[Epoch 26/40] [Batch 170/196] [Batch classify loss: 0.000136]
+right_index: 18176
+[Epoch 26/40] [Batch 171/196] [Batch classify loss: 0.000161]
+right_index: 18432
+[Epoch 26/40] [Batch 172/196] [Batch classify loss: 0.000139]
+right_index: 18688
+[Epoch 26/40] [Batch 173/196] [Batch classify loss: 0.000105]
+right_index: 18944
+[Epoch 26/40] [Batch 174/196] [Batch classify loss: 0.000121]
+right_index: 19200
+[Epoch 26/40] [Batch 175/196] [Batch classify loss: 0.000157]
+right_index: 19456
+[Epoch 26/40] [Batch 176/196] [Batch classify loss: 0.000345]
+right_index: 19712
+[Epoch 26/40] [Batch 177/196] [Batch classify loss: 0.000365]
+right_index: 19968
+[Epoch 26/40] [Batch 178/196] [Batch classify loss: 0.000448]
+right_index: 20224
+[Epoch 26/40] [Batch 179/196] [Batch classify loss: 0.000170]
+right_index: 20480
+[Epoch 26/40] [Batch 180/196] [Batch classify loss: 0.000323]
+right_index: 20736
+[Epoch 26/40] [Batch 181/196] [Batch classify loss: 0.000162]
+right_index: 20992
+[Epoch 26/40] [Batch 182/196] [Batch classify loss: 0.000953]
+right_index: 21248
+[Epoch 26/40] [Batch 183/196] [Batch classify loss: 0.000448]
+right_index: 21504
+[Epoch 26/40] [Batch 184/196] [Batch classify loss: 0.000158]
+right_index: 21760
+[Epoch 26/40] [Batch 185/196] [Batch classify loss: 0.000639]
+right_index: 22016
+[Epoch 26/40] [Batch 186/196] [Batch classify loss: 0.000149]
+right_index: 22272
+[Epoch 26/40] [Batch 187/196] [Batch classify loss: 0.000168]
+right_index: 22528
+[Epoch 26/40] [Batch 188/196] [Batch classify loss: 0.000121]
+right_index: 22784
+[Epoch 26/40] [Batch 189/196] [Batch classify loss: 0.000174]
+right_index: 23040
+[Epoch 26/40] [Batch 190/196] [Batch classify loss: 0.000205]
+right_index: 23296
+[Epoch 26/40] [Batch 191/196] [Batch classify loss: 0.000130]
+right_index: 23552
+[Epoch 26/40] [Batch 192/196] [Batch classify loss: 0.001250]
+right_index: 23808
+[Epoch 26/40] [Batch 193/196] [Batch classify loss: 0.000171]
+right_index: 24064
+[Epoch 26/40] [Batch 194/196] [Batch classify loss: 0.000702]
+right_index: 24320
+[Epoch 26/40] [Batch 195/196] [Batch classify loss: 0.000147]
+right_index: 24576
+[Epoch 26/40] [Batch 196/196] [Batch classify loss: 0.002325]
+0026 epoch rmt trained classifier accuary on the clean testing examples:88.3800%
+0026 epoch rmt trained classifier loss on the clean testing examples:0.7391
+0026 epoch rmt trained classifier accuary on adversarial testset:26.2600%
+0026 epoch rmt trained classifier loss on adversarial testset:6.521663188934326
+
+
+26epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 27/40] [Batch 1/196] [Batch classify loss: 0.000155]
+right_index: 512
+[Epoch 27/40] [Batch 2/196] [Batch classify loss: 0.000175]
+right_index: 768
+[Epoch 27/40] [Batch 3/196] [Batch classify loss: 0.000097]
+right_index: 1024
+[Epoch 27/40] [Batch 4/196] [Batch classify loss: 0.000230]
+right_index: 1280
+[Epoch 27/40] [Batch 5/196] [Batch classify loss: 0.000106]
+right_index: 1536
+[Epoch 27/40] [Batch 6/196] [Batch classify loss: 0.000101]
+right_index: 1792
+[Epoch 27/40] [Batch 7/196] [Batch classify loss: 0.000125]
+right_index: 2048
+[Epoch 27/40] [Batch 8/196] [Batch classify loss: 0.000223]
+right_index: 2304
+[Epoch 27/40] [Batch 9/196] [Batch classify loss: 0.000135]
+right_index: 2560
+[Epoch 27/40] [Batch 10/196] [Batch classify loss: 0.000137]
+right_index: 2816
+[Epoch 27/40] [Batch 11/196] [Batch classify loss: 0.000131]
+right_index: 3072
+[Epoch 27/40] [Batch 12/196] [Batch classify loss: 0.000158]
+right_index: 3328
+[Epoch 27/40] [Batch 13/196] [Batch classify loss: 0.000290]
+right_index: 3584
+[Epoch 27/40] [Batch 14/196] [Batch classify loss: 0.000241]
+right_index: 3840
+[Epoch 27/40] [Batch 15/196] [Batch classify loss: 0.000760]
+right_index: 4096
+[Epoch 27/40] [Batch 16/196] [Batch classify loss: 0.000139]
+right_index: 4352
+[Epoch 27/40] [Batch 17/196] [Batch classify loss: 0.000145]
+right_index: 4608
+[Epoch 27/40] [Batch 18/196] [Batch classify loss: 0.000140]
+right_index: 4864
+[Epoch 27/40] [Batch 19/196] [Batch classify loss: 0.000094]
+right_index: 5120
+[Epoch 27/40] [Batch 20/196] [Batch classify loss: 0.000134]
+right_index: 5376
+[Epoch 27/40] [Batch 21/196] [Batch classify loss: 0.000131]
+right_index: 5632
+[Epoch 27/40] [Batch 22/196] [Batch classify loss: 0.000236]
+right_index: 5888
+[Epoch 27/40] [Batch 23/196] [Batch classify loss: 0.000138]
+right_index: 6144
+[Epoch 27/40] [Batch 24/196] [Batch classify loss: 0.000161]
+right_index: 6400
+[Epoch 27/40] [Batch 25/196] [Batch classify loss: 0.000203]
+right_index: 6656
+[Epoch 27/40] [Batch 26/196] [Batch classify loss: 0.000113]
+right_index: 6912
+[Epoch 27/40] [Batch 27/196] [Batch classify loss: 0.000386]
+right_index: 7168
+[Epoch 27/40] [Batch 28/196] [Batch classify loss: 0.000133]
+right_index: 7424
+[Epoch 27/40] [Batch 29/196] [Batch classify loss: 0.000414]
+right_index: 7680
+[Epoch 27/40] [Batch 30/196] [Batch classify loss: 0.000134]
+right_index: 7936
+[Epoch 27/40] [Batch 31/196] [Batch classify loss: 0.000213]
+right_index: 8192
+[Epoch 27/40] [Batch 32/196] [Batch classify loss: 0.000730]
+right_index: 8448
+[Epoch 27/40] [Batch 33/196] [Batch classify loss: 0.000171]
+right_index: 8704
+[Epoch 27/40] [Batch 34/196] [Batch classify loss: 0.000172]
+right_index: 8960
+[Epoch 27/40] [Batch 35/196] [Batch classify loss: 0.000305]
+right_index: 9216
+[Epoch 27/40] [Batch 36/196] [Batch classify loss: 0.000097]
+right_index: 9472
+[Epoch 27/40] [Batch 37/196] [Batch classify loss: 0.000149]
+right_index: 9728
+[Epoch 27/40] [Batch 38/196] [Batch classify loss: 0.000184]
+right_index: 9984
+[Epoch 27/40] [Batch 39/196] [Batch classify loss: 0.000237]
+right_index: 10240
+[Epoch 27/40] [Batch 40/196] [Batch classify loss: 0.000133]
+right_index: 10496
+[Epoch 27/40] [Batch 41/196] [Batch classify loss: 0.000123]
+right_index: 10752
+[Epoch 27/40] [Batch 42/196] [Batch classify loss: 0.000162]
+right_index: 11008
+[Epoch 27/40] [Batch 43/196] [Batch classify loss: 0.000145]
+right_index: 11264
+[Epoch 27/40] [Batch 44/196] [Batch classify loss: 0.000204]
+right_index: 11520
+[Epoch 27/40] [Batch 45/196] [Batch classify loss: 0.000203]
+right_index: 11776
+[Epoch 27/40] [Batch 46/196] [Batch classify loss: 0.000173]
+right_index: 12032
+[Epoch 27/40] [Batch 47/196] [Batch classify loss: 0.000224]
+right_index: 12288
+[Epoch 27/40] [Batch 48/196] [Batch classify loss: 0.000122]
+right_index: 12544
+[Epoch 27/40] [Batch 49/196] [Batch classify loss: 0.000173]
+right_index: 12800
+[Epoch 27/40] [Batch 50/196] [Batch classify loss: 0.000101]
+right_index: 13056
+[Epoch 27/40] [Batch 51/196] [Batch classify loss: 0.000219]
+right_index: 13312
+[Epoch 27/40] [Batch 52/196] [Batch classify loss: 0.000136]
+right_index: 13568
+[Epoch 27/40] [Batch 53/196] [Batch classify loss: 0.000111]
+right_index: 13824
+[Epoch 27/40] [Batch 54/196] [Batch classify loss: 0.000192]
+right_index: 14080
+[Epoch 27/40] [Batch 55/196] [Batch classify loss: 0.000157]
+right_index: 14336
+[Epoch 27/40] [Batch 56/196] [Batch classify loss: 0.000175]
+right_index: 14592
+[Epoch 27/40] [Batch 57/196] [Batch classify loss: 0.000122]
+right_index: 14848
+[Epoch 27/40] [Batch 58/196] [Batch classify loss: 0.000180]
+right_index: 15104
+[Epoch 27/40] [Batch 59/196] [Batch classify loss: 0.000111]
+right_index: 15360
+[Epoch 27/40] [Batch 60/196] [Batch classify loss: 0.000124]
+right_index: 15616
+[Epoch 27/40] [Batch 61/196] [Batch classify loss: 0.000133]
+right_index: 15872
+[Epoch 27/40] [Batch 62/196] [Batch classify loss: 0.000143]
+right_index: 16128
+[Epoch 27/40] [Batch 63/196] [Batch classify loss: 0.000111]
+right_index: 16384
+[Epoch 27/40] [Batch 64/196] [Batch classify loss: 0.000866]
+right_index: 16640
+[Epoch 27/40] [Batch 65/196] [Batch classify loss: 0.000634]
+right_index: 16896
+[Epoch 27/40] [Batch 66/196] [Batch classify loss: 0.000181]
+right_index: 17152
+[Epoch 27/40] [Batch 67/196] [Batch classify loss: 0.001167]
+right_index: 17408
+[Epoch 27/40] [Batch 68/196] [Batch classify loss: 0.000145]
+right_index: 17664
+[Epoch 27/40] [Batch 69/196] [Batch classify loss: 0.000103]
+right_index: 17920
+[Epoch 27/40] [Batch 70/196] [Batch classify loss: 0.000140]
+right_index: 18176
+[Epoch 27/40] [Batch 71/196] [Batch classify loss: 0.000154]
+right_index: 18432
+[Epoch 27/40] [Batch 72/196] [Batch classify loss: 0.000216]
+right_index: 18688
+[Epoch 27/40] [Batch 73/196] [Batch classify loss: 0.000753]
+right_index: 18944
+[Epoch 27/40] [Batch 74/196] [Batch classify loss: 0.000227]
+right_index: 19200
+[Epoch 27/40] [Batch 75/196] [Batch classify loss: 0.000200]
+right_index: 19456
+[Epoch 27/40] [Batch 76/196] [Batch classify loss: 0.000145]
+right_index: 19712
+[Epoch 27/40] [Batch 77/196] [Batch classify loss: 0.000237]
+right_index: 19968
+[Epoch 27/40] [Batch 78/196] [Batch classify loss: 0.006580]
+right_index: 20224
+[Epoch 27/40] [Batch 79/196] [Batch classify loss: 0.000115]
+right_index: 20480
+[Epoch 27/40] [Batch 80/196] [Batch classify loss: 0.000365]
+right_index: 20736
+[Epoch 27/40] [Batch 81/196] [Batch classify loss: 0.000341]
+right_index: 20992
+[Epoch 27/40] [Batch 82/196] [Batch classify loss: 0.000203]
+right_index: 21248
+[Epoch 27/40] [Batch 83/196] [Batch classify loss: 0.000113]
+right_index: 21504
+[Epoch 27/40] [Batch 84/196] [Batch classify loss: 0.000116]
+right_index: 21760
+[Epoch 27/40] [Batch 85/196] [Batch classify loss: 0.000309]
+right_index: 22016
+[Epoch 27/40] [Batch 86/196] [Batch classify loss: 0.000119]
+right_index: 22272
+[Epoch 27/40] [Batch 87/196] [Batch classify loss: 0.000156]
+right_index: 22528
+[Epoch 27/40] [Batch 88/196] [Batch classify loss: 0.000297]
+right_index: 22784
+[Epoch 27/40] [Batch 89/196] [Batch classify loss: 0.000155]
+right_index: 23040
+[Epoch 27/40] [Batch 90/196] [Batch classify loss: 0.000126]
+right_index: 23296
+[Epoch 27/40] [Batch 91/196] [Batch classify loss: 0.000134]
+right_index: 23552
+[Epoch 27/40] [Batch 92/196] [Batch classify loss: 0.000164]
+right_index: 23808
+[Epoch 27/40] [Batch 93/196] [Batch classify loss: 0.000210]
+right_index: 24064
+[Epoch 27/40] [Batch 94/196] [Batch classify loss: 0.000182]
+right_index: 24320
+[Epoch 27/40] [Batch 95/196] [Batch classify loss: 0.000171]
+right_index: 24576
+[Epoch 27/40] [Batch 96/196] [Batch classify loss: 0.009224]
+right_index: 24832
+[Epoch 27/40] [Batch 97/196] [Batch classify loss: 0.000105]
+right_index: 25088
+[Epoch 27/40] [Batch 98/196] [Batch classify loss: 0.002119]
+right_index: 25344
+[Epoch 27/40] [Batch 99/196] [Batch classify loss: 0.000164]
+right_index: 25397
+[Epoch 27/40] [Batch 100/196] [Batch classify loss: 0.024844]
+right_index: 256
+[Epoch 27/40] [Batch 101/196] [Batch classify loss: 0.000195]
+right_index: 512
+[Epoch 27/40] [Batch 102/196] [Batch classify loss: 0.000170]
+right_index: 768
+[Epoch 27/40] [Batch 103/196] [Batch classify loss: 0.000121]
+right_index: 1024
+[Epoch 27/40] [Batch 104/196] [Batch classify loss: 0.000158]
+right_index: 1280
+[Epoch 27/40] [Batch 105/196] [Batch classify loss: 0.000134]
+right_index: 1536
+[Epoch 27/40] [Batch 106/196] [Batch classify loss: 0.000140]
+right_index: 1792
+[Epoch 27/40] [Batch 107/196] [Batch classify loss: 0.000154]
+right_index: 2048
+[Epoch 27/40] [Batch 108/196] [Batch classify loss: 0.000112]
+right_index: 2304
+[Epoch 27/40] [Batch 109/196] [Batch classify loss: 0.000191]
+right_index: 2560
+[Epoch 27/40] [Batch 110/196] [Batch classify loss: 0.000230]
+right_index: 2816
+[Epoch 27/40] [Batch 111/196] [Batch classify loss: 0.000120]
+right_index: 3072
+[Epoch 27/40] [Batch 112/196] [Batch classify loss: 0.000186]
+right_index: 3328
+[Epoch 27/40] [Batch 113/196] [Batch classify loss: 0.000099]
+right_index: 3584
+[Epoch 27/40] [Batch 114/196] [Batch classify loss: 0.000146]
+right_index: 3840
+[Epoch 27/40] [Batch 115/196] [Batch classify loss: 0.000136]
+right_index: 4096
+[Epoch 27/40] [Batch 116/196] [Batch classify loss: 0.000826]
+right_index: 4352
+[Epoch 27/40] [Batch 117/196] [Batch classify loss: 0.000162]
+right_index: 4608
+[Epoch 27/40] [Batch 118/196] [Batch classify loss: 0.000162]
+right_index: 4864
+[Epoch 27/40] [Batch 119/196] [Batch classify loss: 0.000340]
+right_index: 5120
+[Epoch 27/40] [Batch 120/196] [Batch classify loss: 0.000160]
+right_index: 5376
+[Epoch 27/40] [Batch 121/196] [Batch classify loss: 0.001872]
+right_index: 5632
+[Epoch 27/40] [Batch 122/196] [Batch classify loss: 0.000420]
+right_index: 5888
+[Epoch 27/40] [Batch 123/196] [Batch classify loss: 0.000379]
+right_index: 6144
+[Epoch 27/40] [Batch 124/196] [Batch classify loss: 0.000251]
+right_index: 6400
+[Epoch 27/40] [Batch 125/196] [Batch classify loss: 0.000363]
+right_index: 6656
+[Epoch 27/40] [Batch 126/196] [Batch classify loss: 0.000226]
+right_index: 6912
+[Epoch 27/40] [Batch 127/196] [Batch classify loss: 0.000112]
+right_index: 7168
+[Epoch 27/40] [Batch 128/196] [Batch classify loss: 0.000200]
+right_index: 7424
+[Epoch 27/40] [Batch 129/196] [Batch classify loss: 0.000121]
+right_index: 7680
+[Epoch 27/40] [Batch 130/196] [Batch classify loss: 0.000313]
+right_index: 7936
+[Epoch 27/40] [Batch 131/196] [Batch classify loss: 0.000333]
+right_index: 8192
+[Epoch 27/40] [Batch 132/196] [Batch classify loss: 0.000117]
+right_index: 8448
+[Epoch 27/40] [Batch 133/196] [Batch classify loss: 0.000223]
+right_index: 8704
+[Epoch 27/40] [Batch 134/196] [Batch classify loss: 0.000377]
+right_index: 8960
+[Epoch 27/40] [Batch 135/196] [Batch classify loss: 0.004335]
+right_index: 9216
+[Epoch 27/40] [Batch 136/196] [Batch classify loss: 0.000382]
+right_index: 9472
+[Epoch 27/40] [Batch 137/196] [Batch classify loss: 0.000146]
+right_index: 9728
+[Epoch 27/40] [Batch 138/196] [Batch classify loss: 0.000305]
+right_index: 9984
+[Epoch 27/40] [Batch 139/196] [Batch classify loss: 0.000232]
+right_index: 10240
+[Epoch 27/40] [Batch 140/196] [Batch classify loss: 0.000100]
+right_index: 10496
+[Epoch 27/40] [Batch 141/196] [Batch classify loss: 0.000179]
+right_index: 10752
+[Epoch 27/40] [Batch 142/196] [Batch classify loss: 0.000146]
+right_index: 11008
+[Epoch 27/40] [Batch 143/196] [Batch classify loss: 0.000202]
+right_index: 11264
+[Epoch 27/40] [Batch 144/196] [Batch classify loss: 0.000100]
+right_index: 11520
+[Epoch 27/40] [Batch 145/196] [Batch classify loss: 0.000152]
+right_index: 11776
+[Epoch 27/40] [Batch 146/196] [Batch classify loss: 0.000109]
+right_index: 12032
+[Epoch 27/40] [Batch 147/196] [Batch classify loss: 0.005008]
+right_index: 12288
+[Epoch 27/40] [Batch 148/196] [Batch classify loss: 0.000153]
+right_index: 12544
+[Epoch 27/40] [Batch 149/196] [Batch classify loss: 0.000175]
+right_index: 12800
+[Epoch 27/40] [Batch 150/196] [Batch classify loss: 0.000134]
+right_index: 13056
+[Epoch 27/40] [Batch 151/196] [Batch classify loss: 0.000150]
+right_index: 13312
+[Epoch 27/40] [Batch 152/196] [Batch classify loss: 0.000155]
+right_index: 13568
+[Epoch 27/40] [Batch 153/196] [Batch classify loss: 0.000132]
+right_index: 13824
+[Epoch 27/40] [Batch 154/196] [Batch classify loss: 0.000122]
+right_index: 14080
+[Epoch 27/40] [Batch 155/196] [Batch classify loss: 0.000520]
+right_index: 14336
+[Epoch 27/40] [Batch 156/196] [Batch classify loss: 0.000095]
+right_index: 14592
+[Epoch 27/40] [Batch 157/196] [Batch classify loss: 0.001400]
+right_index: 14848
+[Epoch 27/40] [Batch 158/196] [Batch classify loss: 0.000193]
+right_index: 15104
+[Epoch 27/40] [Batch 159/196] [Batch classify loss: 0.000119]
+right_index: 15360
+[Epoch 27/40] [Batch 160/196] [Batch classify loss: 0.000418]
+right_index: 15616
+[Epoch 27/40] [Batch 161/196] [Batch classify loss: 0.000154]
+right_index: 15872
+[Epoch 27/40] [Batch 162/196] [Batch classify loss: 0.000112]
+right_index: 16128
+[Epoch 27/40] [Batch 163/196] [Batch classify loss: 0.000191]
+right_index: 16384
+[Epoch 27/40] [Batch 164/196] [Batch classify loss: 0.000121]
+right_index: 16640
+[Epoch 27/40] [Batch 165/196] [Batch classify loss: 0.001105]
+right_index: 16896
+[Epoch 27/40] [Batch 166/196] [Batch classify loss: 0.000127]
+right_index: 17152
+[Epoch 27/40] [Batch 167/196] [Batch classify loss: 0.000182]
+right_index: 17408
+[Epoch 27/40] [Batch 168/196] [Batch classify loss: 0.000208]
+right_index: 17664
+[Epoch 27/40] [Batch 169/196] [Batch classify loss: 0.000098]
+right_index: 17920
+[Epoch 27/40] [Batch 170/196] [Batch classify loss: 0.000403]
+right_index: 18176
+[Epoch 27/40] [Batch 171/196] [Batch classify loss: 0.000176]
+right_index: 18432
+[Epoch 27/40] [Batch 172/196] [Batch classify loss: 0.000162]
+right_index: 18688
+[Epoch 27/40] [Batch 173/196] [Batch classify loss: 0.000213]
+right_index: 18944
+[Epoch 27/40] [Batch 174/196] [Batch classify loss: 0.000126]
+right_index: 19200
+[Epoch 27/40] [Batch 175/196] [Batch classify loss: 0.000272]
+right_index: 19456
+[Epoch 27/40] [Batch 176/196] [Batch classify loss: 0.000100]
+right_index: 19712
+[Epoch 27/40] [Batch 177/196] [Batch classify loss: 0.000145]
+right_index: 19968
+[Epoch 27/40] [Batch 178/196] [Batch classify loss: 0.000094]
+right_index: 20224
+[Epoch 27/40] [Batch 179/196] [Batch classify loss: 0.000335]
+right_index: 20480
+[Epoch 27/40] [Batch 180/196] [Batch classify loss: 0.000131]
+right_index: 20736
+[Epoch 27/40] [Batch 181/196] [Batch classify loss: 0.000084]
+right_index: 20992
+[Epoch 27/40] [Batch 182/196] [Batch classify loss: 0.000125]
+right_index: 21248
+[Epoch 27/40] [Batch 183/196] [Batch classify loss: 0.001743]
+right_index: 21504
+[Epoch 27/40] [Batch 184/196] [Batch classify loss: 0.000145]
+right_index: 21760
+[Epoch 27/40] [Batch 185/196] [Batch classify loss: 0.000148]
+right_index: 22016
+[Epoch 27/40] [Batch 186/196] [Batch classify loss: 0.000148]
+right_index: 22272
+[Epoch 27/40] [Batch 187/196] [Batch classify loss: 0.000332]
+right_index: 22528
+[Epoch 27/40] [Batch 188/196] [Batch classify loss: 0.000117]
+right_index: 22784
+[Epoch 27/40] [Batch 189/196] [Batch classify loss: 0.000186]
+right_index: 23040
+[Epoch 27/40] [Batch 190/196] [Batch classify loss: 0.000352]
+right_index: 23296
+[Epoch 27/40] [Batch 191/196] [Batch classify loss: 0.000146]
+right_index: 23552
+[Epoch 27/40] [Batch 192/196] [Batch classify loss: 0.000198]
+right_index: 23808
+[Epoch 27/40] [Batch 193/196] [Batch classify loss: 0.000147]
+right_index: 24064
+[Epoch 27/40] [Batch 194/196] [Batch classify loss: 0.000246]
+right_index: 24320
+[Epoch 27/40] [Batch 195/196] [Batch classify loss: 0.000115]
+right_index: 24576
+[Epoch 27/40] [Batch 196/196] [Batch classify loss: 0.001729]
+0027 epoch rmt trained classifier accuary on the clean testing examples:88.4200%
+0027 epoch rmt trained classifier loss on the clean testing examples:0.7395
+0027 epoch rmt trained classifier accuary on adversarial testset:26.3100%
+0027 epoch rmt trained classifier loss on adversarial testset:6.527690410614014
+
+
+27epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 28/40] [Batch 1/196] [Batch classify loss: 0.000259]
+right_index: 512
+[Epoch 28/40] [Batch 2/196] [Batch classify loss: 0.000120]
+right_index: 768
+[Epoch 28/40] [Batch 3/196] [Batch classify loss: 0.002687]
+right_index: 1024
+[Epoch 28/40] [Batch 4/196] [Batch classify loss: 0.000172]
+right_index: 1280
+[Epoch 28/40] [Batch 5/196] [Batch classify loss: 0.000175]
+right_index: 1536
+[Epoch 28/40] [Batch 6/196] [Batch classify loss: 0.000087]
+right_index: 1792
+[Epoch 28/40] [Batch 7/196] [Batch classify loss: 0.000146]
+right_index: 2048
+[Epoch 28/40] [Batch 8/196] [Batch classify loss: 0.000123]
+right_index: 2304
+[Epoch 28/40] [Batch 9/196] [Batch classify loss: 0.000251]
+right_index: 2560
+[Epoch 28/40] [Batch 10/196] [Batch classify loss: 0.000183]
+right_index: 2816
+[Epoch 28/40] [Batch 11/196] [Batch classify loss: 0.000413]
+right_index: 3072
+[Epoch 28/40] [Batch 12/196] [Batch classify loss: 0.000747]
+right_index: 3328
+[Epoch 28/40] [Batch 13/196] [Batch classify loss: 0.000176]
+right_index: 3584
+[Epoch 28/40] [Batch 14/196] [Batch classify loss: 0.000126]
+right_index: 3840
+[Epoch 28/40] [Batch 15/196] [Batch classify loss: 0.000235]
+right_index: 4096
+[Epoch 28/40] [Batch 16/196] [Batch classify loss: 0.000107]
+right_index: 4352
+[Epoch 28/40] [Batch 17/196] [Batch classify loss: 0.000106]
+right_index: 4608
+[Epoch 28/40] [Batch 18/196] [Batch classify loss: 0.000141]
+right_index: 4864
+[Epoch 28/40] [Batch 19/196] [Batch classify loss: 0.000238]
+right_index: 5120
+[Epoch 28/40] [Batch 20/196] [Batch classify loss: 0.000117]
+right_index: 5376
+[Epoch 28/40] [Batch 21/196] [Batch classify loss: 0.000259]
+right_index: 5632
+[Epoch 28/40] [Batch 22/196] [Batch classify loss: 0.000190]
+right_index: 5888
+[Epoch 28/40] [Batch 23/196] [Batch classify loss: 0.001025]
+right_index: 6144
+[Epoch 28/40] [Batch 24/196] [Batch classify loss: 0.000375]
+right_index: 6400
+[Epoch 28/40] [Batch 25/196] [Batch classify loss: 0.000168]
+right_index: 6656
+[Epoch 28/40] [Batch 26/196] [Batch classify loss: 0.000161]
+right_index: 6912
+[Epoch 28/40] [Batch 27/196] [Batch classify loss: 0.000157]
+right_index: 7168
+[Epoch 28/40] [Batch 28/196] [Batch classify loss: 0.000130]
+right_index: 7424
+[Epoch 28/40] [Batch 29/196] [Batch classify loss: 0.000241]
+right_index: 7680
+[Epoch 28/40] [Batch 30/196] [Batch classify loss: 0.000122]
+right_index: 7936
+[Epoch 28/40] [Batch 31/196] [Batch classify loss: 0.000166]
+right_index: 8192
+[Epoch 28/40] [Batch 32/196] [Batch classify loss: 0.000141]
+right_index: 8448
+[Epoch 28/40] [Batch 33/196] [Batch classify loss: 0.000485]
+right_index: 8704
+[Epoch 28/40] [Batch 34/196] [Batch classify loss: 0.000133]
+right_index: 8960
+[Epoch 28/40] [Batch 35/196] [Batch classify loss: 0.000225]
+right_index: 9216
+[Epoch 28/40] [Batch 36/196] [Batch classify loss: 0.000549]
+right_index: 9472
+[Epoch 28/40] [Batch 37/196] [Batch classify loss: 0.000144]
+right_index: 9728
+[Epoch 28/40] [Batch 38/196] [Batch classify loss: 0.010009]
+right_index: 9984
+[Epoch 28/40] [Batch 39/196] [Batch classify loss: 0.000141]
+right_index: 10240
+[Epoch 28/40] [Batch 40/196] [Batch classify loss: 0.001622]
+right_index: 10496
+[Epoch 28/40] [Batch 41/196] [Batch classify loss: 0.000100]
+right_index: 10752
+[Epoch 28/40] [Batch 42/196] [Batch classify loss: 0.000104]
+right_index: 11008
+[Epoch 28/40] [Batch 43/196] [Batch classify loss: 0.000116]
+right_index: 11264
+[Epoch 28/40] [Batch 44/196] [Batch classify loss: 0.000144]
+right_index: 11520
+[Epoch 28/40] [Batch 45/196] [Batch classify loss: 0.000176]
+right_index: 11776
+[Epoch 28/40] [Batch 46/196] [Batch classify loss: 0.000232]
+right_index: 12032
+[Epoch 28/40] [Batch 47/196] [Batch classify loss: 0.000142]
+right_index: 12288
+[Epoch 28/40] [Batch 48/196] [Batch classify loss: 0.000301]
+right_index: 12544
+[Epoch 28/40] [Batch 49/196] [Batch classify loss: 0.000104]
+right_index: 12800
+[Epoch 28/40] [Batch 50/196] [Batch classify loss: 0.000464]
+right_index: 13056
+[Epoch 28/40] [Batch 51/196] [Batch classify loss: 0.000576]
+right_index: 13312
+[Epoch 28/40] [Batch 52/196] [Batch classify loss: 0.000199]
+right_index: 13568
+[Epoch 28/40] [Batch 53/196] [Batch classify loss: 0.000183]
+right_index: 13824
+[Epoch 28/40] [Batch 54/196] [Batch classify loss: 0.000207]
+right_index: 14080
+[Epoch 28/40] [Batch 55/196] [Batch classify loss: 0.000958]
+right_index: 14336
+[Epoch 28/40] [Batch 56/196] [Batch classify loss: 0.000254]
+right_index: 14592
+[Epoch 28/40] [Batch 57/196] [Batch classify loss: 0.000687]
+right_index: 14848
+[Epoch 28/40] [Batch 58/196] [Batch classify loss: 0.000128]
+right_index: 15104
+[Epoch 28/40] [Batch 59/196] [Batch classify loss: 0.000311]
+right_index: 15360
+[Epoch 28/40] [Batch 60/196] [Batch classify loss: 0.000590]
+right_index: 15616
+[Epoch 28/40] [Batch 61/196] [Batch classify loss: 0.000799]
+right_index: 15872
+[Epoch 28/40] [Batch 62/196] [Batch classify loss: 0.000198]
+right_index: 16128
+[Epoch 28/40] [Batch 63/196] [Batch classify loss: 0.000129]
+right_index: 16384
+[Epoch 28/40] [Batch 64/196] [Batch classify loss: 0.000146]
+right_index: 16640
+[Epoch 28/40] [Batch 65/196] [Batch classify loss: 0.000104]
+right_index: 16896
+[Epoch 28/40] [Batch 66/196] [Batch classify loss: 0.000363]
+right_index: 17152
+[Epoch 28/40] [Batch 67/196] [Batch classify loss: 0.000130]
+right_index: 17408
+[Epoch 28/40] [Batch 68/196] [Batch classify loss: 0.000144]
+right_index: 17664
+[Epoch 28/40] [Batch 69/196] [Batch classify loss: 0.000104]
+right_index: 17920
+[Epoch 28/40] [Batch 70/196] [Batch classify loss: 0.000272]
+right_index: 18176
+[Epoch 28/40] [Batch 71/196] [Batch classify loss: 0.000164]
+right_index: 18432
+[Epoch 28/40] [Batch 72/196] [Batch classify loss: 0.000206]
+right_index: 18688
+[Epoch 28/40] [Batch 73/196] [Batch classify loss: 0.000132]
+right_index: 18944
+[Epoch 28/40] [Batch 74/196] [Batch classify loss: 0.000086]
+right_index: 19200
+[Epoch 28/40] [Batch 75/196] [Batch classify loss: 0.000199]
+right_index: 19456
+[Epoch 28/40] [Batch 76/196] [Batch classify loss: 0.000101]
+right_index: 19712
+[Epoch 28/40] [Batch 77/196] [Batch classify loss: 0.000151]
+right_index: 19968
+[Epoch 28/40] [Batch 78/196] [Batch classify loss: 0.000182]
+right_index: 20224
+[Epoch 28/40] [Batch 79/196] [Batch classify loss: 0.000200]
+right_index: 20480
+[Epoch 28/40] [Batch 80/196] [Batch classify loss: 0.000154]
+right_index: 20736
+[Epoch 28/40] [Batch 81/196] [Batch classify loss: 0.000366]
+right_index: 20992
+[Epoch 28/40] [Batch 82/196] [Batch classify loss: 0.000939]
+right_index: 21248
+[Epoch 28/40] [Batch 83/196] [Batch classify loss: 0.000303]
+right_index: 21504
+[Epoch 28/40] [Batch 84/196] [Batch classify loss: 0.000104]
+right_index: 21760
+[Epoch 28/40] [Batch 85/196] [Batch classify loss: 0.000185]
+right_index: 22016
+[Epoch 28/40] [Batch 86/196] [Batch classify loss: 0.000313]
+right_index: 22272
+[Epoch 28/40] [Batch 87/196] [Batch classify loss: 0.000129]
+right_index: 22528
+[Epoch 28/40] [Batch 88/196] [Batch classify loss: 0.000168]
+right_index: 22784
+[Epoch 28/40] [Batch 89/196] [Batch classify loss: 0.000163]
+right_index: 23040
+[Epoch 28/40] [Batch 90/196] [Batch classify loss: 0.000135]
+right_index: 23296
+[Epoch 28/40] [Batch 91/196] [Batch classify loss: 0.000165]
+right_index: 23552
+[Epoch 28/40] [Batch 92/196] [Batch classify loss: 0.000202]
+right_index: 23808
+[Epoch 28/40] [Batch 93/196] [Batch classify loss: 0.000144]
+right_index: 24064
+[Epoch 28/40] [Batch 94/196] [Batch classify loss: 0.000120]
+right_index: 24320
+[Epoch 28/40] [Batch 95/196] [Batch classify loss: 0.000235]
+right_index: 24576
+[Epoch 28/40] [Batch 96/196] [Batch classify loss: 0.000367]
+right_index: 24832
+[Epoch 28/40] [Batch 97/196] [Batch classify loss: 0.000522]
+right_index: 25088
+[Epoch 28/40] [Batch 98/196] [Batch classify loss: 0.000251]
+right_index: 25344
+[Epoch 28/40] [Batch 99/196] [Batch classify loss: 0.000184]
+right_index: 25397
+[Epoch 28/40] [Batch 100/196] [Batch classify loss: 0.016667]
+right_index: 256
+[Epoch 28/40] [Batch 101/196] [Batch classify loss: 0.004988]
+right_index: 512
+[Epoch 28/40] [Batch 102/196] [Batch classify loss: 0.000263]
+right_index: 768
+[Epoch 28/40] [Batch 103/196] [Batch classify loss: 0.000150]
+right_index: 1024
+[Epoch 28/40] [Batch 104/196] [Batch classify loss: 0.000291]
+right_index: 1280
+[Epoch 28/40] [Batch 105/196] [Batch classify loss: 0.000888]
+right_index: 1536
+[Epoch 28/40] [Batch 106/196] [Batch classify loss: 0.000140]
+right_index: 1792
+[Epoch 28/40] [Batch 107/196] [Batch classify loss: 0.000211]
+right_index: 2048
+[Epoch 28/40] [Batch 108/196] [Batch classify loss: 0.000151]
+right_index: 2304
+[Epoch 28/40] [Batch 109/196] [Batch classify loss: 0.000144]
+right_index: 2560
+[Epoch 28/40] [Batch 110/196] [Batch classify loss: 0.000125]
+right_index: 2816
+[Epoch 28/40] [Batch 111/196] [Batch classify loss: 0.000153]
+right_index: 3072
+[Epoch 28/40] [Batch 112/196] [Batch classify loss: 0.004675]
+right_index: 3328
+[Epoch 28/40] [Batch 113/196] [Batch classify loss: 0.000312]
+right_index: 3584
+[Epoch 28/40] [Batch 114/196] [Batch classify loss: 0.000148]
+right_index: 3840
+[Epoch 28/40] [Batch 115/196] [Batch classify loss: 0.000108]
+right_index: 4096
+[Epoch 28/40] [Batch 116/196] [Batch classify loss: 0.000151]
+right_index: 4352
+[Epoch 28/40] [Batch 117/196] [Batch classify loss: 0.000115]
+right_index: 4608
+[Epoch 28/40] [Batch 118/196] [Batch classify loss: 0.000186]
+right_index: 4864
+[Epoch 28/40] [Batch 119/196] [Batch classify loss: 0.000094]
+right_index: 5120
+[Epoch 28/40] [Batch 120/196] [Batch classify loss: 0.000316]
+right_index: 5376
+[Epoch 28/40] [Batch 121/196] [Batch classify loss: 0.000231]
+right_index: 5632
+[Epoch 28/40] [Batch 122/196] [Batch classify loss: 0.000126]
+right_index: 5888
+[Epoch 28/40] [Batch 123/196] [Batch classify loss: 0.000091]
+right_index: 6144
+[Epoch 28/40] [Batch 124/196] [Batch classify loss: 0.000115]
+right_index: 6400
+[Epoch 28/40] [Batch 125/196] [Batch classify loss: 0.003946]
+right_index: 6656
+[Epoch 28/40] [Batch 126/196] [Batch classify loss: 0.000196]
+right_index: 6912
+[Epoch 28/40] [Batch 127/196] [Batch classify loss: 0.000081]
+right_index: 7168
+[Epoch 28/40] [Batch 128/196] [Batch classify loss: 0.000707]
+right_index: 7424
+[Epoch 28/40] [Batch 129/196] [Batch classify loss: 0.000498]
+right_index: 7680
+[Epoch 28/40] [Batch 130/196] [Batch classify loss: 0.000603]
+right_index: 7936
+[Epoch 28/40] [Batch 131/196] [Batch classify loss: 0.000292]
+right_index: 8192
+[Epoch 28/40] [Batch 132/196] [Batch classify loss: 0.000187]
+right_index: 8448
+[Epoch 28/40] [Batch 133/196] [Batch classify loss: 0.000231]
+right_index: 8704
+[Epoch 28/40] [Batch 134/196] [Batch classify loss: 0.000262]
+right_index: 8960
+[Epoch 28/40] [Batch 135/196] [Batch classify loss: 0.000105]
+right_index: 9216
+[Epoch 28/40] [Batch 136/196] [Batch classify loss: 0.000166]
+right_index: 9472
+[Epoch 28/40] [Batch 137/196] [Batch classify loss: 0.000193]
+right_index: 9728
+[Epoch 28/40] [Batch 138/196] [Batch classify loss: 0.000110]
+right_index: 9984
+[Epoch 28/40] [Batch 139/196] [Batch classify loss: 0.000329]
+right_index: 10240
+[Epoch 28/40] [Batch 140/196] [Batch classify loss: 0.000215]
+right_index: 10496
+[Epoch 28/40] [Batch 141/196] [Batch classify loss: 0.000882]
+right_index: 10752
+[Epoch 28/40] [Batch 142/196] [Batch classify loss: 0.000193]
+right_index: 11008
+[Epoch 28/40] [Batch 143/196] [Batch classify loss: 0.000128]
+right_index: 11264
+[Epoch 28/40] [Batch 144/196] [Batch classify loss: 0.000123]
+right_index: 11520
+[Epoch 28/40] [Batch 145/196] [Batch classify loss: 0.000172]
+right_index: 11776
+[Epoch 28/40] [Batch 146/196] [Batch classify loss: 0.000382]
+right_index: 12032
+[Epoch 28/40] [Batch 147/196] [Batch classify loss: 0.000206]
+right_index: 12288
+[Epoch 28/40] [Batch 148/196] [Batch classify loss: 0.000123]
+right_index: 12544
+[Epoch 28/40] [Batch 149/196] [Batch classify loss: 0.000200]
+right_index: 12800
+[Epoch 28/40] [Batch 150/196] [Batch classify loss: 0.000137]
+right_index: 13056
+[Epoch 28/40] [Batch 151/196] [Batch classify loss: 0.000212]
+right_index: 13312
+[Epoch 28/40] [Batch 152/196] [Batch classify loss: 0.000801]
+right_index: 13568
+[Epoch 28/40] [Batch 153/196] [Batch classify loss: 0.000116]
+right_index: 13824
+[Epoch 28/40] [Batch 154/196] [Batch classify loss: 0.000208]
+right_index: 14080
+[Epoch 28/40] [Batch 155/196] [Batch classify loss: 0.004989]
+right_index: 14336
+[Epoch 28/40] [Batch 156/196] [Batch classify loss: 0.000104]
+right_index: 14592
+[Epoch 28/40] [Batch 157/196] [Batch classify loss: 0.000143]
+right_index: 14848
+[Epoch 28/40] [Batch 158/196] [Batch classify loss: 0.000143]
+right_index: 15104
+[Epoch 28/40] [Batch 159/196] [Batch classify loss: 0.000204]
+right_index: 15360
+[Epoch 28/40] [Batch 160/196] [Batch classify loss: 0.000154]
+right_index: 15616
+[Epoch 28/40] [Batch 161/196] [Batch classify loss: 0.000098]
+right_index: 15872
+[Epoch 28/40] [Batch 162/196] [Batch classify loss: 0.000121]
+right_index: 16128
+[Epoch 28/40] [Batch 163/196] [Batch classify loss: 0.000113]
+right_index: 16384
+[Epoch 28/40] [Batch 164/196] [Batch classify loss: 0.000124]
+right_index: 16640
+[Epoch 28/40] [Batch 165/196] [Batch classify loss: 0.000109]
+right_index: 16896
+[Epoch 28/40] [Batch 166/196] [Batch classify loss: 0.000103]
+right_index: 17152
+[Epoch 28/40] [Batch 167/196] [Batch classify loss: 0.000240]
+right_index: 17408
+[Epoch 28/40] [Batch 168/196] [Batch classify loss: 0.000175]
+right_index: 17664
+[Epoch 28/40] [Batch 169/196] [Batch classify loss: 0.000182]
+right_index: 17920
+[Epoch 28/40] [Batch 170/196] [Batch classify loss: 0.000113]
+right_index: 18176
+[Epoch 28/40] [Batch 171/196] [Batch classify loss: 0.000202]
+right_index: 18432
+[Epoch 28/40] [Batch 172/196] [Batch classify loss: 0.000205]
+right_index: 18688
+[Epoch 28/40] [Batch 173/196] [Batch classify loss: 0.000296]
+right_index: 18944
+[Epoch 28/40] [Batch 174/196] [Batch classify loss: 0.000244]
+right_index: 19200
+[Epoch 28/40] [Batch 175/196] [Batch classify loss: 0.000390]
+right_index: 19456
+[Epoch 28/40] [Batch 176/196] [Batch classify loss: 0.000304]
+right_index: 19712
+[Epoch 28/40] [Batch 177/196] [Batch classify loss: 0.000120]
+right_index: 19968
+[Epoch 28/40] [Batch 178/196] [Batch classify loss: 0.000107]
+right_index: 20224
+[Epoch 28/40] [Batch 179/196] [Batch classify loss: 0.000109]
+right_index: 20480
+[Epoch 28/40] [Batch 180/196] [Batch classify loss: 0.002027]
+right_index: 20736
+[Epoch 28/40] [Batch 181/196] [Batch classify loss: 0.000227]
+right_index: 20992
+[Epoch 28/40] [Batch 182/196] [Batch classify loss: 0.000158]
+right_index: 21248
+[Epoch 28/40] [Batch 183/196] [Batch classify loss: 0.000181]
+right_index: 21504
+[Epoch 28/40] [Batch 184/196] [Batch classify loss: 0.000114]
+right_index: 21760
+[Epoch 28/40] [Batch 185/196] [Batch classify loss: 0.000140]
+right_index: 22016
+[Epoch 28/40] [Batch 186/196] [Batch classify loss: 0.000354]
+right_index: 22272
+[Epoch 28/40] [Batch 187/196] [Batch classify loss: 0.000104]
+right_index: 22528
+[Epoch 28/40] [Batch 188/196] [Batch classify loss: 0.000133]
+right_index: 22784
+[Epoch 28/40] [Batch 189/196] [Batch classify loss: 0.000147]
+right_index: 23040
+[Epoch 28/40] [Batch 190/196] [Batch classify loss: 0.000130]
+right_index: 23296
+[Epoch 28/40] [Batch 191/196] [Batch classify loss: 0.000201]
+right_index: 23552
+[Epoch 28/40] [Batch 192/196] [Batch classify loss: 0.000294]
+right_index: 23808
+[Epoch 28/40] [Batch 193/196] [Batch classify loss: 0.000477]
+right_index: 24064
+[Epoch 28/40] [Batch 194/196] [Batch classify loss: 0.000133]
+right_index: 24320
+[Epoch 28/40] [Batch 195/196] [Batch classify loss: 0.000136]
+right_index: 24576
+[Epoch 28/40] [Batch 196/196] [Batch classify loss: 0.001412]
+0028 epoch rmt trained classifier accuary on the clean testing examples:88.4800%
+0028 epoch rmt trained classifier loss on the clean testing examples:0.7467
+0028 epoch rmt trained classifier accuary on adversarial testset:26.2800%
+0028 epoch rmt trained classifier loss on adversarial testset:6.565311431884766
+
+
+28epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 29/40] [Batch 1/196] [Batch classify loss: 0.000161]
+right_index: 512
+[Epoch 29/40] [Batch 2/196] [Batch classify loss: 0.000093]
+right_index: 768
+[Epoch 29/40] [Batch 3/196] [Batch classify loss: 0.000247]
+right_index: 1024
+[Epoch 29/40] [Batch 4/196] [Batch classify loss: 0.001188]
+right_index: 1280
+[Epoch 29/40] [Batch 5/196] [Batch classify loss: 0.000168]
+right_index: 1536
+[Epoch 29/40] [Batch 6/196] [Batch classify loss: 0.000086]
+right_index: 1792
+[Epoch 29/40] [Batch 7/196] [Batch classify loss: 0.000149]
+right_index: 2048
+[Epoch 29/40] [Batch 8/196] [Batch classify loss: 0.000165]
+right_index: 2304
+[Epoch 29/40] [Batch 9/196] [Batch classify loss: 0.000223]
+right_index: 2560
+[Epoch 29/40] [Batch 10/196] [Batch classify loss: 0.002274]
+right_index: 2816
+[Epoch 29/40] [Batch 11/196] [Batch classify loss: 0.000148]
+right_index: 3072
+[Epoch 29/40] [Batch 12/196] [Batch classify loss: 0.000141]
+right_index: 3328
+[Epoch 29/40] [Batch 13/196] [Batch classify loss: 0.000251]
+right_index: 3584
+[Epoch 29/40] [Batch 14/196] [Batch classify loss: 0.000287]
+right_index: 3840
+[Epoch 29/40] [Batch 15/196] [Batch classify loss: 0.000146]
+right_index: 4096
+[Epoch 29/40] [Batch 16/196] [Batch classify loss: 0.000559]
+right_index: 4352
+[Epoch 29/40] [Batch 17/196] [Batch classify loss: 0.000083]
+right_index: 4608
+[Epoch 29/40] [Batch 18/196] [Batch classify loss: 0.000315]
+right_index: 4864
+[Epoch 29/40] [Batch 19/196] [Batch classify loss: 0.000142]
+right_index: 5120
+[Epoch 29/40] [Batch 20/196] [Batch classify loss: 0.000124]
+right_index: 5376
+[Epoch 29/40] [Batch 21/196] [Batch classify loss: 0.000155]
+right_index: 5632
+[Epoch 29/40] [Batch 22/196] [Batch classify loss: 0.000166]
+right_index: 5888
+[Epoch 29/40] [Batch 23/196] [Batch classify loss: 0.000235]
+right_index: 6144
+[Epoch 29/40] [Batch 24/196] [Batch classify loss: 0.000100]
+right_index: 6400
+[Epoch 29/40] [Batch 25/196] [Batch classify loss: 0.000091]
+right_index: 6656
+[Epoch 29/40] [Batch 26/196] [Batch classify loss: 0.000105]
+right_index: 6912
+[Epoch 29/40] [Batch 27/196] [Batch classify loss: 0.000365]
+right_index: 7168
+[Epoch 29/40] [Batch 28/196] [Batch classify loss: 0.000167]
+right_index: 7424
+[Epoch 29/40] [Batch 29/196] [Batch classify loss: 0.000269]
+right_index: 7680
+[Epoch 29/40] [Batch 30/196] [Batch classify loss: 0.000260]
+right_index: 7936
+[Epoch 29/40] [Batch 31/196] [Batch classify loss: 0.000119]
+right_index: 8192
+[Epoch 29/40] [Batch 32/196] [Batch classify loss: 0.000119]
+right_index: 8448
+[Epoch 29/40] [Batch 33/196] [Batch classify loss: 0.000121]
+right_index: 8704
+[Epoch 29/40] [Batch 34/196] [Batch classify loss: 0.000171]
+right_index: 8960
+[Epoch 29/40] [Batch 35/196] [Batch classify loss: 0.000223]
+right_index: 9216
+[Epoch 29/40] [Batch 36/196] [Batch classify loss: 0.000137]
+right_index: 9472
+[Epoch 29/40] [Batch 37/196] [Batch classify loss: 0.000204]
+right_index: 9728
+[Epoch 29/40] [Batch 38/196] [Batch classify loss: 0.000182]
+right_index: 9984
+[Epoch 29/40] [Batch 39/196] [Batch classify loss: 0.000181]
+right_index: 10240
+[Epoch 29/40] [Batch 40/196] [Batch classify loss: 0.000147]
+right_index: 10496
+[Epoch 29/40] [Batch 41/196] [Batch classify loss: 0.000183]
+right_index: 10752
+[Epoch 29/40] [Batch 42/196] [Batch classify loss: 0.000433]
+right_index: 11008
+[Epoch 29/40] [Batch 43/196] [Batch classify loss: 0.000188]
+right_index: 11264
+[Epoch 29/40] [Batch 44/196] [Batch classify loss: 0.000126]
+right_index: 11520
+[Epoch 29/40] [Batch 45/196] [Batch classify loss: 0.000801]
+right_index: 11776
+[Epoch 29/40] [Batch 46/196] [Batch classify loss: 0.000144]
+right_index: 12032
+[Epoch 29/40] [Batch 47/196] [Batch classify loss: 0.000087]
+right_index: 12288
+[Epoch 29/40] [Batch 48/196] [Batch classify loss: 0.000207]
+right_index: 12544
+[Epoch 29/40] [Batch 49/196] [Batch classify loss: 0.000188]
+right_index: 12800
+[Epoch 29/40] [Batch 50/196] [Batch classify loss: 0.000195]
+right_index: 13056
+[Epoch 29/40] [Batch 51/196] [Batch classify loss: 0.000117]
+right_index: 13312
+[Epoch 29/40] [Batch 52/196] [Batch classify loss: 0.000098]
+right_index: 13568
+[Epoch 29/40] [Batch 53/196] [Batch classify loss: 0.000198]
+right_index: 13824
+[Epoch 29/40] [Batch 54/196] [Batch classify loss: 0.000104]
+right_index: 14080
+[Epoch 29/40] [Batch 55/196] [Batch classify loss: 0.000169]
+right_index: 14336
+[Epoch 29/40] [Batch 56/196] [Batch classify loss: 0.000072]
+right_index: 14592
+[Epoch 29/40] [Batch 57/196] [Batch classify loss: 0.000173]
+right_index: 14848
+[Epoch 29/40] [Batch 58/196] [Batch classify loss: 0.000163]
+right_index: 15104
+[Epoch 29/40] [Batch 59/196] [Batch classify loss: 0.000146]
+right_index: 15360
+[Epoch 29/40] [Batch 60/196] [Batch classify loss: 0.000536]
+right_index: 15616
+[Epoch 29/40] [Batch 61/196] [Batch classify loss: 0.000109]
+right_index: 15872
+[Epoch 29/40] [Batch 62/196] [Batch classify loss: 0.000166]
+right_index: 16128
+[Epoch 29/40] [Batch 63/196] [Batch classify loss: 0.000181]
+right_index: 16384
+[Epoch 29/40] [Batch 64/196] [Batch classify loss: 0.000095]
+right_index: 16640
+[Epoch 29/40] [Batch 65/196] [Batch classify loss: 0.000142]
+right_index: 16896
+[Epoch 29/40] [Batch 66/196] [Batch classify loss: 0.000183]
+right_index: 17152
+[Epoch 29/40] [Batch 67/196] [Batch classify loss: 0.000165]
+right_index: 17408
+[Epoch 29/40] [Batch 68/196] [Batch classify loss: 0.000372]
+right_index: 17664
+[Epoch 29/40] [Batch 69/196] [Batch classify loss: 0.000326]
+right_index: 17920
+[Epoch 29/40] [Batch 70/196] [Batch classify loss: 0.000125]
+right_index: 18176
+[Epoch 29/40] [Batch 71/196] [Batch classify loss: 0.000279]
+right_index: 18432
+[Epoch 29/40] [Batch 72/196] [Batch classify loss: 0.000126]
+right_index: 18688
+[Epoch 29/40] [Batch 73/196] [Batch classify loss: 0.000114]
+right_index: 18944
+[Epoch 29/40] [Batch 74/196] [Batch classify loss: 0.000120]
+right_index: 19200
+[Epoch 29/40] [Batch 75/196] [Batch classify loss: 0.000100]
+right_index: 19456
+[Epoch 29/40] [Batch 76/196] [Batch classify loss: 0.000093]
+right_index: 19712
+[Epoch 29/40] [Batch 77/196] [Batch classify loss: 0.006170]
+right_index: 19968
+[Epoch 29/40] [Batch 78/196] [Batch classify loss: 0.000123]
+right_index: 20224
+[Epoch 29/40] [Batch 79/196] [Batch classify loss: 0.000786]
+right_index: 20480
+[Epoch 29/40] [Batch 80/196] [Batch classify loss: 0.000142]
+right_index: 20736
+[Epoch 29/40] [Batch 81/196] [Batch classify loss: 0.000310]
+right_index: 20992
+[Epoch 29/40] [Batch 82/196] [Batch classify loss: 0.000157]
+right_index: 21248
+[Epoch 29/40] [Batch 83/196] [Batch classify loss: 0.000155]
+right_index: 21504
+[Epoch 29/40] [Batch 84/196] [Batch classify loss: 0.000144]
+right_index: 21760
+[Epoch 29/40] [Batch 85/196] [Batch classify loss: 0.000216]
+right_index: 22016
+[Epoch 29/40] [Batch 86/196] [Batch classify loss: 0.000449]
+right_index: 22272
+[Epoch 29/40] [Batch 87/196] [Batch classify loss: 0.000207]
+right_index: 22528
+[Epoch 29/40] [Batch 88/196] [Batch classify loss: 0.000405]
+right_index: 22784
+[Epoch 29/40] [Batch 89/196] [Batch classify loss: 0.000260]
+right_index: 23040
+[Epoch 29/40] [Batch 90/196] [Batch classify loss: 0.000136]
+right_index: 23296
+[Epoch 29/40] [Batch 91/196] [Batch classify loss: 0.000193]
+right_index: 23552
+[Epoch 29/40] [Batch 92/196] [Batch classify loss: 0.000230]
+right_index: 23808
+[Epoch 29/40] [Batch 93/196] [Batch classify loss: 0.000144]
+right_index: 24064
+[Epoch 29/40] [Batch 94/196] [Batch classify loss: 0.004821]
+right_index: 24320
+[Epoch 29/40] [Batch 95/196] [Batch classify loss: 0.000141]
+right_index: 24576
+[Epoch 29/40] [Batch 96/196] [Batch classify loss: 0.000148]
+right_index: 24832
+[Epoch 29/40] [Batch 97/196] [Batch classify loss: 0.000091]
+right_index: 25088
+[Epoch 29/40] [Batch 98/196] [Batch classify loss: 0.000137]
+right_index: 25344
+[Epoch 29/40] [Batch 99/196] [Batch classify loss: 0.000222]
+right_index: 25397
+[Epoch 29/40] [Batch 100/196] [Batch classify loss: 0.011800]
+right_index: 256
+[Epoch 29/40] [Batch 101/196] [Batch classify loss: 0.000112]
+right_index: 512
+[Epoch 29/40] [Batch 102/196] [Batch classify loss: 0.000179]
+right_index: 768
+[Epoch 29/40] [Batch 103/196] [Batch classify loss: 0.000117]
+right_index: 1024
+[Epoch 29/40] [Batch 104/196] [Batch classify loss: 0.000109]
+right_index: 1280
+[Epoch 29/40] [Batch 105/196] [Batch classify loss: 0.000174]
+right_index: 1536
+[Epoch 29/40] [Batch 106/196] [Batch classify loss: 0.000334]
+right_index: 1792
+[Epoch 29/40] [Batch 107/196] [Batch classify loss: 0.000178]
+right_index: 2048
+[Epoch 29/40] [Batch 108/196] [Batch classify loss: 0.001581]
+right_index: 2304
+[Epoch 29/40] [Batch 109/196] [Batch classify loss: 0.000173]
+right_index: 2560
+[Epoch 29/40] [Batch 110/196] [Batch classify loss: 0.000120]
+right_index: 2816
+[Epoch 29/40] [Batch 111/196] [Batch classify loss: 0.000363]
+right_index: 3072
+[Epoch 29/40] [Batch 112/196] [Batch classify loss: 0.000119]
+right_index: 3328
+[Epoch 29/40] [Batch 113/196] [Batch classify loss: 0.000123]
+right_index: 3584
+[Epoch 29/40] [Batch 114/196] [Batch classify loss: 0.000344]
+right_index: 3840
+[Epoch 29/40] [Batch 115/196] [Batch classify loss: 0.000103]
+right_index: 4096
+[Epoch 29/40] [Batch 116/196] [Batch classify loss: 0.000172]
+right_index: 4352
+[Epoch 29/40] [Batch 117/196] [Batch classify loss: 0.000123]
+right_index: 4608
+[Epoch 29/40] [Batch 118/196] [Batch classify loss: 0.000216]
+right_index: 4864
+[Epoch 29/40] [Batch 119/196] [Batch classify loss: 0.000109]
+right_index: 5120
+[Epoch 29/40] [Batch 120/196] [Batch classify loss: 0.000266]
+right_index: 5376
+[Epoch 29/40] [Batch 121/196] [Batch classify loss: 0.000228]
+right_index: 5632
+[Epoch 29/40] [Batch 122/196] [Batch classify loss: 0.000109]
+right_index: 5888
+[Epoch 29/40] [Batch 123/196] [Batch classify loss: 0.000185]
+right_index: 6144
+[Epoch 29/40] [Batch 124/196] [Batch classify loss: 0.000182]
+right_index: 6400
+[Epoch 29/40] [Batch 125/196] [Batch classify loss: 0.000278]
+right_index: 6656
+[Epoch 29/40] [Batch 126/196] [Batch classify loss: 0.000467]
+right_index: 6912
+[Epoch 29/40] [Batch 127/196] [Batch classify loss: 0.000202]
+right_index: 7168
+[Epoch 29/40] [Batch 128/196] [Batch classify loss: 0.000177]
+right_index: 7424
+[Epoch 29/40] [Batch 129/196] [Batch classify loss: 0.000212]
+right_index: 7680
+[Epoch 29/40] [Batch 130/196] [Batch classify loss: 0.000134]
+right_index: 7936
+[Epoch 29/40] [Batch 131/196] [Batch classify loss: 0.000128]
+right_index: 8192
+[Epoch 29/40] [Batch 132/196] [Batch classify loss: 0.000079]
+right_index: 8448
+[Epoch 29/40] [Batch 133/196] [Batch classify loss: 0.000127]
+right_index: 8704
+[Epoch 29/40] [Batch 134/196] [Batch classify loss: 0.000085]
+right_index: 8960
+[Epoch 29/40] [Batch 135/196] [Batch classify loss: 0.000485]
+right_index: 9216
+[Epoch 29/40] [Batch 136/196] [Batch classify loss: 0.000215]
+right_index: 9472
+[Epoch 29/40] [Batch 137/196] [Batch classify loss: 0.000124]
+right_index: 9728
+[Epoch 29/40] [Batch 138/196] [Batch classify loss: 0.000171]
+right_index: 9984
+[Epoch 29/40] [Batch 139/196] [Batch classify loss: 0.000507]
+right_index: 10240
+[Epoch 29/40] [Batch 140/196] [Batch classify loss: 0.000217]
+right_index: 10496
+[Epoch 29/40] [Batch 141/196] [Batch classify loss: 0.000099]
+right_index: 10752
+[Epoch 29/40] [Batch 142/196] [Batch classify loss: 0.000167]
+right_index: 11008
+[Epoch 29/40] [Batch 143/196] [Batch classify loss: 0.000115]
+right_index: 11264
+[Epoch 29/40] [Batch 144/196] [Batch classify loss: 0.000161]
+right_index: 11520
+[Epoch 29/40] [Batch 145/196] [Batch classify loss: 0.000135]
+right_index: 11776
+[Epoch 29/40] [Batch 146/196] [Batch classify loss: 0.000098]
+right_index: 12032
+[Epoch 29/40] [Batch 147/196] [Batch classify loss: 0.000112]
+right_index: 12288
+[Epoch 29/40] [Batch 148/196] [Batch classify loss: 0.000097]
+right_index: 12544
+[Epoch 29/40] [Batch 149/196] [Batch classify loss: 0.000182]
+right_index: 12800
+[Epoch 29/40] [Batch 150/196] [Batch classify loss: 0.000662]
+right_index: 13056
+[Epoch 29/40] [Batch 151/196] [Batch classify loss: 0.000262]
+right_index: 13312
+[Epoch 29/40] [Batch 152/196] [Batch classify loss: 0.000118]
+right_index: 13568
+[Epoch 29/40] [Batch 153/196] [Batch classify loss: 0.000153]
+right_index: 13824
+[Epoch 29/40] [Batch 154/196] [Batch classify loss: 0.001231]
+right_index: 14080
+[Epoch 29/40] [Batch 155/196] [Batch classify loss: 0.000124]
+right_index: 14336
+[Epoch 29/40] [Batch 156/196] [Batch classify loss: 0.000135]
+right_index: 14592
+[Epoch 29/40] [Batch 157/196] [Batch classify loss: 0.000103]
+right_index: 14848
+[Epoch 29/40] [Batch 158/196] [Batch classify loss: 0.000084]
+right_index: 15104
+[Epoch 29/40] [Batch 159/196] [Batch classify loss: 0.000080]
+right_index: 15360
+[Epoch 29/40] [Batch 160/196] [Batch classify loss: 0.001108]
+right_index: 15616
+[Epoch 29/40] [Batch 161/196] [Batch classify loss: 0.000140]
+right_index: 15872
+[Epoch 29/40] [Batch 162/196] [Batch classify loss: 0.000133]
+right_index: 16128
+[Epoch 29/40] [Batch 163/196] [Batch classify loss: 0.000243]
+right_index: 16384
+[Epoch 29/40] [Batch 164/196] [Batch classify loss: 0.000164]
+right_index: 16640
+[Epoch 29/40] [Batch 165/196] [Batch classify loss: 0.003779]
+right_index: 16896
+[Epoch 29/40] [Batch 166/196] [Batch classify loss: 0.000167]
+right_index: 17152
+[Epoch 29/40] [Batch 167/196] [Batch classify loss: 0.000160]
+right_index: 17408
+[Epoch 29/40] [Batch 168/196] [Batch classify loss: 0.000159]
+right_index: 17664
+[Epoch 29/40] [Batch 169/196] [Batch classify loss: 0.000133]
+right_index: 17920
+[Epoch 29/40] [Batch 170/196] [Batch classify loss: 0.000229]
+right_index: 18176
+[Epoch 29/40] [Batch 171/196] [Batch classify loss: 0.000168]
+right_index: 18432
+[Epoch 29/40] [Batch 172/196] [Batch classify loss: 0.000113]
+right_index: 18688
+[Epoch 29/40] [Batch 173/196] [Batch classify loss: 0.000166]
+right_index: 18944
+[Epoch 29/40] [Batch 174/196] [Batch classify loss: 0.000355]
+right_index: 19200
+[Epoch 29/40] [Batch 175/196] [Batch classify loss: 0.000150]
+right_index: 19456
+[Epoch 29/40] [Batch 176/196] [Batch classify loss: 0.000229]
+right_index: 19712
+[Epoch 29/40] [Batch 177/196] [Batch classify loss: 0.000106]
+right_index: 19968
+[Epoch 29/40] [Batch 178/196] [Batch classify loss: 0.004736]
+right_index: 20224
+[Epoch 29/40] [Batch 179/196] [Batch classify loss: 0.000152]
+right_index: 20480
+[Epoch 29/40] [Batch 180/196] [Batch classify loss: 0.000104]
+right_index: 20736
+[Epoch 29/40] [Batch 181/196] [Batch classify loss: 0.000153]
+right_index: 20992
+[Epoch 29/40] [Batch 182/196] [Batch classify loss: 0.000118]
+right_index: 21248
+[Epoch 29/40] [Batch 183/196] [Batch classify loss: 0.000242]
+right_index: 21504
+[Epoch 29/40] [Batch 184/196] [Batch classify loss: 0.000126]
+right_index: 21760
+[Epoch 29/40] [Batch 185/196] [Batch classify loss: 0.000118]
+right_index: 22016
+[Epoch 29/40] [Batch 186/196] [Batch classify loss: 0.000247]
+right_index: 22272
+[Epoch 29/40] [Batch 187/196] [Batch classify loss: 0.000171]
+right_index: 22528
+[Epoch 29/40] [Batch 188/196] [Batch classify loss: 0.000423]
+right_index: 22784
+[Epoch 29/40] [Batch 189/196] [Batch classify loss: 0.000155]
+right_index: 23040
+[Epoch 29/40] [Batch 190/196] [Batch classify loss: 0.000344]
+right_index: 23296
+[Epoch 29/40] [Batch 191/196] [Batch classify loss: 0.005084]
+right_index: 23552
+[Epoch 29/40] [Batch 192/196] [Batch classify loss: 0.000143]
+right_index: 23808
+[Epoch 29/40] [Batch 193/196] [Batch classify loss: 0.000319]
+right_index: 24064
+[Epoch 29/40] [Batch 194/196] [Batch classify loss: 0.000119]
+right_index: 24320
+[Epoch 29/40] [Batch 195/196] [Batch classify loss: 0.000153]
+right_index: 24576
+[Epoch 29/40] [Batch 196/196] [Batch classify loss: 0.001054]
+0029 epoch rmt trained classifier accuary on the clean testing examples:88.3800%
+0029 epoch rmt trained classifier loss on the clean testing examples:0.7447
+0029 epoch rmt trained classifier accuary on adversarial testset:26.0500%
+0029 epoch rmt trained classifier loss on adversarial testset:6.572543621063232
+
+
+29epoch learning rate:1.0000000000000003e-05
+right_index: 256
+[Epoch 30/40] [Batch 1/196] [Batch classify loss: 0.000131]
+right_index: 512
+[Epoch 30/40] [Batch 2/196] [Batch classify loss: 0.000309]
+right_index: 768
+[Epoch 30/40] [Batch 3/196] [Batch classify loss: 0.000274]
+right_index: 1024
+[Epoch 30/40] [Batch 4/196] [Batch classify loss: 0.000130]
+right_index: 1280
+[Epoch 30/40] [Batch 5/196] [Batch classify loss: 0.000119]
+right_index: 1536
+[Epoch 30/40] [Batch 6/196] [Batch classify loss: 0.000135]
+right_index: 1792
+[Epoch 30/40] [Batch 7/196] [Batch classify loss: 0.000133]
+right_index: 2048
+[Epoch 30/40] [Batch 8/196] [Batch classify loss: 0.000115]
+right_index: 2304
+[Epoch 30/40] [Batch 9/196] [Batch classify loss: 0.000082]
+right_index: 2560
+[Epoch 30/40] [Batch 10/196] [Batch classify loss: 0.003771]
+right_index: 2816
+[Epoch 30/40] [Batch 11/196] [Batch classify loss: 0.000147]
+right_index: 3072
+[Epoch 30/40] [Batch 12/196] [Batch classify loss: 0.000122]
+right_index: 3328
+[Epoch 30/40] [Batch 13/196] [Batch classify loss: 0.000121]
+right_index: 3584
+[Epoch 30/40] [Batch 14/196] [Batch classify loss: 0.000122]
+right_index: 3840
+[Epoch 30/40] [Batch 15/196] [Batch classify loss: 0.000713]
+right_index: 4096
+[Epoch 30/40] [Batch 16/196] [Batch classify loss: 0.000145]
+right_index: 4352
+[Epoch 30/40] [Batch 17/196] [Batch classify loss: 0.000098]
+right_index: 4608
+[Epoch 30/40] [Batch 18/196] [Batch classify loss: 0.000281]
+right_index: 4864
+[Epoch 30/40] [Batch 19/196] [Batch classify loss: 0.000204]
+right_index: 5120
+[Epoch 30/40] [Batch 20/196] [Batch classify loss: 0.000637]
+right_index: 5376
+[Epoch 30/40] [Batch 21/196] [Batch classify loss: 0.000112]
+right_index: 5632
+[Epoch 30/40] [Batch 22/196] [Batch classify loss: 0.000243]
+right_index: 5888
+[Epoch 30/40] [Batch 23/196] [Batch classify loss: 0.000116]
+right_index: 6144
+[Epoch 30/40] [Batch 24/196] [Batch classify loss: 0.000205]
+right_index: 6400
+[Epoch 30/40] [Batch 25/196] [Batch classify loss: 0.000100]
+right_index: 6656
+[Epoch 30/40] [Batch 26/196] [Batch classify loss: 0.000198]
+right_index: 6912
+[Epoch 30/40] [Batch 27/196] [Batch classify loss: 0.000240]
+right_index: 7168
+[Epoch 30/40] [Batch 28/196] [Batch classify loss: 0.000156]
+right_index: 7424
+[Epoch 30/40] [Batch 29/196] [Batch classify loss: 0.000271]
+right_index: 7680
+[Epoch 30/40] [Batch 30/196] [Batch classify loss: 0.000122]
+right_index: 7936
+[Epoch 30/40] [Batch 31/196] [Batch classify loss: 0.000133]
+right_index: 8192
+[Epoch 30/40] [Batch 32/196] [Batch classify loss: 0.000129]
+right_index: 8448
+[Epoch 30/40] [Batch 33/196] [Batch classify loss: 0.000100]
+right_index: 8704
+[Epoch 30/40] [Batch 34/196] [Batch classify loss: 0.000119]
+right_index: 8960
+[Epoch 30/40] [Batch 35/196] [Batch classify loss: 0.000120]
+right_index: 9216
+[Epoch 30/40] [Batch 36/196] [Batch classify loss: 0.000105]
+right_index: 9472
+[Epoch 30/40] [Batch 37/196] [Batch classify loss: 0.000094]
+right_index: 9728
+[Epoch 30/40] [Batch 38/196] [Batch classify loss: 0.000201]
+right_index: 9984
+[Epoch 30/40] [Batch 39/196] [Batch classify loss: 0.000099]
+right_index: 10240
+[Epoch 30/40] [Batch 40/196] [Batch classify loss: 0.000110]
+right_index: 10496
+[Epoch 30/40] [Batch 41/196] [Batch classify loss: 0.000118]
+right_index: 10752
+[Epoch 30/40] [Batch 42/196] [Batch classify loss: 0.000168]
+right_index: 11008
+[Epoch 30/40] [Batch 43/196] [Batch classify loss: 0.000307]
+right_index: 11264
+[Epoch 30/40] [Batch 44/196] [Batch classify loss: 0.000234]
+right_index: 11520
+[Epoch 30/40] [Batch 45/196] [Batch classify loss: 0.000135]
+right_index: 11776
+[Epoch 30/40] [Batch 46/196] [Batch classify loss: 0.000183]
+right_index: 12032
+[Epoch 30/40] [Batch 47/196] [Batch classify loss: 0.000124]
+right_index: 12288
+[Epoch 30/40] [Batch 48/196] [Batch classify loss: 0.000145]
+right_index: 12544
+[Epoch 30/40] [Batch 49/196] [Batch classify loss: 0.000110]
+right_index: 12800
+[Epoch 30/40] [Batch 50/196] [Batch classify loss: 0.000229]
+right_index: 13056
+[Epoch 30/40] [Batch 51/196] [Batch classify loss: 0.000151]
+right_index: 13312
+[Epoch 30/40] [Batch 52/196] [Batch classify loss: 0.000249]
+right_index: 13568
+[Epoch 30/40] [Batch 53/196] [Batch classify loss: 0.000178]
+right_index: 13824
+[Epoch 30/40] [Batch 54/196] [Batch classify loss: 0.000096]
+right_index: 14080
+[Epoch 30/40] [Batch 55/196] [Batch classify loss: 0.000092]
+right_index: 14336
+[Epoch 30/40] [Batch 56/196] [Batch classify loss: 0.000421]
+right_index: 14592
+[Epoch 30/40] [Batch 57/196] [Batch classify loss: 0.000112]
+right_index: 14848
+[Epoch 30/40] [Batch 58/196] [Batch classify loss: 0.000155]
+right_index: 15104
+[Epoch 30/40] [Batch 59/196] [Batch classify loss: 0.000112]
+right_index: 15360
+[Epoch 30/40] [Batch 60/196] [Batch classify loss: 0.000090]
+right_index: 15616
+[Epoch 30/40] [Batch 61/196] [Batch classify loss: 0.000117]
+right_index: 15872
+[Epoch 30/40] [Batch 62/196] [Batch classify loss: 0.000092]
+right_index: 16128
+[Epoch 30/40] [Batch 63/196] [Batch classify loss: 0.000191]
+right_index: 16384
+[Epoch 30/40] [Batch 64/196] [Batch classify loss: 0.000139]
+right_index: 16640
+[Epoch 30/40] [Batch 65/196] [Batch classify loss: 0.000192]
+right_index: 16896
+[Epoch 30/40] [Batch 66/196] [Batch classify loss: 0.000189]
+right_index: 17152
+[Epoch 30/40] [Batch 67/196] [Batch classify loss: 0.000113]
+right_index: 17408
+[Epoch 30/40] [Batch 68/196] [Batch classify loss: 0.000443]
+right_index: 17664
+[Epoch 30/40] [Batch 69/196] [Batch classify loss: 0.000145]
+right_index: 17920
+[Epoch 30/40] [Batch 70/196] [Batch classify loss: 0.000120]
+right_index: 18176
+[Epoch 30/40] [Batch 71/196] [Batch classify loss: 0.001927]
+right_index: 18432
+[Epoch 30/40] [Batch 72/196] [Batch classify loss: 0.000183]
+right_index: 18688
+[Epoch 30/40] [Batch 73/196] [Batch classify loss: 0.000197]
+right_index: 18944
+[Epoch 30/40] [Batch 74/196] [Batch classify loss: 0.000110]
+right_index: 19200
+[Epoch 30/40] [Batch 75/196] [Batch classify loss: 0.000141]
+right_index: 19456
+[Epoch 30/40] [Batch 76/196] [Batch classify loss: 0.000245]
+right_index: 19712
+[Epoch 30/40] [Batch 77/196] [Batch classify loss: 0.000209]
+right_index: 19968
+[Epoch 30/40] [Batch 78/196] [Batch classify loss: 0.000104]
+right_index: 20224
+[Epoch 30/40] [Batch 79/196] [Batch classify loss: 0.000163]
+right_index: 20480
+[Epoch 30/40] [Batch 80/196] [Batch classify loss: 0.000251]
+right_index: 20736
+[Epoch 30/40] [Batch 81/196] [Batch classify loss: 0.000942]
+right_index: 20992
+[Epoch 30/40] [Batch 82/196] [Batch classify loss: 0.000166]
+right_index: 21248
+[Epoch 30/40] [Batch 83/196] [Batch classify loss: 0.000184]
+right_index: 21504
+[Epoch 30/40] [Batch 84/196] [Batch classify loss: 0.000915]
+right_index: 21760
+[Epoch 30/40] [Batch 85/196] [Batch classify loss: 0.001416]
+right_index: 22016
+[Epoch 30/40] [Batch 86/196] [Batch classify loss: 0.000084]
+right_index: 22272
+[Epoch 30/40] [Batch 87/196] [Batch classify loss: 0.000137]
+right_index: 22528
+[Epoch 30/40] [Batch 88/196] [Batch classify loss: 0.001047]
+right_index: 22784
+[Epoch 30/40] [Batch 89/196] [Batch classify loss: 0.000107]
+right_index: 23040
+[Epoch 30/40] [Batch 90/196] [Batch classify loss: 0.000177]
+right_index: 23296
+[Epoch 30/40] [Batch 91/196] [Batch classify loss: 0.000413]
+right_index: 23552
+[Epoch 30/40] [Batch 92/196] [Batch classify loss: 0.000123]
+right_index: 23808
+[Epoch 30/40] [Batch 93/196] [Batch classify loss: 0.000420]
+right_index: 24064
+[Epoch 30/40] [Batch 94/196] [Batch classify loss: 0.000135]
+right_index: 24320
+[Epoch 30/40] [Batch 95/196] [Batch classify loss: 0.000447]
+right_index: 24576
+[Epoch 30/40] [Batch 96/196] [Batch classify loss: 0.000172]
+right_index: 24832
+[Epoch 30/40] [Batch 97/196] [Batch classify loss: 0.000800]
+right_index: 25088
+[Epoch 30/40] [Batch 98/196] [Batch classify loss: 0.000107]
+right_index: 25344
+[Epoch 30/40] [Batch 99/196] [Batch classify loss: 0.000425]
+right_index: 25397
+[Epoch 30/40] [Batch 100/196] [Batch classify loss: 0.008408]
+right_index: 256
+[Epoch 30/40] [Batch 101/196] [Batch classify loss: 0.004255]
+right_index: 512
+[Epoch 30/40] [Batch 102/196] [Batch classify loss: 0.000142]
+right_index: 768
+[Epoch 30/40] [Batch 103/196] [Batch classify loss: 0.000102]
+right_index: 1024
+[Epoch 30/40] [Batch 104/196] [Batch classify loss: 0.000103]
+right_index: 1280
+[Epoch 30/40] [Batch 105/196] [Batch classify loss: 0.000464]
+right_index: 1536
+[Epoch 30/40] [Batch 106/196] [Batch classify loss: 0.000121]
+right_index: 1792
+[Epoch 30/40] [Batch 107/196] [Batch classify loss: 0.000114]
+right_index: 2048
+[Epoch 30/40] [Batch 108/196] [Batch classify loss: 0.000120]
+right_index: 2304
+[Epoch 30/40] [Batch 109/196] [Batch classify loss: 0.000164]
+right_index: 2560
+[Epoch 30/40] [Batch 110/196] [Batch classify loss: 0.002706]
+right_index: 2816
+[Epoch 30/40] [Batch 111/196] [Batch classify loss: 0.000193]
+right_index: 3072
+[Epoch 30/40] [Batch 112/196] [Batch classify loss: 0.000175]
+right_index: 3328
+[Epoch 30/40] [Batch 113/196] [Batch classify loss: 0.000147]
+right_index: 3584
+[Epoch 30/40] [Batch 114/196] [Batch classify loss: 0.000451]
+right_index: 3840
+[Epoch 30/40] [Batch 115/196] [Batch classify loss: 0.000248]
+right_index: 4096
+[Epoch 30/40] [Batch 116/196] [Batch classify loss: 0.000130]
+right_index: 4352
+[Epoch 30/40] [Batch 117/196] [Batch classify loss: 0.000088]
+right_index: 4608
+[Epoch 30/40] [Batch 118/196] [Batch classify loss: 0.000172]
+right_index: 4864
+[Epoch 30/40] [Batch 119/196] [Batch classify loss: 0.000120]
+right_index: 5120
+[Epoch 30/40] [Batch 120/196] [Batch classify loss: 0.000281]
+right_index: 5376
+[Epoch 30/40] [Batch 121/196] [Batch classify loss: 0.000185]
+right_index: 5632
+[Epoch 30/40] [Batch 122/196] [Batch classify loss: 0.000166]
+right_index: 5888
+[Epoch 30/40] [Batch 123/196] [Batch classify loss: 0.000106]
+right_index: 6144
+[Epoch 30/40] [Batch 124/196] [Batch classify loss: 0.000449]
+right_index: 6400
+[Epoch 30/40] [Batch 125/196] [Batch classify loss: 0.000525]
+right_index: 6656
+[Epoch 30/40] [Batch 126/196] [Batch classify loss: 0.000092]
+right_index: 6912
+[Epoch 30/40] [Batch 127/196] [Batch classify loss: 0.000131]
+right_index: 7168
+[Epoch 30/40] [Batch 128/196] [Batch classify loss: 0.000171]
+right_index: 7424
+[Epoch 30/40] [Batch 129/196] [Batch classify loss: 0.000133]
+right_index: 7680
+[Epoch 30/40] [Batch 130/196] [Batch classify loss: 0.000190]
+right_index: 7936
+[Epoch 30/40] [Batch 131/196] [Batch classify loss: 0.000146]
+right_index: 8192
+[Epoch 30/40] [Batch 132/196] [Batch classify loss: 0.000089]
+right_index: 8448
+[Epoch 30/40] [Batch 133/196] [Batch classify loss: 0.000106]
+right_index: 8704
+[Epoch 30/40] [Batch 134/196] [Batch classify loss: 0.000106]
+right_index: 8960
+[Epoch 30/40] [Batch 135/196] [Batch classify loss: 0.005041]
+right_index: 9216
+[Epoch 30/40] [Batch 136/196] [Batch classify loss: 0.000117]
+right_index: 9472
+[Epoch 30/40] [Batch 137/196] [Batch classify loss: 0.000101]
+right_index: 9728
+[Epoch 30/40] [Batch 138/196] [Batch classify loss: 0.000282]
+right_index: 9984
+[Epoch 30/40] [Batch 139/196] [Batch classify loss: 0.000195]
+right_index: 10240
+[Epoch 30/40] [Batch 140/196] [Batch classify loss: 0.000333]
+right_index: 10496
+[Epoch 30/40] [Batch 141/196] [Batch classify loss: 0.000135]
+right_index: 10752
+[Epoch 30/40] [Batch 142/196] [Batch classify loss: 0.000196]
+right_index: 11008
+[Epoch 30/40] [Batch 143/196] [Batch classify loss: 0.000131]
+right_index: 11264
+[Epoch 30/40] [Batch 144/196] [Batch classify loss: 0.000235]
+right_index: 11520
+[Epoch 30/40] [Batch 145/196] [Batch classify loss: 0.000199]
+right_index: 11776
+[Epoch 30/40] [Batch 146/196] [Batch classify loss: 0.000104]
+right_index: 12032
+[Epoch 30/40] [Batch 147/196] [Batch classify loss: 0.000092]
+right_index: 12288
+[Epoch 30/40] [Batch 148/196] [Batch classify loss: 0.000196]
+right_index: 12544
+[Epoch 30/40] [Batch 149/196] [Batch classify loss: 0.000159]
+right_index: 12800
+[Epoch 30/40] [Batch 150/196] [Batch classify loss: 0.000158]
+right_index: 13056
+[Epoch 30/40] [Batch 151/196] [Batch classify loss: 0.000144]
+right_index: 13312
+[Epoch 30/40] [Batch 152/196] [Batch classify loss: 0.000135]
+right_index: 13568
+[Epoch 30/40] [Batch 153/196] [Batch classify loss: 0.001426]
+right_index: 13824
+[Epoch 30/40] [Batch 154/196] [Batch classify loss: 0.000127]
+right_index: 14080
+[Epoch 30/40] [Batch 155/196] [Batch classify loss: 0.000301]
+right_index: 14336
+[Epoch 30/40] [Batch 156/196] [Batch classify loss: 0.000150]
+right_index: 14592
+[Epoch 30/40] [Batch 157/196] [Batch classify loss: 0.000177]
+right_index: 14848
+[Epoch 30/40] [Batch 158/196] [Batch classify loss: 0.000116]
+right_index: 15104
+[Epoch 30/40] [Batch 159/196] [Batch classify loss: 0.000078]
+right_index: 15360
+[Epoch 30/40] [Batch 160/196] [Batch classify loss: 0.000172]
+right_index: 15616
+[Epoch 30/40] [Batch 161/196] [Batch classify loss: 0.000136]
+right_index: 15872
+[Epoch 30/40] [Batch 162/196] [Batch classify loss: 0.000130]
+right_index: 16128
+[Epoch 30/40] [Batch 163/196] [Batch classify loss: 0.000112]
+right_index: 16384
+[Epoch 30/40] [Batch 164/196] [Batch classify loss: 0.000130]
+right_index: 16640
+[Epoch 30/40] [Batch 165/196] [Batch classify loss: 0.000143]
+right_index: 16896
+[Epoch 30/40] [Batch 166/196] [Batch classify loss: 0.000167]
+right_index: 17152
+[Epoch 30/40] [Batch 167/196] [Batch classify loss: 0.000242]
+right_index: 17408
+[Epoch 30/40] [Batch 168/196] [Batch classify loss: 0.000121]
+right_index: 17664
+[Epoch 30/40] [Batch 169/196] [Batch classify loss: 0.000178]
+right_index: 17920
+[Epoch 30/40] [Batch 170/196] [Batch classify loss: 0.000110]
+right_index: 18176
+[Epoch 30/40] [Batch 171/196] [Batch classify loss: 0.000115]
+right_index: 18432
+[Epoch 30/40] [Batch 172/196] [Batch classify loss: 0.000092]
+right_index: 18688
+[Epoch 30/40] [Batch 173/196] [Batch classify loss: 0.000132]
+right_index: 18944
+[Epoch 30/40] [Batch 174/196] [Batch classify loss: 0.000177]
+right_index: 19200
+[Epoch 30/40] [Batch 175/196] [Batch classify loss: 0.000099]
+right_index: 19456
+[Epoch 30/40] [Batch 176/196] [Batch classify loss: 0.000187]
+right_index: 19712
+[Epoch 30/40] [Batch 177/196] [Batch classify loss: 0.000185]
+right_index: 19968
+[Epoch 30/40] [Batch 178/196] [Batch classify loss: 0.000118]
+right_index: 20224
+[Epoch 30/40] [Batch 179/196] [Batch classify loss: 0.000159]
+right_index: 20480
+[Epoch 30/40] [Batch 180/196] [Batch classify loss: 0.000174]
+right_index: 20736
+[Epoch 30/40] [Batch 181/196] [Batch classify loss: 0.007892]
+right_index: 20992
+[Epoch 30/40] [Batch 182/196] [Batch classify loss: 0.000114]
+right_index: 21248
+[Epoch 30/40] [Batch 183/196] [Batch classify loss: 0.000143]
+right_index: 21504
+[Epoch 30/40] [Batch 184/196] [Batch classify loss: 0.000206]
+right_index: 21760
+[Epoch 30/40] [Batch 185/196] [Batch classify loss: 0.000146]
+right_index: 22016
+[Epoch 30/40] [Batch 186/196] [Batch classify loss: 0.000607]
+right_index: 22272
+[Epoch 30/40] [Batch 187/196] [Batch classify loss: 0.001086]
+right_index: 22528
+[Epoch 30/40] [Batch 188/196] [Batch classify loss: 0.000204]
+right_index: 22784
+[Epoch 30/40] [Batch 189/196] [Batch classify loss: 0.004689]
+right_index: 23040
+[Epoch 30/40] [Batch 190/196] [Batch classify loss: 0.000108]
+right_index: 23296
+[Epoch 30/40] [Batch 191/196] [Batch classify loss: 0.000254]
+right_index: 23552
+[Epoch 30/40] [Batch 192/196] [Batch classify loss: 0.000136]
+right_index: 23808
+[Epoch 30/40] [Batch 193/196] [Batch classify loss: 0.000155]
+right_index: 24064
+[Epoch 30/40] [Batch 194/196] [Batch classify loss: 0.000136]
+right_index: 24320
+[Epoch 30/40] [Batch 195/196] [Batch classify loss: 0.000127]
+right_index: 24576
+[Epoch 30/40] [Batch 196/196] [Batch classify loss: 0.001112]
+0030 epoch rmt trained classifier accuary on the clean testing examples:88.4100%
+0030 epoch rmt trained classifier loss on the clean testing examples:0.7499
+0030 epoch rmt trained classifier accuary on adversarial testset:26.1800%
+0030 epoch rmt trained classifier loss on adversarial testset:6.627813816070557
+
+
+30epoch learning rate:1.0000000000000002e-06
+right_index: 256
+[Epoch 31/40] [Batch 1/196] [Batch classify loss: 0.000426]
+right_index: 512
+[Epoch 31/40] [Batch 2/196] [Batch classify loss: 0.000264]
+right_index: 768
+[Epoch 31/40] [Batch 3/196] [Batch classify loss: 0.000124]
+right_index: 1024
+[Epoch 31/40] [Batch 4/196] [Batch classify loss: 0.000149]
+right_index: 1280
+[Epoch 31/40] [Batch 5/196] [Batch classify loss: 0.000120]
+right_index: 1536
+[Epoch 31/40] [Batch 6/196] [Batch classify loss: 0.000107]
+right_index: 1792
+[Epoch 31/40] [Batch 7/196] [Batch classify loss: 0.000180]
+right_index: 2048
+[Epoch 31/40] [Batch 8/196] [Batch classify loss: 0.000199]
+right_index: 2304
+[Epoch 31/40] [Batch 9/196] [Batch classify loss: 0.000122]
+right_index: 2560
+[Epoch 31/40] [Batch 10/196] [Batch classify loss: 0.000160]
+right_index: 2816
+[Epoch 31/40] [Batch 11/196] [Batch classify loss: 0.000339]
+right_index: 3072
+[Epoch 31/40] [Batch 12/196] [Batch classify loss: 0.000226]
+right_index: 3328
+[Epoch 31/40] [Batch 13/196] [Batch classify loss: 0.000211]
+right_index: 3584
+[Epoch 31/40] [Batch 14/196] [Batch classify loss: 0.000352]
+right_index: 3840
+[Epoch 31/40] [Batch 15/196] [Batch classify loss: 0.000271]
+right_index: 4096
+[Epoch 31/40] [Batch 16/196] [Batch classify loss: 0.000161]
+right_index: 4352
+[Epoch 31/40] [Batch 17/196] [Batch classify loss: 0.000207]
+right_index: 4608
+[Epoch 31/40] [Batch 18/196] [Batch classify loss: 0.000215]
+right_index: 4864
+[Epoch 31/40] [Batch 19/196] [Batch classify loss: 0.000190]
+right_index: 5120
+[Epoch 31/40] [Batch 20/196] [Batch classify loss: 0.004823]
+right_index: 5376
+[Epoch 31/40] [Batch 21/196] [Batch classify loss: 0.000107]
+right_index: 5632
+[Epoch 31/40] [Batch 22/196] [Batch classify loss: 0.000131]
+right_index: 5888
+[Epoch 31/40] [Batch 23/196] [Batch classify loss: 0.000228]
+right_index: 6144
+[Epoch 31/40] [Batch 24/196] [Batch classify loss: 0.000120]
+right_index: 6400
+[Epoch 31/40] [Batch 25/196] [Batch classify loss: 0.000150]
+right_index: 6656
+[Epoch 31/40] [Batch 26/196] [Batch classify loss: 0.000078]
+right_index: 6912
+[Epoch 31/40] [Batch 27/196] [Batch classify loss: 0.000105]
+right_index: 7168
+[Epoch 31/40] [Batch 28/196] [Batch classify loss: 0.000307]
+right_index: 7424
+[Epoch 31/40] [Batch 29/196] [Batch classify loss: 0.000163]
+right_index: 7680
+[Epoch 31/40] [Batch 30/196] [Batch classify loss: 0.000206]
+right_index: 7936
+[Epoch 31/40] [Batch 31/196] [Batch classify loss: 0.000089]
+right_index: 8192
+[Epoch 31/40] [Batch 32/196] [Batch classify loss: 0.000147]
+right_index: 8448
+[Epoch 31/40] [Batch 33/196] [Batch classify loss: 0.000108]
+right_index: 8704
+[Epoch 31/40] [Batch 34/196] [Batch classify loss: 0.000143]
+right_index: 8960
+[Epoch 31/40] [Batch 35/196] [Batch classify loss: 0.000117]
+right_index: 9216
+[Epoch 31/40] [Batch 36/196] [Batch classify loss: 0.000439]
+right_index: 9472
+[Epoch 31/40] [Batch 37/196] [Batch classify loss: 0.000171]
+right_index: 9728
+[Epoch 31/40] [Batch 38/196] [Batch classify loss: 0.000231]
+right_index: 9984
+[Epoch 31/40] [Batch 39/196] [Batch classify loss: 0.000126]
+right_index: 10240
+[Epoch 31/40] [Batch 40/196] [Batch classify loss: 0.000150]
+right_index: 10496
+[Epoch 31/40] [Batch 41/196] [Batch classify loss: 0.000089]
+right_index: 10752
+[Epoch 31/40] [Batch 42/196] [Batch classify loss: 0.000200]
+right_index: 11008
+[Epoch 31/40] [Batch 43/196] [Batch classify loss: 0.000079]
+right_index: 11264
+[Epoch 31/40] [Batch 44/196] [Batch classify loss: 0.000198]
+right_index: 11520
+[Epoch 31/40] [Batch 45/196] [Batch classify loss: 0.000117]
+right_index: 11776
+[Epoch 31/40] [Batch 46/196] [Batch classify loss: 0.000220]
+right_index: 12032
+[Epoch 31/40] [Batch 47/196] [Batch classify loss: 0.000119]
+right_index: 12288
+[Epoch 31/40] [Batch 48/196] [Batch classify loss: 0.000108]
+right_index: 12544
+[Epoch 31/40] [Batch 49/196] [Batch classify loss: 0.000144]
+right_index: 12800
+[Epoch 31/40] [Batch 50/196] [Batch classify loss: 0.000100]
+right_index: 13056
+[Epoch 31/40] [Batch 51/196] [Batch classify loss: 0.000159]
+right_index: 13312
+[Epoch 31/40] [Batch 52/196] [Batch classify loss: 0.000604]
+right_index: 13568
+[Epoch 31/40] [Batch 53/196] [Batch classify loss: 0.000241]
+right_index: 13824
+[Epoch 31/40] [Batch 54/196] [Batch classify loss: 0.000133]
+right_index: 14080
+[Epoch 31/40] [Batch 55/196] [Batch classify loss: 0.000082]
+right_index: 14336
+[Epoch 31/40] [Batch 56/196] [Batch classify loss: 0.000357]
+right_index: 14592
+[Epoch 31/40] [Batch 57/196] [Batch classify loss: 0.000134]
+right_index: 14848
+[Epoch 31/40] [Batch 58/196] [Batch classify loss: 0.000109]
+right_index: 15104
+[Epoch 31/40] [Batch 59/196] [Batch classify loss: 0.000104]
+right_index: 15360
+[Epoch 31/40] [Batch 60/196] [Batch classify loss: 0.000163]
+right_index: 15616
+[Epoch 31/40] [Batch 61/196] [Batch classify loss: 0.000750]
+right_index: 15872
+[Epoch 31/40] [Batch 62/196] [Batch classify loss: 0.002389]
+right_index: 16128
+[Epoch 31/40] [Batch 63/196] [Batch classify loss: 0.000259]
+right_index: 16384
+[Epoch 31/40] [Batch 64/196] [Batch classify loss: 0.000730]
+right_index: 16640
+[Epoch 31/40] [Batch 65/196] [Batch classify loss: 0.000099]
+right_index: 16896
+[Epoch 31/40] [Batch 66/196] [Batch classify loss: 0.000126]
+right_index: 17152
+[Epoch 31/40] [Batch 67/196] [Batch classify loss: 0.000131]
+right_index: 17408
+[Epoch 31/40] [Batch 68/196] [Batch classify loss: 0.000178]
+right_index: 17664
+[Epoch 31/40] [Batch 69/196] [Batch classify loss: 0.000177]
+right_index: 17920
+[Epoch 31/40] [Batch 70/196] [Batch classify loss: 0.000091]
+right_index: 18176
+[Epoch 31/40] [Batch 71/196] [Batch classify loss: 0.000280]
+right_index: 18432
+[Epoch 31/40] [Batch 72/196] [Batch classify loss: 0.000128]
+right_index: 18688
+[Epoch 31/40] [Batch 73/196] [Batch classify loss: 0.000082]
+right_index: 18944
+[Epoch 31/40] [Batch 74/196] [Batch classify loss: 0.000090]
+right_index: 19200
+[Epoch 31/40] [Batch 75/196] [Batch classify loss: 0.000137]
+right_index: 19456
+[Epoch 31/40] [Batch 76/196] [Batch classify loss: 0.000091]
+right_index: 19712
+[Epoch 31/40] [Batch 77/196] [Batch classify loss: 0.000667]
+right_index: 19968
+[Epoch 31/40] [Batch 78/196] [Batch classify loss: 0.000139]
+right_index: 20224
+[Epoch 31/40] [Batch 79/196] [Batch classify loss: 0.000153]
+right_index: 20480
+[Epoch 31/40] [Batch 80/196] [Batch classify loss: 0.000089]
+right_index: 20736
+[Epoch 31/40] [Batch 81/196] [Batch classify loss: 0.000289]
+right_index: 20992
+[Epoch 31/40] [Batch 82/196] [Batch classify loss: 0.000209]
+right_index: 21248
+[Epoch 31/40] [Batch 83/196] [Batch classify loss: 0.000102]
+right_index: 21504
+[Epoch 31/40] [Batch 84/196] [Batch classify loss: 0.000205]
+right_index: 21760
+[Epoch 31/40] [Batch 85/196] [Batch classify loss: 0.000150]
+right_index: 22016
+[Epoch 31/40] [Batch 86/196] [Batch classify loss: 0.001092]
+right_index: 22272
+[Epoch 31/40] [Batch 87/196] [Batch classify loss: 0.000133]
+right_index: 22528
+[Epoch 31/40] [Batch 88/196] [Batch classify loss: 0.000136]
+right_index: 22784
+[Epoch 31/40] [Batch 89/196] [Batch classify loss: 0.000114]
+right_index: 23040
+[Epoch 31/40] [Batch 90/196] [Batch classify loss: 0.000226]
+right_index: 23296
+[Epoch 31/40] [Batch 91/196] [Batch classify loss: 0.000173]
+right_index: 23552
+[Epoch 31/40] [Batch 92/196] [Batch classify loss: 0.000397]
+right_index: 23808
+[Epoch 31/40] [Batch 93/196] [Batch classify loss: 0.000098]
+right_index: 24064
+[Epoch 31/40] [Batch 94/196] [Batch classify loss: 0.000085]
+right_index: 24320
+[Epoch 31/40] [Batch 95/196] [Batch classify loss: 0.000145]
+right_index: 24576
+[Epoch 31/40] [Batch 96/196] [Batch classify loss: 0.000253]
+right_index: 24832
+[Epoch 31/40] [Batch 97/196] [Batch classify loss: 0.005162]
+right_index: 25088
+[Epoch 31/40] [Batch 98/196] [Batch classify loss: 0.000101]
+right_index: 25344
+[Epoch 31/40] [Batch 99/196] [Batch classify loss: 0.000131]
+right_index: 25397
+[Epoch 31/40] [Batch 100/196] [Batch classify loss: 0.011207]
+right_index: 256
+[Epoch 31/40] [Batch 101/196] [Batch classify loss: 0.000199]
+right_index: 512
+[Epoch 31/40] [Batch 102/196] [Batch classify loss: 0.000109]
+right_index: 768
+[Epoch 31/40] [Batch 103/196] [Batch classify loss: 0.000191]
+right_index: 1024
+[Epoch 31/40] [Batch 104/196] [Batch classify loss: 0.000124]
+right_index: 1280
+[Epoch 31/40] [Batch 105/196] [Batch classify loss: 0.000106]
+right_index: 1536
+[Epoch 31/40] [Batch 106/196] [Batch classify loss: 0.001919]
+right_index: 1792
+[Epoch 31/40] [Batch 107/196] [Batch classify loss: 0.000103]
+right_index: 2048
+[Epoch 31/40] [Batch 108/196] [Batch classify loss: 0.000094]
+right_index: 2304
+[Epoch 31/40] [Batch 109/196] [Batch classify loss: 0.000144]
+right_index: 2560
+[Epoch 31/40] [Batch 110/196] [Batch classify loss: 0.000125]
+right_index: 2816
+[Epoch 31/40] [Batch 111/196] [Batch classify loss: 0.000068]
+right_index: 3072
+[Epoch 31/40] [Batch 112/196] [Batch classify loss: 0.003764]
+right_index: 3328
+[Epoch 31/40] [Batch 113/196] [Batch classify loss: 0.000099]
+right_index: 3584
+[Epoch 31/40] [Batch 114/196] [Batch classify loss: 0.000142]
+right_index: 3840
+[Epoch 31/40] [Batch 115/196] [Batch classify loss: 0.000127]
+right_index: 4096
+[Epoch 31/40] [Batch 116/196] [Batch classify loss: 0.000180]
+right_index: 4352
+[Epoch 31/40] [Batch 117/196] [Batch classify loss: 0.000142]
+right_index: 4608
+[Epoch 31/40] [Batch 118/196] [Batch classify loss: 0.000112]
+right_index: 4864
+[Epoch 31/40] [Batch 119/196] [Batch classify loss: 0.000114]
+right_index: 5120
+[Epoch 31/40] [Batch 120/196] [Batch classify loss: 0.000126]
+right_index: 5376
+[Epoch 31/40] [Batch 121/196] [Batch classify loss: 0.000436]
+right_index: 5632
+[Epoch 31/40] [Batch 122/196] [Batch classify loss: 0.000246]
+right_index: 5888
+[Epoch 31/40] [Batch 123/196] [Batch classify loss: 0.000131]
+right_index: 6144
+[Epoch 31/40] [Batch 124/196] [Batch classify loss: 0.000131]
+right_index: 6400
+[Epoch 31/40] [Batch 125/196] [Batch classify loss: 0.008423]
+right_index: 6656
+[Epoch 31/40] [Batch 126/196] [Batch classify loss: 0.000118]
+right_index: 6912
+[Epoch 31/40] [Batch 127/196] [Batch classify loss: 0.000084]
+right_index: 7168
+[Epoch 31/40] [Batch 128/196] [Batch classify loss: 0.000092]
+right_index: 7424
+[Epoch 31/40] [Batch 129/196] [Batch classify loss: 0.000101]
+right_index: 7680
+[Epoch 31/40] [Batch 130/196] [Batch classify loss: 0.000135]
+right_index: 7936
+[Epoch 31/40] [Batch 131/196] [Batch classify loss: 0.000168]
+right_index: 8192
+[Epoch 31/40] [Batch 132/196] [Batch classify loss: 0.000143]
+right_index: 8448
+[Epoch 31/40] [Batch 133/196] [Batch classify loss: 0.000088]
+right_index: 8704
+[Epoch 31/40] [Batch 134/196] [Batch classify loss: 0.000321]
+right_index: 8960
+[Epoch 31/40] [Batch 135/196] [Batch classify loss: 0.000171]
+right_index: 9216
+[Epoch 31/40] [Batch 136/196] [Batch classify loss: 0.000400]
+right_index: 9472
+[Epoch 31/40] [Batch 137/196] [Batch classify loss: 0.000096]
+right_index: 9728
+[Epoch 31/40] [Batch 138/196] [Batch classify loss: 0.000358]
+right_index: 9984
+[Epoch 31/40] [Batch 139/196] [Batch classify loss: 0.000091]
+right_index: 10240
+[Epoch 31/40] [Batch 140/196] [Batch classify loss: 0.000392]
+right_index: 10496
+[Epoch 31/40] [Batch 141/196] [Batch classify loss: 0.000152]
+right_index: 10752
+[Epoch 31/40] [Batch 142/196] [Batch classify loss: 0.000192]
+right_index: 11008
+[Epoch 31/40] [Batch 143/196] [Batch classify loss: 0.000113]
+right_index: 11264
+[Epoch 31/40] [Batch 144/196] [Batch classify loss: 0.000107]
+right_index: 11520
+[Epoch 31/40] [Batch 145/196] [Batch classify loss: 0.000111]
+right_index: 11776
+[Epoch 31/40] [Batch 146/196] [Batch classify loss: 0.000092]
+right_index: 12032
+[Epoch 31/40] [Batch 147/196] [Batch classify loss: 0.000128]
+right_index: 12288
+[Epoch 31/40] [Batch 148/196] [Batch classify loss: 0.000108]
+right_index: 12544
+[Epoch 31/40] [Batch 149/196] [Batch classify loss: 0.005730]
+right_index: 12800
+[Epoch 31/40] [Batch 150/196] [Batch classify loss: 0.000150]
+right_index: 13056
+[Epoch 31/40] [Batch 151/196] [Batch classify loss: 0.000174]
+right_index: 13312
+[Epoch 31/40] [Batch 152/196] [Batch classify loss: 0.000105]
+right_index: 13568
+[Epoch 31/40] [Batch 153/196] [Batch classify loss: 0.000136]
+right_index: 13824
+[Epoch 31/40] [Batch 154/196] [Batch classify loss: 0.000264]
+right_index: 14080
+[Epoch 31/40] [Batch 155/196] [Batch classify loss: 0.000224]
+right_index: 14336
+[Epoch 31/40] [Batch 156/196] [Batch classify loss: 0.000390]
+right_index: 14592
+[Epoch 31/40] [Batch 157/196] [Batch classify loss: 0.000149]
+right_index: 14848
+[Epoch 31/40] [Batch 158/196] [Batch classify loss: 0.000379]
+right_index: 15104
+[Epoch 31/40] [Batch 159/196] [Batch classify loss: 0.000153]
+right_index: 15360
+[Epoch 31/40] [Batch 160/196] [Batch classify loss: 0.000217]
+right_index: 15616
+[Epoch 31/40] [Batch 161/196] [Batch classify loss: 0.000139]
+right_index: 15872
+[Epoch 31/40] [Batch 162/196] [Batch classify loss: 0.000079]
+right_index: 16128
+[Epoch 31/40] [Batch 163/196] [Batch classify loss: 0.000097]
+right_index: 16384
+[Epoch 31/40] [Batch 164/196] [Batch classify loss: 0.000618]
+right_index: 16640
+[Epoch 31/40] [Batch 165/196] [Batch classify loss: 0.000241]
+right_index: 16896
+[Epoch 31/40] [Batch 166/196] [Batch classify loss: 0.000179]
+right_index: 17152
+[Epoch 31/40] [Batch 167/196] [Batch classify loss: 0.000162]
+right_index: 17408
+[Epoch 31/40] [Batch 168/196] [Batch classify loss: 0.000177]
+right_index: 17664
+[Epoch 31/40] [Batch 169/196] [Batch classify loss: 0.000095]
+right_index: 17920
+[Epoch 31/40] [Batch 170/196] [Batch classify loss: 0.000121]
+right_index: 18176
+[Epoch 31/40] [Batch 171/196] [Batch classify loss: 0.000142]
+right_index: 18432
+[Epoch 31/40] [Batch 172/196] [Batch classify loss: 0.000162]
+right_index: 18688
+[Epoch 31/40] [Batch 173/196] [Batch classify loss: 0.000202]
+right_index: 18944
+[Epoch 31/40] [Batch 174/196] [Batch classify loss: 0.000479]
+right_index: 19200
+[Epoch 31/40] [Batch 175/196] [Batch classify loss: 0.000136]
+right_index: 19456
+[Epoch 31/40] [Batch 176/196] [Batch classify loss: 0.000202]
+right_index: 19712
+[Epoch 31/40] [Batch 177/196] [Batch classify loss: 0.000114]
+right_index: 19968
+[Epoch 31/40] [Batch 178/196] [Batch classify loss: 0.000100]
+right_index: 20224
+[Epoch 31/40] [Batch 179/196] [Batch classify loss: 0.000167]
+right_index: 20480
+[Epoch 31/40] [Batch 180/196] [Batch classify loss: 0.000123]
+right_index: 20736
