@@ -167,12 +167,17 @@ def parse_arguments():
         parser_object.add_argument('--pretrained_on_imagenet', help='pretrain', type= bool, default= False)
         
         #-------------------------arguments for classifier attack-------------------------
-        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm',choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd'])
+        parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm', 
+        choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd','fog','snow','elastic','gabor','jpeg'])
+
+
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
         parser_object.add_argument('--whitebox',action='store_true', help='white box attack')
         parser_object.add_argument('--blackbox',action='store_true', help='black box attack')
         parser_object.add_argument('--latentattack', action='store_true', help='latent adversarial attack')
+        parser_object.add_argument('--perceptualattack', action='store_true', help='Perceptual attack')
+
 
         #-------------------------arguments for classifier defense-------------------------
         parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt'])

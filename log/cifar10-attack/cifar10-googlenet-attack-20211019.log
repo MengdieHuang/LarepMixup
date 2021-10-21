@@ -1,0 +1,1773 @@
+
+
+---------------------------------------
+Torch cuda is available
+usage: tasklauncher-20211019.py run [-h]
+                                    [--exp_name {gan-mnist,gan-kmnist,gan-cifar10,gan-cifar100,gan-lsun,gan-imagenet,gan-imagenetmixed10,acgan-mnist,acgan-kmnist,acgan-cifar10,acgan-cifar100,acgan-lsun,acgan-imagenet,acgan-imagenetmixed10,aae-mnist,aae-kmnist,aae-cifar10,aae-cifar100,aae-lsun,aae-imagenet,aae-imagenetmixed10,vae-mnist,vae-kmnist,vae-cifar10,vae-cifar100,vae-lsun,vae-imagenet,vae-imagenetmixed10,stylegan2-mnist,stylegan2-kmnist,stylegan2-cifar10,stylegan2-cifar100,stylegan2-lsun,stylegan2-imagenet,stylegan2-imagenetmixed10,stylegan2ada-mnist,stylegan2ada-kmnist,stylegan2ada-cifar10,stylegan2ada-cifar100,stylegan2ada-lsun,stylegan2ada-imagenet,stylegan2ada-imagenetmixed10,stylegan2ada-svhn,stylegan2ada-stl10,resnet50-mnist,resnet50-kmnist,resnet50-cifar10,resnet50-cifar100,resnet50-lsun,resnet50-imagenet,resnet50-imagenetmixed10,resnet50-svhn,resnet50-stl10,vgg19-mnist,vgg19-kmnist,vgg19-cifar10,vgg19-cifar100,vgg19-lsun,vgg19-imagenet,vgg19-imagenetmixed10,vgg19-svhn,vgg19-stl10,alexnet-mnist,alexnet-kmnist,alexnet-cifar10,alexnet-cifar100,alexnet-lsun,alexnet-imagenet,alexnet-imagenetmixed10,alexnet-svhn,alexnet-stl10,densenet169-mnist,densenet169-kmnist,densenet169-cifar10,densenet169-cifar100,densenet169-lsun,densenet169-imagenet,densenet169-imagenetmixed10,densenet169-svhn,densenet169-stl10,inception_v3-mnist,inception_v3-kmnist,inception_v3-cifar10,inception_v3-cifar100,inception_v3-lsun,inception_v3-imagenet,inception_v3-imagenetmixed10,inception_v3-svhn,inception_v3-stl10,resnet34-mnist,resnet34-kmnist,resnet34-mnist,resnet34-cifar10,resnet34-cifar100,resnet34-lsun,resnet34-imagenet,resnet34-imagenetmixed10,resnet34-svhn,resnet34-stl10,resnet18-mnist,resnet18-kmnist,resnet18-mnist,resnet18-cifar10,resnet18-cifar100,resnet18-lsun,resnet18-imagenet,resnet18-imagenetmixed10,resnet18-svhn,resnet18-stl10,googlenet-mnist,googlenet-kmnist,googlenet-mnist,googlenet-cifar10,googlenet-cifar100,googlenet-lsun,googlenet-imagenet,googlenet-imagenetmixed10,googlenet-svhn,googlenet-stl10,preactresnet18-kmnist,preactresnet18-svhn,preactresnet18-cifar10,preactresnet34-kmnist,preactresnet34-svhn,preactresnet34-cifar10,preactresnet50-kmnist,preactresnet50-svhn,preactresnet50-cifar10,wideresnet2810-kmnist,wideresnet2810-svhn,wideresnet2810-cifar10}]
+                                    [--cla_model {resnet34,resnet50,vgg19,alexnet,densenet169,inception_v3,resnet18,googlenet,preactresnet18,preactresnet34,preactresnet50,wideresnet2810}]
+                                    [--gen_model {gan,acgan,aae,vae,stylegan2,stylegan2ada}]
+                                    [--dataset {mnist,kmnist,cifar10,cifar100,lsun,imagenet,imagenetmixed10,svhn,stl10}]
+                                    [--mode {train,test,attack,defense,valid,project,generate,interpolate,defense}]
+                                    [--n_classes N_CLASSES]
+                                    [--batch_size BATCH_SIZE]
+                                    [--epochs EPOCHS] [--lr LR]
+                                    [--save_path SAVE_PATH] [--cpus CPUS]
+                                    [--gpus GPUS] [--metrics METRICS]
+                                    [--conditional CONDITIONAL]
+                                    [--dry-run DRY_RUN] [--snap INT]
+                                    [--data PATH] [--subset INT]
+                                    [--mirror MIRROR] [--cfg CFG]
+                                    [--gamma GAMMA] [--kimg KIMG] [--aug AUG]
+                                    [--p P] [--target TARGET]
+                                    [--augpipe AUGPIPE] [--resume PKL]
+                                    [--freezed INT] [--fp32 BOOL]
+                                    [--nhwc BOOL] [--nobench BOOL]
+                                    [--allow-tf32 BOOL]
+                                    [--pretrain_pkl_path PRETRAIN_PKL_PATH]
+                                    [--gen_network_pkl GEN_NETWORK_PKL]
+                                    [--target_fname FILE]
+                                    [--num_steps NUM_STEPS]
+                                    [--save_video SAVE_VIDEO]
+                                    [--target_dataset PATH]
+                                    [--viewdataset_path PATH]
+                                    [--project_target_num PROJECT_TARGET_NUM]
+                                    [--truncation_psi TRUNCATION_PSI]
+                                    [--class_idx CLASS_IDX]
+                                    [--noise-mode NOISE_MODE]
+                                    [--projected_w FILE]
+                                    [--mixed_dataset FILE]
+                                    [--generate_seeds GENERATE_SEEDS [GENERATE_SEEDS ...]]
+                                    [--projected_w_label FILE]
+                                    [--projected_w1 FILE]
+                                    [--projected_w2 FILE]
+                                    [--projected_w3 FILE]
+                                    [--projected_w1_label FILE]
+                                    [--projected_w2_label FILE]
+                                    [--projected_w3_label FILE]
+                                    [--mix_mode {basemixup,maskmixup,adversarialmixup}]
+                                    [--mix_w_num MIX_W_NUM]
+                                    [--sample_mode {uniformsampler,uniformsampler2,bernoullisampler,bernoullisampler2,betasampler,dirichletsampler}]
+                                    [--projected_dataset PROJECTED_DATASET]
+                                    [--mix_img_num MIX_IMG_NUM]
+                                    [--beta_alpha BETA_ALPHA]
+                                    [--train_mode {gen-train,cla-train}]
+                                    [--test_mode {gen-test,classifier-test,classifier-advtest}]
+                                    [--pretrained_on_imagenet PRETRAINED_ON_IMAGENET]
+                                    [--attack_mode {fgsm,deepfool,bim,cw,pgd,om-fgsm,om-pgd,fog,snow,elastic,gabor,jpeg}]
+                                    [--cla_network_pkl CLA_NETWORK_PKL]
+                                    [--attack_eps ATTACK_EPS] [--whitebox]
+                                    [--blackbox] [--latentattack]
+                                    [--perceptualattack]
+                                    [--defense_mode {at,mmat,rmt}]
+                                    [--adv_dataset ADV_DATASET]
+                                    [--mix_dataset MIX_DATASET]
+                                    [--aug_adv_num AUG_ADV_NUM]
+                                    [--aug_num AUG_NUM]
+                                    [--aug_mix_rate AUG_MIX_RATE]
+                                    [--img_size IMG_SIZE]
+                                    [--channels CHANNELS] [--b1 B1] [--b2 B2]
+                                    [--latent_dim LATENT_DIM]
+                                    [--sample_interval SAMPLE_INTERVAL]
+                                    [--seed SEED]
+                                    [--save_images_every SAVE_IMAGES_EVERY]
+                                    [--save_every SAVE_EVERY]
+tasklauncher-20211019.py run: error: argument --cla_model: invalid choice: 'googlenet--cla_network_pkl' (choose from 'resnet34', 'resnet50', 'vgg19', 'alexnet', 'densenet169', 'inception_v3', 'resnet18', 'googlenet', 'preactresnet18', 'preactresnet34', 'preactresnet50', 'wideresnet2810')
+
+
+---------------------------------------
+Torch cuda is available
+usage: tasklauncher-20211019.py run [-h]
+                                    [--exp_name {gan-mnist,gan-kmnist,gan-cifar10,gan-cifar100,gan-lsun,gan-imagenet,gan-imagenetmixed10,acgan-mnist,acgan-kmnist,acgan-cifar10,acgan-cifar100,acgan-lsun,acgan-imagenet,acgan-imagenetmixed10,aae-mnist,aae-kmnist,aae-cifar10,aae-cifar100,aae-lsun,aae-imagenet,aae-imagenetmixed10,vae-mnist,vae-kmnist,vae-cifar10,vae-cifar100,vae-lsun,vae-imagenet,vae-imagenetmixed10,stylegan2-mnist,stylegan2-kmnist,stylegan2-cifar10,stylegan2-cifar100,stylegan2-lsun,stylegan2-imagenet,stylegan2-imagenetmixed10,stylegan2ada-mnist,stylegan2ada-kmnist,stylegan2ada-cifar10,stylegan2ada-cifar100,stylegan2ada-lsun,stylegan2ada-imagenet,stylegan2ada-imagenetmixed10,stylegan2ada-svhn,stylegan2ada-stl10,resnet50-mnist,resnet50-kmnist,resnet50-cifar10,resnet50-cifar100,resnet50-lsun,resnet50-imagenet,resnet50-imagenetmixed10,resnet50-svhn,resnet50-stl10,vgg19-mnist,vgg19-kmnist,vgg19-cifar10,vgg19-cifar100,vgg19-lsun,vgg19-imagenet,vgg19-imagenetmixed10,vgg19-svhn,vgg19-stl10,alexnet-mnist,alexnet-kmnist,alexnet-cifar10,alexnet-cifar100,alexnet-lsun,alexnet-imagenet,alexnet-imagenetmixed10,alexnet-svhn,alexnet-stl10,densenet169-mnist,densenet169-kmnist,densenet169-cifar10,densenet169-cifar100,densenet169-lsun,densenet169-imagenet,densenet169-imagenetmixed10,densenet169-svhn,densenet169-stl10,inception_v3-mnist,inception_v3-kmnist,inception_v3-cifar10,inception_v3-cifar100,inception_v3-lsun,inception_v3-imagenet,inception_v3-imagenetmixed10,inception_v3-svhn,inception_v3-stl10,resnet34-mnist,resnet34-kmnist,resnet34-mnist,resnet34-cifar10,resnet34-cifar100,resnet34-lsun,resnet34-imagenet,resnet34-imagenetmixed10,resnet34-svhn,resnet34-stl10,resnet18-mnist,resnet18-kmnist,resnet18-mnist,resnet18-cifar10,resnet18-cifar100,resnet18-lsun,resnet18-imagenet,resnet18-imagenetmixed10,resnet18-svhn,resnet18-stl10,googlenet-mnist,googlenet-kmnist,googlenet-mnist,googlenet-cifar10,googlenet-cifar100,googlenet-lsun,googlenet-imagenet,googlenet-imagenetmixed10,googlenet-svhn,googlenet-stl10,preactresnet18-kmnist,preactresnet18-svhn,preactresnet18-cifar10,preactresnet34-kmnist,preactresnet34-svhn,preactresnet34-cifar10,preactresnet50-kmnist,preactresnet50-svhn,preactresnet50-cifar10,wideresnet2810-kmnist,wideresnet2810-svhn,wideresnet2810-cifar10}]
+                                    [--cla_model {resnet34,resnet50,vgg19,alexnet,densenet169,inception_v3,resnet18,googlenet,preactresnet18,preactresnet34,preactresnet50,wideresnet2810}]
+                                    [--gen_model {gan,acgan,aae,vae,stylegan2,stylegan2ada}]
+                                    [--dataset {mnist,kmnist,cifar10,cifar100,lsun,imagenet,imagenetmixed10,svhn,stl10}]
+                                    [--mode {train,test,attack,defense,valid,project,generate,interpolate,defense}]
+                                    [--n_classes N_CLASSES]
+                                    [--batch_size BATCH_SIZE]
+                                    [--epochs EPOCHS] [--lr LR]
+                                    [--save_path SAVE_PATH] [--cpus CPUS]
+                                    [--gpus GPUS] [--metrics METRICS]
+                                    [--conditional CONDITIONAL]
+                                    [--dry-run DRY_RUN] [--snap INT]
+                                    [--data PATH] [--subset INT]
+                                    [--mirror MIRROR] [--cfg CFG]
+                                    [--gamma GAMMA] [--kimg KIMG] [--aug AUG]
+                                    [--p P] [--target TARGET]
+                                    [--augpipe AUGPIPE] [--resume PKL]
+                                    [--freezed INT] [--fp32 BOOL]
+                                    [--nhwc BOOL] [--nobench BOOL]
+                                    [--allow-tf32 BOOL]
+                                    [--pretrain_pkl_path PRETRAIN_PKL_PATH]
+                                    [--gen_network_pkl GEN_NETWORK_PKL]
+                                    [--target_fname FILE]
+                                    [--num_steps NUM_STEPS]
+                                    [--save_video SAVE_VIDEO]
+                                    [--target_dataset PATH]
+                                    [--viewdataset_path PATH]
+                                    [--project_target_num PROJECT_TARGET_NUM]
+                                    [--truncation_psi TRUNCATION_PSI]
+                                    [--class_idx CLASS_IDX]
+                                    [--noise-mode NOISE_MODE]
+                                    [--projected_w FILE]
+                                    [--mixed_dataset FILE]
+                                    [--generate_seeds GENERATE_SEEDS [GENERATE_SEEDS ...]]
+                                    [--projected_w_label FILE]
+                                    [--projected_w1 FILE]
+                                    [--projected_w2 FILE]
+                                    [--projected_w3 FILE]
+                                    [--projected_w1_label FILE]
+                                    [--projected_w2_label FILE]
+                                    [--projected_w3_label FILE]
+                                    [--mix_mode {basemixup,maskmixup,adversarialmixup}]
+                                    [--mix_w_num MIX_W_NUM]
+                                    [--sample_mode {uniformsampler,uniformsampler2,bernoullisampler,bernoullisampler2,betasampler,dirichletsampler}]
+                                    [--projected_dataset PROJECTED_DATASET]
+                                    [--mix_img_num MIX_IMG_NUM]
+                                    [--beta_alpha BETA_ALPHA]
+                                    [--train_mode {gen-train,cla-train}]
+                                    [--test_mode {gen-test,classifier-test,classifier-advtest}]
+                                    [--pretrained_on_imagenet PRETRAINED_ON_IMAGENET]
+                                    [--attack_mode {fgsm,deepfool,bim,cw,pgd,om-fgsm,om-pgd,fog,snow,elastic,gabor,jpeg}]
+                                    [--cla_network_pkl CLA_NETWORK_PKL]
+                                    [--attack_eps ATTACK_EPS] [--whitebox]
+                                    [--blackbox] [--latentattack]
+                                    [--perceptualattack]
+                                    [--defense_mode {at,mmat,rmt}]
+                                    [--adv_dataset ADV_DATASET]
+                                    [--mix_dataset MIX_DATASET]
+                                    [--aug_adv_num AUG_ADV_NUM]
+                                    [--aug_num AUG_NUM]
+                                    [--aug_mix_rate AUG_MIX_RATE]
+                                    [--img_size IMG_SIZE]
+                                    [--channels CHANNELS] [--b1 B1] [--b2 B2]
+                                    [--latent_dim LATENT_DIM]
+                                    [--sample_interval SAMPLE_INTERVAL]
+                                    [--seed SEED]
+                                    [--save_images_every SAVE_IMAGES_EVERY]
+                                    [--save_every SAVE_EVERY]
+tasklauncher-20211019.py run: error: argument --cla_model: invalid choice: 'googlenet--cla_network_pkl' (choose from 'resnet34', 'resnet50', 'vgg19', 'alexnet', 'densenet169', 'inception_v3', 'resnet18', 'googlenet', 'preactresnet18', 'preactresnet34', 'preactresnet50', 'wideresnet2810')
+
+
+---------------------------------------
+Torch cuda is available
+usage: tasklauncher-20211019.py run [-h]
+                                    [--exp_name {gan-mnist,gan-kmnist,gan-cifar10,gan-cifar100,gan-lsun,gan-imagenet,gan-imagenetmixed10,acgan-mnist,acgan-kmnist,acgan-cifar10,acgan-cifar100,acgan-lsun,acgan-imagenet,acgan-imagenetmixed10,aae-mnist,aae-kmnist,aae-cifar10,aae-cifar100,aae-lsun,aae-imagenet,aae-imagenetmixed10,vae-mnist,vae-kmnist,vae-cifar10,vae-cifar100,vae-lsun,vae-imagenet,vae-imagenetmixed10,stylegan2-mnist,stylegan2-kmnist,stylegan2-cifar10,stylegan2-cifar100,stylegan2-lsun,stylegan2-imagenet,stylegan2-imagenetmixed10,stylegan2ada-mnist,stylegan2ada-kmnist,stylegan2ada-cifar10,stylegan2ada-cifar100,stylegan2ada-lsun,stylegan2ada-imagenet,stylegan2ada-imagenetmixed10,stylegan2ada-svhn,stylegan2ada-stl10,resnet50-mnist,resnet50-kmnist,resnet50-cifar10,resnet50-cifar100,resnet50-lsun,resnet50-imagenet,resnet50-imagenetmixed10,resnet50-svhn,resnet50-stl10,vgg19-mnist,vgg19-kmnist,vgg19-cifar10,vgg19-cifar100,vgg19-lsun,vgg19-imagenet,vgg19-imagenetmixed10,vgg19-svhn,vgg19-stl10,alexnet-mnist,alexnet-kmnist,alexnet-cifar10,alexnet-cifar100,alexnet-lsun,alexnet-imagenet,alexnet-imagenetmixed10,alexnet-svhn,alexnet-stl10,densenet169-mnist,densenet169-kmnist,densenet169-cifar10,densenet169-cifar100,densenet169-lsun,densenet169-imagenet,densenet169-imagenetmixed10,densenet169-svhn,densenet169-stl10,inception_v3-mnist,inception_v3-kmnist,inception_v3-cifar10,inception_v3-cifar100,inception_v3-lsun,inception_v3-imagenet,inception_v3-imagenetmixed10,inception_v3-svhn,inception_v3-stl10,resnet34-mnist,resnet34-kmnist,resnet34-mnist,resnet34-cifar10,resnet34-cifar100,resnet34-lsun,resnet34-imagenet,resnet34-imagenetmixed10,resnet34-svhn,resnet34-stl10,resnet18-mnist,resnet18-kmnist,resnet18-mnist,resnet18-cifar10,resnet18-cifar100,resnet18-lsun,resnet18-imagenet,resnet18-imagenetmixed10,resnet18-svhn,resnet18-stl10,googlenet-mnist,googlenet-kmnist,googlenet-mnist,googlenet-cifar10,googlenet-cifar100,googlenet-lsun,googlenet-imagenet,googlenet-imagenetmixed10,googlenet-svhn,googlenet-stl10,preactresnet18-kmnist,preactresnet18-svhn,preactresnet18-cifar10,preactresnet34-kmnist,preactresnet34-svhn,preactresnet34-cifar10,preactresnet50-kmnist,preactresnet50-svhn,preactresnet50-cifar10,wideresnet2810-kmnist,wideresnet2810-svhn,wideresnet2810-cifar10}]
+                                    [--cla_model {resnet34,resnet50,vgg19,alexnet,densenet169,inception_v3,resnet18,googlenet,preactresnet18,preactresnet34,preactresnet50,wideresnet2810}]
+                                    [--gen_model {gan,acgan,aae,vae,stylegan2,stylegan2ada}]
+                                    [--dataset {mnist,kmnist,cifar10,cifar100,lsun,imagenet,imagenetmixed10,svhn,stl10}]
+                                    [--mode {train,test,attack,defense,valid,project,generate,interpolate,defense}]
+                                    [--n_classes N_CLASSES]
+                                    [--batch_size BATCH_SIZE]
+                                    [--epochs EPOCHS] [--lr LR]
+                                    [--save_path SAVE_PATH] [--cpus CPUS]
+                                    [--gpus GPUS] [--metrics METRICS]
+                                    [--conditional CONDITIONAL]
+                                    [--dry-run DRY_RUN] [--snap INT]
+                                    [--data PATH] [--subset INT]
+                                    [--mirror MIRROR] [--cfg CFG]
+                                    [--gamma GAMMA] [--kimg KIMG] [--aug AUG]
+                                    [--p P] [--target TARGET]
+                                    [--augpipe AUGPIPE] [--resume PKL]
+                                    [--freezed INT] [--fp32 BOOL]
+                                    [--nhwc BOOL] [--nobench BOOL]
+                                    [--allow-tf32 BOOL]
+                                    [--pretrain_pkl_path PRETRAIN_PKL_PATH]
+                                    [--gen_network_pkl GEN_NETWORK_PKL]
+                                    [--target_fname FILE]
+                                    [--num_steps NUM_STEPS]
+                                    [--save_video SAVE_VIDEO]
+                                    [--target_dataset PATH]
+                                    [--viewdataset_path PATH]
+                                    [--project_target_num PROJECT_TARGET_NUM]
+                                    [--truncation_psi TRUNCATION_PSI]
+                                    [--class_idx CLASS_IDX]
+                                    [--noise-mode NOISE_MODE]
+                                    [--projected_w FILE]
+                                    [--mixed_dataset FILE]
+                                    [--generate_seeds GENERATE_SEEDS [GENERATE_SEEDS ...]]
+                                    [--projected_w_label FILE]
+                                    [--projected_w1 FILE]
+                                    [--projected_w2 FILE]
+                                    [--projected_w3 FILE]
+                                    [--projected_w1_label FILE]
+                                    [--projected_w2_label FILE]
+                                    [--projected_w3_label FILE]
+                                    [--mix_mode {basemixup,maskmixup,adversarialmixup}]
+                                    [--mix_w_num MIX_W_NUM]
+                                    [--sample_mode {uniformsampler,uniformsampler2,bernoullisampler,bernoullisampler2,betasampler,dirichletsampler}]
+                                    [--projected_dataset PROJECTED_DATASET]
+                                    [--mix_img_num MIX_IMG_NUM]
+                                    [--beta_alpha BETA_ALPHA]
+                                    [--train_mode {gen-train,cla-train}]
+                                    [--test_mode {gen-test,classifier-test,classifier-advtest}]
+                                    [--pretrained_on_imagenet PRETRAINED_ON_IMAGENET]
+                                    [--attack_mode {fgsm,deepfool,bim,cw,pgd,om-fgsm,om-pgd,fog,snow,elastic,gabor,jpeg}]
+                                    [--cla_network_pkl CLA_NETWORK_PKL]
+                                    [--attack_eps ATTACK_EPS] [--whitebox]
+                                    [--blackbox] [--latentattack]
+                                    [--perceptualattack]
+                                    [--defense_mode {at,mmat,rmt}]
+                                    [--adv_dataset ADV_DATASET]
+                                    [--mix_dataset MIX_DATASET]
+                                    [--aug_adv_num AUG_ADV_NUM]
+                                    [--aug_num AUG_NUM]
+                                    [--aug_mix_rate AUG_MIX_RATE]
+                                    [--img_size IMG_SIZE]
+                                    [--channels CHANNELS] [--b1 B1] [--b2 B2]
+                                    [--latent_dim LATENT_DIM]
+                                    [--sample_interval SAMPLE_INTERVAL]
+                                    [--seed SEED]
+                                    [--save_images_every SAVE_IMAGES_EVERY]
+                                    [--save_every SAVE_EVERY]
+tasklauncher-20211019.py run: error: argument --cla_model: invalid choice: 'googlenet--cla_network_pkl' (choose from 'resnet34', 'resnet50', 'vgg19', 'alexnet', 'densenet169', 'inception_v3', 'resnet18', 'googlenet', 'preactresnet18', 'preactresnet34', 'preactresnet50', 'wideresnet2810')
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/fog/googlenet-cifar10/20211019/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel fog attack
+finish init fogattack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:3.1250%
+standard trained classifier loss on perceptual attack testset:8.219818115234375
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/snow/googlenet-cifar10/20211019/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel snow attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:60.9375%
+standard trained classifier loss on perceptual attack testset:1.5379533767700195
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/elastic/googlenet-cifar10/20211019/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel elastic attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py:3829: UserWarning: Default grid_sample and affine_grid behavior has changed to align_corners=False since 1.3.0. Please specify align_corners=True if the old behavior is desired. See the documentation of grid_sample for details.
+  "Default grid_sample and affine_grid behavior has changed "
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:10.9375%
+standard trained classifier loss on perceptual attack testset:6.562368869781494
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/fog/googlenet-cifar10/20211019/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel fog attack
+finish init fogattack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:4.6875%
+standard trained classifier loss on perceptual attack testset:8.219659805297852
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/snow/googlenet-cifar10/20211019/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel snow attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:62.5000%
+standard trained classifier loss on perceptual attack testset:1.4377046823501587
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211019
+Experiment result save dir: /home/maggie/mmat/result/attack/elastic/googlenet-cifar10/20211019/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel elastic attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+images.shape: torch.Size([32, 3, 32, 32])
+labels.shape: torch.Size([32])
+labels[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1])
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py:3829: UserWarning: Default grid_sample and affine_grid behavior has changed to align_corners=False since 1.3.0. Please specify align_corners=True if the old behavior is desired. See the documentation of grid_sample for details.
+  "Default grid_sample and affine_grid behavior has changed "
+batch_index = 0001/0313
+per_x_test.shape: torch.Size([64, 3, 32, 32])
+per_y_test.shape: torch.Size([64])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:10.9375%
+standard trained classifier loss on perceptual attack testset:6.516880989074707
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211020
+Experiment result save dir: /home/maggie/mmat/result/attack/fog/googlenet-cifar10/20211020/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel fog attack
+finish init fogattack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+batch_index = 0001/0313
+batch_index = 0002/0313
+batch_index = 0003/0313
+batch_index = 0004/0313
+batch_index = 0005/0313
+batch_index = 0006/0313
+batch_index = 0007/0313
+batch_index = 0008/0313
+batch_index = 0009/0313
+batch_index = 0010/0313
+batch_index = 0011/0313
+batch_index = 0012/0313
+batch_index = 0013/0313
+batch_index = 0014/0313
+batch_index = 0015/0313
+batch_index = 0016/0313
+batch_index = 0017/0313
+batch_index = 0018/0313
+batch_index = 0019/0313
+batch_index = 0020/0313
+batch_index = 0021/0313
+batch_index = 0022/0313
+batch_index = 0023/0313
+batch_index = 0024/0313
+batch_index = 0025/0313
+batch_index = 0026/0313
+batch_index = 0027/0313
+batch_index = 0028/0313
+batch_index = 0029/0313
+batch_index = 0030/0313
+batch_index = 0031/0313
+batch_index = 0032/0313
+batch_index = 0033/0313
+batch_index = 0034/0313
+batch_index = 0035/0313
+batch_index = 0036/0313
+batch_index = 0037/0313
+batch_index = 0038/0313
+batch_index = 0039/0313
+batch_index = 0040/0313
+batch_index = 0041/0313
+batch_index = 0042/0313
+batch_index = 0043/0313
+batch_index = 0044/0313
+batch_index = 0045/0313
+batch_index = 0046/0313
+batch_index = 0047/0313
+batch_index = 0048/0313
+batch_index = 0049/0313
+batch_index = 0050/0313
+batch_index = 0051/0313
+batch_index = 0052/0313
+batch_index = 0053/0313
+batch_index = 0054/0313
+batch_index = 0055/0313
+batch_index = 0056/0313
+batch_index = 0057/0313
+batch_index = 0058/0313
+batch_index = 0059/0313
+batch_index = 0060/0313
+batch_index = 0061/0313
+batch_index = 0062/0313
+batch_index = 0063/0313
+batch_index = 0064/0313
+batch_index = 0065/0313
+batch_index = 0066/0313
+batch_index = 0067/0313
+batch_index = 0068/0313
+batch_index = 0069/0313
+batch_index = 0070/0313
+batch_index = 0071/0313
+batch_index = 0072/0313
+batch_index = 0073/0313
+batch_index = 0074/0313
+batch_index = 0075/0313
+batch_index = 0076/0313
+batch_index = 0077/0313
+batch_index = 0078/0313
+batch_index = 0079/0313
+batch_index = 0080/0313
+batch_index = 0081/0313
+batch_index = 0082/0313
+batch_index = 0083/0313
+batch_index = 0084/0313
+batch_index = 0085/0313
+batch_index = 0086/0313
+batch_index = 0087/0313
+batch_index = 0088/0313
+batch_index = 0089/0313
+batch_index = 0090/0313
+batch_index = 0091/0313
+batch_index = 0092/0313
+batch_index = 0093/0313
+batch_index = 0094/0313
+batch_index = 0095/0313
+batch_index = 0096/0313
+batch_index = 0097/0313
+batch_index = 0098/0313
+batch_index = 0099/0313
+batch_index = 0100/0313
+batch_index = 0101/0313
+batch_index = 0102/0313
+batch_index = 0103/0313
+batch_index = 0104/0313
+batch_index = 0105/0313
+batch_index = 0106/0313
+batch_index = 0107/0313
+batch_index = 0108/0313
+batch_index = 0109/0313
+batch_index = 0110/0313
+batch_index = 0111/0313
+batch_index = 0112/0313
+batch_index = 0113/0313
+batch_index = 0114/0313
+batch_index = 0115/0313
+batch_index = 0116/0313
+batch_index = 0117/0313
+batch_index = 0118/0313
+batch_index = 0119/0313
+batch_index = 0120/0313
+batch_index = 0121/0313
+batch_index = 0122/0313
+batch_index = 0123/0313
+batch_index = 0124/0313
+batch_index = 0125/0313
+batch_index = 0126/0313
+batch_index = 0127/0313
+batch_index = 0128/0313
+batch_index = 0129/0313
+batch_index = 0130/0313
+batch_index = 0131/0313
+batch_index = 0132/0313
+batch_index = 0133/0313
+batch_index = 0134/0313
+batch_index = 0135/0313
+batch_index = 0136/0313
+batch_index = 0137/0313
+batch_index = 0138/0313
+batch_index = 0139/0313
+batch_index = 0140/0313
+batch_index = 0141/0313
+batch_index = 0142/0313
+batch_index = 0143/0313
+batch_index = 0144/0313
+batch_index = 0145/0313
+batch_index = 0146/0313
+batch_index = 0147/0313
+batch_index = 0148/0313
+batch_index = 0149/0313
+batch_index = 0150/0313
+batch_index = 0151/0313
+batch_index = 0152/0313
+batch_index = 0153/0313
+batch_index = 0154/0313
+batch_index = 0155/0313
+batch_index = 0156/0313
+batch_index = 0157/0313
+batch_index = 0158/0313
+batch_index = 0159/0313
+batch_index = 0160/0313
+batch_index = 0161/0313
+batch_index = 0162/0313
+batch_index = 0163/0313
+batch_index = 0164/0313
+batch_index = 0165/0313
+batch_index = 0166/0313
+batch_index = 0167/0313
+batch_index = 0168/0313
+batch_index = 0169/0313
+batch_index = 0170/0313
+batch_index = 0171/0313
+batch_index = 0172/0313
+batch_index = 0173/0313
+batch_index = 0174/0313
+batch_index = 0175/0313
+batch_index = 0176/0313
+batch_index = 0177/0313
+batch_index = 0178/0313
+batch_index = 0179/0313
+batch_index = 0180/0313
+batch_index = 0181/0313
+batch_index = 0182/0313
+batch_index = 0183/0313
+batch_index = 0184/0313
+batch_index = 0185/0313
+batch_index = 0186/0313
+batch_index = 0187/0313
+batch_index = 0188/0313
+batch_index = 0189/0313
+batch_index = 0190/0313
+batch_index = 0191/0313
+batch_index = 0192/0313
+batch_index = 0193/0313
+batch_index = 0194/0313
+batch_index = 0195/0313
+batch_index = 0196/0313
+batch_index = 0197/0313
+batch_index = 0198/0313
+batch_index = 0199/0313
+batch_index = 0200/0313
+batch_index = 0201/0313
+batch_index = 0202/0313
+batch_index = 0203/0313
+batch_index = 0204/0313
+batch_index = 0205/0313
+batch_index = 0206/0313
+batch_index = 0207/0313
+batch_index = 0208/0313
+batch_index = 0209/0313
+batch_index = 0210/0313
+batch_index = 0211/0313
+batch_index = 0212/0313
+batch_index = 0213/0313
+batch_index = 0214/0313
+batch_index = 0215/0313
+batch_index = 0216/0313
+batch_index = 0217/0313
+batch_index = 0218/0313
+batch_index = 0219/0313
+batch_index = 0220/0313
+batch_index = 0221/0313
+batch_index = 0222/0313
+batch_index = 0223/0313
+batch_index = 0224/0313
+batch_index = 0225/0313
+batch_index = 0226/0313
+batch_index = 0227/0313
+batch_index = 0228/0313
+batch_index = 0229/0313
+batch_index = 0230/0313
+batch_index = 0231/0313
+batch_index = 0232/0313
+batch_index = 0233/0313
+batch_index = 0234/0313
+batch_index = 0235/0313
+batch_index = 0236/0313
+batch_index = 0237/0313
+batch_index = 0238/0313
+batch_index = 0239/0313
+batch_index = 0240/0313
+batch_index = 0241/0313
+batch_index = 0242/0313
+batch_index = 0243/0313
+batch_index = 0244/0313
+batch_index = 0245/0313
+batch_index = 0246/0313
+batch_index = 0247/0313
+batch_index = 0248/0313
+batch_index = 0249/0313
+batch_index = 0250/0313
+batch_index = 0251/0313
+batch_index = 0252/0313
+batch_index = 0253/0313
+batch_index = 0254/0313
+batch_index = 0255/0313
+batch_index = 0256/0313
+batch_index = 0257/0313
+batch_index = 0258/0313
+batch_index = 0259/0313
+batch_index = 0260/0313
+batch_index = 0261/0313
+batch_index = 0262/0313
+batch_index = 0263/0313
+batch_index = 0264/0313
+batch_index = 0265/0313
+batch_index = 0266/0313
+batch_index = 0267/0313
+batch_index = 0268/0313
+batch_index = 0269/0313
+batch_index = 0270/0313
+batch_index = 0271/0313
+batch_index = 0272/0313
+batch_index = 0273/0313
+batch_index = 0274/0313
+batch_index = 0275/0313
+batch_index = 0276/0313
+batch_index = 0277/0313
+batch_index = 0278/0313
+batch_index = 0279/0313
+batch_index = 0280/0313
+batch_index = 0281/0313
+batch_index = 0282/0313
+batch_index = 0283/0313
+batch_index = 0284/0313
+batch_index = 0285/0313
+batch_index = 0286/0313
+batch_index = 0287/0313
+batch_index = 0288/0313
+batch_index = 0289/0313
+batch_index = 0290/0313
+batch_index = 0291/0313
+batch_index = 0292/0313
+batch_index = 0293/0313
+batch_index = 0294/0313
+batch_index = 0295/0313
+batch_index = 0296/0313
+batch_index = 0297/0313
+batch_index = 0298/0313
+batch_index = 0299/0313
+batch_index = 0300/0313
+batch_index = 0301/0313
+batch_index = 0302/0313
+batch_index = 0303/0313
+batch_index = 0304/0313
+batch_index = 0305/0313
+batch_index = 0306/0313
+batch_index = 0307/0313
+batch_index = 0308/0313
+batch_index = 0309/0313
+batch_index = 0310/0313
+batch_index = 0311/0313
+batch_index = 0312/0313
+per_x_test.shape: torch.Size([10000, 3, 32, 32])
+per_y_test.shape: torch.Size([10000])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:6.7100%
+standard trained classifier loss on perceptual attack testset:8.143787384033203
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211020
+Experiment result save dir: /home/maggie/mmat/result/attack/snow/googlenet-cifar10/20211020/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel snow attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+batch_index = 0001/0313
+batch_index = 0002/0313
+batch_index = 0003/0313
+batch_index = 0004/0313
+batch_index = 0005/0313
+batch_index = 0006/0313
+batch_index = 0007/0313
+batch_index = 0008/0313
+batch_index = 0009/0313
+batch_index = 0010/0313
+batch_index = 0011/0313
+batch_index = 0012/0313
+batch_index = 0013/0313
+batch_index = 0014/0313
+batch_index = 0015/0313
+batch_index = 0016/0313
+batch_index = 0017/0313
+batch_index = 0018/0313
+batch_index = 0019/0313
+batch_index = 0020/0313
+batch_index = 0021/0313
+batch_index = 0022/0313
+batch_index = 0023/0313
+batch_index = 0024/0313
+batch_index = 0025/0313
+batch_index = 0026/0313
+batch_index = 0027/0313
+batch_index = 0028/0313
+batch_index = 0029/0313
+batch_index = 0030/0313
+batch_index = 0031/0313
+batch_index = 0032/0313
+batch_index = 0033/0313
+batch_index = 0034/0313
+batch_index = 0035/0313
+batch_index = 0036/0313
+batch_index = 0037/0313
+batch_index = 0038/0313
+batch_index = 0039/0313
+batch_index = 0040/0313
+batch_index = 0041/0313
+batch_index = 0042/0313
+batch_index = 0043/0313
+batch_index = 0044/0313
+batch_index = 0045/0313
+batch_index = 0046/0313
+batch_index = 0047/0313
+batch_index = 0048/0313
+batch_index = 0049/0313
+batch_index = 0050/0313
+batch_index = 0051/0313
+batch_index = 0052/0313
+batch_index = 0053/0313
+batch_index = 0054/0313
+batch_index = 0055/0313
+batch_index = 0056/0313
+batch_index = 0057/0313
+batch_index = 0058/0313
+batch_index = 0059/0313
+batch_index = 0060/0313
+batch_index = 0061/0313
+batch_index = 0062/0313
+batch_index = 0063/0313
+batch_index = 0064/0313
+batch_index = 0065/0313
+batch_index = 0066/0313
+batch_index = 0067/0313
+batch_index = 0068/0313
+batch_index = 0069/0313
+batch_index = 0070/0313
+batch_index = 0071/0313
+batch_index = 0072/0313
+batch_index = 0073/0313
+batch_index = 0074/0313
+batch_index = 0075/0313
+batch_index = 0076/0313
+batch_index = 0077/0313
+batch_index = 0078/0313
+batch_index = 0079/0313
+batch_index = 0080/0313
+batch_index = 0081/0313
+batch_index = 0082/0313
+batch_index = 0083/0313
+batch_index = 0084/0313
+batch_index = 0085/0313
+batch_index = 0086/0313
+batch_index = 0087/0313
+batch_index = 0088/0313
+batch_index = 0089/0313
+batch_index = 0090/0313
+batch_index = 0091/0313
+batch_index = 0092/0313
+batch_index = 0093/0313
+batch_index = 0094/0313
+batch_index = 0095/0313
+batch_index = 0096/0313
+batch_index = 0097/0313
+batch_index = 0098/0313
+batch_index = 0099/0313
+batch_index = 0100/0313
+batch_index = 0101/0313
+batch_index = 0102/0313
+batch_index = 0103/0313
+batch_index = 0104/0313
+batch_index = 0105/0313
+batch_index = 0106/0313
+batch_index = 0107/0313
+batch_index = 0108/0313
+batch_index = 0109/0313
+batch_index = 0110/0313
+batch_index = 0111/0313
+batch_index = 0112/0313
+batch_index = 0113/0313
+batch_index = 0114/0313
+batch_index = 0115/0313
+batch_index = 0116/0313
+batch_index = 0117/0313
+batch_index = 0118/0313
+batch_index = 0119/0313
+batch_index = 0120/0313
+batch_index = 0121/0313
+batch_index = 0122/0313
+batch_index = 0123/0313
+batch_index = 0124/0313
+batch_index = 0125/0313
+batch_index = 0126/0313
+batch_index = 0127/0313
+batch_index = 0128/0313
+batch_index = 0129/0313
+batch_index = 0130/0313
+batch_index = 0131/0313
+batch_index = 0132/0313
+batch_index = 0133/0313
+batch_index = 0134/0313
+batch_index = 0135/0313
+batch_index = 0136/0313
+batch_index = 0137/0313
+batch_index = 0138/0313
+batch_index = 0139/0313
+batch_index = 0140/0313
+batch_index = 0141/0313
+batch_index = 0142/0313
+batch_index = 0143/0313
+batch_index = 0144/0313
+batch_index = 0145/0313
+batch_index = 0146/0313
+batch_index = 0147/0313
+batch_index = 0148/0313
+batch_index = 0149/0313
+batch_index = 0150/0313
+batch_index = 0151/0313
+batch_index = 0152/0313
+batch_index = 0153/0313
+batch_index = 0154/0313
+batch_index = 0155/0313
+batch_index = 0156/0313
+batch_index = 0157/0313
+batch_index = 0158/0313
+batch_index = 0159/0313
+batch_index = 0160/0313
+batch_index = 0161/0313
+batch_index = 0162/0313
+batch_index = 0163/0313
+batch_index = 0164/0313
+batch_index = 0165/0313
+batch_index = 0166/0313
+batch_index = 0167/0313
+batch_index = 0168/0313
+batch_index = 0169/0313
+batch_index = 0170/0313
+batch_index = 0171/0313
+batch_index = 0172/0313
+batch_index = 0173/0313
+batch_index = 0174/0313
+batch_index = 0175/0313
+batch_index = 0176/0313
+batch_index = 0177/0313
+batch_index = 0178/0313
+batch_index = 0179/0313
+batch_index = 0180/0313
+batch_index = 0181/0313
+batch_index = 0182/0313
+batch_index = 0183/0313
+batch_index = 0184/0313
+batch_index = 0185/0313
+batch_index = 0186/0313
+batch_index = 0187/0313
+batch_index = 0188/0313
+batch_index = 0189/0313
+batch_index = 0190/0313
+batch_index = 0191/0313
+batch_index = 0192/0313
+batch_index = 0193/0313
+batch_index = 0194/0313
+batch_index = 0195/0313
+batch_index = 0196/0313
+batch_index = 0197/0313
+batch_index = 0198/0313
+batch_index = 0199/0313
+batch_index = 0200/0313
+batch_index = 0201/0313
+batch_index = 0202/0313
+batch_index = 0203/0313
+batch_index = 0204/0313
+batch_index = 0205/0313
+batch_index = 0206/0313
+batch_index = 0207/0313
+batch_index = 0208/0313
+batch_index = 0209/0313
+batch_index = 0210/0313
+batch_index = 0211/0313
+batch_index = 0212/0313
+batch_index = 0213/0313
+batch_index = 0214/0313
+batch_index = 0215/0313
+batch_index = 0216/0313
+batch_index = 0217/0313
+batch_index = 0218/0313
+batch_index = 0219/0313
+batch_index = 0220/0313
+batch_index = 0221/0313
+batch_index = 0222/0313
+batch_index = 0223/0313
+batch_index = 0224/0313
+batch_index = 0225/0313
+batch_index = 0226/0313
+batch_index = 0227/0313
+batch_index = 0228/0313
+batch_index = 0229/0313
+batch_index = 0230/0313
+batch_index = 0231/0313
+batch_index = 0232/0313
+batch_index = 0233/0313
+batch_index = 0234/0313
+batch_index = 0235/0313
+batch_index = 0236/0313
+batch_index = 0237/0313
+batch_index = 0238/0313
+batch_index = 0239/0313
+batch_index = 0240/0313
+batch_index = 0241/0313
+batch_index = 0242/0313
+batch_index = 0243/0313
+batch_index = 0244/0313
+batch_index = 0245/0313
+batch_index = 0246/0313
+batch_index = 0247/0313
+batch_index = 0248/0313
+batch_index = 0249/0313
+batch_index = 0250/0313
+batch_index = 0251/0313
+batch_index = 0252/0313
+batch_index = 0253/0313
+batch_index = 0254/0313
+batch_index = 0255/0313
+batch_index = 0256/0313
+batch_index = 0257/0313
+batch_index = 0258/0313
+batch_index = 0259/0313
+batch_index = 0260/0313
+batch_index = 0261/0313
+batch_index = 0262/0313
+batch_index = 0263/0313
+batch_index = 0264/0313
+batch_index = 0265/0313
+batch_index = 0266/0313
+batch_index = 0267/0313
+batch_index = 0268/0313
+batch_index = 0269/0313
+batch_index = 0270/0313
+batch_index = 0271/0313
+batch_index = 0272/0313
+batch_index = 0273/0313
+batch_index = 0274/0313
+batch_index = 0275/0313
+batch_index = 0276/0313
+batch_index = 0277/0313
+batch_index = 0278/0313
+batch_index = 0279/0313
+batch_index = 0280/0313
+batch_index = 0281/0313
+batch_index = 0282/0313
+batch_index = 0283/0313
+batch_index = 0284/0313
+batch_index = 0285/0313
+batch_index = 0286/0313
+batch_index = 0287/0313
+batch_index = 0288/0313
+batch_index = 0289/0313
+batch_index = 0290/0313
+batch_index = 0291/0313
+batch_index = 0292/0313
+batch_index = 0293/0313
+batch_index = 0294/0313
+batch_index = 0295/0313
+batch_index = 0296/0313
+batch_index = 0297/0313
+batch_index = 0298/0313
+batch_index = 0299/0313
+batch_index = 0300/0313
+batch_index = 0301/0313
+batch_index = 0302/0313
+batch_index = 0303/0313
+batch_index = 0304/0313
+batch_index = 0305/0313
+batch_index = 0306/0313
+batch_index = 0307/0313
+batch_index = 0308/0313
+batch_index = 0309/0313
+batch_index = 0310/0313
+batch_index = 0311/0313
+batch_index = 0312/0313
+per_x_test.shape: torch.Size([10000, 3, 32, 32])
+per_y_test.shape: torch.Size([10000])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:61.1100%
+standard trained classifier loss on perceptual attack testset:1.669409155845642
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211020
+Experiment result save dir: /home/maggie/mmat/result/attack/elastic/googlenet-cifar10/20211020/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel elastic attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py:3829: UserWarning: Default grid_sample and affine_grid behavior has changed to align_corners=False since 1.3.0. Please specify align_corners=True if the old behavior is desired. See the documentation of grid_sample for details.
+  "Default grid_sample and affine_grid behavior has changed "
+batch_index = 0001/0313
+batch_index = 0002/0313
+batch_index = 0003/0313
+batch_index = 0004/0313
+batch_index = 0005/0313
+batch_index = 0006/0313
+batch_index = 0007/0313
+batch_index = 0008/0313
+batch_index = 0009/0313
+batch_index = 0010/0313
+batch_index = 0011/0313
+batch_index = 0012/0313
+batch_index = 0013/0313
+batch_index = 0014/0313
+batch_index = 0015/0313
+batch_index = 0016/0313
+batch_index = 0017/0313
+batch_index = 0018/0313
+batch_index = 0019/0313
+batch_index = 0020/0313
+batch_index = 0021/0313
+batch_index = 0022/0313
+batch_index = 0023/0313
+batch_index = 0024/0313
+batch_index = 0025/0313
+batch_index = 0026/0313
+batch_index = 0027/0313
+batch_index = 0028/0313
+batch_index = 0029/0313
+batch_index = 0030/0313
+batch_index = 0031/0313
+batch_index = 0032/0313
+batch_index = 0033/0313
+batch_index = 0034/0313
+batch_index = 0035/0313
+batch_index = 0036/0313
+batch_index = 0037/0313
+batch_index = 0038/0313
+batch_index = 0039/0313
+batch_index = 0040/0313
+batch_index = 0041/0313
+batch_index = 0042/0313
+batch_index = 0043/0313
+batch_index = 0044/0313
+batch_index = 0045/0313
+batch_index = 0046/0313
+batch_index = 0047/0313
+batch_index = 0048/0313
+batch_index = 0049/0313
+batch_index = 0050/0313
+batch_index = 0051/0313
+batch_index = 0052/0313
+batch_index = 0053/0313
+batch_index = 0054/0313
+batch_index = 0055/0313
+batch_index = 0056/0313
+batch_index = 0057/0313
+batch_index = 0058/0313
+batch_index = 0059/0313
+batch_index = 0060/0313
+batch_index = 0061/0313
+batch_index = 0062/0313
+batch_index = 0063/0313
+batch_index = 0064/0313
+batch_index = 0065/0313
+batch_index = 0066/0313
+batch_index = 0067/0313
+batch_index = 0068/0313
+batch_index = 0069/0313
+batch_index = 0070/0313
+batch_index = 0071/0313
+batch_index = 0072/0313
+batch_index = 0073/0313
+batch_index = 0074/0313
+batch_index = 0075/0313
+batch_index = 0076/0313
+batch_index = 0077/0313
+batch_index = 0078/0313
+batch_index = 0079/0313
+batch_index = 0080/0313
+batch_index = 0081/0313
+batch_index = 0082/0313
+batch_index = 0083/0313
+batch_index = 0084/0313
+batch_index = 0085/0313
+batch_index = 0086/0313
+batch_index = 0087/0313
+batch_index = 0088/0313
+batch_index = 0089/0313
+batch_index = 0090/0313
+batch_index = 0091/0313
+batch_index = 0092/0313
+batch_index = 0093/0313
+batch_index = 0094/0313
+batch_index = 0095/0313
+batch_index = 0096/0313
+batch_index = 0097/0313
+batch_index = 0098/0313
+batch_index = 0099/0313
+batch_index = 0100/0313
+batch_index = 0101/0313
+batch_index = 0102/0313
+batch_index = 0103/0313
+batch_index = 0104/0313
+batch_index = 0105/0313
+batch_index = 0106/0313
+batch_index = 0107/0313
+batch_index = 0108/0313
+batch_index = 0109/0313
+batch_index = 0110/0313
+batch_index = 0111/0313
+batch_index = 0112/0313
+batch_index = 0113/0313
+batch_index = 0114/0313
+batch_index = 0115/0313
+batch_index = 0116/0313
+batch_index = 0117/0313
+batch_index = 0118/0313
+batch_index = 0119/0313
+batch_index = 0120/0313
+batch_index = 0121/0313
+batch_index = 0122/0313
+batch_index = 0123/0313
+batch_index = 0124/0313
+batch_index = 0125/0313
+batch_index = 0126/0313
+batch_index = 0127/0313
+batch_index = 0128/0313
+batch_index = 0129/0313
+batch_index = 0130/0313
+batch_index = 0131/0313
+batch_index = 0132/0313
+batch_index = 0133/0313
+batch_index = 0134/0313
+batch_index = 0135/0313
+batch_index = 0136/0313
+batch_index = 0137/0313
+batch_index = 0138/0313
+batch_index = 0139/0313
+batch_index = 0140/0313
+batch_index = 0141/0313
+batch_index = 0142/0313
+batch_index = 0143/0313
+batch_index = 0144/0313
+batch_index = 0145/0313
+batch_index = 0146/0313
+batch_index = 0147/0313
+batch_index = 0148/0313
+batch_index = 0149/0313
+batch_index = 0150/0313
+batch_index = 0151/0313
+batch_index = 0152/0313
+batch_index = 0153/0313
+batch_index = 0154/0313
+batch_index = 0155/0313
+batch_index = 0156/0313
+batch_index = 0157/0313
+batch_index = 0158/0313
+batch_index = 0159/0313
+batch_index = 0160/0313
+batch_index = 0161/0313
+batch_index = 0162/0313
+batch_index = 0163/0313
+batch_index = 0164/0313
+batch_index = 0165/0313
+batch_index = 0166/0313
+batch_index = 0167/0313
+batch_index = 0168/0313
+batch_index = 0169/0313
+batch_index = 0170/0313
+batch_index = 0171/0313
+batch_index = 0172/0313
+batch_index = 0173/0313
+batch_index = 0174/0313
+batch_index = 0175/0313
+batch_index = 0176/0313
+batch_index = 0177/0313
+batch_index = 0178/0313
+batch_index = 0179/0313
+batch_index = 0180/0313
+batch_index = 0181/0313
+batch_index = 0182/0313
+batch_index = 0183/0313
+batch_index = 0184/0313
+batch_index = 0185/0313
+batch_index = 0186/0313
+batch_index = 0187/0313
+batch_index = 0188/0313
+batch_index = 0189/0313
+batch_index = 0190/0313
+batch_index = 0191/0313
+batch_index = 0192/0313
+batch_index = 0193/0313
+batch_index = 0194/0313
+batch_index = 0195/0313
+batch_index = 0196/0313
+batch_index = 0197/0313
+batch_index = 0198/0313
+batch_index = 0199/0313
+batch_index = 0200/0313
+batch_index = 0201/0313
+batch_index = 0202/0313
+batch_index = 0203/0313
+batch_index = 0204/0313
+batch_index = 0205/0313
+batch_index = 0206/0313
+batch_index = 0207/0313
+batch_index = 0208/0313
+batch_index = 0209/0313
+batch_index = 0210/0313
+batch_index = 0211/0313
+batch_index = 0212/0313
+batch_index = 0213/0313
+batch_index = 0214/0313
+batch_index = 0215/0313
+batch_index = 0216/0313
+batch_index = 0217/0313
+batch_index = 0218/0313
+batch_index = 0219/0313
+batch_index = 0220/0313
+batch_index = 0221/0313
+batch_index = 0222/0313
+batch_index = 0223/0313
+batch_index = 0224/0313
+batch_index = 0225/0313
+batch_index = 0226/0313
+batch_index = 0227/0313
+batch_index = 0228/0313
+batch_index = 0229/0313
+batch_index = 0230/0313
+batch_index = 0231/0313
+batch_index = 0232/0313
+batch_index = 0233/0313
+batch_index = 0234/0313
+batch_index = 0235/0313
+batch_index = 0236/0313
+batch_index = 0237/0313
+batch_index = 0238/0313
+batch_index = 0239/0313
+batch_index = 0240/0313
+batch_index = 0241/0313
+batch_index = 0242/0313
+batch_index = 0243/0313
+batch_index = 0244/0313
+batch_index = 0245/0313
+batch_index = 0246/0313
+batch_index = 0247/0313
+batch_index = 0248/0313
+batch_index = 0249/0313
+batch_index = 0250/0313
+batch_index = 0251/0313
+batch_index = 0252/0313
+batch_index = 0253/0313
+batch_index = 0254/0313
+batch_index = 0255/0313
+batch_index = 0256/0313
+batch_index = 0257/0313
+batch_index = 0258/0313
+batch_index = 0259/0313
+batch_index = 0260/0313
+batch_index = 0261/0313
+batch_index = 0262/0313
+batch_index = 0263/0313
+batch_index = 0264/0313
+batch_index = 0265/0313
+batch_index = 0266/0313
+batch_index = 0267/0313
+batch_index = 0268/0313
+batch_index = 0269/0313
+batch_index = 0270/0313
+batch_index = 0271/0313
+batch_index = 0272/0313
+batch_index = 0273/0313
+batch_index = 0274/0313
+batch_index = 0275/0313
+batch_index = 0276/0313
+batch_index = 0277/0313
+batch_index = 0278/0313
+batch_index = 0279/0313
+batch_index = 0280/0313
+batch_index = 0281/0313
+batch_index = 0282/0313
+batch_index = 0283/0313
+batch_index = 0284/0313
+batch_index = 0285/0313
+batch_index = 0286/0313
+batch_index = 0287/0313
+batch_index = 0288/0313
+batch_index = 0289/0313
+batch_index = 0290/0313
+batch_index = 0291/0313
+batch_index = 0292/0313
+batch_index = 0293/0313
+batch_index = 0294/0313
+batch_index = 0295/0313
+batch_index = 0296/0313
+batch_index = 0297/0313
+batch_index = 0298/0313
+batch_index = 0299/0313
+batch_index = 0300/0313
+batch_index = 0301/0313
+batch_index = 0302/0313
+batch_index = 0303/0313
+batch_index = 0304/0313
+batch_index = 0305/0313
+batch_index = 0306/0313
+batch_index = 0307/0313
+batch_index = 0308/0313
+batch_index = 0309/0313
+batch_index = 0310/0313
+batch_index = 0311/0313
+batch_index = 0312/0313
+per_x_test.shape: torch.Size([10000, 3, 32, 32])
+per_y_test.shape: torch.Size([10000])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:8.5000%
+standard trained classifier loss on perceptual attack testset:7.116245746612549
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211020
+Experiment result save dir: /home/maggie/mmat/result/attack/jpeg/googlenet-cifar10/20211020/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize perceptual classifier
+pixel jpeg attack
+generating testset perceptual attack examples...
+batch_index = 0000/0313
+batch_index = 0001/0313
+batch_index = 0002/0313
+batch_index = 0003/0313
+batch_index = 0004/0313
+batch_index = 0005/0313
+batch_index = 0006/0313
+batch_index = 0007/0313
+batch_index = 0008/0313
+batch_index = 0009/0313
+batch_index = 0010/0313
+batch_index = 0011/0313
+batch_index = 0012/0313
+batch_index = 0013/0313
+batch_index = 0014/0313
+batch_index = 0015/0313
+batch_index = 0016/0313
+batch_index = 0017/0313
+batch_index = 0018/0313
+batch_index = 0019/0313
+batch_index = 0020/0313
+batch_index = 0021/0313
+batch_index = 0022/0313
+batch_index = 0023/0313
+batch_index = 0024/0313
+batch_index = 0025/0313
+batch_index = 0026/0313
+batch_index = 0027/0313
+batch_index = 0028/0313
+batch_index = 0029/0313
+batch_index = 0030/0313
+batch_index = 0031/0313
+batch_index = 0032/0313
+batch_index = 0033/0313
+batch_index = 0034/0313
+batch_index = 0035/0313
+batch_index = 0036/0313
+batch_index = 0037/0313
+batch_index = 0038/0313
+batch_index = 0039/0313
+batch_index = 0040/0313
+batch_index = 0041/0313
+batch_index = 0042/0313
+batch_index = 0043/0313
+batch_index = 0044/0313
+batch_index = 0045/0313
+batch_index = 0046/0313
+batch_index = 0047/0313
+batch_index = 0048/0313
+batch_index = 0049/0313
+batch_index = 0050/0313
+batch_index = 0051/0313
+batch_index = 0052/0313
+batch_index = 0053/0313
+batch_index = 0054/0313
+batch_index = 0055/0313
+batch_index = 0056/0313
+batch_index = 0057/0313
+batch_index = 0058/0313
+batch_index = 0059/0313
+batch_index = 0060/0313
+batch_index = 0061/0313
+batch_index = 0062/0313
+batch_index = 0063/0313
+batch_index = 0064/0313
+batch_index = 0065/0313
+batch_index = 0066/0313
+batch_index = 0067/0313
+batch_index = 0068/0313
+batch_index = 0069/0313
+batch_index = 0070/0313
+batch_index = 0071/0313
+batch_index = 0072/0313
+batch_index = 0073/0313
+batch_index = 0074/0313
+batch_index = 0075/0313
+batch_index = 0076/0313
+batch_index = 0077/0313
+batch_index = 0078/0313
+batch_index = 0079/0313
+batch_index = 0080/0313
+batch_index = 0081/0313
+batch_index = 0082/0313
+batch_index = 0083/0313
+batch_index = 0084/0313
+batch_index = 0085/0313
+batch_index = 0086/0313
+batch_index = 0087/0313
+batch_index = 0088/0313
+batch_index = 0089/0313
+batch_index = 0090/0313
+batch_index = 0091/0313
+batch_index = 0092/0313
+batch_index = 0093/0313
+batch_index = 0094/0313
+batch_index = 0095/0313
+batch_index = 0096/0313
+batch_index = 0097/0313
+batch_index = 0098/0313
+batch_index = 0099/0313
+batch_index = 0100/0313
+batch_index = 0101/0313
+batch_index = 0102/0313
+batch_index = 0103/0313
+batch_index = 0104/0313
+batch_index = 0105/0313
+batch_index = 0106/0313
+batch_index = 0107/0313
+batch_index = 0108/0313
+batch_index = 0109/0313
+batch_index = 0110/0313
+batch_index = 0111/0313
+batch_index = 0112/0313
+batch_index = 0113/0313
+batch_index = 0114/0313
+batch_index = 0115/0313
+batch_index = 0116/0313
+batch_index = 0117/0313
+batch_index = 0118/0313
+batch_index = 0119/0313
+batch_index = 0120/0313
+batch_index = 0121/0313
+batch_index = 0122/0313
+batch_index = 0123/0313
+batch_index = 0124/0313
+batch_index = 0125/0313
+batch_index = 0126/0313
+batch_index = 0127/0313
+batch_index = 0128/0313
+batch_index = 0129/0313
+batch_index = 0130/0313
+batch_index = 0131/0313
+batch_index = 0132/0313
+batch_index = 0133/0313
+batch_index = 0134/0313
+batch_index = 0135/0313
+batch_index = 0136/0313
+batch_index = 0137/0313
+batch_index = 0138/0313
+batch_index = 0139/0313
+batch_index = 0140/0313
+batch_index = 0141/0313
+batch_index = 0142/0313
+batch_index = 0143/0313
+batch_index = 0144/0313
+batch_index = 0145/0313
+batch_index = 0146/0313
+batch_index = 0147/0313
+batch_index = 0148/0313
+batch_index = 0149/0313
+batch_index = 0150/0313
+batch_index = 0151/0313
+batch_index = 0152/0313
+batch_index = 0153/0313
+batch_index = 0154/0313
+batch_index = 0155/0313
+batch_index = 0156/0313
+batch_index = 0157/0313
+batch_index = 0158/0313
+batch_index = 0159/0313
+batch_index = 0160/0313
+batch_index = 0161/0313
+batch_index = 0162/0313
+batch_index = 0163/0313
+batch_index = 0164/0313
+batch_index = 0165/0313
+batch_index = 0166/0313
+batch_index = 0167/0313
+batch_index = 0168/0313
+batch_index = 0169/0313
+batch_index = 0170/0313
+batch_index = 0171/0313
+batch_index = 0172/0313
+batch_index = 0173/0313
+batch_index = 0174/0313
+batch_index = 0175/0313
+batch_index = 0176/0313
+batch_index = 0177/0313
+batch_index = 0178/0313
+batch_index = 0179/0313
+batch_index = 0180/0313
+batch_index = 0181/0313
+batch_index = 0182/0313
+batch_index = 0183/0313
+batch_index = 0184/0313
+batch_index = 0185/0313
+batch_index = 0186/0313
+batch_index = 0187/0313
+batch_index = 0188/0313
+batch_index = 0189/0313
+batch_index = 0190/0313
+batch_index = 0191/0313
+batch_index = 0192/0313
+batch_index = 0193/0313
+batch_index = 0194/0313
+batch_index = 0195/0313
+batch_index = 0196/0313
+batch_index = 0197/0313
+batch_index = 0198/0313
+batch_index = 0199/0313
+batch_index = 0200/0313
+batch_index = 0201/0313
+batch_index = 0202/0313
+batch_index = 0203/0313
+batch_index = 0204/0313
+batch_index = 0205/0313
+batch_index = 0206/0313
+batch_index = 0207/0313
+batch_index = 0208/0313
+batch_index = 0209/0313
+batch_index = 0210/0313
+batch_index = 0211/0313
+batch_index = 0212/0313
+batch_index = 0213/0313
+batch_index = 0214/0313
+batch_index = 0215/0313
+batch_index = 0216/0313
+batch_index = 0217/0313
+batch_index = 0218/0313
+batch_index = 0219/0313
+batch_index = 0220/0313
+batch_index = 0221/0313
+batch_index = 0222/0313
+batch_index = 0223/0313
+batch_index = 0224/0313
+batch_index = 0225/0313
+batch_index = 0226/0313
+batch_index = 0227/0313
+batch_index = 0228/0313
+batch_index = 0229/0313
+batch_index = 0230/0313
+batch_index = 0231/0313
+batch_index = 0232/0313
+batch_index = 0233/0313
+batch_index = 0234/0313
+batch_index = 0235/0313
+batch_index = 0236/0313
+batch_index = 0237/0313
+batch_index = 0238/0313
+batch_index = 0239/0313
+batch_index = 0240/0313
+batch_index = 0241/0313
+batch_index = 0242/0313
+batch_index = 0243/0313
+batch_index = 0244/0313
+batch_index = 0245/0313
+batch_index = 0246/0313
+batch_index = 0247/0313
+batch_index = 0248/0313
+batch_index = 0249/0313
+batch_index = 0250/0313
+batch_index = 0251/0313
+batch_index = 0252/0313
+batch_index = 0253/0313
+batch_index = 0254/0313
+batch_index = 0255/0313
+batch_index = 0256/0313
+batch_index = 0257/0313
+batch_index = 0258/0313
+batch_index = 0259/0313
+batch_index = 0260/0313
+batch_index = 0261/0313
+batch_index = 0262/0313
+batch_index = 0263/0313
+batch_index = 0264/0313
+batch_index = 0265/0313
+batch_index = 0266/0313
+batch_index = 0267/0313
+batch_index = 0268/0313
+batch_index = 0269/0313
+batch_index = 0270/0313
+batch_index = 0271/0313
+batch_index = 0272/0313
+batch_index = 0273/0313
+batch_index = 0274/0313
+batch_index = 0275/0313
+batch_index = 0276/0313
+batch_index = 0277/0313
+batch_index = 0278/0313
+batch_index = 0279/0313
+batch_index = 0280/0313
+batch_index = 0281/0313
+batch_index = 0282/0313
+batch_index = 0283/0313
+batch_index = 0284/0313
+batch_index = 0285/0313
+batch_index = 0286/0313
+batch_index = 0287/0313
+batch_index = 0288/0313
+batch_index = 0289/0313
+batch_index = 0290/0313
+batch_index = 0291/0313
+batch_index = 0292/0313
+batch_index = 0293/0313
+batch_index = 0294/0313
+batch_index = 0295/0313
+batch_index = 0296/0313
+batch_index = 0297/0313
+batch_index = 0298/0313
+batch_index = 0299/0313
+batch_index = 0300/0313
+batch_index = 0301/0313
+batch_index = 0302/0313
+batch_index = 0303/0313
+batch_index = 0304/0313
+batch_index = 0305/0313
+batch_index = 0306/0313
+batch_index = 0307/0313
+batch_index = 0308/0313
+batch_index = 0309/0313
+batch_index = 0310/0313
+batch_index = 0311/0313
+batch_index = 0312/0313
+per_x_test.shape: torch.Size([10000, 3, 32, 32])
+per_y_test.shape: torch.Size([10000])
+per_y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+self._x_test.shape: torch.Size([10000, 3, 32, 32])
+self._y_test.shape: torch.Size([10000])
+self._y_test[:10]: tensor([3, 8, 8, 0, 6, 6, 1, 6, 3, 1], device='cuda:0')
+Saving cifar10 testset perceptual attack examples...
+standard trained classifier accuary on perceptual attack testset:0.2500%
+standard trained classifier loss on perceptual attack testset:13.443126678466797
+---------------------------------------
+
+

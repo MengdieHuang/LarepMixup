@@ -784,31 +784,59 @@ class MaggieClassifier:
         
     def __getadvsettensor__(self,adv_dataset_path):
 
-        file_dir=os.listdir(adv_dataset_path)
-        file_dir.sort()
-        # '00000000-adv-3-cat.npz'
-        filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
+        if self._args.perceptualattack == False:
+            file_dir=os.listdir(adv_dataset_path)
+            file_dir.sort()
+            # '00000000-adv-3-cat.npz'
+            filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
 
-        adv_xset_tensor = []
-        adv_yset_tensor = []
+            adv_xset_tensor = []
+            adv_yset_tensor = []
 
-        for index, filename in enumerate(filenames):
-            adv_npz_path = os.path.join(adv_dataset_path,filename)
+            for index, filename in enumerate(filenames):
+                adv_npz_path = os.path.join(adv_dataset_path,filename)
 
-            load_adv_img = np.load(adv_npz_path)['w']            
-            load_adv_img = torch.tensor(load_adv_img)
-            
-            load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
-            load_adv_label = torch.tensor(load_adv_label)
+                load_adv_img = np.load(adv_npz_path)['w']            
+                load_adv_img = torch.tensor(load_adv_img)
+                
+                load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
+                load_adv_label = torch.tensor(load_adv_label)
 
-            adv_xset_tensor.append(load_adv_img)
-            adv_yset_tensor.append(load_adv_label)
+                adv_xset_tensor.append(load_adv_img)
+                adv_yset_tensor.append(load_adv_label)
 
-        adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
-        adv_yset_tensor = torch.stack(adv_yset_tensor)   
+            adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
+            adv_yset_tensor = torch.stack(adv_yset_tensor)   
 
-        # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
-        return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()     
+            # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+            return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()  
+
+        elif self._args.perceptualattack == True:
+            file_dir=os.listdir(adv_dataset_path)
+            file_dir.sort()
+            # '00000000-adv-3-cat.npz'
+            filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'per']           
+
+            adv_xset_tensor = []
+            adv_yset_tensor = []
+
+            for index, filename in enumerate(filenames):
+                adv_npz_path = os.path.join(adv_dataset_path,filename)
+
+                load_adv_img = np.load(adv_npz_path)['w']            
+                load_adv_img = torch.tensor(load_adv_img)
+                
+                load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
+                load_adv_label = torch.tensor(load_adv_label)
+
+                adv_xset_tensor.append(load_adv_img)
+                adv_yset_tensor.append(load_adv_label)
+
+            adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
+            adv_yset_tensor = torch.stack(adv_yset_tensor)   
+
+            # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+            return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()    
 
     #   get representation set tensor format
     def getproset(self, pro_dataset_path):
