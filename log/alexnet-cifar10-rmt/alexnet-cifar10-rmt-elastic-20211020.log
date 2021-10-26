@@ -48430,3 +48430,1626 @@ Traceback (most recent call last):
   File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
     from torch._C import *
 RuntimeError: KeyboardInterrupt: 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/elastic/alexnet-cifar10/20211019/00001-perattackacc-12.59/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:84.9200%
+Loss of before mmat trained classifier clean testset:0.5403244495391846
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+Accuary of before rmt trained classifier on adversarial testset:12.5900%
+Loss of before mmat trained classifier on adversarial testset:6.5400919914245605
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.001
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 209, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1477, in rmt
+    outputs = self._model(inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 106, in forward
+    layer2 = self.batch_norm2(self.pad(self.lrn(self.relu(self.conv2(layer1)))))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/normalization.py", line 56, in forward
+    self.k)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 2245, in local_response_norm
+    div = pad(div, (0, 0, 0, 0, size // 2, (size - 1) // 2))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 4000, in _pad
+    return _VF.constant_pad_nd(input, pad, value)
+RuntimeError: CUDA out of memory. Tried to allocate 58.00 MiB (GPU 0; 10.76 GiB total capacity; 845.31 MiB already allocated; 13.12 MiB free; 876.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 186, in <module>
+    cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 843, in getproset
+    pro_wset_tensor, pro_yset_tensor = self.__getprosettensor__(pro_dataset_path)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 875, in __getprosettensor__
+    w = torch.tensor(w, device=device)                                                                                 
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/elastic/alexnet-cifar10/20211019/00001-perattackacc-12.59/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:84.9200%
+Loss of before mmat trained classifier clean testset:0.5403244495391846
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+Accuary of before rmt trained classifier on adversarial testset:12.5900%
+Loss of before mmat trained classifier on adversarial testset:6.5400919914245605
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.001
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/196] [Batch classify loss: 1.379707]
+right_index: 512
+[Epoch 1/40] [Batch 2/196] [Batch classify loss: 1.081238]
+right_index: 768
+[Epoch 1/40] [Batch 3/196] [Batch classify loss: 1.439215]
+right_index: 1024
+[Epoch 1/40] [Batch 4/196] [Batch classify loss: 1.336703]
+right_index: 1280
+[Epoch 1/40] [Batch 5/196] [Batch classify loss: 1.186984]
+right_index: 1536
+[Epoch 1/40] [Batch 6/196] [Batch classify loss: 1.324799]
+right_index: 1792
+[Epoch 1/40] [Batch 7/196] [Batch classify loss: 1.153136]
+right_index: 2048
+[Epoch 1/40] [Batch 8/196] [Batch classify loss: 1.196059]
+right_index: 2304
+[Epoch 1/40] [Batch 9/196] [Batch classify loss: 1.245710]
+right_index: 2560
+[Epoch 1/40] [Batch 10/196] [Batch classify loss: 1.124480]
+right_index: 2816
+[Epoch 1/40] [Batch 11/196] [Batch classify loss: 1.194859]
+right_index: 3072
+[Epoch 1/40] [Batch 12/196] [Batch classify loss: 1.213170]
+right_index: 3328
+[Epoch 1/40] [Batch 13/196] [Batch classify loss: 1.336914]
+right_index: 3584
+[Epoch 1/40] [Batch 14/196] [Batch classify loss: 1.060935]
+right_index: 3840
+[Epoch 1/40] [Batch 15/196] [Batch classify loss: 1.239651]
+right_index: 4096
+[Epoch 1/40] [Batch 16/196] [Batch classify loss: 1.201449]
+right_index: 4352
+[Epoch 1/40] [Batch 17/196] [Batch classify loss: 1.295696]
+right_index: 4608
+[Epoch 1/40] [Batch 18/196] [Batch classify loss: 0.991059]
+right_index: 4864
+[Epoch 1/40] [Batch 19/196] [Batch classify loss: 1.089152]
+right_index: 5120
+[Epoch 1/40] [Batch 20/196] [Batch classify loss: 1.165207]
+right_index: 5376
+[Epoch 1/40] [Batch 21/196] [Batch classify loss: 1.101287]
+right_index: 5632
+[Epoch 1/40] [Batch 22/196] [Batch classify loss: 0.986664]
+right_index: 5888
+[Epoch 1/40] [Batch 23/196] [Batch classify loss: 1.078204]
+right_index: 6144
+[Epoch 1/40] [Batch 24/196] [Batch classify loss: 1.011719]
+right_index: 6400
+[Epoch 1/40] [Batch 25/196] [Batch classify loss: 1.062057]
+right_index: 6656
+[Epoch 1/40] [Batch 26/196] [Batch classify loss: 1.062574]
+right_index: 6912
+[Epoch 1/40] [Batch 27/196] [Batch classify loss: 0.950950]
+right_index: 7168
+[Epoch 1/40] [Batch 28/196] [Batch classify loss: 0.993467]
+right_index: 7424
+[Epoch 1/40] [Batch 29/196] [Batch classify loss: 1.032449]
+right_index: 7680
+[Epoch 1/40] [Batch 30/196] [Batch classify loss: 0.920734]
+right_index: 7936
+[Epoch 1/40] [Batch 31/196] [Batch classify loss: 0.953689]
+right_index: 8192
+[Epoch 1/40] [Batch 32/196] [Batch classify loss: 0.972638]
+right_index: 8448
+[Epoch 1/40] [Batch 33/196] [Batch classify loss: 0.961424]
+right_index: 8704
+[Epoch 1/40] [Batch 34/196] [Batch classify loss: 0.948628]
+right_index: 8960
+[Epoch 1/40] [Batch 35/196] [Batch classify loss: 0.962650]
+right_index: 9216
+[Epoch 1/40] [Batch 36/196] [Batch classify loss: 0.942683]
+right_index: 9472
+[Epoch 1/40] [Batch 37/196] [Batch classify loss: 0.865278]
+right_index: 9728
+[Epoch 1/40] [Batch 38/196] [Batch classify loss: 0.959110]
+right_index: 9984
+[Epoch 1/40] [Batch 39/196] [Batch classify loss: 0.970714]
+right_index: 10240
+[Epoch 1/40] [Batch 40/196] [Batch classify loss: 0.831296]
+right_index: 10496
+[Epoch 1/40] [Batch 41/196] [Batch classify loss: 0.950202]
+right_index: 10752
+[Epoch 1/40] [Batch 42/196] [Batch classify loss: 0.953250]
+right_index: 11008
+[Epoch 1/40] [Batch 43/196] [Batch classify loss: 1.020851]
+right_index: 11264
+[Epoch 1/40] [Batch 44/196] [Batch classify loss: 0.923894]
+right_index: 11520
+[Epoch 1/40] [Batch 45/196] [Batch classify loss: 0.968173]
+right_index: 11776
+[Epoch 1/40] [Batch 46/196] [Batch classify loss: 0.942244]
+right_index: 12032
+[Epoch 1/40] [Batch 47/196] [Batch classify loss: 0.903722]
+right_index: 12288
+[Epoch 1/40] [Batch 48/196] [Batch classify loss: 0.923526]
+right_index: 12544
+[Epoch 1/40] [Batch 49/196] [Batch classify loss: 0.957843]
+right_index: 12800
+[Epoch 1/40] [Batch 50/196] [Batch classify loss: 0.928789]
+right_index: 13056
+[Epoch 1/40] [Batch 51/196] [Batch classify loss: 0.883420]
+right_index: 13312
+[Epoch 1/40] [Batch 52/196] [Batch classify loss: 0.916937]
+right_index: 13568
+[Epoch 1/40] [Batch 53/196] [Batch classify loss: 0.908375]
+right_index: 13824
+[Epoch 1/40] [Batch 54/196] [Batch classify loss: 0.891427]
+right_index: 14080
+[Epoch 1/40] [Batch 55/196] [Batch classify loss: 0.943970]
+right_index: 14336
+[Epoch 1/40] [Batch 56/196] [Batch classify loss: 0.827043]
+right_index: 14592
+[Epoch 1/40] [Batch 57/196] [Batch classify loss: 0.964273]
+right_index: 14848
+[Epoch 1/40] [Batch 58/196] [Batch classify loss: 0.876967]
+right_index: 15104
+[Epoch 1/40] [Batch 59/196] [Batch classify loss: 0.873580]
+right_index: 15360
+[Epoch 1/40] [Batch 60/196] [Batch classify loss: 0.989978]
+right_index: 15616
+[Epoch 1/40] [Batch 61/196] [Batch classify loss: 0.911772]
+right_index: 15872
+[Epoch 1/40] [Batch 62/196] [Batch classify loss: 0.858160]
+right_index: 16128
+[Epoch 1/40] [Batch 63/196] [Batch classify loss: 0.915036]
+right_index: 16384
+[Epoch 1/40] [Batch 64/196] [Batch classify loss: 0.875342]
+right_index: 16640
+[Epoch 1/40] [Batch 65/196] [Batch classify loss: 0.820639]
+right_index: 16896
+[Epoch 1/40] [Batch 66/196] [Batch classify loss: 0.874827]
+right_index: 17152
+[Epoch 1/40] [Batch 67/196] [Batch classify loss: 0.879594]
+right_index: 17408
+[Epoch 1/40] [Batch 68/196] [Batch classify loss: 0.874935]
+right_index: 17664
+[Epoch 1/40] [Batch 69/196] [Batch classify loss: 0.929555]
+right_index: 17920
+[Epoch 1/40] [Batch 70/196] [Batch classify loss: 0.883480]
+right_index: 18176
+[Epoch 1/40] [Batch 71/196] [Batch classify loss: 0.829813]
+right_index: 18432
+[Epoch 1/40] [Batch 72/196] [Batch classify loss: 0.891581]
+right_index: 18688
+[Epoch 1/40] [Batch 73/196] [Batch classify loss: 0.839123]
+right_index: 18944
+[Epoch 1/40] [Batch 74/196] [Batch classify loss: 0.921723]
+right_index: 19200
+[Epoch 1/40] [Batch 75/196] [Batch classify loss: 0.831783]
+right_index: 19456
+[Epoch 1/40] [Batch 76/196] [Batch classify loss: 0.901707]
+right_index: 19712
+[Epoch 1/40] [Batch 77/196] [Batch classify loss: 0.881883]
+right_index: 19968
+[Epoch 1/40] [Batch 78/196] [Batch classify loss: 0.814156]
+right_index: 20224
+[Epoch 1/40] [Batch 79/196] [Batch classify loss: 0.879223]
+right_index: 20480
+[Epoch 1/40] [Batch 80/196] [Batch classify loss: 0.863779]
+right_index: 20736
+[Epoch 1/40] [Batch 81/196] [Batch classify loss: 0.839965]
+right_index: 20992
+[Epoch 1/40] [Batch 82/196] [Batch classify loss: 0.921508]
+right_index: 21248
+[Epoch 1/40] [Batch 83/196] [Batch classify loss: 0.884323]
+right_index: 21504
+[Epoch 1/40] [Batch 84/196] [Batch classify loss: 0.828846]
+right_index: 21760
+[Epoch 1/40] [Batch 85/196] [Batch classify loss: 0.828605]
+right_index: 22016
+[Epoch 1/40] [Batch 86/196] [Batch classify loss: 0.853145]
+right_index: 22272
+[Epoch 1/40] [Batch 87/196] [Batch classify loss: 0.911874]
+right_index: 22528
+[Epoch 1/40] [Batch 88/196] [Batch classify loss: 0.926958]
+right_index: 22784
+[Epoch 1/40] [Batch 89/196] [Batch classify loss: 0.835765]
+right_index: 23040
+[Epoch 1/40] [Batch 90/196] [Batch classify loss: 0.837366]
+right_index: 23296
+[Epoch 1/40] [Batch 91/196] [Batch classify loss: 0.855625]
+right_index: 23552
+[Epoch 1/40] [Batch 92/196] [Batch classify loss: 0.893391]
+right_index: 23808
+[Epoch 1/40] [Batch 93/196] [Batch classify loss: 0.965236]
+right_index: 24064
+[Epoch 1/40] [Batch 94/196] [Batch classify loss: 0.807780]
+right_index: 24320
+[Epoch 1/40] [Batch 95/196] [Batch classify loss: 0.916022]
+right_index: 24576
+[Epoch 1/40] [Batch 96/196] [Batch classify loss: 0.913738]
+right_index: 24832
+[Epoch 1/40] [Batch 97/196] [Batch classify loss: 0.872618]
+right_index: 25088
+[Epoch 1/40] [Batch 98/196] [Batch classify loss: 0.841372]
+right_index: 25344
+[Epoch 1/40] [Batch 99/196] [Batch classify loss: 0.834895]
+right_index: 25397
+[Epoch 1/40] [Batch 100/196] [Batch classify loss: 0.516249]
+right_index: 256
+[Epoch 1/40] [Batch 101/196] [Batch classify loss: 0.711500]
+right_index: 512
+[Epoch 1/40] [Batch 102/196] [Batch classify loss: 0.789823]
+right_index: 768
+[Epoch 1/40] [Batch 103/196] [Batch classify loss: 0.823855]
+right_index: 1024
+[Epoch 1/40] [Batch 104/196] [Batch classify loss: 0.889499]
+right_index: 1280
+[Epoch 1/40] [Batch 105/196] [Batch classify loss: 0.773215]
+right_index: 1536
+[Epoch 1/40] [Batch 106/196] [Batch classify loss: 0.875485]
+right_index: 1792
+[Epoch 1/40] [Batch 107/196] [Batch classify loss: 0.755855]
+right_index: 2048
+[Epoch 1/40] [Batch 108/196] [Batch classify loss: 0.819312]
+right_index: 2304
+[Epoch 1/40] [Batch 109/196] [Batch classify loss: 0.856499]
+right_index: 2560
+[Epoch 1/40] [Batch 110/196] [Batch classify loss: 0.855725]
+right_index: 2816
+[Epoch 1/40] [Batch 111/196] [Batch classify loss: 0.783046]
+right_index: 3072
+[Epoch 1/40] [Batch 112/196] [Batch classify loss: 0.808649]
+right_index: 3328
+[Epoch 1/40] [Batch 113/196] [Batch classify loss: 0.857017]
+right_index: 3584
+[Epoch 1/40] [Batch 114/196] [Batch classify loss: 0.881732]
+right_index: 3840
+[Epoch 1/40] [Batch 115/196] [Batch classify loss: 0.828987]
+right_index: 4096
+[Epoch 1/40] [Batch 116/196] [Batch classify loss: 0.863616]
+right_index: 4352
+[Epoch 1/40] [Batch 117/196] [Batch classify loss: 0.877467]
+right_index: 4608
+[Epoch 1/40] [Batch 118/196] [Batch classify loss: 0.864586]
+right_index: 4864
+[Epoch 1/40] [Batch 119/196] [Batch classify loss: 0.814556]
+right_index: 5120
+[Epoch 1/40] [Batch 120/196] [Batch classify loss: 0.778744]
+right_index: 5376
+[Epoch 1/40] [Batch 121/196] [Batch classify loss: 0.857777]
+right_index: 5632
+[Epoch 1/40] [Batch 122/196] [Batch classify loss: 0.875431]
+right_index: 5888
+[Epoch 1/40] [Batch 123/196] [Batch classify loss: 0.802639]
+right_index: 6144
+[Epoch 1/40] [Batch 124/196] [Batch classify loss: 0.758484]
+right_index: 6400
+[Epoch 1/40] [Batch 125/196] [Batch classify loss: 0.717295]
+right_index: 6656
+[Epoch 1/40] [Batch 126/196] [Batch classify loss: 0.787238]
+right_index: 6912
+[Epoch 1/40] [Batch 127/196] [Batch classify loss: 0.815936]
+right_index: 7168
+[Epoch 1/40] [Batch 128/196] [Batch classify loss: 0.847749]
+right_index: 7424
+[Epoch 1/40] [Batch 129/196] [Batch classify loss: 0.809244]
+right_index: 7680
+[Epoch 1/40] [Batch 130/196] [Batch classify loss: 0.802371]
+right_index: 7936
+[Epoch 1/40] [Batch 131/196] [Batch classify loss: 0.840234]
+right_index: 8192
+[Epoch 1/40] [Batch 132/196] [Batch classify loss: 0.873992]
+right_index: 8448
+[Epoch 1/40] [Batch 133/196] [Batch classify loss: 0.853834]
+right_index: 8704
+[Epoch 1/40] [Batch 134/196] [Batch classify loss: 0.791910]
+right_index: 8960
+[Epoch 1/40] [Batch 135/196] [Batch classify loss: 0.770594]
+right_index: 9216
+[Epoch 1/40] [Batch 136/196] [Batch classify loss: 0.818811]
+right_index: 9472
+[Epoch 1/40] [Batch 137/196] [Batch classify loss: 0.799345]
+right_index: 9728
+[Epoch 1/40] [Batch 138/196] [Batch classify loss: 0.854629]
+right_index: 9984
+[Epoch 1/40] [Batch 139/196] [Batch classify loss: 0.879875]
+right_index: 10240
+[Epoch 1/40] [Batch 140/196] [Batch classify loss: 0.800826]
+right_index: 10496
+[Epoch 1/40] [Batch 141/196] [Batch classify loss: 0.807387]
+right_index: 10752
+[Epoch 1/40] [Batch 142/196] [Batch classify loss: 0.827884]
+right_index: 11008
+[Epoch 1/40] [Batch 143/196] [Batch classify loss: 0.901204]
+right_index: 11264
+[Epoch 1/40] [Batch 144/196] [Batch classify loss: 0.831390]
+right_index: 11520
+[Epoch 1/40] [Batch 145/196] [Batch classify loss: 0.829048]
+right_index: 11776
+[Epoch 1/40] [Batch 146/196] [Batch classify loss: 0.812026]
+right_index: 12032
+[Epoch 1/40] [Batch 147/196] [Batch classify loss: 0.809263]
+right_index: 12288
+[Epoch 1/40] [Batch 148/196] [Batch classify loss: 0.827936]
+right_index: 12544
+[Epoch 1/40] [Batch 149/196] [Batch classify loss: 0.845547]
+right_index: 12800
+[Epoch 1/40] [Batch 150/196] [Batch classify loss: 0.821255]
+right_index: 13056
+[Epoch 1/40] [Batch 151/196] [Batch classify loss: 0.833392]
+right_index: 13312
+[Epoch 1/40] [Batch 152/196] [Batch classify loss: 0.827170]
+right_index: 13568
+[Epoch 1/40] [Batch 153/196] [Batch classify loss: 0.823791]
+right_index: 13824
+[Epoch 1/40] [Batch 154/196] [Batch classify loss: 0.862469]
+right_index: 14080
+[Epoch 1/40] [Batch 155/196] [Batch classify loss: 0.836731]
+right_index: 14336
+[Epoch 1/40] [Batch 156/196] [Batch classify loss: 0.857151]
+right_index: 14592
+[Epoch 1/40] [Batch 157/196] [Batch classify loss: 0.851004]
+right_index: 14848
+[Epoch 1/40] [Batch 158/196] [Batch classify loss: 0.775589]
+right_index: 15104
+[Epoch 1/40] [Batch 159/196] [Batch classify loss: 0.740397]
+right_index: 15360
+[Epoch 1/40] [Batch 160/196] [Batch classify loss: 0.822436]
+right_index: 15616
+[Epoch 1/40] [Batch 161/196] [Batch classify loss: 0.810651]
+right_index: 15872
+[Epoch 1/40] [Batch 162/196] [Batch classify loss: 0.812560]
+right_index: 16128
+[Epoch 1/40] [Batch 163/196] [Batch classify loss: 0.835842]
+right_index: 16384
+[Epoch 1/40] [Batch 164/196] [Batch classify loss: 0.837264]
+right_index: 16640
+[Epoch 1/40] [Batch 165/196] [Batch classify loss: 0.808732]
+right_index: 16896
+[Epoch 1/40] [Batch 166/196] [Batch classify loss: 0.797960]
+right_index: 17152
+[Epoch 1/40] [Batch 167/196] [Batch classify loss: 0.851169]
+right_index: 17408
+[Epoch 1/40] [Batch 168/196] [Batch classify loss: 0.767071]
+right_index: 17664
+[Epoch 1/40] [Batch 169/196] [Batch classify loss: 0.802573]
+right_index: 17920
+[Epoch 1/40] [Batch 170/196] [Batch classify loss: 0.821352]
+right_index: 18176
+[Epoch 1/40] [Batch 171/196] [Batch classify loss: 0.901214]
+right_index: 18432
+[Epoch 1/40] [Batch 172/196] [Batch classify loss: 0.770894]
+right_index: 18688
+[Epoch 1/40] [Batch 173/196] [Batch classify loss: 0.833888]
+right_index: 18944
+[Epoch 1/40] [Batch 174/196] [Batch classify loss: 0.795330]
+right_index: 19200
+[Epoch 1/40] [Batch 175/196] [Batch classify loss: 0.757713]
+right_index: 19456
+[Epoch 1/40] [Batch 176/196] [Batch classify loss: 0.766193]
+right_index: 19712
+[Epoch 1/40] [Batch 177/196] [Batch classify loss: 0.852404]
+right_index: 19968
+[Epoch 1/40] [Batch 178/196] [Batch classify loss: 0.820370]
+right_index: 20224
+[Epoch 1/40] [Batch 179/196] [Batch classify loss: 0.833297]
+right_index: 20480
+[Epoch 1/40] [Batch 180/196] [Batch classify loss: 0.881763]
+right_index: 20736
+[Epoch 1/40] [Batch 181/196] [Batch classify loss: 0.891123]
+right_index: 20992
+[Epoch 1/40] [Batch 182/196] [Batch classify loss: 0.819413]
+right_index: 21248
+[Epoch 1/40] [Batch 183/196] [Batch classify loss: 0.788653]
+right_index: 21504
+[Epoch 1/40] [Batch 184/196] [Batch classify loss: 0.860675]
+right_index: 21760
+[Epoch 1/40] [Batch 185/196] [Batch classify loss: 0.856276]
+right_index: 22016
+[Epoch 1/40] [Batch 186/196] [Batch classify loss: 0.855256]
+right_index: 22272
+[Epoch 1/40] [Batch 187/196] [Batch classify loss: 0.890967]
+right_index: 22528
+[Epoch 1/40] [Batch 188/196] [Batch classify loss: 0.862673]
+right_index: 22784
+[Epoch 1/40] [Batch 189/196] [Batch classify loss: 0.807028]
+right_index: 23040
+[Epoch 1/40] [Batch 190/196] [Batch classify loss: 0.805868]
+right_index: 23296
+[Epoch 1/40] [Batch 191/196] [Batch classify loss: 0.833099]
+right_index: 23552
+[Epoch 1/40] [Batch 192/196] [Batch classify loss: 0.879929]
+right_index: 23808
+[Epoch 1/40] [Batch 193/196] [Batch classify loss: 0.870713]
+right_index: 24064
+[Epoch 1/40] [Batch 194/196] [Batch classify loss: 0.846852]
+right_index: 24320
+[Epoch 1/40] [Batch 195/196] [Batch classify loss: 0.841049]
+right_index: 24576
+[Epoch 1/40] [Batch 196/196] [Batch classify loss: 1.188357]
+0001 epoch rmt trained classifier accuary on the clean testing examples:82.5700%
+0001 epoch rmt trained classifier loss on the clean testing examples:0.5506
+0001 epoch rmt trained classifier accuary on adversarial testset:28.7400%
+0001 epoch rmt trained classifier loss on adversarial testset:2.425041675567627
+
+
+1epoch learning rate:0.001
+right_index: 256
+[Epoch 2/40] [Batch 1/196] [Batch classify loss: 0.724373]
+right_index: 512
+[Epoch 2/40] [Batch 2/196] [Batch classify loss: 0.772891]
+right_index: 768
+[Epoch 2/40] [Batch 3/196] [Batch classify loss: 0.776153]
+right_index: 1024
+[Epoch 2/40] [Batch 4/196] [Batch classify loss: 0.733308]
+right_index: 1280
+[Epoch 2/40] [Batch 5/196] [Batch classify loss: 0.699717]
+right_index: 1536
+[Epoch 2/40] [Batch 6/196] [Batch classify loss: 0.727924]
+right_index: 1792
+[Epoch 2/40] [Batch 7/196] [Batch classify loss: 0.718703]
+right_index: 2048
+[Epoch 2/40] [Batch 8/196] [Batch classify loss: 0.714446]
+right_index: 2304
+[Epoch 2/40] [Batch 9/196] [Batch classify loss: 0.801030]
+right_index: 2560
+[Epoch 2/40] [Batch 10/196] [Batch classify loss: 0.678875]
+right_index: 2816
+[Epoch 2/40] [Batch 11/196] [Batch classify loss: 0.731194]
+right_index: 3072
+[Epoch 2/40] [Batch 12/196] [Batch classify loss: 0.756355]
+right_index: 3328
+[Epoch 2/40] [Batch 13/196] [Batch classify loss: 0.713595]
+right_index: 3584
+[Epoch 2/40] [Batch 14/196] [Batch classify loss: 0.714856]
+right_index: 3840
+[Epoch 2/40] [Batch 15/196] [Batch classify loss: 0.772369]
+right_index: 4096
+[Epoch 2/40] [Batch 16/196] [Batch classify loss: 0.703986]
+right_index: 4352
+[Epoch 2/40] [Batch 17/196] [Batch classify loss: 0.687680]
+right_index: 4608
+[Epoch 2/40] [Batch 18/196] [Batch classify loss: 0.686753]
+right_index: 4864
+[Epoch 2/40] [Batch 19/196] [Batch classify loss: 0.653584]
+right_index: 5120
+[Epoch 2/40] [Batch 20/196] [Batch classify loss: 0.742494]
+right_index: 5376
+[Epoch 2/40] [Batch 21/196] [Batch classify loss: 0.718521]
+right_index: 5632
+[Epoch 2/40] [Batch 22/196] [Batch classify loss: 0.737575]
+right_index: 5888
+[Epoch 2/40] [Batch 23/196] [Batch classify loss: 0.752733]
+right_index: 6144
+[Epoch 2/40] [Batch 24/196] [Batch classify loss: 0.736802]
+right_index: 6400
+[Epoch 2/40] [Batch 25/196] [Batch classify loss: 0.652832]
+right_index: 6656
+[Epoch 2/40] [Batch 26/196] [Batch classify loss: 0.763885]
+right_index: 6912
+[Epoch 2/40] [Batch 27/196] [Batch classify loss: 0.783674]
+right_index: 7168
+[Epoch 2/40] [Batch 28/196] [Batch classify loss: 0.816054]
+right_index: 7424
+[Epoch 2/40] [Batch 29/196] [Batch classify loss: 0.724361]
+right_index: 7680
+[Epoch 2/40] [Batch 30/196] [Batch classify loss: 0.724901]
+right_index: 7936
+[Epoch 2/40] [Batch 31/196] [Batch classify loss: 0.778341]
+right_index: 8192
+[Epoch 2/40] [Batch 32/196] [Batch classify loss: 0.784590]
+right_index: 8448
+[Epoch 2/40] [Batch 33/196] [Batch classify loss: 0.742595]
+right_index: 8704
+[Epoch 2/40] [Batch 34/196] [Batch classify loss: 0.721290]
+right_index: 8960
+[Epoch 2/40] [Batch 35/196] [Batch classify loss: 0.767006]
+right_index: 9216
+[Epoch 2/40] [Batch 36/196] [Batch classify loss: 0.745532]
+right_index: 9472
+[Epoch 2/40] [Batch 37/196] [Batch classify loss: 0.713591]
+right_index: 9728
+[Epoch 2/40] [Batch 38/196] [Batch classify loss: 0.758176]
+right_index: 9984
+[Epoch 2/40] [Batch 39/196] [Batch classify loss: 0.779761]
+right_index: 10240
+[Epoch 2/40] [Batch 40/196] [Batch classify loss: 0.708617]
+right_index: 10496
+[Epoch 2/40] [Batch 41/196] [Batch classify loss: 0.758820]
+right_index: 10752
+[Epoch 2/40] [Batch 42/196] [Batch classify loss: 0.692940]
+right_index: 11008
+[Epoch 2/40] [Batch 43/196] [Batch classify loss: 0.798844]
+right_index: 11264
+[Epoch 2/40] [Batch 44/196] [Batch classify loss: 0.799923]
+right_index: 11520
+[Epoch 2/40] [Batch 45/196] [Batch classify loss: 0.752578]
+right_index: 11776
+[Epoch 2/40] [Batch 46/196] [Batch classify loss: 0.770107]
+right_index: 12032
+[Epoch 2/40] [Batch 47/196] [Batch classify loss: 0.834825]
+right_index: 12288
+[Epoch 2/40] [Batch 48/196] [Batch classify loss: 0.766098]
+right_index: 12544
+[Epoch 2/40] [Batch 49/196] [Batch classify loss: 0.753610]
+right_index: 12800
+[Epoch 2/40] [Batch 50/196] [Batch classify loss: 0.775418]
+right_index: 13056
+[Epoch 2/40] [Batch 51/196] [Batch classify loss: 0.768496]
+right_index: 13312
+[Epoch 2/40] [Batch 52/196] [Batch classify loss: 0.809565]
+right_index: 13568
+[Epoch 2/40] [Batch 53/196] [Batch classify loss: 0.721448]
+right_index: 13824
+[Epoch 2/40] [Batch 54/196] [Batch classify loss: 0.814806]
+right_index: 14080
+[Epoch 2/40] [Batch 55/196] [Batch classify loss: 0.738609]
+right_index: 14336
+[Epoch 2/40] [Batch 56/196] [Batch classify loss: 0.756106]
+right_index: 14592
+[Epoch 2/40] [Batch 57/196] [Batch classify loss: 0.725195]
+right_index: 14848
+[Epoch 2/40] [Batch 58/196] [Batch classify loss: 0.767285]
+right_index: 15104
+[Epoch 2/40] [Batch 59/196] [Batch classify loss: 0.787207]
+right_index: 15360
+[Epoch 2/40] [Batch 60/196] [Batch classify loss: 0.742619]
+right_index: 15616
+[Epoch 2/40] [Batch 61/196] [Batch classify loss: 0.783185]
+right_index: 15872
+[Epoch 2/40] [Batch 62/196] [Batch classify loss: 0.776811]
+right_index: 16128
+[Epoch 2/40] [Batch 63/196] [Batch classify loss: 0.829479]
+right_index: 16384
+[Epoch 2/40] [Batch 64/196] [Batch classify loss: 0.801117]
+right_index: 16640
+[Epoch 2/40] [Batch 65/196] [Batch classify loss: 0.751117]
+right_index: 16896
+[Epoch 2/40] [Batch 66/196] [Batch classify loss: 0.783782]
+right_index: 17152
+[Epoch 2/40] [Batch 67/196] [Batch classify loss: 0.702081]
+right_index: 17408
+[Epoch 2/40] [Batch 68/196] [Batch classify loss: 0.707096]
+right_index: 17664
+[Epoch 2/40] [Batch 69/196] [Batch classify loss: 0.784358]
+right_index: 17920
+[Epoch 2/40] [Batch 70/196] [Batch classify loss: 0.716311]
+right_index: 18176
+[Epoch 2/40] [Batch 71/196] [Batch classify loss: 0.756138]
+right_index: 18432
+[Epoch 2/40] [Batch 72/196] [Batch classify loss: 0.769261]
+right_index: 18688
+[Epoch 2/40] [Batch 73/196] [Batch classify loss: 0.793115]
+right_index: 18944
+[Epoch 2/40] [Batch 74/196] [Batch classify loss: 0.711827]
+right_index: 19200
+[Epoch 2/40] [Batch 75/196] [Batch classify loss: 0.801905]
+right_index: 19456
+[Epoch 2/40] [Batch 76/196] [Batch classify loss: 0.742257]
+right_index: 19712
+[Epoch 2/40] [Batch 77/196] [Batch classify loss: 0.768263]
+right_index: 19968
+[Epoch 2/40] [Batch 78/196] [Batch classify loss: 0.803128]
+right_index: 20224
+[Epoch 2/40] [Batch 79/196] [Batch classify loss: 0.796541]
+right_index: 20480
+[Epoch 2/40] [Batch 80/196] [Batch classify loss: 0.790483]
+right_index: 20736
+[Epoch 2/40] [Batch 81/196] [Batch classify loss: 0.757684]
+right_index: 20992
+[Epoch 2/40] [Batch 82/196] [Batch classify loss: 0.763856]
+right_index: 21248
+[Epoch 2/40] [Batch 83/196] [Batch classify loss: 0.744473]
+right_index: 21504
+[Epoch 2/40] [Batch 84/196] [Batch classify loss: 0.781538]
+right_index: 21760
+[Epoch 2/40] [Batch 85/196] [Batch classify loss: 0.784482]
+right_index: 22016
+[Epoch 2/40] [Batch 86/196] [Batch classify loss: 0.787169]
+right_index: 22272
+[Epoch 2/40] [Batch 87/196] [Batch classify loss: 0.827321]
+right_index: 22528
+[Epoch 2/40] [Batch 88/196] [Batch classify loss: 0.852434]
+right_index: 22784
+[Epoch 2/40] [Batch 89/196] [Batch classify loss: 0.744718]
+right_index: 23040
+[Epoch 2/40] [Batch 90/196] [Batch classify loss: 0.724144]
+right_index: 23296
+[Epoch 2/40] [Batch 91/196] [Batch classify loss: 0.722222]
+right_index: 23552
+[Epoch 2/40] [Batch 92/196] [Batch classify loss: 0.767707]
+right_index: 23808
+[Epoch 2/40] [Batch 93/196] [Batch classify loss: 0.777026]
+right_index: 24064
+[Epoch 2/40] [Batch 94/196] [Batch classify loss: 0.768154]
+right_index: 24320
+[Epoch 2/40] [Batch 95/196] [Batch classify loss: 0.730786]
+right_index: 24576
+[Epoch 2/40] [Batch 96/196] [Batch classify loss: 0.803928]
+right_index: 24832
+[Epoch 2/40] [Batch 97/196] [Batch classify loss: 0.707257]
+right_index: 25088
+[Epoch 2/40] [Batch 98/196] [Batch classify loss: 0.741929]
+right_index: 25344
+[Epoch 2/40] [Batch 99/196] [Batch classify loss: 0.786650]
+right_index: 25397
+[Epoch 2/40] [Batch 100/196] [Batch classify loss: 0.458661]
+right_index: 256
+[Epoch 2/40] [Batch 101/196] [Batch classify loss: 0.629155]
+right_index: 512
+[Epoch 2/40] [Batch 102/196] [Batch classify loss: 0.661643]
+right_index: 768
+[Epoch 2/40] [Batch 103/196] [Batch classify loss: 0.722001]
+right_index: 1024
+[Epoch 2/40] [Batch 104/196] [Batch classify loss: 0.678285]
+right_index: 1280
+[Epoch 2/40] [Batch 105/196] [Batch classify loss: 0.726781]
+right_index: 1536
+[Epoch 2/40] [Batch 106/196] [Batch classify loss: 0.691068]
+right_index: 1792
+[Epoch 2/40] [Batch 107/196] [Batch classify loss: 0.597745]
+right_index: 2048
+[Epoch 2/40] [Batch 108/196] [Batch classify loss: 0.726801]
+right_index: 2304
+[Epoch 2/40] [Batch 109/196] [Batch classify loss: 0.750642]
+right_index: 2560
+[Epoch 2/40] [Batch 110/196] [Batch classify loss: 0.657313]
+right_index: 2816
+[Epoch 2/40] [Batch 111/196] [Batch classify loss: 0.723825]
+right_index: 3072
+[Epoch 2/40] [Batch 112/196] [Batch classify loss: 0.664724]
+right_index: 3328
+[Epoch 2/40] [Batch 113/196] [Batch classify loss: 0.706489]
+right_index: 3584
+[Epoch 2/40] [Batch 114/196] [Batch classify loss: 0.740650]
+right_index: 3840
+[Epoch 2/40] [Batch 115/196] [Batch classify loss: 0.690075]
+right_index: 4096
+[Epoch 2/40] [Batch 116/196] [Batch classify loss: 0.700801]
+right_index: 4352
+[Epoch 2/40] [Batch 117/196] [Batch classify loss: 0.664398]
+right_index: 4608
+[Epoch 2/40] [Batch 118/196] [Batch classify loss: 0.726441]
+right_index: 4864
+[Epoch 2/40] [Batch 119/196] [Batch classify loss: 0.677413]
+right_index: 5120
+[Epoch 2/40] [Batch 120/196] [Batch classify loss: 0.719098]
+right_index: 5376
+[Epoch 2/40] [Batch 121/196] [Batch classify loss: 0.733445]
+right_index: 5632
+[Epoch 2/40] [Batch 122/196] [Batch classify loss: 0.683596]
+right_index: 5888
+[Epoch 2/40] [Batch 123/196] [Batch classify loss: 0.672944]
+right_index: 6144
+[Epoch 2/40] [Batch 124/196] [Batch classify loss: 0.661442]
+right_index: 6400
+[Epoch 2/40] [Batch 125/196] [Batch classify loss: 0.685337]
+right_index: 6656
+[Epoch 2/40] [Batch 126/196] [Batch classify loss: 0.661715]
+right_index: 6912
+[Epoch 2/40] [Batch 127/196] [Batch classify loss: 0.706180]
+right_index: 7168
+[Epoch 2/40] [Batch 128/196] [Batch classify loss: 0.807924]
+right_index: 7424
+[Epoch 2/40] [Batch 129/196] [Batch classify loss: 0.672194]
+right_index: 7680
+[Epoch 2/40] [Batch 130/196] [Batch classify loss: 0.653435]
+right_index: 7936
+[Epoch 2/40] [Batch 131/196] [Batch classify loss: 0.721740]
+right_index: 8192
+[Epoch 2/40] [Batch 132/196] [Batch classify loss: 0.659995]
+right_index: 8448
+[Epoch 2/40] [Batch 133/196] [Batch classify loss: 0.678872]
+right_index: 8704
+[Epoch 2/40] [Batch 134/196] [Batch classify loss: 0.711690]
+right_index: 8960
+[Epoch 2/40] [Batch 135/196] [Batch classify loss: 0.713307]
+right_index: 9216
+[Epoch 2/40] [Batch 136/196] [Batch classify loss: 0.736272]
+right_index: 9472
+[Epoch 2/40] [Batch 137/196] [Batch classify loss: 0.694062]
+right_index: 9728
+[Epoch 2/40] [Batch 138/196] [Batch classify loss: 0.744836]
+right_index: 9984
+[Epoch 2/40] [Batch 139/196] [Batch classify loss: 0.752613]
+right_index: 10240
+[Epoch 2/40] [Batch 140/196] [Batch classify loss: 0.679984]
+right_index: 10496
+[Epoch 2/40] [Batch 141/196] [Batch classify loss: 0.709228]
+right_index: 10752
+[Epoch 2/40] [Batch 142/196] [Batch classify loss: 0.742329]
+right_index: 11008
+[Epoch 2/40] [Batch 143/196] [Batch classify loss: 0.692229]
+right_index: 11264
+[Epoch 2/40] [Batch 144/196] [Batch classify loss: 0.739775]
+right_index: 11520
+[Epoch 2/40] [Batch 145/196] [Batch classify loss: 0.702365]
+right_index: 11776
+[Epoch 2/40] [Batch 146/196] [Batch classify loss: 0.669904]
+right_index: 12032
+[Epoch 2/40] [Batch 147/196] [Batch classify loss: 0.663207]
+right_index: 12288
+[Epoch 2/40] [Batch 148/196] [Batch classify loss: 0.668920]
+right_index: 12544
+[Epoch 2/40] [Batch 149/196] [Batch classify loss: 0.747625]
+right_index: 12800
+[Epoch 2/40] [Batch 150/196] [Batch classify loss: 0.793468]
+right_index: 13056
+[Epoch 2/40] [Batch 151/196] [Batch classify loss: 0.737116]
+right_index: 13312
+[Epoch 2/40] [Batch 152/196] [Batch classify loss: 0.713873]
+right_index: 13568
+[Epoch 2/40] [Batch 153/196] [Batch classify loss: 0.682270]
+right_index: 13824
+[Epoch 2/40] [Batch 154/196] [Batch classify loss: 0.736526]
+right_index: 14080
+[Epoch 2/40] [Batch 155/196] [Batch classify loss: 0.676160]
+right_index: 14336
+[Epoch 2/40] [Batch 156/196] [Batch classify loss: 0.715135]
+right_index: 14592
+[Epoch 2/40] [Batch 157/196] [Batch classify loss: 0.735116]
+right_index: 14848
+[Epoch 2/40] [Batch 158/196] [Batch classify loss: 0.719653]
+right_index: 15104
+[Epoch 2/40] [Batch 159/196] [Batch classify loss: 0.787184]
+right_index: 15360
+[Epoch 2/40] [Batch 160/196] [Batch classify loss: 0.685349]
+right_index: 15616
+[Epoch 2/40] [Batch 161/196] [Batch classify loss: 0.793581]
+right_index: 15872
+[Epoch 2/40] [Batch 162/196] [Batch classify loss: 0.726039]
+right_index: 16128
+[Epoch 2/40] [Batch 163/196] [Batch classify loss: 0.730593]
+right_index: 16384
+[Epoch 2/40] [Batch 164/196] [Batch classify loss: 0.795735]
+right_index: 16640
+[Epoch 2/40] [Batch 165/196] [Batch classify loss: 0.704194]
+right_index: 16896
+[Epoch 2/40] [Batch 166/196] [Batch classify loss: 0.765006]
+right_index: 17152
+[Epoch 2/40] [Batch 167/196] [Batch classify loss: 0.697888]
+right_index: 17408
+[Epoch 2/40] [Batch 168/196] [Batch classify loss: 0.774083]
+right_index: 17664
+[Epoch 2/40] [Batch 169/196] [Batch classify loss: 0.721924]
+right_index: 17920
+[Epoch 2/40] [Batch 170/196] [Batch classify loss: 0.731590]
+right_index: 18176
+[Epoch 2/40] [Batch 171/196] [Batch classify loss: 0.727359]
+right_index: 18432
+[Epoch 2/40] [Batch 172/196] [Batch classify loss: 0.724477]
+right_index: 18688
+[Epoch 2/40] [Batch 173/196] [Batch classify loss: 0.760349]
+right_index: 18944
+[Epoch 2/40] [Batch 174/196] [Batch classify loss: 0.706101]
+right_index: 19200
+[Epoch 2/40] [Batch 175/196] [Batch classify loss: 0.747197]
+right_index: 19456
+[Epoch 2/40] [Batch 176/196] [Batch classify loss: 0.777894]
+right_index: 19712
+[Epoch 2/40] [Batch 177/196] [Batch classify loss: 0.747624]
+right_index: 19968
+[Epoch 2/40] [Batch 178/196] [Batch classify loss: 0.732182]
+right_index: 20224
+[Epoch 2/40] [Batch 179/196] [Batch classify loss: 0.742782]
+right_index: 20480
+[Epoch 2/40] [Batch 180/196] [Batch classify loss: 0.783307]
+right_index: 20736
+[Epoch 2/40] [Batch 181/196] [Batch classify loss: 0.731667]
+right_index: 20992
+[Epoch 2/40] [Batch 182/196] [Batch classify loss: 0.750181]
+right_index: 21248
+[Epoch 2/40] [Batch 183/196] [Batch classify loss: 0.724782]
+right_index: 21504
+[Epoch 2/40] [Batch 184/196] [Batch classify loss: 0.867989]
+right_index: 21760
+[Epoch 2/40] [Batch 185/196] [Batch classify loss: 0.772884]
+right_index: 22016
+[Epoch 2/40] [Batch 186/196] [Batch classify loss: 0.691848]
+right_index: 22272
+[Epoch 2/40] [Batch 187/196] [Batch classify loss: 0.793764]
+right_index: 22528
+[Epoch 2/40] [Batch 188/196] [Batch classify loss: 0.856426]
+right_index: 22784
+[Epoch 2/40] [Batch 189/196] [Batch classify loss: 0.787589]
+right_index: 23040
+[Epoch 2/40] [Batch 190/196] [Batch classify loss: 0.731279]
+right_index: 23296
+[Epoch 2/40] [Batch 191/196] [Batch classify loss: 0.758259]
+right_index: 23552
+[Epoch 2/40] [Batch 192/196] [Batch classify loss: 0.776395]
+right_index: 23808
+[Epoch 2/40] [Batch 193/196] [Batch classify loss: 0.761271]
+right_index: 24064
+[Epoch 2/40] [Batch 194/196] [Batch classify loss: 0.705721]
+right_index: 24320
+[Epoch 2/40] [Batch 195/196] [Batch classify loss: 0.819270]
+right_index: 24576
+[Epoch 2/40] [Batch 196/196] [Batch classify loss: 1.061425]
+0002 epoch rmt trained classifier accuary on the clean testing examples:81.7500%
+0002 epoch rmt trained classifier loss on the clean testing examples:0.5894
+0002 epoch rmt trained classifier accuary on adversarial testset:30.0700%
+0002 epoch rmt trained classifier loss on adversarial testset:2.568678855895996
+
+
+2epoch learning rate:0.001
+right_index: 256
+[Epoch 3/40] [Batch 1/196] [Batch classify loss: 0.628650]
+right_index: 512
+[Epoch 3/40] [Batch 2/196] [Batch classify loss: 0.623682]
+right_index: 768
+[Epoch 3/40] [Batch 3/196] [Batch classify loss: 0.627394]
+right_index: 1024
+[Epoch 3/40] [Batch 4/196] [Batch classify loss: 0.612680]
+right_index: 1280
+[Epoch 3/40] [Batch 5/196] [Batch classify loss: 0.674572]
+right_index: 1536
+[Epoch 3/40] [Batch 6/196] [Batch classify loss: 0.629113]
+right_index: 1792
+[Epoch 3/40] [Batch 7/196] [Batch classify loss: 0.668531]
+right_index: 2048
+[Epoch 3/40] [Batch 8/196] [Batch classify loss: 0.622094]
+right_index: 2304
+[Epoch 3/40] [Batch 9/196] [Batch classify loss: 0.629865]
+right_index: 2560
+[Epoch 3/40] [Batch 10/196] [Batch classify loss: 0.674638]
+right_index: 2816
+[Epoch 3/40] [Batch 11/196] [Batch classify loss: 0.639263]
+right_index: 3072
+[Epoch 3/40] [Batch 12/196] [Batch classify loss: 0.660878]
+right_index: 3328
+[Epoch 3/40] [Batch 13/196] [Batch classify loss: 0.642329]
+right_index: 3584
+[Epoch 3/40] [Batch 14/196] [Batch classify loss: 0.576724]
+right_index: 3840
+[Epoch 3/40] [Batch 15/196] [Batch classify loss: 0.620377]
+right_index: 4096
+[Epoch 3/40] [Batch 16/196] [Batch classify loss: 0.604641]
+right_index: 4352
+[Epoch 3/40] [Batch 17/196] [Batch classify loss: 0.670068]
+right_index: 4608
+[Epoch 3/40] [Batch 18/196] [Batch classify loss: 0.620755]
+right_index: 4864
+[Epoch 3/40] [Batch 19/196] [Batch classify loss: 0.630915]
+right_index: 5120
+[Epoch 3/40] [Batch 20/196] [Batch classify loss: 0.621009]
+right_index: 5376
+[Epoch 3/40] [Batch 21/196] [Batch classify loss: 0.629516]
+right_index: 5632
+[Epoch 3/40] [Batch 22/196] [Batch classify loss: 0.636693]
+right_index: 5888
+[Epoch 3/40] [Batch 23/196] [Batch classify loss: 0.686305]
+right_index: 6144
+[Epoch 3/40] [Batch 24/196] [Batch classify loss: 0.697492]
+right_index: 6400
+[Epoch 3/40] [Batch 25/196] [Batch classify loss: 0.628922]
+right_index: 6656
+[Epoch 3/40] [Batch 26/196] [Batch classify loss: 0.624166]
+right_index: 6912
+[Epoch 3/40] [Batch 27/196] [Batch classify loss: 0.686050]
+right_index: 7168
+[Epoch 3/40] [Batch 28/196] [Batch classify loss: 0.674160]
+right_index: 7424
+[Epoch 3/40] [Batch 29/196] [Batch classify loss: 0.638003]
+right_index: 7680
+[Epoch 3/40] [Batch 30/196] [Batch classify loss: 0.595762]
+right_index: 7936
+[Epoch 3/40] [Batch 31/196] [Batch classify loss: 0.658507]
+right_index: 8192
+[Epoch 3/40] [Batch 32/196] [Batch classify loss: 0.658794]
+right_index: 8448
+[Epoch 3/40] [Batch 33/196] [Batch classify loss: 0.590113]
+right_index: 8704
+[Epoch 3/40] [Batch 34/196] [Batch classify loss: 0.625547]
+right_index: 8960
+[Epoch 3/40] [Batch 35/196] [Batch classify loss: 0.602184]
+right_index: 9216
+[Epoch 3/40] [Batch 36/196] [Batch classify loss: 0.674607]
+right_index: 9472
+[Epoch 3/40] [Batch 37/196] [Batch classify loss: 0.609931]
+right_index: 9728
+[Epoch 3/40] [Batch 38/196] [Batch classify loss: 0.673628]
+right_index: 9984
+[Epoch 3/40] [Batch 39/196] [Batch classify loss: 0.660991]
+right_index: 10240
+[Epoch 3/40] [Batch 40/196] [Batch classify loss: 0.686684]
+right_index: 10496
+[Epoch 3/40] [Batch 41/196] [Batch classify loss: 0.651355]
+right_index: 10752
+[Epoch 3/40] [Batch 42/196] [Batch classify loss: 0.715374]
+right_index: 11008
+[Epoch 3/40] [Batch 43/196] [Batch classify loss: 0.614682]
+right_index: 11264
+[Epoch 3/40] [Batch 44/196] [Batch classify loss: 0.668695]
+right_index: 11520
+[Epoch 3/40] [Batch 45/196] [Batch classify loss: 0.635650]
+right_index: 11776
+[Epoch 3/40] [Batch 46/196] [Batch classify loss: 0.685611]
+right_index: 12032
+[Epoch 3/40] [Batch 47/196] [Batch classify loss: 0.664184]
+right_index: 12288
+[Epoch 3/40] [Batch 48/196] [Batch classify loss: 0.702311]
+right_index: 12544
+[Epoch 3/40] [Batch 49/196] [Batch classify loss: 0.636083]
+right_index: 12800
+[Epoch 3/40] [Batch 50/196] [Batch classify loss: 0.614976]
+right_index: 13056
+[Epoch 3/40] [Batch 51/196] [Batch classify loss: 0.632596]
+right_index: 13312
+[Epoch 3/40] [Batch 52/196] [Batch classify loss: 0.654713]
+right_index: 13568
+[Epoch 3/40] [Batch 53/196] [Batch classify loss: 0.654830]
+right_index: 13824
+[Epoch 3/40] [Batch 54/196] [Batch classify loss: 0.744480]
+right_index: 14080
+[Epoch 3/40] [Batch 55/196] [Batch classify loss: 0.661306]
+right_index: 14336
+[Epoch 3/40] [Batch 56/196] [Batch classify loss: 0.698557]
+right_index: 14592
+[Epoch 3/40] [Batch 57/196] [Batch classify loss: 0.703555]
+right_index: 14848
+[Epoch 3/40] [Batch 58/196] [Batch classify loss: 0.636109]
+right_index: 15104
+[Epoch 3/40] [Batch 59/196] [Batch classify loss: 0.712450]
+right_index: 15360
+[Epoch 3/40] [Batch 60/196] [Batch classify loss: 0.639202]
+right_index: 15616
+[Epoch 3/40] [Batch 61/196] [Batch classify loss: 0.683090]
+right_index: 15872
+[Epoch 3/40] [Batch 62/196] [Batch classify loss: 0.652920]
+right_index: 16128
+[Epoch 3/40] [Batch 63/196] [Batch classify loss: 0.713855]
+right_index: 16384
+[Epoch 3/40] [Batch 64/196] [Batch classify loss: 0.632495]
+right_index: 16640
+[Epoch 3/40] [Batch 65/196] [Batch classify loss: 0.654426]
+right_index: 16896
+[Epoch 3/40] [Batch 66/196] [Batch classify loss: 0.627053]
+right_index: 17152
+[Epoch 3/40] [Batch 67/196] [Batch classify loss: 0.666970]
+right_index: 17408
+[Epoch 3/40] [Batch 68/196] [Batch classify loss: 0.626241]
+right_index: 17664
+[Epoch 3/40] [Batch 69/196] [Batch classify loss: 0.671427]
+right_index: 17920
+[Epoch 3/40] [Batch 70/196] [Batch classify loss: 0.686297]
+right_index: 18176
+[Epoch 3/40] [Batch 71/196] [Batch classify loss: 0.684703]
+right_index: 18432
+[Epoch 3/40] [Batch 72/196] [Batch classify loss: 0.681459]
+right_index: 18688
+[Epoch 3/40] [Batch 73/196] [Batch classify loss: 0.619416]
+right_index: 18944
+[Epoch 3/40] [Batch 74/196] [Batch classify loss: 0.616283]
+right_index: 19200
+[Epoch 3/40] [Batch 75/196] [Batch classify loss: 0.748825]
+right_index: 19456
+[Epoch 3/40] [Batch 76/196] [Batch classify loss: 0.662703]
+right_index: 19712
+[Epoch 3/40] [Batch 77/196] [Batch classify loss: 0.680230]
+right_index: 19968
+[Epoch 3/40] [Batch 78/196] [Batch classify loss: 0.724044]
+right_index: 20224
+[Epoch 3/40] [Batch 79/196] [Batch classify loss: 0.657664]
+right_index: 20480
+[Epoch 3/40] [Batch 80/196] [Batch classify loss: 0.672786]
+right_index: 20736
+[Epoch 3/40] [Batch 81/196] [Batch classify loss: 0.699759]
+right_index: 20992
+[Epoch 3/40] [Batch 82/196] [Batch classify loss: 0.765870]
+right_index: 21248
+[Epoch 3/40] [Batch 83/196] [Batch classify loss: 0.712404]
+right_index: 21504
+[Epoch 3/40] [Batch 84/196] [Batch classify loss: 0.742194]
+right_index: 21760
+[Epoch 3/40] [Batch 85/196] [Batch classify loss: 0.679689]
+right_index: 22016
+[Epoch 3/40] [Batch 86/196] [Batch classify loss: 0.721328]
+right_index: 22272
+[Epoch 3/40] [Batch 87/196] [Batch classify loss: 0.668777]
+right_index: 22528
+[Epoch 3/40] [Batch 88/196] [Batch classify loss: 0.644740]
+right_index: 22784
+[Epoch 3/40] [Batch 89/196] [Batch classify loss: 0.702928]
+right_index: 23040
+[Epoch 3/40] [Batch 90/196] [Batch classify loss: 0.604858]
+right_index: 23296
+[Epoch 3/40] [Batch 91/196] [Batch classify loss: 0.701814]
+right_index: 23552
+[Epoch 3/40] [Batch 92/196] [Batch classify loss: 0.664096]
+right_index: 23808
+[Epoch 3/40] [Batch 93/196] [Batch classify loss: 0.724548]
+right_index: 24064
+[Epoch 3/40] [Batch 94/196] [Batch classify loss: 0.718735]
+right_index: 24320
+[Epoch 3/40] [Batch 95/196] [Batch classify loss: 0.713621]
+right_index: 24576
+[Epoch 3/40] [Batch 96/196] [Batch classify loss: 0.686951]
+right_index: 24832
+[Epoch 3/40] [Batch 97/196] [Batch classify loss: 0.673640]
+right_index: 25088
+[Epoch 3/40] [Batch 98/196] [Batch classify loss: 0.763824]
+right_index: 25344
+[Epoch 3/40] [Batch 99/196] [Batch classify loss: 0.705989]
+right_index: 25397
+[Epoch 3/40] [Batch 100/196] [Batch classify loss: 0.404448]
+right_index: 256
+[Epoch 3/40] [Batch 101/196] [Batch classify loss: 0.558922]
+right_index: 512
+[Epoch 3/40] [Batch 102/196] [Batch classify loss: 0.592256]
+right_index: 768
+[Epoch 3/40] [Batch 103/196] [Batch classify loss: 0.615041]
+right_index: 1024
+[Epoch 3/40] [Batch 104/196] [Batch classify loss: 0.609328]
+right_index: 1280
+[Epoch 3/40] [Batch 105/196] [Batch classify loss: 0.613129]
+right_index: 1536
+[Epoch 3/40] [Batch 106/196] [Batch classify loss: 0.630577]
+right_index: 1792
+[Epoch 3/40] [Batch 107/196] [Batch classify loss: 0.596524]
+right_index: 2048
+[Epoch 3/40] [Batch 108/196] [Batch classify loss: 0.618805]
+right_index: 2304
+[Epoch 3/40] [Batch 109/196] [Batch classify loss: 0.565658]
+right_index: 2560
+[Epoch 3/40] [Batch 110/196] [Batch classify loss: 0.630775]
+right_index: 2816
+[Epoch 3/40] [Batch 111/196] [Batch classify loss: 0.621634]
+right_index: 3072
+[Epoch 3/40] [Batch 112/196] [Batch classify loss: 0.625767]
+right_index: 3328
+[Epoch 3/40] [Batch 113/196] [Batch classify loss: 0.614860]
+right_index: 3584
+[Epoch 3/40] [Batch 114/196] [Batch classify loss: 0.630118]
+right_index: 3840
+[Epoch 3/40] [Batch 115/196] [Batch classify loss: 0.632546]
+right_index: 4096
+[Epoch 3/40] [Batch 116/196] [Batch classify loss: 0.615901]
+right_index: 4352
+[Epoch 3/40] [Batch 117/196] [Batch classify loss: 0.656174]
+right_index: 4608
+[Epoch 3/40] [Batch 118/196] [Batch classify loss: 0.608653]
+right_index: 4864
+[Epoch 3/40] [Batch 119/196] [Batch classify loss: 0.623124]
+right_index: 5120
+[Epoch 3/40] [Batch 120/196] [Batch classify loss: 0.662311]
+right_index: 5376
+[Epoch 3/40] [Batch 121/196] [Batch classify loss: 0.647183]
+right_index: 5632
+[Epoch 3/40] [Batch 122/196] [Batch classify loss: 0.664697]
+right_index: 5888
+[Epoch 3/40] [Batch 123/196] [Batch classify loss: 0.633776]
+right_index: 6144
+[Epoch 3/40] [Batch 124/196] [Batch classify loss: 0.602807]
+right_index: 6400
+[Epoch 3/40] [Batch 125/196] [Batch classify loss: 0.680002]
+right_index: 6656
+[Epoch 3/40] [Batch 126/196] [Batch classify loss: 0.659208]
+right_index: 6912
+[Epoch 3/40] [Batch 127/196] [Batch classify loss: 0.708864]
+right_index: 7168
+[Epoch 3/40] [Batch 128/196] [Batch classify loss: 0.651225]
+right_index: 7424
+[Epoch 3/40] [Batch 129/196] [Batch classify loss: 0.609122]
+right_index: 7680
+[Epoch 3/40] [Batch 130/196] [Batch classify loss: 0.675759]
+right_index: 7936
+[Epoch 3/40] [Batch 131/196] [Batch classify loss: 0.707520]
+right_index: 8192
+[Epoch 3/40] [Batch 132/196] [Batch classify loss: 0.669596]
+right_index: 8448
+[Epoch 3/40] [Batch 133/196] [Batch classify loss: 0.612051]
+right_index: 8704
+[Epoch 3/40] [Batch 134/196] [Batch classify loss: 0.649310]
+right_index: 8960
+[Epoch 3/40] [Batch 135/196] [Batch classify loss: 0.621001]
+right_index: 9216
+[Epoch 3/40] [Batch 136/196] [Batch classify loss: 0.713940]
+right_index: 9472
+[Epoch 3/40] [Batch 137/196] [Batch classify loss: 0.642578]
+right_index: 9728
+[Epoch 3/40] [Batch 138/196] [Batch classify loss: 0.650503]
+right_index: 9984
+[Epoch 3/40] [Batch 139/196] [Batch classify loss: 0.645569]
+right_index: 10240
+[Epoch 3/40] [Batch 140/196] [Batch classify loss: 0.623923]
+right_index: 10496
+[Epoch 3/40] [Batch 141/196] [Batch classify loss: 0.697197]
+right_index: 10752
+[Epoch 3/40] [Batch 142/196] [Batch classify loss: 0.637201]
+right_index: 11008
+[Epoch 3/40] [Batch 143/196] [Batch classify loss: 0.629221]
+right_index: 11264
+[Epoch 3/40] [Batch 144/196] [Batch classify loss: 0.673146]
+right_index: 11520
+[Epoch 3/40] [Batch 145/196] [Batch classify loss: 0.630171]
+right_index: 11776
+[Epoch 3/40] [Batch 146/196] [Batch classify loss: 0.675208]
+right_index: 12032
+[Epoch 3/40] [Batch 147/196] [Batch classify loss: 0.747017]
+right_index: 12288
+[Epoch 3/40] [Batch 148/196] [Batch classify loss: 0.654866]
+right_index: 12544
+[Epoch 3/40] [Batch 149/196] [Batch classify loss: 0.590386]
+right_index: 12800
+[Epoch 3/40] [Batch 150/196] [Batch classify loss: 0.616539]
+right_index: 13056
+[Epoch 3/40] [Batch 151/196] [Batch classify loss: 0.730808]
+right_index: 13312
+[Epoch 3/40] [Batch 152/196] [Batch classify loss: 0.618588]
+right_index: 13568
+[Epoch 3/40] [Batch 153/196] [Batch classify loss: 0.640501]
+right_index: 13824
+[Epoch 3/40] [Batch 154/196] [Batch classify loss: 0.661686]
+right_index: 14080
+[Epoch 3/40] [Batch 155/196] [Batch classify loss: 0.596257]
+right_index: 14336
+[Epoch 3/40] [Batch 156/196] [Batch classify loss: 0.694428]
+right_index: 14592
+[Epoch 3/40] [Batch 157/196] [Batch classify loss: 0.675836]
+right_index: 14848
+[Epoch 3/40] [Batch 158/196] [Batch classify loss: 0.642157]
+right_index: 15104
+[Epoch 3/40] [Batch 159/196] [Batch classify loss: 0.719870]
+right_index: 15360
+[Epoch 3/40] [Batch 160/196] [Batch classify loss: 0.623297]
+right_index: 15616
+[Epoch 3/40] [Batch 161/196] [Batch classify loss: 0.644637]
+right_index: 15872
+[Epoch 3/40] [Batch 162/196] [Batch classify loss: 0.662195]
+right_index: 16128
+[Epoch 3/40] [Batch 163/196] [Batch classify loss: 0.723374]
+right_index: 16384
+[Epoch 3/40] [Batch 164/196] [Batch classify loss: 0.680598]
+right_index: 16640
+[Epoch 3/40] [Batch 165/196] [Batch classify loss: 0.666558]
+right_index: 16896
+[Epoch 3/40] [Batch 166/196] [Batch classify loss: 0.634842]
+right_index: 17152
+[Epoch 3/40] [Batch 167/196] [Batch classify loss: 0.619606]
+right_index: 17408
+[Epoch 3/40] [Batch 168/196] [Batch classify loss: 0.707717]
+right_index: 17664
+[Epoch 3/40] [Batch 169/196] [Batch classify loss: 0.645280]
+right_index: 17920
+[Epoch 3/40] [Batch 170/196] [Batch classify loss: 0.666894]
+right_index: 18176
+[Epoch 3/40] [Batch 171/196] [Batch classify loss: 0.677650]
+right_index: 18432
+[Epoch 3/40] [Batch 172/196] [Batch classify loss: 0.695265]
+right_index: 18688
+[Epoch 3/40] [Batch 173/196] [Batch classify loss: 0.659554]
+right_index: 18944
+[Epoch 3/40] [Batch 174/196] [Batch classify loss: 0.731093]
+right_index: 19200
+[Epoch 3/40] [Batch 175/196] [Batch classify loss: 0.645996]
+right_index: 19456
+[Epoch 3/40] [Batch 176/196] [Batch classify loss: 0.661671]
+right_index: 19712
+[Epoch 3/40] [Batch 177/196] [Batch classify loss: 0.687056]
+right_index: 19968
+[Epoch 3/40] [Batch 178/196] [Batch classify loss: 0.708346]
+right_index: 20224
+[Epoch 3/40] [Batch 179/196] [Batch classify loss: 0.739333]
+right_index: 20480
+[Epoch 3/40] [Batch 180/196] [Batch classify loss: 0.650364]
+right_index: 20736
+[Epoch 3/40] [Batch 181/196] [Batch classify loss: 0.745681]
+right_index: 20992
+[Epoch 3/40] [Batch 182/196] [Batch classify loss: 0.727848]
+right_index: 21248
+[Epoch 3/40] [Batch 183/196] [Batch classify loss: 0.611542]
+right_index: 21504
+[Epoch 3/40] [Batch 184/196] [Batch classify loss: 0.673749]
+right_index: 21760
+[Epoch 3/40] [Batch 185/196] [Batch classify loss: 0.648497]
+right_index: 22016
+[Epoch 3/40] [Batch 186/196] [Batch classify loss: 0.597980]
+right_index: 22272
+[Epoch 3/40] [Batch 187/196] [Batch classify loss: 0.714998]
+right_index: 22528
+[Epoch 3/40] [Batch 188/196] [Batch classify loss: 0.664592]
+right_index: 22784
+[Epoch 3/40] [Batch 189/196] [Batch classify loss: 0.748307]
+right_index: 23040
+[Epoch 3/40] [Batch 190/196] [Batch classify loss: 0.637574]
+right_index: 23296
+[Epoch 3/40] [Batch 191/196] [Batch classify loss: 0.633469]
+right_index: 23552
+[Epoch 3/40] [Batch 192/196] [Batch classify loss: 0.695991]
+right_index: 23808
+[Epoch 3/40] [Batch 193/196] [Batch classify loss: 0.704121]
+right_index: 24064
+[Epoch 3/40] [Batch 194/196] [Batch classify loss: 0.687827]
+right_index: 24320
+[Epoch 3/40] [Batch 195/196] [Batch classify loss: 0.684112]
+right_index: 24576
+[Epoch 3/40] [Batch 196/196] [Batch classify loss: 0.905063]
+0003 epoch rmt trained classifier accuary on the clean testing examples:82.4000%
+0003 epoch rmt trained classifier loss on the clean testing examples:0.5862
+0003 epoch rmt trained classifier accuary on adversarial testset:32.5700%
+0003 epoch rmt trained classifier loss on adversarial testset:2.4847400188446045
+
+
+3epoch learning rate:0.001
+right_index: 256
+[Epoch 4/40] [Batch 1/196] [Batch classify loss: 0.543866]
+right_index: 512
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 209, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1460, in rmt
+    mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, mix_img_batch, mix_lab_batch)      #   混合样本 two-hot标签
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1861, in mixup_data
+    mix_x_train, mix_y_train = generate_model.generate()
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 483, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1935, in generate
+    generated_x_set, generated_y_set = self.__generatemain__(self._args, self._exp_result_dir, interpolated_w_set, interpolated_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1946, in __generatemain__
+    generated_x_set, generated_y_set = self.__generatefromntensor__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2029, in __generatefromntensor__
+    interpolated_y = interpolated_y_set,
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2098, in __getgeneratedbatchxy__
+    img = G.synthesis(w.unsqueeze(0), noise_mode=noise_mode).cpu()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 414, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 85, in modulated_conv2d
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/elastic/alexnet-cifar10/20211019/00001-perattackacc-12.59/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:84.9200%
+Loss of before mmat trained classifier clean testset:0.5403244495391846
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+Accuary of before rmt trained classifier on adversarial testset:12.5900%
+Loss of before mmat trained classifier on adversarial testset:6.5400919914245605
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.001
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/196] [Batch classify loss: 1.458984]
+right_index: 512
+[Epoch 1/40] [Batch 2/196] [Batch classify loss: 1.163360]
+right_index: 768
+[Epoch 1/40] [Batch 3/196] [Batch classify loss: 1.265629]
+right_index: 1024
+[Epoch 1/40] [Batch 4/196] [Batch classify loss: 1.305048]
+right_index: 1280
+[Epoch 1/40] [Batch 5/196] [Batch classify loss: 1.266099]
+right_index: 1536
+[Epoch 1/40] [Batch 6/196] [Batch classify loss: 1.276997]
+right_index: 1792
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 209, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1460, in rmt
+    mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, mix_img_batch, mix_lab_batch)      #   混合样本 two-hot标签
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1861, in mixup_data
+    mix_x_train, mix_y_train = generate_model.generate()
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 483, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1935, in generate
+    generated_x_set, generated_y_set = self.__generatemain__(self._args, self._exp_result_dir, interpolated_w_set, interpolated_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1946, in __generatemain__
+    generated_x_set, generated_y_set = self.__generatefromntensor__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2029, in __generatefromntensor__
+    interpolated_y = interpolated_y_set,
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2073, in __getgeneratedbatchxy__
+    G = legacy.load_network_pkl(f)['G_ema'].to(device)                                                                  #   type: ignore
+  File "/home/maggie/mmat/utils/stylegan2ada/legacy.py", line 25, in load_network_pkl
+    data = _LegacyUnpickler(f).load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/storage.py", line 160, in _load_from_bytes
+    def _load_from_bytes(b):
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/elastic/alexnet-cifar10/20211019/00001-perattackacc-12.59/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:84.9200%
+Loss of before mmat trained classifier clean testset:0.5403244495391846
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+Accuary of before rmt trained classifier on adversarial testset:12.5900%
+Loss of before mmat trained classifier on adversarial testset:6.5400919914245605
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.001
+right_index: 256
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 209, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1477, in rmt
+    outputs = self._model(inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 106, in forward
+    layer2 = self.batch_norm2(self.pad(self.lrn(self.relu(self.conv2(layer1)))))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/normalization.py", line 56, in forward
+    self.k)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 2245, in local_response_norm
+    div = pad(div, (0, 0, 0, 0, size // 2, (size - 1) // 2))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/functional.py", line 4000, in _pad
+    return _VF.constant_pad_nd(input, pad, value)
+RuntimeError: CUDA out of memory. Tried to allocate 58.00 MiB (GPU 0; 10.76 GiB total capacity; 845.31 MiB already allocated; 13.12 MiB free; 876.00 MiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211025
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/elastic/basemixup-betasampler/alexnet-cifar10/blackbox/20211025/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+Traceback (most recent call last):
+  File "tasklauncher-20211020.py", line 186, in <module>
+    cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 843, in getproset
+    pro_wset_tensor, pro_yset_tensor = self.__getprosettensor__(pro_dataset_path)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 885, in __getprosettensor__
+    y = torch.tensor(y, device=device)                                                                                 
+KeyboardInterrupt

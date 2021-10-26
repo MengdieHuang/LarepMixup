@@ -155,10 +155,11 @@ def parse_arguments():
 
         parser_object.add_argument('--mix_mode', help='mix mode of the projected w', type=str, default='basemixup', choices=['basemixup', 'maskmixup', 'adversarialmixup'])
         parser_object.add_argument('--mix_w_num', help='number of the projected w for mixup', type=int, default=2)
-        parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='betasampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2', 'betasampler', 'dirichletsampler'])
+        parser_object.add_argument('--sample_mode', help='share alpha for projected_w.size(1) or not', type=str, default='betasampler',choices=['uniformsampler', 'uniformsampler2', 'bernoullisampler','bernoullisampler2', 'betasampler', 'dirichletsampler','bernoullisampler3'])
         parser_object.add_argument('--projected_dataset', help = 'The projected w dataset path of target png images to interpolate', type = str, default = None)
         parser_object.add_argument('--mix_img_num', help='number of the mixed images', type=int, default=None)
         parser_object.add_argument('--beta_alpha', help='beta(alpha,alpha)', type=float, default=1)
+        parser_object.add_argument('--dirichlet_gama', help='dirichlet(gama, gama)', type=float, default=1)
 
 
         #-------------------------arguments for classifier train-------------------------

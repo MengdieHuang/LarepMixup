@@ -1454,10 +1454,13 @@ class MaggieClassifier:
                     right_index = w_trainset_len
                 else:
                     right_index = ( (batch_index + 1) % w_batch_num ) * batch_size
-                print("right_index:",right_index) 
-                mix_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]
-                mix_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]                   
-                mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, mix_img_batch, mix_lab_batch)      #   混合样本 two-hot标签
+                # print("right_index:",right_index) 
+
+                pro_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]
+                pro_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]                   
+                
+                # print("20211026 mixup test")
+                mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, pro_img_batch, pro_lab_batch)      #   混合样本 two-hot标签
                 
                 aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
                 aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)

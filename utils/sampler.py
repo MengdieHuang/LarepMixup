@@ -159,8 +159,8 @@ def BernoulliSampler2(bs, f, is_2d, p=None):
     return alphas
 
 def DirichletSampler(bs, f, is_2d, dirichlet_gama=9.0):
-    """Uniform Sample for 3 ws mix """          #本实验中 is_2d = true
-    print('flag:DirichletSampler ing')          #   相当于3mix场景下的uniformsample,为512维分量分配相同alpha
+    """Uniform Sample for 3 ws mix """                  #   本实验中 is_2d = true
+    # print('flag:DirichletSampler ing')                #   相当于3mix场景下的uniformsample,为512维分量分配相同alpha
     # Dirichlet_gama = 9.0
     # print("is_2d:",is_2d)
     with torch.no_grad():
@@ -178,12 +178,12 @@ def DirichletSampler(bs, f, is_2d, dirichlet_gama=9.0):
     
 def BernoulliSampler3(bs, f, is_2d):            #   相当于3mix场景下的bernoullisample,为512维分量分配不同alpha
     """Bernoulli Sample for 3 ws mix """
-    print('flag:BernoulliSampler3 ing')
+    # print('flag:BernoulliSampler3 ing')
     # print("is_2d:",is_2d)       #is_2d: True
 
     if is_2d:
         alpha = np.zeros((bs, 3, f)).astype(np.float32)    
-        print("alpha.shape:",alpha.shape)     # alpha.shape: (1, 3, 512)
+        # print("alpha.shape:",alpha.shape)     # alpha.shape: (1, 3, 512)
     else:
         alpha = np.zeros((bs, 3, f, 1, 1)).astype(np.float32)
     for b in range(bs):
