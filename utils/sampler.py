@@ -1,3 +1,4 @@
+from logging import error
 import numpy as np
 import torch
 from torch.distributions import Dirichlet
@@ -166,7 +167,20 @@ def DirichletSampler(bs, f, is_2d, dirichlet_gama=9.0):
     with torch.no_grad():
         # dirichlet = Dirichlet(torch.FloatTensor([1.0, 1.0, 1.0]))
         dirichlet = Dirichlet(torch.FloatTensor([dirichlet_gama, dirichlet_gama, dirichlet_gama]))
-        alpha = dirichlet.sample_n(bs)
+        # alpha = dirichlet.sample_n(bs)
+        alpha = dirichlet.sample((bs,))
+
+        
+        # print("alpha.shape:",alpha.shape)  # [4,3]
+        # print("alpha:",alpha)
+        # """
+        # alpha.shape: torch.Size([4, 3])
+        # alpha: tensor([[0.3521, 0.3893, 0.2586],
+        # [0.2814, 0.4428, 0.2758],
+        # [0.3799, 0.2434, 0.3767],
+        # [0.3881, 0.3062, 0.3057]])
+        # """
+        # raise error
         if not is_2d:
             alpha = alpha.reshape(-1, alpha.size(1), 1, 1)                              
     # print(alpha.shape)                                                                  # torch.Size([1, 3])

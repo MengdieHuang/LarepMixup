@@ -1632,17 +1632,6 @@ class MaggieStylegan2ada:
 
     def __MaskMixup2__(self,w1,w2,sample_mode,y1,y2):                                                                           #   m1*w1+(1-m1)*w2
         # print("flag: MaskMixup2")
-        # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
-        # print("w1.type:",type(w1))
-        # print("w1.shape",w1.shape)                                                                                            #   w1.shape torch.Size([1, 512])
-        # print("w1.size:",w1.size())                                                                                           #  w1.size: torch.Size([1,512])                     
-       
-        # print("w1.size(0): ",w1.size(0))                                                                                      #   w1.size(0):  1
-        # print("w1.size(1): ",w1.size(1))                                                                                      #   w1.size(1):  512
-
-        # print("y1:",y1)
-        # print("y1.type:",type(y1))                                                                                            #   y1.type: <class 'torch.Tensor'>
-        # print("y1.shape",y1.shape)        #   y1.shape torch.Size([1, 10])     
 
         """
         w1.shape torch.Size([bs, 512])
@@ -1657,42 +1646,36 @@ class MaggieStylegan2ada:
             # print('sample_mode = bernoullisampler2, big variance !')
             m = utils.sampler.BernoulliSampler2(w1.size(0), w1.size(1), is_2d, p=None)
 
-        # print('m.shape:', m.shape)              #   m.shape: torch.Size([bs, 512])          
-        # print("m.size(0):",m.size(0))       #   m.size(0): 1
-        # print("m.size(1):",m.size(1))       #   m.size(1): 512
-        # print("m:",m)
-        # print("(1.-m):",1.-m)
-
-        # print("torch.nonzero(m[0]).shape:",torch.nonzero(m[0]).shape)             # torch.nonzero(m[0]).shape: torch.Size([250, 1]) 找出tensor中非零的元素的索引
-        # print("torch.nonzero(m[0]).size(0):",torch.nonzero(m[0]).size(0))         # torch.nonzero(m[0]).size(0): 250
-        
-        # lam = (torch.nonzero(m[0]).size(0)) / m.size(1)
-
         lam = []
         for i in range(len(m)):
-            # print(f"m[{i}].size():", m[i].shape)
-            # print("m[{i}:",m[i])
-            # print("torch.nonzero(m[i]).size(0):",torch.nonzero(m[i]).size(0))
             lam_i = (torch.nonzero(m[i]).size(0)) / m.size(1)
             lam.append(lam_i)
 
         lam = np.asarray(lam)
         lam = torch.tensor(lam).unsqueeze(1)
-        # print("lam.shape:",lam.shape)       #   lam.shape: torch.Size([4])
-        # print("lam:",lam)                   #   lam: [0.501953125, 0.5078125, 0.494140625, 0.484375]
-        # print("(1.-lam):",1.-lam)
 
         m1 = m.cpu()
         m2 = (1.-m).cpu()
-        w1.cpu()
-        w2.cpu()
-
         lam1 = lam.cpu()
         lam2 = (1.-lam).cpu() 
-     
 
-        y1.cpu()
-        y2.cpu()
+        w1 = w1.cpu()
+        w2 = w2.cpu()        
+        y1 = y1.cpu()
+        y2 = y2.cpu()
+
+        # m2 = (1.-m)
+        # lam2 = (1.-lam)
+        # m2 = m2.cuda()
+        # m1 = m.cuda()
+        # lam2 = lam2.cuda() 
+        # lam1 = lam.cuda()
+
+        # w1 = w1.cuda()
+        # w2 = w2.cuda()
+        # y1 = y1.cuda()
+        # y2 = y2.cuda()
+
 
         # print("w1:",w1)
         # print("w2:",w2)
@@ -1705,52 +1688,12 @@ class MaggieStylegan2ada:
         # print("y2.shape:",y2.shape)   
 
         w_mixed = m1*w1 + m2*w2
-        
         y_mixed = lam1*y1 + lam2*y2
 
-
-        # print("w_mixed:",w_mixed)
-
-
-        # print("y_mixed:",y_mixed)
-
-
-        # print("w_mixed.shape:",w_mixed.shape)
-        # print("y_mixed.shape:",y_mixed.shape)
-
-        # raise error
-        return w_mixed,y_mixed
+        return w_mixed.cpu(),y_mixed.cpu()
 
     def __BaseMixup3__(self,w1,w2,w3,sample_mode,y1,y2,y3):
         # print("flag: BaseMixup3")
-        # print(w1.size())                                                                          #   返回的是当前张量w1的形状 , 输出torch.Size([1, 14, 512])
-        # print('bs=w1.size(0)=%s' % w1.size(0))             
-        # print('f=w1.size(1)=%s' % w1.size(1))             
-        # print("len w1.size()=%s" % len(w1.size()))
-
-        # is_2d = True if len(w1.size()) == 2 else False                                                                          #   即w1的shape元组是二维时,is_2d = true
-        # print("is_2d=%s" % is_2d)
-        # print('sample_mode = dirichletsampler')
-        # alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d)
-        # print('alpha=%s' % alpha)
-
-        # w_mixed = alpha[:, 0:1]*w1 + alpha[:, 1:2]*w2 + alpha[:, 2:3]*w3
-        # # return w_mixed
-
-
-        # print("flag: BaseMixup3...")
-        
-        # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
-        # print("w1.type:",type(w1))
-        # print("w1.shape",w1.shape)                                                                                            #  w1.shape torch.Size([1, 512])
-        # print("w1.size:",w1.size())                                                                                           #  w1.size: torch.Size([1,512])                     
-       
-        # print("w1.size(0): ",w1.size(0))                                                                                      #   w1.size(0):  1
-        # print("w1.size(1): ",w1.size(1))                                                                                      #   w1.size(1):  512
-
-        # print("y1:",y1)
-        # print("y1.type:",type(y1))                                                                                            #   y1.type: <class 'torch.Tensor'>
-        # print("y1.shape",y1.shape)                                                                                            #   y1.shape torch.Size([1, 10])  
 
         """
         w1.shape torch.Size([4, 512])
@@ -1758,107 +1701,62 @@ class MaggieStylegan2ada:
         """
 
         is_2d = True if len(w1.size()) == 2 else False                                                                          #   即w1的shape元组是二维时,is_2d = true
-        # print("is_2d=%s" % is_2d)
 
-        # if sample_mode == 'uniformsampler' or sample_mode == 'uniformsampler2' or sample_mode =='dirichletsampler':
-            # print('sample_mode = uniformsampler, set the same alpha value for each dimension of the 512 dimensions values of projected w !')
-            # alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None)                                         #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
-            #                     # UniformSampler(bs, f, is_2d, p=None)
-        
         #   dirichlet 分布采样        
         if  sample_mode =='dirichletsampler':
+            # raise error
             alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama)
-
-
-        # elif sample_mode == 'uniformsampler2':
-        #     # print('sample_mode = uniformsampler2,set different alpha values for each dimension of the 512 dimensions values of projected w !')
-        #     # alpha = utils.sampler.UniformSampler2(w1.size(0), w1.size(1), is_2d, p=None)
-        #     alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d)
 
         # print('alpha=',alpha)       
         
-        alpha1 = alpha[:, 0:1].cpu()
-        alpha2 = alpha[:, 1:2].cpu()
-        alpha3 = alpha[:, 2:3].cpu()
+        # alpha1 = alpha[:, 0:1].cpu()
+        # alpha2 = alpha[:, 1:2].cpu()
+        # alpha3 = alpha[:, 2:3].cpu()
         
-        # print('alpha[:, 0:1]=',alpha[:, 0:1])                                                                           #   alpha[:, 0:1]= tensor([[0.3399]], device='cuda:0')
-        # print('alpha[:, 1:2]=',alpha[:, 1:2])                                                                           #   alpha[:, 1:2]= tensor([[0.2961]], device='cuda:0')
-        # print('alpha[:, 2:3]=',alpha[:, 2:3])                                                                           #   alpha[:, 2:3]= tensor([[0.3639]], device='cuda:0')   
-        # print('alpha.shape:', alpha.shape)                                                                                 # alpha.shape: torch.Size([bs, 3])
-        # print('alpha1:', alpha1)                                                                                 
-        # print('alpha2:', alpha2)                                                                                 
-        # print('alpha3:', alpha3)                                                                                 
+        # # print('alpha[:, 0:1]=',alpha[:, 0:1])                                                                           #   alpha[:, 0:1]= tensor([[0.3399]], device='cuda:0')
+        # # print('alpha[:, 1:2]=',alpha[:, 1:2])                                                                           #   alpha[:, 1:2]= tensor([[0.2961]], device='cuda:0')
+        # # print('alpha[:, 2:3]=',alpha[:, 2:3])                                                                           #   alpha[:, 2:3]= tensor([[0.3639]], device='cuda:0')   
+        # # print('alpha.shape:', alpha.shape)                                                                                 # alpha.shape: torch.Size([bs, 3])
+        # # print('alpha1:', alpha1)                                                                                 
+        # # print('alpha2:', alpha2)                                                                                 
+        # # print('alpha3:', alpha3)                                                                                 
 
-        # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
-        # print("w2:",w2)
-        # print("w3:",w3)
-        # print("y1:",y1)
-        # print("y2:",y2)
-        # print("y3:",y3)
+        # # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
+        # # print("w2:",w2)
+        # # print("w3:",w3)
+        # # print("y1:",y1)
+        # # print("y2:",y2)
+        # # print("y3:",y3)
 
-        w1.cpu()
-        w2.cpu()
-        w3.cpu()
-        y1.cpu()
-        y2.cpu()
-        y3.cpu()
+        # w1.cpu()
+        # w2.cpu()
+        # w3.cpu()
+        # y1.cpu()
+        # y2.cpu()
+        # y3.cpu()
 
-        # w_mixed = alpha*w1 + (1.-alpha)*w2
-        # y_mixed = alpha*y1 + (1.-alpha)*y2
+        alpha1 = alpha[:, 0:1].cuda()
+        alpha2 = alpha[:, 1:2].cuda()
+        alpha3 = alpha[:, 2:3].cuda()
         
-        # w_mixed = alpha[:, 0:1]*w1 + alpha[:, 1:2]*w2 + alpha[:, 2:3]*w3
-        # y_mixed = alpha[:, 0:1]*y1 + alpha[:, 1:2]*y2 + alpha[:, 2:3]*y3
+        w1 = w1.cuda()
+        w2 = w2.cuda()
+        w3 = w3.cuda()
+        y1 = y1.cuda()
+        y2 = y2.cuda()
+        y3 = y3.cuda()
+
         w_mixed = alpha1 * w1 + alpha2 * w2 + alpha3 * w3
         y_mixed = alpha1 * y1 + alpha2 * y2 + alpha3 * y3
 
-
-        # print("w_mixed: ",w_mixed)
-        # print("w_mixed.shape:",w_mixed.shape)                                                                                 #   w_mixed.shape: torch.Size([1, 512])
-        # print("y_mixed: ",y_mixed)
-        # print("y_mixed.shape:",y_mixed.shape)                                                                                 #   y_mixed.shape: torch.Size([1, 10])
-
-
-        # raise error
-
-        return w_mixed,y_mixed
+        return w_mixed.cpu(),y_mixed.cpu()
 
     def __MaskMixup3__(self,w1,w2,w3,sample_mode,y1,y2,y3):
         # print("flag: MaskMixup3")
-        # print(w1.size())                                                                                                        #   返回的是当前张量w1的形状 , 输出torch.Size([1, 14, 512])
-        # print('bs=w1.size(0)=%s' % w1.size(0))             
-        # print('f=w1.size(1)=%s' % w1.size(1))             
-        # print("len w1.size()=%s" % len(w1.size()))
-
-        # is_2d = True if len(w1.size()) == 2 else False
-        # print('sample_mode = bernoullisampler3')
-        # alpha = utils.sampler.BernoulliSampler3(w1.size(0), w1.size(1), is_2d)
-        # print('alpha=%s' % alpha)
-
-        # w_mixed = alpha[:, 0]*w1 + alpha[:, 1]*w2 + alpha[:, 2]*w3
-        # return w_mixed
-
-        # print("flag: MaskMixup3")
-        # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
-        # print("w1.type:",type(w1))
-        # print("w1.shape",w1.shape)                                                                                            #   w1.shape torch.Size([1, 512])
-        # print("w1.size:",w1.size())                                                                                           #  w1.size: torch.Size([1,512])                     
-       
-        # print("w1.size(0): ",w1.size(0))                                                                                      #   w1.size(0):  1
-        # print("w1.size(1): ",w1.size(1))                                                                                      #   w1.size(1):  512
-
-        # print("y1:",y1)
-        # print("y1.type:",type(y1))                                                                                            #   y1.type: <class 'torch.Tensor'>
-        # print("y1.shape",y1.shape)        #   y1.shape torch.Size([1, 10])     
-
 
         is_2d = True if len(w1.size()) == 2 else False
         if sample_mode == 'bernoullisampler3':
             m = utils.sampler.BernoulliSampler3(w1.size(0), w1.size(1), is_2d)
-
-        # print('m.shape:', m.shape)          #   m.shape: torch.Size([bs, 3, 512])
-        # print("m.size(0):",m.size(0))       #   m.size(0): bs
-        # print("m.size(1):",m.size(1))       #   m.size(1): 3
-        # print("m.size(2):",m.size(2))       #   m.size(2): 512
 
         """
         alpha.shape: (4, 3, 512)
@@ -1868,25 +1766,48 @@ class MaggieStylegan2ada:
         m.size(2): 512
         """
 
-        # print("m[0][0]:",m[0][0]) # 3 张mask
-        # print("m[0][1]:",m[0][1])
-        # print("m[0][2]:",m[0][2])
-   
-
-        # m1 = m[0][0].unsqueeze(0)
-        # m2 = m[0][1].unsqueeze(0)
-        # m3 = m[0][2].unsqueeze(0)
-
-        m1 = m[:, 0:1, :].squeeze(1).cpu()
-        m2 = m[:, 1:2, :].squeeze(1).cpu()
-        m3 = m[:, 2:3, :].squeeze(1).cpu()
+        # m1 = m[:, 0:1, :].squeeze(1).cpu()
+        # m2 = m[:, 1:2, :].squeeze(1).cpu()
+        # m3 = m[:, 2:3, :].squeeze(1).cpu()
         
-        # print("m1.shape:",m1.shape)         
-        # print("m2.shape:",m2.shape)
-        # print("m3.shape:",m3.shape)
-        # print("m1:",m1)
-        # print("m2:",m2)
-        # print("m3:",m3)
+        # # print("m1.shape:",m1.shape)         
+        # # print("m2.shape:",m2.shape)
+        # # print("m3.shape:",m3.shape)
+        # # print("m1:",m1)
+        # # print("m2:",m2)
+        # # print("m3:",m3)
+        # """
+        # m1.shape: torch.Size([4, 512])
+        # m2.shape: torch.Size([4, 512])
+        # m3.shape: torch.Size([4, 512])
+        # """
+
+        # lam1 = []
+        # for i in range(len(m1)):        #bs
+        #     lam1_i = torch.nonzero(m1[i]).size(0) / m.size(2)
+        #     lam1.append(lam1_i)
+        # lam1 = np.asarray(lam1)         #   (4)
+        # lam1 = torch.tensor(lam1).unsqueeze(1).cpu()  #   [4,1]
+
+        # lam2 = []
+        # for i in range(len(m2)):        #bs
+        #     lam2_i = torch.nonzero(m2[i]).size(0) / m.size(2)
+        #     lam2.append(lam2_i)
+        # lam2 = np.asarray(lam2)         #   (4)
+        # lam2 = torch.tensor(lam2).unsqueeze(1).cpu()  #   [4,1]
+
+        # lam3 = []
+        # for i in range(len(m3)):        #bs
+        #     lam3_i = torch.nonzero(m3[i]).size(0) / m.size(2)
+        #     lam3.append(lam3_i)
+        # lam3 = np.asarray(lam3)         #   (4)
+        # lam3 = torch.tensor(lam3).unsqueeze(1).cpu()  #   [4,1]
+
+        m1 = m[:, 0:1, :].squeeze(1).cuda()
+        m2 = m[:, 1:2, :].squeeze(1).cuda()
+        m3 = m[:, 2:3, :].squeeze(1).cuda()
+        
+
         """
         m1.shape: torch.Size([4, 512])
         m2.shape: torch.Size([4, 512])
@@ -1898,60 +1819,27 @@ class MaggieStylegan2ada:
             lam1_i = torch.nonzero(m1[i]).size(0) / m.size(2)
             lam1.append(lam1_i)
         lam1 = np.asarray(lam1)         #   (4)
-        lam1 = torch.tensor(lam1).unsqueeze(1).cpu()  #   [4,1]
+        lam1 = torch.tensor(lam1).unsqueeze(1).cuda()  #   [4,1]
 
         lam2 = []
         for i in range(len(m2)):        #bs
             lam2_i = torch.nonzero(m2[i]).size(0) / m.size(2)
             lam2.append(lam2_i)
         lam2 = np.asarray(lam2)         #   (4)
-        lam2 = torch.tensor(lam2).unsqueeze(1).cpu()  #   [4,1]
+        lam2 = torch.tensor(lam2).unsqueeze(1).cuda()  #   [4,1]
 
         lam3 = []
         for i in range(len(m3)):        #bs
             lam3_i = torch.nonzero(m3[i]).size(0) / m.size(2)
             lam3.append(lam3_i)
         lam3 = np.asarray(lam3)         #   (4)
-        lam3 = torch.tensor(lam3).unsqueeze(1).cpu()  #   [4,1]
+        lam3 = torch.tensor(lam3).unsqueeze(1).cuda()  #   [4,1]
 
-        # lam = torch.cat((lam1,lam2,lam3),dim=1)
-        # print("lam:",lam)
-        # print("lam.shape:",lam.shape)
-
-
-        # print("torch.nonzero(m1).shape:",torch.nonzero(m1).shape)        
-        # print("torch.nonzero(m2).shape:",torch.nonzero(m2).shape)         
-        # print("torch.nonzero(m3).shape:",torch.nonzero(m3).shape)        
-
- 
-
-        # lam_1 = (torch.nonzero(m1).size(0)) / m.size(2)
-        # lam_2 = (torch.nonzero(m2).size(0)) / m.size(2)
-        # lam_3 = (torch.nonzero(m3).size(0)) / m.size(2)
-
-        # print("torch.nonzero(m[0][0]).size(0):",torch.nonzero(m[0][0]).size(0))         #   torch.nonzero(m[0][0]).size(0): 159
-        # print("torch.nonzero(m[0][1]).size(0):",torch.nonzero(m[0][1]).size(0))         #   torch.nonzero(m[0][1]).size(0): 175
-        # print("torch.nonzero(m[0][2]).size(0):",torch.nonzero(m[0][2]).size(0))         #   torch.nonzero(m[0][2]).size(0): 178
-
-        # print("lam1:",lam1)       
-        # print("lam2:",lam2)       
-        # print("lam3:",lam3)       
-    
-        # print("lam1.shape:",lam1.shape)       
-        # print("lam2.shape:",lam2.shape)       
-        # print("lam3.shape:",lam3.shape)      
 
         w_mixed = m1*w1 + m2*w2 +m3*w3
         y_mixed = lam1*y1 + lam2*y2 +lam3*y3
 
-        # print("w_mixed.shape:",w_mixed.shape)       #   w_mixed.shape: torch.Size([4, 512])
-        # print("y_mixed.shape:",y_mixed.shape)       #   y_mixed.shape: torch.Size([4, 10])
-
-        # print("w_mixed[0]:",w_mixed)       
-        # print("y_mixed[0]:",y_mixed)      
-
-        # raise error
-        return w_mixed,y_mixed
+        return w_mixed.cpu(),y_mixed.cpu()
 
     def __AdversarialMixup2__(self,ws1,ws2,sample_mode):
         print('AdversarialMixup2')
