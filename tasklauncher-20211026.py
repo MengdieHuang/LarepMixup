@@ -207,7 +207,8 @@ if __name__ == '__main__':
 
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
-
+            print("args.beta_alpha:",args.beta_alpha)
+            print("args.dirichlet_gama:",args.dirichlet_gama)
             
             # train
             target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)

@@ -1707,34 +1707,6 @@ class MaggieStylegan2ada:
             # raise error
             alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama)
 
-        # print('alpha=',alpha)       
-        
-        # alpha1 = alpha[:, 0:1].cpu()
-        # alpha2 = alpha[:, 1:2].cpu()
-        # alpha3 = alpha[:, 2:3].cpu()
-        
-        # # print('alpha[:, 0:1]=',alpha[:, 0:1])                                                                           #   alpha[:, 0:1]= tensor([[0.3399]], device='cuda:0')
-        # # print('alpha[:, 1:2]=',alpha[:, 1:2])                                                                           #   alpha[:, 1:2]= tensor([[0.2961]], device='cuda:0')
-        # # print('alpha[:, 2:3]=',alpha[:, 2:3])                                                                           #   alpha[:, 2:3]= tensor([[0.3639]], device='cuda:0')   
-        # # print('alpha.shape:', alpha.shape)                                                                                 # alpha.shape: torch.Size([bs, 3])
-        # # print('alpha1:', alpha1)                                                                                 
-        # # print('alpha2:', alpha2)                                                                                 
-        # # print('alpha3:', alpha3)                                                                                 
-
-        # # print("w1:",w1)                                                                                                       #   w1.type: <class 'torch.Tensor'>
-        # # print("w2:",w2)
-        # # print("w3:",w3)
-        # # print("y1:",y1)
-        # # print("y2:",y2)
-        # # print("y3:",y3)
-
-        # w1.cpu()
-        # w2.cpu()
-        # w3.cpu()
-        # y1.cpu()
-        # y2.cpu()
-        # y3.cpu()
-
         alpha1 = alpha[:, 0:1].cuda()
         alpha2 = alpha[:, 1:2].cuda()
         alpha3 = alpha[:, 2:3].cuda()
@@ -1835,6 +1807,12 @@ class MaggieStylegan2ada:
         lam3 = np.asarray(lam3)         #   (4)
         lam3 = torch.tensor(lam3).unsqueeze(1).cuda()  #   [4,1]
 
+        w1 = w1.cuda()
+        w2 = w2.cuda()
+        w3 = w3.cuda()
+        y1 = y1.cuda()
+        y2 = y2.cuda()
+        y3 = y3.cuda()
 
         w_mixed = m1*w1 + m2*w2 +m3*w3
         y_mixed = lam1*y1 + lam2*y2 +lam3*y3
