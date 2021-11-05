@@ -1,0 +1,7 @@
+Adversary Model,std-normal,std-omfgsm,repmix-0.5-normal,repmix-0.5-omfgsm,repmix-2.0-normal,repmix-2.0-omfgsm
+AlexNet,87.31,26.29,88.1,26.35,88.42,26.52
+ResNet18,87.31,26.51,88.19,26.9,88.48,27.67
+ResNet34,87.31,24.34,88.15,24.86,88.3,25.42
+ResNet50,87.31,28.07,88.38,28.99,88.46,28.74
+DenseNet169,87.31,25.33,87.98,26.33,88.6,26.38
+GoogleNet,87.31,26.43,88.15,27.16,88.17,27.38
