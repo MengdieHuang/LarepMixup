@@ -58916,3 +58916,43 @@ Loss of rmt trained classifier on white-box adv testset:20.209476470947266
 ---------------------------------------
 
 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211108
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/inputmixup/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211108/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+cle_x_train.shape: torch.Size([25397, 3, 32, 32])
+cle_y_train.shape: torch.Size([25397])
+cle_y_train.shape: torch.Size([25397, 10])
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20210927/00000-attackacc-14.71/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:87.3700%
+Loss of before mmat trained classifier clean testset:0.4629557728767395
+Traceback (most recent call last):
+  File "tasklauncher-20211107.py", line 267, in <module>
+    adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 631, in evaluatefromtensor
+    batch_same_num = predicted_label_index.cpu().eq(labs.cpu()).sum()
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20211108
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/inputmixup/fgsm/basemixup-betasampler/preactresnet18-cifar10/whitebox/20211108/00005
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None

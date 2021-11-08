@@ -1922,8 +1922,17 @@ class MaggieClassifier:
                 # print("20211107 mixup test")
                 mix_img_batch, mix_lab_batch = input_mixup_data(args, cle_img_batch, cle_lab_batch)      #   混合样本 two-hot标签              
                 
-                aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
-                aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                #------------------20211108--------------------
+                # aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                # aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                if self._args.defense_mode == 'inputmixup':
+                    #   在inputmixup中不混合原样本
+                    aug_x_train = mix_img_batch
+                    aug_y_train = mix_lab_batch
+                else:
+                    aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                    aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                #---------------------------------------------
 
                 inputs = aug_x_train.cuda()
                 targets = aug_y_train.cuda()
