@@ -181,7 +181,7 @@ def parse_arguments():
 
 
         #-------------------------arguments for classifier defense-------------------------
-        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt'])
+        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt','inputmixup'])
         parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
@@ -276,7 +276,8 @@ def set_exp_result_dir(args):
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
         elif args.defense_mode == "rmt":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
-
+        elif args.defense_mode == "inputmixup":
+            exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
 
     else:
         exp_result_dir=f'{save_path}/{args.mode}/{args.exp_name}/{date}'    
