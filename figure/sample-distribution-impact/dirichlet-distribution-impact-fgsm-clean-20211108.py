@@ -103,7 +103,7 @@ f'PreActResNet34 {gamma_str}=({0.5},{0.5},{0.5})',
 f'PreActResNet34 {gamma_str}=({1.0},{1.0},{1.0})',
 f'PreActResNet34 {gamma_str}=({10},{10},{10})'
 ],
-fontsize = 7, 
+fontsize = 8, 
 loc='lower right') # .打出图例
 # loc='upper left') #   打出图例
 # loc='lower left') #   打出图例
@@ -143,7 +143,7 @@ f'PreActResNet34 {gamma_str}=({0.5},{0.5},{0.5})',
 f'PreActResNet34 {gamma_str}=({1.0},{1.0},{1.0})',
 f'PreActResNet34 {gamma_str}=({10},{10},{10})'
 ],
-fontsize = 7, 
+fontsize = 8, 
 loc='lower right') # .打出图例
 # loc='upper left') #   打出图例
 # loc='lower left') #   打出图例
