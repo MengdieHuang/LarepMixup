@@ -271,7 +271,7 @@ def set_exp_result_dir(args):
         exp_result_dir = f'{save_path}/{args.mode}/{args.mix_w_num}mixup/{args.mix_mode}/{args.sample_mode}/{args.exp_name}/{date}'
     elif args.mode == 'defense':     
         if args.defense_mode == "at":
-            exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{date}'
+            exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{attack}/{date}'
         elif args.defense_mode == "mmat":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
         elif args.defense_mode == "rmt":

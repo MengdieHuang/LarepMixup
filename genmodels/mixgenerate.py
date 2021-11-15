@@ -448,7 +448,7 @@ class MixGenerate:
                 # print("self.cle_w_train.shape:",self.cle_w_train.shape)
                 # print("self.cle_y_train.shape:",self.cle_y_train.shape)
                 self._model.interpolate(self._exp_result_dir, self.cle_w_train, self.cle_y_train)
-                mix_w_train, mix_y_train = self._model.mixwyset()                                                                   #   当采用整个batch采样时，返回的直接就是tensor,不需要torch.stack从list转tensor
+                mix_w_train, mix_y_train = self._model.mixwyset()   #   当采用整个batch采样时，返回的直接就是tensor,不需要torch.stack从list转tensor
 
             else:
                 if self._args.projected_dataset is None and self._args.projected_w1 is None :        # 从内存中加载待投影x,y
@@ -460,8 +460,11 @@ class MixGenerate:
                 #   读取mix样本
                 mix_w_train, mix_y_train = self._model.mixwyset()                                                                   #   tensor的list， int的list
 
-                mix_w_train = torch.stack(mix_w_train)                                                                              #   torch.Tensor GPU Tensor             
-                mix_y_train = torch.stack(mix_y_train)                                                                              #   torch.Tensor GPU Tensor       
+                # mix_w_train = torch.stack(mix_w_train)                                                                              #   torch.Tensor GPU Tensor             
+                # mix_y_train = torch.stack(mix_y_train)                                                                              #   torch.Tensor GPU Tensor       
+
+                mix_w_train = torch.stack(mix_w_train).cuda()                                                                              #   torch.Tensor GPU Tensor             
+                mix_y_train = torch.stack(mix_y_train).cuda()                                                                              #   torch.Tensor GPU Tensor       
 
                 # print('mix_w_train:',mix_w_train)                                                                       #   mix_w_train.shape: torch.Size([3, 8, 512])            
                 # print('mix_y_train:',mix_y_train)                                                                       #   mix_y_train.shape: torch.Size([3, 8, 10])

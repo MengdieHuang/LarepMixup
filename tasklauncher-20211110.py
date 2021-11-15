@@ -157,6 +157,8 @@ if __name__ == '__main__':
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
             generate_model.projectmain(cle_train_dataloader) 
+            # generate_model.projectmain(cle_test_dataloader) 
+
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
 
@@ -318,6 +320,9 @@ if __name__ == '__main__':
             #  训练集
             adv_trainset_path = os.path.join(args.adv_dataset,'train')
             adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
+            # adv_x_train=adv_x_train[:25397]
+            # adv_y_train=adv_y_train[:25397]
+
 
             # adversarial testset
             print("args.adv_dataset：",args.adv_dataset)
@@ -336,10 +341,10 @@ if __name__ == '__main__':
             print(f'Loss of before rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
             # raise error
 
-            print("args.mix_mode:",args.mix_mode)
-            print("args.mix_w_num:",args.mix_w_num)
-            print("args.beta_alpha:",args.beta_alpha)
-            print("args.dirichlet_gama:",args.dirichlet_gama)
+            # print("args.mix_mode:",args.mix_mode)
+            # print("args.mix_w_num:",args.mix_w_num)
+            # print("args.beta_alpha:",args.beta_alpha)
+            # print("args.dirichlet_gama:",args.dirichlet_gama)
 
             target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
 

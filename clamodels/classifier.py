@@ -1881,6 +1881,11 @@ class MaggieClassifier:
 
                 lr = self._args.lr * (0.1 ** (epoch_index // 10))    
 
+        elif self._args.defense_mode == 'at':
+            if self._args.dataset == 'svhn' or self._args.dataset == 'cifar10' or self._args.dataset == 'kmnist':
+
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))    
+
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
 
@@ -1935,6 +1940,7 @@ class MaggieClassifier:
             self._model = epoch_attack_classifier.targetmodel()
             epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
         elif args.blackbox == True:
+            print("黑盒")
             #   当前分类模型在黑盒对抗测试集上的准确率 传入
             epoch_x_test_adv = self._adv_test_tensorset_x
             epoch_y_test_adv = self._adv_test_tensorset_y     
@@ -1992,23 +1998,23 @@ class MaggieClassifier:
                 mix_img_batch, mix_lab_batch = input_mixup_data(args, cle_img_batch, cle_lab_batch)      #   混合样本 two-hot标签              
                 
                 #------------------20211108--------------------
-                # aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
-                # aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
-                if self._args.defense_mode == 'inputmixup':
-                    #   在inputmixup中不混合原样本
-                    # aug_x_train = mix_img_batch
-                    # aug_y_train = mix_lab_batch
-                    aug_x_train = raw_img_batch #   纯粹用干净样本微调是否有效
-                    aug_y_train = raw_lab_batch                    
-                else:
-                    aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
-                    aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                # if self._args.defense_mode == 'inputmixup':
+                #     #   在inputmixup中不混合原样本
+                #     aug_x_train = mix_img_batch
+                #     aug_y_train = mix_lab_batch
+                #     # aug_x_train = raw_img_batch #   纯粹用干净样本微调是否有效
+                #     # aug_y_train = raw_lab_batch                    
+                # else:
+                #     aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                #     aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
                 #---------------------------------------------
 
                 inputs = aug_x_train.cuda()
                 targets = aug_y_train.cuda()
                 
-                self._optimizer.zero_grad()
+                # self._optimizer.zero_grad()
                 self._model.train()                 #   train mode
 
                 # outputs = self._model(inputs)
@@ -2110,7 +2116,7 @@ class MaggieClassifier:
           
 
     def advtrain(self, args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir):
-        print("compare with---------iadversarial train--------------")
+        print("compare with---------adversarial train--------------")
 
         print("adv_x_train.shape:",adv_x_train.shape)   
         print("adv_y_train.shape:",adv_y_train.shape)
@@ -2120,6 +2126,15 @@ class MaggieClassifier:
 
         print("adv_x_test.shape:",adv_x_test.shape)
         print("adv_y_test.shape:",adv_y_test.shape) 
+
+        """
+        adv_x_train.shape: torch.Size([50000, 3, 32, 32])
+        adv_y_train.shape: torch.Size([50000])
+        cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+        cle_y_test.shape: torch.Size([10000])
+        adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+        adv_y_test.shape: torch.Size([10000])        
+        """
 
         self._exp_result_dir = exp_result_dir
         self._lossfunc = torch.nn.CrossEntropyLoss()
@@ -2152,8 +2167,8 @@ class MaggieClassifier:
             epoch_x_test_adv = self._adv_test_tensorset_x # omfgsm黑盒
             epoch_y_test_adv = self._adv_test_tensorset_y     
 
-        epoch__adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
-        print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch__adv_test_accuracy * 100:.4f}%' ) 
+        epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
+        print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
         print(f'Loss of before mmat trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
 
         #----------train----
@@ -2177,11 +2192,11 @@ class MaggieClassifier:
 
             for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   加载原始训练集batch
                 
-                print("raw_img_batch.shape:",raw_img_batch.shape)
-                print("raw_lab_batch.shape:",raw_lab_batch.shape)
+                # print("raw_img_batch.shape:",raw_img_batch.shape)
+                # print("raw_lab_batch.shape:",raw_lab_batch.shape)
                 # """
                 # raw_img_batch.shape: torch.Size([256, 3, 32, 32])
-                # raw_lab_batch.shape: torch.Size([256, 10])
+                # raw_lab_batch.shape: torch.Size([256])
                 # """
                #-----------maggie cat clean and mix------------
                 if (batch_index + 1) % adv_batch_num == 0:
@@ -2192,20 +2207,29 @@ class MaggieClassifier:
 
                 adv_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % adv_batch_num) * batch_size : right_index]]
                 adv_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % adv_batch_num) * batch_size : right_index]]                   
-                
-                
-                #------------------20211108--------------------
+                # print("adv_img_batch.shape:",adv_img_batch.shape)
+                # print("adv_lab_batch.shape:",adv_lab_batch.shape)                
+                # """
+                # adv_img_batch.shape: torch.Size([256, 3, 32, 32])
+                # adv_lab_batch.shape: torch.Size([256])
+                # """
+                #------------------20211110--------------------
+
                 aug_x_train = torch.cat([raw_img_batch, adv_img_batch], dim=0)
-                aug_y_train = torch.cat([raw_lab_batch, adv_lab_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, adv_lab_batch], dim=0)                
+                # aug_x_train = raw_img_batch
+                # aug_y_train = raw_lab_batch
+                # aug_x_train = adv_img_batch
+                # aug_y_train = adv_lab_batch
+                # raise error
 
 
                 inputs = aug_x_train.cuda()
                 targets = aug_y_train.cuda()
                 
-                self._optimizer.zero_grad()
+                # self._optimizer.zero_grad()
                 self._model.train()                 #   train mode
 
-                # outputs = self._model(inputs)
                 if self._args.cla_model == 'inception_v3':
                     outputs, aux = self._model(inputs)
                 elif self._args.cla_model == 'googlenet':
@@ -2214,6 +2238,7 @@ class MaggieClassifier:
                     outputs = self._model(inputs)
 
                 loss = self._lossfunc(outputs, targets)
+                
                 self._optimizer.zero_grad()
                 loss.backward()
                 self._optimizer.step()
