@@ -2321,8 +2321,8 @@ class MaggieStylegan2ada:
 
                         img_pil = PIL.Image.fromarray(img, 'L')
 
-                    #   关闭存储 20211110
-                    img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.png')       #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
+                    # #   关闭存储 20211110
+                    # img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.png')       #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
 
                     if self._args.defense_mode != 'rmt':
                         np.savez(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.npz', w = generated_x.cpu().numpy())                                                #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
@@ -2456,8 +2456,8 @@ class MaggieStylegan2ada:
 
                         img_pil = PIL.Image.fromarray(img, 'L')                                      
 
-                    #   关闭存储 20211110
-                    img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}+{int(w3_label_index)}-{w3_label_name}-mixed-image.png')                                         #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
+                    # #   关闭存储 20211110
+                    # img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}+{int(w3_label_index)}-{w3_label_name}-mixed-image.png')                                         #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
 
                     # label_path = f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed_label.npz'
                     # np.savez(label_path, w = mixed_label.unsqueeze(0).cpu().numpy())                                                #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
