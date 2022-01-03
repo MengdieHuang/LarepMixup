@@ -1,0 +1,654 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+ERROR:root:maggie stop
+Traceback (most recent call last):
+  File "tasklauncher-20220103.py", line 111, in <module>
+    raise error("maggie stop")
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.02
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+testset_total_num: 15397
+batch_size: 32
+batch_num: 482
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([15397, 3, 32, 32])
+adv_y_test.shape: torch.Size([15397])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+ERROR:root:maggie stop
+Traceback (most recent call last):
+  File "tasklauncher-20220103.py", line 129, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 294, in generatelatentadv
+    self.__saveadvpng__()
+  File "/home/maggie/mmat/attacks/advattack.py", line 381, in __saveadvpng__
+    raise error("maggie stop")
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.02
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+testset_total_num: 20
+batch_size: 32
+batch_num: 1
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([20, 3, 32, 32])
+adv_y_test.shape: torch.Size([20])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+ERROR:root:maggie stop
+Traceback (most recent call last):
+  File "tasklauncher-20220103.py", line 129, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 294, in generatelatentadv
+    self.__saveadvpng__()
+  File "/home/maggie/mmat/attacks/advattack.py", line 381, in __saveadvpng__
+    raise error("maggie stop")
+TypeError: exceptions must derive from BaseException
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.02
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+testset_total_num: 20
+batch_size: 32
+batch_num: 1
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([20, 3, 32, 32])
+adv_y_test.shape: torch.Size([20])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220103.py", line 129, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 294, in generatelatentadv
+    self.__saveadvpng__()
+  File "/home/maggie/mmat/attacks/advattack.py", line 381, in __saveadvpng__
+    np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+  File "<__array_function__ internals>", line 6, in savez
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 616, in savez
+    _savez(file, args, kwds, False)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 712, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 112, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/zipfile.py", line 1240, in __init__
+    self.fp = io.open(file, filemode)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00003/attack-cifar10-dataset/latent-attack-samples/test/00000000-adv-1-automobile.npz'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+testset_total_num: 20
+batch_size: 32
+batch_num: 1
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([20, 3, 32, 32])
+adv_y_test.shape: torch.Size([20])
+finished generate latent adversarial examples !
+Saving cifar10 testset  adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220103.py", line 129, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 294, in generatelatentadv
+    self.__saveadvpng__()
+  File "/home/maggie/mmat/attacks/advattack.py", line 381, in __saveadvpng__
+    np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+  File "<__array_function__ internals>", line 6, in savez
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 616, in savez
+    _savez(file, args, kwds, False)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 712, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/numpy/lib/npyio.py", line 112, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/zipfile.py", line 1240, in __init__
+    self.fp = io.open(file, filemode)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00004/attack-cifar10-dataset/latent-attack-samples/test/00000000-adv-1-automobile.npz'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00005
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([20, 8, 512])
+cle_y_test.shape: torch.Size([20])
+testset_total_num: 20
+batch_size: 32
+batch_num: 1
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([20, 3, 32, 32])
+adv_y_test.shape: torch.Size([20])
+finished generate latent adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+standard trained classifier accuary on adversarial testset:30.0000%
+standard trained classifier loss on adversarial testset:2.981748342514038
+cle_x_test.shape: torch.Size([20, 3, 32, 32])
+cle_y_test.shape: torch.Size([20])
+standard trained classifier accuary on clean testset:95.0000%
+standard trained classifier loss on clean testset:0.1385960876941681
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220103/00006
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+testset_total_num: 15397
+batch_size: 32
+batch_num: 482
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([15397, 3, 32, 32])
+adv_y_test.shape: torch.Size([15397])
+finished generate latent adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+standard trained classifier accuary on adversarial testset:27.6872%
+standard trained classifier loss on adversarial testset:5.261658668518066
+cle_x_test.shape: torch.Size([15397, 3, 32, 32])
+cle_y_test.shape: torch.Size([15397])
+standard trained classifier accuary on clean testset:76.8202%
+standard trained classifier loss on clean testset:1.0003650188446045
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet34-cifar10/20220103/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+testset_total_num: 15397
+batch_size: 32
+batch_num: 482
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([15397, 3, 32, 32])
+adv_y_test.shape: torch.Size([15397])
+finished generate latent adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+standard trained classifier accuary on adversarial testset:27.7716%
+standard trained classifier loss on adversarial testset:5.3409576416015625
+cle_x_test.shape: torch.Size([15397, 3, 32, 32])
+cle_y_test.shape: torch.Size([15397])
+standard trained classifier accuary on clean testset:73.9625%
+standard trained classifier loss on clean testset:1.2116949558258057
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220103
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet50-cifar10/20220103/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+latent adversarial attack.............
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([15397, 8, 512])
+cle_y_test.shape: torch.Size([15397])
+testset_total_num: 15397
+batch_size: 32
+batch_num: 482
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([15397, 3, 32, 32])
+adv_y_test.shape: torch.Size([15397])
+finished generate latent adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+standard trained classifier accuary on adversarial testset:35.9356%
+standard trained classifier loss on adversarial testset:10.413958549499512
+cle_x_test.shape: torch.Size([15397, 3, 32, 32])
+cle_y_test.shape: torch.Size([15397])
+standard trained classifier accuary on clean testset:74.2158%
+standard trained classifier loss on clean testset:1.6756006479263306
+---------------------------------------
+
+

@@ -2118,14 +2118,14 @@ class MaggieClassifier:
     def advtrain(self, args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir):
         print("compare with---------adversarial train--------------")
 
-        print("adv_x_train.shape:",adv_x_train.shape)   
-        print("adv_y_train.shape:",adv_y_train.shape)
+        # print("adv_x_train.shape:",adv_x_train.shape)   
+        # print("adv_y_train.shape:",adv_y_train.shape)
 
-        print("cle_x_test.shape:",cle_x_test.shape)
-        print("cle_y_test.shape:",cle_y_test.shape)        
+        # print("cle_x_test.shape:",cle_x_test.shape)
+        # print("cle_y_test.shape:",cle_y_test.shape)        
 
-        print("adv_x_test.shape:",adv_x_test.shape)
-        print("adv_y_test.shape:",adv_y_test.shape) 
+        # print("adv_x_test.shape:",adv_x_test.shape)
+        # print("adv_y_test.shape:",adv_y_test.shape) 
 
         """
         adv_x_train.shape: torch.Size([50000, 3, 32, 32])
@@ -2248,7 +2248,7 @@ class MaggieClassifier:
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
             #   finish batch training
                 
-            
+            # self._model.
             #   当前epoch分类模型在干净测试集上的准确率
             epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
             # global_cle_test_acc.append(epoch_cle_test_accuracy)   
@@ -2278,7 +2278,6 @@ class MaggieClassifier:
             writer_adv_acc.add_scalar(tag = "epoch_adv_acc", scalar_value = epoch_adv_test_accuracy, global_step = epoch_index + 1 )
             writer_adv_acc.close()
             #--------------------------------------------------
-
            #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-adv')
             os.makedirs(tensorboard_log_adv_loss_dir,exist_ok=True)    

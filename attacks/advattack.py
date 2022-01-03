@@ -4,6 +4,7 @@ Date:   2021-06-15
 Place:  Xidian University
 @copyright
 """
+from logging import error
 import torch
 from art.estimators.classification import PyTorchClassifier
 from torch.cuda import device
@@ -367,17 +368,28 @@ class AdvAttack():
             classification = self.__labelnames__() 
             # os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
             # os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
-            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
+            # os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
+            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
 
 
-            print(f"Saving {self._args.dataset} testset  adversarial examples...")
+            # print(f"Saving {self._args.dataset} testset  adversarial examples...")
+            # for img_index, _ in enumerate(self._x_test_adv):
+            #     save_adv_img = self._x_test_adv[img_index]
+            #     # save_cle_img = self._x_test[img_index]
+            #     img_true_label = self._y_test_adv[img_index]
+
+            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+            #     save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+
+            print(f"Saving {self._args.dataset} trainset  adversarial examples...")
             for img_index, _ in enumerate(self._x_test_adv):
                 save_adv_img = self._x_test_adv[img_index]
                 # save_cle_img = self._x_test[img_index]
                 img_true_label = self._y_test_adv[img_index]
 
-                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
         if exp_result_dir is not None:

@@ -187,6 +187,7 @@ def parse_arguments():
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
         parser_object.add_argument('--aug_num',type=int, default=None)
         parser_object.add_argument('--aug_mix_rate',type=float, default=None)
+        parser_object.add_argument('--train_adv_dataset', help='train_adv_dataset', type=str)#用于对抗训练时指定用于训练的对抗样本路径        
 
 
         #-------------------------other arguments-------------------------
