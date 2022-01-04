@@ -329,14 +329,24 @@ if __name__ == '__main__':
 
             if args.attack_mode == 'fgsm': 
                 # 对抗样本训练集
-                print("args.adv_dataset：",args.adv_dataset)
-                adv_trainset_path = os.path.join(args.adv_dataset,'train')
+                # print("args.adv_dataset：",args.adv_dataset)
+                # adv_trainset_path = os.path.join(args.adv_dataset,'train')
+                # adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
+                # print("adv_x_train.shape:",adv_x_train.shape)
+                # print("adv_y_train.shape:",adv_y_train.shape)            
+                # # adv_x_train=adv_x_train[:25397]
+                # # adv_y_train=adv_y_train[:25397]
+
+                print("args.train_adv_dataset：",args.train_adv_dataset)
+                adv_trainset_path = os.path.join(args.train_adv_dataset,'train')
                 adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
                 print("adv_x_train.shape:",adv_x_train.shape)
                 print("adv_y_train.shape:",adv_y_train.shape)            
                 # adv_x_train=adv_x_train[:25397]
                 # adv_y_train=adv_y_train[:25397]
+
                 # 对抗样本测试集
+                print("args.test_adv_dataset：",args.adv_dataset)
                 adv_testset_path = os.path.join(args.adv_dataset,'test')
                 adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
                 print("adv_x_test.shape:",adv_x_test.shape)
