@@ -1998,10 +1998,10 @@ class MaggieClassifier:
                 mix_img_batch, mix_lab_batch = input_mixup_data(args, cle_img_batch, cle_lab_batch)      #   混合样本 two-hot标签              
                 
                 #------------------20211108--------------------
-                # aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
-                # aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
-                aug_x_train = mix_img_batch
-                aug_y_train = mix_lab_batch
+                aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                # aug_x_train = mix_img_batch
+                # aug_y_train = mix_lab_batch
 
                 # if self._args.defense_mode == 'inputmixup':
                 #     #   在inputmixup中不混合原样本
