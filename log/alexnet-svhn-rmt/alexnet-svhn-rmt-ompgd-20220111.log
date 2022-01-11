@@ -12,3 +12,113 @@ Loading *svhn* train dataloader finished !
 Loading *svhn* test dataloader finished !
 initlize classifier
 learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220111/00004-eps-0.3-acc-12.2849/attack-svhn-dataset/samples
+Accuary of before rmt trained classifier on clean testset:95.2558%
+Loss of before mmat trained classifier clean testset:0.19625991582870483
+args.mix_mode: basemixup
+args.mix_w_num: 2
+args.beta_alpha: 0.5
+args.dirichlet_gama: 1
+cle_w_train.shape: torch.Size([24004, 8, 512])
+cle_y_train.shape: torch.Size([24004, 8])
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+adv_x_test.shape: torch.Size([26032, 3, 32, 32])
+adv_y_test.shape: torch.Size([26032])
+cle_train_dataloader.len: 287
+Accuary of before rmt trained classifier on adversarial testset:12.2849%
+Loss of before mmat trained classifier on adversarial testset:19.568334579467773
+w_trainset_len: 24004
+batch_size: 256
+w_batch_num: 94
+
+
+0epoch learning rate:0.001
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/287] [Batch classify loss: 1.905573]
+[Epoch 1/40] [Batch 2/287] [Batch classify loss: 1.606745]
+[Epoch 1/40] [Batch 3/287] [Batch classify loss: 1.754475]
+[Epoch 1/40] [Batch 4/287] [Batch classify loss: 1.498034]
+[Epoch 1/40] [Batch 5/287] [Batch classify loss: 1.772068]
+[Epoch 1/40] [Batch 6/287] [Batch classify loss: 1.583880]
+[Epoch 1/40] [Batch 7/287] [Batch classify loss: 1.494831]
+[Epoch 1/40] [Batch 8/287] [Batch classify loss: 1.562401]
+[Epoch 1/40] [Batch 9/287] [Batch classify loss: 1.486221]
+[Epoch 1/40] [Batch 10/287] [Batch classify loss: 1.879982]
+[Epoch 1/40] [Batch 11/287] [Batch classify loss: 1.533357]
+[Epoch 1/40] [Batch 12/287] [Batch classify loss: 1.398118]
+[Epoch 1/40] [Batch 13/287] [Batch classify loss: 1.432435]
+[Epoch 1/40] [Batch 14/287] [Batch classify loss: 1.431691]
+[Epoch 1/40] [Batch 15/287] [Batch classify loss: 1.286870]
+[Epoch 1/40] [Batch 16/287] [Batch classify loss: 1.301004]
+[Epoch 1/40] [Batch 17/287] [Batch classify loss: 1.209948]
+[Epoch 1/40] [Batch 18/287] [Batch classify loss: 1.401008]
+[Epoch 1/40] [Batch 19/287] [Batch classify loss: 1.347222]
+[Epoch 1/40] [Batch 20/287] [Batch classify loss: 1.323321]
+[Epoch 1/40] [Batch 21/287] [Batch classify loss: 1.473695]
+[Epoch 1/40] [Batch 22/287] [Batch classify loss: 1.394891]
+[Epoch 1/40] [Batch 23/287] [Batch classify loss: 1.325117]
+[Epoch 1/40] [Batch 24/287] [Batch classify loss: 1.171021]
+[Epoch 1/40] [Batch 25/287] [Batch classify loss: 1.288039]
+[Epoch 1/40] [Batch 26/287] [Batch classify loss: 1.191974]
+[Epoch 1/40] [Batch 27/287] [Batch classify loss: 1.378401]
+[Epoch 1/40] [Batch 28/287] [Batch classify loss: 1.293853]
+[Epoch 1/40] [Batch 29/287] [Batch classify loss: 1.315747]
+[Epoch 1/40] [Batch 30/287] [Batch classify loss: 1.297671]
+[Epoch 1/40] [Batch 31/287] [Batch classify loss: 1.141016]
+[Epoch 1/40] [Batch 32/287] [Batch classify loss: 1.260848]
+[Epoch 1/40] [Batch 33/287] [Batch classify loss: 1.320930]
+[Epoch 1/40] [Batch 34/287] [Batch classify loss: 1.273451]
+[Epoch 1/40] [Batch 35/287] [Batch classify loss: 1.172010]
+[Epoch 1/40] [Batch 36/287] [Batch classify loss: 1.265273]
+[Epoch 1/40] [Batch 37/287] [Batch classify loss: 1.275745]
+[Epoch 1/40] [Batch 38/287] [Batch classify loss: 1.202159]
+[Epoch 1/40] [Batch 39/287] [Batch classify loss: 1.148346]
+[Epoch 1/40] [Batch 40/287] [Batch classify loss: 1.228176]
+[Epoch 1/40] [Batch 41/287] [Batch classify loss: 1.281649]
+[Epoch 1/40] [Batch 42/287] [Batch classify loss: 1.258356]
+Traceback (most recent call last):
+  File "tasklauncher-20220111.py", line 224, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1557, in rmt
+    loss = self.__CustomSoftlossFunction__(outputs, targets)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1401, in __CustomSoftlossFunction__
+    if torch.nonzero(modified_mixed_label[i]).size(0) == 0:
+KeyboardInterrupt

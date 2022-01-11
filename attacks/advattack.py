@@ -284,7 +284,7 @@ class AdvAttack():
         
         adv_x_test = []
         for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
-            # print("batch_index:",batch_index)
+            print("batch_index:",batch_index)
             cle_w_batch = cle_w_test[batch_index * batch_size : (batch_index + 1) * batch_size]
             cle_y_batch = cle_y_test[batch_index * batch_size : (batch_index + 1) * batch_size] 
             adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
