@@ -1,0 +1,15 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220111
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/pgd/basemixup-betasampler/alexnet-svhn/blackbox/20220111/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20210914/00000-attackacc-0.20421/attack-svhn-dataset/samples

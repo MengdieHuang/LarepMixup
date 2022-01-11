@@ -939,7 +939,9 @@ class MaggieClassifier:
         pro_yset_tensor = []
         device = torch.device('cuda')
 
-        for projected_w_path in projected_w_npz_paths:                                                                                   
+        for projected_w_path in projected_w_npz_paths:   
+            # print("projected_w_path:",projected_w_path)     
+            # raise error("maggie flag")                                                                           
             w = np.load(projected_w_path)['w']
             w = torch.tensor(w, device=device)                                                                                 
             w = w[-1]                                                                                       #   w.shape: torch.Size([1, 8,512]))         
@@ -949,7 +951,8 @@ class MaggieClassifier:
         # print("pro_wset_tensor.shape:",pro_wset_tensor.shape)                                         #   projected_w_set_x.shape: torch.Size([37, 8, 512])
                                                                                                             #   stl10 projected_w_set_x.shape: torch.Size([38, 10, 512])
 
-        for label_npz_path in label_npz_paths:                                                                                  
+        for label_npz_path in label_npz_paths:    
+            # print("label_npz_path:",label_npz_path)                                                                                   
             y = np.load(label_npz_path)['w']
             y = torch.tensor(y, device=device)                                                                                 
             y = y[-1]                                                                                       #   y.shape: torch.Size([1, 8]))

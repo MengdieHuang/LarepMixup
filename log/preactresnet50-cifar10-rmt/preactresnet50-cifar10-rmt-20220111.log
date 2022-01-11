@@ -8405,3 +8405,166 @@ finished generate testset adversarial examples !
 [Epoch 40/40] [Batch 175/196] [Batch classify loss: 0.000012]
 [Epoch 40/40] [Batch 176/196] [Batch classify loss: 0.000009]
 [Epoch 40/40] [Batch 177/196] [Batch classify loss: 0.000081]
+[Epoch 40/40] [Batch 178/196] [Batch classify loss: 0.000035]
+[Epoch 40/40] [Batch 179/196] [Batch classify loss: 0.000324]
+[Epoch 40/40] [Batch 180/196] [Batch classify loss: 0.000013]
+[Epoch 40/40] [Batch 181/196] [Batch classify loss: 0.000027]
+[Epoch 40/40] [Batch 182/196] [Batch classify loss: 0.000489]
+[Epoch 40/40] [Batch 183/196] [Batch classify loss: 0.000011]
+[Epoch 40/40] [Batch 184/196] [Batch classify loss: 0.000084]
+[Epoch 40/40] [Batch 185/196] [Batch classify loss: 0.000028]
+[Epoch 40/40] [Batch 186/196] [Batch classify loss: 0.000053]
+[Epoch 40/40] [Batch 187/196] [Batch classify loss: 0.000018]
+[Epoch 40/40] [Batch 188/196] [Batch classify loss: 0.000009]
+[Epoch 40/40] [Batch 189/196] [Batch classify loss: 0.000014]
+[Epoch 40/40] [Batch 190/196] [Batch classify loss: 0.000094]
+[Epoch 40/40] [Batch 191/196] [Batch classify loss: 0.000062]
+[Epoch 40/40] [Batch 192/196] [Batch classify loss: 0.000021]
+[Epoch 40/40] [Batch 193/196] [Batch classify loss: 0.000054]
+[Epoch 40/40] [Batch 194/196] [Batch classify loss: 0.000035]
+[Epoch 40/40] [Batch 195/196] [Batch classify loss: 0.000029]
+[Epoch 40/40] [Batch 196/196] [Batch classify loss: 0.000185]
+0040 epoch rmt trained classifier accuary on the clean testing examples:86.9600%
+0040 epoch rmt trained classifier loss on the clean testing examples:1.2311
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+0040 epoch rmt trained classifier accuary on adversarial testset:23.7400%
+0040 epoch rmt trained classifier loss on adversarial testset:11.778237342834473
+Accuary of rmt trained classifier on clean testset:86.9600%
+Loss of rmt trained classifier on clean testset:1.2310985326766968
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+Accuary of rmt trained classifier on white-box adv testset:23.7400%
+Loss of rmt trained classifier on white-box adv testset:11.778350830078125
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220111
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/fgsm/basemixup-dirichletsampler/preactresnet50-cifar10/whitebox/20220111/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/fgsm/preactresnet50-cifar10/20210927/00000-attackacc-22.55/attack-cifar10-dataset/samples
+Accuary of before rmt trained classifier on clean testset:84.7400%
+Loss of before mmat trained classifier clean testset:0.8470060229301453
+args.mix_mode: basemixup
+args.mix_w_num: 3
+args.beta_alpha: 1
+args.dirichlet_gama: 1.0
+cle_w_train.shape: torch.Size([25397, 8, 512])
+cle_y_train.shape: torch.Size([25397, 8])
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+Accuary of before rmt trained classifier on adversarial testset:22.5500%
+Loss of before mmat trained classifier on adversarial testset:7.858931064605713
+w_trainset_len: 25397
+batch_size: 256
+w_batch_num: 100
+
+
+0epoch learning rate:0.001
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/196] [Batch classify loss: 3.895390]
+[Epoch 1/40] [Batch 2/196] [Batch classify loss: 2.364111]
+[Epoch 1/40] [Batch 3/196] [Batch classify loss: 1.674993]
+[Epoch 1/40] [Batch 4/196] [Batch classify loss: 1.425385]
+[Epoch 1/40] [Batch 5/196] [Batch classify loss: 1.552705]
+[Epoch 1/40] [Batch 6/196] [Batch classify loss: 1.506331]
+[Epoch 1/40] [Batch 7/196] [Batch classify loss: 1.446766]
+[Epoch 1/40] [Batch 8/196] [Batch classify loss: 1.393632]
+[Epoch 1/40] [Batch 9/196] [Batch classify loss: 1.425018]
+[Epoch 1/40] [Batch 10/196] [Batch classify loss: 1.455838]
+[Epoch 1/40] [Batch 11/196] [Batch classify loss: 1.407958]
+Traceback (most recent call last):
+  File "tasklauncher-20220105.py", line 223, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1531, in rmt
+    mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, pro_img_batch, pro_lab_batch)      #   混合样本 two-hot标签
+  File "/home/maggie/mmat/clamodels/classifier.py", line 63, in mixup_data
+    mix_x_train, mix_y_train = generate_model.generate()
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 486, in generate
+    self._model.generate(self._exp_result_dir, self.mix_w_train, self.mix_y_train)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2005, in generate
+    generated_x_set, generated_y_set = self.__generatemain__(self._args, self._exp_result_dir, interpolated_w_set, interpolated_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2016, in __generatemain__
+    generated_x_set, generated_y_set = self.__generatefromntensor__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2099, in __generatefromntensor__
+    interpolated_y = interpolated_y_set,
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 2168, in __getgeneratedbatchxy__
+    img = G.synthesis(w.unsqueeze(0), noise_mode=noise_mode).cpu()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 413, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 101, in decorator
+    with torch.autograd.profiler.record_function(fn.__name__):
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/profiler.py", line 616, in __enter__
+    self.handle = torch.ops.profiler._record_function_enter(self.name)
+KeyboardInterrupt
