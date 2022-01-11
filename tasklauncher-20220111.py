@@ -97,15 +97,16 @@ if __name__ == '__main__':
         
         elif args.latentattack == True:  #   表征层对抗攻击
             print("latent adversarial attack.............")
+            print("eps:",args.attack_eps)
             learned_cla_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_cla_model)
             cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
-            # cle_w_test = cle_w_test[:10000]
-            # cle_y_test = cle_y_test[:10000]
+            cle_w_test = cle_w_test[:24000]
+            cle_y_test = cle_y_test[:24000]
             # cle_y_test = cle_y_test[:,0]
-            cle_w_test = cle_w_test[10000:]
-            cle_y_test = cle_y_test[10000:]
-            cle_y_test = cle_y_test[:,0]
+            # cle_w_test = cle_w_test[10000:]
+            # cle_y_test = cle_y_test[10000:]
+            cle_y_test = cle_y_test[:,0]    #这个不能注释
             print("cle_w_test.shape:",cle_w_test.shape)
             print("cle_y_test.shape:",cle_y_test.shape)
             # raise error("maggie stop")

@@ -1469,6 +1469,7 @@ class MaggieClassifier:
         self._cle_test_tensorset_x = cle_x_test
         self._cle_test_tensorset_y = cle_y_test
 
+        print("cle_train_dataloader.len:",len(cle_train_dataloader))
         self._train_dataloader = cle_train_dataloader
 
         if args.whitebox == True:

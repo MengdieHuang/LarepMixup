@@ -1,0 +1,83 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220111
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/pgd/basemixup-betasampler/resnet34-svhn/whitebox/20220111/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/pgd/resnet34-svhn/20210915/00000-attackacc-0.173901/attack-svhn-dataset/samples
+Accuary of before rmt trained classifier on clean testset:93.4312%
+Loss of before mmat trained classifier clean testset:0.25741657614707947
+args.mix_mode: basemixup
+args.mix_w_num: 2
+args.beta_alpha: 0.5
+args.dirichlet_gama: 1
+cle_w_train.shape: torch.Size([24004, 8, 512])
+cle_y_train.shape: torch.Size([24004, 8])
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+adv_x_test.shape: torch.Size([26032, 3, 32, 32])
+adv_y_test.shape: torch.Size([26032])
+cle_train_dataloader.len: 287
+initlize attack classifier
+generate pixel adversarial exampels
+generating testset adversarial examples...
+PGD - Batches:   0%|          | 0/814 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:   0%|          | 1/814 [00:02<36:40,  2.71s/it]PGD - Batches:   0%|          | 2/814 [00:05<36:38,  2.71s/it]PGD - Batches:   0%|          | 3/814 [00:08<36:36,  2.71s/it]PGD - Batches:   0%|          | 4/814 [00:10<36:04,  2.67s/it]PGD - Batches:   1%|          | 5/814 [00:13<35:24,  2.63s/it]PGD - Batches:   1%|          | 6/814 [00:15<35:04,  2.60s/it]PGD - Batches:   1%|          | 7/814 [00:18<34:48,  2.59s/it]PGD - Batches:   1%|          | 8/814 [00:20<34:19,  2.56s/it]PGD - Batches:   1%|          | 9/814 [00:23<34:06,  2.54s/it]PGD - Batches:   1%|          | 10/814 [00:25<33:59,  2.54s/it]PGD - Batches:   1%|▏         | 11/814 [00:28<33:22,  2.49s/it]PGD - Batches:   1%|▏         | 12/814 [00:30<32:59,  2.47s/it]PGD - Batches:   2%|▏         | 13/814 [00:33<33:12,  2.49s/it]                                                               Traceback (most recent call last):
+  File "tasklauncher-20220111.py", line 223, in <module>
+    target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 1479, in rmt
+    epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+  File "/home/maggie/mmat/attacks/advattack.py", line 408, in generateadvfromtestsettensor
+    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/projected_gradient_descent/projected_gradient_descent.py", line 181, in generate
+    return self._attack.generate(x=x, y=y, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/projected_gradient_descent/projected_gradient_descent_pytorch.py", line 196, in generate
+    x=batch, targets=batch_labels, mask=mask_batch, eps=batch_eps, eps_step=batch_eps_step
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/projected_gradient_descent/projected_gradient_descent_pytorch.py", line 252, in _generate_batch
+    adv_x, inputs, targets, mask, eps, eps_step, self.num_random_init > 0 and i_max_iter == 0,
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/projected_gradient_descent/projected_gradient_descent_pytorch.py", line 385, in _compute_torch
+    perturbation = self._compute_perturbation(x_adv, y, mask)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/projected_gradient_descent/projected_gradient_descent_pytorch.py", line 279, in _compute_perturbation
+    grad = self.estimator.loss_gradient(x=x, y=y) * (1 - 2 * int(self.targeted))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 1164, in loss_gradient
+    model_outputs = self._model(inputs_t)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 1393, in forward
+    x = self._model(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 255, in forward
+    return self._forward_impl(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 245, in _forward_impl
+    x = self.layer3(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/models/resnet.py", line 78, in forward
+    identity = self.downsample(x)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+KeyboardInterrupt
