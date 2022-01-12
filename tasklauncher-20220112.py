@@ -207,6 +207,10 @@ if __name__ == '__main__':
             print("args.adv_dataset：",args.adv_dataset)
             adv_testset_path = os.path.join(args.adv_dataset,'test')
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
+            
+            if args.dataset == 'svhn' and args.attack_mode == 'om-pgd':
+                adv_x_test = adv_x_test[:10000]
+                adv_y_test = adv_y_test[:10000]
 
             # clean pixel testset acc and loss
             cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   bug

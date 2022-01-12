@@ -1506,7 +1506,7 @@ class MaggieClassifier:
 
             epoch_total_loss = 0
 
-            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   加载原始训练集batch
+            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   SVHN 7万多training samples 因此运行起来慢 加载原始训练集batch
                 
                 #--------------raw batch training--------------
                 # softlabel
@@ -1597,10 +1597,10 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
 
-
-            # if (epoch_index+1) % 11== 0 and epoch_index > 0:
+            if (epoch_index+1) == 11 or (epoch_index+1) == 40 or (epoch_index+1) == 30 or (epoch_index+1) == 20:
+            # if (epoch_index+1) % 10 == 0 and epoch_index > 0:
             # if epoch_adv_test_accuracy  >= 0.2:
-            #     torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
+                torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
 
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')

@@ -1,0 +1,164 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.02
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220111.py", line 66, in <module>
+    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+  File "/home/maggie/mmat/attacks/advattack.py", line 229, in generate
+    self.__saveadvpng__()
+  File "/home/maggie/mmat/attacks/advattack.py", line 360, in __saveadvpng__
+    save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
+  File "/home/maggie/mmat/utils/savepng.py", line 106, in save_image
+    normalize=normalize, range=range, scale_each=scale_each)
+  File "/home/maggie/mmat/utils/savepng.py", line 73, in make_grid
+    norm_range(tensor, range)
+  File "/home/maggie/mmat/utils/savepng.py", line 67, in norm_range
+    norm_ip(t, float(t.min()), float(t.max()))
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.02
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset adversarial examples...
+standard trained classifier accuary on adversarial testset:60.9375%
+standard trained classifier loss on adversarial testset:1.8037970066070557
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.05
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset adversarial examples...
+standard trained classifier accuary on adversarial testset:34.3750%
+standard trained classifier loss on adversarial testset:3.619784355163574
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.1
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.1
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset adversarial examples...
+standard trained classifier accuary on adversarial testset:26.5625%
+standard trained classifier loss on adversarial testset:5.4770050048828125
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.2
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset adversarial examples...
+standard trained classifier accuary on adversarial testset:14.0625%
+standard trained classifier loss on adversarial testset:6.254900932312012
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220112
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/alexnet-cifar10/20220112/00005
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.3
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating adversarial examples...
+finished generate adversarial examples !
+Saving cifar10 trainset  adversarial examples...
+Saving cifar10 testset adversarial examples...
+standard trained classifier accuary on adversarial testset:12.5000%
+standard trained classifier loss on adversarial testset:6.060525894165039
+---------------------------------------
+
+

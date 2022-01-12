@@ -348,14 +348,17 @@ class AdvAttack():
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # print(f"Saving {self._args.dataset} trainset  adversarial examples...")
-            # for img_index, _ in enumerate(self._x_train_adv):
-            #     save_adv_img = self._x_train_adv[img_index]
-            #     # save_cle_img = self._x_train[img_index]
-            #     img_true_label = self._y_train_adv[img_index]
+            print(f"Saving {self._args.dataset} trainset  adversarial examples...")
+            for img_index, _ in enumerate(self._x_train_adv):
+                save_adv_img = self._x_train_adv[img_index]
+                # save_cle_img = self._x_train[img_index]
+                img_true_label = self._y_train_adv[img_index]
                 
-            #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
-        
+                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
+
+                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
+
             print(f"Saving {self._args.dataset} testset adversarial examples...")
             
             for img_index, _ in enumerate(self._x_test_adv):
@@ -467,7 +470,7 @@ class AdvAttack():
                 
                 elif cla_model_name == 'googlenet':
                     # if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'svhn' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
-                    if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
+                    if self._args.dataset == 'imagenetmixed10' or self._args.dataset == 'kmnist' or self._args.dataset == 'cifar10' or self._args.dataset == 'svhn':  #   只有imagenet和svhn kmnist搭配googlenet时是返回一个值
                         output = classifier(imgs)
                     else:
                         output, aux1, aux2 = classifier(imgs)
