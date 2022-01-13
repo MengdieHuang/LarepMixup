@@ -1844,3 +1844,1538 @@ latent adversarial attack.............
 eps: 0.02
 initlize classifier
 learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:56.2500%
+standard trained classifier loss on adversarial testset:2.1916661262512207
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9249687790870667
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00024
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+initlize classifier
+learned calssify model != None
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 106, in <module>
+    cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 912, in getproset
+    pro_wset_tensor, pro_yset_tensor = self.__getprosettensor__(pro_dataset_path)
+  File "/home/maggie/mmat/clamodels/classifier.py", line 946, in __getprosettensor__
+    w = torch.tensor(w, device=device)                                                                                 
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00025
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:56.2500%
+standard trained classifier loss on adversarial testset:2.2158021926879883
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:87.5000%
+standard trained classifier loss on clean testset:0.9506197571754456
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00026
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:25.0000%
+standard trained classifier loss on adversarial testset:8.423521995544434
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9622408747673035
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00027
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.1
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:6.2500%
+standard trained classifier loss on adversarial testset:16.706878662109375
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:81.2500%
+standard trained classifier loss on clean testset:1.014233112335205
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00028
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.2
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:0.0000%
+standard trained classifier loss on adversarial testset:21.77948760986328
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:81.2500%
+standard trained classifier loss on clean testset:0.9916172623634338
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00029
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.3
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:0.0000%
+standard trained classifier loss on adversarial testset:24.15277099609375
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:81.2500%
+standard trained classifier loss on clean testset:0.9363074898719788
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/resnet18-svhn/20220113/00002
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+Traceback (most recent call last):
+  File "tasklauncher-20220112.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 291, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 189, in perturb
+    l1_sparsity=self.l1_sparsity,
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 65, in perturb_iterative
+    outputs = predict(xvar + delta)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 414, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 308, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 66, in modulated_conv2d
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/resnet18-svhn/20220113/00003
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+Traceback (most recent call last):
+  File "tasklauncher-20220112.py", line 135, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 291, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 189, in perturb
+    l1_sparsity=self.l1_sparsity,
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 70, in perturb_iterative
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/resnet18-svhn/20220114/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:62.5000%
+standard trained classifier loss on adversarial testset:2.269958257675171
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:90.6250%
+standard trained classifier loss on clean testset:0.9383373260498047
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/vgg19-svhn/20220114/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 31, in <module>
+    cle_dataset = MaggieDataset(args)
+  File "/home/maggie/mmat/datas/dataset.py", line 376, in __init__
+    self._traindataset = self.__loadtraindataset__()  
+  File "/home/maggie/mmat/datas/dataset.py", line 582, in __loadtraindataset__
+    transforms.Normalize([0.5], [0.5])
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/datasets/svhn.py", line 70, in __init__
+    loaded_mat = sio.loadmat(os.path.join(self.root, self.filename))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/io/matlab/mio.py", line 224, in loadmat
+    matfile_dict = MR.get_variables(variable_names)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/io/matlab/mio5.py", line 333, in get_variables
+    res = self.read_var_array(hdr, process)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/io/matlab/mio5.py", line 293, in read_var_array
+    return self._matrix_reader.array_from_header(header, process)
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/resnet18-svhn/20220114/00001
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 137, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 291, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 189, in perturb
+    l1_sparsity=self.l1_sparsity,
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/iterative_projected_gradient.py", line 70, in perturb_iterative
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00001
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00002
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.1
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00003
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.2
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00004
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.3
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00005
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00006
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00007
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.1
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00008
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.2
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00009
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.3
+Traceback (most recent call last):
+  File "tasklauncher-20220113.py", line 104, in <module>
+    learned_cla_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 592, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 851, in _load
+    result = unpickler.load()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 843, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 832, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 157, in _cuda_deserialize
+    return obj.cuda(device)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/_utils.py", line 80, in _cuda
+    return new_type(self.size()).copy_(self, non_blocking)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py", line 484, in _lazy_new
+    return super(_CudaBase, cls).__new__(cls, *args, **kwargs)
+RuntimeError: CUDA error: out of memory
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00010
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:59.3750%
+standard trained classifier loss on adversarial testset:2.4618730545043945
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:87.5000%
+standard trained classifier loss on clean testset:1.0119106769561768
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00011
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:28.1250%
+standard trained classifier loss on adversarial testset:8.541927337646484
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9863661527633667
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00012
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.1
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:9.3750%
+standard trained classifier loss on adversarial testset:16.20196533203125
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:87.5000%
+standard trained classifier loss on clean testset:0.8249415755271912
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00013
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.2
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:0.0000%
+standard trained classifier loss on adversarial testset:22.66255760192871
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9159241914749146
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00014
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.3
+initlize classifier
+learned calssify model != None
