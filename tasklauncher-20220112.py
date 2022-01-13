@@ -58,6 +58,7 @@ if __name__ == '__main__':
         if args.latentattack == False:    
             if args.perceptualattack == False:  #   像素层对抗攻击
                 print("eps:",args.attack_eps)
+                print("pixel adversarial attack.............")
 
                 learned_model = torch.load(args.cla_network_pkl)
                 attack_classifier = AdvAttack(args,learned_model)
