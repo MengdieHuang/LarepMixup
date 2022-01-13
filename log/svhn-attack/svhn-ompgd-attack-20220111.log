@@ -7506,3 +7506,39 @@ batch_index: 286
 batch_index: 287
 batch_index: 288
 batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:61.2100%
+standard trained classifier loss on adversarial testset:1.8753389120101929
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:87.0000%
+standard trained classifier loss on clean testset:0.5363677740097046
+---------------------------------------
+
+

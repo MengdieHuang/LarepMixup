@@ -1,0 +1,29 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00003
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+initlize attack classifier
+generate pixel adversarial exampels
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.59s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.50s/it]                                                            PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.49s/it]PGD - Batches: 100%|██████████| 2/2 [00:03<00:00,  1.50s/it]                                                            finished generate adversarial examples !
+Saving svhn trainset  adversarial examples...
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:79.6875%
+standard trained classifier loss on adversarial testset:1.0707833766937256
+---------------------------------------
+
+

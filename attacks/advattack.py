@@ -194,36 +194,36 @@ class AdvAttack():
             os.makedirs(self._exp_result_dir,exist_ok=True)            
 
             #如果不想生成Trainset adv
-            print("PGD ing 20220111")
-            self._x_train_adv=None
-            self._y_train_adv=None
+            # print("PGD ing 20220111")
+            # self._x_train_adv=None
+            # self._y_train_adv=None
 
-            # self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
+            self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
             self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
 
             """"artmodel.generate()函数生成对抗样本时只接受numpy ndarray输入，所以进行tensor转numpy"""
 
-            # self._x_train = self._x_train.cpu().numpy()                         #   self._x_train原本是GPU
-            # self._y_train = self._y_train.cpu().numpy()
+            self._x_train = self._x_train.cpu().numpy()                         #   self._x_train原本是GPU
+            self._y_train = self._y_train.cpu().numpy()
             self._x_test = self._x_test.cpu().numpy()
             self._y_test = self._y_test.cpu().numpy()
 
             print('generating adversarial examples...')
-            # self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
-            # self._y_train_adv = self._y_train
+            self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
+            self._y_train_adv = self._y_train
             self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
             self._y_test_adv = self._y_test
             print('finished generate adversarial examples !')
 
             #numpy转tensor
-            # self._x_train_adv = torch.from_numpy(self._x_train_adv).cuda()
-            # self._y_train_adv = torch.from_numpy(self._y_train_adv).cuda()
+            self._x_train_adv = torch.from_numpy(self._x_train_adv).cuda()
+            self._y_train_adv = torch.from_numpy(self._y_train_adv).cuda()
             self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
             self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
 
             #   numpy转tensor
-            # self._x_train = torch.from_numpy(self._x_train).cuda()
-            # self._y_train = torch.from_numpy(self._y_train).cuda()
+            self._x_train = torch.from_numpy(self._x_train).cuda()
+            self._y_train = torch.from_numpy(self._y_train).cuda()
             self._x_test = torch.from_numpy(self._x_test).cuda()
             self._y_test = torch.from_numpy(self._y_test).cuda()
 
@@ -342,23 +342,20 @@ class AdvAttack():
 
             classification = self.__labelnames__() 
             # print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-            # label_name = classification[int(laber_index)]
-            # print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
-            # classification = ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']
-
+     
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # print(f"Saving {self._args.dataset} trainset  adversarial examples...")
-            # for img_index, _ in enumerate(self._x_train_adv):
-            #     save_adv_img = self._x_train_adv[img_index]
-            #     # save_cle_img = self._x_train[img_index]
-            #     img_true_label = self._y_train_adv[img_index]
+            print(f"Saving {self._args.dataset} trainset  adversarial examples...")
+            for img_index, _ in enumerate(self._x_train_adv):
+                save_adv_img = self._x_train_adv[img_index]
+                save_cle_img = self._x_train[img_index]
+                img_true_label = self._y_train_adv[img_index]
                 
-            #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
+                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
 
-            #     # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-            #     # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
+                save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
             print(f"Saving {self._args.dataset} testset adversarial examples...")
             
@@ -369,13 +366,12 @@ class AdvAttack():
 
                 np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
                 
-                #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
                 # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
                 # 
                 # #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
 
-                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
+                save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
         elif self._args.latentattack == True: # 表征层对抗样本
             classification = self.__labelnames__() 
@@ -529,7 +525,9 @@ class AdvAttack():
         elif self._args.dataset == 'svhn':
 
             xset_tensor = []
-            for img_index in range(len(dataloader.dataset)):
+            # for img_index in range(len(dataloader.dataset)):
+            for img_index in range(64):
+
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)   
 
@@ -596,7 +594,9 @@ class AdvAttack():
             # y_ndarray = y_ndarray[:jieduan_num]
 
             yset_tensor = []
-            for img_index in range(len(dataloader.dataset)):
+            # for img_index in range(len(dataloader.dataset)):
+            for img_index in range(64):
+
                 yset_tensor.append(dataloader.dataset[img_index][1])
 
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
