@@ -174,7 +174,8 @@ class AdvAttack():
             print('Get CW examples generate model')
             advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
         elif self._args.attack_mode =='pgd': 
-            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.3, targeted=False)   #默认eps是0.3
+            # advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.3, targeted=False)   #默认eps是0.3
+            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   #默认eps是0.3            
         elif self._args.attack_mode == None:
             raise Exception('please input the attack mode')           
 
@@ -348,16 +349,16 @@ class AdvAttack():
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            print(f"Saving {self._args.dataset} trainset  adversarial examples...")
-            for img_index, _ in enumerate(self._x_train_adv):
-                save_adv_img = self._x_train_adv[img_index]
-                # save_cle_img = self._x_train[img_index]
-                img_true_label = self._y_train_adv[img_index]
+            # print(f"Saving {self._args.dataset} trainset  adversarial examples...")
+            # for img_index, _ in enumerate(self._x_train_adv):
+            #     save_adv_img = self._x_train_adv[img_index]
+            #     # save_cle_img = self._x_train[img_index]
+            #     img_true_label = self._y_train_adv[img_index]
                 
-                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
+            #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
 
-                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
+            #     # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+            #     # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
             print(f"Saving {self._args.dataset} testset adversarial examples...")
             
