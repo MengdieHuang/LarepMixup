@@ -351,12 +351,11 @@ class AdvAttack():
             #     save_adv_img = self._x_train_adv[img_index]
             #     save_cle_img = self._x_train[img_index]
             #     img_true_label = self._y_train_adv[img_index]
-                
+               
             #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
 
             #     save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
             #     save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
-
             print(f"Saving {self._args.dataset} testset adversarial examples...")
             
             for img_index, _ in enumerate(self._x_test_adv):
@@ -367,10 +366,8 @@ class AdvAttack():
                 np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
                 
                 # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
-                # 
-                # #   存投影npz, projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
-
                 save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
                 # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
         elif self._args.latentattack == True: # 表征层对抗样本
@@ -389,6 +386,7 @@ class AdvAttack():
                 img_true_label = self._y_test_adv[img_index]
 
                 np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                
                 # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
 
                 # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)

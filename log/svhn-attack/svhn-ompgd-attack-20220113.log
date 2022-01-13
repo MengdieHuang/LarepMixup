@@ -3379,3 +3379,455 @@ latent adversarial attack.............
 eps: 0.3
 initlize classifier
 learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:0.0000%
+standard trained classifier loss on adversarial testset:24.091876983642578
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9246143698692322
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00015
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.02
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:62.5000%
+standard trained classifier loss on adversarial testset:2.354135274887085
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:87.5000%
+standard trained classifier loss on clean testset:0.8855347633361816
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00016
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.05
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:28.1250%
+standard trained classifier loss on adversarial testset:7.763777256011963
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:87.5000%
+standard trained classifier loss on clean testset:0.8657898306846619
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00017
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.1
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:9.3750%
+standard trained classifier loss on adversarial testset:15.56730842590332
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9542161226272583
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00018
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.2
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:3.1250%
+standard trained classifier loss on adversarial testset:22.149864196777344
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9835829138755798
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220114
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220114/00019
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+latent adversarial attack.............
+eps: 0.3
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+initlize attack classifier
+generate latent adversarial exampels
+latent pgd attack
+cle_w_test.shape: torch.Size([32, 8, 512])
+cle_y_test.shape: torch.Size([32])
+testset_total_num: 32
+batch_size: 32
+batch_num: 1
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+adv_x_test.shape: torch.Size([32, 3, 32, 32])
+adv_y_test.shape: torch.Size([32])
+finished generate latent adversarial examples !
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:0.0000%
+standard trained classifier loss on adversarial testset:24.315614700317383
+cle_x_test.shape: torch.Size([32, 3, 32, 32])
+cle_y_test.shape: torch.Size([32])
+standard trained classifier accuary on clean testset:84.3750%
+standard trained classifier loss on clean testset:0.9379898905754089
+---------------------------------------
+
+
