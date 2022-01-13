@@ -1,0 +1,403 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+blackbox attack
+Experiment result save dir: /home/maggie/mmat/result/defense/rmt/om-pgd/basemixup-betasampler/densenet169-svhn/blackbox/20220113/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+initlize classifier
+learned calssify model != None
+args.adv_dataset： /home/maggie/mmat/result/attack/pgd/densenet169-svhn/20220112/00001-ompgd-eps-0.3-acc-0.8800/attack-svhn-dataset/latent-attack-samples
+Accuary of before rmt trained classifier on clean testset:93.0931%
+Loss of before mmat trained classifier clean testset:0.2809613347053528
+args.mix_mode: basemixup
+args.mix_w_num: 2
+args.beta_alpha: 2.0
+args.dirichlet_gama: 1
+cle_w_train.shape: torch.Size([24004, 8, 512])
+cle_y_train.shape: torch.Size([24004, 8])
+cle_x_test.shape: torch.Size([26032, 3, 32, 32])
+cle_y_test.shape: torch.Size([26032])
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+cle_train_dataloader.len: 287
+Accuary of before rmt trained classifier on adversarial testset:0.8800%
+Loss of before mmat trained classifier on adversarial testset:19.344457626342773
+w_trainset_len: 24004
+batch_size: 256
+w_batch_num: 94
+
+
+0epoch learning rate:0.001
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+[Epoch 1/40] [Batch 1/287] [Batch classify loss: 2.803604]
+[Epoch 1/40] [Batch 2/287] [Batch classify loss: 2.263511]
+[Epoch 1/40] [Batch 3/287] [Batch classify loss: 1.941982]
+[Epoch 1/40] [Batch 4/287] [Batch classify loss: 1.861091]
+[Epoch 1/40] [Batch 5/287] [Batch classify loss: 1.632494]
+[Epoch 1/40] [Batch 6/287] [Batch classify loss: 1.546509]
+[Epoch 1/40] [Batch 7/287] [Batch classify loss: 1.376997]
+[Epoch 1/40] [Batch 8/287] [Batch classify loss: 1.296088]
+[Epoch 1/40] [Batch 9/287] [Batch classify loss: 1.339528]
+[Epoch 1/40] [Batch 10/287] [Batch classify loss: 1.340680]
+[Epoch 1/40] [Batch 11/287] [Batch classify loss: 1.366978]
+[Epoch 1/40] [Batch 12/287] [Batch classify loss: 1.338947]
+[Epoch 1/40] [Batch 13/287] [Batch classify loss: 1.290228]
+[Epoch 1/40] [Batch 14/287] [Batch classify loss: 1.297190]
+[Epoch 1/40] [Batch 15/287] [Batch classify loss: 1.229959]
+[Epoch 1/40] [Batch 16/287] [Batch classify loss: 1.222470]
+[Epoch 1/40] [Batch 17/287] [Batch classify loss: 1.162529]
+[Epoch 1/40] [Batch 18/287] [Batch classify loss: 1.298773]
+[Epoch 1/40] [Batch 19/287] [Batch classify loss: 1.188473]
+[Epoch 1/40] [Batch 20/287] [Batch classify loss: 1.175577]
+[Epoch 1/40] [Batch 21/287] [Batch classify loss: 1.221229]
+[Epoch 1/40] [Batch 22/287] [Batch classify loss: 1.149553]
+[Epoch 1/40] [Batch 23/287] [Batch classify loss: 1.195042]
+[Epoch 1/40] [Batch 24/287] [Batch classify loss: 1.097526]
+[Epoch 1/40] [Batch 25/287] [Batch classify loss: 1.142514]
+[Epoch 1/40] [Batch 26/287] [Batch classify loss: 1.221004]
+[Epoch 1/40] [Batch 27/287] [Batch classify loss: 1.248233]
+[Epoch 1/40] [Batch 28/287] [Batch classify loss: 1.131473]
+[Epoch 1/40] [Batch 29/287] [Batch classify loss: 1.166852]
+[Epoch 1/40] [Batch 30/287] [Batch classify loss: 1.102430]
+[Epoch 1/40] [Batch 31/287] [Batch classify loss: 1.187879]
+[Epoch 1/40] [Batch 32/287] [Batch classify loss: 1.181105]
+[Epoch 1/40] [Batch 33/287] [Batch classify loss: 1.202808]
+[Epoch 1/40] [Batch 34/287] [Batch classify loss: 1.194370]
+[Epoch 1/40] [Batch 35/287] [Batch classify loss: 1.137123]
+[Epoch 1/40] [Batch 36/287] [Batch classify loss: 1.092054]
+[Epoch 1/40] [Batch 37/287] [Batch classify loss: 1.088004]
+[Epoch 1/40] [Batch 38/287] [Batch classify loss: 1.201779]
+[Epoch 1/40] [Batch 39/287] [Batch classify loss: 1.145607]
+[Epoch 1/40] [Batch 40/287] [Batch classify loss: 1.125959]
+[Epoch 1/40] [Batch 41/287] [Batch classify loss: 1.130660]
+[Epoch 1/40] [Batch 42/287] [Batch classify loss: 1.183081]
+[Epoch 1/40] [Batch 43/287] [Batch classify loss: 1.117165]
+[Epoch 1/40] [Batch 44/287] [Batch classify loss: 1.124143]
+[Epoch 1/40] [Batch 45/287] [Batch classify loss: 1.092482]
+[Epoch 1/40] [Batch 46/287] [Batch classify loss: 1.161653]
+[Epoch 1/40] [Batch 47/287] [Batch classify loss: 1.148319]
+[Epoch 1/40] [Batch 48/287] [Batch classify loss: 1.147039]
+[Epoch 1/40] [Batch 49/287] [Batch classify loss: 1.087607]
+[Epoch 1/40] [Batch 50/287] [Batch classify loss: 1.099620]
+[Epoch 1/40] [Batch 51/287] [Batch classify loss: 1.078775]
+[Epoch 1/40] [Batch 52/287] [Batch classify loss: 1.108317]
+[Epoch 1/40] [Batch 53/287] [Batch classify loss: 1.052405]
+[Epoch 1/40] [Batch 54/287] [Batch classify loss: 1.091120]
+[Epoch 1/40] [Batch 55/287] [Batch classify loss: 1.051888]
+[Epoch 1/40] [Batch 56/287] [Batch classify loss: 1.087266]
+[Epoch 1/40] [Batch 57/287] [Batch classify loss: 1.137308]
+[Epoch 1/40] [Batch 58/287] [Batch classify loss: 1.149562]
+[Epoch 1/40] [Batch 59/287] [Batch classify loss: 1.131600]
+[Epoch 1/40] [Batch 60/287] [Batch classify loss: 1.081080]
+[Epoch 1/40] [Batch 61/287] [Batch classify loss: 1.099205]
+[Epoch 1/40] [Batch 62/287] [Batch classify loss: 1.091678]
+[Epoch 1/40] [Batch 63/287] [Batch classify loss: 1.090759]
+[Epoch 1/40] [Batch 64/287] [Batch classify loss: 1.151602]
+[Epoch 1/40] [Batch 65/287] [Batch classify loss: 1.185451]
+[Epoch 1/40] [Batch 66/287] [Batch classify loss: 1.090001]
+[Epoch 1/40] [Batch 67/287] [Batch classify loss: 1.126755]
+[Epoch 1/40] [Batch 68/287] [Batch classify loss: 1.125326]
+[Epoch 1/40] [Batch 69/287] [Batch classify loss: 1.139519]
+[Epoch 1/40] [Batch 70/287] [Batch classify loss: 1.101437]
+[Epoch 1/40] [Batch 71/287] [Batch classify loss: 1.153126]
+[Epoch 1/40] [Batch 72/287] [Batch classify loss: 1.112254]
+[Epoch 1/40] [Batch 73/287] [Batch classify loss: 1.097145]
+[Epoch 1/40] [Batch 74/287] [Batch classify loss: 1.136507]
+[Epoch 1/40] [Batch 75/287] [Batch classify loss: 1.092370]
+[Epoch 1/40] [Batch 76/287] [Batch classify loss: 1.131090]
+[Epoch 1/40] [Batch 77/287] [Batch classify loss: 1.122466]
+[Epoch 1/40] [Batch 78/287] [Batch classify loss: 1.165916]
+[Epoch 1/40] [Batch 79/287] [Batch classify loss: 1.176068]
+[Epoch 1/40] [Batch 80/287] [Batch classify loss: 1.161254]
+[Epoch 1/40] [Batch 81/287] [Batch classify loss: 1.118944]
+[Epoch 1/40] [Batch 82/287] [Batch classify loss: 1.059174]
+[Epoch 1/40] [Batch 83/287] [Batch classify loss: 1.021115]
+[Epoch 1/40] [Batch 84/287] [Batch classify loss: 1.042002]
+[Epoch 1/40] [Batch 85/287] [Batch classify loss: 1.060524]
+[Epoch 1/40] [Batch 86/287] [Batch classify loss: 1.098977]
+[Epoch 1/40] [Batch 87/287] [Batch classify loss: 1.139182]
+[Epoch 1/40] [Batch 88/287] [Batch classify loss: 1.171944]
+[Epoch 1/40] [Batch 89/287] [Batch classify loss: 1.059947]
+[Epoch 1/40] [Batch 90/287] [Batch classify loss: 1.143364]
+[Epoch 1/40] [Batch 91/287] [Batch classify loss: 1.103602]
+[Epoch 1/40] [Batch 92/287] [Batch classify loss: 1.140259]
+[Epoch 1/40] [Batch 93/287] [Batch classify loss: 1.180662]
+[Epoch 1/40] [Batch 94/287] [Batch classify loss: 0.940955]
+[Epoch 1/40] [Batch 95/287] [Batch classify loss: 1.090602]
+[Epoch 1/40] [Batch 96/287] [Batch classify loss: 1.121524]
+[Epoch 1/40] [Batch 97/287] [Batch classify loss: 1.101294]
+[Epoch 1/40] [Batch 98/287] [Batch classify loss: 1.075794]
+[Epoch 1/40] [Batch 99/287] [Batch classify loss: 1.051683]
+[Epoch 1/40] [Batch 100/287] [Batch classify loss: 1.128711]
+[Epoch 1/40] [Batch 101/287] [Batch classify loss: 1.124956]
+[Epoch 1/40] [Batch 102/287] [Batch classify loss: 1.105379]
+[Epoch 1/40] [Batch 103/287] [Batch classify loss: 1.052517]
+[Epoch 1/40] [Batch 104/287] [Batch classify loss: 1.024786]
+[Epoch 1/40] [Batch 105/287] [Batch classify loss: 1.068526]
+[Epoch 1/40] [Batch 106/287] [Batch classify loss: 1.131946]
+[Epoch 1/40] [Batch 107/287] [Batch classify loss: 1.065924]
+[Epoch 1/40] [Batch 108/287] [Batch classify loss: 1.156280]
+[Epoch 1/40] [Batch 109/287] [Batch classify loss: 1.069960]
+[Epoch 1/40] [Batch 110/287] [Batch classify loss: 1.096357]
+[Epoch 1/40] [Batch 111/287] [Batch classify loss: 1.061697]
+[Epoch 1/40] [Batch 112/287] [Batch classify loss: 1.047011]
+[Epoch 1/40] [Batch 113/287] [Batch classify loss: 1.136735]
+[Epoch 1/40] [Batch 114/287] [Batch classify loss: 1.003280]
+[Epoch 1/40] [Batch 115/287] [Batch classify loss: 1.078198]
+[Epoch 1/40] [Batch 116/287] [Batch classify loss: 1.091873]
+[Epoch 1/40] [Batch 117/287] [Batch classify loss: 1.111388]
+[Epoch 1/40] [Batch 118/287] [Batch classify loss: 1.046510]
+[Epoch 1/40] [Batch 119/287] [Batch classify loss: 1.094401]
+[Epoch 1/40] [Batch 120/287] [Batch classify loss: 1.057507]
+[Epoch 1/40] [Batch 121/287] [Batch classify loss: 1.087308]
+[Epoch 1/40] [Batch 122/287] [Batch classify loss: 1.069233]
+[Epoch 1/40] [Batch 123/287] [Batch classify loss: 1.074174]
+[Epoch 1/40] [Batch 124/287] [Batch classify loss: 1.121982]
+[Epoch 1/40] [Batch 125/287] [Batch classify loss: 1.137944]
+[Epoch 1/40] [Batch 126/287] [Batch classify loss: 1.105955]
+[Epoch 1/40] [Batch 127/287] [Batch classify loss: 1.099588]
+[Epoch 1/40] [Batch 128/287] [Batch classify loss: 1.045874]
+[Epoch 1/40] [Batch 129/287] [Batch classify loss: 1.138285]
+[Epoch 1/40] [Batch 130/287] [Batch classify loss: 1.111080]
+[Epoch 1/40] [Batch 131/287] [Batch classify loss: 1.065824]
+[Epoch 1/40] [Batch 132/287] [Batch classify loss: 1.070093]
+[Epoch 1/40] [Batch 133/287] [Batch classify loss: 1.083440]
+[Epoch 1/40] [Batch 134/287] [Batch classify loss: 1.168200]
+[Epoch 1/40] [Batch 135/287] [Batch classify loss: 1.112889]
+[Epoch 1/40] [Batch 136/287] [Batch classify loss: 1.143862]
+[Epoch 1/40] [Batch 137/287] [Batch classify loss: 1.070257]
+[Epoch 1/40] [Batch 138/287] [Batch classify loss: 1.097749]
+[Epoch 1/40] [Batch 139/287] [Batch classify loss: 1.091485]
+[Epoch 1/40] [Batch 140/287] [Batch classify loss: 1.091680]
+[Epoch 1/40] [Batch 141/287] [Batch classify loss: 1.107158]
+[Epoch 1/40] [Batch 142/287] [Batch classify loss: 1.098772]
+[Epoch 1/40] [Batch 143/287] [Batch classify loss: 1.071167]
+[Epoch 1/40] [Batch 144/287] [Batch classify loss: 1.041831]
+[Epoch 1/40] [Batch 145/287] [Batch classify loss: 1.058409]
+[Epoch 1/40] [Batch 146/287] [Batch classify loss: 1.119390]
+[Epoch 1/40] [Batch 147/287] [Batch classify loss: 1.111012]
+[Epoch 1/40] [Batch 148/287] [Batch classify loss: 1.070395]
+[Epoch 1/40] [Batch 149/287] [Batch classify loss: 1.087503]
+[Epoch 1/40] [Batch 150/287] [Batch classify loss: 1.066745]
+[Epoch 1/40] [Batch 151/287] [Batch classify loss: 1.050414]
+[Epoch 1/40] [Batch 152/287] [Batch classify loss: 1.057881]
+[Epoch 1/40] [Batch 153/287] [Batch classify loss: 1.169045]
+[Epoch 1/40] [Batch 154/287] [Batch classify loss: 1.116175]
+[Epoch 1/40] [Batch 155/287] [Batch classify loss: 1.019320]
+[Epoch 1/40] [Batch 156/287] [Batch classify loss: 1.121435]
+[Epoch 1/40] [Batch 157/287] [Batch classify loss: 1.107017]
+[Epoch 1/40] [Batch 158/287] [Batch classify loss: 1.144578]
+[Epoch 1/40] [Batch 159/287] [Batch classify loss: 1.049560]
+[Epoch 1/40] [Batch 160/287] [Batch classify loss: 1.127208]
+[Epoch 1/40] [Batch 161/287] [Batch classify loss: 1.144937]
+[Epoch 1/40] [Batch 162/287] [Batch classify loss: 1.026975]
+[Epoch 1/40] [Batch 163/287] [Batch classify loss: 1.132422]
+[Epoch 1/40] [Batch 164/287] [Batch classify loss: 1.117283]
+[Epoch 1/40] [Batch 165/287] [Batch classify loss: 1.188987]
+[Epoch 1/40] [Batch 166/287] [Batch classify loss: 1.006705]
+[Epoch 1/40] [Batch 167/287] [Batch classify loss: 1.055830]
+[Epoch 1/40] [Batch 168/287] [Batch classify loss: 1.131054]
+[Epoch 1/40] [Batch 169/287] [Batch classify loss: 1.076687]
+[Epoch 1/40] [Batch 170/287] [Batch classify loss: 1.160563]
+[Epoch 1/40] [Batch 171/287] [Batch classify loss: 1.099053]
+[Epoch 1/40] [Batch 172/287] [Batch classify loss: 1.224054]
+[Epoch 1/40] [Batch 173/287] [Batch classify loss: 1.154989]
+[Epoch 1/40] [Batch 174/287] [Batch classify loss: 1.089010]
+[Epoch 1/40] [Batch 175/287] [Batch classify loss: 1.049181]
+[Epoch 1/40] [Batch 176/287] [Batch classify loss: 1.041342]
+[Epoch 1/40] [Batch 177/287] [Batch classify loss: 1.119536]
+[Epoch 1/40] [Batch 178/287] [Batch classify loss: 1.097934]
+[Epoch 1/40] [Batch 179/287] [Batch classify loss: 1.032656]
+[Epoch 1/40] [Batch 180/287] [Batch classify loss: 1.159187]
+[Epoch 1/40] [Batch 181/287] [Batch classify loss: 1.076313]
+[Epoch 1/40] [Batch 182/287] [Batch classify loss: 1.088914]
+[Epoch 1/40] [Batch 183/287] [Batch classify loss: 1.046701]
+[Epoch 1/40] [Batch 184/287] [Batch classify loss: 1.036281]
+[Epoch 1/40] [Batch 185/287] [Batch classify loss: 1.140411]
+[Epoch 1/40] [Batch 186/287] [Batch classify loss: 1.101603]
+[Epoch 1/40] [Batch 187/287] [Batch classify loss: 1.177886]
+[Epoch 1/40] [Batch 188/287] [Batch classify loss: 0.993391]
+[Epoch 1/40] [Batch 189/287] [Batch classify loss: 1.052076]
+[Epoch 1/40] [Batch 190/287] [Batch classify loss: 1.083096]
+[Epoch 1/40] [Batch 191/287] [Batch classify loss: 1.105063]
+[Epoch 1/40] [Batch 192/287] [Batch classify loss: 1.061122]
+[Epoch 1/40] [Batch 193/287] [Batch classify loss: 1.062457]
+[Epoch 1/40] [Batch 194/287] [Batch classify loss: 1.051003]
+[Epoch 1/40] [Batch 195/287] [Batch classify loss: 1.059081]
+[Epoch 1/40] [Batch 196/287] [Batch classify loss: 1.104230]
+[Epoch 1/40] [Batch 197/287] [Batch classify loss: 1.130834]
+[Epoch 1/40] [Batch 198/287] [Batch classify loss: 1.015947]
+[Epoch 1/40] [Batch 199/287] [Batch classify loss: 1.058150]
+[Epoch 1/40] [Batch 200/287] [Batch classify loss: 1.161233]
+[Epoch 1/40] [Batch 201/287] [Batch classify loss: 1.049646]
+[Epoch 1/40] [Batch 202/287] [Batch classify loss: 1.120285]
+[Epoch 1/40] [Batch 203/287] [Batch classify loss: 1.036628]
+[Epoch 1/40] [Batch 204/287] [Batch classify loss: 1.057213]
+[Epoch 1/40] [Batch 205/287] [Batch classify loss: 1.007721]
+[Epoch 1/40] [Batch 206/287] [Batch classify loss: 1.121377]
+[Epoch 1/40] [Batch 207/287] [Batch classify loss: 1.024382]
+[Epoch 1/40] [Batch 208/287] [Batch classify loss: 1.023967]
+[Epoch 1/40] [Batch 209/287] [Batch classify loss: 1.061513]
+[Epoch 1/40] [Batch 210/287] [Batch classify loss: 1.063030]
+[Epoch 1/40] [Batch 211/287] [Batch classify loss: 1.083369]
+[Epoch 1/40] [Batch 212/287] [Batch classify loss: 1.047257]
+[Epoch 1/40] [Batch 213/287] [Batch classify loss: 1.096641]
+[Epoch 1/40] [Batch 214/287] [Batch classify loss: 1.071559]
+[Epoch 1/40] [Batch 215/287] [Batch classify loss: 1.158121]
+[Epoch 1/40] [Batch 216/287] [Batch classify loss: 1.103750]
+[Epoch 1/40] [Batch 217/287] [Batch classify loss: 1.073371]
+[Epoch 1/40] [Batch 218/287] [Batch classify loss: 1.114845]
+[Epoch 1/40] [Batch 219/287] [Batch classify loss: 1.147202]
+[Epoch 1/40] [Batch 220/287] [Batch classify loss: 1.032804]
+[Epoch 1/40] [Batch 221/287] [Batch classify loss: 1.111214]
+[Epoch 1/40] [Batch 222/287] [Batch classify loss: 1.114465]
+[Epoch 1/40] [Batch 223/287] [Batch classify loss: 1.139190]
+[Epoch 1/40] [Batch 224/287] [Batch classify loss: 1.054675]
+[Epoch 1/40] [Batch 225/287] [Batch classify loss: 1.070084]
+[Epoch 1/40] [Batch 226/287] [Batch classify loss: 1.100249]
+[Epoch 1/40] [Batch 227/287] [Batch classify loss: 1.105269]
+[Epoch 1/40] [Batch 228/287] [Batch classify loss: 1.127415]
+[Epoch 1/40] [Batch 229/287] [Batch classify loss: 1.078455]
+[Epoch 1/40] [Batch 230/287] [Batch classify loss: 1.079178]
+[Epoch 1/40] [Batch 231/287] [Batch classify loss: 1.048265]
+[Epoch 1/40] [Batch 232/287] [Batch classify loss: 1.036406]
+[Epoch 1/40] [Batch 233/287] [Batch classify loss: 1.050177]
+[Epoch 1/40] [Batch 234/287] [Batch classify loss: 1.037178]
+[Epoch 1/40] [Batch 235/287] [Batch classify loss: 1.139687]
+[Epoch 1/40] [Batch 236/287] [Batch classify loss: 1.089213]
+[Epoch 1/40] [Batch 237/287] [Batch classify loss: 1.071861]
+[Epoch 1/40] [Batch 238/287] [Batch classify loss: 1.023541]
+[Epoch 1/40] [Batch 239/287] [Batch classify loss: 1.041624]
+[Epoch 1/40] [Batch 240/287] [Batch classify loss: 1.135519]
+[Epoch 1/40] [Batch 241/287] [Batch classify loss: 1.075598]
+[Epoch 1/40] [Batch 242/287] [Batch classify loss: 1.076500]
+[Epoch 1/40] [Batch 243/287] [Batch classify loss: 1.065155]
+[Epoch 1/40] [Batch 244/287] [Batch classify loss: 1.080799]
+[Epoch 1/40] [Batch 245/287] [Batch classify loss: 1.106585]
+[Epoch 1/40] [Batch 246/287] [Batch classify loss: 1.101296]
+[Epoch 1/40] [Batch 247/287] [Batch classify loss: 1.148532]
+[Epoch 1/40] [Batch 248/287] [Batch classify loss: 1.159742]
+[Epoch 1/40] [Batch 249/287] [Batch classify loss: 1.074823]
+[Epoch 1/40] [Batch 250/287] [Batch classify loss: 1.107988]
+[Epoch 1/40] [Batch 251/287] [Batch classify loss: 1.094235]
+[Epoch 1/40] [Batch 252/287] [Batch classify loss: 1.107159]
+[Epoch 1/40] [Batch 253/287] [Batch classify loss: 1.072488]
+[Epoch 1/40] [Batch 254/287] [Batch classify loss: 1.090741]
+[Epoch 1/40] [Batch 255/287] [Batch classify loss: 1.116976]
+[Epoch 1/40] [Batch 256/287] [Batch classify loss: 1.086769]
+[Epoch 1/40] [Batch 257/287] [Batch classify loss: 1.117603]
+[Epoch 1/40] [Batch 258/287] [Batch classify loss: 1.062941]
+[Epoch 1/40] [Batch 259/287] [Batch classify loss: 1.053650]
+[Epoch 1/40] [Batch 260/287] [Batch classify loss: 1.105685]
+[Epoch 1/40] [Batch 261/287] [Batch classify loss: 1.054873]
+[Epoch 1/40] [Batch 262/287] [Batch classify loss: 1.118953]
+[Epoch 1/40] [Batch 263/287] [Batch classify loss: 1.056560]
+[Epoch 1/40] [Batch 264/287] [Batch classify loss: 1.083675]
+[Epoch 1/40] [Batch 265/287] [Batch classify loss: 1.097268]
+[Epoch 1/40] [Batch 266/287] [Batch classify loss: 1.129090]
+[Epoch 1/40] [Batch 267/287] [Batch classify loss: 1.120033]
+[Epoch 1/40] [Batch 268/287] [Batch classify loss: 1.116639]
+[Epoch 1/40] [Batch 269/287] [Batch classify loss: 1.062945]
+[Epoch 1/40] [Batch 270/287] [Batch classify loss: 1.031397]
+[Epoch 1/40] [Batch 271/287] [Batch classify loss: 1.106706]
+[Epoch 1/40] [Batch 272/287] [Batch classify loss: 1.088740]
+[Epoch 1/40] [Batch 273/287] [Batch classify loss: 1.038027]
+[Epoch 1/40] [Batch 274/287] [Batch classify loss: 1.149486]
+[Epoch 1/40] [Batch 275/287] [Batch classify loss: 1.041324]
+[Epoch 1/40] [Batch 276/287] [Batch classify loss: 1.084308]
+[Epoch 1/40] [Batch 277/287] [Batch classify loss: 1.067498]
+[Epoch 1/40] [Batch 278/287] [Batch classify loss: 1.068380]
+[Epoch 1/40] [Batch 279/287] [Batch classify loss: 1.065767]
+[Epoch 1/40] [Batch 280/287] [Batch classify loss: 1.079749]
+[Epoch 1/40] [Batch 281/287] [Batch classify loss: 1.100807]
+[Epoch 1/40] [Batch 282/287] [Batch classify loss: 0.999350]
+[Epoch 1/40] [Batch 283/287] [Batch classify loss: 1.062531]
+[Epoch 1/40] [Batch 284/287] [Batch classify loss: 1.089589]
+[Epoch 1/40] [Batch 285/287] [Batch classify loss: 1.103081]
+[Epoch 1/40] [Batch 286/287] [Batch classify loss: 1.007755]
+[Epoch 1/40] [Batch 287/287] [Batch classify loss: 1.625149]
+0001 epoch rmt trained classifier accuary on the clean testing examples:90.9880%
+0001 epoch rmt trained classifier loss on the clean testing examples:0.4664
+0001 epoch rmt trained classifier accuary on adversarial testset:3.0200%
+0001 epoch rmt trained classifier loss on adversarial testset:11.589254379272461
+
+
+1epoch learning rate:0.001
+[Epoch 2/40] [Batch 1/287] [Batch classify loss: 1.029302]
+[Epoch 2/40] [Batch 2/287] [Batch classify loss: 1.000021]
+[Epoch 2/40] [Batch 3/287] [Batch classify loss: 1.057522]
+[Epoch 2/40] [Batch 4/287] [Batch classify loss: 1.030111]
+[Epoch 2/40] [Batch 5/287] [Batch classify loss: 1.052641]
+[Epoch 2/40] [Batch 6/287] [Batch classify loss: 1.029986]
+[Epoch 2/40] [Batch 7/287] [Batch classify loss: 1.075372]
+[Epoch 2/40] [Batch 8/287] [Batch classify loss: 0.990807]
+[Epoch 2/40] [Batch 9/287] [Batch classify loss: 1.047315]
+[Epoch 2/40] [Batch 10/287] [Batch classify loss: 1.069613]
+[Epoch 2/40] [Batch 11/287] [Batch classify loss: 1.049809]
+[Epoch 2/40] [Batch 12/287] [Batch classify loss: 1.013715]
+[Epoch 2/40] [Batch 13/287] [Batch classify loss: 1.091520]
+[Epoch 2/40] [Batch 14/287] [Batch classify loss: 1.078518]
+[Epoch 2/40] [Batch 15/287] [Batch classify loss: 1.077660]
+[Epoch 2/40] [Batch 16/287] [Batch classify loss: 1.037851]
+[Epoch 2/40] [Batch 17/287] [Batch classify loss: 1.049931]
+[Epoch 2/40] [Batch 18/287] [Batch classify loss: 1.104615]
+[Epoch 2/40] [Batch 19/287] [Batch classify loss: 1.133774]
+[Epoch 2/40] [Batch 20/287] [Batch classify loss: 1.030723]
+[Epoch 2/40] [Batch 21/287] [Batch classify loss: 1.035765]
+[Epoch 2/40] [Batch 22/287] [Batch classify loss: 1.067331]
+[Epoch 2/40] [Batch 23/287] [Batch classify loss: 1.038037]
+[Epoch 2/40] [Batch 24/287] [Batch classify loss: 1.041908]
+[Epoch 2/40] [Batch 25/287] [Batch classify loss: 1.087472]
+[Epoch 2/40] [Batch 26/287] [Batch classify loss: 1.079246]
+[Epoch 2/40] [Batch 27/287] [Batch classify loss: 1.002211]
+[Epoch 2/40] [Batch 28/287] [Batch classify loss: 1.124430]
+[Epoch 2/40] [Batch 29/287] [Batch classify loss: 1.088125]
+[Epoch 2/40] [Batch 30/287] [Batch classify loss: 1.079306]
+[Epoch 2/40] [Batch 31/287] [Batch classify loss: 1.109077]
+[Epoch 2/40] [Batch 32/287] [Batch classify loss: 1.077000]
+[Epoch 2/40] [Batch 33/287] [Batch classify loss: 1.064697]
+[Epoch 2/40] [Batch 34/287] [Batch classify loss: 1.052217]
+[Epoch 2/40] [Batch 35/287] [Batch classify loss: 1.070264]

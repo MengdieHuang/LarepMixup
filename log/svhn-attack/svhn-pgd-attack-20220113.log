@@ -27,3 +27,119 @@ standard trained classifier loss on adversarial testset:1.0707833766937256
 ---------------------------------------
 
 
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00004
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.05
+pixel adversarial attack.............
+initlize attack classifier
+generate pixel adversarial exampels
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.34s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.43s/it]                                                            PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.37s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.44s/it]                                                            finished generate adversarial examples !
+Saving svhn trainset  adversarial examples...
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:65.6250%
+standard trained classifier loss on adversarial testset:1.935340166091919
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00005
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.1
+pixel adversarial attack.............
+initlize attack classifier
+generate pixel adversarial exampels
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.38s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.43s/it]                                                            PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.53s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.45s/it]                                                            finished generate adversarial examples !
+Saving svhn trainset  adversarial examples...
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:39.0625%
+standard trained classifier loss on adversarial testset:6.44287109375
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00006
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.2
+pixel adversarial attack.............
+initlize attack classifier
+generate pixel adversarial exampels
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.62s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.52s/it]                                                            PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.67s/it]PGD - Batches: 100%|██████████| 2/2 [00:03<00:00,  1.58s/it]                                                            finished generate adversarial examples !
+Saving svhn trainset  adversarial examples...
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:15.6250%
+standard trained classifier loss on adversarial testset:14.087091445922852
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220113
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/pgd/alexnet-svhn/20220113/00007
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.3
+pixel adversarial attack.............
+initlize attack classifier
+generate pixel adversarial exampels
+generating adversarial examples...
+PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1143: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  x_grad = torch.tensor(x).to(self._device)
+/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py:1144: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_grad = torch.tensor(y).to(self._device)
+PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.49s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.48s/it]                                                            PGD - Batches:   0%|          | 0/2 [00:00<?, ?it/s]PGD - Batches:  50%|█████     | 1/2 [00:01<00:01,  1.33s/it]PGD - Batches: 100%|██████████| 2/2 [00:02<00:00,  1.40s/it]                                                            finished generate adversarial examples !
+Saving svhn trainset  adversarial examples...
+Saving svhn testset adversarial examples...
+standard trained classifier accuary on adversarial testset:9.3750%
+standard trained classifier loss on adversarial testset:20.01822280883789
+---------------------------------------
+
+
