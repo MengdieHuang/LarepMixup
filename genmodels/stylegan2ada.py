@@ -1425,14 +1425,15 @@ class MaggieStylegan2ada:
         mix_num = 0
         if opt.mix_w_num == 2:      
             print("--------------------Dual mixup----------------------")
+
             for i in range(len(projected_w_set_x)):                        #   projected_w_set列表共有63个张量
                 #------------20211111------------
-                if i in [1,5,7,8,18,34,40,54]:  #8
-                # if i in [5,7]:  #8
+                # if i in [1,5,7,8,18,34,40,54]:  #8
+                if i in [2,3,26,27,28,29]:  #8
 
                 #-------------------------
                     for j in range(len(projected_w_set_x)):
-                        if j in [1,5,7,8,18,34,40,54,6,12,15,20,29,30,41,43,46,60,62]:
+                        if j in [0,1,2,3,20,21,24,25,26,27,28,29]:
                         # if j in [8,34]:
 
                             if j != i:
@@ -1509,17 +1510,17 @@ class MaggieStylegan2ada:
             print("-------------------Ternary mixup----------------------")
             for i in range(len(projected_w_set_x)):
                 #------------20211111------------
-                # if i in [1,5,7,8,18,34,40,54]:  #8
-                if i in [5,7]:  #8
+                # if i in [0,1,2,3,20,21,24,25,26,27,28,29]:  #8
+                if i in [2,3,26,27]:  #4
 
                 #-------------------------                
                     for j in range(len(projected_w_set_x)):
                         #------------20211111------------
                         # if j in [1,5,7,8,18,34,40,54,6,12,15,20,29,30,41,43,46,60,62]:  #19                 
-                        if j in [8,34]:
+                        if j in [2,3,26,27,28,29]: #6
 
                             for k in range(len(projected_w_set_x)):
-                                if k in [1,5,7,8,18,34,40,54,6,12,15,20,29,30,41,43,46,60,62,2,9,11,19,26,47,59]:   #26
+                                if k in [0,1,2,3,20,21,24,25,26,27,28,29]:   #12
                                     if k != j and j != i :
                                         if mix_num < opt.mix_img_num:
                                             # print(f"projected_w_set_x[{i}]:{projected_w_set_x[i]}")
@@ -2321,8 +2322,8 @@ class MaggieStylegan2ada:
 
                         img_pil = PIL.Image.fromarray(img, 'L')
 
-                    # #   关闭存储 20211110
-                    # img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.png')       #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
+                    #   关闭存储 20211110
+                    img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.png')       #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
 
                     if self._args.defense_mode != 'rmt':
                         np.savez(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed-image.npz', w = generated_x.cpu().numpy())                                                #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
@@ -2457,7 +2458,7 @@ class MaggieStylegan2ada:
                         img_pil = PIL.Image.fromarray(img, 'L')                                      
 
                     # #   关闭存储 20211110
-                    # img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}+{int(w3_label_index)}-{w3_label_name}-mixed-image.png')                                         #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
+                    img = img_pil.save(f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}+{int(w3_label_index)}-{w3_label_name}-mixed-image.png')                                         #   idx实则一直为0，因为ws中只有一个w，该函数是处理单张投影向量的
 
                     # label_path = f'{outdir}/{interpolated_w_index:08d}-{int(w1_label_index)}-{w1_label_name}+{int(w2_label_index)}-{w2_label_name}-mixed_label.npz'
                     # np.savez(label_path, w = mixed_label.unsqueeze(0).cpu().numpy())                                                #   将latent code w村委outdir定义的输出路径下的projected_w.npz文件
