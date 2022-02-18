@@ -169,7 +169,7 @@ def parse_arguments():
         
         #-------------------------arguments for classifier attack-------------------------
         parser_object.add_argument('--attack_mode', help='attack method', type=str, default='fgsm', 
-        choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd','fog','snow','elastic','gabor','jpeg'])
+        choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd','fog','snow','elastic','gabor','jpeg','autoattack'])
 
 
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)

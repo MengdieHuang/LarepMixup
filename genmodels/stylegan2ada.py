@@ -1429,11 +1429,11 @@ class MaggieStylegan2ada:
             for i in range(len(projected_w_set_x)):                        #   projected_w_set列表共有63个张量
                 #------------20211111------------
                 # if i in [1,5,7,8,18,34,40,54]:  #8
-                if i in [2,3,26,27,28,29]:  #8
+                if i in [2,3,26,27,28,29]:  #6
 
                 #-------------------------
                     for j in range(len(projected_w_set_x)):
-                        if j in [0,1,2,3,20,21,24,25,26,27,28,29]:
+                        if j in [0,1,2,3,20,21,24,25,26,27,28,29]: #12
                         # if j in [8,34]:
 
                             if j != i:

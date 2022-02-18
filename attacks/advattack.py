@@ -175,9 +175,14 @@ class AdvAttack():
             advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
         elif self._args.attack_mode =='pgd': 
             # advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.3, targeted=False)   #默认eps是0.3
-            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   #默认eps是0.3            
+            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   #默认eps是0.3  
+
+        #new auto attack 20220217
+        elif self._args.attack_mode =='autoattack':   
+            advgenmodel = art.attacks.evasion.AutoAttack(estimator=self._artmodel, eps=self._args.attack_eps, estimator_orig=self._artmodel, targeted=False)
+
         elif self._args.attack_mode == None:
-            raise Exception('please input the attack mode')           
+            raise Exception('please input the attack mode')      
 
         return advgenmodel
 
@@ -211,9 +216,20 @@ class AdvAttack():
             print('generating adversarial examples...')
             # self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
             # self._y_train_adv = self._y_train
+
+            # raise error("maggie test stop here 20220217")
             self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
             self._y_test_adv = self._y_test
             print('finished generate adversarial examples !')
+
+            print("self._x_test_adv.shape:",self._x_test_adv.shape)
+            print("self._y_test_adv.shape:",self._y_test_adv.shape)
+
+            # self._x_test_adv.shape: (10000, 3, 32, 32)
+            # self._y_test_adv.shape: (10000,)
+
+            # raise error("maggie test stop here 20220217")
+
 
             #numpy转tensor
             # self._x_train_adv = torch.from_numpy(self._x_train_adv).cuda()
@@ -355,9 +371,9 @@ class AdvAttack():
             #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
 
             #     save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-            #     save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
-            print(f"Saving {self._args.dataset} testset adversarial examples...")
-            
+            #     save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
+            #  
+            print(f"Saving {self._args.dataset} testset adversarial examples...")            
             for img_index, _ in enumerate(self._x_test_adv):
                 save_adv_img = self._x_test_adv[img_index]
                 # save_cle_img = self._x_test[img_index]
