@@ -1,0 +1,5 @@
+cifar10-autoattack-20220217.sh: line 104: /home/xieyi/anaconda3/envs/mmat/bin/python: Permission denied
+cifar10-autoattack-20220217.sh: line 107: /home/xieyi/anaconda3/envs/mmat/bin/python: Permission denied
+cifar10-autoattack-20220217.sh: line 110: /home/xieyi/anaconda3/envs/mmat/bin/python: Permission denied
+cifar10-autoattack-20220217.sh: line 113: /home/xieyi/anaconda3/envs/mmat/bin/python: Permission denied
+cifar10-autoattack-20220217.sh: line 116: /home/xieyi/anaconda3/envs/mmat/bin/python: Permission denied

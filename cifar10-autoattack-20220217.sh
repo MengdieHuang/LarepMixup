@@ -52,8 +52,8 @@ source /home/xieyi/anaconda3/bin/activate mmat
 # CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220218.py run --mode attack --attack_mode autoattack --whitebox --exp_name resnet34-cifar10 --cla_model resnet34 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/resnet34-cifar10/20210907/00030-testacc-0.7739/train-cifar10-dataset/standard-trained-classifier-resnet34-on-clean-cifar10-finished.pkl --dataset cifar10 --attack_eps 0.3 >> /home/maggie/mmat/log/cifar10-attack/cifar10-resnet34-autoattack-20220218.log 2>&1
 
 #----------------------resnet50---------------------------------
-#resnet50 cifar autoattack 20220218 
-CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220218.py run --mode attack --attack_mode autoattack --whitebox --exp_name resnet50-cifar10 --cla_model resnet50 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl --dataset cifar10 --attack_eps 0.02 >> /home/maggie/mmat/log/cifar10-attack/cifar10-resnet50-autoattack-20220218.log 2>&1
+# #resnet50 cifar autoattack 20220218 
+# CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220218.py run --mode attack --attack_mode autoattack --whitebox --exp_name resnet50-cifar10 --cla_model resnet50 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl --dataset cifar10 --attack_eps 0.02 >> /home/maggie/mmat/log/cifar10-attack/cifar10-resnet50-autoattack-20220218.log 2>&1
 
 #resnet50 cifar autoattack 20220218 
 CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220218.py run --mode attack --attack_mode autoattack --whitebox --exp_name resnet50-cifar10 --cla_model resnet50 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl --dataset cifar10 --attack_eps 0.05 >> /home/maggie/mmat/log/cifar10-attack/cifar10-resnet50-autoattack-20220218.log 2>&1
