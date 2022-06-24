@@ -57,7 +57,7 @@ class AdvAttack():
             self._artmodel = self.__getartmodel__()
 
             # initilize the generate model of the art format attack model
-            self._advgenmodel = self.__getadvgenmodel__()
+            self._advgenmodel = self.__getadvgenmodel__() # 返回多种像素对抗攻击生成模型
 
         elif args.latentattack == True:
             print("generate latent adversarial exampels")
@@ -68,27 +68,29 @@ class AdvAttack():
             elif self._args.blackbox == True:
                 self._model = torchvision.models.resnet34(pretrained=True)
 
-            self._attacker = self.__getadvertorchmodel__()
+            self._attacker = self.__getadvertorchmodel__() # 返回多种潜层对抗攻击生成模型
 
-    def __getadvertorchmodel__(self):   #潜层对抗攻击
-
+    def __getadvertorchmodel__(self):   # 潜层对抗攻击
+        # OM-PGD 攻击
         if self._args.attack_mode =='pgd':
             print("latent pgd attack")
             attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
             
+        # OM-FGSM 攻击    
         elif self._args.attack_mode =='fgsm':
             print("latent fgsm attack")
             print("eps：",self._args.attack_eps)
             attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
-        elif self._args.attack_mode =='bim':
-            attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
-
+        # OM-CW 攻击 
         elif self._args.attack_mode =='cw':
             attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
-        elif self._args.attack_mode =='deepfool':
-            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+        # elif self._args.attack_mode =='bim':
+        #     attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+     
+        # elif self._args.attack_mode =='deepfool':
+        #     attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
 
         return attacker
 
@@ -158,26 +160,34 @@ class AdvAttack():
 
     def __getadvgenmodel__(self) -> "art.attacks.evasion":
         
-        if self._args.attack_mode == 'fgsm':                              #   FGSM攻击
+        #   FGSM攻击
+        if self._args.attack_mode == 'fgsm':                              
             print('Get FGSM examples generate model')
-            # advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=0.2, targeted=False)    #   estimator: A trained classifier. eps: Attack step size (input variation).
             print("self._args.attack_eps:",self._args.attack_eps)
-            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)    #   estimator: A trained classifier. eps: Attack step size (input variation).
+            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)    
+            #   estimator: A trained classifier. eps: Attack step size (input variation).
 
-        elif self._args.attack_mode =='deepfool':                         #   DeepFool攻击
+        #   DeepFool攻击
+        elif self._args.attack_mode =='deepfool':                         
             print('Get DeepFool examples generate model')
-            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=0.3)                         #   estimator: A trained classifier. eps: Attack step size (input variation).
-        elif self._args.attack_mode =='bim':                              #   BIM攻击
+            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=self._args.attack_eps)                         
+
+        #   BIM攻击
+        elif self._args.attack_mode =='bim':                              
             print('Get BIM(PGD) examples generate model')
-            advgenmodel = art.attacks.evasion.BasicIterativeMethod(estimator=self._artmodel, eps=0.3, targeted=False)  #   estimator: A trained classifier. eps: Attack step size (input variation).
-        elif self._args.attack_mode =='cw':                               #   CW攻击
+            advgenmodel = art.attacks.evasion.BasicIterativeMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)  
+
+        #   CW攻击
+        elif self._args.attack_mode =='cw':                               
             print('Get CW examples generate model')
             advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
+        
+        #   PGD攻击
         elif self._args.attack_mode =='pgd': 
-            # advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=0.3, targeted=False)   #默认eps是0.3
-            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   #默认eps是0.3  
+            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   
+            # 默认eps是0.3  
 
-        #new auto attack 20220217
+        #   auto attack攻击 20220217
         elif self._args.attack_mode =='autoattack':   
             advgenmodel = art.attacks.evasion.AutoAttack(estimator=self._artmodel, eps=self._args.attack_eps, estimator_orig=self._artmodel, targeted=False)
 
@@ -369,7 +379,8 @@ class AdvAttack():
 
             classification = self.__labelnames__() 
             print("label_names:",classification)        
-     
+            #   label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+            
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
@@ -410,33 +421,43 @@ class AdvAttack():
 
         elif self._args.latentattack == True: # 表征层对抗样本
             classification = self.__labelnames__() 
-            # os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
-            # os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
+            print("label_names:",classification)  
+
+            # os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
-            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
 
-
-            print(f"Saving {self._args.dataset} testset adversarial examples...")
-            for img_index, _ in enumerate(self._x_test_adv):
-                save_adv_img = self._x_test_adv[img_index]
-
-                # save_cle_img = self._x_test[img_index]
-                img_true_label = self._y_test_adv[img_index]
-
-                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                
-                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-
-                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-
+            # # 存储训练集对抗样本 
             # print(f"Saving {self._args.dataset} trainset adversarial examples...")
             # for img_index, _ in enumerate(self._x_test_adv):
             #     save_adv_img = self._x_test_adv[img_index]
             #     # save_cle_img = self._x_test[img_index]
             #     img_true_label = self._y_test_adv[img_index]
 
+            #     # 存储对抗样本npz
             #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                
+            #     # 存储对抗样本png
             #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
+
+            #     # 存储干净样本png
+            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+            # 存储测试集对抗样本
+            print(f"Saving {self._args.dataset} testset adversarial examples...")
+            for img_index, _ in enumerate(self._x_test_adv):
+                save_adv_img = self._x_test_adv[img_index]
+                # save_cle_img = self._x_test[img_index]
+                img_true_label = self._y_test_adv[img_index]
+
+                # 存储对抗样本npz
+                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                
+                # 存储对抗样本png
+                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+                # 存储干净样本png
+                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
+        print("save adversarial examples finished")
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
         if exp_result_dir is not None:
@@ -466,7 +487,6 @@ class AdvAttack():
 
         # self.__saveadvpng__()
         return self._x_test_adv, self._y_test_adv         #   GPU tensor        
-
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):
         classifier.eval()   #   eval mode        

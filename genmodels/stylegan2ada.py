@@ -592,8 +592,8 @@ class MaggieStylegan2ada:
     def __ramxyproject__(self):
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
-        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')  # 20220624 投影CIFAR10测试集
 
         os.makedirs(exp_result_dir,exist_ok=True)    
 
@@ -603,10 +603,10 @@ class MaggieStylegan2ada:
         projected_x_set = []
         projected_y_set = []
 
-        for index in range(len(target_x_set)):                                                                            
+        for index in range(len(target_x_set)):  #   在一个batch中                                                                          
             
             if  self._args.project_target_num != None:
-                if index < self._args.project_target_num:                                                                          
+                if index + opt.batch_size * self._batch_index < self._args.project_target_num:                                                                          
                     projected_w, projected_y = self.__xyproject__(
                         network_pkl = opt.gen_network_pkl,
                         target_pil = target_x_set[index],
@@ -620,6 +620,7 @@ class MaggieStylegan2ada:
                     projected_x_set.append(projected_w)
                     projected_y_set.append(projected_y)         
             else:
+                print("projecting samples num:",len(target_x_set))
                 projected_w, projected_y = self.__xyproject__(
                     network_pkl = opt.gen_network_pkl,
                     target_pil = target_x_set[index],
@@ -655,7 +656,8 @@ class MaggieStylegan2ada:
         # Load networks.
         device = torch.device('cuda')
         with dnnlib.util.open_url(network_pkl) as fp:
-            G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                         #   load_network_pkl（）会调用到persistency中的class解释器。
+            G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)                         
+            #   load_network_pkl（）会调用到persistency中的class解释器。
         
         if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='svhn' or self._args.dataset =='stl10' or self._args.dataset =='imagenetmixed10':
             if self._args.dataset =='svhn' or self._args.dataset =='stl10':
@@ -672,11 +674,13 @@ class MaggieStylegan2ada:
 
             target_uint8 = np.array(target_pil, dtype=np.uint8)
             target_uint8 = target_uint8.transpose([2, 0, 1])
-            # print("target_uint8.shape:",target_uint8.shape)                                 #         target_uint8.shape: (3, 64, 64)     
+            # print("target_uint8.shape:",target_uint8.shape)                                 
+            # target_uint8.shape: (3, 64, 64)     
 
         elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
             target_pil = target_pil.numpy()                         
-            target_pil = PIL.Image.fromarray(target_pil, 'L')     #   fromarray接收的是WHC格式或WH格式 28,28
+            target_pil = PIL.Image.fromarray(target_pil, 'L')     
+            #   fromarray接收的是WHC格式或WH格式 28,28
             
             w, h = target_pil.size
             s = min(w, h)
@@ -684,7 +688,8 @@ class MaggieStylegan2ada:
             target_pil = target_pil.resize((G.img_resolution, G.img_resolution), PIL.Image.LANCZOS) #32,32
 
             target_uint8 = np.array(target_pil, dtype=np.uint8)                                 #   32,32
-            # print("target_uint8.shape:",target_uint8.shape)                                 #   target_uint8.shape: (32, 32)
+            # print("target_uint8.shape:",target_uint8.shape)                                 
+            # target_uint8.shape: (32, 32)
             target_uint8 = torch.tensor(target_uint8).unsqueeze(0)
             target_uint8 = target_uint8.numpy()
 
@@ -706,17 +711,20 @@ class MaggieStylegan2ada:
         os.makedirs(outdir, exist_ok=True)
 
         classification = self.__labelnames__() 
-        print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-
+        # print("label_names:",classification)        
+        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+        #   label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
         label_name = classification[int(laber_index)]
         print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
+        #   label = 0005-dog
 
-        # 存原图
-        target_pil.save(f'{outdir}/original-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')                   
+        # 存原图png
+        # target_pil.save(f'{outdir}/original-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')                   
 
         # 存投影生成图
         projected_w = projected_w_steps[-1]                                                #   projected_w.shape:  torch.Size([8, 512])    
         synth_image = G.synthesis(projected_w.unsqueeze(0), noise_mode='const')            #   projected_w.unsqueeze(0).shape:  torch.Size([1, 8, 512])
+        
         # print("synth_image.shape:",synth_image.shape)                       # synth_image.shape: torch.Size([1, 1, 32, 32])  
         synth_image = (synth_image + 1) * (255/2)
         synth_image = synth_image.permute(0, 2, 3, 1).clamp(0, 255).to(torch.uint8)[0].cpu().numpy()
@@ -732,10 +740,10 @@ class MaggieStylegan2ada:
             # print("synth_image.shape:",synth_image.shape)               #   synth_image.shape: (32, 32)
             synth_image = PIL.Image.fromarray(synth_image, 'L')
 
-        #-----maggie注释 不存投影 20210909
-        synth_image.save(f'{outdir}/projected-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')
+        # 存投影png
+        # synth_image.save(f'{outdir}/projected-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')
 
-        #------------写成npz文件-------------------
+        # 存投影npz
         np.savez(f'{outdir}/{projected_img_index:08d}-{int(laber_index)}-{label_name}-projected_w.npz', w=projected_w.unsqueeze(0).cpu().numpy())      
 
         projected_w_y = int(laber_index) * torch.ones(projected_w.size(0), dtype = int) 

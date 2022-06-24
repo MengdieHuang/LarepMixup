@@ -112,12 +112,12 @@ class MixGenerate:
         return local_model_pkl
 
     #   建立流形映射
-    def projectmain(self,cle_train_dataloader):
+    def projectmain(self, cle_train_dataloader):
         #分成batch输入
         print("self._args.dataset:",self._args.dataset)
         # print("cle_train_dataloader.dataset.__dict__:",cle_train_dataloader.dataset.__dict__) #    ('/home/data/ImageNet/train/n13052670/n13052670_9998.JPEG', 8)
 
-        print("cle_train_dataloader.dataset.__dict__.keys():",cle_train_dataloader.dataset.__dict__.keys())
+        # print("cle_train_dataloader.dataset.__dict__.keys():",cle_train_dataloader.dataset.__dict__.keys())
         # cle_train_dataloader.dataset.__dict__.keys(): dict_keys(['root', 'loader', 'extensions', 'classes', 'class_to_idx', 'samples', 'targets', 'transform', 'target_transform', 'imgs'])
 
         # print("cle_train_dataloader.dataset.classes:",cle_train_dataloader.dataset.classes)             #   cle_train_dataloader.dataset.classes: None
@@ -154,7 +154,7 @@ class MixGenerate:
         # print("cle_train_dataloader.dataset.loader:",cle_train_dataloader.dataset.loader) # 加载函数
 
 
-        print("cle_train_dataloader.__dict__.keys():",cle_train_dataloader.__dict__.keys())
+        # print("cle_train_dataloader.__dict__.keys():",cle_train_dataloader.__dict__.keys())
         #   cle_train_dataloader.__dict__.keys(): dict_keys(['dataset', 'num_workers', 'prefetch_factor', 'pin_memory', 'timeout', 'worker_init_fn', '_DataLoader__multiprocessing_context', '_dataset_kind', 'batch_size', 'drop_last', 'sampler', 'batch_sampler', 'generator', 'collate_fn', 'persistent_workers', '_DataLoader__initialized', '_IterableDataset_len_called', '_iterator'])
 
         # print("cle_train_dataloader._dataset_kind:",cle_train_dataloader._dataset_kind)
@@ -194,7 +194,7 @@ class MixGenerate:
         
         # print("self.cle_y_train.type:",type(self.cle_y_train))                          #   self.cle_y_train.type: <class 'list'>
         # print("self.cle_y_train:",self.cle_y_train)                                     #   self.cle_y_train: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7, 7
-        print("self.cle_y_train.len:",len(self.cle_y_train))                            #   self.cle_y_train.len: 50000
+        # print("self.cle_y_train.len:",len(self.cle_y_train))                            #   self.cle_y_train.len: 50000
 
         # batch_num = int(np.ceil(len(self.cle_x_train) / float(self._args.batch_size)))           #   50099 /256=197
         sample_num = len(self.cle_y_train)

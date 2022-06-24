@@ -59,7 +59,8 @@ if __name__ == '__main__':
             if args.perceptualattack == False:  #   像素层对抗攻击
                 print("eps:",args.attack_eps)
                 print("pixel adversarial attack.............")
-
+                print("cla_network_pkl:",args.cla_network_pkl)
+                
                 learned_model = torch.load(args.cla_network_pkl)
                 attack_classifier = AdvAttack(args,learned_model)
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
@@ -99,13 +100,14 @@ if __name__ == '__main__':
                 loss_txt.write(str(loss_txt_content))    
         
         elif args.latentattack == True:  #   表征层对抗攻击
-            print("latent adversarial attack.............")
             print("eps:",args.attack_eps)
+            print("latent adversarial attack.............")
+            print("cla_network_pkl:",args.cla_network_pkl)
             learned_cla_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_cla_model)
             cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
-            # cle_w_test = cle_w_test[:24000]
-            # cle_y_test = cle_y_test[:24000]
+            # cle_w_test = cle_w_test[:25396]
+            # cle_y_test = cle_y_test[:25396]
             cle_w_test = cle_w_test[:10000]
             cle_y_test = cle_y_test[:10000]      
             # cle_w_test = cle_w_test[:32]
@@ -171,8 +173,11 @@ if __name__ == '__main__':
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-            generate_model.projectmain(cle_train_dataloader) 
-            # generate_model.projectmain(cle_test_dataloader) 
+            # print("projecting training set")
+            # generate_model.projectmain(cle_train_dataloader) 
+
+            print("projecting test set")
+            generate_model.projectmain(cle_test_dataloader)     #20220624 投影CIFAR10测试集
 
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")
