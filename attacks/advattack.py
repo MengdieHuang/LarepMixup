@@ -198,56 +198,67 @@ class AdvAttack():
             self._exp_result_dir = os.path.join(self._exp_result_dir,f'attack-{self._args.dataset}-dataset')
             os.makedirs(self._exp_result_dir,exist_ok=True)            
 
-            # 如果不想生成Trainset adv
             # print("PGD ing 20220111")
             self._x_train_adv=None
             self._y_train_adv=None
 
-            # self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
+            self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
             self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
 
-            """"artmodel.generate()函数生成对抗样本时只接受numpy ndarray输入，所以进行tensor转numpy"""
+            # print("self._x_train.shape:",self._x_train.shape)
+            # print("self._y_train.shape:",self._y_train.shape)
+            # print("self._x_test.shape:",self._x_test.shape)
+            # print("self._y_test.shape:",self._y_test.shape)
+            # """
+            # self._x_train.shape: torch.Size([50000, 3, 32, 32])
+            # self._y_train.shape: torch.Size([50000])
+            # self._x_test.shape: torch.Size([10000, 3, 32, 32])
+            # self._y_test.shape: torch.Size([10000])
+            # """
 
-            # self._x_train = self._x_train.cpu().numpy()                         #   self._x_train原本是GPU
-            # self._y_train = self._y_train.cpu().numpy()
+            """"self._x_train原本是GPU, artmodel.generate()函数生成对抗样本时只接受numpy ndarray输入，所以进行tensor转numpy"""
+            self._x_train = self._x_train.cpu().numpy()                            
+            self._y_train = self._y_train.cpu().numpy()
             self._x_test = self._x_test.cpu().numpy()
             self._y_test = self._y_test.cpu().numpy()
+            # print("self._x_train.shape:",self._x_train.shape)
+            # print("self._y_train.shape:",self._y_train.shape)
+            # print("self._x_test.shape:",self._x_test.shape)
+            # print("self._y_test.shape:",self._y_test.shape)
+            # """
+            # self._x_train.shape: (50000, 3, 32, 32)
+            # self._y_train.shape: (50000,)
+            # self._x_test.shape: (10000, 3, 32, 32)
+            # self._y_test.shape: (10000,)
+            # """
 
-            print('generating adversarial examples...')
-            # self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
-            # self._y_train_adv = self._y_train
-
-            # raise error("maggie test stop here 20220217")
+            print('generating trainset adversarial examples...')
+            self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
+            self._y_train_adv = self._y_train
+            print('finished generate trainset adversarial examples !')
+            print('generating testset adversarial examples...')
             self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
             self._y_test_adv = self._y_test
-            print('finished generate adversarial examples !')
+            print('finished generate testset adversarial examples !')
 
+            print("self._x_train_adv.shape:",self._x_train_adv.shape)
+            print("self._y_train_adv.shape:",self._y_train_adv.shape)
             print("self._x_test_adv.shape:",self._x_test_adv.shape)
             print("self._y_test_adv.shape:",self._y_test_adv.shape)
 
-            # self._x_test_adv.shape: (10000, 3, 32, 32)
-            # self._y_test_adv.shape: (10000,)
-
-            # raise error("maggie test stop here 20220217")
-
-
-            #numpy转tensor
-            # self._x_train_adv = torch.from_numpy(self._x_train_adv).cuda()
-            # self._y_train_adv = torch.from_numpy(self._y_train_adv).cuda()
+            # 对抗样本numpy转tensor
+            self._x_train_adv = torch.from_numpy(self._x_train_adv).cuda()
+            self._y_train_adv = torch.from_numpy(self._y_train_adv).cuda()
             self._x_test_adv = torch.from_numpy(self._x_test_adv).cuda()
             self._y_test_adv = torch.from_numpy(self._y_test_adv).cuda()
 
-            #   numpy转tensor
-            # self._x_train = torch.from_numpy(self._x_train).cuda()
-            # self._y_train = torch.from_numpy(self._y_train).cuda()
+            # 干净样本numpy转tensor
+            self._x_train = torch.from_numpy(self._x_train).cuda()
+            self._y_train = torch.from_numpy(self._y_train).cuda()
             self._x_test = torch.from_numpy(self._x_test).cuda()
             self._y_test = torch.from_numpy(self._y_test).cuda()
 
             self.__saveadvpng__()
-
-            # #如果不想生成Trainset adv
-            # self._x_train_adv=None
-            # self._y_train_adv=None
 
             return self._x_train_adv, self._y_train_adv, self._x_test_adv, self._y_test_adv         #   GPU tensor
 
@@ -357,33 +368,44 @@ class AdvAttack():
         if self._args.latentattack == False:      # 像素层对抗样本
 
             classification = self.__labelnames__() 
-            # print("label_names:",classification)        #   label_names: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+            print("label_names:",classification)        
      
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # print(f"Saving {self._args.dataset} trainset  adversarial examples...")
-            # for img_index, _ in enumerate(self._x_train_adv):
-            #     save_adv_img = self._x_train_adv[img_index]
-            #     save_cle_img = self._x_train[img_index]
-            #     img_true_label = self._y_train_adv[img_index]
+            # 存储训练集对抗样本
+            print(f"Saving {self._args.dataset} trainset adversarial examples...")
+            for img_index, _ in enumerate(self._x_train_adv):
+                save_adv_img = self._x_train_adv[img_index]
+                # save_cle_img = self._x_train[img_index]
+                img_true_label = self._y_train_adv[img_index]
                
-            #     np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      #   存投影
+                # 存储对抗样本npz
+                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
 
-            #     save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-            #     save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
-            #  
+                # 存储对抗样本png
+                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                
+                # 存储干净样本png
+                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
+             
+            # 存储测试集对抗样本 
             print(f"Saving {self._args.dataset} testset adversarial examples...")            
             for img_index, _ in enumerate(self._x_test_adv):
                 save_adv_img = self._x_test_adv[img_index]
                 # save_cle_img = self._x_test[img_index]
                 img_true_label = self._y_test_adv[img_index]
 
+                # 存储对抗样本npz
                 np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
-                
-                # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
-                save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
 
+                # 存储干净样本npz                
+                # np.savez(f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_cle_img.cpu().numpy())      
+                
+                # 存储对抗样本png                
+                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                
+                # 存储干净样本png                
                 # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
         elif self._args.latentattack == True: # 表征层对抗样本
