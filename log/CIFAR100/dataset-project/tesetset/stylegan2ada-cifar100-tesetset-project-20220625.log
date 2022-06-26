@@ -56,3 +56,52 @@ with compiling PyTorch from source.
                               !! WARNING !!
 
   platform=sys.platform))
+Done.
+label = 0049-mountain
+projecting samples num: 32
+projecting 00000001 image:
+label = 0033-forest
+projecting samples num: 32
+projecting 00000002 image:
+label = 0072-seal
+projecting samples num: 32
+projecting 00000003 image:
+label = 0051-mushroom
+projecting samples num: 32
+projecting 00000004 image:
+Traceback (most recent call last):
+  File "tasklauncher-20220624.py", line 180, in <module>
+    generate_model.projectmain(cle_test_dataloader)     #20220624 投影CIFAR10测试集
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 228, in projectmain
+    pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                                 #   numpy
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 428, in __batchproject__
+    self._model.project(self._exp_result_dir,cle_x_trainbatch,cle_y_trainbatch,batch_index)         #   调用stylegan2ada的project
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 528, in project
+    projected_w_set, projected_y_set = self.__projectmain__(self._args, self._exp_result_dir,ori_x_set, ori_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 539, in __projectmain__
+    projected_w_set, projected_y_set = self.__ramxyproject__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 632, in __ramxyproject__
+    laber_index = target_y_set[index]
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 702, in __xyproject__
+    verbose=True
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1055, in __project__
+    synth_images = G.synthesis(ws, noise_mode='const')
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 421, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 330, in forward
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "<string>", line 88, in modulated_conv2d
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/ops/conv2d_resample.py", line 147, in conv2d_resample
+    return _conv2d_wrapper(x=x, w=w, padding=[py0,px0], groups=groups, flip_weight=flip_weight)
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/ops/conv2d_resample.py", line 40, in _conv2d_wrapper
+    if kw == 1 and kh == 1 and stride == 1 and padding in [0, [0, 0], (0, 0)] and not transpose:
+KeyboardInterrupt

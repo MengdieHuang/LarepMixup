@@ -178,9 +178,13 @@ class AdvAttack():
             advgenmodel = art.attacks.evasion.BasicIterativeMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)  
 
         #   CW攻击
+        # elif self._args.attack_mode =='cw':                               
+        #     print('Get CW examples generate model')
+        #     advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
+
         elif self._args.attack_mode =='cw':                               
             print('Get CW examples generate model')
-            advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
+            advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, confidence=self._args.confidence, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
         
         #   PGD攻击
         elif self._args.attack_mode =='pgd': 

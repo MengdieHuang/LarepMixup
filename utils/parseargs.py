@@ -178,6 +178,7 @@ def parse_arguments():
         parser_object.add_argument('--blackbox',action='store_true', help='black box attack')
         parser_object.add_argument('--latentattack', action='store_true', help='latent adversarial attack')
         parser_object.add_argument('--perceptualattack', action='store_true', help='Perceptual attack')
+        parser_object.add_argument('--confidence', help='Confidence of CW adversarial examples', type=float, default=0.0)
 
 
         #-------------------------arguments for classifier defense-------------------------
