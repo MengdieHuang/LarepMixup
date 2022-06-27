@@ -1742,6 +1742,17 @@ class MaggieClassifier:
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+
+
             elif self._args.dataset == 'imagenetmixed10':
                 if self._args.cla_model == 'alexnet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 20))  
@@ -1774,6 +1785,15 @@ class MaggieClassifier:
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))                    
+
             elif self._args.dataset == 'cifar100':
                 if self._args.cla_model == 'resnet34':     
                     # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
@@ -1797,13 +1817,6 @@ class MaggieClassifier:
                 elif self._args.cla_model =='resnet18':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-                    # if epoch_index <= 5:
-                    #     lr = self._args.lr                                  #   0.01
-                    # elif epoch_index >= 6 and epoch_index <= 7:
-                    #     lr = self._args.lr * 0.1                            #   0.001
-                    # elif epoch_index >= 8:
-                    #     lr = self._args.lr * 0.01                            #   0.0001
-
                 elif self._args.cla_model =='resnet50':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
                 
@@ -1817,6 +1830,15 @@ class MaggieClassifier:
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
                 elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
             elif self._args.dataset == 'stl10':
@@ -1843,6 +1865,15 @@ class MaggieClassifier:
 
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))                    
             
         elif self._args.defense_mode == 'mmat':
             if self._args.dataset == 'svhn':
@@ -1850,22 +1881,6 @@ class MaggieClassifier:
                     
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-                    # if epoch_index <= 3:
-                    #     lr = self._args.lr                                  #   0.1
-                    # elif epoch_index >= 4 and epoch_index <= 5:
-                    #     lr = self._args.lr * 0.1                            #   0.01 
-                    # elif epoch_index >= 6 and epoch_index <= 10:
-                    #     lr = self._args.lr * 0.1                            #   0.001   
-                    # elif epoch_index >= 11:
-                    #     lr = self._args.lr * 0.1                            #   0.0001   
-
-
-                    # if epoch_index <= 3:
-                    #     lr = 0.1 + (0.1 * epoch_index)  # 0.1 -> 0.2 -> 0.3 -> 0.4 
-                    # elif epoch_index >= 4 and epoch_index <= 10:
-                    #     lr = 0.01
-                    # elif epoch_index >= 11 and epoch_index <= 20:
-                    #     lr = 0.001
                 elif self._args.cla_model == 'resnet18':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
