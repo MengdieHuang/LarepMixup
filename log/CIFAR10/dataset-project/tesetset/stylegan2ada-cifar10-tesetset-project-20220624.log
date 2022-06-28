@@ -23370,3 +23370,647 @@ label = 0006-frog
 projecting samples num: 32
 projecting 00002238 image:
 label = 0001-automobile
+projecting samples num: 32
+projecting 00002239 image:
+label = 0007-horse
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 70/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002240 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002241 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002242 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002243 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002244 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002245 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002246 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002247 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002248 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002249 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002250 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002251 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002252 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002253 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002254 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002255 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002256 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002257 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002258 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002259 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002260 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002261 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002262 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002263 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002264 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002265 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002266 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002267 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002268 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002269 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002270 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002271 image:
+label = 0009-truck
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 71/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002272 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002273 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002274 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002275 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002276 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002277 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002278 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002279 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002280 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002281 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002282 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002283 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002284 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002285 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002286 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002287 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002288 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002289 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002290 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002291 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002292 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002293 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002294 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002295 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002296 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002297 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002298 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002299 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002300 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002301 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002302 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002303 image:
+label = 0002-bird
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 72/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002304 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002305 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002306 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002307 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002308 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002309 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002310 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002311 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002312 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002313 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002314 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002315 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002316 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002317 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002318 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002319 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002320 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002321 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002322 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002323 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002324 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002325 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002326 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002327 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002328 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002329 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002330 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002331 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002332 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002333 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002334 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002335 image:
+label = 0005-dog
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 73/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002336 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002337 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002338 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002339 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002340 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002341 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002342 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002343 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002344 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002345 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002346 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002347 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002348 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002349 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002350 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002351 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002352 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002353 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002354 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002355 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002356 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002357 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002358 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002359 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002360 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002361 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002362 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002363 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002364 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002365 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002366 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002367 image:
+label = 0004-deer
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 74/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002368 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002369 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002370 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002371 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002372 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002373 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002374 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002375 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002376 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002377 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002378 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002379 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002380 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002381 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002382 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002383 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002384 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002385 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002386 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002387 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002388 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002389 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002390 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002391 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002392 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002393 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002394 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002395 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002396 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002397 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002398 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002399 image:
+label = 0008-ship
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 75/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002400 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002401 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002402 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002403 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002404 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002405 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002406 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002407 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002408 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002409 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002410 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002411 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002412 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002413 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002414 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002415 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002416 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002417 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002418 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002419 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00002420 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002421 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002422 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00002423 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002424 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002425 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002426 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00002427 image:
+label = 0005-dog
+projecting samples num: 32
+projecting 00002428 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002429 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002430 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00002431 image:
+label = 0008-ship
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *cifar10* 76/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00002432 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002433 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00002434 image:
+label = 0000-airplane
+projecting samples num: 32
+projecting 00002435 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002436 image:
+label = 0006-frog
+projecting samples num: 32
+projecting 00002437 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00002438 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00002439 image:

@@ -1,0 +1,302 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20220627/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+Traceback (most recent call last):
+  File "tasklauncher-20220627.py", line 69, in <module>
+    learned_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 579, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20220627/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20220627/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+Traceback (most recent call last):
+  File "tasklauncher-20220627.py", line 69, in <module>
+    learned_model = torch.load(args.cla_network_pkl)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 579, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20220627/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl'
+Traceback (most recent call last):
+  File "tasklauncher-20220627.py", line 6, in <module>
+    from clamodels.classifier import MaggieClassifier
+  File "/home/maggie/mmat/clamodels/classifier.py", line 28, in <module>
+    from genmodels.mixgenerate import MixGenerate
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 19, in <module>
+    import genmodels.stylegan2ada
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 25, in <module>
+    from utils.stylegan2ada.torch_utils import custom_ops
+  File "/home/maggie/mmat/utils/stylegan2ada/torch_utils/custom_ops.py", line 12, in <module>
+    import torch.utils.cpp_extension
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py", line 18, in <module>
+    from .hipify import hipify_python
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/hipify/hipify_python.py", line 689, in <module>
+    RE_PYTORCH_PREPROCESSOR = re.compile(r'(?<=\W)({0})(?=\W)'.format(PYTORCH_TRIE.pattern()))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/re.py", line 236, in compile
+    return _compile(pattern, flags)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/re.py", line 288, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_compile.py", line 764, in compile
+    p = sre_parse.parse(p, flags)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 924, in parse
+    p = _parse_sub(source, pattern, flags & SRE_FLAG_VERBOSE, 0)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 640, in _parse
+    item = subpattern[-1:]
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 166, in __getitem__
+    return SubPattern(self.pattern, self.data[index])
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/sre_parse.py", line 112, in __init__
+    self.pattern = pattern
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.02
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:53.9800%
+standard trained classifier loss on adversarial testset:2.5149309635162354
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.05
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:32.0700%
+standard trained classifier loss on adversarial testset:4.6816582679748535
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.1
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.1
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:22.2300%
+standard trained classifier loss on adversarial testset:6.024352073669434
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.2
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:17.5500%
+standard trained classifier loss on adversarial testset:6.70330810546875
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/preactresnet18-cifar10/20220627/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.3
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:14.7100%
+standard trained classifier loss on adversarial testset:6.898253440856934
+---------------------------------------
+
+

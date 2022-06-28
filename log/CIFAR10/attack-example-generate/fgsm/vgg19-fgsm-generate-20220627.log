@@ -1,0 +1,180 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20220627/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.02
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:57.9700%
+standard trained classifier loss on adversarial testset:2.362962484359741
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20220627/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.05
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:35.4400%
+standard trained classifier loss on adversarial testset:4.288272857666016
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20220627/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.1
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.1
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:23.4400%
+standard trained classifier loss on adversarial testset:5.4310078620910645
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20220627/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.2
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:17.5700%
+standard trained classifier loss on adversarial testset:5.785620212554932
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220627
+whitebox attack
+Experiment result save dir: /home/maggie/mmat/result/attack/fgsm/vgg19-cifar10/20220627/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.3
+pixel adversarial attack.............
+cla_network_pkl: /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (50000, 3, 32, 32)
+self._y_train_adv.shape: (50000,)
+self._x_test_adv.shape: (10000, 3, 32, 32)
+self._y_test_adv.shape: (10000,)
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 trainset adversarial examples...
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:14.5400%
+standard trained classifier loss on adversarial testset:5.738091468811035
+---------------------------------------
+
+

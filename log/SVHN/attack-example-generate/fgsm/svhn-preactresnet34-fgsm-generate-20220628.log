@@ -1,0 +1,180 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220628
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.02
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (73257, 3, 32, 32)
+self._y_train_adv.shape: (73257,)
+self._x_test_adv.shape: (26032, 3, 32, 32)
+self._y_test_adv.shape: (26032,)
+label_names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+Saving svhn trainset adversarial examples...
+Saving svhn testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:83.7892%
+standard trained classifier loss on adversarial testset:0.6412121057510376
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220628
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00001
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.05
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.05
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (73257, 3, 32, 32)
+self._y_train_adv.shape: (73257,)
+self._x_test_adv.shape: (26032, 3, 32, 32)
+self._y_test_adv.shape: (26032,)
+label_names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+Saving svhn trainset adversarial examples...
+Saving svhn testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:69.4261%
+standard trained classifier loss on adversarial testset:1.3167070150375366
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220628
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00002
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.1
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.1
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (73257, 3, 32, 32)
+self._y_train_adv.shape: (73257,)
+self._x_test_adv.shape: (26032, 3, 32, 32)
+self._y_test_adv.shape: (26032,)
+label_names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+Saving svhn trainset adversarial examples...
+Saving svhn testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:57.1143%
+standard trained classifier loss on adversarial testset:1.873780608177185
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220628
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00003
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.2
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.2
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (73257, 3, 32, 32)
+self._y_train_adv.shape: (73257,)
+self._x_test_adv.shape: (26032, 3, 32, 32)
+self._y_test_adv.shape: (26032,)
+label_names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+Saving svhn trainset adversarial examples...
+Saving svhn testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:43.1277%
+standard trained classifier loss on adversarial testset:2.399395704269409
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220628
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00004
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+eps: 0.3
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get FGSM examples generate model
+self._args.attack_eps: 0.3
+generating trainset adversarial examples...
+finished generate trainset adversarial examples !
+generating testset adversarial examples...
+finished generate testset adversarial examples !
+self._x_train_adv.shape: (73257, 3, 32, 32)
+self._y_train_adv.shape: (73257,)
+self._x_test_adv.shape: (26032, 3, 32, 32)
+self._y_test_adv.shape: (26032,)
+label_names: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+Saving svhn trainset adversarial examples...
+Saving svhn testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:32.7789%
+standard trained classifier loss on adversarial testset:2.8022751808166504
+---------------------------------------
+
+
