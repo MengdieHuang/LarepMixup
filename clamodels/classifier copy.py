@@ -22,8 +22,78 @@ import math
 import random
 import copy
 from attacks.advattack import AdvAttack
+from clamodels import comparemodels
 
 from tensorboardX import SummaryWriter
+from genmodels.mixgenerate import MixGenerate
+
+
+
+#-----------------------
+
+def mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets):
+    if args.gen_network_pkl != None:     
+
+        generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+        generate_model.cle_w_train = inputs
+        generate_model.cle_y_train = targets
+
+        # print("generate_model.cle_w_train.shape:",generate_model.cle_w_train.shape)
+        # print("generate_model.cle_y_train.shape:",generate_model.cle_y_train.shape)
+
+        """
+            generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
+            generate_model.cle_y_train.shape: torch.Size([256, 8])
+        """
+
+        # generate_model.interpolate()
+
+        # print("C inputs:",inputs)
+        # print("C targets:",targets)
+
+
+        mix_w_train, mix_y_train = generate_model.interpolate()                                                                           #   numpy
+
+        # print("G mix_w_train:",mix_w_train)         # CPU tensor
+        # print("G mix_y_train:",mix_y_train)        
+
+        generate_model.mix_w_train = mix_w_train    # CPU tensor
+        generate_model.mix_y_train = mix_y_train
+
+        mix_x_train, mix_y_train = generate_model.generate()
+
+        # # raise error
+        # print("mix_x_train:",mix_x_train)
+        # print("mix_y_train:",mix_y_train)
+
+        # print("H mix_x_train:",mix_x_train)         #   CPU tensor
+        # print("H mix_y_train:",mix_y_train)
+
+    else:
+        raise Exception("There is no gen_network_pkl, please load generative model first!")   
+    
+    return mix_x_train, mix_y_train
+
+def input_mixup_data(args, raw_img_batch, raw_lab_batch):
+    
+    # print("raw_img_batch.shape:",raw_img_batch.shape)
+    # print("raw_lab_batch.shape:",raw_lab_batch.shape)
+
+    lam = np.random.beta(args.beta_alpha, args.beta_alpha)
+
+    batch_size = raw_img_batch.size()[0]
+    index = torch.randperm(batch_size).cuda()   #表示从batch中随机选一个待混合的样本x[index, :]
+
+    mixed_img_batch = lam * raw_img_batch + (1 - lam) * raw_img_batch[index, :]
+    mixed_lab_batch = lam * raw_lab_batch + (1 - lam) * raw_lab_batch[index, :]
+
+    # print("mixed_img_batch.shape:",mixed_img_batch.shape)
+    # print("mixed_lab_batch.shape:",mixed_lab_batch.shape)
+    # """
+    # mixed_img_batch.shape: torch.Size([256, 3, 32, 32])
+    # mixed_lab_batch.shape: torch.Size([256, 10])
+    # """
+    return mixed_img_batch,mixed_lab_batch 
 
 def smooth_step(a,b,c,d,epoch_index):
     if epoch_index <= a:        #   <=10
@@ -222,9 +292,11 @@ class MaggieClassifier:
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','alexnet','inception_v3']    # 少 alexnet
         # torchvisionmodel_dict = ['resnet34','resnet50','vgg19','densenet169','inception_v3','resnet18','googlenet']
         torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet'] # 少 vgg19
-
+        comparemodel_dict = ['preactresnet18','preactresnet34','preactresnet50']    #   ,'wideresnet2810'
         if model_name in torchvisionmodel_dict:
             model = self.__gettorchvisionmodel__()      #   加载torchvision库model
+        elif model_name in comparemodel_dict:
+            model = self.__getcomparemodel__()
         else:   # alexnet, vgg19
             if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
                 model = self.__getlocalmodel__()
@@ -284,6 +356,27 @@ class MaggieClassifier:
 
         # raise error
         return torchvisionmodel
+
+    def __getcomparemodel__(self):
+        print('使用文献对比模型')
+        model_name = self._args.cla_model
+        classes_number = self._args.n_classes
+        pretrain_flag = self._args.pretrained_on_imagenet
+        img_channels = self._args.channels
+        print("model_name:",model_name)
+        print("classes_number:",classes_number)
+        print("pretrain_flag:",pretrain_flag)   #  pretrain_flag: False
+        print("img_channels:",img_channels)   #  pretrain_flag: False
+
+        net = comparemodels.__dict__[model_name]()
+
+        #   获取原始模型的最后一层信息
+        last_name = list(net._modules.keys())[-1]
+        last_module = net._modules[last_name]
+        print('last_name:',last_name)               #   last_name: fc3
+        print('last_module:',last_module)           #   last_module: Linear(in_features=256, out_features=10, bias=True)
+        # raise error            
+        return net
 
     def __getlocalmodel__(self)->"CustomNet":
         print('使用自定义模型')
@@ -411,6 +504,7 @@ class MaggieClassifier:
                 batch_labs = labels.cuda()
                 self._optimizer.zero_grad()
 
+                self._model.train()     #   train mode
                 if self._args.cla_model == 'inception_v3':
                     output, aux = self._model(batch_imgs)
                 elif self._args.cla_model == 'googlenet':
@@ -440,9 +534,10 @@ class MaggieClassifier:
 
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), batch_loss.item()))
 
-            #--------当前epoch分类模型在当前训练集epoch上的准确率-------------            
-            epoch_train_accuarcy = epoch_correct_num / len(self._train_dataloader.dataset)
-            epoch_train_loss = epoch_total_loss / len(self._train_dataloader)
+            #--------当前epoch分类模型在当前训练集epoch上的准确率和loss-------------            
+            epoch_train_accuarcy = epoch_correct_num / len(self._train_dataloader.dataset)      #    除以epoch里的样本总数
+            epoch_train_loss = epoch_total_loss / len(self._train_dataloader)                   #   除以样本总数
+
             global_train_loss.append(epoch_train_loss)
             global_train_acc.append(epoch_train_accuarcy)   #   每个epoch训练完后的最新准确率list                  
 
@@ -461,13 +556,13 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')
             
             #-------------tensorboard实时画图-------------------
-            tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run')
+            tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc')
             os.makedirs(tensorboard_log_acc_dir,exist_ok=True)    
             # print("tensorboard_log_dir:",tensorboard_log_dir)   
             #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
 
             writer_acc = SummaryWriter(log_dir = tensorboard_log_acc_dir, comment= '-'+'testacc')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer_acc.add_scalar(tag = "epoch_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
+            writer_acc.add_scalar(tag = "epoch_test_acc", scalar_value = epoch_test_accuracy, global_step = epoch_index + 1 )
             writer_acc.close()
             # raise error
             #--------------------------------------------------
@@ -479,10 +574,35 @@ class MaggieClassifier:
             #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
 
             writer_loss = SummaryWriter(log_dir = tensorboard_log_loss_dir, comment= '-'+'testloss')#  f'{self._args.dataset}-{self._args.cla_model}
-            writer_loss.add_scalar(tag = "epoch_loss", scalar_value = epoch_test_loss, global_step = epoch_index + 1 )
+            writer_loss.add_scalar(tag = "epoch_test_loss", scalar_value = epoch_test_loss, global_step = epoch_index + 1 )
             writer_loss.close()
             # raise error
             #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-train-acc')
+            os.makedirs(tensorboard_log_train_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_dir)   
+            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
+
+            writer_train_acc = SummaryWriter(log_dir = tensorboard_log_train_acc_dir, comment= '-'+'trainacc')#  f'{self._args.dataset}-{self._args.cla_model}
+            writer_train_acc.add_scalar(tag = "epoch_train_acc", scalar_value = epoch_train_accuarcy, global_step = epoch_index + 1 )
+            writer_train_acc.close()
+            # raise error
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-train-loss')
+            os.makedirs(tensorboard_log_train_loss_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_dir)   
+            #   tensorboard_log_dir: result/train/cla-train/resnet34-cifar10/20210906/00000/train-cifar10-dataset/tensorboard-log-run
+
+            writer_train_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'trainloss')#  f'{self._args.dataset}-{self._args.cla_model}
+            writer_train_loss.add_scalar(tag = "epoch_train_loss", scalar_value = epoch_train_loss, global_step = epoch_index + 1 )
+            writer_train_loss.close()
+            # raise error
+            #--------------------------------------------------
+
 
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     
@@ -526,6 +646,7 @@ class MaggieClassifier:
         return artmodel
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):
+        classifier.eval()   #   eval mode
         if torch.cuda.is_available():
             classifier.cuda()             
         
@@ -537,21 +658,27 @@ class MaggieClassifier:
         # print("x_set.shape:",x_set.shape)           #   x_set.shape: torch.Size([26032, 3, 32, 32])
         # print("y_set.shape:",y_set.shape)           #   y_set.shape: torch.Size([26032])
         # print("testset_total_num:",testset_total_num)       #   testset_total_num: 26032
-        # print("batch_num:",batch_num)                   #   batch_num: 813.5
+        # print("batch_num:",batch_num)                   #   batch_num: 
         # print("batch_size:",batch_size)       #  
-        # print("cla_model_name:",cla_model_name)       #   cla_model_name: alexnet
+        # print("cla_model_name:",cla_model_name)       #   cla_model_name: 
 
         eva_loss = torch.nn.CrossEntropyLoss()
         epoch_correct_num = 0
         epoch_total_loss = 0
 
+        # batch_same_num = 0
+
         for batch_index in range(batch_num):                                                #   进入batch迭代 共有num_batch个batch
-            images = x_set[batch_index * batch_size : (batch_index + 1) * batch_size]
-            labels = y_set[batch_index * batch_size : (batch_index + 1) * batch_size]                                                
+            right_index = min((batch_index + 1) * batch_size, testset_total_num)
+            # print("right_index:",right_index)
+            images = x_set[batch_index * batch_size : right_index]
+            labels = y_set[batch_index * batch_size : right_index]                                                
 
             imgs = images.cuda()
             labs = labels.cuda()
+            eva_loss = eva_loss.cuda()
 
+            
             with torch.no_grad():
 
                 if cla_model_name == 'inception_v3':
@@ -562,20 +689,25 @@ class MaggieClassifier:
                         output = classifier(imgs)
                     else:
                         output, aux1, aux2 = classifier(imgs)
-                else:
+                else:   # resnet alexent densenet 
                     output = classifier(imgs)         
                                 
                 loss = eva_loss(output,labs)
                 _, predicted_label_index = torch.max(output.data, 1)    #torch.max()这个函数返回的是两个值，第一个值是具体的value，第二个值是value所在的index   
                 
-                batch_same_num = (predicted_label_index == labs).sum().item()
+                assert len(predicted_label_index) == len(labs)
+                # batch_same_num = (predicted_label_index == labs).sum().item()
+                batch_same_num = predicted_label_index.cpu().eq(labs.cpu()).sum()
+
+                # same_lables += student_labels.cpu().eq(labels.cpu()).sum()
                 epoch_correct_num += batch_same_num
                 epoch_total_loss += loss
 
+        # print("epoch_correct_num:",epoch_correct_num)
 
         test_accuracy = epoch_correct_num / testset_total_num
         test_loss = epoch_total_loss / batch_num                  
-
+        classifier.train()
         return test_accuracy, test_loss
 
     #   get clean set tensor format
@@ -632,7 +764,8 @@ class MaggieClassifier:
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)  
 
-        return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        # return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        return xset_tensor.cpu()
 
     def __getysettensor__(self,dataloader)->"Tensor":
 
@@ -710,7 +843,8 @@ class MaggieClassifier:
             # print("yset_tensor.shape:", yset_tensor.shape)
 
 
-        return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        # return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+        return yset_tensor.cpu()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
 
     #   get adv set tensor format
     def getadvset(self,adv_dataset_path):
@@ -719,30 +853,59 @@ class MaggieClassifier:
         
     def __getadvsettensor__(self,adv_dataset_path):
 
-        file_dir=os.listdir(adv_dataset_path)
-        file_dir.sort()
-        # '00000000-adv-3-cat.npz'
-        filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
+        if self._args.perceptualattack == False:
+            file_dir=os.listdir(adv_dataset_path)
+            file_dir.sort()
+            # '00000000-adv-3-cat.npz'
+            filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'adv']           
 
-        adv_xset_tensor = []
-        adv_yset_tensor = []
+            adv_xset_tensor = []
+            adv_yset_tensor = []
 
-        for index, filename in enumerate(filenames):
-            adv_npz_path = os.path.join(adv_dataset_path,filename)
+            for index, filename in enumerate(filenames):
+                adv_npz_path = os.path.join(adv_dataset_path,filename)
 
-            load_adv_img = np.load(adv_npz_path)['w']            
-            load_adv_img = torch.tensor(load_adv_img)
-            
-            load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
-            load_adv_label = torch.tensor(load_adv_label)
+                load_adv_img = np.load(adv_npz_path)['w']            
+                load_adv_img = torch.tensor(load_adv_img)
+                
+                load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
+                load_adv_label = torch.tensor(load_adv_label)
 
-            adv_xset_tensor.append(load_adv_img)
-            adv_yset_tensor.append(load_adv_label)
+                adv_xset_tensor.append(load_adv_img)
+                adv_yset_tensor.append(load_adv_label)
 
-        adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
-        adv_yset_tensor = torch.stack(adv_yset_tensor)   
+            adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
+            adv_yset_tensor = torch.stack(adv_yset_tensor)   
 
-        return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+            # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+            return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()  
+
+        elif self._args.perceptualattack == True:
+            file_dir=os.listdir(adv_dataset_path)
+            file_dir.sort()
+            # '00000000-adv-3-cat.npz'
+            filenames = [name for name in file_dir if os.path.splitext(name)[-1] == '.npz' and name[9:12] == 'per']           
+
+            adv_xset_tensor = []
+            adv_yset_tensor = []
+
+            for index, filename in enumerate(filenames):
+                adv_npz_path = os.path.join(adv_dataset_path,filename)
+
+                load_adv_img = np.load(adv_npz_path)['w']            
+                load_adv_img = torch.tensor(load_adv_img)
+                
+                load_adv_label = int(filename[13:14])               #   从文件名中读出对抗样本的label信息
+                load_adv_label = torch.tensor(load_adv_label)
+
+                adv_xset_tensor.append(load_adv_img)
+                adv_yset_tensor.append(load_adv_label)
+
+            adv_xset_tensor = torch.stack(adv_xset_tensor)                                                                         
+            adv_yset_tensor = torch.stack(adv_yset_tensor)   
+
+            # return adv_xset_tensor.cuda(), adv_yset_tensor.cuda()     
+            return adv_xset_tensor.cpu(), adv_yset_tensor.cpu()    
 
     #   get representation set tensor format
     def getproset(self, pro_dataset_path):
@@ -776,7 +939,9 @@ class MaggieClassifier:
         pro_yset_tensor = []
         device = torch.device('cuda')
 
-        for projected_w_path in projected_w_npz_paths:                                                                                   
+        for projected_w_path in projected_w_npz_paths:   
+            # print("projected_w_path:",projected_w_path)     
+            # raise error("maggie flag")                                                                           
             w = np.load(projected_w_path)['w']
             w = torch.tensor(w, device=device)                                                                                 
             w = w[-1]                                                                                       #   w.shape: torch.Size([1, 8,512]))         
@@ -786,7 +951,8 @@ class MaggieClassifier:
         # print("pro_wset_tensor.shape:",pro_wset_tensor.shape)                                         #   projected_w_set_x.shape: torch.Size([37, 8, 512])
                                                                                                             #   stl10 projected_w_set_x.shape: torch.Size([38, 10, 512])
 
-        for label_npz_path in label_npz_paths:                                                                                  
+        for label_npz_path in label_npz_paths:    
+            # print("label_npz_path:",label_npz_path)                                                                                   
             y = np.load(label_npz_path)['w']
             y = torch.tensor(y, device=device)                                                                                 
             y = y[-1]                                                                                       #   y.shape: torch.Size([1, 8]))
@@ -800,7 +966,8 @@ class MaggieClassifier:
         # print("pro_yset_tensor.shape:",pro_yset_tensor.shape)                                         #   projected_w_set_y.shape: torch.Size([37, 8, 10])
         # print("pro_yset_tensor[0]:",pro_yset_tensor[0])                                         #   projected_w_set_y.shape: torch.Size([37, 8])  
 
-        return pro_wset_tensor.cuda(), pro_yset_tensor.cuda()     
+        # return pro_wset_tensor.cuda(), pro_yset_tensor.cuda()     
+        return pro_wset_tensor.cpu(), pro_yset_tensor.cpu()
 
     def adversarialtrain(self,
         args,
@@ -1256,7 +1423,7 @@ class MaggieClassifier:
         # print("w1_label_index[0]:",w1_label_index[0])
         # print("w2_label_index[0]:",w2_label_index[0])
 
-        cla_loss =  torch.nn.CrossEntropyLoss(reduction = 'none')
+        cla_loss =  torch.nn.CrossEntropyLoss(reduction = 'none').cuda()
         loss_a = cla_loss(batch_outputs, w1_label_index)
         loss_b = cla_loss(batch_outputs, w2_label_index)
         loss = alpha_1 * loss_a + alpha_2 * loss_b
@@ -1264,7 +1431,8 @@ class MaggieClassifier:
 
         return loss
 
-    def rmt(self, args,cle_w_train,cle_y_train,cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs):
+    #   representation mixup training
+    def rmt(self, args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test, cle_y_test, adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs):
 
         print("cle_w_train.shape:",cle_w_train.shape)   
         print("cle_y_train.shape:",cle_y_train.shape)
@@ -1287,7 +1455,6 @@ class MaggieClassifier:
         self._exp_result_dir = exp_result_dir
         if self._args.defense_mode == "rmt":
             self._exp_result_dir = os.path.join(self._exp_result_dir,f'rmt-{self._args.dataset}-dataset')
-
         os.makedirs(self._exp_result_dir,exist_ok=True)            
         if torch.cuda.is_available():
             self._lossfunc.cuda()
@@ -1302,114 +1469,111 @@ class MaggieClassifier:
         self._cle_test_tensorset_x = cle_x_test
         self._cle_test_tensorset_y = cle_y_test
 
+        print("cle_train_dataloader.len:",len(cle_train_dataloader))
+        self._train_dataloader = cle_train_dataloader
 
-        #  当前分类模型在白盒对抗测试集上的准确率
-        epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
-        self._model = epoch_attack_classifier.targetmodel()
+        if args.whitebox == True:
+            #   当前分类模型在白盒对抗测试集上的准确率
+            epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
+            self._model = epoch_attack_classifier.targetmodel()
+            epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+        elif args.blackbox == True:
+            #   当前分类模型在黑盒对抗测试集上的准确率
+            epoch_x_test_adv = self._adv_test_tensorset_x
+            epoch_y_test_adv = self._adv_test_tensorset_y        
         
-        epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
         epoch__adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
 
         print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch__adv_test_accuracy * 100:.4f}%' ) 
         print(f'Loss of before mmat trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
 
-        """
-        Accuary of before rmt trained classifier on adversarial testset:40.0545%
-        Loss of before mmat trained classifier on adversarial testset:4.552259922027588
-        """
-
-        trainset_len = len(self._train_tensorset_x)
-        epoch_num = self._args.epochs                                               
+        #----------train----
+        w_trainset_len = len(self._train_tensorset_x)
         batch_size = self._args.batch_size
-        batch_num = int(np.ceil(trainset_len / float(batch_size)))
+        w_batch_num = int(np.ceil(w_trainset_len / float(batch_size)))
 
-        shuffle_index = np.arange(trainset_len)
+        print("w_trainset_len:",w_trainset_len)
+        print("batch_size:",batch_size)
+        print("w_batch_num:",w_batch_num)
+
+        shuffle_index = np.arange(w_trainset_len)
         shuffle_index = torch.tensor(shuffle_index)
 
-        print("epoch_num:",epoch_num)
-        print("batch_num:",batch_num)
-
-
-        for epoch_index in range (epoch_num):
+        for epoch_index in range(self._args.epochs):
             print("\n")
             random.shuffle(shuffle_index)
-            self.__adjustlearningrate__(epoch_index)     
+            self.__adjustlearningrate__(epoch_index)       
 
-            epoch_correct_num = 0
             epoch_total_loss = 0
-            trained_num = 0
 
-            for batch_index in range (batch_num):
-
-                x_trainbatch = self._train_tensorset_x[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]
-                y_trainbatch = self._train_tensorset_y[shuffle_index[batch_index * batch_size : (batch_index + 1) * batch_size]]                                                
-
-                inputs = x_trainbatch.cuda()
-                targets = y_trainbatch.cuda()
-                # print("inputs:",inputs)
-                # print("inputs.shape:",inputs.shape)                 #   inputs.shape: torch.Size([4, 8, 512])
-                # print("targets:",targets)
-                # print("targets.shape:",targets.shape)               #   targets.shape: torch.Size([4, 8, 10])
-
-                # mixup representation                                #     [4,8,512]
-                inputs, targets = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets)      #   混合样本 two-hot标签
+            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   SVHN 7万多training samples 因此运行起来慢 加载原始训练集batch
                 
-                print("inputs.shape:",inputs.shape)
-                print("targets.shape:",targets.shape)
+                #--------------raw batch training--------------
+                # softlabel
+                # print("raw_lab_batch:",raw_lab_batch)
+                # print("raw_lab_batch.type:",type(raw_lab_batch))
 
-                # """
-                # inputs.shape: torch.Size([256, 3, 32, 32])
-                # targets.shape: torch.Size([256, 10])
-                # """
-                # generate mixed sampels                              #     [4, 3, 32, 32]
+                """
+                raw_lab_batch: tensor([9, 9, 0, 6])
+                raw_lab_batch.type: <class 'torch.Tensor'>
+                """
 
+                raw_lab_batch = LongTensor(raw_lab_batch)                           #   list型转为tensor
+                raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
+                
+                #-----------maggie cat clean and mix------------
+                if (batch_index + 1) % w_batch_num == 0:
+                    right_index = w_trainset_len
+                else:
+                    right_index = ( (batch_index + 1) % w_batch_num ) * batch_size
+                # print("right_index:",right_index) 
 
-                # train
+                pro_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]
+                pro_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]                   
+                
+                # print("20211026 mixup test")
+                mix_img_batch, mix_lab_batch = mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, pro_img_batch, pro_lab_batch)      #   混合样本 two-hot标签
+                
+                aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+
+                inputs = aug_x_train.cuda()
+                targets = aug_y_train.cuda()
+                
                 self._optimizer.zero_grad()
-                outputs = self._model(inputs)
-                
+                self._model.train()                 #   train mode
+
+                # outputs = self._model(inputs)
+                if self._args.cla_model == 'inception_v3':
+                    outputs, aux = self._model(inputs)
+                elif self._args.cla_model == 'googlenet':
+                    outputs, aux1, aux2 = self._model(inputs)
+                else:
+                    outputs = self._model(inputs)
+
                #   计算损失
                 lossfunction = 'ce'
-
                 if lossfunction == 'ce':
                     loss = self.__CustomSoftlossFunction__(outputs, targets)
-
                 elif lossfunction == 'mse':
                     softmax_outputs = torch.nn.functional.softmax(outputs, dim = 1)                              #   对每一行进行softmax
-                    cla_lossfun = torch.nn.MSELoss()
+                    cla_lossfun = torch.nn.MSELoss().cuda()
                     loss = cla_lossfun(softmax_outputs, targets) 
-
                 elif lossfunction == 'cosine':
                     softmax_outputs = torch.nn.functional.softmax(outputs, dim = 1)    
                     cla_lossfun = torch.cosine_similarity                                                          #   越接近1表明越相似
                     loss = cla_lossfun(softmax_outputs, targets) 
                     loss = 1 - loss         
                     loss =loss.mean()
-
                 self._optimizer.zero_grad()
                 loss.backward()
                 self._optimizer.step()
 
-                # #   Top1 accuracy
-                # _, predicted_maxindex = torch.max(outputs.data, 1)    
-                # _, targets_maxindex = torch.max(targets, 1)
-
-                # batch_correct_num = (predicted_maxindex == targets_maxindex).sum().item()     
-
-                # epoch_correct_num += batch_correct_num                                     
                 epoch_total_loss += loss
-                # trained_num = trained_num + targets.size(0)
-
-                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, epoch_num, batch_index+1, batch_num, loss.item()))
-
-                # raise error
-           
-           #--------当前epoch分类模型在当前训练集epoch上的准确率-------------            
-            epoch_train_loss = epoch_total_loss / (epoch_index+1)       #   截止当前训练了(epoch_index+1) 个epoch
-            # global_train_loss.append(epoch_train_loss)
-            # global_train_acc.append(epoch_train_accuarcy)   #   每个epoch训练完后的最新准确率list                                  
-
-
+                #------------------------------
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
+            #   finish batch training
+            
             #   当前epoch分类模型在干净测试集上的准确率
             epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
             # global_cle_test_acc.append(epoch_cle_test_accuracy)   
@@ -1417,17 +1581,26 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
             print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
 
-            #  当前epoch分类模型在白盒对抗测试集上的准确率
-            epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
-            self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
+            if args.whitebox == True:
+                #  当前epoch分类模型在白盒对抗测试集上的准确率
+                epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
+                self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
+                epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y)         
+            elif args.blackbox == True:
+                 #当前epoch分类模型在黑盒对抗测试集上的准确率
+                epoch_x_test_adv = self._adv_test_tensorset_x
+                epoch_y_test_adv = self._adv_test_tensorset_y
 
-            epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
-            
             epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)
             # global_adv_test_acc.append(epoch_adv_test_accuracy)   
-            # global_adv_test_loss.append(epoch_adv_test_loss)            
+            # global_adv_test_loss.append(epoch_adv_test_loss)                 
             print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+
+            if (epoch_index+1) == 11 or (epoch_index+1) == 40 or (epoch_index+1) == 30 or (epoch_index+1) == 20:
+            # if (epoch_index+1) % 10 == 0 and epoch_index > 0:
+            # if epoch_adv_test_accuracy  >= 0.2:
+                torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
 
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
@@ -1461,6 +1634,14 @@ class MaggieClassifier:
             writer_cle_loss = SummaryWriter(log_dir = tensorboard_log_cle_loss_dir, comment= '-'+'cletestloss') 
             writer_cle_loss.add_scalar(tag = "epoch_cle_loss", scalar_value = epoch_cle_test_loss, global_step = epoch_index + 1 )
             writer_cle_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-train')
+            os.makedirs(tensorboard_log_train_loss_dir,exist_ok=True)    
+            writer_tra_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'augtrainloss') 
+            writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
+            writer_tra_loss.close()
             #--------------------------------------------------
 
     def __adjustlearningrate__(self, epoch_index):
@@ -1510,6 +1691,15 @@ class MaggieClassifier:
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
             elif self._args.dataset == 'svhn':
                 if self._args.cla_model == 'resnet34':     
                     # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
@@ -1552,6 +1742,17 @@ class MaggieClassifier:
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+
+
             elif self._args.dataset == 'imagenetmixed10':
                 if self._args.cla_model == 'alexnet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 20))  
@@ -1584,6 +1785,15 @@ class MaggieClassifier:
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))                    
+
             elif self._args.dataset == 'cifar100':
                 if self._args.cla_model == 'resnet34':     
                     # lr = self._args.lr * (0.1 ** (epoch_index // 10))                   #   每隔10epoch除以一次10
@@ -1607,13 +1817,6 @@ class MaggieClassifier:
                 elif self._args.cla_model =='resnet18':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-                    # if epoch_index <= 5:
-                    #     lr = self._args.lr                                  #   0.01
-                    # elif epoch_index >= 6 and epoch_index <= 7:
-                    #     lr = self._args.lr * 0.1                            #   0.001
-                    # elif epoch_index >= 8:
-                    #     lr = self._args.lr * 0.01                            #   0.0001
-
                 elif self._args.cla_model =='resnet50':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
                 
@@ -1627,6 +1830,15 @@ class MaggieClassifier:
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
                 elif self._args.cla_model =='googlenet':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
             elif self._args.dataset == 'stl10':
@@ -1653,6 +1865,15 @@ class MaggieClassifier:
 
                 elif self._args.cla_model =='googlenet':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet18':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet34':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+
+                elif self._args.cla_model =='preactresnet50':
+                    lr = self._args.lr * (0.1 ** (epoch_index // 10))                    
             
         elif self._args.defense_mode == 'mmat':
             if self._args.dataset == 'svhn':
@@ -1660,22 +1881,6 @@ class MaggieClassifier:
                     
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
-                    # if epoch_index <= 3:
-                    #     lr = self._args.lr                                  #   0.1
-                    # elif epoch_index >= 4 and epoch_index <= 5:
-                    #     lr = self._args.lr * 0.1                            #   0.01 
-                    # elif epoch_index >= 6 and epoch_index <= 10:
-                    #     lr = self._args.lr * 0.1                            #   0.001   
-                    # elif epoch_index >= 11:
-                    #     lr = self._args.lr * 0.1                            #   0.0001   
-
-
-                    # if epoch_index <= 3:
-                    #     lr = 0.1 + (0.1 * epoch_index)  # 0.1 -> 0.2 -> 0.3 -> 0.4 
-                    # elif epoch_index >= 4 and epoch_index <= 10:
-                    #     lr = 0.01
-                    # elif epoch_index >= 11 and epoch_index <= 20:
-                    #     lr = 0.001
                 elif self._args.cla_model == 'resnet18':
                     lr = self._args.lr * (0.1 ** (epoch_index // 10))
 
@@ -1688,18 +1893,17 @@ class MaggieClassifier:
         elif self._args.defense_mode == 'rmt':
             if self._args.dataset == 'svhn' or self._args.dataset == 'cifar10' or self._args.dataset == 'kmnist':
 
-                if self._args.cla_model == 'alexnet':
-                    
-                    lr = self._args.lr * (0.1 ** (epoch_index // 10))
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))    
 
-                elif self._args.cla_model == 'resnet18':
-                    """decrease the learning rate at 100 and 150 epoch"""
-                    lr = self._args.lr
-                    if epoch_index >= 100:
-                        lr /= 10
-                    if epoch_index >= 150:
-                        lr /= 10
+        elif self._args.defense_mode == 'inputmixup':
+            if self._args.dataset == 'svhn' or self._args.dataset == 'cifar10' or self._args.dataset == 'kmnist':
 
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))    
+
+        elif self._args.defense_mode == 'at':
+            if self._args.dataset == 'svhn' or self._args.dataset == 'cifar10' or self._args.dataset == 'kmnist':
+
+                lr = self._args.lr * (0.1 ** (epoch_index // 10))    
 
         for param_group in self._optimizer.param_groups:
             param_group['lr'] = lr
@@ -1707,37 +1911,425 @@ class MaggieClassifier:
 
         print(f'{epoch_index}epoch learning rate:{lr}')             #   0epoch learning rate:0.01
 
-from genmodels.mixgenerate import MixGenerate
+    # 20211107 input mixup train
+    def inputmixuptrain(self,args, cle_x_train, cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir):
+        print("compare with---------input mixup train--------------")
 
-def mixup_data(args, exp_result_dir, stylegan2ada_config_kwargs, inputs, targets):
-    if args.gen_network_pkl != None:     
+        print("cle_x_train.shape:",cle_x_train.shape)   
+        print("cle_y_train.shape:",cle_y_train.shape)
 
-        generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-        generate_model.cle_w_train = inputs
-        generate_model.cle_y_train = targets
+        print("cle_x_test.shape:",cle_x_test.shape)
+        print("cle_y_test.shape:",cle_y_test.shape)        
 
-        # print("generate_model.cle_w_train.shape:",generate_model.cle_w_train.shape)
-        # print("generate_model.cle_y_train.shape:",generate_model.cle_y_train.shape)
+        print("adv_x_test.shape:",adv_x_test.shape)
+        print("adv_y_test.shape:",adv_y_test.shape) 
 
         """
-            generate_model.cle_w_train.shape: torch.Size([256, 8, 512])
-            generate_model.cle_y_train.shape: torch.Size([256, 8])
+        cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+        cle_y_test.shape: torch.Size([10000])
+        adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+        adv_y_test.shape: torch.Size([10000])
         """
 
-        # generate_model.interpolate()
+        self._exp_result_dir = exp_result_dir
+        if self._args.defense_mode == "inputmixup":
+            self._exp_result_dir = os.path.join(self._exp_result_dir,f'rmt-{self._args.dataset}-dataset')
+        os.makedirs(self._exp_result_dir,exist_ok=True) 
 
-        mix_w_train, mix_y_train = generate_model.interpolate()                                                                           #   numpy
+        if torch.cuda.is_available():
+            self._lossfunc.cuda()
+            self._model.cuda()          #   self._model在初始化时被赋值为了读入的模型
+
+        self._train_tensorset_x = cle_x_train
+        self._train_tensorset_y = cle_y_train
+
+        self._adv_test_tensorset_x = adv_x_test
+        self._adv_test_tensorset_y = adv_y_test
+
+        self._cle_test_tensorset_x = cle_x_test
+        self._cle_test_tensorset_y = cle_y_test
+
+        self._train_dataloader = cle_train_dataloader
+
+        #   获取对抗样本
+        if args.whitebox == True:
+            print("白盒")
+            #   当前分类模型在白盒对抗测试集上的准确率 现场生成
+            epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
+            self._model = epoch_attack_classifier.targetmodel()
+            epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+        elif args.blackbox == True:
+            print("黑盒")
+            #   当前分类模型在黑盒对抗测试集上的准确率 传入
+            epoch_x_test_adv = self._adv_test_tensorset_x
+            epoch_y_test_adv = self._adv_test_tensorset_y     
+
+        epoch__adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
+        print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch__adv_test_accuracy * 100:.4f}%' ) 
+        print(f'Loss of before mmat trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
         
-        generate_model.mix_w_train = mix_w_train
-        generate_model.mix_y_train = mix_y_train
+        #----------train----
+        w_trainset_len = len(self._train_tensorset_x)
+        batch_size = self._args.batch_size
+        w_batch_num = int(np.ceil(w_trainset_len / float(batch_size)))
 
-        mix_x_train, mix_y_train = generate_model.generate()
+        print("w_trainset_len:",w_trainset_len)
+        print("batch_size:",batch_size)
+        print("w_batch_num:",w_batch_num)
+        """
+        w_trainset_len: 25397
+        batch_size: 256
+        w_batch_num: 100
+        """
+        shuffle_index = np.arange(w_trainset_len)
+        shuffle_index = torch.tensor(shuffle_index)
 
-        # # raise error
-        # print("mix_x_train:",mix_x_train)
-        # print("mix_y_train:",mix_y_train)
+        for epoch_index in range(self._args.epochs):
+            print("\n")
+            random.shuffle(shuffle_index)
+            self.__adjustlearningrate__(epoch_index)       
 
-    else:
-        raise Exception("There is no gen_network_pkl, please load generative model first!")   
-    
-    return mix_x_train, mix_y_train
+            epoch_total_loss = 0
+
+            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   加载原始训练集batch
+                raw_lab_batch = LongTensor(raw_lab_batch)                           #   list型转为tensor
+                raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
+                
+                # print("raw_img_batch.shape:",raw_img_batch.shape)
+                # print("raw_lab_batch.shape:",raw_lab_batch.shape)
+                # """
+                # raw_img_batch.shape: torch.Size([256, 3, 32, 32])
+                # raw_lab_batch.shape: torch.Size([256, 10])
+                # """
+
+
+                #-----------maggie cat clean and mix------------
+                if (batch_index + 1) % w_batch_num == 0:
+                    right_index = w_trainset_len
+                else:
+                    right_index = ( (batch_index + 1) % w_batch_num ) * batch_size
+                # print("right_index:",right_index) 
+
+                cle_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]
+                cle_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]                   
+                
+                # print("20211107 mixup test")
+                mix_img_batch, mix_lab_batch = input_mixup_data(args, cle_img_batch, cle_lab_batch)      #   混合样本 two-hot标签              
+                
+                #------------------20211108--------------------
+                aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                # aug_x_train = mix_img_batch
+                # aug_y_train = mix_lab_batch
+
+                # if self._args.defense_mode == 'inputmixup':
+                #     #   在inputmixup中不混合原样本
+                #     aug_x_train = mix_img_batch
+                #     aug_y_train = mix_lab_batch
+                #     # aug_x_train = raw_img_batch #   纯粹用干净样本微调是否有效
+                #     # aug_y_train = raw_lab_batch                    
+                # else:
+                #     aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
+                #     aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
+                #---------------------------------------------
+
+                inputs = aug_x_train.cuda()
+                targets = aug_y_train.cuda()
+                
+                # self._optimizer.zero_grad()
+                self._model.train()                 #   train mode
+
+                # outputs = self._model(inputs)
+                if self._args.cla_model == 'inception_v3':
+                    outputs, aux = self._model(inputs)
+                elif self._args.cla_model == 'googlenet':
+                    outputs, aux1, aux2 = self._model(inputs)
+                else:
+                    outputs = self._model(inputs)
+
+               #   计算损失
+                lossfunction = 'ce'
+                if lossfunction == 'ce':
+                    loss = self.__CustomSoftlossFunction__(outputs, targets)
+                elif lossfunction == 'mse':
+                    softmax_outputs = torch.nn.functional.softmax(outputs, dim = 1)                              #   对每一行进行softmax
+                    cla_lossfun = torch.nn.MSELoss().cuda()
+                    loss = cla_lossfun(softmax_outputs, targets) 
+                elif lossfunction == 'cosine':
+                    softmax_outputs = torch.nn.functional.softmax(outputs, dim = 1)    
+                    cla_lossfun = torch.cosine_similarity                                                          #   越接近1表明越相似
+                    loss = cla_lossfun(softmax_outputs, targets) 
+                    loss = 1 - loss         
+                    loss =loss.mean()
+
+                self._optimizer.zero_grad()
+                loss.backward()
+                self._optimizer.step()
+
+                epoch_total_loss += loss
+                #------------------------------
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
+            #   finish batch training
+                
+            
+            #   当前epoch分类模型在干净测试集上的准确率
+            epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
+            # global_cle_test_acc.append(epoch_cle_test_accuracy)   
+            # global_cle_test_loss.append(epoch_cle_test_loss)
+            print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
+            print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
+
+            if args.whitebox == True:
+                #  当前epoch分类模型在白盒对抗测试集上的准确率
+                epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
+                self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
+                epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y)         
+            elif args.blackbox == True:
+                 #当前epoch分类模型在黑盒对抗测试集上的准确率
+                epoch_x_test_adv = self._adv_test_tensorset_x
+                epoch_y_test_adv = self._adv_test_tensorset_y
+
+            epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)               
+            print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+            print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
+            os.makedirs(tensorboard_log_adv_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_adv_acc_dir)   
+            writer_adv_acc = SummaryWriter(log_dir = tensorboard_log_adv_acc_dir, comment= '-'+'advtestacc') 
+            writer_adv_acc.add_scalar(tag = "epoch_adv_acc", scalar_value = epoch_adv_test_accuracy, global_step = epoch_index + 1 )
+            writer_adv_acc.close()
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-adv')
+            os.makedirs(tensorboard_log_adv_loss_dir,exist_ok=True)    
+            writer_adv_loss = SummaryWriter(log_dir = tensorboard_log_adv_loss_dir, comment= '-'+'advtestloss') 
+            writer_adv_loss.add_scalar(tag = "epoch_adv_loss", scalar_value = epoch_adv_test_loss, global_step = epoch_index + 1 )
+            writer_adv_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-cle')
+            os.makedirs(tensorboard_log_cle_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_cle_acc_dir)   
+            writer_cle_acc = SummaryWriter(log_dir = tensorboard_log_cle_acc_dir, comment= '-'+'cletestacc') 
+            writer_cle_acc.add_scalar(tag = "epoch_cle_acc", scalar_value = epoch_cle_test_accuracy, global_step = epoch_index + 1 )
+            writer_cle_acc.close()
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-cle')
+            os.makedirs(tensorboard_log_cle_loss_dir,exist_ok=True)    
+            writer_cle_loss = SummaryWriter(log_dir = tensorboard_log_cle_loss_dir, comment= '-'+'cletestloss') 
+            writer_cle_loss.add_scalar(tag = "epoch_cle_loss", scalar_value = epoch_cle_test_loss, global_step = epoch_index + 1 )
+            writer_cle_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-train')
+            os.makedirs(tensorboard_log_train_loss_dir,exist_ok=True)    
+            writer_tra_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'augtrainloss') 
+            writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
+            writer_tra_loss.close()
+            #--------------------------------------------------
+          
+
+    def advtrain(self, args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir):
+        print("compare with---------adversarial train--------------")
+
+        # print("adv_x_train.shape:",adv_x_train.shape)   
+        # print("adv_y_train.shape:",adv_y_train.shape)
+
+        # print("cle_x_test.shape:",cle_x_test.shape)
+        # print("cle_y_test.shape:",cle_y_test.shape)        
+
+        # print("adv_x_test.shape:",adv_x_test.shape)
+        # print("adv_y_test.shape:",adv_y_test.shape) 
+
+        """
+        adv_x_train.shape: torch.Size([50000, 3, 32, 32])
+        adv_y_train.shape: torch.Size([50000])
+        cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+        cle_y_test.shape: torch.Size([10000])
+        adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+        adv_y_test.shape: torch.Size([10000])        
+        """
+
+        self._exp_result_dir = exp_result_dir
+        self._lossfunc = torch.nn.CrossEntropyLoss()
+
+        if torch.cuda.is_available():
+            self._lossfunc.cuda()
+            self._model.cuda()          #   self._model在初始化时被赋值为了读入的模型
+
+        self._train_tensorset_x = adv_x_train
+        self._train_tensorset_y = adv_y_train
+
+        self._adv_test_tensorset_x = adv_x_test
+        self._adv_test_tensorset_y = adv_y_test
+
+        self._cle_test_tensorset_x = cle_x_test
+        self._cle_test_tensorset_y = cle_y_test
+
+        self._train_dataloader = cle_train_dataloader
+
+        #   获取对抗样本
+        if args.whitebox == True:
+            print("白盒")
+            #   当前分类模型在白盒对抗测试集上的准确率 现场生成
+            epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
+            self._model = epoch_attack_classifier.targetmodel()
+            epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+        elif args.blackbox == True:
+            #   当前分类模型在黑盒对抗测试集上的准确率 传入
+            print("黑盒")
+            epoch_x_test_adv = self._adv_test_tensorset_x # omfgsm黑盒
+            epoch_y_test_adv = self._adv_test_tensorset_y     
+
+        epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
+        print(f'Accuary of before rmt trained classifier on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+        print(f'Loss of before mmat trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
+
+        #----------train----
+        adv_trainset_len = len(self._train_tensorset_x)
+        batch_size = self._args.batch_size
+        adv_batch_num = int(np.ceil(adv_trainset_len / float(batch_size)))
+
+        print("adv_trainset_len:",adv_trainset_len) #5w
+        print("batch_size:",batch_size)
+        print("adv_batch_num:",adv_batch_num)
+
+        shuffle_index = np.arange(adv_trainset_len)
+        shuffle_index = torch.tensor(shuffle_index)
+
+        #----------train----
+        for epoch_index in range(self._args.epochs):
+            print("\n")
+            random.shuffle(shuffle_index)
+            self.__adjustlearningrate__(epoch_index)     
+            epoch_total_loss = 0
+
+            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):         #   加载原始训练集batch
+                
+                # print("raw_img_batch.shape:",raw_img_batch.shape)
+                # print("raw_lab_batch.shape:",raw_lab_batch.shape)
+                # """
+                # raw_img_batch.shape: torch.Size([256, 3, 32, 32])
+                # raw_lab_batch.shape: torch.Size([256])
+                # """
+               #-----------maggie cat clean and mix------------
+                if (batch_index + 1) % adv_batch_num == 0:
+                    right_index = adv_trainset_len
+                else:
+                    right_index = ( (batch_index + 1) % adv_batch_num ) * batch_size
+                # print("right_index:",right_index) 
+
+                adv_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % adv_batch_num) * batch_size : right_index]]
+                adv_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % adv_batch_num) * batch_size : right_index]]                   
+                # print("adv_img_batch.shape:",adv_img_batch.shape)
+                # print("adv_lab_batch.shape:",adv_lab_batch.shape)                
+                # """
+                # adv_img_batch.shape: torch.Size([256, 3, 32, 32])
+                # adv_lab_batch.shape: torch.Size([256])
+                # """
+                #------------------20211110--------------------
+
+                aug_x_train = torch.cat([raw_img_batch, adv_img_batch], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, adv_lab_batch], dim=0)                
+                # aug_x_train = raw_img_batch
+                # aug_y_train = raw_lab_batch
+                # aug_x_train = adv_img_batch
+                # aug_y_train = adv_lab_batch
+                # raise error
+
+
+                inputs = aug_x_train.cuda()
+                targets = aug_y_train.cuda()
+                
+                # self._optimizer.zero_grad()
+                self._model.train()                 #   train mode
+
+                if self._args.cla_model == 'inception_v3':
+                    outputs, aux = self._model(inputs)
+                elif self._args.cla_model == 'googlenet':
+                    outputs, aux1, aux2 = self._model(inputs)
+                else:
+                    outputs = self._model(inputs)
+
+                loss = self._lossfunc(outputs, targets)
+                
+                self._optimizer.zero_grad()
+                loss.backward()
+                self._optimizer.step()
+
+                epoch_total_loss += loss
+                #------------------------------
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
+            #   finish batch training
+                
+            # self._model.
+            #   当前epoch分类模型在干净测试集上的准确率
+            epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
+            # global_cle_test_acc.append(epoch_cle_test_accuracy)   
+            # global_cle_test_loss.append(epoch_cle_test_loss)
+            print(f'{epoch_index+1:04d} epoch at trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
+            print(f'{epoch_index+1:04d} epoch at trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
+
+            if args.whitebox == True:
+                #  当前epoch分类模型在白盒对抗测试集上的准确率
+                epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
+                self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
+                epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y)         
+            elif args.blackbox == True:
+                 #当前epoch分类模型在黑盒对抗测试集上的准确率
+                epoch_x_test_adv = self._adv_test_tensorset_x
+                epoch_y_test_adv = self._adv_test_tensorset_y
+
+            epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)               
+            print(f'{epoch_index+1:04d} epoch at trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+            print(f'{epoch_index+1:04d} epoch at trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
+            os.makedirs(tensorboard_log_adv_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_adv_acc_dir)   
+            writer_adv_acc = SummaryWriter(log_dir = tensorboard_log_adv_acc_dir, comment= '-'+'advtestacc') 
+            writer_adv_acc.add_scalar(tag = "epoch_adv_acc", scalar_value = epoch_adv_test_accuracy, global_step = epoch_index + 1 )
+            writer_adv_acc.close()
+            #--------------------------------------------------
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-adv')
+            os.makedirs(tensorboard_log_adv_loss_dir,exist_ok=True)    
+            writer_adv_loss = SummaryWriter(log_dir = tensorboard_log_adv_loss_dir, comment= '-'+'advtestloss') 
+            writer_adv_loss.add_scalar(tag = "epoch_adv_loss", scalar_value = epoch_adv_test_loss, global_step = epoch_index + 1 )
+            writer_adv_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-cle')
+            os.makedirs(tensorboard_log_cle_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_cle_acc_dir)   
+            writer_cle_acc = SummaryWriter(log_dir = tensorboard_log_cle_acc_dir, comment= '-'+'cletestacc') 
+            writer_cle_acc.add_scalar(tag = "epoch_cle_acc", scalar_value = epoch_cle_test_accuracy, global_step = epoch_index + 1 )
+            writer_cle_acc.close()
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-cle')
+            os.makedirs(tensorboard_log_cle_loss_dir,exist_ok=True)    
+            writer_cle_loss = SummaryWriter(log_dir = tensorboard_log_cle_loss_dir, comment= '-'+'cletestloss') 
+            writer_cle_loss.add_scalar(tag = "epoch_cle_loss", scalar_value = epoch_cle_test_loss, global_step = epoch_index + 1 )
+            writer_cle_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-train')
+            os.makedirs(tensorboard_log_train_loss_dir,exist_ok=True)    
+            writer_tra_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'augtrainloss') 
+            writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
+            writer_tra_loss.close()
+            #--------------------------------------------------
+          
