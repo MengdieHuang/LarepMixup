@@ -1,0 +1,20 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220629
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/cw/preactresnet18-cifar10/20220629/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+confidence: 0.0
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get CW examples generate model
+generating trainset adversarial examples...
+C&W L_2:   0%|          | 0/50000 [00:00<?, ?it/s]C&W L_2:   0%|          | 1/50000 [00:08<111:38:34,  8.04s/it]C&W L_2:   0%|          | 2/50000 [00:16<112:09:08,  8.08s/it]C&W L_2:   0%|          | 3/50000 [00:25<118:45:11,  8.55s/it]C&W L_2:   0%|          | 4/50000 [00:35<122:46:47,  8.84s/it]C&W L_2:   0%|          | 5/50000 [00:44<125:55:48,  9.07s/it]C&W L_2:   0%|          | 6/50000 [00:54<128:21:42,  9.24s/it]C&W L_2:   0%|          | 7/50000 [01:04<130:30:46,  9.40s/it]C&W L_2:   0%|          | 8/50000 [01:14<132:07:57,  9.52s/it]C&W L_2:   0%|          | 9/50000 [01:23<132:57:48,  9.58s/it]C&W L_2:   0%|          | 10/50000 [01:33<132:56:02,  9.57s/it]C&W L_2:   0%|          | 11/50000 [01:43<133:51:26,  9.64s/it]C&W L_2:   0%|          | 12/50000 [01:53<134:27:35,  9.68s/it]C&W L_2:   0%|          | 13/50000 [02:02<134:41:04,  9.70s/it]C&W L_2:   0%|          | 14/50000 [02:12<134:42:31,  9.70s/it]C&W L_2:   0%|          | 15/50000 [02:22<134:41:25,  9.70s/it]C&W L_2:   0%|          | 16/50000 [02:31<134:32:48,  9.69s/it]
