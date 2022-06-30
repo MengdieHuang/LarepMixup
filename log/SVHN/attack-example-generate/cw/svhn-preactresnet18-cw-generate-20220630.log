@@ -1,0 +1,20 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220630
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/cw/preactresnet18-svhn/20220630/00000
+initilize the dataset loading parameters
+Using downloaded and verified file: /home/data/maggie/svhn/train_32x32.mat
+Loading *svhn* train dataloader finished !
+Loading *svhn* test dataloader finished !
+confidence: 0.0
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/preactresnet18-svhn/20220627/00003-testacc-95.97/train-svhn-dataset/standard-trained-classifier-preactresnet18-on-clean-svhn-epoch-0011.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get CW examples generate model
+generating trainset adversarial examples...
+C&W L_2:   0%|          | 0/73257 [00:00<?, ?it/s]C&W L_2:   0%|          | 1/73257 [00:09<183:25:20,  9.01s/it]C&W L_2:   0%|          | 2/73257 [00:17<183:02:27,  9.00s/it]C&W L_2:   0%|          | 3/73257 [00:26<180:18:48,  8.86s/it]C&W L_2:   0%|          | 4/73257 [00:35<180:24:48,  8.87s/it]C&W L_2:   0%|          | 5/73257 [00:44<179:39:21,  8.83s/it]C&W L_2:   0%|          | 6/73257 [00:52<178:26:45,  8.77s/it]C&W L_2:   0%|          | 7/73257 [01:02<181:24:06,  8.92s/it]C&W L_2:   0%|          | 8/73257 [01:10<175:54:56,  8.65s/it]C&W L_2:   0%|          | 9/73257 [01:19<178:10:48,  8.76s/it]C&W L_2:   0%|          | 10/73257 [01:27<177:46:47,  8.74s/it]C&W L_2:   0%|          | 11/73257 [01:36<178:44:58,  8.79s/it]C&W L_2:   0%|          | 12/73257 [01:45<179:51:23,  8.84s/it]C&W L_2:   0%|          | 13/73257 [01:54<179:31:21,  8.82s/it]C&W L_2:   0%|          | 14/73257 [02:02<178:03:10,  8.75s/it]C&W L_2:   0%|          | 15/73257 [02:12<180:59:45,  8.90s/it]C&W L_2:   0%|          | 16/73257 [02:20<177:24:50,  8.72s/it]C&W L_2:   0%|          | 17/73257 [02:29<177:19:48,  8.72s/it]C&W L_2:   0%|          | 18/73257 [02:37<177:15:24,  8.71s/it]

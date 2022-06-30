@@ -36175,4 +36175,341 @@ label = 0007-7
 projecting samples num: 32
 projecting 00006203 image:
 label = 0001-1
-projecting samples num:
+projecting samples num: 32
+projecting 00006204 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006205 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006206 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006207 image:
+label = 0000-0
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *svhn* 194/814 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00006208 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006209 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006210 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006211 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006212 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006213 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006214 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006215 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006216 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006217 image:
+label = 0008-8
+projecting samples num: 32
+projecting 00006218 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006219 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006220 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006221 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006222 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006223 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006224 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006225 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006226 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006227 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006228 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006229 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006230 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006231 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006232 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006233 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006234 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006235 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006236 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006237 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006238 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006239 image:
+label = 0001-1
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *svhn* 195/814 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00006240 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006241 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006242 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006243 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006244 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006245 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006246 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006247 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006248 image:
+label = 0009-9
+projecting samples num: 32
+projecting 00006249 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006250 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006251 image:
+label = 0009-9
+projecting samples num: 32
+projecting 00006252 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006253 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006254 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006255 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006256 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006257 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006258 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006259 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006260 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006261 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006262 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006263 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006264 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006265 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006266 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006267 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006268 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006269 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006270 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006271 image:
+label = 0001-1
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *svhn* 196/814 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00006272 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006273 image:
+label = 0004-4
+projecting samples num: 32
+projecting 00006274 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006275 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006276 image:
+label = 0008-8
+projecting samples num: 32
+projecting 00006277 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006278 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006279 image:
+label = 0009-9
+projecting samples num: 32
+projecting 00006280 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006281 image:
+label = 0009-9
+projecting samples num: 32
+projecting 00006282 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006283 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006284 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006285 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006286 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006287 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006288 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006289 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006290 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006291 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006292 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006293 image:
+label = 0008-8
+projecting samples num: 32
+projecting 00006294 image:
+label = 0009-9
+projecting samples num: 32
+projecting 00006295 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006296 image:
+label = 0000-0
+projecting samples num: 32
+projecting 00006297 image:
+label = 0001-1
+projecting samples num: 32
+projecting 00006298 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006299 image:
+label = 0007-7
+projecting samples num: 32
+projecting 00006300 image:
+label = 0006-6
+projecting samples num: 32
+projecting 00006301 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006302 image:
+label = 0003-3
+projecting samples num: 32
+projecting 00006303 image:
+label = 0002-2
+Finished dataset projecting !
+pro_w_train.shape: torch.Size([32, 8, 512])
+pro_y_train.shape: torch.Size([32, 8])
+Projecting *svhn* 197/814 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00006304 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006305 image:
+label = 0005-5
+projecting samples num: 32
+projecting 00006306 image:
+label = 0002-2
+projecting samples num: 32
+projecting 00006307 image:
+label = 0008-8
+projecting samples num: 32
+projecting 00006308 image:
