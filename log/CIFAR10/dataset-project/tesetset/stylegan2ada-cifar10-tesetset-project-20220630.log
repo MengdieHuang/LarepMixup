@@ -1,0 +1,91 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220630
+Experiment result save dir: /home/maggie/mmat/result/project/stylegan2ada-cifar10/20220630/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+projecting test set
+self._args.dataset: cifar10
+sample_num: 10000
+batch_num: 313
+batch_size: 32
+Projecting *cifar10* 0/313 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00000000 image:
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+label = 0003-cat
+projecting samples num: 32
+projecting 00000001 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00000002 image:
+Traceback (most recent call last):
+  File "tasklauncher-20220630.py", line 185, in <module>
+    generate_model.projectmain(cle_test_dataloader)     #20220624 投影CIFAR10测试集
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 228, in projectmain
+    pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                                 #   numpy
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 428, in __batchproject__
+    self._model.project(self._exp_result_dir,cle_x_trainbatch,cle_y_trainbatch,batch_index)         #   调用stylegan2ada的project
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 528, in project
+    projected_w_set, projected_y_set = self.__projectmain__(self._args, self._exp_result_dir,ori_x_set, ori_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 539, in __projectmain__
+    projected_w_set, projected_y_set = self.__ramxyproject__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 632, in __ramxyproject__
+    laber_index = target_y_set[index]
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 702, in __xyproject__
+    verbose=True
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1055, in __project__
+    synth_images = G.synthesis(ws, noise_mode='const')
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 479, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "<string>", line 421, in forward
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 873, in _call_impl
+    _global_forward_pre_hooks.values(),
+KeyboardInterrupt
