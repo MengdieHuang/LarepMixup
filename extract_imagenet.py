@@ -3,9 +3,12 @@ import tarfile
 
 TRAIN_SRC_DIR = '/root/autodl-pub/ImageNet/ILSVRC2012/ILSVRC2012_img_train.tar'
 TRAIN_DEST_DIR = '/root/autodl-tmp/imagenet/train'
-VAL_SRC_DIR = '/root/autodl-pub/ImageNet/ILSVRC2012/ILSVRC2012_img_val.tar'
-VAL_DEST_DIR = '/root/autodl-tmp/imagenet/val'
 
+# VAL_SRC_DIR = '/root/autodl-pub/ImageNet/ILSVRC2012/ILSVRC2012_img_val.tar'
+VAL_SRC_DIR = '/root/autodl-tmp/maggie/data/ImageNet/ILSVRC2012_img_val.tar'
+
+# VAL_DEST_DIR = '/root/autodl-tmp/imagenet/val'
+VAL_DEST_DIR = '/root/autodl-tmp/maggie/data/ImageNet/val'
 
 def extract_train():
     with open(TRAIN_SRC_DIR, 'rb') as f:
@@ -35,6 +38,6 @@ def extract_val():
 
 
 if __name__ == '__main__':
-    extract_train()
+    # extract_train()
     extract_val()
 
