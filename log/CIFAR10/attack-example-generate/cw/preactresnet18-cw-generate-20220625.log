@@ -1,154 +1,0 @@
-
-
----------------------------------------
-Torch cuda is available
-args.subcommand=run, run the command line
-date: 20220625
-whitebox attack
-Experiment result save dir: /home/maggie/mmat/result/attack/cw/preactresnet18-cifar10/20220625/00000
-initilize the dataset loading parameters
-load cifar10 dataset
-Loading *cifar10* train dataloader finished !
-Loading *cifar10* test dataloader finished !
-eps: 0.2
-pixel adversarial attack.............
-cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
-initlize attack classifier
-generate pixel adversarial exampels
-Get CW examples generate model
-generating testset adversarial examples...
-C&W L_2:   0%|          | 0/10000 [00:00<?, ?it/s]C&W L_2:   0%|          | 1/10000 [00:12<34:57:25, 12.59s/it]C&W L_2:   0%|          | 2/10000 [00:24<34:23:15, 12.38s/it]C&W L_2:   0%|          | 3/10000 [00:36<34:07:13, 12.29s/it]C&W L_2:   0%|          | 4/10000 [00:48<34:05:12, 12.28s/it]C&W L_2:   0%|          | 5/10000 [01:01<34:02:35, 12.26s/it]C&W L_2:   0%|          | 6/10000 [01:12<33:27:47, 12.05s/it]C&W L_2:   0%|          | 7/10000 [01:24<33:33:27, 12.09s/it]C&W L_2:   0%|          | 8/10000 [01:37<34:02:01, 12.26s/it]C&W L_2:   0%|          | 9/10000 [01:49<33:32:49, 12.09s/it]C&W L_2:   0%|          | 10/10000 [02:01<33:41:44, 12.14s/it]C&W L_2:   0%|          | 11/10000 [02:14<34:34:05, 12.46s/it]C&W L_2:   0%|          | 12/10000 [02:26<34:23:22, 12.40s/it]C&W L_2:   0%|          | 13/10000 [02:38<33:31:31, 12.08s/it]C&W L_2:   0%|          | 14/10000 [02:50<33:43:54, 12.16s/it]C&W L_2:   0%|          | 15/10000 [03:03<34:39:04, 12.49s/it]C&W L_2:   0%|          | 16/10000 [03:15<33:47:49, 12.19s/it]C&W L_2:   0%|          | 17/10000 [03:27<33:39:14, 12.14s/it]C&W L_2:   0%|          | 18/10000 [03:39<33:35:12, 12.11s/it]C&W L_2:   0%|          | 19/10000 [03:51<33:25:24, 12.06s/it]C&W L_2:   0%|          | 20/10000 [04:02<32:57:49, 11.89s/it]C&W L_2:   0%|          | 21/10000 [04:15<33:21:31, 12.03s/it]C&W L_2:   0%|          | 22/10000 [04:27<33:29:53, 12.09s/it]C&W L_2:   0%|          | 23/10000 [04:39<33:38:38, 12.14s/it]C&W L_2:   0%|          | 24/10000 [04:51<33:11:04, 11.98s/it]C&W L_2:   0%|          | 25/10000 [05:03<33:30:07, 12.09s/it]C&W L_2:   0%|          | 26/10000 [05:15<33:39:29, 12.15s/it]C&W L_2:   0%|          | 27/10000 [05:27<33:15:18, 12.00s/it]C&W L_2:   0%|          | 28/10000 [05:39<33:17:57, 12.02s/it]C&W L_2:   0%|          | 29/10000 [05:51<33:19:31, 12.03s/it]C&W L_2:   0%|          | 30/10000 [06:03<33:27:26, 12.08s/it]C&W L_2:   0%|          | 30/10000 [06:10<34:13:49, 12.36s/it]
-Traceback (most recent call last):
-  File "tasklauncher-20220625.py", line 68, in <module>
-    
-  File "/home/maggie/mmat/attacks/advattack.py", line 254, in generate
-    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
-    return fdict[func_name](self, *args, **kwargs)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/carlini.py", line 355, in generate
-    c_current[active_and_do_halving],
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/carlini.py", line 150, in _loss
-    np.array(x_adv, dtype=ART_NUMPY_DTYPE), logits=True, batch_size=self.batch_size,
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/classifier.py", line 71, in replacement_function
-    return fdict[func_name](self, *args, **kwargs)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 309, in predict
-    results[begin:end] = output.detach().cpu().numpy()
-KeyboardInterrupt
-
-
----------------------------------------
-Torch cuda is available
-args.subcommand=run, run the command line
-date: 20220625
-whitebox attack
-Experiment result save dir: /home/maggie/mmat/result/attack/cw/preactresnet18-cifar10/20220625/00001
-initilize the dataset loading parameters
-load cifar10 dataset
-Loading *cifar10* train dataloader finished !
-Loading *cifar10* test dataloader finished !
-confidence: 1.0
-pixel adversarial attack.............
-cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
-initlize attack classifier
-generate pixel adversarial exampels
-Get CW examples generate model
-Traceback (most recent call last):
-  File "tasklauncher-20220625.py", line 73, in <module>
-    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
-  File "/home/maggie/mmat/attacks/advattack.py", line 220, in generate
-    self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
-  File "/home/maggie/mmat/attacks/advattack.py", line 553, in __getsettensor__
-    xset_tensor  = self.__getxsettensor__(dataloader)
-  File "/home/maggie/mmat/attacks/advattack.py", line 566, in __getxsettensor__
-    xset_tensor.append(dataloader.dataset[img_index][0])
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/datasets/cifar.py", line 120, in __getitem__
-    img = self.transform(img)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 60, in __call__
-    img = t(img)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 97, in __call__
-    return F.to_tensor(pic)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/functional.py", line 136, in to_tensor
-    img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
-KeyboardInterrupt
-
-
----------------------------------------
-Torch cuda is available
-args.subcommand=run, run the command line
-date: 20220625
-whitebox attack
-Experiment result save dir: /home/maggie/mmat/result/attack/cw/preactresnet18-cifar10/20220625/00002
-initilize the dataset loading parameters
-load cifar10 dataset
-Loading *cifar10* train dataloader finished !
-Loading *cifar10* test dataloader finished !
-confidence: 0.1
-pixel adversarial attack.............
-cla_network_pkl: /home/maggie/mmat/result/train/cla-train/preactresnet18-cifar10/20210924/00001-teatacc-87.37/train-cifar10-dataset/standard-trained-classifier-preactresnet18-on-clean-cifar10-epoch-0011.pkl
-initlize attack classifier
-generate pixel adversarial exampels
-Get CW examples generate model
-generating testset adversarial examples...
-C&W L_2:   0%|          | 0/10000 [00:00<?, ?it/s]C&W L_2:   0%|          | 1/10000 [00:12<35:17:47, 12.71s/it]C&W L_2:   0%|          | 2/10000 [00:25<35:15:50, 12.70s/it]C&W L_2:   0%|          | 3/10000 [00:36<34:19:07, 12.36s/it]C&W L_2:   0%|          | 4/10000 [00:49<34:15:17, 12.34s/it]C&W L_2:   0%|          | 5/10000 [01:01<34:11:56, 12.32s/it]C&W L_2:   0%|          | 6/10000 [01:13<34:13:54, 12.33s/it]C&W L_2:   0%|          | 7/10000 [01:25<33:40:40, 12.13s/it]C&W L_2:   0%|          | 8/10000 [01:38<33:59:39, 12.25s/it]C&W L_2:   0%|          | 9/10000 [01:50<34:16:12, 12.35s/it]C&W L_2:   0%|          | 10/10000 [02:02<33:36:45, 12.11s/it]C&W L_2:   0%|          | 11/10000 [02:15<34:46:26, 12.53s/it]C&W L_2:   0%|          | 12/10000 [02:28<34:50:07, 12.56s/it]C&W L_2:   0%|          | 13/10000 [02:40<34:35:56, 12.47s/it]C&W L_2:   0%|          | 14/10000 [02:52<33:51:42, 12.21s/it]C&W L_2:   0%|          | 15/10000 [03:04<34:19:53, 12.38s/it]C&W L_2:   0%|          | 16/10000 [03:17<34:29:52, 12.44s/it]C&W L_2:   0%|          | 17/10000 [03:29<33:43:03, 12.16s/it]C&W L_2:   0%|          | 18/10000 [03:41<33:47:42, 12.19s/it]C&W L_2:   0%|          | 19/10000 [03:53<33:53:13, 12.22s/it]C&W L_2:   0%|          | 20/10000 [04:05<33:51:39, 12.21s/it]C&W L_2:   0%|          | 21/10000 [04:17<33:24:22, 12.05s/it]C&W L_2:   0%|          | 22/10000 [04:29<33:40:18, 12.15s/it]C&W L_2:   0%|          | 23/10000 [04:42<34:01:01, 12.27s/it]C&W L_2:   0%|          | 24/10000 [04:53<33:25:34, 12.06s/it]C&W L_2:   0%|          | 25/10000 [05:06<33:48:20, 12.20s/it]C&W L_2:   0%|          | 26/10000 [05:18<33:42:11, 12.16s/it]C&W L_2:   0%|          | 27/10000 [05:30<33:50:33, 12.22s/it]C&W L_2:   0%|          | 28/10000 [05:42<33:14:27, 12.00s/it]C&W L_2:   0%|          | 29/10000 [05:54<33:25:10, 12.07s/it]C&W L_2:   0%|          | 30/10000 [06:07<33:39:46, 12.16s/it]C&W L_2:   0%|          | 31/10000 [06:18<33:15:10, 12.01s/it]C&W L_2:   0%|          | 32/10000 [06:29<32:32:06, 11.75s/it]C&W L_2:   0%|          | 33/10000 [06:41<32:46:59, 11.84s/it]C&W L_2:   0%|          | 34/10000 [06:54<33:16:31, 12.02s/it]C&W L_2:   0%|          | 35/10000 [07:05<32:50:45, 11.87s/it]C&W L_2:   0%|          | 36/10000 [07:18<33:09:19, 11.98s/it]C&W L_2:   0%|          | 37/10000 [07:28<31:35:49, 11.42s/it]C&W L_2:   0%|          | 38/10000 [07:40<32:09:18, 11.62s/it]C&W L_2:   0%|          | 39/10000 [07:51<31:53:08, 11.52s/it]C&W L_2:   0%|          | 40/10000 [08:03<32:28:02, 11.74s/it]C&W L_2:   0%|          | 41/10000 [08:16<33:03:16, 11.95s/it]C&W L_2:   0%|          | 42/10000 [08:27<32:42:12, 11.82s/it]C&W L_2:   0%|          | 43/10000 [08:39<33:02:21, 11.95s/it]C&W L_2:   0%|          | 44/10000 [08:52<33:21:34, 12.06s/it]C&W L_2:   0%|          | 45/10000 [09:04<33:43:51, 12.20s/it]C&W L_2:   0%|          | 46/10000 [09:16<33:07:08, 11.98s/it]C&W L_2:   0%|          | 47/10000 [09:28<33:16:01, 12.03s/it]C&W L_2:   0%|          | 48/10000 [09:40<33:35:39, 12.15s/it]C&W L_2:   0%|          | 49/10000 [09:50<31:24:39, 11.36s/it]C&W L_2:   0%|          | 50/10000 [10:02<31:50:09, 11.52s/it]C&W L_2:   1%|          | 51/10000 [10:14<32:26:37, 11.74s/it]C&W L_2:   1%|          | 52/10000 [10:26<32:47:00, 11.86s/it]C&W L_2:   1%|          | 53/10000 [10:38<32:30:34, 11.77s/it]C&W L_2:   1%|          | 54/10000 [10:50<32:40:07, 11.82s/it]C&W L_2:   1%|          | 55/10000 [11:02<33:05:34, 11.98s/it]C&W L_2:   1%|          | 56/10000 [11:14<33:05:54, 11.98s/it]C&W L_2:   1%|          | 57/10000 [11:25<32:34:07, 11.79s/it]C&W L_2:   1%|          | 58/10000 [11:38<33:00:30, 11.95s/it]C&W L_2:   1%|          | 59/10000 [11:48<31:13:45, 11.31s/it]C&W L_2:   1%|          | 60/10000 [12:00<32:01:28, 11.60s/it]C&W L_2:   1%|          | 61/10000 [12:11<32:01:41, 11.60s/it]C&W L_2:   1%|          | 62/10000 [12:24<32:33:59, 11.80s/it]C&W L_2:   1%|          | 63/10000 [12:34<31:17:57, 11.34s/it]C&W L_2:   1%|          | 64/10000 [12:45<31:29:00, 11.41s/it]C&W L_2:   1%|          | 65/10000 [12:57<31:54:39, 11.56s/it]C&W L_2:   1%|          | 66/10000 [13:09<32:03:32, 11.62s/it]C&W L_2:   1%|          | 67/10000 [13:21<32:18:57, 11.71s/it]C&W L_2:   1%|          | 68/10000 [13:33<32:08:54, 11.65s/it]C&W L_2:   1%|          | 69/10000 [13:45<32:44:44, 11.87s/it]C&W L_2:   1%|          | 70/10000 [13:55<31:10:43, 11.30s/it]C&W L_2:   1%|          | 71/10000 [14:07<31:40:27, 11.48s/it]C&W L_2:   1%|          | 72/10000 [14:18<31:26:19, 11.40s/it]C&W L_2:   1%|          | 73/10000 [14:30<32:05:46, 11.64s/it]C&W L_2:   1%|          | 74/10000 [14:43<32:41:21, 11.86s/it]C&W L_2:   1%|          | 75/10000 [14:55<32:55:58, 11.95s/it]C&W L_2:   1%|          | 76/10000 [15:06<32:22:40, 11.75s/it]C&W L_2:   1%|          | 77/10000 [15:18<32:30:20, 11.79s/it]C&W L_2:   1%|          | 78/10000 [15:31<33:10:34, 12.04s/it]C&W L_2:   1%|          | 79/10000 [15:42<32:44:06, 11.88s/it]C&W L_2:   1%|          | 80/10000 [15:55<33:17:20, 12.08s/it]C&W L_2:   1%|          | 81/10000 [16:07<33:27:14, 12.14s/it]C&W L_2:   1%|          | 82/10000 [16:19<33:32:46, 12.18s/it]C&W L_2:   1%|          | 83/10000 [16:31<32:58:47, 11.97s/it]C&W L_2:   1%|          | 84/10000 [16:43<33:06:36, 12.02s/it]C&W L_2:   1%|          | 85/10000 [16:55<33:21:00, 12.11s/it]C&W L_2:   1%|          | 86/10000 [17:07<32:44:18, 11.89s/it]C&W L_2:   1%|          | 87/10000 [17:19<33:07:07, 12.03s/it]C&W L_2:   1%|          | 88/10000 [17:32<33:55:06, 12.32s/it]C&W L_2:   1%|          | 89/10000 [17:44<33:48:12, 12.28s/it]C&W L_2:   1%|          | 90/10000 [17:56<33:18:31, 12.10s/it]C&W L_2:   1%|          | 91/10000 [18:08<33:18:45, 12.10s/it]C&W L_2:   1%|          | 92/10000 [18:20<33:39:27, 12.23s/it]C&W L_2:   1%|          | 93/10000 [18:32<33:20:26, 12.12s/it]C&W L_2:   1%|          | 94/10000 [18:44<33:20:32, 12.12s/it]C&W L_2:   1%|          | 95/10000 [18:54<31:24:43, 11.42s/it]C&W L_2:   1%|          | 96/10000 [19:04<30:20:00, 11.03s/it]C&W L_2:   1%|          | 97/10000 [19:15<30:31:51, 11.10s/it]C&W L_2:   1%|          | 98/10000 [19:28<31:32:23, 11.47s/it]C&W L_2:   1%|          | 99/10000 [19:40<32:04:56, 11.67s/it]C&W L_2:   1%|          | 100/10000 [19:52<32:15:32, 11.73s/it]C&W L_2:   1%|          | 101/10000 [20:04<32:15:17, 11.73s/it]C&W L_2:   1%|          | 102/10000 [20:16<32:36:55, 11.86s/it]C&W L_2:   1%|          | 103/10000 [20:28<32:57:20, 11.99s/it]C&W L_2:   1%|          | 104/10000 [20:39<32:29:24, 11.82s/it]C&W L_2:   1%|          | 105/10000 [20:52<32:48:20, 11.94s/it]C&W L_2:   1%|          | 106/10000 [21:04<33:04:47, 12.04s/it]C&W L_2:   1%|          | 107/10000 [21:16<32:49:43, 11.95s/it]C&W L_2:   1%|          | 108/10000 [21:27<32:40:13, 11.89s/it]C&W L_2:   1%|          | 109/10000 [21:40<33:10:58, 12.08s/it]C&W L_2:   1%|          | 110/10000 [21:52<33:25:26, 12.17s/it]C&W L_2:   1%|          | 111/10000 [22:02<31:35:40, 11.50s/it]C&W L_2:   1%|          | 112/10000 [22:15<32:14:47, 11.74s/it]C&W L_2:   1%|          | 113/10000 [22:27<32:31:51, 11.84s/it]C&W L_2:   1%|          | 114/10000 [22:40<33:25:51, 12.17s/it]C&W L_2:   1%|          | 115/10000 [22:51<33:12:02, 12.09s/it]C&W L_2:   1%|          | 116/10000 [23:04<33:17:57, 12.13s/it]C&W L_2:   1%|          | 117/10000 [23:16<33:22:18, 12.16s/it]C&W L_2:   1%|          | 118/10000 [23:27<32:49:12, 11.96s/it]C&W L_2:   1%|          | 119/10000 [23:40<33:26:03, 12.18s/it]C&W L_2:   1%|          | 120/10000 [23:52<33:30:08, 12.21s/it]C&W L_2:   1%|          | 121/10000 [24:04<33:00:39, 12.03s/it]C&W L_2:   1%|          | 122/10000 [24:16<33:07:43, 12.07s/it]C&W L_2:   1%|          | 123/10000 [24:28<33:13:17, 12.11s/it]C&W L_2:   1%|          | 124/10000 [24:41<33:24:02, 12.18s/it]C&W L_2:   1%|▏         | 125/10000 [24:52<32:53:43, 11.99s/it]C&W L_2:   1%|▏         | 126/10000 [25:05<33:14:13, 12.12s/it]C&W L_2:   1%|▏         | 127/10000 [25:17<33:29:25, 12.21s/it]C&W L_2:   1%|▏         | 128/10000 [25:29<33:02:15, 12.05s/it]C&W L_2:   1%|▏         | 129/10000 [25:41<33:06:20, 12.07s/it]C&W L_2:   1%|▏         | 130/10000 [25:53<33:23:19, 12.18s/it]C&W L_2:   1%|▏         | 131/10000 [26:05<33:20:44, 12.16s/it]C&W L_2:   1%|▏         | 132/10000 [26:17<33:00:09, 12.04s/it]C&W L_2:   1%|▏         | 133/10000 [26:30<33:14:54, 12.13s/it]C&W L_2:   1%|▏         | 134/10000 [26:42<33:30:59, 12.23s/it]C&W L_2:   1%|▏         | 135/10000 [26:53<32:53:11, 12.00s/it]C&W L_2:   1%|▏         | 136/10000 [27:06<32:55:43, 12.02s/it]C&W L_2:   1%|▏         | 137/10000 [27:18<33:17:53, 12.15s/it]C&W L_2:   1%|▏         | 138/10000 [27:30<33:23:33, 12.19s/it]C&W L_2:   1%|▏         | 139/10000 [27:42<32:57:47, 12.03s/it]C&W L_2:   1%|▏         | 140/10000 [27:54<33:10:34, 12.11s/it]C&W L_2:   1%|▏         | 141/10000 [28:06<33:03:26, 12.07s/it]C&W L_2:   1%|▏         | 142/10000 [28:17<31:36:42, 11.54s/it]C&W L_2:   1%|▏         | 143/10000 [28:29<32:44:37, 11.96s/it]C&W L_2:   1%|▏         | 144/10000 [28:44<35:14:05, 12.87s/it]C&W L_2:   1%|▏         | 145/10000 [28:57<34:45:26, 12.70s/it]C&W L_2:   1%|▏         | 146/10000 [29:08<33:43:12, 12.32s/it]C&W L_2:   1%|▏         | 147/10000 [29:21<33:53:38, 12.38s/it]C&W L_2:   1%|▏         | 148/10000 [29:33<33:57:02, 12.41s/it]C&W L_2:   1%|▏         | 149/10000 [29:45<33:22:25, 12.20s/it]C&W L_2:   2%|▏         | 150/10000 [29:57<33:32:29, 12.26s/it]C&W L_2:   2%|▏         | 151/10000 [30:09<33:29:55, 12.24s/it]C&W L_2:   2%|▏         | 152/10000 [30:22<34:06:12, 12.47s/it]C&W L_2:   2%|▏         | 153/10000 [30:35<34:01:30, 12.44s/it]C&W L_2:   2%|▏         | 154/10000 [30:48<34:27:04, 12.60s/it]C&W L_2:   2%|▏         | 155/10000 [31:00<34:07:51, 12.48s/it]C&W L_2:   2%|▏         | 156/10000 [31:12<33:22:37, 12.21s/it]C&W L_2:   2%|▏         | 157/10000 [31:24<33:47:08, 12.36s/it]C&W L_2:   2%|▏         | 158/10000 [31:37<33:59:36, 12.43s/it]C&W L_2:   2%|▏         | 159/10000 [31:49<33:24:37, 12.22s/it]C&W L_2:   2%|▏         | 160/10000 [32:01<33:38:18, 12.31s/it]C&W L_2:   2%|▏         | 161/10000 [32:14<33:49:59, 12.38s/it]C&W L_2:   2%|▏         | 162/10000 [32:26<33:46:40, 12.36s/it]C&W L_2:   2%|▏         | 163/10000 [32:35<31:22:31, 11.48s/it]C&W L_2:   2%|▏         | 164/10000 [32:48<32:01:37, 11.72s/it]C&W L_2:   2%|▏         | 165/10000 [33:00<32:49:03, 12.01s/it]C&W L_2:   2%|▏         | 166/10000 [33:12<32:29:17, 11.89s/it]C&W L_2:   2%|▏         | 167/10000 [33:24<32:56:53, 12.06s/it]C&W L_2:   2%|▏         | 168/10000 [33:35<31:53:09, 11.68s/it]C&W L_2:   2%|▏         | 169/10000 [33:47<32:17:29, 11.82s/it]C&W L_2:   2%|▏         | 170/10000 [33:59<32:04:16, 11.75s/it]C&W L_2:   2%|▏         | 171/10000 [34:12<32:53:04, 12.04s/it]C&W L_2:   2%|▏         | 172/10000 [34:24<33:11:42, 12.16s/it]C&W L_2:   2%|▏         | 173/10000 [34:37<33:30:46, 12.28s/it]C&W L_2:   2%|▏         | 174/10000 [34:49<33:39:02, 12.33s/it]C&W L_2:   2%|▏         | 175/10000 [35:02<33:47:21, 12.38s/it]C&W L_2:   2%|▏         | 176/10000 [35:14<33:49:41, 12.40s/it]C&W L_2:   2%|▏         | 177/10000 [35:26<33:12:58, 12.17s/it]C&W L_2:   2%|▏         | 178/10000 [35:38<33:31:01, 12.28s/it]C&W L_2:   2%|▏         | 179/10000 [35:51<33:41:14, 12.35s/it]C&W L_2:   2%|▏         | 180/10000 [36:02<33:06:50, 12.14s/it]C&W L_2:   2%|▏         | 181/10000 [36:15<33:12:54, 12.18s/it]C&W L_2:   2%|▏         | 182/10000 [36:27<33:08:15, 12.15s/it]C&W L_2:   2%|▏         | 183/10000 [36:39<32:59:21, 12.10s/it]C&W L_2:   2%|▏         | 184/10000 [36:49<31:14:04, 11.46s/it]C&W L_2:   2%|▏         | 185/10000 [37:00<30:53:19, 11.33s/it]C&W L_2:   2%|▏         | 185/10000 [37:11<32:52:46, 12.06s/it]
-Traceback (most recent call last):
-  File "tasklauncher-20220625.py", line 73, in <module>
-    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
-  File "/home/maggie/mmat/attacks/advattack.py", line 254, in generate
-    self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
-    return fdict[func_name](self, *args, **kwargs)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/carlini.py", line 355, in generate
-    c_current[active_and_do_halving],
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/carlini.py", line 150, in _loss
-    np.array(x_adv, dtype=ART_NUMPY_DTYPE), logits=True, batch_size=self.batch_size,
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/classifier.py", line 71, in replacement_function
-    return fdict[func_name](self, *args, **kwargs)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 294, in predict
-    x_preprocessed, _ = self._apply_preprocessing(x, y=None, fit=False)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/pytorch.py", line 166, in _apply_preprocessing
-    x = torch.tensor(x, device=self._device)
-KeyboardInterrupt
-Traceback (most recent call last):
-  File "tasklauncher-20220625.py", line 6, in <module>
-    from clamodels.classifier import MaggieClassifier
-  File "/home/maggie/mmat/clamodels/classifier.py", line 17, in <module>
-    from art.estimators.classification import PyTorchClassifier
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/__init__.py", line 7, in <module>
-    from art import attacks
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/__init__.py", line 8, in <module>
-    from art.attacks import evasion
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/__init__.py", line 4, in <module>
-    from art.attacks.evasion.adversarial_patch.adversarial_patch import AdversarialPatch
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/adversarial_patch/adversarial_patch.py", line 31, in <module>
-    from art.attacks.evasion.adversarial_patch.adversarial_patch_numpy import AdversarialPatchNumpy
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/adversarial_patch/adversarial_patch_numpy.py", line 37, in <module>
-    from art.estimators.estimator import BaseEstimator, NeuralNetworkMixin
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/__init__.py", line 17, in <module>
-    from art.estimators import certification
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/certification/__init__.py", line 4, in <module>
-    from art.estimators.certification import randomized_smoothing
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/certification/randomized_smoothing/__init__.py", line 4, in <module>
-    from art.estimators.certification.randomized_smoothing.randomized_smoothing import RandomizedSmoothingMixin
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/certification/randomized_smoothing/randomized_smoothing.py", line 30, in <module>
-    from scipy.stats import norm
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/__init__.py", line 388, in <module>
-    from .stats import *
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/stats.py", line 180, in <module>
-    from . import distributions
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/distributions.py", line 11, in <module>
-    from . import _continuous_distns
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/_continuous_distns.py", line 3360, in <module>
-    halflogistic = halflogistic_gen(a=0.0, name='halflogistic')
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/_distn_infrastructure.py", line 1660, in __init__
-    self._construct_doc(docdict, dct.get(self.name))
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/stats/_distn_infrastructure.py", line 741, in _construct_doc
-    self.__doc__ = doccer.docformat(self.__doc__, tempdict)
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/scipy/_lib/doccer.py", line 46, in docformat
-    if not docdict:
-KeyboardInterrupt
-Traceback (most recent call last):
-  File "tasklauncher-20220625.py", line 4, in <module>
-    import torch
-  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/__init__.py", line 196, in <module>
-    from torch._C import *
-RuntimeError: KeyboardInterrupt: 
