@@ -1,5 +1,6 @@
 source ~/.bashrc
-source /home/xieyi/anaconda3/bin/activate mmat
+# source /home/xieyi/anaconda3/bin/activate mmat
+source /root/miniconda3/bin/activate mmat
 
 # train stylegan2ada for imagenetmixed10
 #--------------------
