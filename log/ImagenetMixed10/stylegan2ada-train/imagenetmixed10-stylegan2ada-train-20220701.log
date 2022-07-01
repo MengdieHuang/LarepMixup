@@ -6,3 +6,23 @@ Traceback (most recent call last):
   File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
     import click
 ModuleNotFoundError: No module named 'click'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00000
+initilize the dataset loading parameters
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 31, in <module>
+    cle_dataset = MaggieDataset(args)
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 376, in __init__
+    self._traindataset = self.__loadtraindataset__()  
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 507, in __loadtraindataset__
+    in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 55, in __init__
+    ret = self.load_imagenet_info(ds_path, ds_info_path)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 106, in load_imagenet_info
+    files = os.listdir(os.path.join(ds_path, 'train'))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/data/ImageNet/train'
