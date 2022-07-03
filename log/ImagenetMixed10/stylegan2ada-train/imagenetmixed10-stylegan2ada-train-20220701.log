@@ -1,0 +1,846 @@
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 10, in <module>
+    from utils.separatelist import CommaSeparatedList
+  File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00000
+initilize the dataset loading parameters
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 31, in <module>
+    cle_dataset = MaggieDataset(args)
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 376, in __init__
+    self._traindataset = self.__loadtraindataset__()  
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 507, in __loadtraindataset__
+    in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 55, in __init__
+    ret = self.load_imagenet_info(ds_path, ds_info_path)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 106, in load_imagenet_info
+    files = os.listdir(os.path.join(ds_path, 'train'))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/data/ImageNet/train'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00001
+initilize the dataset loading parameters
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 31, in <module>
+    cle_dataset = MaggieDataset(args)
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 376, in __init__
+    self._traindataset = self.__loadtraindataset__()  
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 510, in __loadtraindataset__
+    in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 55, in __init__
+    ret = self.load_imagenet_info(ds_path, ds_info_path)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 106, in load_imagenet_info
+    files = os.listdir(os.path.join(ds_path, 'train'))
+FileNotFoundError: [Errno 2] No such file or directory: '/root/autodl-tmp/maggie/data/ImageNet/train'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00002
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 31, in <module>
+    cle_dataset = MaggieDataset(args)
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 377, in __init__
+    self._testdataset = self.__loadtestdataset__() 
+  File "/root/autodl-nas/maggie/mmat/datas/dataset.py", line 730, in __loadtestdataset__
+    in_hier = ImageNetHierarchy(in_path, in_info_path)                  
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 55, in __init__
+    ret = self.load_imagenet_info(ds_path, ds_info_path)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/imagenet_helpers.py", line 106, in load_imagenet_info
+    files = os.listdir(os.path.join(ds_path, 'train'))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/data/ImageNet/train'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00003
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 35, in <module>
+    cle_dataloader = MaggieDataloader(args,cle_train_dataset,cle_test_dataset)
+  File "/root/autodl-nas/maggie/mmat/datas/dataloader.py", line 18, in __init__
+    self._traindataloader = self.__loadtraindataloader__()
+  File "/root/autodl-nas/maggie/mmat/datas/dataloader.py", line 39, in __loadtraindataloader__
+    train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/datasets.py", line 177, in make_loaders
+    custom_class_args=self.custom_class_args)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/loaders.py", line 60, in make_loaders
+    label_mapping=label_mapping)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/folder.py", line 216, in __init__
+    label_mapping=label_mapping)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/robustness/tools/folder.py", line 93, in __init__
+    "Supported extensions are: " + ",".join(extensions)))
+RuntimeError: Found 0 files in subfolders of: /root/autodl-tmp/maggie/data/ImageNet/val
+Supported extensions are: .jpg,.jpeg,.png,.ppm,.bmp,.pgm,.tif
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00004
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 1,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 3,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.8192
+  },
+  "total_kimg": 25000,
+  "batch_size": 64,
+  "batch_gpu": 64,
+  "ema_kimg": 5.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00004/imagenetmixed10-auto1-batch64-ada-bgc-noresume"
+}
+
+Output directory:   /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00004/imagenetmixed10-auto1-batch64-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     1
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py:104: UserWarning: 
+NVIDIA RTX A5000 with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA RTX A5000 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 128, in __trainmain__
+    snapshot_network_pkls = self.__subprocess_fn__(rank=0, args=args, temp_dir=temp_dir)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 206, in training_loop
+    img = misc.print_module_summary(G, [z, c])
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 213, in print_module_summary
+    outputs = module(*inputs)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 506, in forward
+    ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 228, in forward
+    x = normalize_2nd_moment(z.to(torch.float32))
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 30, in normalize_2nd_moment
+    return x * (x.square().mean(dim=dim, keepdim=True) + eps).rsqrt()
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 266
+    print("exp_result_dir":,exp_result_dir)
+                          ^
+SyntaxError: invalid syntax
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+exp_result_dir /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701
+Experiment result save dir: /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00005
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 1,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 3,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.8192
+  },
+  "total_kimg": 25000,
+  "batch_size": 64,
+  "batch_gpu": 64,
+  "ema_kimg": 5.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00005/imagenetmixed10-auto1-batch64-ada-bgc-noresume"
+}
+
+Output directory:   /maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00005/imagenetmixed10-auto1-batch64-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     1
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py:104: UserWarning: 
+NVIDIA RTX A5000 with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA RTX A5000 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 128, in __trainmain__
+    snapshot_network_pkls = self.__subprocess_fn__(rank=0, args=args, temp_dir=temp_dir)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 206, in training_loop
+    img = misc.print_module_summary(G, [z, c])
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 213, in print_module_summary
+    outputs = module(*inputs)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 506, in forward
+    ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 228, in forward
+    x = normalize_2nd_moment(z.to(torch.float32))
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 30, in normalize_2nd_moment
+    return x * (x.square().mean(dim=dim, keepdim=True) + eps).rsqrt()
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00000
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 1,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 3,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.8192
+  },
+  "total_kimg": 25000,
+  "batch_size": 64,
+  "batch_gpu": 64,
+  "ema_kimg": 5.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00000/imagenetmixed10-auto1-batch64-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00000/imagenetmixed10-auto1-batch64-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     1
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py:104: UserWarning: 
+NVIDIA RTX A5000 with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA RTX A5000 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 128, in __trainmain__
+    snapshot_network_pkls = self.__subprocess_fn__(rank=0, args=args, temp_dir=temp_dir)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 206, in training_loop
+    img = misc.print_module_summary(G, [z, c])
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 213, in print_module_summary
+    outputs = module(*inputs)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 506, in forward
+    ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 228, in forward
+    x = normalize_2nd_moment(z.to(torch.float32))
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 30, in normalize_2nd_moment
+    return x * (x.square().mean(dim=dim, keepdim=True) + eps).rsqrt()
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220701
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00001
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 1,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 3,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.8192
+  },
+  "total_kimg": 25000,
+  "batch_size": 64,
+  "batch_gpu": 64,
+  "ema_kimg": 5.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00001/imagenetmixed10-auto1-batch64-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220701/00001/imagenetmixed10-auto1-batch64-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     1
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/cuda/__init__.py:104: UserWarning: 
+NVIDIA RTX A5000 with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA RTX A5000 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 128, in __trainmain__
+    snapshot_network_pkls = self.__subprocess_fn__(rank=0, args=args, temp_dir=temp_dir)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 206, in training_loop
+    img = misc.print_module_summary(G, [z, c])
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 213, in print_module_summary
+    outputs = module(*inputs)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 506, in forward
+    ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
+  File "/root/miniconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 228, in forward
+    x = normalize_2nd_moment(z.to(torch.float32))
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 30, in normalize_2nd_moment
+    return x * (x.square().mean(dim=dim, keepdim=True) + eps).rsqrt()
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 10, in <module>
+    from utils.separatelist import CommaSeparatedList
+  File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 10, in <module>
+    from utils.separatelist import CommaSeparatedList
+  File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'
+Traceback (most recent call last):
+  File "/root/autodl-nas/maggie/mmat/tasklauncher-20220701.py", line 4, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 10, in <module>
+    from utils.separatelist import CommaSeparatedList
+  File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 17, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 17, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 17, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 17, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Traceback (most recent call last):
+  File "/root/autodl-nas/maggie/mmat/tasklauncher-20220701.py", line 4, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "tasklauncher-20220701.py", line 5, in <module>
+    import utils.parseargs
+  File "/root/autodl-nas/maggie/mmat/utils/parseargs.py", line 10, in <module>
+    from utils.separatelist import CommaSeparatedList
+  File "/root/autodl-nas/maggie/mmat/utils/separatelist.py", line 8, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'

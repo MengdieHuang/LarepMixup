@@ -263,6 +263,7 @@ def set_exp_result_dir(args):
     
     if args.mode == 'train':
         exp_result_dir = f'{save_path}/{args.mode}/{args.train_mode}/{args.exp_name}/{date}'
+        print("exp_result_dir:",exp_result_dir)
     # elif args.mode == 'test':
     #     exp_result_dir = f'{save_path}/{args.mode}/{args.test_mode}/{args.exp_name}/{date}'
     elif args.mode == 'attack':

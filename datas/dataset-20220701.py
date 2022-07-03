@@ -502,11 +502,8 @@ class MaggieDataset:
             return train_dataset
 
         elif self._args.dataset == 'imagenetmixed10':
-            # in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
-            # in_info_path = "/home/data/ImageNet/info"
-            in_path = "/root/autodl-tmp/maggie/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
-            in_info_path = "/root/autodl-tmp/maggie/data/ImageNet/info"
-           
+            in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
+            in_info_path = "/home/data/ImageNet/info"
             in_hier = ImageNetHierarchy(in_path, in_info_path)                  
 
             superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
@@ -725,12 +722,8 @@ class MaggieDataset:
             return test_dataset    
 
         elif self._args.dataset == 'imagenetmixed10':
-            # in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
-            # in_info_path = "/home/data/ImageNet/info"
-            in_path = "/root/autodl-tmp/maggie/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
-            in_info_path = "/root/autodl-tmp/maggie/data/ImageNet/info"
-
-
+            in_path = "/home/data/ImageNet"             #   ImageNet解压后的train和val所在的目录
+            in_info_path = "/home/data/ImageNet/info"
             in_hier = ImageNetHierarchy(in_path, in_info_path)                  
 
             superclass_wnid = common_superclass_wnid('mixed_10')            # group name: mixed_10
