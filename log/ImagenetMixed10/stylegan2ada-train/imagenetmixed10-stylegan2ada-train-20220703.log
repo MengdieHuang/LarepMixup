@@ -1,0 +1,518 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220703
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 1,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 3,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.8192
+  },
+  "total_kimg": 25000,
+  "batch_size": 32,
+  "batch_gpu": 32,
+  "ema_kimg": 5.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     1
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+
+Generator             Parameters  Buffers  Output shape         Datatype
+---                   ---         ---      ---                  ---     
+mapping.fc0           262656      -        [32, 512]            float32 
+mapping.fc1           262656      -        [32, 512]            float32 
+mapping               -           512      [32, 14, 512]        float32 
+synthesis.b4.conv1    2622465     32       [32, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [32, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [32, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [32, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [32, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [32, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [32, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [32, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [32, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [32, 512, 16, 16]    float32 
+synthesis.b16.conv1   2622465     272      [32, 512, 16, 16]    float32 
+synthesis.b16.torgb   264195      -        [32, 3, 16, 16]      float32 
+synthesis.b16:0       -           16       [32, 512, 16, 16]    float32 
+synthesis.b16:1       -           -        [32, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [32, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [32, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [32, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [32, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [32, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [32, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [32, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [32, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [32, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [32, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [32, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [32, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [32, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [32, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [32, 128, 128, 128]  float32 
+synthesis.b256.conv0  139457      65552    [32, 64, 256, 256]   float16 
+synthesis.b256.conv1  69761       65552    [32, 64, 256, 256]   float16 
+synthesis.b256.torgb  33027       -        [32, 3, 256, 256]    float16 
+synthesis.b256:0      -           16       [32, 64, 256, 256]   float16 
+synthesis.b256:1      -           -        [32, 64, 256, 256]   float32 
+---                   ---         ---      ---                  ---     
+Total                 23191522    175568   -                    -       
+
+
+Discriminator  Parameters  Buffers  Output shape         Datatype
+---            ---         ---      ---                  ---     
+b256.fromrgb   256         16       [32, 64, 256, 256]   float16 
+b256.skip      8192        16       [32, 128, 128, 128]  float16 
+b256.conv0     36928       16       [32, 64, 256, 256]   float16 
+b256.conv1     73856       16       [32, 128, 128, 128]  float16 
+b256           -           16       [32, 128, 128, 128]  float16 
+b128.skip      32768       16       [32, 256, 64, 64]    float16 
+b128.conv0     147584      16       [32, 128, 128, 128]  float16 
+b128.conv1     295168      16       [32, 256, 64, 64]    float16 
+b128           -           16       [32, 256, 64, 64]    float16 
+b64.skip       131072      16       [32, 512, 32, 32]    float16 
+b64.conv0      590080      16       [32, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [32, 512, 32, 32]    float16 
+b64            -           16       [32, 512, 32, 32]    float16 
+b32.skip       262144      16       [32, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [32, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [32, 512, 16, 16]    float16 
+b32            -           16       [32, 512, 16, 16]    float16 
+b16.skip       262144      16       [32, 512, 8, 8]      float32 
+b16.conv0      2359808     16       [32, 512, 16, 16]    float32 
+b16.conv1      2359808     16       [32, 512, 8, 8]      float32 
+b16            -           16       [32, 512, 8, 8]      float32 
+b8.skip        262144      16       [32, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [32, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [32, 512, 4, 4]      float32 
+b8             -           16       [32, 512, 4, 4]      float32 
+b4.mbstd       -           -        [32, 513, 4, 4]      float32 
+b4.conv        2364416     16       [32, 512, 4, 4]      float32 
+b4.fc          4194816     -        [32, 512]            float32 
+b4.out         513         -        [32, 1]              float32 
+---            ---         ---      ---                  ---     
+Total          24001089    416      -                    -       
+
+Setting up augmentation...
+Distributing across 1 GPUs...
+Setting up training phases...
+Exporting sample images...
+Initializing logs...
+Training for 25000 kimg...
+
+tick 0     kimg 0.0      time 57s          sec/tick 7.2     sec/kimg 225.17  maintenance 49.6   cpumem 5.71   gpumem 16.56  augment 0.000
+Evaluating metrics...
+{"results": {"fid50k_full": 282.1840295596535}, "metric": "fid50k_full", "total_time": 304.0956425666809, "total_time_str": "5m 04s", "num_gpus": 1, "snapshot_pkl": "network-snapshot-000000.pkl", "timestamp": 1656849498.8968844}
+tick 1     kimg 4.0      time 8m 27s       sec/tick 133.5   sec/kimg 33.36   maintenance 316.6  cpumem 5.73   gpumem 9.63   augment 0.005
+tick 2     kimg 8.0      time 10m 41s      sec/tick 134.1   sec/kimg 33.52   maintenance 0.2    cpumem 5.73   gpumem 9.20   augment 0.012
+tick 3     kimg 12.0     time 12m 56s      sec/tick 134.5   sec/kimg 33.62   maintenance 0.2    cpumem 5.73   gpumem 9.21   augment 0.017
+tick 4     kimg 16.0     time 15m 11s      sec/tick 134.9   sec/kimg 33.73   maintenance 0.0    cpumem 5.73   gpumem 9.25   augment 0.021
+tick 5     kimg 20.0     time 17m 26s      sec/tick 134.9   sec/kimg 33.72   maintenance 0.2    cpumem 5.73   gpumem 9.24   augment 0.022
+tick 6     kimg 24.0     time 19m 41s      sec/tick 134.7   sec/kimg 33.67   maintenance 0.2    cpumem 5.73   gpumem 9.28   augment 0.023
+tick 7     kimg 28.0     time 21m 56s      sec/tick 135.1   sec/kimg 33.77   maintenance 0.2    cpumem 5.73   gpumem 9.20   augment 0.025
+tick 8     kimg 32.0     time 24m 11s      sec/tick 135.5   sec/kimg 33.88   maintenance 0.0    cpumem 5.73   gpumem 9.23   augment 0.031
+tick 9     kimg 36.0     time 26m 27s      sec/tick 135.1   sec/kimg 33.77   maintenance 0.2    cpumem 5.73   gpumem 9.28   augment 0.035
+tick 10    kimg 40.0     time 28m 42s      sec/tick 135.1   sec/kimg 33.76   maintenance 0.2    cpumem 5.73   gpumem 9.26   augment 0.041
+tick 11    kimg 44.0     time 30m 57s      sec/tick 135.0   sec/kimg 33.76   maintenance 0.2    cpumem 5.73   gpumem 9.23   augment 0.048
+tick 12    kimg 48.0     time 33m 13s      sec/tick 135.5   sec/kimg 33.87   maintenance 0.0    cpumem 5.73   gpumem 9.23   augment 0.054
+tick 13    kimg 52.0     time 35m 28s      sec/tick 135.5   sec/kimg 33.87   maintenance 0.2    cpumem 5.73   gpumem 9.26   augment 0.060
+tick 14    kimg 56.0     time 37m 44s      sec/tick 135.3   sec/kimg 33.83   maintenance 0.2    cpumem 5.73   gpumem 9.37   augment 0.064
+tick 15    kimg 60.0     time 39m 59s      sec/tick 135.6   sec/kimg 33.89   maintenance 0.2    cpumem 5.73   gpumem 9.28   augment 0.070
+tick 16    kimg 64.0     time 42m 15s      sec/tick 135.7   sec/kimg 33.92   maintenance 0.0    cpumem 5.73   gpumem 9.27   augment 0.075
+tick 17    kimg 68.0     time 44m 30s      sec/tick 134.9   sec/kimg 33.72   maintenance 0.2    cpumem 5.73   gpumem 9.37   augment 0.080
+tick 18    kimg 72.0     time 46m 46s      sec/tick 135.5   sec/kimg 33.88   maintenance 0.2    cpumem 5.73   gpumem 9.27   augment 0.083
+tick 19    kimg 76.0     time 49m 02s      sec/tick 135.6   sec/kimg 33.91   maintenance 0.2    cpumem 5.73   gpumem 9.33   augment 0.081
+tick 20    kimg 80.0     time 51m 18s      sec/tick 135.9   sec/kimg 33.98   maintenance 0.0    cpumem 5.73   gpumem 9.45   augment 0.081
+Evaluating metrics...
+{"results": {"fid50k_full": 239.9499164421197}, "metric": "fid50k_full", "total_time": 289.1642806529999, "total_time_str": "4m 49s", "num_gpus": 1, "snapshot_pkl": "network-snapshot-000080.pkl", "timestamp": 1656852507.0039947}
+tick 21    kimg 84.0     time 58m 37s      sec/tick 135.3   sec/kimg 33.83   maintenance 303.8  cpumem 5.71   gpumem 9.30   augment 0.079
+tick 22    kimg 88.0     time 1h 00m 53s   sec/tick 134.8   sec/kimg 33.71   maintenance 0.9    cpumem 5.71   gpumem 9.28   augment 0.077
+tick 23    kimg 92.0     time 1h 03m 08s   sec/tick 135.7   sec/kimg 33.91   maintenance 0.2    cpumem 5.71   gpumem 9.26   augment 0.075
+tick 24    kimg 96.0     time 1h 05m 24s   sec/tick 135.8   sec/kimg 33.96   maintenance 0.0    cpumem 5.71   gpumem 9.32   augment 0.072
+tick 25    kimg 100.0    time 1h 07m 40s   sec/tick 135.5   sec/kimg 33.87   maintenance 0.2    cpumem 5.71   gpumem 9.32   augment 0.072
+tick 26    kimg 104.0    time 1h 09m 56s   sec/tick 135.5   sec/kimg 33.88   maintenance 0.2    cpumem 5.71   gpumem 9.30   augment 0.069
+tick 27    kimg 108.0    time 1h 12m 11s   sec/tick 135.1   sec/kimg 33.77   maintenance 0.2    cpumem 5.71   gpumem 9.29   augment 0.066
+tick 28    kimg 112.0    time 1h 14m 27s   sec/tick 136.0   sec/kimg 33.99   maintenance 0.0    cpumem 5.71   gpumem 9.26   augment 0.065
+tick 29    kimg 116.0    time 1h 16m 42s   sec/tick 135.5   sec/kimg 33.87   maintenance 0.2    cpumem 5.71   gpumem 9.26   augment 0.061
+tick 30    kimg 120.0    time 1h 18m 58s   sec/tick 135.5   sec/kimg 33.88   maintenance 0.2    cpumem 5.71   gpumem 9.32   augment 0.060
+tick 31    kimg 124.0    time 1h 21m 14s   sec/tick 135.7   sec/kimg 33.92   maintenance 0.2    cpumem 5.71   gpumem 9.36   augment 0.058
+tick 32    kimg 128.0    time 1h 23m 30s   sec/tick 135.7   sec/kimg 33.92   maintenance 0.0    cpumem 5.71   gpumem 9.33   augment 0.056
+tick 33    kimg 132.0    time 1h 25m 45s   sec/tick 135.1   sec/kimg 33.78   maintenance 0.2    cpumem 5.71   gpumem 9.26   augment 0.053
+tick 34    kimg 136.0    time 1h 28m 01s   sec/tick 135.4   sec/kimg 33.85   maintenance 0.2    cpumem 5.71   gpumem 9.33   augment 0.050
+tick 35    kimg 140.0    time 1h 30m 17s   sec/tick 135.7   sec/kimg 33.92   maintenance 0.2    cpumem 5.71   gpumem 9.26   augment 0.050
+tick 36    kimg 144.0    time 1h 32m 32s   sec/tick 135.9   sec/kimg 33.97   maintenance 0.0    cpumem 5.71   gpumem 9.34   augment 0.050
+tick 37    kimg 148.0    time 1h 34m 48s   sec/tick 135.4   sec/kimg 33.85   maintenance 0.2    cpumem 5.71   gpumem 9.29   augment 0.050
+tick 38    kimg 152.0    time 1h 37m 03s   sec/tick 135.1   sec/kimg 33.78   maintenance 0.2    cpumem 5.71   gpumem 9.24   augment 0.045
+tick 39    kimg 156.0    time 1h 39m 19s   sec/tick 135.5   sec/kimg 33.88   maintenance 0.2    cpumem 5.71   gpumem 9.23   augment 0.043
+tick 40    kimg 160.0    time 1h 41m 35s   sec/tick 135.8   sec/kimg 33.94   maintenance 0.0    cpumem 5.71   gpumem 9.26   augment 0.044
+Evaluating metrics...
+{"results": {"fid50k_full": 229.26726466313644}, "metric": "fid50k_full", "total_time": 301.1743278503418, "total_time_str": "5m 01s", "num_gpus": 1, "snapshot_pkl": "network-snapshot-000160.pkl", "timestamp": 1656855535.850411}
+tick 41    kimg 164.0    time 1h 49m 06s   sec/tick 135.2   sec/kimg 33.79   maintenance 315.6  cpumem 5.75   gpumem 9.28   augment 0.042
+tick 42    kimg 168.0    time 1h 51m 21s   sec/tick 135.3   sec/kimg 33.82   maintenance 0.2    cpumem 5.75   gpumem 9.25   augment 0.042
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220703
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00001
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 2,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 16,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.4096
+  },
+  "total_kimg": 25000,
+  "batch_size": 32,
+  "batch_gpu": 16,
+  "ema_kimg": 10.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00001/imagenetmixed10-auto2-batch32-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00001/imagenetmixed10-auto2-batch32-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     2
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+resume_pkl: None
+rank: 1
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+
+Generator             Parameters  Buffers  Output shape         Datatype
+---                   ---         ---      ---                  ---     
+mapping.fc0           262656      -        [16, 512]            float32 
+mapping.fc1           262656      -        [16, 512]            float32 
+mapping               -           512      [16, 14, 512]        float32 
+synthesis.b4.conv1    2622465     32       [16, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [16, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [16, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [16, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [16, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [16, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [16, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [16, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [16, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [16, 512, 16, 16]    float32 
+synthesis.b16.conv1   2622465     272      [16, 512, 16, 16]    float32 
+synthesis.b16.torgb   264195      -        [16, 3, 16, 16]      float32 
+synthesis.b16:0       -           16       [16, 512, 16, 16]    float32 
+synthesis.b16:1       -           -        [16, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [16, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [16, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [16, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [16, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [16, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [16, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [16, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [16, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [16, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [16, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [16, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [16, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [16, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [16, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [16, 128, 128, 128]  float32 
+synthesis.b256.conv0  139457      65552    [16, 64, 256, 256]   float16 
+synthesis.b256.conv1  69761       65552    [16, 64, 256, 256]   float16 
+synthesis.b256.torgb  33027       -        [16, 3, 256, 256]    float16 
+synthesis.b256:0      -           16       [16, 64, 256, 256]   float16 
+synthesis.b256:1      -           -        [16, 64, 256, 256]   float32 
+---                   ---         ---      ---                  ---     
+Total                 23191522    175568   -                    -       
+
+
+Discriminator  Parameters  Buffers  Output shape         Datatype
+---            ---         ---      ---                  ---     
+b256.fromrgb   256         16       [16, 64, 256, 256]   float16 
+b256.skip      8192        16       [16, 128, 128, 128]  float16 
+b256.conv0     36928       16       [16, 64, 256, 256]   float16 
+b256.conv1     73856       16       [16, 128, 128, 128]  float16 
+b256           -           16       [16, 128, 128, 128]  float16 
+b128.skip      32768       16       [16, 256, 64, 64]    float16 
+b128.conv0     147584      16       [16, 128, 128, 128]  float16 
+b128.conv1     295168      16       [16, 256, 64, 64]    float16 
+b128           -           16       [16, 256, 64, 64]    float16 
+b64.skip       131072      16       [16, 512, 32, 32]    float16 
+b64.conv0      590080      16       [16, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [16, 512, 32, 32]    float16 
+b64            -           16       [16, 512, 32, 32]    float16 
+b32.skip       262144      16       [16, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [16, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [16, 512, 16, 16]    float16 
+b32            -           16       [16, 512, 16, 16]    float16 
+b16.skip       262144      16       [16, 512, 8, 8]      float32 
+b16.conv0      2359808     16       [16, 512, 16, 16]    float32 
+b16.conv1      2359808     16       [16, 512, 8, 8]      float32 
+b16            -           16       [16, 512, 8, 8]      float32 
+b8.skip        262144      16       [16, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [16, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [16, 512, 4, 4]      float32 
+b8             -           16       [16, 512, 4, 4]      float32 
+b4.mbstd       -           -        [16, 513, 4, 4]      float32 
+b4.conv        2364416     16       [16, 512, 4, 4]      float32 
+b4.fc          4194816     -        [16, 512]            float32 
+b4.out         513         -        [16, 1]              float32 
+---            ---         ---      ---                  ---     
+Total          24001089    416      -                    -       
+
+Setting up augmentation...
+Distributing across 2 GPUs...
+Setting up training phases...
+Exporting sample images...
+Initializing logs...
+Training for 25000 kimg...
+
+tick 0     kimg 0.0      time 1m 52s       sec/tick 4.6     sec/kimg 142.39  maintenance 106.9  cpumem 5.57   gpumem 12.75  augment 0.000
+Evaluating metrics...
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 135, in __trainmain__
+    snapshot_network_pkls = torch.multiprocessing.spawn(fn=self.__subprocess_fn__, args=(args, temp_dir), nprocs=args.num_gpus)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 230, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 188, in start_processes
+    while not context.join():
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 99, in join
+    ready = multiprocessing.connection.wait(
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt

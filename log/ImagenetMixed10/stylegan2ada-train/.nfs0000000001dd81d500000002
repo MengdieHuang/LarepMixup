@@ -1,0 +1,887 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220703
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00004
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 2,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 16,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.4096
+  },
+  "total_kimg": 25000,
+  "batch_size": 256,
+  "batch_gpu": 128,
+  "ema_kimg": 10.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00004/imagenetmixed10-auto2-batch256-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00004/imagenetmixed10-auto2-batch256-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     2
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 1
+resume_pkl: None
+rank: 0
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+
+Generator             Parameters  Buffers  Output shape          Datatype
+---                   ---         ---      ---                   ---     
+mapping.fc0           262656      -        [128, 512]            float32 
+mapping.fc1           262656      -        [128, 512]            float32 
+mapping               -           512      [128, 14, 512]        float32 
+synthesis.b4.conv1    2622465     32       [128, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [128, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [128, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [128, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [128, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [128, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [128, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [128, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [128, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [128, 512, 16, 16]    float32 
+synthesis.b16.conv1   2622465     272      [128, 512, 16, 16]    float32 
+synthesis.b16.torgb   264195      -        [128, 3, 16, 16]      float32 
+synthesis.b16:0       -           16       [128, 512, 16, 16]    float32 
+synthesis.b16:1       -           -        [128, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [128, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [128, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [128, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [128, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [128, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [128, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [128, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [128, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [128, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [128, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [128, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [128, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [128, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [128, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [128, 128, 128, 128]  float32 
+synthesis.b256.conv0  139457      65552    [128, 64, 256, 256]   float16 
+synthesis.b256.conv1  69761       65552    [128, 64, 256, 256]   float16 
+synthesis.b256.torgb  33027       -        [128, 3, 256, 256]    float16 
+synthesis.b256:0      -           16       [128, 64, 256, 256]   float16 
+synthesis.b256:1      -           -        [128, 64, 256, 256]   float32 
+---                   ---         ---      ---                   ---     
+Total                 23191522    175568   -                     -       
+
+
+Discriminator  Parameters  Buffers  Output shape          Datatype
+---            ---         ---      ---                   ---     
+b256.fromrgb   256         16       [128, 64, 256, 256]   float16 
+b256.skip      8192        16       [128, 128, 128, 128]  float16 
+b256.conv0     36928       16       [128, 64, 256, 256]   float16 
+b256.conv1     73856       16       [128, 128, 128, 128]  float16 
+b256           -           16       [128, 128, 128, 128]  float16 
+b128.skip      32768       16       [128, 256, 64, 64]    float16 
+b128.conv0     147584      16       [128, 128, 128, 128]  float16 
+b128.conv1     295168      16       [128, 256, 64, 64]    float16 
+b128           -           16       [128, 256, 64, 64]    float16 
+b64.skip       131072      16       [128, 512, 32, 32]    float16 
+b64.conv0      590080      16       [128, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [128, 512, 32, 32]    float16 
+b64            -           16       [128, 512, 32, 32]    float16 
+b32.skip       262144      16       [128, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [128, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [128, 512, 16, 16]    float16 
+b32            -           16       [128, 512, 16, 16]    float16 
+b16.skip       262144      16       [128, 512, 8, 8]      float32 
+b16.conv0      2359808     16       [128, 512, 16, 16]    float32 
+b16.conv1      2359808     16       [128, 512, 8, 8]      float32 
+b16            -           16       [128, 512, 8, 8]      float32 
+b8.skip        262144      16       [128, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [128, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [128, 512, 4, 4]      float32 
+b8             -           16       [128, 512, 4, 4]      float32 
+b4.mbstd       -           -        [128, 513, 4, 4]      float32 
+b4.conv        2364416     16       [128, 512, 4, 4]      float32 
+b4.fc          4194816     -        [128, 512]            float32 
+b4.out         513         -        [128, 1]              float32 
+---            ---         ---      ---                   ---     
+Total          24001089    416      -                     -       
+
+Setting up augmentation...
+Distributing across 2 GPUs...
+Setting up training phases...
+Exporting sample images...
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 135, in __trainmain__
+    snapshot_network_pkls = torch.multiprocessing.spawn(fn=self.__subprocess_fn__, args=(args, temp_dir), nprocs=args.num_gpus)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 230, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 188, in start_processes
+    while not context.join():
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 150, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException: 
+
+-- Process 1 terminated with the following error:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 59, in _wrap
+    fn(i, *args)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 355, in training_loop
+    loss.accumulate_gradients(phase=phase.name, real_img=real_img, real_c=real_c, gen_z=gen_z, gen_c=gen_c, sync=sync, gain=gain)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/loss.py", line 70, in accumulate_gradients
+    gen_img, _gen_ws = self.run_G(gen_z, gen_c, sync=(sync and not do_Gpl)) # May get synced by Gpl.
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/loss.py", line 50, in run_G
+    img = self.G_synthesis(ws)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 705, in forward
+    output = self.module(*inputs[0], **kwargs[0])
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 479, in forward
+    x, img = block(x, img, cur_ws, **block_kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 414, in forward
+    x = self.conv1(x, next(w_iter), fused_modconv=fused_modconv, **layer_kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 307, in forward
+    x = modulated_conv2d(x=x, weight=self.weight, styles=styles, noise=noise, up=self.up,
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 75, in modulated_conv2d
+    x = fma.fma(x, dcoefs.to(x.dtype).reshape(batch_size, -1, 1, 1), noise.to(x.dtype))
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/ops/fma.py", line 16, in fma
+    return _FusedMultiplyAdd.apply(a, b, c)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/ops/fma.py", line 23, in forward
+    out = torch.addcmul(c, a, b)
+RuntimeError: CUDA out of memory. Tried to allocate 1024.00 MiB (GPU 1; 23.69 GiB total capacity; 20.44 GiB already allocated; 452.56 MiB free; 21.63 GiB reserved in total by PyTorch)
+
+/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 56 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220703
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00005
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+
+Training options:
+{
+  "num_gpus": 2,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 16,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.4096
+  },
+  "total_kimg": 25000,
+  "batch_size": 128,
+  "batch_gpu": 64,
+  "ema_kimg": 10.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00005/imagenetmixed10-auto2-batch128-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00005/imagenetmixed10-auto2-batch128-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     2
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: None
+rank: 0
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+resume_pkl: None
+rank: 1
+
+Generator             Parameters  Buffers  Output shape         Datatype
+---                   ---         ---      ---                  ---     
+mapping.fc0           262656      -        [64, 512]            float32 
+mapping.fc1           262656      -        [64, 512]            float32 
+mapping               -           512      [64, 14, 512]        float32 
+synthesis.b4.conv1    2622465     32       [64, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [64, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [64, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [64, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [64, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [64, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [64, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [64, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [64, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [64, 512, 16, 16]    float32 
+synthesis.b16.conv1   2622465     272      [64, 512, 16, 16]    float32 
+synthesis.b16.torgb   264195      -        [64, 3, 16, 16]      float32 
+synthesis.b16:0       -           16       [64, 512, 16, 16]    float32 
+synthesis.b16:1       -           -        [64, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [64, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [64, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [64, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [64, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [64, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [64, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [64, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [64, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [64, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [64, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [64, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [64, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [64, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [64, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [64, 128, 128, 128]  float32 
+synthesis.b256.conv0  139457      65552    [64, 64, 256, 256]   float16 
+synthesis.b256.conv1  69761       65552    [64, 64, 256, 256]   float16 
+synthesis.b256.torgb  33027       -        [64, 3, 256, 256]    float16 
+synthesis.b256:0      -           16       [64, 64, 256, 256]   float16 
+synthesis.b256:1      -           -        [64, 64, 256, 256]   float32 
+---                   ---         ---      ---                  ---     
+Total                 23191522    175568   -                    -       
+
+
+Discriminator  Parameters  Buffers  Output shape         Datatype
+---            ---         ---      ---                  ---     
+b256.fromrgb   256         16       [64, 64, 256, 256]   float16 
+b256.skip      8192        16       [64, 128, 128, 128]  float16 
+b256.conv0     36928       16       [64, 64, 256, 256]   float16 
+b256.conv1     73856       16       [64, 128, 128, 128]  float16 
+b256           -           16       [64, 128, 128, 128]  float16 
+b128.skip      32768       16       [64, 256, 64, 64]    float16 
+b128.conv0     147584      16       [64, 128, 128, 128]  float16 
+b128.conv1     295168      16       [64, 256, 64, 64]    float16 
+b128           -           16       [64, 256, 64, 64]    float16 
+b64.skip       131072      16       [64, 512, 32, 32]    float16 
+b64.conv0      590080      16       [64, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [64, 512, 32, 32]    float16 
+b64            -           16       [64, 512, 32, 32]    float16 
+b32.skip       262144      16       [64, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [64, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [64, 512, 16, 16]    float16 
+b32            -           16       [64, 512, 16, 16]    float16 
+b16.skip       262144      16       [64, 512, 8, 8]      float32 
+b16.conv0      2359808     16       [64, 512, 16, 16]    float32 
+b16.conv1      2359808     16       [64, 512, 8, 8]      float32 
+b16            -           16       [64, 512, 8, 8]      float32 
+b8.skip        262144      16       [64, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [64, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [64, 512, 4, 4]      float32 
+b8             -           16       [64, 512, 4, 4]      float32 
+b4.mbstd       -           -        [64, 513, 4, 4]      float32 
+b4.conv        2364416     16       [64, 512, 4, 4]      float32 
+b4.fc          4194816     -        [64, 512]            float32 
+b4.out         513         -        [64, 1]              float32 
+---            ---         ---      ---                  ---     
+Total          24001089    416      -                    -       
+
+Setting up augmentation...
+Distributing across 2 GPUs...
+Setting up training phases...
+Exporting sample images...
+Initializing logs...
+Training for 25000 kimg...
+
+tick 0     kimg 0.1      time 2m 01s       sec/tick 9.9     sec/kimg 77.59   maintenance 111.4  cpumem 5.66   gpumem 18.59  augment 0.000
+Evaluating metrics...
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 135, in __trainmain__
+    snapshot_network_pkls = torch.multiprocessing.spawn(fn=self.__subprocess_fn__, args=(args, temp_dir), nprocs=args.num_gpus)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 230, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 188, in start_processes
+    while not context.join():
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 99, in join
+    ready = multiprocessing.connection.wait(
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt
+Exception ignored in: Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x7f6d11cf11f0><function _MultiProcessingDataLoaderIter.__del__ at 0x7f9b311e11f0>
+
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1324, in __del__
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1324, in __del__
+    self._shutdown_workers()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1297, in _shutdown_workers
+    self._shutdown_workers()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1297, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 149, in join
+        res = self._popen.wait(timeout)
+w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 44, in wait
+
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 149, in join
+    if not wait([self.sentinel], timeout):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 931, in wait
+    res = self._popen.wait(timeout)
+      File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 44, in wait
+ready = selector.select(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/selectors.py", line 415, in select
+        if not wait([self.sentinel], timeout):fd_event_list = self._selector.poll(timeout)
+
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 931, in wait
+KeyboardInterrupt: 
+    ready = selector.select(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt: 
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 61, in _wrap
+    pass  # SIGINT; Killed by parent, do nothing
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 318, in _bootstrap
+    util._exit_function()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/util.py", line 357, in _exit_function
+    p.join()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 47, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 318, in _bootstrap
+    util._exit_function()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/util.py", line 357, in _exit_function
+    p.join()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 47, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220703
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00006
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+args.resume_pkl: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume/network-snapshot-000080.pkl
+
+Training options:
+{
+  "num_gpus": 2,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 16,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.4096
+  },
+  "total_kimg": 25000,
+  "batch_size": 128,
+  "batch_gpu": 64,
+  "ema_kimg": 10.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "resume_pkl": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume/network-snapshot-000080.pkl",
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00006/imagenetmixed10-auto2-batch128-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00006/imagenetmixed10-auto2-batch128-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     2
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+resume_pkl: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume/network-snapshot-000080.pkl
+rank: 0
+Resuming from "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume/network-snapshot-000080.pkl"
+Setting up PyTorch plugin "bias_act_plugin"... Done.
+resume_pkl: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220703/00000/imagenetmixed10-auto1-batch32-ada-bgc-noresume/network-snapshot-000080.pkl
+rank: 1
+Setting up PyTorch plugin "upfirdn2d_plugin"... Done.
+
+Generator             Parameters  Buffers  Output shape         Datatype
+---                   ---         ---      ---                  ---     
+mapping.fc0           262656      -        [64, 512]            float32 
+mapping.fc1           262656      -        [64, 512]            float32 
+mapping               -           512      [64, 14, 512]        float32 
+synthesis.b4.conv1    2622465     32       [64, 512, 4, 4]      float32 
+synthesis.b4.torgb    264195      -        [64, 3, 4, 4]        float32 
+synthesis.b4:0        8192        16       [64, 512, 4, 4]      float32 
+synthesis.b4:1        -           -        [64, 512, 4, 4]      float32 
+synthesis.b8.conv0    2622465     80       [64, 512, 8, 8]      float32 
+synthesis.b8.conv1    2622465     80       [64, 512, 8, 8]      float32 
+synthesis.b8.torgb    264195      -        [64, 3, 8, 8]        float32 
+synthesis.b8:0        -           16       [64, 512, 8, 8]      float32 
+synthesis.b8:1        -           -        [64, 512, 8, 8]      float32 
+synthesis.b16.conv0   2622465     272      [64, 512, 16, 16]    float32 
+synthesis.b16.conv1   2622465     272      [64, 512, 16, 16]    float32 
+synthesis.b16.torgb   264195      -        [64, 3, 16, 16]      float32 
+synthesis.b16:0       -           16       [64, 512, 16, 16]    float32 
+synthesis.b16:1       -           -        [64, 512, 16, 16]    float32 
+synthesis.b32.conv0   2622465     1040     [64, 512, 32, 32]    float16 
+synthesis.b32.conv1   2622465     1040     [64, 512, 32, 32]    float16 
+synthesis.b32.torgb   264195      -        [64, 3, 32, 32]      float16 
+synthesis.b32:0       -           16       [64, 512, 32, 32]    float16 
+synthesis.b32:1       -           -        [64, 512, 32, 32]    float32 
+synthesis.b64.conv0   1442561     4112     [64, 256, 64, 64]    float16 
+synthesis.b64.conv1   721409      4112     [64, 256, 64, 64]    float16 
+synthesis.b64.torgb   132099      -        [64, 3, 64, 64]      float16 
+synthesis.b64:0       -           16       [64, 256, 64, 64]    float16 
+synthesis.b64:1       -           -        [64, 256, 64, 64]    float32 
+synthesis.b128.conv0  426369      16400    [64, 128, 128, 128]  float16 
+synthesis.b128.conv1  213249      16400    [64, 128, 128, 128]  float16 
+synthesis.b128.torgb  66051       -        [64, 3, 128, 128]    float16 
+synthesis.b128:0      -           16       [64, 128, 128, 128]  float16 
+synthesis.b128:1      -           -        [64, 128, 128, 128]  float32 
+synthesis.b256.conv0  139457      65552    [64, 64, 256, 256]   float16 
+synthesis.b256.conv1  69761       65552    [64, 64, 256, 256]   float16 
+synthesis.b256.torgb  33027       -        [64, 3, 256, 256]    float16 
+synthesis.b256:0      -           16       [64, 64, 256, 256]   float16 
+synthesis.b256:1      -           -        [64, 64, 256, 256]   float32 
+---                   ---         ---      ---                  ---     
+Total                 23191522    175568   -                    -       
+
+
+Discriminator  Parameters  Buffers  Output shape         Datatype
+---            ---         ---      ---                  ---     
+b256.fromrgb   256         16       [64, 64, 256, 256]   float16 
+b256.skip      8192        16       [64, 128, 128, 128]  float16 
+b256.conv0     36928       16       [64, 64, 256, 256]   float16 
+b256.conv1     73856       16       [64, 128, 128, 128]  float16 
+b256           -           16       [64, 128, 128, 128]  float16 
+b128.skip      32768       16       [64, 256, 64, 64]    float16 
+b128.conv0     147584      16       [64, 128, 128, 128]  float16 
+b128.conv1     295168      16       [64, 256, 64, 64]    float16 
+b128           -           16       [64, 256, 64, 64]    float16 
+b64.skip       131072      16       [64, 512, 32, 32]    float16 
+b64.conv0      590080      16       [64, 256, 64, 64]    float16 
+b64.conv1      1180160     16       [64, 512, 32, 32]    float16 
+b64            -           16       [64, 512, 32, 32]    float16 
+b32.skip       262144      16       [64, 512, 16, 16]    float16 
+b32.conv0      2359808     16       [64, 512, 32, 32]    float16 
+b32.conv1      2359808     16       [64, 512, 16, 16]    float16 
+b32            -           16       [64, 512, 16, 16]    float16 
+b16.skip       262144      16       [64, 512, 8, 8]      float32 
+b16.conv0      2359808     16       [64, 512, 16, 16]    float32 
+b16.conv1      2359808     16       [64, 512, 8, 8]      float32 
+b16            -           16       [64, 512, 8, 8]      float32 
+b8.skip        262144      16       [64, 512, 4, 4]      float32 
+b8.conv0       2359808     16       [64, 512, 8, 8]      float32 
+b8.conv1       2359808     16       [64, 512, 4, 4]      float32 
+b8             -           16       [64, 512, 4, 4]      float32 
+b4.mbstd       -           -        [64, 513, 4, 4]      float32 
+b4.conv        2364416     16       [64, 512, 4, 4]      float32 
+b4.fc          4194816     -        [64, 512]            float32 
+b4.out         513         -        [64, 1]              float32 
+---            ---         ---      ---                  ---     
+Total          24001089    416      -                    -       
+
+Setting up augmentation...
+Distributing across 2 GPUs...
+Setting up training phases...
+Exporting sample images...
+Initializing logs...
+Training for 25000 kimg...
+
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 135, in __trainmain__
+    snapshot_network_pkls = torch.multiprocessing.spawn(fn=self.__subprocess_fn__, args=(args, temp_dir), nprocs=args.num_gpus)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 230, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 188, in start_processes
+    while not context.join():
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 150, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException: 
+
+-- Process 0 terminated with the following error:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 59, in _wrap
+    fn(i, *args)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 355, in training_loop
+    loss.accumulate_gradients(phase=phase.name, real_img=real_img, real_c=real_c, gen_z=gen_z, gen_c=gen_c, sync=sync, gain=gain)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/loss.py", line 70, in accumulate_gradients
+    gen_img, _gen_ws = self.run_G(gen_z, gen_c, sync=(sync and not do_Gpl)) # May get synced by Gpl.
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/loss.py", line 50, in run_G
+    img = self.G_synthesis(ws)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 705, in forward
+    output = self.module(*inputs[0], **kwargs[0])
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 479, in forward
+    x, img = block(x, img, cur_ws, **block_kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 413, in forward
+    x = self.conv0(x, next(w_iter), fused_modconv=fused_modconv, **layer_kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 307, in forward
+    x = modulated_conv2d(x=x, weight=self.weight, styles=styles, noise=noise, up=self.up,
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/networks.py", line 73, in modulated_conv2d
+    x = conv2d_resample.conv2d_resample(x=x, w=weight.to(x.dtype), f=resample_filter, up=up, down=down, padding=padding, flip_weight=flip_weight)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/misc.py", line 102, in decorator
+    return fn(*args, **kwargs)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/ops/conv2d_resample.py", line 139, in conv2d_resample
+    x = upfirdn2d.upfirdn2d(x=x, f=f, padding=[px0+pxt,px1+pxt,py0+pyt,py1+pyt], gain=up**2, flip_filter=flip_filter)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/ops/upfirdn2d.py", line 163, in upfirdn2d
+    return _upfirdn2d_cuda(up=up, down=down, padding=padding, flip_filter=flip_filter, gain=gain).apply(x, f)
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/torch_utils/ops/upfirdn2d.py", line 237, in forward
+    y = _plugin.upfirdn2d(y, f, upx, upy, downx, downy, padx0, padx1, pady0, pady1, flip_filter, gain)
+RuntimeError: CUDA out of memory. Tried to allocate 512.00 MiB (GPU 0; 23.69 GiB total capacity; 8.99 GiB already allocated; 217.56 MiB free; 9.15 GiB reserved in total by PyTorch)
+
+/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 56 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
