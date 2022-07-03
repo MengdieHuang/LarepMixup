@@ -1,0 +1,1970 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220702
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/vgg19-cifar10/20220702/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.02
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+batch_index: 34
+batch_index: 35
+batch_index: 36
+batch_index: 37
+batch_index: 38
+batch_index: 39
+batch_index: 40
+batch_index: 41
+batch_index: 42
+batch_index: 43
+batch_index: 44
+batch_index: 45
+batch_index: 46
+batch_index: 47
+batch_index: 48
+batch_index: 49
+batch_index: 50
+batch_index: 51
+batch_index: 52
+batch_index: 53
+batch_index: 54
+batch_index: 55
+batch_index: 56
+batch_index: 57
+batch_index: 58
+batch_index: 59
+batch_index: 60
+batch_index: 61
+batch_index: 62
+batch_index: 63
+batch_index: 64
+batch_index: 65
+batch_index: 66
+batch_index: 67
+batch_index: 68
+batch_index: 69
+batch_index: 70
+batch_index: 71
+batch_index: 72
+batch_index: 73
+batch_index: 74
+batch_index: 75
+batch_index: 76
+batch_index: 77
+batch_index: 78
+batch_index: 79
+batch_index: 80
+batch_index: 81
+batch_index: 82
+batch_index: 83
+batch_index: 84
+batch_index: 85
+batch_index: 86
+batch_index: 87
+batch_index: 88
+batch_index: 89
+batch_index: 90
+batch_index: 91
+batch_index: 92
+batch_index: 93
+batch_index: 94
+batch_index: 95
+batch_index: 96
+batch_index: 97
+batch_index: 98
+batch_index: 99
+batch_index: 100
+batch_index: 101
+batch_index: 102
+batch_index: 103
+batch_index: 104
+batch_index: 105
+batch_index: 106
+batch_index: 107
+batch_index: 108
+batch_index: 109
+batch_index: 110
+batch_index: 111
+batch_index: 112
+batch_index: 113
+batch_index: 114
+batch_index: 115
+batch_index: 116
+batch_index: 117
+batch_index: 118
+batch_index: 119
+batch_index: 120
+batch_index: 121
+batch_index: 122
+batch_index: 123
+batch_index: 124
+batch_index: 125
+batch_index: 126
+batch_index: 127
+batch_index: 128
+batch_index: 129
+batch_index: 130
+batch_index: 131
+batch_index: 132
+batch_index: 133
+batch_index: 134
+batch_index: 135
+batch_index: 136
+batch_index: 137
+batch_index: 138
+batch_index: 139
+batch_index: 140
+batch_index: 141
+batch_index: 142
+batch_index: 143
+batch_index: 144
+batch_index: 145
+batch_index: 146
+batch_index: 147
+batch_index: 148
+batch_index: 149
+batch_index: 150
+batch_index: 151
+batch_index: 152
+batch_index: 153
+batch_index: 154
+batch_index: 155
+batch_index: 156
+batch_index: 157
+batch_index: 158
+batch_index: 159
+batch_index: 160
+batch_index: 161
+batch_index: 162
+batch_index: 163
+batch_index: 164
+batch_index: 165
+batch_index: 166
+batch_index: 167
+batch_index: 168
+batch_index: 169
+batch_index: 170
+batch_index: 171
+batch_index: 172
+batch_index: 173
+batch_index: 174
+batch_index: 175
+batch_index: 176
+batch_index: 177
+batch_index: 178
+batch_index: 179
+batch_index: 180
+batch_index: 181
+batch_index: 182
+batch_index: 183
+batch_index: 184
+batch_index: 185
+batch_index: 186
+batch_index: 187
+batch_index: 188
+batch_index: 189
+batch_index: 190
+batch_index: 191
+batch_index: 192
+batch_index: 193
+batch_index: 194
+batch_index: 195
+batch_index: 196
+batch_index: 197
+batch_index: 198
+batch_index: 199
+batch_index: 200
+batch_index: 201
+batch_index: 202
+batch_index: 203
+batch_index: 204
+batch_index: 205
+batch_index: 206
+batch_index: 207
+batch_index: 208
+batch_index: 209
+batch_index: 210
+batch_index: 211
+batch_index: 212
+batch_index: 213
+batch_index: 214
+batch_index: 215
+batch_index: 216
+batch_index: 217
+batch_index: 218
+batch_index: 219
+batch_index: 220
+batch_index: 221
+batch_index: 222
+batch_index: 223
+batch_index: 224
+batch_index: 225
+batch_index: 226
+batch_index: 227
+batch_index: 228
+batch_index: 229
+batch_index: 230
+batch_index: 231
+batch_index: 232
+batch_index: 233
+batch_index: 234
+batch_index: 235
+batch_index: 236
+batch_index: 237
+batch_index: 238
+batch_index: 239
+batch_index: 240
+batch_index: 241
+batch_index: 242
+batch_index: 243
+batch_index: 244
+batch_index: 245
+batch_index: 246
+batch_index: 247
+batch_index: 248
+batch_index: 249
+batch_index: 250
+batch_index: 251
+batch_index: 252
+batch_index: 253
+batch_index: 254
+batch_index: 255
+batch_index: 256
+batch_index: 257
+batch_index: 258
+batch_index: 259
+batch_index: 260
+batch_index: 261
+batch_index: 262
+batch_index: 263
+batch_index: 264
+batch_index: 265
+batch_index: 266
+batch_index: 267
+batch_index: 268
+batch_index: 269
+batch_index: 270
+batch_index: 271
+batch_index: 272
+batch_index: 273
+batch_index: 274
+batch_index: 275
+batch_index: 276
+batch_index: 277
+batch_index: 278
+batch_index: 279
+batch_index: 280
+batch_index: 281
+batch_index: 282
+batch_index: 283
+batch_index: 284
+batch_index: 285
+batch_index: 286
+batch_index: 287
+batch_index: 288
+batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:63.0100%
+standard trained classifier loss on adversarial testset:2.1028552055358887
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:75.8000%
+standard trained classifier loss on clean testset:1.171947717666626
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220702
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/vgg19-cifar10/20220702/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.05
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+batch_index: 34
+batch_index: 35
+batch_index: 36
+batch_index: 37
+batch_index: 38
+batch_index: 39
+batch_index: 40
+batch_index: 41
+batch_index: 42
+batch_index: 43
+batch_index: 44
+batch_index: 45
+batch_index: 46
+batch_index: 47
+batch_index: 48
+batch_index: 49
+batch_index: 50
+batch_index: 51
+batch_index: 52
+batch_index: 53
+batch_index: 54
+batch_index: 55
+batch_index: 56
+batch_index: 57
+batch_index: 58
+batch_index: 59
+batch_index: 60
+batch_index: 61
+batch_index: 62
+batch_index: 63
+batch_index: 64
+batch_index: 65
+batch_index: 66
+batch_index: 67
+batch_index: 68
+batch_index: 69
+batch_index: 70
+batch_index: 71
+batch_index: 72
+batch_index: 73
+batch_index: 74
+batch_index: 75
+batch_index: 76
+batch_index: 77
+batch_index: 78
+batch_index: 79
+batch_index: 80
+batch_index: 81
+batch_index: 82
+batch_index: 83
+batch_index: 84
+batch_index: 85
+batch_index: 86
+batch_index: 87
+batch_index: 88
+batch_index: 89
+batch_index: 90
+batch_index: 91
+batch_index: 92
+batch_index: 93
+batch_index: 94
+batch_index: 95
+batch_index: 96
+batch_index: 97
+batch_index: 98
+batch_index: 99
+batch_index: 100
+batch_index: 101
+batch_index: 102
+batch_index: 103
+batch_index: 104
+batch_index: 105
+batch_index: 106
+batch_index: 107
+batch_index: 108
+batch_index: 109
+batch_index: 110
+batch_index: 111
+batch_index: 112
+batch_index: 113
+batch_index: 114
+batch_index: 115
+batch_index: 116
+batch_index: 117
+batch_index: 118
+batch_index: 119
+batch_index: 120
+batch_index: 121
+batch_index: 122
+batch_index: 123
+batch_index: 124
+batch_index: 125
+batch_index: 126
+batch_index: 127
+batch_index: 128
+batch_index: 129
+batch_index: 130
+batch_index: 131
+batch_index: 132
+batch_index: 133
+batch_index: 134
+batch_index: 135
+batch_index: 136
+batch_index: 137
+batch_index: 138
+batch_index: 139
+batch_index: 140
+batch_index: 141
+batch_index: 142
+batch_index: 143
+batch_index: 144
+batch_index: 145
+batch_index: 146
+batch_index: 147
+batch_index: 148
+batch_index: 149
+batch_index: 150
+batch_index: 151
+batch_index: 152
+batch_index: 153
+batch_index: 154
+batch_index: 155
+batch_index: 156
+batch_index: 157
+batch_index: 158
+batch_index: 159
+batch_index: 160
+batch_index: 161
+batch_index: 162
+batch_index: 163
+batch_index: 164
+batch_index: 165
+batch_index: 166
+batch_index: 167
+batch_index: 168
+batch_index: 169
+batch_index: 170
+batch_index: 171
+batch_index: 172
+batch_index: 173
+batch_index: 174
+batch_index: 175
+batch_index: 176
+batch_index: 177
+batch_index: 178
+batch_index: 179
+batch_index: 180
+batch_index: 181
+batch_index: 182
+batch_index: 183
+batch_index: 184
+batch_index: 185
+batch_index: 186
+batch_index: 187
+batch_index: 188
+batch_index: 189
+batch_index: 190
+batch_index: 191
+batch_index: 192
+batch_index: 193
+batch_index: 194
+batch_index: 195
+batch_index: 196
+batch_index: 197
+batch_index: 198
+batch_index: 199
+batch_index: 200
+batch_index: 201
+batch_index: 202
+batch_index: 203
+batch_index: 204
+batch_index: 205
+batch_index: 206
+batch_index: 207
+batch_index: 208
+batch_index: 209
+batch_index: 210
+batch_index: 211
+batch_index: 212
+batch_index: 213
+batch_index: 214
+batch_index: 215
+batch_index: 216
+batch_index: 217
+batch_index: 218
+batch_index: 219
+batch_index: 220
+batch_index: 221
+batch_index: 222
+batch_index: 223
+batch_index: 224
+batch_index: 225
+batch_index: 226
+batch_index: 227
+batch_index: 228
+batch_index: 229
+batch_index: 230
+batch_index: 231
+batch_index: 232
+batch_index: 233
+batch_index: 234
+batch_index: 235
+batch_index: 236
+batch_index: 237
+batch_index: 238
+batch_index: 239
+batch_index: 240
+batch_index: 241
+batch_index: 242
+batch_index: 243
+batch_index: 244
+batch_index: 245
+batch_index: 246
+batch_index: 247
+batch_index: 248
+batch_index: 249
+batch_index: 250
+batch_index: 251
+batch_index: 252
+batch_index: 253
+batch_index: 254
+batch_index: 255
+batch_index: 256
+batch_index: 257
+batch_index: 258
+batch_index: 259
+batch_index: 260
+batch_index: 261
+batch_index: 262
+batch_index: 263
+batch_index: 264
+batch_index: 265
+batch_index: 266
+batch_index: 267
+batch_index: 268
+batch_index: 269
+batch_index: 270
+batch_index: 271
+batch_index: 272
+batch_index: 273
+batch_index: 274
+batch_index: 275
+batch_index: 276
+batch_index: 277
+batch_index: 278
+batch_index: 279
+batch_index: 280
+batch_index: 281
+batch_index: 282
+batch_index: 283
+batch_index: 284
+batch_index: 285
+batch_index: 286
+batch_index: 287
+batch_index: 288
+batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:48.8800%
+standard trained classifier loss on adversarial testset:3.2550439834594727
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:75.9100%
+standard trained classifier loss on clean testset:1.1636452674865723
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220702
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/vgg19-cifar10/20220702/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.1
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.1
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+batch_index: 34
+batch_index: 35
+batch_index: 36
+batch_index: 37
+batch_index: 38
+batch_index: 39
+batch_index: 40
+batch_index: 41
+batch_index: 42
+batch_index: 43
+batch_index: 44
+batch_index: 45
+batch_index: 46
+batch_index: 47
+batch_index: 48
+batch_index: 49
+batch_index: 50
+batch_index: 51
+batch_index: 52
+batch_index: 53
+batch_index: 54
+batch_index: 55
+batch_index: 56
+batch_index: 57
+batch_index: 58
+batch_index: 59
+batch_index: 60
+batch_index: 61
+batch_index: 62
+batch_index: 63
+batch_index: 64
+batch_index: 65
+batch_index: 66
+batch_index: 67
+batch_index: 68
+batch_index: 69
+batch_index: 70
+batch_index: 71
+batch_index: 72
+batch_index: 73
+batch_index: 74
+batch_index: 75
+batch_index: 76
+batch_index: 77
+batch_index: 78
+batch_index: 79
+batch_index: 80
+batch_index: 81
+batch_index: 82
+batch_index: 83
+batch_index: 84
+batch_index: 85
+batch_index: 86
+batch_index: 87
+batch_index: 88
+batch_index: 89
+batch_index: 90
+batch_index: 91
+batch_index: 92
+batch_index: 93
+batch_index: 94
+batch_index: 95
+batch_index: 96
+batch_index: 97
+batch_index: 98
+batch_index: 99
+batch_index: 100
+batch_index: 101
+batch_index: 102
+batch_index: 103
+batch_index: 104
+batch_index: 105
+batch_index: 106
+batch_index: 107
+batch_index: 108
+batch_index: 109
+batch_index: 110
+batch_index: 111
+batch_index: 112
+batch_index: 113
+batch_index: 114
+batch_index: 115
+batch_index: 116
+batch_index: 117
+batch_index: 118
+batch_index: 119
+batch_index: 120
+batch_index: 121
+batch_index: 122
+batch_index: 123
+batch_index: 124
+batch_index: 125
+batch_index: 126
+batch_index: 127
+batch_index: 128
+batch_index: 129
+batch_index: 130
+batch_index: 131
+batch_index: 132
+batch_index: 133
+batch_index: 134
+batch_index: 135
+batch_index: 136
+batch_index: 137
+batch_index: 138
+batch_index: 139
+batch_index: 140
+batch_index: 141
+batch_index: 142
+batch_index: 143
+batch_index: 144
+batch_index: 145
+batch_index: 146
+batch_index: 147
+batch_index: 148
+batch_index: 149
+batch_index: 150
+batch_index: 151
+batch_index: 152
+batch_index: 153
+batch_index: 154
+batch_index: 155
+batch_index: 156
+batch_index: 157
+batch_index: 158
+batch_index: 159
+batch_index: 160
+batch_index: 161
+batch_index: 162
+batch_index: 163
+batch_index: 164
+batch_index: 165
+batch_index: 166
+batch_index: 167
+batch_index: 168
+batch_index: 169
+batch_index: 170
+batch_index: 171
+batch_index: 172
+batch_index: 173
+batch_index: 174
+batch_index: 175
+batch_index: 176
+batch_index: 177
+batch_index: 178
+batch_index: 179
+batch_index: 180
+batch_index: 181
+batch_index: 182
+batch_index: 183
+batch_index: 184
+batch_index: 185
+batch_index: 186
+batch_index: 187
+batch_index: 188
+batch_index: 189
+batch_index: 190
+batch_index: 191
+batch_index: 192
+batch_index: 193
+batch_index: 194
+batch_index: 195
+batch_index: 196
+batch_index: 197
+batch_index: 198
+batch_index: 199
+batch_index: 200
+batch_index: 201
+batch_index: 202
+batch_index: 203
+batch_index: 204
+batch_index: 205
+batch_index: 206
+batch_index: 207
+batch_index: 208
+batch_index: 209
+batch_index: 210
+batch_index: 211
+batch_index: 212
+batch_index: 213
+batch_index: 214
+batch_index: 215
+batch_index: 216
+batch_index: 217
+batch_index: 218
+batch_index: 219
+batch_index: 220
+batch_index: 221
+batch_index: 222
+batch_index: 223
+batch_index: 224
+batch_index: 225
+batch_index: 226
+batch_index: 227
+batch_index: 228
+batch_index: 229
+batch_index: 230
+batch_index: 231
+batch_index: 232
+batch_index: 233
+batch_index: 234
+batch_index: 235
+batch_index: 236
+batch_index: 237
+batch_index: 238
+batch_index: 239
+batch_index: 240
+batch_index: 241
+batch_index: 242
+batch_index: 243
+batch_index: 244
+batch_index: 245
+batch_index: 246
+batch_index: 247
+batch_index: 248
+batch_index: 249
+batch_index: 250
+batch_index: 251
+batch_index: 252
+batch_index: 253
+batch_index: 254
+batch_index: 255
+batch_index: 256
+batch_index: 257
+batch_index: 258
+batch_index: 259
+batch_index: 260
+batch_index: 261
+batch_index: 262
+batch_index: 263
+batch_index: 264
+batch_index: 265
+batch_index: 266
+batch_index: 267
+batch_index: 268
+batch_index: 269
+batch_index: 270
+batch_index: 271
+batch_index: 272
+batch_index: 273
+batch_index: 274
+batch_index: 275
+batch_index: 276
+batch_index: 277
+batch_index: 278
+batch_index: 279
+batch_index: 280
+batch_index: 281
+batch_index: 282
+batch_index: 283
+batch_index: 284
+batch_index: 285
+batch_index: 286
+batch_index: 287
+batch_index: 288
+batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:37.6200%
+standard trained classifier loss on adversarial testset:4.246007919311523
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:76.0500%
+standard trained classifier loss on clean testset:1.167794942855835
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220702
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/vgg19-cifar10/20220702/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.2
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.2
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+batch_index: 34
+batch_index: 35
+batch_index: 36
+batch_index: 37
+batch_index: 38
+batch_index: 39
+batch_index: 40
+batch_index: 41
+batch_index: 42
+batch_index: 43
+batch_index: 44
+batch_index: 45
+batch_index: 46
+batch_index: 47
+batch_index: 48
+batch_index: 49
+batch_index: 50
+batch_index: 51
+batch_index: 52
+batch_index: 53
+batch_index: 54
+batch_index: 55
+batch_index: 56
+batch_index: 57
+batch_index: 58
+batch_index: 59
+batch_index: 60
+batch_index: 61
+batch_index: 62
+batch_index: 63
+batch_index: 64
+batch_index: 65
+batch_index: 66
+batch_index: 67
+batch_index: 68
+batch_index: 69
+batch_index: 70
+batch_index: 71
+batch_index: 72
+batch_index: 73
+batch_index: 74
+batch_index: 75
+batch_index: 76
+batch_index: 77
+batch_index: 78
+batch_index: 79
+batch_index: 80
+batch_index: 81
+batch_index: 82
+batch_index: 83
+batch_index: 84
+batch_index: 85
+batch_index: 86
+batch_index: 87
+batch_index: 88
+batch_index: 89
+batch_index: 90
+batch_index: 91
+batch_index: 92
+batch_index: 93
+batch_index: 94
+batch_index: 95
+batch_index: 96
+batch_index: 97
+batch_index: 98
+batch_index: 99
+batch_index: 100
+batch_index: 101
+batch_index: 102
+batch_index: 103
+batch_index: 104
+batch_index: 105
+batch_index: 106
+batch_index: 107
+batch_index: 108
+batch_index: 109
+batch_index: 110
+batch_index: 111
+batch_index: 112
+batch_index: 113
+batch_index: 114
+batch_index: 115
+batch_index: 116
+batch_index: 117
+batch_index: 118
+batch_index: 119
+batch_index: 120
+batch_index: 121
+batch_index: 122
+batch_index: 123
+batch_index: 124
+batch_index: 125
+batch_index: 126
+batch_index: 127
+batch_index: 128
+batch_index: 129
+batch_index: 130
+batch_index: 131
+batch_index: 132
+batch_index: 133
+batch_index: 134
+batch_index: 135
+batch_index: 136
+batch_index: 137
+batch_index: 138
+batch_index: 139
+batch_index: 140
+batch_index: 141
+batch_index: 142
+batch_index: 143
+batch_index: 144
+batch_index: 145
+batch_index: 146
+batch_index: 147
+batch_index: 148
+batch_index: 149
+batch_index: 150
+batch_index: 151
+batch_index: 152
+batch_index: 153
+batch_index: 154
+batch_index: 155
+batch_index: 156
+batch_index: 157
+batch_index: 158
+batch_index: 159
+batch_index: 160
+batch_index: 161
+batch_index: 162
+batch_index: 163
+batch_index: 164
+batch_index: 165
+batch_index: 166
+batch_index: 167
+batch_index: 168
+batch_index: 169
+batch_index: 170
+batch_index: 171
+batch_index: 172
+batch_index: 173
+batch_index: 174
+batch_index: 175
+batch_index: 176
+batch_index: 177
+batch_index: 178
+batch_index: 179
+batch_index: 180
+batch_index: 181
+batch_index: 182
+batch_index: 183
+batch_index: 184
+batch_index: 185
+batch_index: 186
+batch_index: 187
+batch_index: 188
+batch_index: 189
+batch_index: 190
+batch_index: 191
+batch_index: 192
+batch_index: 193
+batch_index: 194
+batch_index: 195
+batch_index: 196
+batch_index: 197
+batch_index: 198
+batch_index: 199
+batch_index: 200
+batch_index: 201
+batch_index: 202
+batch_index: 203
+batch_index: 204
+batch_index: 205
+batch_index: 206
+batch_index: 207
+batch_index: 208
+batch_index: 209
+batch_index: 210
+batch_index: 211
+batch_index: 212
+batch_index: 213
+batch_index: 214
+batch_index: 215
+batch_index: 216
+batch_index: 217
+batch_index: 218
+batch_index: 219
+batch_index: 220
+batch_index: 221
+batch_index: 222
+batch_index: 223
+batch_index: 224
+batch_index: 225
+batch_index: 226
+batch_index: 227
+batch_index: 228
+batch_index: 229
+batch_index: 230
+batch_index: 231
+batch_index: 232
+batch_index: 233
+batch_index: 234
+batch_index: 235
+batch_index: 236
+batch_index: 237
+batch_index: 238
+batch_index: 239
+batch_index: 240
+batch_index: 241
+batch_index: 242
+batch_index: 243
+batch_index: 244
+batch_index: 245
+batch_index: 246
+batch_index: 247
+batch_index: 248
+batch_index: 249
+batch_index: 250
+batch_index: 251
+batch_index: 252
+batch_index: 253
+batch_index: 254
+batch_index: 255
+batch_index: 256
+batch_index: 257
+batch_index: 258
+batch_index: 259
+batch_index: 260
+batch_index: 261
+batch_index: 262
+batch_index: 263
+batch_index: 264
+batch_index: 265
+batch_index: 266
+batch_index: 267
+batch_index: 268
+batch_index: 269
+batch_index: 270
+batch_index: 271
+batch_index: 272
+batch_index: 273
+batch_index: 274
+batch_index: 275
+batch_index: 276
+batch_index: 277
+batch_index: 278
+batch_index: 279
+batch_index: 280
+batch_index: 281
+batch_index: 282
+batch_index: 283
+batch_index: 284
+batch_index: 285
+batch_index: 286
+batch_index: 287
+batch_index: 288
+batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:27.5000%
+standard trained classifier loss on adversarial testset:5.052842617034912
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:76.2000%
+standard trained classifier loss on clean testset:1.1603056192398071
+---------------------------------------
+
+
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220702
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/vgg19-cifar10/20220702/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.3
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+batch_index: 1
+batch_index: 2
+batch_index: 3
+batch_index: 4
+batch_index: 5
+batch_index: 6
+batch_index: 7
+batch_index: 8
+batch_index: 9
+batch_index: 10
+batch_index: 11
+batch_index: 12
+batch_index: 13
+batch_index: 14
+batch_index: 15
+batch_index: 16
+batch_index: 17
+batch_index: 18
+batch_index: 19
+batch_index: 20
+batch_index: 21
+batch_index: 22
+batch_index: 23
+batch_index: 24
+batch_index: 25
+batch_index: 26
+batch_index: 27
+batch_index: 28
+batch_index: 29
+batch_index: 30
+batch_index: 31
+batch_index: 32
+batch_index: 33
+batch_index: 34
+batch_index: 35
+batch_index: 36
+batch_index: 37
+batch_index: 38
+batch_index: 39
+batch_index: 40
+batch_index: 41
+batch_index: 42
+batch_index: 43
+batch_index: 44
+batch_index: 45
+batch_index: 46
+batch_index: 47
+batch_index: 48
+batch_index: 49
+batch_index: 50
+batch_index: 51
+batch_index: 52
+batch_index: 53
+batch_index: 54
+batch_index: 55
+batch_index: 56
+batch_index: 57
+batch_index: 58
+batch_index: 59
+batch_index: 60
+batch_index: 61
+batch_index: 62
+batch_index: 63
+batch_index: 64
+batch_index: 65
+batch_index: 66
+batch_index: 67
+batch_index: 68
+batch_index: 69
+batch_index: 70
+batch_index: 71
+batch_index: 72
+batch_index: 73
+batch_index: 74
+batch_index: 75
+batch_index: 76
+batch_index: 77
+batch_index: 78
+batch_index: 79
+batch_index: 80
+batch_index: 81
+batch_index: 82
+batch_index: 83
+batch_index: 84
+batch_index: 85
+batch_index: 86
+batch_index: 87
+batch_index: 88
+batch_index: 89
+batch_index: 90
+batch_index: 91
+batch_index: 92
+batch_index: 93
+batch_index: 94
+batch_index: 95
+batch_index: 96
+batch_index: 97
+batch_index: 98
+batch_index: 99
+batch_index: 100
+batch_index: 101
+batch_index: 102
+batch_index: 103
+batch_index: 104
+batch_index: 105
+batch_index: 106
+batch_index: 107
+batch_index: 108
+batch_index: 109
+batch_index: 110
+batch_index: 111
+batch_index: 112
+batch_index: 113
+batch_index: 114
+batch_index: 115
+batch_index: 116
+batch_index: 117
+batch_index: 118
+batch_index: 119
+batch_index: 120
+batch_index: 121
+batch_index: 122
+batch_index: 123
+batch_index: 124
+batch_index: 125
+batch_index: 126
+batch_index: 127
+batch_index: 128
+batch_index: 129
+batch_index: 130
+batch_index: 131
+batch_index: 132
+batch_index: 133
+batch_index: 134
+batch_index: 135
+batch_index: 136
+batch_index: 137
+batch_index: 138
+batch_index: 139
+batch_index: 140
+batch_index: 141
+batch_index: 142
+batch_index: 143
+batch_index: 144
+batch_index: 145
+batch_index: 146
+batch_index: 147
+batch_index: 148
+batch_index: 149
+batch_index: 150
+batch_index: 151
+batch_index: 152
+batch_index: 153
+batch_index: 154
+batch_index: 155
+batch_index: 156
+batch_index: 157
+batch_index: 158
+batch_index: 159
+batch_index: 160
+batch_index: 161
+batch_index: 162
+batch_index: 163
+batch_index: 164
+batch_index: 165
+batch_index: 166
+batch_index: 167
+batch_index: 168
+batch_index: 169
+batch_index: 170
+batch_index: 171
+batch_index: 172
+batch_index: 173
+batch_index: 174
+batch_index: 175
+batch_index: 176
+batch_index: 177
+batch_index: 178
+batch_index: 179
+batch_index: 180
+batch_index: 181
+batch_index: 182
+batch_index: 183
+batch_index: 184
+batch_index: 185
+batch_index: 186
+batch_index: 187
+batch_index: 188
+batch_index: 189
+batch_index: 190
+batch_index: 191
+batch_index: 192
+batch_index: 193
+batch_index: 194
+batch_index: 195
+batch_index: 196
+batch_index: 197
+batch_index: 198
+batch_index: 199
+batch_index: 200
+batch_index: 201
+batch_index: 202
+batch_index: 203
+batch_index: 204
+batch_index: 205
+batch_index: 206
+batch_index: 207
+batch_index: 208
+batch_index: 209
+batch_index: 210
+batch_index: 211
+batch_index: 212
+batch_index: 213
+batch_index: 214
+batch_index: 215
+batch_index: 216
+batch_index: 217
+batch_index: 218
+batch_index: 219
+batch_index: 220
+batch_index: 221
+batch_index: 222
+batch_index: 223
+batch_index: 224
+batch_index: 225
+batch_index: 226
+batch_index: 227
+batch_index: 228
+batch_index: 229
+batch_index: 230
+batch_index: 231
+batch_index: 232
+batch_index: 233
+batch_index: 234
+batch_index: 235
+batch_index: 236
+batch_index: 237
+batch_index: 238
+batch_index: 239
+batch_index: 240
+batch_index: 241
+batch_index: 242
+batch_index: 243
+batch_index: 244
+batch_index: 245
+batch_index: 246
+batch_index: 247
+batch_index: 248
+batch_index: 249
+batch_index: 250
+batch_index: 251
+batch_index: 252
+batch_index: 253
+batch_index: 254
+batch_index: 255
+batch_index: 256
+batch_index: 257
+batch_index: 258
+batch_index: 259
+batch_index: 260
+batch_index: 261
+batch_index: 262
+batch_index: 263
+batch_index: 264
+batch_index: 265
+batch_index: 266
+batch_index: 267
+batch_index: 268
+batch_index: 269
+batch_index: 270
+batch_index: 271
+batch_index: 272
+batch_index: 273
+batch_index: 274
+batch_index: 275
+batch_index: 276
+batch_index: 277
+batch_index: 278
+batch_index: 279
+batch_index: 280
+batch_index: 281
+batch_index: 282
+batch_index: 283
+batch_index: 284
+batch_index: 285
+batch_index: 286
+batch_index: 287
+batch_index: 288
+batch_index: 289
+batch_index: 290
+batch_index: 291
+batch_index: 292
+batch_index: 293
+batch_index: 294
+batch_index: 295
+batch_index: 296
+batch_index: 297
+batch_index: 298
+batch_index: 299
+batch_index: 300
+batch_index: 301
+batch_index: 302
+batch_index: 303
+batch_index: 304
+batch_index: 305
+batch_index: 306
+batch_index: 307
+batch_index: 308
+batch_index: 309
+batch_index: 310
+batch_index: 311
+batch_index: 312
+adv_x_test.shape: torch.Size([10000, 3, 32, 32])
+adv_y_test.shape: torch.Size([10000])
+finished generate latent adversarial examples !
+label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+Saving cifar10 testset adversarial examples...
+save adversarial examples finished
+standard trained classifier accuary on adversarial testset:22.2600%
+standard trained classifier loss on adversarial testset:5.41459321975708
+cle_x_test.shape: torch.Size([10000, 3, 32, 32])
+cle_y_test.shape: torch.Size([10000])
+standard trained classifier accuary on clean testset:75.5600%
+standard trained classifier loss on clean testset:1.174125075340271
+---------------------------------------
+
+
