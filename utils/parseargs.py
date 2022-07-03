@@ -198,7 +198,7 @@ def parse_arguments():
         parser_object.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
         parser_object.add_argument("--latent_dim", type=int, default=100, help="dimensionality of the latent space")
         parser_object.add_argument("--sample_interval", type=int, default=2000, help="interval betwen image samples")
-        # parser_object.add_argument('--workers', type=int, default=4)
+        parser_object.add_argument('--workers', type=int, default=4)
         parser_object.add_argument('--seed', type=int, default=0)  
         parser_object.add_argument('--save_images_every', type=int, default=10)
         parser_object.add_argument('--save_every', type=int, default=1000)
