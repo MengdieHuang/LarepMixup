@@ -37,8 +37,23 @@ def extract_val():
         for name in names:
             tar.extract(name, VAL_DEST_DIR)
 
+# def extract_val():
+#     with open(VAL_SRC_DIR, 'rb') as f:
+#         tar = tarfile.open(fileobj=f, mode='r:')
+#         for i, item in enumerate(tar):
+#             cls_name = item.name.strip(".tar")
+#             a = tar.extractfile(item)
+#             b = tarfile.open(fileobj=a, mode="r:")
+#             e_path = "{}/{}/".format(VAL_DEST_DIR, cls_name)
+#             if not os.path.isdir(e_path):
+#                 os.makedirs(e_path)
+#             print("#", i, "extract val dateset to >>>", e_path)
+#             names = b.getnames()
+#             for name in names:
+#                 b.extract(name, e_path)            
+
 
 if __name__ == '__main__':
-    extract_train()
+    # extract_train()
     extract_val()
 
