@@ -123,3 +123,398 @@ Traceback (most recent call last):
   File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
     super(_open_file, self).__init__(open(name, mode))
 FileNotFoundError: [Errno 2] No such file or directory: '/home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220704
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/resnet50-cifar10/20220704/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.02
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 144, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 332, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 69, in perturb
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+RuntimeError: CUDA out of memory. Tried to allocate 288.00 MiB (GPU 0; 10.76 GiB total capacity; 3.63 GiB already allocated; 236.25 MiB free; 3.95 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220704
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/resnet50-cifar10/20220704/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.05
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.05
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 144, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 332, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 69, in perturb
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+RuntimeError: CUDA out of memory. Tried to allocate 288.00 MiB (GPU 0; 10.76 GiB total capacity; 3.63 GiB already allocated; 236.25 MiB free; 3.95 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220704
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/resnet50-cifar10/20220704/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.1
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.1
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 144, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 332, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 69, in perturb
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+RuntimeError: CUDA out of memory. Tried to allocate 288.00 MiB (GPU 0; 10.76 GiB total capacity; 3.63 GiB already allocated; 236.25 MiB free; 3.95 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220704
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/resnet50-cifar10/20220704/00003
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.2
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.2
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 144, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 332, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 69, in perturb
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+RuntimeError: CUDA out of memory. Tried to allocate 288.00 MiB (GPU 0; 10.76 GiB total capacity; 3.63 GiB already allocated; 236.25 MiB free; 3.95 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220704
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/fgsm/resnet50-cifar10/20220704/00004
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.3
+latent adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize classifier
+learned calssify model != None
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+initlize attack classifier
+generate latent adversarial exampels
+latent fgsm attack
+eps： 0.3
+cle_w_test.shape: torch.Size([10000, 8, 512])
+cle_y_test.shape: torch.Size([10000])
+testset_total_num: 10000
+batch_size: 32
+batch_num: 313
+batch_index: 0
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 144, in <module>
+    adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+  File "/home/maggie/mmat/attacks/advattack.py", line 332, in generatelatentadv
+    adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/advertorch/attacks/one_step_gradient.py", line 69, in perturb
+    loss.backward()
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/tensor.py", line 245, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/autograd/__init__.py", line 147, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+RuntimeError: CUDA out of memory. Tried to allocate 288.00 MiB (GPU 0; 10.76 GiB total capacity; 3.63 GiB already allocated; 236.25 MiB free; 3.95 GiB reserved in total by PyTorch)
