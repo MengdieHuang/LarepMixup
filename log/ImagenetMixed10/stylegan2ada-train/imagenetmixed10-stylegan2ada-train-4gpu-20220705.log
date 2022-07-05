@@ -1,0 +1,270 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220706
+exp_result_dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220706
+Experiment result save dir: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220706/00000
+initilize the dataset loading parameters
+custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* train dataloader finished !
+==> Preparing dataset custom_imagenet..
+Loading *imagenetmixed10* test dataloader finished !
+running stylegan2ada train main()...............
+args.resume_pkl: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220704/00000/imagenetmixed10-auto2-batch128-ada-bgc-noresume/network-snapshot-004505.pkl
+
+Training options:
+{
+  "num_gpus": 4,
+  "image_snapshot_ticks": 20,
+  "network_snapshot_ticks": 20,
+  "metrics": [
+    "fid50k_full"
+  ],
+  "random_seed": 0,
+  "training_set_kwargs": {
+    "class_name": "utils.stylegan2ada.training.dataset.ImageFolderDataset",
+    "path": "/root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip",
+    "use_labels": false,
+    "max_size": 77237,
+    "xflip": false,
+    "resolution": 256
+  },
+  "data_loader_kwargs": {
+    "pin_memory": true,
+    "num_workers": 32,
+    "prefetch_factor": 2
+  },
+  "G_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Generator",
+    "z_dim": 512,
+    "w_dim": 512,
+    "mapping_kwargs": {
+      "num_layers": 2
+    },
+    "synthesis_kwargs": {
+      "channel_base": 16384,
+      "channel_max": 512,
+      "num_fp16_res": 4,
+      "conv_clamp": 256
+    }
+  },
+  "D_kwargs": {
+    "class_name": "utils.stylegan2ada.training.networks.Discriminator",
+    "block_kwargs": {},
+    "mapping_kwargs": {},
+    "epilogue_kwargs": {
+      "mbstd_group_size": 4
+    },
+    "channel_base": 16384,
+    "channel_max": 512,
+    "num_fp16_res": 4,
+    "conv_clamp": 256
+  },
+  "G_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "D_opt_kwargs": {
+    "class_name": "torch.optim.Adam",
+    "lr": 0.0025,
+    "betas": [
+      0,
+      0.99
+    ],
+    "eps": 1e-08
+  },
+  "loss_kwargs": {
+    "class_name": "utils.stylegan2ada.training.loss.StyleGAN2Loss",
+    "r1_gamma": 0.2048
+  },
+  "total_kimg": 25000,
+  "batch_size": 256,
+  "batch_gpu": 64,
+  "ema_kimg": 20.0,
+  "ema_rampup": 0.05,
+  "ada_target": 0.6,
+  "augment_kwargs": {
+    "class_name": "utils.stylegan2ada.training.augment.AugmentPipe",
+    "xflip": 1,
+    "rotate90": 1,
+    "xint": 1,
+    "scale": 1,
+    "rotate": 1,
+    "aniso": 1,
+    "xfrac": 1,
+    "brightness": 1,
+    "contrast": 1,
+    "lumaflip": 1,
+    "hue": 1,
+    "saturation": 1
+  },
+  "resume_pkl": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220704/00000/imagenetmixed10-auto2-batch128-ada-bgc-noresume/network-snapshot-004505.pkl",
+  "run_dir": "/root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220706/00000/imagenetmixed10-auto4-batch256-ada-bgc-noresume"
+}
+
+Output directory:   /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220706/00000/imagenetmixed10-auto4-batch256-ada-bgc-noresume
+Training data:      /root/autodl-tmp/maggie/data/imagenetmixed10/imagenetmixed104stylegan2ada/datasets/imagenetmixed10.zip
+Training duration:  25000 kimg
+Number of GPUs:     4
+Number of images:   77237
+Image resolution:   256
+Conditional model:  False
+Dataset x-flips:    False
+
+Creating output directory...
+Launching processes...
+Loading training set...
+resume_pkl: /root/autodl-tmp/maggie/result/train/gen-train/stylegan2ada-imagenetmixed10/20220704/00000/imagenetmixed10-auto2-batch128-ada-bgc-noresume/network-snapshot-004505.pkl
+rank: 3
+
+Num images:  77237
+Image shape: [3, 256, 256]
+Label shape: [0]
+
+Constructing networks...
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/utils/data/_utils/pin_memory.py", line 25, in _pin_memory_loop
+    r = in_queue.get(timeout=MP_STATUS_CHECK_INTERVAL)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/queues.py", line 116, in get
+    return _ForkingPickler.loads(res)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/reductions.py", line 282, in rebuild_storage_fd
+    fd = df.detach()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/resource_sharer.py", line 57, in detach
+    with _resource_sharer.get_connection(self._id) as conn:
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/resource_sharer.py", line 87, in get_connection
+    c = Client(address, authkey=process.current_process().authkey)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 508, in Client
+    answer_challenge(c, authkey)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 752, in answer_challenge
+    message = connection.recv_bytes(256)         # reject large message
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+ConnectionResetError: [Errno 104] Connection reset by peer
+Traceback (most recent call last):
+  File "tasklauncher-20220702.py", line 41, in <module>
+    generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 87, in __init__
+    self._args.gen_network_pkl = self.__getpkl__()                                                                      #   训练好的模型路径赋值给 
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 95, in __getpkl__
+    gen_network_pkl = self.__getgenpkl__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/mixgenerate.py", line 103, in __getgenpkl__
+    self._model.train(self._exp_result_dir, self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 58, in train
+    self.__train__()
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 61, in __train__
+    snapshot_network_pkls = self.__trainmain__(self._args, self._exp_result_dir, **self._stylegan2ada_config_kwargs)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 135, in __trainmain__
+    snapshot_network_pkls = torch.multiprocessing.spawn(fn=self.__subprocess_fn__, args=(args, temp_dir), nprocs=args.num_gpus)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 230, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 188, in start_processes
+    while not context.join():
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 150, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException: 
+
+-- Process 2 terminated with the following error:
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/multiprocessing/spawn.py", line 59, in _wrap
+    fn(i, *args)
+  File "/root/autodl-nas/maggie/mmat/genmodels/stylegan2ada.py", line 516, in __subprocess_fn__
+    snapshot_network_pkls = training_loop.training_loop(rank=rank, **args)                                                  #   调用utils/training/training_loop.py中定义爹函数开始逐轮训练
+  File "/root/autodl-nas/maggie/mmat/utils/stylegan2ada/training/training_loop.py", line 187, in training_loop
+    G_ema = copy.deepcopy(G).eval()
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 264, in _reconstruct
+    y = func(*args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 263, in <genexpr>
+    args = (deepcopy(arg, memo) for arg in args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 296, in _reconstruct
+    value = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 264, in _reconstruct
+    y = func(*args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 263, in <genexpr>
+    args = (deepcopy(arg, memo) for arg in args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 296, in _reconstruct
+    value = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 264, in _reconstruct
+    y = func(*args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 263, in <genexpr>
+    args = (deepcopy(arg, memo) for arg in args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 296, in _reconstruct
+    value = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 264, in _reconstruct
+    y = func(*args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 263, in <genexpr>
+    args = (deepcopy(arg, memo) for arg in args)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 146, in deepcopy
+    y = copier(x, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 230, in _deepcopy_dict
+    y[deepcopy(key, memo)] = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 172, in deepcopy
+    y = _reconstruct(x, memo, *rv)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 296, in _reconstruct
+    value = deepcopy(value, memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/copy.py", line 153, in deepcopy
+    y = copier(memo)
+  File "/root/miniconda3/envs/mmat/lib/python3.8/site-packages/torch/nn/parameter.py", line 32, in __deepcopy__
+    result = type(self)(self.data.clone(memory_format=torch.preserve_format), self.requires_grad)
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 2; 23.69 GiB total capacity; 245.57 MiB already allocated; 19.56 MiB free; 270.00 MiB reserved in total by PyTorch)
+
+/root/miniconda3/envs/mmat/lib/python3.8/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 312 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
