@@ -178,11 +178,11 @@ if __name__ == '__main__':
     elif args.mode == 'project':        
         if args.gen_network_pkl != None:        
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-            # print("projecting training set")
-            # generate_model.projectmain(cle_train_dataloader) 
+            print("projecting training set")                        #   20220714 投影CIFAR10训练集
+            generate_model.projectmain(cle_train_dataloader) 
 
-            print("projecting test set")
-            generate_model.projectmain(cle_test_dataloader)     #20220624 投影CIFAR10测试集
+            # print("projecting test set")
+            # generate_model.projectmain(cle_test_dataloader)     #20220624 投影CIFAR10测试集
 
         else:
             raise Exception("There is no gen_network_pkl, please train generative model first!")

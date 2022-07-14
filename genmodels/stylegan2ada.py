@@ -592,8 +592,8 @@ class MaggieStylegan2ada:
     def __ramxyproject__(self):
         opt = self._args
         exp_result_dir = self._exp_result_dir
-        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')
-        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')  # 20220624 投影CIFAR10测试集
+        exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-trainset')     #   20220714 投影CIFAR10训练集
+        # exp_result_dir = os.path.join(exp_result_dir,f'project-{opt.dataset}-testset')  # 20220624 投影CIFAR10测试集
 
         os.makedirs(exp_result_dir,exist_ok=True)    
 
