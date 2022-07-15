@@ -3,3 +3,7 @@ result/
 log/
 log/CIFAR10/attack-example-generate/autoattack/
 *.log
+log/CIFAR10/attack-example-generate/cw/
+log/SVHN/attack-example-generate/cw/
+log/SVHN/attack-example-generate/ompgd/
+log/SVHN/dataset-project/trainset/
