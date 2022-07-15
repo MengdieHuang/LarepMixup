@@ -1,4 +1,13 @@
 __pycache__/
 result/
 log/
+<<<<<<< HEAD
 *.log
+=======
+log/CIFAR10/attack-example-generate/autoattack/
+*.log
+log/CIFAR10/attack-example-generate/cw/
+log/SVHN/attack-example-generate/cw/
+log/SVHN/attack-example-generate/ompgd/
+log/SVHN/dataset-project/trainset/
+>>>>>>> a26a22547717f9e7aaaf8d228e6f032d723b88e4
