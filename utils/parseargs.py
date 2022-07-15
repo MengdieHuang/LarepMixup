@@ -89,7 +89,7 @@ def parse_arguments():
         parser_object.add_argument('--batch_size',type=int,default=32,help='Batch size of the dataset setting for the training process')
         parser_object.add_argument('--epochs',type=int,default=20,help='Epochs number setting for the training process')
         parser_object.add_argument('--lr',type=float,default=0.01,help='Learning rate setting for the training process')
-        parser_object.add_argument('--save_path',type=str,default='/home/maggie/mmat/result',help='Output path for saving results')
+        parser_object.add_argument('--save_path',type=str,default='/home/data/maggie/result-newhome',help='Output path for saving results')
         parser_object.add_argument('--cpus',type=int,default=4,help='Number of CPUs to use')
         parser_object.add_argument('--gpus',type=int,default=1,help='Number of GPUS to use')
 
@@ -182,7 +182,7 @@ def parse_arguments():
 
 
         #-------------------------arguments for classifier defense-------------------------
-        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt','inputmixup'])
+        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt','inputmixup','manifoldmixup'])
         parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)

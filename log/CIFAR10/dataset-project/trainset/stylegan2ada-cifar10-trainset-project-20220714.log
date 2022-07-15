@@ -1,0 +1,156 @@
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220714
+Experiment result save dir: /home/data/maggie/result-newhome/project/stylegan2ada-cifar10/20220714/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+projecting training set
+self._args.dataset: cifar10
+sample_num: 50000
+batch_num: 1563
+batch_size: 32
+Projecting *cifar10* 0/1563 batch data sets...
+running projecting main()..............
+Project original images from images tensor set !
+projecting samples num: 32
+projecting 00000000 image:
+Setting up PyTorch plugin "bias_act_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+Setting up PyTorch plugin "upfirdn2d_plugin"... /home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/utils/cpp_extension.py:286: UserWarning: 
+
+                               !! WARNING !!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Your compiler (c++) is not compatible with the compiler Pytorch was
+built with for this platform, which is g++ on linux. Please
+use g++ to to compile your extension. Alternatively, you may
+compile PyTorch from source using c++, and then you can also use
+c++ to compile your extension.
+
+See https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md for help
+with compiling PyTorch from source.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                              !! WARNING !!
+
+  platform=sys.platform))
+Done.
+label = 0006-frog
+projecting samples num: 32
+projecting 00000001 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00000002 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00000003 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00000004 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00000005 image:
+label = 0001-automobile
+projecting samples num: 32
+projecting 00000006 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00000007 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00000008 image:
+label = 0008-ship
+projecting samples num: 32
+projecting 00000009 image:
+label = 0003-cat
+projecting samples num: 32
+projecting 00000010 image:
+label = 0004-deer
+projecting samples num: 32
+projecting 00000011 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00000012 image:
+label = 0007-horse
+projecting samples num: 32
+projecting 00000013 image:
+label = 0002-bird
+projecting samples num: 32
+projecting 00000014 image:
+label = 0009-truck
+projecting samples num: 32
+projecting 00000015 image:
+Traceback (most recent call last):
+  File "tasklauncher-20220713.py", line 182, in <module>
+    generate_model.projectmain(cle_train_dataloader) 
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 228, in projectmain
+    pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                                 #   numpy
+  File "/home/maggie/mmat/genmodels/mixgenerate.py", line 428, in __batchproject__
+    self._model.project(self._exp_result_dir,cle_x_trainbatch,cle_y_trainbatch,batch_index)         #   调用stylegan2ada的project
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 528, in project
+    projected_w_set, projected_y_set = self.__projectmain__(self._args, self._exp_result_dir,ori_x_set, ori_y_set)
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 539, in __projectmain__
+    projected_w_set, projected_y_set = self.__ramxyproject__()
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 632, in __ramxyproject__
+    laber_index = target_y_set[index]
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 702, in __xyproject__
+    verbose=True
+  File "/home/maggie/mmat/genmodels/stylegan2ada.py", line 1086, in __project__
+    synth_features = vgg16(synth_images, resize_images=False, return_lpips=True)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript, serialized code (most recent call last):
+  File "code/__torch__.py", line 179, in forward
+      _78 = torch.__not__(torch.__contains__(_77, "conv5"))
+      if _78:
+        x11 = (_28).forward(x10, )
+               ~~~~~~~~~~~~ <--- HERE
+      else:
+        x11 = x10
+  File "code/__torch__/torch/nn/functional.py", line 131, in forward
+    result = torch.relu_(input)
+  else:
+    result = torch.relu(input)
+             ~~~~~~~~~~ <--- HERE
+  return result
+def _max_pool2d(input: Tensor,
+
+Traceback of TorchScript, original code (most recent call last):
+  File "c:\p4research\research\tkarras\dnn\gan3support\feature_detectors\vgg.py", line 103, in forward
+                    ys.append(x.to(torch.float32))
+                if name not in ['pool5', 'fc1', 'fc2', 'fc3', 'softmax']:
+                    x = layer(x)
+                        ~~~~~ <--- HERE
+            for idx, (y, w) in enumerate(zip(ys, [self.lpips0, self.lpips1, self.lpips2, self.lpips3, self.lpips4])):
+                y = y / (torch.norm(y, dim=1, keepdim=True) + 1e-10)
+  File "C:\Users\tkarras\Anaconda3\lib\site-packages\torch\nn\functional.py", line 1136, in forward
+        result = torch.relu_(input)
+    else:
+        result = torch.relu(input)
+                 ~~~~~~~~~~ <--- HERE
+    return result
+RuntimeError: CUDA out of memory. Tried to allocate 2.00 MiB (GPU 0; 10.76 GiB total capacity; 1.06 GiB already allocated; 5.56 MiB free; 1.20 GiB reserved in total by PyTorch)
+

@@ -23,3 +23,146 @@ Traceback (most recent call last):
   File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
     super(_open_file, self).__init__(open(name, mode))
 FileNotFoundError: [Errno 2] No such file or directory: '/home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-attackacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl'
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220715
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/deepfool/resnet50-cifar10/20220715/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get DeepFool examples generate model
+generating trainset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220704.py", line 73, in <module>
+    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+  File "/home/maggie/mmat/attacks/advattack.py", line 250, in generate
+    self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/deepfool.py", line 102, in generate
+    preds = self.estimator.predict(x, batch_size=self.batch_size)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/classifier.py", line 71, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 309, in predict
+    results[begin:end] = output.detach().cpu().numpy()
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220715
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/deepfool/resnet50-cifar10/20220715/00001
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get DeepFool examples generate model
+generating trainset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220704.py", line 73, in <module>
+    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+  File "/home/maggie/mmat/attacks/advattack.py", line 250, in generate
+    self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/deepfool.py", line 102, in generate
+    preds = self.estimator.predict(x, batch_size=self.batch_size)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/classifier.py", line 71, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 294, in predict
+    x_preprocessed, _ = self._apply_preprocessing(x, y=None, fit=False)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/pytorch.py", line 182, in _apply_preprocessing
+    x, y = chain_processes(x, y)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/pytorch.py", line 177, in chain_processes
+    x, y = preprocess.forward(x, y)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/preprocessing/standardisation_mean_std/pytorch.py", line 91, in forward
+    x_norm = x_norm / torch.tensor(self._broadcastable_std, device=self._device, dtype=torch.float32)
+RuntimeError: CUDA out of memory. Tried to allocate 586.00 MiB (GPU 0; 10.76 GiB total capacity; 1.32 GiB already allocated; 63.25 MiB free; 1.34 GiB reserved in total by PyTorch)
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220715
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/deepfool/resnet50-cifar10/20220715/00002
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get DeepFool examples generate model
+Traceback (most recent call last):
+  File "tasklauncher-20220704.py", line 73, in <module>
+    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+  File "/home/maggie/mmat/attacks/advattack.py", line 219, in generate
+    self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
+  File "/home/maggie/mmat/attacks/advattack.py", line 553, in __getsettensor__
+    xset_tensor  = self.__getxsettensor__(dataloader)
+  File "/home/maggie/mmat/attacks/advattack.py", line 566, in __getxsettensor__
+    xset_tensor.append(dataloader.dataset[img_index][0])
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/datasets/cifar.py", line 120, in __getitem__
+    img = self.transform(img)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 60, in __call__
+    img = t(img)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 221, in forward
+    return F.normalize(tensor, self.mean, self.std, self.inplace)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/torchvision/transforms/functional.py", line 328, in normalize
+    mean = torch.as_tensor(mean, dtype=dtype, device=tensor.device)
+KeyboardInterrupt
+
+
+---------------------------------------
+Torch cuda is available
+args.subcommand=run, run the command line
+date: 20220715
+whitebox attack
+Experiment result save dir: /home/data/maggie/result-newhome/attack/deepfool/resnet50-cifar10/20220715/00000
+initilize the dataset loading parameters
+load cifar10 dataset
+Loading *cifar10* train dataloader finished !
+Loading *cifar10* test dataloader finished !
+eps: 0.02
+pixel adversarial attack.............
+cla_network_pkl: /home/data/maggie/result-newhome/train/cla-train/resnet50-cifar10/20210908/00002-testacc-0.7624/train-cifar10-dataset/standard-trained-classifier-resnet50-on-clean-cifar10-finished.pkl
+initlize attack classifier
+generate pixel adversarial exampels
+Get DeepFool examples generate model
+generating trainset adversarial examples...
+Traceback (most recent call last):
+  File "tasklauncher-20220704.py", line 73, in <module>
+    x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+  File "/home/maggie/mmat/attacks/advattack.py", line 250, in generate
+    self._x_train_adv = self._advgenmodel.generate(x = self._x_train, y = self._y_train)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/attack.py", line 74, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/attacks/evasion/deepfool.py", line 102, in generate
+    preds = self.estimator.predict(x, batch_size=self.batch_size)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/classifier.py", line 71, in replacement_function
+    return fdict[func_name](self, *args, **kwargs)
+  File "/home/xieyi/anaconda3/envs/mmat/lib/python3.7/site-packages/art/estimators/classification/pytorch.py", line 309, in predict
+    results[begin:end] = output.detach().cpu().numpy()
+KeyboardInterrupt
