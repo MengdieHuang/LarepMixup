@@ -2,3 +2,6 @@ __pycache__/
 result/
 log/
 *.log
+log/CIFAR10/attack-example-generate/autoattack/
+log/CIFAR10/attack-example-generate/cw/
+log/SVHN/attack-example-generate/cw/
