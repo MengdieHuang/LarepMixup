@@ -5,3 +5,5 @@ log/
 log/CIFAR10/attack-example-generate/autoattack/
 log/CIFAR10/attack-example-generate/cw/
 log/SVHN/attack-example-generate/cw/
+log/CIFAR10/dataset-project/trainset/
+log/CIFAR10/attack-example-generate/deepfool/
