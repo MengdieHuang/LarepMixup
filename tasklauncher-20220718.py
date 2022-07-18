@@ -359,16 +359,15 @@ if __name__ == '__main__':
             adv_testset_path = args.adv_dataset
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)          #   加载对抗样本测试集
 
-            # # clean pixel testset acc and loss
-            # cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
-            # print(f'Accuary of before manifold mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before manifold mixup trained classifier clean testset:{cle_test_loss}' ) 
+            # clean pixel testset acc and loss
+            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
+            print(f'Accuary of before manifold mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before manifold mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            # # adv pixel testset acc and loss
-            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
-            # print(f'Accuary of before manifold mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before manifold mixup trained classifier on white-box adv testset:{adv_test_loss}' ) 
-            # # raise error
+            # adv pixel testset acc and loss
+            adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
+            print(f'Accuary of before manifold mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before manifold mixup trained classifier on white-box adv testset:{adv_test_loss}' ) 
 
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
@@ -376,7 +375,103 @@ if __name__ == '__main__':
             print("args.dirichlet_gama:",args.dirichlet_gama)
 
             target_classifier.manifoldmixuptrain(args, cle_x_train, cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir)
-        
+
+
+            # test
+            # clean pixel testset acc and loss
+            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
+            print(f'Accuary of manifold trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of manifold trained classifier on clean testset:{cle_test_loss}' ) 
+           
+            # adversarial pixel testset acc and loss
+            if args.whitebox == True:
+                # white box adversarial pixel testset acc and loss
+                attack_classifier = AdvAttack(args, target_classifier.model())
+                target_model = attack_classifier.targetmodel()
+                adv_x_test, adv_y_test = attack_classifier.generateadvfromtestsettensor(cle_x_test, cle_y_test)
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_model,adv_x_test,adv_y_test)
+                print(f'Accuary of manifold trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of manifold trained classifier on white-box adv testset:{adv_test_loss}' ) 
+
+            elif args.blackbox == True:
+                # black box adversarial pixel testset acc and loss
+                adv_x_test, adv_y_test = adv_x_test, adv_y_test
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of manifold trained classifier on black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of manifold trained classifier on black-box adv testset:{adv_test_loss}' ) 
+
+
+        elif args.defense_mode =='patchmixup':
+            print("patch mixup")
+            print("lr:",args.lr)
+            print("cla_network_pkl:",args.cla_network_pkl)
+
+            # model
+            learned_model = torch.load(args.cla_network_pkl)
+            target_classifier = MaggieClassifier(args,learned_model)
+
+            # clean pixel testset
+            cle_x_train, cle_y_train = target_classifier.getrawset(cle_train_dataloader)
+            cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
+            # print("cle_x_train.shape:",cle_x_train.shape)
+            # print("cle_y_train.shape:",cle_y_train.shape)
+            cle_x_train=cle_x_train[:25397]                                                 #   训练时保持和表征数据集一样的训练集大小
+            cle_y_train=cle_y_train[:25397]
+            print("cle_x_train.shape:",cle_x_train.shape)
+            print("cle_y_train.shape:",cle_y_train.shape)
+            cle_y_train = torch.nn.functional.one_hot(cle_y_train, args.n_classes).float()  #   标签转为one hot
+            print("cle_y_train.shape:",cle_y_train.shape)
+            
+            # adversarial testset
+            print("args.adv_dataset：",args.adv_dataset)
+            #   /home/data/maggie/result-newhome/attack/fgsm/preactresnet18-cifar10/20220627/00000-fgsm-eps-0.02-acc-53.98/attack-cifar10-dataset/samples/test
+            # adv_testset_path = os.path.join(args.adv_dataset,'test')
+            adv_testset_path = args.adv_dataset
+            adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)          #   加载对抗样本测试集
+
+            # # clean pixel testset acc and loss
+            # cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
+            # print(f'Accuary of before patch mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            # print(f'Loss of before patch mixup trained classifier clean testset:{cle_test_loss}' ) 
+
+            # # adv pixel testset acc and loss
+            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
+            # print(f'Accuary of before patch mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            # print(f'Loss of before patch mixup trained classifier on white-box adv testset:{adv_test_loss}' ) 
+            # # raise error
+
+            print("args.mix_mode:",args.mix_mode)
+            print("args.mix_w_num:",args.mix_w_num)
+            print("args.beta_alpha:",args.beta_alpha)
+            print("args.dirichlet_gama:",args.dirichlet_gama)
+
+            target_classifier.patchmixuptrain(args, cle_x_train, cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir)
+
+
+            # test
+            # clean pixel testset acc and loss
+            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
+            print(f'Accuary of patch trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of patch trained classifier on clean testset:{cle_test_loss}' ) 
+           
+            # adversarial pixel testset acc and loss
+            if args.whitebox == True:
+                # white box adversarial pixel testset acc and loss
+                attack_classifier = AdvAttack(args, target_classifier.model())
+                target_model = attack_classifier.targetmodel()
+                adv_x_test, adv_y_test = attack_classifier.generateadvfromtestsettensor(cle_x_test, cle_y_test)
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_model,adv_x_test,adv_y_test)
+                print(f'Accuary of patch trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of patch trained classifier on white-box adv testset:{adv_test_loss}' ) 
+
+            elif args.blackbox == True:
+                # black box adversarial pixel testset acc and loss
+                adv_x_test, adv_y_test = adv_x_test, adv_y_test
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of patch trained classifier on black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of patch trained classifier on black-box adv testset:{adv_test_loss}' ) 
+
+
         elif args.defense_mode =='at':
             print("adversarial training")
             print("lr:",args.lr)

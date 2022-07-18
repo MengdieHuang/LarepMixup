@@ -18,115 +18,11 @@ from torch.autograd import Variable
 #----maggie-----
 import random
 import numpy as np
-import utils.sampler
 
 #---------------
 
 #----------------
-def hidden_patchmixup_process(out, y, defense_mode):      
-    batch_size = out.size()[0]
-    index = torch.randperm(batch_size).cuda()                       #   生成一组长度为batchsize的随机数组 32
-    # print("index:",index)                                           
-    # print("indices.len:",len(index))                                
-    # print("out.shape:",out.shape)                                   
-    # print("y.shape:",y.shape)       
-
-    """
-    index: tensor([0, 1, 2, 3], device='cuda:0')
-    indices.len: 4
-    out.shape: torch.Size([4, 64, 32, 32])
-    y.shape: torch.Size([4, 10])
-    """                      
-    is_2d = True if len(out.size()) == 2 else False                 #   out有4维 不是2d
-
-    m = utils.sampler.BernoulliSampler(out.size(0), out.size(1), is_2d, p=None)
-    # print("m:",m)
-    # print("m.shape:",m.shape)                                       #   m.shape: torch.Size([4, 64, 1, 1])
-
-    lam = []
-    for i in range(len(m)):
-        lam_i = (torch.nonzero(m[i]).size(0)) / m.size(1)
-        lam.append(lam_i)
-
-    lam = np.asarray(lam)
-    lam = torch.tensor(lam).unsqueeze(1)
-
-    m1 = m.cpu()
-    m2 = (1.-m).cpu()
-    lam1 = lam.cpu()
-    lam2 = (1.-lam).cpu() 
-
-    # print("m1:",m1)
-    # print("m2:",m2)
-    # print("lam1:",lam1)
-    # print("lam2:",lam2)
-
-    """
-    lam1: tensor([[0.5039],[0.4727],[0.5547],[0.4922]], dtype=torch.float64)
-    lam2: tensor([[0.4961],[0.5273],[0.4453],[0.5078]], dtype=torch.float64)
-    """
-
-    # print("m1.shape:",m1.shape)
-    # print("m2.shape:",m2.shape)
-    # print("lam1.shape:",lam1.shape)
-    # print("lam2.shape:",lam2.shape)
-
-    """
-    m1.shape: torch.Size([4, 64, 1, 1])
-    m2.shape: torch.Size([4, 64, 1, 1])
-    lam1.shape: torch.Size([4, 1])
-    lam2.shape: torch.Size([4, 1])
-    """
-
-    w1 = out.cpu()
-    w2 = out[index,:].cpu()        
-    y1 = y.cpu()
-    y2 = y[index,:].cpu()
-
-    # print("w1:",w1)
-    # print("w2:",w2)
-    # print("y1:",y1)
-    # print("y2:",y2)
-
-    """
-    y1: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.],
-                [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
-    y2: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.],
-                [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]])
-    """
-    out = m1*w1 + m2*w2
-    mixed_y = lam1*y1 + lam2*y2
-
-    # print("out.shape:", out.shape)                                
-    # print("out:",out) 
-    # print("mixed_y.shape:", mixed_y.shape)                        
-    # print("mixed_y:",mixed_y)      
-    """
-    out.shape: torch.Size([4, 128, 16, 16])
-    mixed_y.shape: torch.Size([4, 10])
-    mixed_y: tensor([
-                    [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 1.0000, 0.0000, 0.0000, 0.0000],
-                    [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.4688, 0.0000, 0.0000, 0.5312], 
-                    [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.5781, 0.0000, 0.0000, 0.4219],
-                    [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 1.0000]
-                    ], dtype=torch.float64)
-    mixed_y: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                    [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.],
-                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
-                    [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]], dtype=torch.float64)                    
-    """                               
-    # raise error
-
-    out=out.cuda()
-    mixed_y=mixed_y.cuda()
-
-    return out, mixed_y
-
-def hidden_manifoldmixup_process(out, y, defense_mode, beta_alpha):
+def hidden_mixup_process(out, y, defense_mode, beta_alpha):
     alpha=beta_alpha
     lam = np.random.beta(alpha, alpha)                              #   根据beta分布的alpha参数生成随机数lam
     batch_size = out.size()[0]
@@ -293,18 +189,22 @@ class ResNet(nn.Module):
     def forward(self, x, lin=0, lout=5, y=None, defense_mode=None, beta_alpha=None):
 
         #---------------     
-        if defense_mode in ['manifoldmixup','patchmixup']:
-            print("defense_mode",defense_mode)
-            print("y.shape",y.shape)
+        if defense_mode == 'manifoldmixup':
+            # print("defense_mode",defense_mode)
+            # print("y.shape",y.shape)
+            # print("beta_alpha",beta_alpha)
+            # print("maggie test2 20220718")
             """
-            defense_mode patchmixup
-            y.shape torch.Size([4, 10])
-            layer_mix: 2
+            defense_mode manifoldmixup
+            y.shape torch.Size([32, 10])
+            beta_alpha 0.5
             """
+            # print("manifold mixup -----maggie")
             layer_mix = random.randint(1, 3)                                            #   从1 2 3中随机选
-            print("layer_mix:",layer_mix)                                             #   layer_mix: 2       
-        
+            # print("layer_mix:",layer_mix)                                               #   layer_mix: 2
+
         else:
+            # print("standard training -----maggie")
             layer_mix = None
         #---------------        
 
@@ -321,29 +221,22 @@ class ResNet(nn.Module):
         if lin < 3 and lout > 1:
             #-------------
             if layer_mix == 1:                                                          #   如果laymix=1，就在进入layer2前进行潜层混合，否则不混合
-                if defense_mode == 'manifoldmixup':
-                    out, mixed_y = hidden_manifoldmixup_process(out, y, defense_mode, beta_alpha)
-                elif defense_mode == 'patchmixup':
-                    out, mixed_y = hidden_patchmixup_process(out, y, defense_mode)
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
             #-------------            
             out = self.layer2(out)                                                      #   第二个layer计算
 
         if lin < 4 and lout > 2:
             #-------------
             if layer_mix == 2:                                                          #   如果laymix=2，就在进入layer3前进行潜层混合，否则不混合
-                if defense_mode == 'manifoldmixup':
-                    out, mixed_y = hidden_manifoldmixup_process(out, y, defense_mode, beta_alpha)
-                elif defense_mode == 'patchmixup':
-                    out, mixed_y = hidden_patchmixup_process(out, y, defense_mode)     
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
+            #-------------                 
             out = self.layer3(out)                                                      #   第三个layer计算
 
         if lin < 5 and lout > 3:
             #-------------
             if layer_mix == 3:                                                          #   如果laymix=3，就在进入layer4前进行潜层混合，否则不混合
-                if defense_mode == 'manifoldmixup':
-                    out, mixed_y = hidden_manifoldmixup_process(out, y, defense_mode, beta_alpha)
-                elif defense_mode == 'patchmixup':
-                    out, mixed_y = hidden_patchmixup_process(out, y, defense_mode)            
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
+            #-------------               
             out = self.layer4(out)                                                      #   第四个layer计算
 
         if lout > 4:
@@ -351,7 +244,7 @@ class ResNet(nn.Module):
             out = out.view(out.size(0), -1)
             out = self.linear(out)
 
-        if defense_mode in ['manifoldmixup','patchmixup']:
+        if defense_mode == 'manifoldmixup':
             return out, mixed_y
         else:
             return out
