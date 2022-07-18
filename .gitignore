@@ -10,3 +10,5 @@ log/CIFAR10/attack-example-generate/deepfool/
 log/CIFAR10/attack-example-generate/cw/cifar10-preactresnet50-cw-generate-20220629.log
 log/CIFAR10/attack-example-generate/deepfool/cifar10-resnet50-deepfool-generate-20220706.log
 log/SVHN/attack-example-generate/cw/svhn-preactresnet34-cw-generate-20220630.log
+log/CIFAR10/attack-example-generate/cw/cifar10-preactresnet50-cw-generate-20220629.log
+log/SVHN/attack-example-generate/cw/svhn-preactresnet34-cw-generate-20220630.log
