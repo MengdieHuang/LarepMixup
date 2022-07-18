@@ -294,8 +294,8 @@ class ResNet(nn.Module):
 
         #---------------     
         if defense_mode in ['manifoldmixup','patchmixup']:
-            print("defense_mode",defense_mode)
-            print("y.shape",y.shape)
+            # print("defense_mode",defense_mode)
+            # print("y.shape",y.shape)
             """
             defense_mode patchmixup
             y.shape torch.Size([4, 10])
