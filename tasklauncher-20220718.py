@@ -334,6 +334,8 @@ if __name__ == '__main__':
         elif args.defense_mode =='manifoldmixup':
             print("manifold mixup")
             print("lr:",args.lr)
+            print("cla_network_pkl:",args.cla_network_pkl)
+
             # model
             learned_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_model)
@@ -357,16 +359,16 @@ if __name__ == '__main__':
             adv_testset_path = args.adv_dataset
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)          #   加载对抗样本测试集
 
-            # clean pixel testset acc and loss
-            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
-            print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            print(f'Loss of before mmat trained classifier clean testset:{cle_test_loss}' ) 
+            # # clean pixel testset acc and loss
+            # cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
+            # print(f'Accuary of before manifold mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            # print(f'Loss of before manifold mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            # adv pixel testset acc and loss
-            adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
-            print(f'Accuary of before rmt trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            print(f'Loss of before rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
-            # raise error
+            # # adv pixel testset acc and loss
+            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
+            # print(f'Accuary of before manifold mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            # print(f'Loss of before manifold mixup trained classifier on white-box adv testset:{adv_test_loss}' ) 
+            # # raise error
 
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
@@ -374,10 +376,7 @@ if __name__ == '__main__':
             print("args.dirichlet_gama:",args.dirichlet_gama)
 
             target_classifier.manifoldmixuptrain(args, cle_x_train, cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir)
-
-
-            
-
+        
         elif args.defense_mode =='at':
             print("adversarial training")
             print("lr:",args.lr)

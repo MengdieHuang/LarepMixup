@@ -8,12 +8,50 @@ PreActBlock and PreActBottleneck module is from the later paper:
 [2] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
     Identity Mappings in Deep Residual Networks. arXiv:1603.05027
 '''
+from distutils.log import error
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 from torch.autograd import Variable
 
+#----maggie-----
+import random
+import numpy as np
+
+#---------------
+
+#----------------
+def hidden_mixup_process(out, y, defense_mode, beta_alpha):
+    alpha=beta_alpha
+    lam = np.random.beta(alpha, alpha)                              #   根据beta分布的alpha参数生成随机数lam
+    batch_size = out.size()[0]
+    index = torch.randperm(batch_size).cuda()                       #   生成一组长度为batchsize的随机数组 32
+    
+    # print("index:",index)                                           
+    # print("indices.len:",len(index))                                
+    # print("lam:",lam)                                               
+    # print("out.shape:",out.shape)                                   
+    # print("y.shape:",y.shape)                                       
+
+    """
+    index: tensor([24, 31, ..., 12, 29, 19],  device='cuda:0')
+    indices.len: 32
+    lam: 0.09522716670648239
+    out.shape: torch.Size([32, 128, 16, 16])
+    y.shape: torch.Size([32, 10])
+    """
+    out = lam*out + (1-lam)*out[index,:]                            #   把out和打乱样本顺序后的out mixup      
+    mixed_y = lam*y + (1-lam)*y[index,:]
+    
+    # print("out.shape:", out.shape)                                #   out.shape: torch.Size([32, 64, 32, 32])
+    # print("out:",out) 
+    # print("mixed_y.shape:", mixed_y.shape)                        #   mixed_y.shape: torch.Size([32, 10])
+    # print("mixed_y:",mixed_y)                                     
+    # raise error
+
+    return out, mixed_y
+#----------------
 
 def conv3x3(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False)
@@ -148,26 +186,68 @@ class ResNet(nn.Module):
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
 
-    def forward(self, x, lin=0, lout=5):
-        out = x
+    def forward(self, x, lin=0, lout=5, y=None, defense_mode=None, beta_alpha=None):
+
+        #---------------     
+        if defense_mode == 'manifoldmixup':
+            # print("defense_mode",defense_mode)
+            # print("y.shape",y.shape)
+            # print("beta_alpha",beta_alpha)
+            # print("maggie test2 20220718")
+            """
+            defense_mode manifoldmixup
+            y.shape torch.Size([32, 10])
+            beta_alpha 0.5
+            """
+            # print("manifold mixup -----maggie")
+            layer_mix = random.randint(1, 3)                                            #   从1 2 3中随机选
+            # print("layer_mix:",layer_mix)                                               #   layer_mix: 2
+
+        else:
+            # print("standard training -----maggie")
+            layer_mix = None
+        #---------------        
+
+        out = x                                                                         #   把x直接赋值给out
+
         if lin < 1 and lout > -1:
             out = self.conv1(out)
             out = self.bn1(out)
             out = F.relu(out)
+
         if lin < 2 and lout > 0:
-            out = self.layer1(out)
+            out = self.layer1(out)                                                      #   第一个layer计算                             
+
         if lin < 3 and lout > 1:
-            out = self.layer2(out)
+            #-------------
+            if layer_mix == 1:                                                          #   如果laymix=1，就在进入layer2前进行潜层混合，否则不混合
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
+            #-------------            
+            out = self.layer2(out)                                                      #   第二个layer计算
+
         if lin < 4 and lout > 2:
-            out = self.layer3(out)
+            #-------------
+            if layer_mix == 2:                                                          #   如果laymix=2，就在进入layer3前进行潜层混合，否则不混合
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
+            #-------------                 
+            out = self.layer3(out)                                                      #   第三个layer计算
+
         if lin < 5 and lout > 3:
-            out = self.layer4(out)
+            #-------------
+            if layer_mix == 3:                                                          #   如果laymix=3，就在进入layer4前进行潜层混合，否则不混合
+                out, mixed_y = hidden_mixup_process(out, y, defense_mode, beta_alpha)
+            #-------------               
+            out = self.layer4(out)                                                      #   第四个layer计算
+
         if lout > 4:
             out = F.avg_pool2d(out, 4)
             out = out.view(out.size(0), -1)
             out = self.linear(out)
-        return out
 
+        if defense_mode == 'manifoldmixup':
+            return out, mixed_y
+        else:
+            return out
 
 def ResNet18():
     return ResNet(PreActBlock, [2,2,2,2])

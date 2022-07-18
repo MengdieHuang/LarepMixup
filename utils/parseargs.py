@@ -182,7 +182,7 @@ def parse_arguments():
 
 
         #-------------------------arguments for classifier defense-------------------------
-        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt','inputmixup','manifoldmixup'])
+        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='at',choices=['at','mmat','rmt','inputmixup','manifoldmixup','patchmixup'])
         parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)

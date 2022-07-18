@@ -14,31 +14,6 @@ import torch.nn.functional as F
 
 from torch.autograd import Variable
 
-#----maggie-----
-import random
-import numpy as np
-
-#---------------
-
-#----------------
-def hidden_mixup_process(out,args,target):
-    lam = np.random.beta(args.beta_alpha, args.beta_alpha)  #   根据beta分布的alpha参数生成随机数lam
-    batch_size = out.size()[0]
-    index = torch.randperm(batch_size).cuda()               #   生成一组长度为batchsize的随机数组
-    print("index:",index)               #   [93 84 34 19 59...] 
-    print("indices.len:",len(index))      #   indices.len: 100
-    print("lam:",lam)                       #   lam: 0.0967587
-    print("out.shape:",out.shape)           #   out.shape: torch.Size([100, 64, 32, 32])   100个样本 64通道 32x32
-
-    print("manifold mixup -----maggie")
-    out = out * lam + out[index,:] * (1 - lam)                      #   把out和打乱样本顺序后的out mixup      
-    ratio = torch.ones(out.shape[0], device='cuda') * lam
-    print("out.shape:",out.shape)
-    print("ratio.shape:",ratio.shape)                               #   ratio.shape: torch.Size([100])
-    # print("ratio:",ratio)                                           #   ratio: tensor([0.0968, 0.0968,...]  
-    mixed_target = lam * target + (1 - lam) * target[index, :]
-    return out, mixed_target
-#----------------
 
 def conv3x3(in_planes, out_planes, stride=1):
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False)
@@ -174,84 +149,37 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     # def forward(self, x, lin=0, lout=5):
-    #     out = x
-    #     if lin < 1 and lout > -1:
-    #         out = self.conv1(out)
-    #         out = self.bn1(out)
-    #         out = F.relu(out)
-    #     if lin < 2 and lout > 0:
-    #         out = self.layer1(out)
-    #     if lin < 3 and lout > 1:
-    #         out = self.layer2(out)
-    #     if lin < 4 and lout > 2:
-    #         out = self.layer3(out)
-    #     if lin < 5 and lout > 3:
-    #         out = self.layer4(out)
-    #     if lout > 4:
-    #         out = F.avg_pool2d(out, 4)
-    #         out = out.view(out.size(0), -1)
-    #         out = self.linear(out)
-    #     return out
-
-    # maggie 20220713
-    # def forward(self, x, lin=0, lout=5):
-    def forward(self, x, lin=0, lout=5, args=None, target=None):
-                
-        #---------------
-        manifoldmixup = False        
-        manifoldmixup = True
-        if manifoldmixup:
-            print("manifold mixup -----maggie")
-            layer_mix = random.randint(0, 5)                                            #   从0 1 2中随机选
-            print("layer_mix:",layer_mix)                                               #   layer_mix：1  
-
-        else:
-            print("standard training -----maggie")
-            layer_mix = None
-        #---------------        
-
-        out = x                                                     #   把x直接赋值给out
-
+    def forward(self, x, lin=0, lout=5, y=None, defense_mode=None, beta_alpha=None):
+        print("defense_mode",defense_mode)
+        print("y.shape",y.shape)
+        print("beta_alpha",beta_alpha)
+        print("maggie test2 20220718")
+        """
+        defense_mode manifoldmixup
+        y.shape torch.Size([32, 10])
+        """
+        out = x
         if lin < 1 and lout > -1:
             out = self.conv1(out)
             out = self.bn1(out)
             out = F.relu(out)
-
         if lin < 2 and lout > 0:
             out = self.layer1(out)
-
         if lin < 3 and lout > 1:
-            #-------------
-            if layer_mix == 1:
-                out,mixed_target = hidden_mixup_process(out,args,target)
-            #-------------            
             out = self.layer2(out)
-
         if lin < 4 and lout > 2:
-            #-------------
-            if layer_mix == 2:
-                out,mixed_target = hidden_mixup_process(out,args,target)
-            #-------------                 
             out = self.layer3(out)
-
         if lin < 5 and lout > 3:
-            #-------------
-            if layer_mix == 3:
-                out,mixed_target = hidden_mixup_process(out,args,target)
-            #-------------               
             out = self.layer4(out)
-
         if lout > 4:
             out = F.avg_pool2d(out, 4)
             out = out.view(out.size(0), -1)
             out = self.linear(out)
+        return out
 
-        if manifoldmixup:
-            return out, mixed_target
-        else:
-            return out
 
 def ResNet18():
+    # print("maggie test1 20220718")
     return ResNet(PreActBlock, [2,2,2,2])
 
 def ResNet34():
