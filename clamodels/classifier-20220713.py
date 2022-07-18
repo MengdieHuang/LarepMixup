@@ -2345,7 +2345,7 @@ class MaggieClassifier:
 
         print("adv_x_test.shape:",adv_x_test.shape)
         print("adv_y_test.shape:",adv_y_test.shape)           
-
+        raise error
         self._exp_result_dir = exp_result_dir
         if self._args.defense_mode == "manifoldmixup":
             self._exp_result_dir = os.path.join(self._exp_result_dir,f'manifoldmixup-{self._args.dataset}-dataset')

@@ -352,7 +352,9 @@ if __name__ == '__main__':
             
             # adversarial testset
             print("args.adv_dataset：",args.adv_dataset)
-            adv_testset_path = os.path.join(args.adv_dataset,'test')
+            #   /home/data/maggie/result-newhome/attack/fgsm/preactresnet18-cifar10/20220627/00000-fgsm-eps-0.02-acc-53.98/attack-cifar10-dataset/samples/test
+            # adv_testset_path = os.path.join(args.adv_dataset,'test')
+            adv_testset_path = args.adv_dataset
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)          #   加载对抗样本测试集
 
             # clean pixel testset acc and loss

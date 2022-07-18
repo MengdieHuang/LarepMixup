@@ -277,9 +277,9 @@ def set_exp_result_dir(args):
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{attack}/{date}'
         elif args.defense_mode == "mmat":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
-        elif args.defense_mode == "rmt":
-            exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
-        elif args.defense_mode == "inputmixup":
+        # elif args.defense_mode == "rmt":
+        #     exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
+        elif args.defense_mode in ['rmt','inputmixup','manifoldmixup']:
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
 
     else:
