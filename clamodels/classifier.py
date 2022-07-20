@@ -31,8 +31,99 @@ from genmodels.mixgenerate import MixGenerate
 from torch.autograd import Variable
 # import torch.nn.functional
 from utils import puzzle
-#-----------------------
 
+#-----------------------
+def mixup_box(out, y, lam, index):
+    '''CutMix'''
+    input1=out
+    input2=out[index]
+    target1=y
+    target2=y[index]
+
+    # print("input1:",input1)
+    # print("input1.shape:",input1.shape)
+    # print("input2:",input2)
+    # print("input2.shape:",input2.shape)
+
+    # print("target1:",target1)
+    # print("target1.shape:",target1.shape)
+    # print("target2:",target2)
+    # print("target2.shape:",target2.shape)
+
+    """
+    target1: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]], device='cuda:0')
+    target1.shape: torch.Size([4, 10])
+    target2: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]], device='cuda:0')
+    target2.shape: torch.Size([4, 10])
+    """
+
+    batch_size, _, height, width = input1.shape
+    ratio = np.zeros([batch_size])
+
+    rx = np.random.uniform(0, height)
+    ry = np.random.uniform(0, width)
+    rh = np.sqrt(1 - lam) * height
+    rw = np.sqrt(1 - lam) * width
+
+    x1 = int(np.clip(rx - rh / 2, a_min=0., a_max=height))
+    x2 = int(np.clip(rx + rh / 2, a_min=0., a_max=height))
+    y1 = int(np.clip(ry - rw / 2, a_min=0., a_max=width))
+    y2 = int(np.clip(ry + rw / 2, a_min=0., a_max=width))
+
+    input1[:, :, x1:x2, y1:y2] = input2[:, :, x1:x2, y1:y2]
+
+    ratio += 1 - (x2 - x1) * (y2 - y1) / (width * height)
+
+    ratio = torch.tensor(ratio, dtype=torch.float32)
+
+    # if device == 'cuda':
+    ratio = ratio.cuda()
+    # print("ratio:",ratio)
+    # print("ratio.shape:",ratio.shape)
+    """
+    ratio: tensor([0.9521, 0.9521, 0.9521, 0.9521], device='cuda:0')
+    ratio.shape: torch.Size([4])
+    """
+
+    mixed_x = input1
+    mixed_y = ratio.unsqueeze(-1) * target1 + (1 - ratio.unsqueeze(-1)) * target2
+
+    # print("mixed_x:",mixed_x)
+    # print("mixed_x.shape:",mixed_x.shape)
+
+    # print("mixed_y:",mixed_y)
+    # print("mixed_y.shape:",mixed_y.shape)
+    """
+    mixed_x.shape: torch.Size([4, 3, 32, 32])
+    mixed_y: tensor([[0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 1., 0., 0., 0.],
+                    [0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]], device='cuda:0')
+    mixed_y.shape: torch.Size([4, 10])
+    """
+    # raise error
+    return mixed_x, mixed_y
+
+def cut_mixup_data(out, y, beta_alpha):
+    alpha=beta_alpha
+    lam = np.random.beta(alpha, alpha)                              #   根据beta分布的alpha参数生成随机数lam
+    batch_size = out.size()[0]
+    index = torch.randperm(batch_size).cuda()                       #   生成一组长度为batchsize的随机数组 32
+    # print("index:",index)
+    # print("lam:",lam)
+    """
+    index: tensor([1, 0, 2, 3], device='cuda:0')
+    lam: 0.950227157797238
+    """
+    mix_x_train, mix_y_train = mixup_box(out, y, lam=lam, index=index)
+
+    return mix_x_train, mix_y_train
 
 def puzzle_mixup_data(out, y, beta_alpha, grad):
     alpha=beta_alpha
@@ -2635,6 +2726,7 @@ class MaggieClassifier:
                 # print("targets.shape:",targets.shape)
                 # print("targets:",targets)
 
+                
                 input_var = Variable(inputs, requires_grad=True)                 #   浅封装input Tensor, 需要存梯度
                 target_var = Variable(targets)                                    #   浅封装target Tensor,不需要存梯度
                 # print("input_var.shape:",input_var.shape)
@@ -2758,3 +2850,197 @@ class MaggieClassifier:
             writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
             writer_tra_loss.close()
             #--------------------------------------------------
+
+    def cutmixuptrain(self,args, cle_x_train, cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir):
+        print("compare with---------cut mixup train--------------")
+        print("cle_x_train.shape:",cle_x_train.shape)   
+        print("cle_y_train.shape:",cle_y_train.shape)
+        print("cle_x_test.shape:",cle_x_test.shape)
+        print("cle_y_test.shape:",cle_y_test.shape)        
+        print("adv_x_test.shape:",adv_x_test.shape)
+        print("adv_y_test.shape:",adv_y_test.shape)      
+     
+        self._exp_result_dir = exp_result_dir
+        if self._args.defense_mode == "cutmixup":
+            self._exp_result_dir = os.path.join(self._exp_result_dir,f'cutmixup-{self._args.dataset}-dataset')
+        os.makedirs(self._exp_result_dir,exist_ok=True) 
+
+        if torch.cuda.is_available():
+            self._lossfunc.cuda()
+            self._model.cuda()          #   self._model在初始化时被赋值为了读入的模型
+
+        self._train_tensorset_x = cle_x_train
+        self._train_tensorset_y = cle_y_train
+
+        self._adv_test_tensorset_x = adv_x_test
+        self._adv_test_tensorset_y = adv_y_test
+
+        self._cle_test_tensorset_x = cle_x_test
+        self._cle_test_tensorset_y = cle_y_test
+
+        self._train_dataloader = cle_train_dataloader
+
+        # #   获取对抗样本
+        # if args.whitebox == True:
+        #     print("白盒")
+        #     #   当前分类模型在白盒对抗测试集上的准确率 现场生成
+        #     epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
+        #     self._model = epoch_attack_classifier.targetmodel()
+        #     epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y) 
+        # elif args.blackbox == True:
+        #     print("黑盒")
+        #     #   当前分类模型在黑盒对抗测试集上的准确率 传入
+        #     epoch_x_test_adv = self._adv_test_tensorset_x
+        #     epoch_y_test_adv = self._adv_test_tensorset_y     
+
+        # epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model, epoch_x_test_adv,epoch_y_test_adv)
+        # print(f'Accuary of before cutmixup trained classifier on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+        # print(f'Loss of before cutmixup trained classifier on adversarial testset:{epoch_adv_test_loss}' )    
+
+        #----------cutmixup mixup train----
+        w_trainset_len = len(self._train_tensorset_x)                               #   用于cutmixup mixup的训练样本和rep mix投影训练样本一样多
+        batch_size = self._args.batch_size
+        w_batch_num = int(np.ceil(w_trainset_len / float(batch_size)))
+
+        # print("w_trainset_len:",w_trainset_len)
+        print("batch_size:",batch_size)
+        print("w_batch_num:",w_batch_num)
+
+        shuffle_index = np.arange(w_trainset_len)   
+        shuffle_index = torch.tensor(shuffle_index)
+        unary = None
+
+        for epoch_index in range(self._args.epochs):
+            print("\n")
+            random.shuffle(shuffle_index)
+            self.__adjustlearningrate__(epoch_index)       
+
+            epoch_total_loss = 0
+
+            for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):           #   加载原始训练集batch
+                # raw_lab_batch = LongTensor(raw_lab_batch)                                                   #   list型转为tensor
+                # raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
+                
+                # print("raw_img_batch.shape:",raw_img_batch.shape)
+                # print("raw_lab_batch.shape:",raw_lab_batch.shape)
+
+                #-----------maggie cat clean and mix------------
+                if (batch_index + 1) % w_batch_num == 0:
+                    right_index = w_trainset_len
+                else:
+                    right_index = ( (batch_index + 1) % w_batch_num ) * batch_size
+                # print("right_index:",right_index) 
+
+                cle_img_batch = self._train_tensorset_x[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]
+                cle_lab_batch = self._train_tensorset_y[shuffle_index[(batch_index % w_batch_num) * batch_size : right_index]]                   
+
+                inputs = cle_img_batch.cuda()
+                targets = cle_lab_batch.cuda()
+                # print("targets.shape:",targets.shape)
+                # print("targets:",targets)
+
+                input_var = Variable(inputs)                                        #   浅封装input Tensor, 不需要存梯度
+                target_var = Variable(targets)                                      #   浅封装target Tensor,不需要存梯度
+                # print("input_var.shape:",input_var.shape)
+                # print("target_var.shape:",target_var.shape)
+                # print("target_var:",target_var)
+
+
+                mix_input_var, mix_target_var = cut_mixup_data(input_var, target_var, self._args.beta_alpha)  #   混合样本 two-hot标签              
+                inputs = mix_input_var.cuda()
+                targets = mix_target_var.cuda()
+
+                # print("inputs:",inputs)
+                # print("inputs.shape:",inputs.shape)
+                # print("targets:",targets)
+                # print("targets.shape:",targets.shape)
+
+                # """
+                # inputs.shape: torch.Size([4, 3, 32, 32])
+                # targets.shape: torch.Size([4, 10])
+                # """
+
+                self._model.train()                                                 #   切换train模式
+                if self._args.cla_model == 'inception_v3':
+                    outputs, aux = self._model(inputs)
+                elif self._args.cla_model == 'googlenet':
+                    outputs, aux1, aux2 = self._model(inputs)
+                else:                                                                                       #   preactresnet
+                    outputs = self._model(inputs)
+
+               #   计算损失
+                loss = self.__CustomSoftlossFunction__(outputs, targets)
+
+                self._optimizer.zero_grad()
+                loss.backward()
+                self._optimizer.step()
+
+                epoch_total_loss += loss
+                #------------------------------
+                print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
+            #   finish batch training        
+                # raise error("maggie stop 20220718")
+            
+            #   当前epoch分类模型在干净测试集上的准确率
+            epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
+            # global_cle_test_acc.append(epoch_cle_test_accuracy)   
+            # global_cle_test_loss.append(epoch_cle_test_loss)
+            print(f'{epoch_index+1:04d} epoch cutmixup trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
+            print(f'{epoch_index+1:04d} epoch cutmixup trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
+
+            if args.whitebox == True:
+                #  当前epoch分类模型在白盒对抗测试集上的准确率
+                epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
+                self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
+                epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y)         
+            elif args.blackbox == True:
+                 #当前epoch分类模型在黑盒对抗测试集上的准确率
+                epoch_x_test_adv = self._adv_test_tensorset_x
+                epoch_y_test_adv = self._adv_test_tensorset_y
+
+            epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)               
+            print(f'{epoch_index+1:04d} epoch cutmixup trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+            print(f'{epoch_index+1:04d} epoch cutmixup trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
+            os.makedirs(tensorboard_log_adv_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_adv_acc_dir)   
+            writer_adv_acc = SummaryWriter(log_dir = tensorboard_log_adv_acc_dir, comment= '-'+'advtestacc') 
+            writer_adv_acc.add_scalar(tag = "epoch_adv_acc", scalar_value = epoch_adv_test_accuracy, global_step = epoch_index + 1 )
+            writer_adv_acc.close()
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_adv_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-adv')
+            os.makedirs(tensorboard_log_adv_loss_dir,exist_ok=True)    
+            writer_adv_loss = SummaryWriter(log_dir = tensorboard_log_adv_loss_dir, comment= '-'+'advtestloss') 
+            writer_adv_loss.add_scalar(tag = "epoch_adv_loss", scalar_value = epoch_adv_test_loss, global_step = epoch_index + 1 )
+            writer_adv_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-cle')
+            os.makedirs(tensorboard_log_cle_acc_dir,exist_ok=True)    
+            # print("tensorboard_log_dir:",tensorboard_log_cle_acc_dir)   
+            writer_cle_acc = SummaryWriter(log_dir = tensorboard_log_cle_acc_dir, comment= '-'+'cletestacc') 
+            writer_cle_acc.add_scalar(tag = "epoch_cle_acc", scalar_value = epoch_cle_test_accuracy, global_step = epoch_index + 1 )
+            writer_cle_acc.close()
+            #--------------------------------------------------
+
+           #-------------tensorboard实时画图-------------------
+            tensorboard_log_cle_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-cle')
+            os.makedirs(tensorboard_log_cle_loss_dir,exist_ok=True)    
+            writer_cle_loss = SummaryWriter(log_dir = tensorboard_log_cle_loss_dir, comment= '-'+'cletestloss') 
+            writer_cle_loss.add_scalar(tag = "epoch_cle_loss", scalar_value = epoch_cle_test_loss, global_step = epoch_index + 1 )
+            writer_cle_loss.close()
+            #--------------------------------------------------
+
+            #-------------tensorboard实时画图-------------------
+            tensorboard_log_train_loss_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-loss-train')
+            os.makedirs(tensorboard_log_train_loss_dir,exist_ok=True)    
+            writer_tra_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'augtrainloss') 
+            writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
+            writer_tra_loss.close()
+            #--------------------------------------------------            
