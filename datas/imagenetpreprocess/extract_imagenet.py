@@ -56,9 +56,5 @@ def extract_val():
 
 if __name__ == '__main__':
     extract_train()
-<<<<<<< HEAD
-    # extract_val()
-=======
-    #extract_val()
->>>>>>> c6770e7044a689f669bc07f4419472a88bb5da6f
+    extract_val()
 
