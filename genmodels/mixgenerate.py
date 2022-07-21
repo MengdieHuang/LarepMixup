@@ -165,13 +165,10 @@ class MixGenerate:
         #     print("img:",img)                           #   img: tensor([[[[0.2941, 0.2392, 0.2431,  ..., 0.6196, 0.6275, 0.6235],
         #     print("lab.dtype:",lab.dtype)               #   lab.dtype: torch.int64
         #     print("lab:",lab)                           #   lab: tensor([3, 7, 0, 6, 4, 4, 9, 0, 3, 7, 1, 2, 1, 4, 4, 0, 8, 8, 1, 3, 2, 9, 5, 3,7, 9, 3, 3, 3, 3, 2, 5]
-        #     raise error
-
 
         # print("custom_dataset.__dict__.keys()",custom_dataset.__dict__.keys())
         # custom_dataset.__dict__.keys() dict_keys(['ds_name', 'data_path', 'num_classes', 'mean', 'std', 'transform_train', 'transform_test', 'custom_class', 'label_mapping', 'custom_class_args'])
 
-        # raise error
 
         if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='kmnist':
             self.cle_x_train = cle_train_dataloader.dataset.data        #   读出来的数据是transformer前的
@@ -179,9 +176,13 @@ class MixGenerate:
         elif self._args.dataset =='svhn' or self._args.dataset =='stl10':
             self.cle_x_train = cle_train_dataloader.dataset.data
             self.cle_y_train = cle_train_dataloader.dataset.labels   
+
+        #--------------maggie 20220721------------------    
         if  self._args.dataset =='imagenetmixed10':
             self.cle_y_train = cle_train_dataloader.dataset.targets
             # self.cle_x_train = cle_train_dataloader.dataset.targets
+        #-----------------------------------------------
+
 
         # print("cle_train_dataloader.dataset.__dict__:",cle_train_dataloader.dataset.__dict__)
         # print(cle_train_dataloader.dataset.classes)
@@ -192,23 +193,33 @@ class MixGenerate:
         # print("self.cle_x_train:",self.cle_x_train)                                     #   self.cle_x_train: [[[[ 59  62  63][ 43  46  45]...
         # print("self.cle_x_train.shape:",self.cle_x_train.shape)                         #   self.cle_x_train.shape: (50000, 32, 32, 3)
         
-        print("self.cle_y_train.type:",type(self.cle_y_train))                          #   self.cle_y_train.type: <class 'list'>
-        print("self.cle_y_train:",self.cle_y_train)                                     #   self.cle_y_train: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7, 7
-        print("self.cle_y_train.len:",len(self.cle_y_train))                            #   self.cle_y_train.len: 50000
+        #--------------maggie 20220721------------------    
+        # print("self.cle_y_train.type:",type(self.cle_y_train))                          
+        # print("self.cle_y_train:",self.cle_y_train)                                     
+        # print("self.cle_y_train.len:",len(self.cle_y_train))        
+        """
+        self.cle_y_train.type: <class 'list'>
+        self.cle_y_train.len: 77237
+        """                    
+        #-----------------------------------------------
 
-        # batch_num = int(np.ceil(len(self.cle_x_train) / float(self._args.batch_size)))           #   50099 /256=197
         sample_num = len(self.cle_y_train)
         batch_num = len(cle_train_dataloader)
         batch_size = self._args.batch_size
-        print("sample_num:",sample_num)                                                                 #   sample_num: 77237
-        print("batch_num:",batch_num)                                                                   #   batch_num: 2414
-        print("batch_size:",batch_size)                                                                 #   batch_size: 32
-
+        print("sample_num:",sample_num)                                                                
+        print("batch_num:",batch_num)                                                                   
+        print("batch_size:",batch_size)                                                                 
+        """
+        Mixed10 training set
+        sample_num: 77237
+        batch_num: 2414
+        batch_size: 32
+        """
 
         if self._args.mode == "project":
             if self._args.projected_dataset == None:
 
-                if self._args.dataset != 'imagenetmixed10':
+                if self._args.dataset != 'imagenetmixed10':                                             #   非imageNet数据集 ，千万别改！！
                     cle_w_train = []
                     cle_y_train = []                
                     # print("cle_w_train.type:",type(cle_w_train))                                        #   cle_w_train.type: <class 'list'>
@@ -238,56 +249,70 @@ class MixGenerate:
                         # print("cle_w_train.type:",type(cle_w_train))                                        #   cle_w_train.type: <class 'NoneType'>
                         # print("cle_y_train.type:",type(cle_y_train))                                        #   cle_y_train.type: <class 'NoneType'>
                
-                elif self._args.dataset == 'imagenetmixed10':
+                #---------------------maggie 20220721------------------------
+                elif self._args.dataset == 'imagenetmixed10':                                           #   如果是ImageNet
                     cle_w_train = []
                     cle_y_train = [] 
-
+                    print("cle_w_train.type:",type(cle_w_train))                                        
+                    print("cle_y_train.type:",type(cle_y_train))    
+                    """
+                    cle_w_train.type: <class 'list'>
+                    cle_y_train.type: <class 'list'>
+                    """                                    
                     for batch_index in range(batch_num):
-                        print("batch_index:",batch_index)                     # batch_index: 0
-
-                        for batch_idx, (imgs, labs) in enumerate(cle_train_dataloader):
+                        print("batch_index:",batch_index)                     
+                        for batch_idx, (imgs, labs) in enumerate(cle_train_dataloader):     #   cle_train_dataloader放的是ImageNet Mixed训练集                          
                             print("batch_idx:",batch_idx)
- 
-                            if batch_idx == batch_index:
-                                # print("img.shape:",img.shape)               #   img.shape: torch.Size([32, 3, 256, 256])
-                                # print("img.dtype:",img.dtype)               #   img.dtype: torch.float32
-                                # print("img:",img)                           #   img: tensor([[[[0.2941, 0.2392, 0.2431,  ..., 0.6196, 0.6275, 0.6235],
 
-                                # print("image index:",idx)
-                                # print("img.shape",img.shape)
-                                print("imgs.shape",imgs.shape)                      #   imgs.shape torch.Size([32, 3, 256, 256])
-                                imgs.reshape(-1, 3, 256, 256)
-                                print("imgs.shape",imgs.shape)                      #   imgs.shape torch.Size([32, 3, 256, 256])
+                            if batch_idx == batch_index:
+                                # print("imgs.dtype:",imgs.dtype)                       
+                                # print("imgs.shape",imgs.shape)                               
+                                """
+                                imgs.dtype: torch.float32
+                                imgs.shape torch.Size([32, 3, 256, 256])
+                                """
+
+                                # imgs.reshape(-1, 3, 256, 256)
+                                # print("imgs.shape",imgs.shape)                      
 
                                 imgs = imgs.numpy()
 
-                                # print("imgs.shape",imgs.shape)                      #   imgs.shape (32, 3, 256, 256)
-                                imgs = imgs.transpose([0, 2, 3, 1])               #   NCHW -> NHWC
-                                # print("imgs.shape:",imgs.shape)                   #   imgs.shape: (32, 256, 256, 3)
+                                # print("imgs.shape",imgs.shape)                      
+                                # imgs = imgs.transpose([0, 2, 3, 1])                         #   NCHW -> NHWC #    在后面prject时换顺序
+                                # print("imgs.shape:",imgs.shape)                   
 
-                                # print("imgs.dtype",imgs.dtype)                    #   imgs.dtype float32
-                                # print("imgs:",imgs)
+                                """
+                                imgs.shape (32, 3, 256, 256)
+                                imgs.shape: (32, 256, 256, 3)
+                                """
 
-                                imgs = (imgs*255).astype(np.uint8)
+                                # imgs = (imgs*255).astype(np.uint8)
                                 # print("imgs.dtype",imgs.dtype)                    #   imgs.dtype uint8
                                 # print("imgs:",imgs)
 
                                 cle_x_trainbatch = imgs
                                 cle_y_trainbatch = labs.numpy().tolist()
-                                # print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)
-                                # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))
 
-                                print("cle_x_trainbatch.type:",type(cle_x_trainbatch))                          #   cle_x_trainbatch.type: <class 'numpy.ndarray'>
-                                # print("cle_x_trainbatch:",cle_x_trainbatch)                                     #   cle_x_trainbatch: [[[[ 44  48  34] [ 99 121  58]
-                                print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)                         #   cle_x_trainbatch.shape: (32, 256, 256, 3)
-                                # print("cle_y_trainbatch.type:",type(cle_y_trainbatch))                          #   cle_y_trainbatch.type: <class 'list'>
-                                # print("cle_y_trainbatch:",cle_y_trainbatch)                                     #   cle_y_trainbatch: [3, 4, 1, 6, 3, 6, 7, 8, 7, 3, 5,
-                                # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))                            #   cle_y_trainbatch.len: 32
-
-                                raise error
-                                print(f"Projecting *{self._args.dataset}* {batch_index}/{batch_num} batch data sets...")                      #   projecting 00000031 image:
-                                pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                 #   numpy
+                                # print("cle_x_trainbatch.type:",type(cle_x_trainbatch))                          
+                                # print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)                                    
+                                # print("cle_y_trainbatch.type:",type(cle_y_trainbatch))                          
+                                # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))                            
                                 
+                                """
+                                cle_x_trainbatch.type: <class 'numpy.ndarray'>
+                                cle_x_trainbatch.shape: (32, 256, 256, 3)
+                                cle_y_trainbatch.type: <class 'list'>
+                                cle_y_trainbatch.len: 32
+                                """
+
+                                print(f"Projecting *{self._args.dataset}* {batch_index+1}/{batch_num} batch data sets...")                      
+                                """Projecting *imagenetmixed10* 0/2414 batch data sets..."""
+                                
+                                pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                 #   numpy
+                                raise error
+
+
+
                                 # print("pro_w_trainbatch.type:",type(pro_w_trainbatch))                              #   pro_w_trainbatch.type: <class 'torch.Tensor'>
                                 # print("pro_w_trainbatch.shape:",pro_w_trainbatch.shape)                             #   pro_w_trainbatch.shape: torch.Size([32, 8, 512])
                                 # print("pro_y_trainbatch.type:",type(pro_y_trainbatch))                              #   pro_y_trainbatch.type: <class 'torch.Tensor'>
@@ -298,6 +323,7 @@ class MixGenerate:
                                 cle_y_train.append(pro_y_trainbatch)
                                 # print("cle_w_train.type:",type(cle_w_train))                                        #   cle_w_train.type: <class 'NoneType'>
                                 # print("cle_y_train.type:",type(cle_y_train))                                        #   cle_y_train.type: <class 'NoneType'>                        
+                #----------------------------------------------------------
 
             else:
                 raise Exception("参数 projected_dataset 不为空,无需投影！")
@@ -317,6 +343,7 @@ class MixGenerate:
         print("self.cle_y_train.shape:",self.cle_y_train.shape)  
 
         print(f"Finished projecting {self._args.dataset} the whole {sample_num} samples!")
+
 
     def interpolatemain(self):
 

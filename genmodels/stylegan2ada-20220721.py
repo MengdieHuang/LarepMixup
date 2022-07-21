@@ -660,23 +660,10 @@ class MaggieStylegan2ada:
             #   load_network_pkl（）会调用到persistency中的class解释器。
         
         if self._args.dataset =='cifar10' or self._args.dataset =='cifar100' or self._args.dataset =='svhn' or self._args.dataset =='stl10' or self._args.dataset =='imagenetmixed10':
-            if self._args.dataset =='svhn' or self._args.dataset =='stl10' or self._args.dataset =='imagenetmixed10':
+            if self._args.dataset =='svhn' or self._args.dataset =='stl10':
                 # print("target_pil.shape:",target_pil.shape)           #   target_pil.shape: (3, 32, 32)
                 target_pil = target_pil.transpose([1, 2, 0])
                 # print("target_pil.shape:",target_pil.shape)           #  target_pil.shape: (32, 32, 3)
-
-            # #-----------maggie20220721----------
-            # elif self._args.dataset =='imagenetmixed10':
-            #     # print("target_pil.shape:",target_pil.shape)           
-            #     target_pil = target_pil.transpose([1, 2, 0])
-            #     # print("target_pil.shape:",target_pil.shape)           
-
-            #     """
-            #     target_pil.shape: (3, 256, 256)
-            #     target_pil.shape: (256, 256, 3)
-            #     """
-            #     # raise error
-            # #------------------------------------
 
             target_pil = PIL.Image.fromarray(target_pil, 'RGB')     #   fromarray接收的是WHC格式或WH格式
         
@@ -688,8 +675,7 @@ class MaggieStylegan2ada:
             target_uint8 = np.array(target_pil, dtype=np.uint8)
             target_uint8 = target_uint8.transpose([2, 0, 1])
             # print("target_uint8.shape:",target_uint8.shape)                                 
-            # target_uint8.shape: (3, 64, 64)    
-
+            # target_uint8.shape: (3, 64, 64)     
 
         elif self._args.dataset == 'kmnist' or self._args.dataset == 'mnist':
             target_pil = target_pil.numpy()                         
