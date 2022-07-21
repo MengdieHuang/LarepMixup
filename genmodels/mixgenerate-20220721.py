@@ -192,9 +192,9 @@ class MixGenerate:
         # print("self.cle_x_train:",self.cle_x_train)                                     #   self.cle_x_train: [[[[ 59  62  63][ 43  46  45]...
         # print("self.cle_x_train.shape:",self.cle_x_train.shape)                         #   self.cle_x_train.shape: (50000, 32, 32, 3)
         
-        print("self.cle_y_train.type:",type(self.cle_y_train))                          #   self.cle_y_train.type: <class 'list'>
-        print("self.cle_y_train:",self.cle_y_train)                                     #   self.cle_y_train: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7, 7
-        print("self.cle_y_train.len:",len(self.cle_y_train))                            #   self.cle_y_train.len: 50000
+        # print("self.cle_y_train.type:",type(self.cle_y_train))                          #   self.cle_y_train.type: <class 'list'>
+        # print("self.cle_y_train:",self.cle_y_train)                                     #   self.cle_y_train: [6, 9, 9, 4, 1, 1, 2, 7, 8, 3, 4, 7, 7
+        # print("self.cle_y_train.len:",len(self.cle_y_train))                            #   self.cle_y_train.len: 50000
 
         # batch_num = int(np.ceil(len(self.cle_x_train) / float(self._args.batch_size)))           #   50099 /256=197
         sample_num = len(self.cle_y_train)
@@ -255,9 +255,8 @@ class MixGenerate:
 
                                 # print("image index:",idx)
                                 # print("img.shape",img.shape)
-                                print("imgs.shape",imgs.shape)                      #   imgs.shape torch.Size([32, 3, 256, 256])
                                 imgs.reshape(-1, 3, 256, 256)
-                                print("imgs.shape",imgs.shape)                      #   imgs.shape torch.Size([32, 3, 256, 256])
+                                # print("imgs.shape",imgs.shape)                      #   imgs.shape torch.Size([32, 3, 256, 256])
 
                                 imgs = imgs.numpy()
 
@@ -277,14 +276,14 @@ class MixGenerate:
                                 # print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)
                                 # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))
 
-                                print("cle_x_trainbatch.type:",type(cle_x_trainbatch))                          #   cle_x_trainbatch.type: <class 'numpy.ndarray'>
+                                # print("cle_x_trainbatch.type:",type(cle_x_trainbatch))                          #   cle_x_trainbatch.type: <class 'numpy.ndarray'>
                                 # print("cle_x_trainbatch:",cle_x_trainbatch)                                     #   cle_x_trainbatch: [[[[ 44  48  34] [ 99 121  58]
-                                print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)                         #   cle_x_trainbatch.shape: (32, 256, 256, 3)
+                                # print("cle_x_trainbatch.shape:",cle_x_trainbatch.shape)                         #   cle_x_trainbatch.shape: (32, 256, 256, 3)
                                 # print("cle_y_trainbatch.type:",type(cle_y_trainbatch))                          #   cle_y_trainbatch.type: <class 'list'>
                                 # print("cle_y_trainbatch:",cle_y_trainbatch)                                     #   cle_y_trainbatch: [3, 4, 1, 6, 3, 6, 7, 8, 7, 3, 5,
                                 # print("cle_y_trainbatch.len:",len(cle_y_trainbatch))                            #   cle_y_trainbatch.len: 32
 
-                                raise error
+                                # raise error
                                 print(f"Projecting *{self._args.dataset}* {batch_index}/{batch_num} batch data sets...")                      #   projecting 00000031 image:
                                 pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                 #   numpy
                                 
