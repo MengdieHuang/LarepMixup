@@ -643,13 +643,6 @@ class MaggieClassifier:
                     # print("images:", images)
                     # print("labels.shape:", labels.shape)
                     # print("labels:", labels)
-
-                    """
-                    images.shape: torch.Size([16, 3, 256, 256])
-                    images: tensor([[[[0.4275, 0.4353, 0.4275,  ..., 0.4039, 0.4039, 0.3961],...
-                    labels.shape: torch.Size([16])
-                    labels: tensor([5, 2, 5, 1, 2, 2, 6, 3, 8, 5, 9, 0, 3, 7, 4, 3])
-                    """
                 #--------------------------------
 
                 batch_imgs = images.cuda()
