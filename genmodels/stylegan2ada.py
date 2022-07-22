@@ -665,19 +665,6 @@ class MaggieStylegan2ada:
                 target_pil = target_pil.transpose([1, 2, 0])
                 # print("target_pil.shape:",target_pil.shape)           #  target_pil.shape: (32, 32, 3)
 
-            # #-----------maggie20220721----------
-            # elif self._args.dataset =='imagenetmixed10':
-            #     # print("target_pil.shape:",target_pil.shape)           
-            #     target_pil = target_pil.transpose([1, 2, 0])
-            #     # print("target_pil.shape:",target_pil.shape)           
-
-            #     """
-            #     target_pil.shape: (3, 256, 256)
-            #     target_pil.shape: (256, 256, 3)
-            #     """
-            #     # raise error
-            # #------------------------------------
-
             target_pil = PIL.Image.fromarray(target_pil, 'RGB')     #   fromarray接收的是WHC格式或WH格式
         
             w, h = target_pil.size
@@ -732,7 +719,7 @@ class MaggieStylegan2ada:
         print(f"label = {laber_index:04d}-{classification[int(laber_index)]}")
         #   label = 0005-dog
 
-        # 存原图png
+        # 存原图png 20220721 开
         # target_pil.save(f'{outdir}/original-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')                   
 
         # 存投影生成图
@@ -754,7 +741,7 @@ class MaggieStylegan2ada:
             # print("synth_image.shape:",synth_image.shape)               #   synth_image.shape: (32, 32)
             synth_image = PIL.Image.fromarray(synth_image, 'L')
 
-        # 存投影png
+        # 存投影png 20220721 开
         # synth_image.save(f'{outdir}/projected-{projected_img_index:08d}-{int(laber_index)}-{label_name}.png')
 
         # 存投影npz

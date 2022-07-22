@@ -30,14 +30,15 @@ class MaggieDataloader:
             train_dataloader = torch.utils.data.DataLoader(   
                 self._traindataset,
                 batch_size=self._args.batch_size,
-                shuffle=True,
+                shuffle=True,                                  
                 num_workers=self._args.cpus,
                 pin_memory=True,
             )
         elif self._args.dataset == 'imagenetmixed10':
             batch_size=self._args.batch_size
             num_workers=self._args.cpus
-            train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size)
+            # train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size)
+            train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size, shuffle_train=True)  #   投影时也True
             train_dataloader = train_loader
 
         print(f'Loading *{self._args.dataset}* train dataloader finished !')
@@ -56,7 +57,7 @@ class MaggieDataloader:
         elif self._args.dataset == 'imagenetmixed10':
             batch_size=self._args.batch_size
             num_workers=self._args.cpus
-            train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size)
+            train_loader, test_loader = self._traindataset.make_loaders(workers=num_workers, batch_size=batch_size, shuffle_val=False)
             test_dataloader = test_loader
 
         print(f'Loading *{self._args.dataset}* test dataloader finished !')
