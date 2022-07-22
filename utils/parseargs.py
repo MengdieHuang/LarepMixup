@@ -42,9 +42,9 @@ def parse_arguments():
                 'resnet34-mnist','resnet34-kmnist','resnet34-mnist','resnet34-cifar10','resnet34-cifar100','resnet34-lsun','resnet34-imagenet','resnet34-imagenetmixed10','resnet34-svhn','resnet34-stl10',
                 'resnet18-mnist','resnet18-kmnist','resnet18-mnist','resnet18-cifar10','resnet18-cifar100','resnet18-lsun','resnet18-imagenet','resnet18-imagenetmixed10','resnet18-svhn','resnet18-stl10',
                 'googlenet-mnist','googlenet-kmnist','googlenet-mnist','googlenet-cifar10','googlenet-cifar100','googlenet-lsun','googlenet-imagenet','googlenet-imagenetmixed10','googlenet-svhn','googlenet-stl10',
-                'preactresnet18-kmnist', 'preactresnet18-svhn', 'preactresnet18-cifar10',
-                'preactresnet34-kmnist', 'preactresnet34-svhn', 'preactresnet34-cifar10',
-                'preactresnet50-kmnist', 'preactresnet50-svhn', 'preactresnet50-cifar10',
+                'preactresnet18-kmnist', 'preactresnet18-svhn', 'preactresnet18-cifar10','preactresnet18-imagenetmixed10',
+                'preactresnet34-kmnist', 'preactresnet34-svhn', 'preactresnet34-cifar10','preactresnet34-imagenetmixed10',
+                'preactresnet50-kmnist', 'preactresnet50-svhn', 'preactresnet50-cifar10','preactresnet50-imagenetmixed10',
                 'wideresnet2810-kmnist', 'wideresnet2810-svhn', 'wideresnet2810-cifar10'
 
             ]  

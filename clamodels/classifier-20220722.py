@@ -583,19 +583,13 @@ class MaggieClassifier:
         self._trainset_len = len(self._train_dataloader.dataset)
         self._trainbatch_num = len(self._train_dataloader)
         self._exp_result_dir = exp_result_dir
-        print("self._trainset_len:",self._trainset_len)                 
+        print("self._trainset_len:",self._trainset_len)                 #   77237
         print("self._trainbatch_num:",self._trainbatch_num)
-        print("self._testset_len:",len( self._test_dataloader.dataset))     
+        print("self._testset_len:",len( self._test_dataloader.dataset))     #   self._testset_len: 3000
         # print("self._train_dataloader.dataset[0][0][0].shape:",self._train_dataloader.dataset[0][0][0].shape)
         # print("self._test_dataloader.dataset[0][0][0].shape:",self._test_dataloader.dataset[0][0][0].shape)
 
-        """
-        self._trainset_len: 77237
-        self._trainbatch_num: 151
-        self._testset_len: 3000
-        self._train_dataloader.dataset[0][0][0].shape: torch.Size([256, 256])
-        self._test_dataloader.dataset[0][0][0].shape: torch.Size([256, 256])
-        """
+        # raise error
 
         self._exp_result_dir = os.path.join(self._exp_result_dir,f'train-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True)    
@@ -637,20 +631,6 @@ class MaggieClassifier:
             epoch_total_loss = 0
 
             for batch_index, (images, labels) in enumerate(self._train_dataloader):
-                #--------maggie 20220722---------
-                # if self._args.dataset == "imagenetmixed10":
-                    # print("images.shape:", images.shape)
-                    # print("images:", images)
-                    # print("labels.shape:", labels.shape)
-                    # print("labels:", labels)
-
-                    """
-                    images.shape: torch.Size([16, 3, 256, 256])
-                    images: tensor([[[[0.4275, 0.4353, 0.4275,  ..., 0.4039, 0.4039, 0.3961],...
-                    labels.shape: torch.Size([16])
-                    labels: tensor([5, 2, 5, 1, 2, 2, 6, 3, 8, 5, 9, 0, 3, 7, 4, 3])
-                    """
-                #--------------------------------
 
                 batch_imgs = images.cuda()
                 batch_labs = labels.cuda()
@@ -662,13 +642,7 @@ class MaggieClassifier:
                 elif self._args.cla_model == 'googlenet':
                     output, aux1, aux2 = self._model(batch_imgs)
                 else:
-                    # output = self._model(batch_imgs)
-                    #--------maggie 20220722---------
-                    if self._args.dataset == "imagenetmixed10" and self._args.train_mode == "cla-train":
-                        output = self._model(batch_imgs, imagenetmixed10=True)
-                    else:
-                        output = self._model(batch_imgs)
-                    #--------------------------------
+                    output = self._model(batch_imgs)
 
                 # print("output:",output)                                     #   output: tensor([[-0.2694,  0.1577,  0.4321,  ...,  0.0562,  0.3836,  0.8319],
                 # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
@@ -691,7 +665,6 @@ class MaggieClassifier:
                 epoch_total_loss += batch_loss
 
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f] " % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), batch_loss.item()))
-                # raise error
 
             #--------当前epoch分类模型在当前训练集epoch上的准确率和loss-------------            
             epoch_train_accuarcy = epoch_correct_num / len(self._train_dataloader.dataset)      #    除以epoch里的样本总数

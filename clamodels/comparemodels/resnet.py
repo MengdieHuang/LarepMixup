@@ -290,7 +290,7 @@ class ResNet(nn.Module):
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
 
-    def forward(self, x, lin=0, lout=5, y=None, defense_mode=None, beta_alpha=None):
+    def forward(self, x, lin=0, lout=5, y=None, defense_mode=None, beta_alpha=None, imagenetmixed10=None):
 
         #---------------     
         if defense_mode in ['manifoldmixup','patchmixup']:
@@ -347,7 +347,17 @@ class ResNet(nn.Module):
             out = self.layer4(out)                                                      #   第四个layer计算
 
         if lout > 4:
-            out = F.avg_pool2d(out, 4)
+            #---------20220722 naggie---------
+            if imagenetmixed10 == True:
+                # print("out.shape", out.shape)           #   out.shape torch.Size([16, 512, 32, 32])
+                avg = nn.AdaptiveAvgPool2d((1, 1))        #   不用原来的池化函数
+                out = avg(out)
+                # print("out.shape", out.shape)           #   out.shape torch.Size([16, 512, 1, 1])
+            else:
+                out = F.avg_pool2d(out, 4)    
+            #----------------------------------    
+
+            #   out = F.avg_pool2d(out, 4)
             out = out.view(out.size(0), -1)
             out = self.linear(out)
 
