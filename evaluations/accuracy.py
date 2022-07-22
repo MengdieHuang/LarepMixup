@@ -8,7 +8,7 @@ Place:  Xidian University
 import torch
 import torch.utils.data
 
-def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.DataLoader,cla_model_name):
+def EvaluateAccuracy(classifier, classify_loss, test_dataloader:torch.utils.data.DataLoader, cla_model_name):
     classifier.eval()     #   eval mode
     #   计算准确率
     testset_total_num = len(test_dataloader.dataset)
@@ -40,7 +40,14 @@ def EvaluateAccuracy(classifier,classify_loss,test_dataloader:torch.utils.data.D
         
         with torch.no_grad():
 
-            output = classifier(imgs)
+            #   output = classifier(imgs)
+            #--------maggie 20220722---------
+            # print("images[0].shape:",images[0].shape)
+            if images[0].shape == (3,256,256):                          #   表明是 ImageNetMixed 10
+                output = classifier(imgs, imagenetmixed10=True)
+            else:
+                output = classifier(imgs)
+            #--------------------------------
 
             if cla_model_name == 'inception_v3':
                 output, aux = classifier(imgs)
