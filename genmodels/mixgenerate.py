@@ -270,23 +270,9 @@ class MixGenerate:
                                 """
                                 imgs.dtype: torch.float32
                                 imgs.shape torch.Size([32, 3, 256, 256])
-                                """
-
-                                # imgs.reshape(-1, 3, 256, 256)
-                                # print("imgs.shape",imgs.shape)                      
-
+                                """              
                                 imgs = imgs.numpy()
-
-                                # print("imgs.shape",imgs.shape)                      
-                                # imgs = imgs.transpose([0, 2, 3, 1])                         #   NCHW -> NHWC #    在后面prject时换顺序
-                                # print("imgs.shape:",imgs.shape)                   
-
-                                """
-                                imgs.shape (32, 3, 256, 256)
-                                imgs.shape: (32, 256, 256, 3)
-                                """
-
-                                # imgs = (imgs*255).astype(np.uint8)
+                                imgs = (imgs*255).astype(np.uint8)                  #   不能少这一行
                                 # print("imgs.dtype",imgs.dtype)                    #   imgs.dtype uint8
                                 # print("imgs:",imgs)
 
@@ -309,7 +295,7 @@ class MixGenerate:
                                 """Projecting *imagenetmixed10* 0/2414 batch data sets..."""
                                 
                                 pro_w_trainbatch, pro_y_trainbatch = self.__batchproject__(batch_index,cle_x_trainbatch, cle_y_trainbatch)                 #   numpy
-                                raise error
+                                # raise error
 
 
 
