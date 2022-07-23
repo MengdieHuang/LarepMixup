@@ -638,10 +638,10 @@ class MaggieClassifier:
 
             for batch_index, (images, labels) in enumerate(self._train_dataloader):
                 #--------maggie 20220722---------
-                # if self._args.dataset == "imagenetmixed10":
-                    # print("images.shape:", images.shape)
+                if self._args.dataset == "imagenetmixed10":
+                    print("images.shape:", images.shape)
                     # print("images:", images)
-                    # print("labels.shape:", labels.shape)
+                    print("labels.shape:", labels.shape)
                     # print("labels:", labels)
                 #--------------------------------
 
@@ -694,7 +694,7 @@ class MaggieClassifier:
             global_train_acc.append(epoch_train_accuarcy)   #   每个epoch训练完后的最新准确率list                  
 
             #--------当前epoch分类模型在整体测试集上的准确率------------- 
-            epoch_test_accuracy, epoch_test_loss = EvaluateAccuracy(self._model, self._lossfunc, self._test_dataloader,self._args.cla_model)
+            epoch_test_accuracy, epoch_test_loss = EvaluateAccuracy(self._model, self._lossfunc, self._test_dataloader, self._args.cla_model)
             global_test_acc.append(epoch_test_accuracy)   
             global_test_loss.append(epoch_test_loss)
 
