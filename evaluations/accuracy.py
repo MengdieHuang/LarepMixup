@@ -40,17 +40,6 @@ def EvaluateAccuracy(classifier, classify_loss, test_dataloader:torch.utils.data
         
         with torch.no_grad():
 
-            #   output = classifier(imgs)
-            #--------maggie 20220722---------
-            print("images.shape:",images.shape)
-            print("images[0].shape:",images[0].shape)
-            
-            if images[0].shape == (3,256,256):                          #   表明是 ImageNetMixed 10
-                output = classifier(imgs, imagenetmixed10=True)
-            else:
-                output = classifier(imgs)
-            #--------------------------------
-
             if cla_model_name == 'inception_v3':
                 output, aux = classifier(imgs)
             elif cla_model_name == 'googlenet':
@@ -59,8 +48,16 @@ def EvaluateAccuracy(classifier, classify_loss, test_dataloader:torch.utils.data
                 else:
                     output, aux1, aux2 = classifier(imgs)
             else:
-                output = classifier(imgs)         
-            
+                #   output = classifier(imgs)
+                #--------maggie 20220722---------
+                print("images.shape:",images.shape)
+                print("images[0].shape:",images[0].shape)
+                
+                if images[0].shape == (3,256,256):                          #   表明是 ImageNetMixed 10
+                    output = classifier(imgs, imagenetmixed10=True)
+                else:
+                    output = classifier(imgs)
+                #--------------------------------            
             
             # print("output:",output)                                     #   output: tensor([[-3.9918e+00, -4.0301e+00,  6.1573e+00,  ...,  1.5459e+00
             # print("output.shape:",output.shape)                         #   output.shape: torch.Size([256, 10])
