@@ -638,10 +638,10 @@ class MaggieClassifier:
 
             for batch_index, (images, labels) in enumerate(self._train_dataloader):
                 #--------maggie 20220722---------
-                if self._args.dataset == "imagenetmixed10":
-                    print("images.shape:", images.shape)
+                # if self._args.dataset == "imagenetmixed10": 
+                    # print("images.shape:", images.shape)  # images.shape: torch.Size([32, 3, 256, 256])
                     # print("images:", images)
-                    print("labels.shape:", labels.shape)
+                    # print("labels.shape:", labels.shape)  #   labels.shape: torch.Size([32])
                     # print("labels:", labels)
                 #--------------------------------
 
