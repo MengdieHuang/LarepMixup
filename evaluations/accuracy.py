@@ -50,8 +50,8 @@ def EvaluateAccuracy(classifier, classify_loss, test_dataloader:torch.utils.data
             else:
                 #   output = classifier(imgs)
                 #--------maggie 20220722---------
-                print("images.shape:",images.shape)
-                print("images[0].shape:",images[0].shape)
+                # print("images.shape:",images.shape)                         #   images.shape: torch.Size([32, 3, 256, 256])
+                # print("images[0].shape:",images[0].shape)                   #   images[0].shape: torch.Size([3, 256, 256])
                 
                 if images[0].shape == (3,256,256):                          #   表明是 ImageNetMixed 10
                     output = classifier(imgs, imagenetmixed10=True)
