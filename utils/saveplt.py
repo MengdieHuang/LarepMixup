@@ -28,8 +28,10 @@ def SaveLossCurve(model,dataset,exp_result_dir,global_train_loss,global_test_los
     test_x = list(range(len(global_test_loss)))
     test_y = global_test_loss
     plt.title(f'{png_name}')
-    plt.plot(train_x, train_y, color='black', label='on trainset loss') 
-    plt.plot(test_x, test_y, color='red', label='on testset loss') 
+    # plt.plot(train_x, train_y, color='black', label='on trainset loss') 
+    # plt.plot(test_x, test_y, color='red', label='on testset loss') 
+    plt.plot(train_x.cpu(), train_y.cpu(), color='black', label='on trainset loss') 
+    plt.plot(test_x.cpu(), test_y.cpu(), color='red', label='on testset loss')     
     plt.legend()
     plt.xlabel('epochs')
     plt.ylabel('loss')
