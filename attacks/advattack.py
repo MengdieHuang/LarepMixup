@@ -599,7 +599,7 @@ class AdvAttack():
             xset_tensor = torch.stack(xset_tensor)  
 
         if self._args.dataset == 'imagenetmixed10':
-
+            print("len(dataloader.dataset):",len(dataloader.dataset))
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
@@ -689,7 +689,7 @@ class AdvAttack():
         #     print("y_ndarray.type:", type(y_ndarray))
 
             # y_ndarray = y_ndarray[:jieduan_num]
-
+            print("len(dataloader.dataset):",len(dataloader.dataset))
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])

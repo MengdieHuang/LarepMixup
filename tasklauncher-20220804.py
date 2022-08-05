@@ -36,6 +36,9 @@ if __name__ == '__main__':
     cle_train_dataloader = cle_dataloader.traindataloader()
     cle_test_dataloader = cle_dataloader.testdataloader()
 
+    print("cle_train_dataloader.len",len(cle_train_dataloader))
+    print("cle_test_dataloader.len",len(cle_test_dataloader))
+
     if args.mode == 'train':
         if args.train_mode =="gen-train":                                               
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
