@@ -224,20 +224,20 @@ if __name__ == '__main__':
             adv_testset_path = os.path.join(args.adv_dataset,'test')
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
             
-            if args.dataset == 'svhn' and args.attack_mode == 'om-pgd':
-                adv_x_test = adv_x_test[:10000]
-                adv_y_test = adv_y_test[:10000]
+            # if args.dataset == 'svhn' and args.attack_mode == 'om-pgd':           #   因为已经全部投影了
+            #     adv_x_test = adv_x_test[:10000]
+            #     adv_y_test = adv_y_test[:10000]
 
             # clean pixel testset acc and loss
             cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   bug
             print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of before mmat trained classifier clean testset:{cle_test_loss}' ) 
 
-            # # adv pixel testset acc and loss
-            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            # print(f'Accuary of before rmt trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
-            # # raise error
+            # adv pixel testset acc and loss
+            adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+            print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+            # raise error
 
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
@@ -272,7 +272,9 @@ if __name__ == '__main__':
 
         elif args.defense_mode =='at':
             print("adversarial training")
+            print("args.attack_mode:",args.attack_mode)
             print("lr:",args.lr)
+
             # model
             learned_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_model)
@@ -282,71 +284,42 @@ if __name__ == '__main__':
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
             print("cle_x_train.shape:",cle_x_train.shape)
             print("cle_y_train.shape:",cle_y_train.shape)
-            # cle_x_train=cle_x_train[:25397]
-            # cle_y_train=cle_y_train[:25397]
             # 干净样本测试集
             print("cle_x_test.shape:",cle_x_test.shape)
             print("cle_y_test.shape:",cle_y_test.shape)
 
-            if args.attack_mode == 'fgsm': 
-                # 对抗样本训练集
-                # print("args.adv_dataset：",args.adv_dataset)
-                # adv_trainset_path = os.path.join(args.adv_dataset,'train')
-                # adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
-                # print("adv_x_train.shape:",adv_x_train.shape)
-                # print("adv_y_train.shape:",adv_y_train.shape)            
-                # # adv_x_train=adv_x_train[:25397]
-                # # adv_y_train=adv_y_train[:25397]
+            # 对抗样本训练集
+            # print("args.train_adv_dataset：",args.train_adv_dataset)
+            # adv_trainset_path = os.path.join(args.train_adv_dataset,'train')
+            adv_trainset_path = args.train_adv_dataset
 
-                print("args.train_adv_dataset：",args.train_adv_dataset)
-                adv_trainset_path = os.path.join(args.train_adv_dataset,'train')
-                adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
-                print("adv_x_train.shape:",adv_x_train.shape)
-                print("adv_y_train.shape:",adv_y_train.shape)            
-                # adv_x_train=adv_x_train[:25397]
-                # adv_y_train=adv_y_train[:25397]
+            adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
+            print("adv_x_train.shape:",adv_x_train.shape)
+            print("adv_y_train.shape:",adv_y_train.shape)            
+            # adv_x_train=adv_x_train[:25397]
+            # adv_y_train=adv_y_train[:25397]
 
-                # 对抗样本测试集
-                print("args.test_adv_dataset：",args.adv_dataset)
-                adv_testset_path = os.path.join(args.adv_dataset,'test')
-                adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
-                print("adv_x_test.shape:",adv_x_test.shape)
-                print("adv_y_test.shape:",adv_y_test.shape)  
+            # 对抗样本测试集
+            # print("args.test_adv_dataset：",args.adv_dataset)
+            # adv_testset_path = os.path.join(args.adv_dataset,'test')
+            adv_testset_path = args.test_adv_dataset
 
-            if args.attack_mode == 'om-fgsm': 
-                # FGSM对抗样本训练集
-                print("args.train_adv_dataset：",args.train_adv_dataset)
-                adv_trainset_path = os.path.join(args.train_adv_dataset,'train')
-                adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
-                print("adv_x_train.shape:",adv_x_train.shape)
-                print("adv_y_train.shape:",adv_y_train.shape)            
-                # adv_x_train=adv_x_train[:25397]
-                # adv_y_train=adv_y_train[:25397]
-
-                # OM-FGSM对抗样本测试集
-                print("args.test_adv_dataset：",args.adv_dataset)
-                adv_testset_path = os.path.join(args.adv_dataset,'test')
-                adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
-                print("adv_x_test.shape:",adv_x_test.shape)
-                print("adv_y_test.shape:",adv_y_test.shape)  
+            adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
+            print("adv_x_test.shape:",adv_x_test.shape)
+            print("adv_y_test.shape:",adv_y_test.shape)  
 
             # clean pixel testset acc and loss
             cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   bug
-            print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            print(f'Loss of before mmat trained classifier clean testset:{cle_test_loss}' ) 
+            print(f'Accuary of before adversarial trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before adversarial trained classifier clean testset:{cle_test_loss}' ) 
 
             # adv pixel testset acc and loss
             adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            print(f'Accuary of before rmt trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            print(f'Loss of before rmt trained classifier on white-box adv testset:{adv_test_loss}' ) 
-            # raise error
+            print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' ) 
 
-            # print("args.mix_mode:",args.mix_mode)
-            # print("args.mix_w_num:",args.mix_w_num)
-            # print("args.beta_alpha:",args.beta_alpha)
-            # print("args.dirichlet_gama:",args.dirichlet_gama)
-
-            # raise error("maggie stop here")
+            
+            raise error("maggie stop here")
             target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
 
             # test

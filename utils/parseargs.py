@@ -183,12 +183,13 @@ def parse_arguments():
 
         #-------------------------arguments for classifier defense-------------------------
         parser_object.add_argument('--defense_mode', help='defense method', type=str, default='rmt',choices=['at','mmat','rmt','inputmixup','manifoldmixup','patchmixup','puzzlemixup','cutmixup'])
-        parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
+        # parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
         parser_object.add_argument('--aug_num',type=int, default=None)
         parser_object.add_argument('--aug_mix_rate',type=float, default=None)
-        parser_object.add_argument('--train_adv_dataset', help='train_adv_dataset', type=str)#用于对抗训练时指定用于训练的对抗样本路径        
+        parser_object.add_argument('--train_adv_dataset', help='train_adv_dataset', type=str)   # 对抗训练时指定用于训练的对抗样本路径        
+        parser_object.add_argument('--test_adv_dataset', help='test_adv_dataset', type=str)     # 指定用于测试的对抗样本路径    
 
 
         #-------------------------other arguments-------------------------

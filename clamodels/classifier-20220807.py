@@ -2237,8 +2237,8 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch at trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
             print(f'{epoch_index+1:04d} epoch at trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
 
-            # if (epoch_index+1)  >= 9:
-            #     torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
+            if (epoch_index+1)  >= 9:
+                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
 
             if args.whitebox == True:
                 #  当前epoch分类模型在白盒对抗测试集上的准确率
