@@ -276,6 +276,7 @@ if __name__ == '__main__':
             print("lr:",args.lr)
 
             # model
+            print("args.cla_network_pkl",args.cla_network_pkl)
             learned_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_model)
 
@@ -289,8 +290,7 @@ if __name__ == '__main__':
             print("cle_y_test.shape:",cle_y_test.shape)
 
             # 对抗样本训练集
-            # print("args.train_adv_dataset：",args.train_adv_dataset)
-            # adv_trainset_path = os.path.join(args.train_adv_dataset,'train')
+            # print("args.train_adv_dataset",args.train_adv_dataset)
             adv_trainset_path = args.train_adv_dataset
 
             adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
@@ -300,8 +300,7 @@ if __name__ == '__main__':
             # adv_y_train=adv_y_train[:25397]
 
             # 对抗样本测试集
-            # print("args.test_adv_dataset：",args.adv_dataset)
-            # adv_testset_path = os.path.join(args.adv_dataset,'test')
+            print("args.test_adv_dataset",args.test_adv_dataset)
             adv_testset_path = args.test_adv_dataset
 
             adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
@@ -316,10 +315,9 @@ if __name__ == '__main__':
             # adv pixel testset acc and loss
             adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
             print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' ) 
-
-            
+            print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' )           
             raise error("maggie stop here")
+            
             target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
 
             # test

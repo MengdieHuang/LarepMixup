@@ -2195,19 +2195,18 @@ class MaggieClassifier:
                 # adv_img_batch.shape: torch.Size([256, 3, 32, 32])
                 # adv_lab_batch.shape: torch.Size([256])
                 # """
+
                 #------------------20211110--------------------
-
                 aug_x_train = torch.cat([raw_img_batch, adv_img_batch], dim=0)
-                aug_y_train = torch.cat([raw_lab_batch, adv_lab_batch], dim=0)                
-                # aug_x_train = raw_img_batch
-                # aug_y_train = raw_lab_batch
-                # aug_x_train = adv_img_batch
-                # aug_y_train = adv_lab_batch
-                # raise error
-
-
+                aug_y_train = torch.cat([raw_lab_batch, adv_lab_batch], dim=0)    
                 inputs = aug_x_train.cuda()
-                targets = aug_y_train.cuda()
+                targets = aug_y_train.cuda()      
+                                      
+                # #------------20220808----------
+                # inputs = adv_img_batch.cuda()
+                # targets = adv_lab_batch.cuda()
+
+
                 
                 # self._optimizer.zero_grad()
                 self._model.train()                 #   train mode
