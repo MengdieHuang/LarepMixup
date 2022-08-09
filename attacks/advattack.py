@@ -427,40 +427,40 @@ class AdvAttack():
             classification = self.__labelnames__() 
             print("label_names:",classification)  
 
-            # os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
-            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
+            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
+            # os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
 
-            # # 存储训练集对抗样本 
-            # print(f"Saving {self._args.dataset} trainset adversarial examples...")
-            # for img_index, _ in enumerate(self._x_test_adv):
-            #     save_adv_img = self._x_test_adv[img_index]
-            #     # save_cle_img = self._x_test[img_index]
-            #     img_true_label = self._y_test_adv[img_index]
-
-            #     # 存储对抗样本npz
-            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                
-            #     # 存储对抗样本png
-            #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
-
-            #     # 存储干净样本png
-            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-
-            # 存储测试集对抗样本
-            print(f"Saving {self._args.dataset} testset adversarial examples...")
+            # 存储训练集对抗样本 
+            print(f"Saving {self._args.dataset} trainset adversarial examples...")
             for img_index, _ in enumerate(self._x_test_adv):
                 save_adv_img = self._x_test_adv[img_index]
                 # save_cle_img = self._x_test[img_index]
                 img_true_label = self._y_test_adv[img_index]
 
                 # 存储对抗样本npz
-                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
                 
                 # 存储对抗样本png
-                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
 
                 # 存储干净样本png
-                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
+                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+            # # 存储测试集对抗样本
+            # print(f"Saving {self._args.dataset} testset adversarial examples...")
+            # for img_index, _ in enumerate(self._x_test_adv):
+            #     save_adv_img = self._x_test_adv[img_index]
+            #     # save_cle_img = self._x_test[img_index]
+            #     img_true_label = self._y_test_adv[img_index]
+
+            #     # 存储对抗样本npz
+            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                
+            #     # 存储对抗样本png
+            #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+            #     # 存储干净样本png
+            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
         print("save adversarial examples finished")
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):

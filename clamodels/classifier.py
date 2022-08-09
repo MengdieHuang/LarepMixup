@@ -1979,22 +1979,13 @@ class MaggieClassifier:
                 #------------------20211108--------------------
                 aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
                 aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
-                # aug_x_train = mix_img_batch
-                # aug_y_train = mix_lab_batch
-
-                # if self._args.defense_mode == 'inputmixup':
-                #     #   在inputmixup中不混合原样本
-                #     aug_x_train = mix_img_batch
-                #     aug_y_train = mix_lab_batch
-                #     # aug_x_train = raw_img_batch #   纯粹用干净样本微调是否有效
-                #     # aug_y_train = raw_lab_batch                    
-                # else:
-                #     aug_x_train = torch.cat([raw_img_batch, mix_img_batch], dim=0)
-                #     aug_y_train = torch.cat([raw_lab_batch, mix_lab_batch], dim=0)
-                #---------------------------------------------
-
                 inputs = aug_x_train.cuda()
                 targets = aug_y_train.cuda()
+
+                #------------------20220808--------------------
+                # inputs = mix_img_batch.cuda()
+                # targets = mix_lab_batch.cuda()
+
                 
                 # self._optimizer.zero_grad()
                 self._model.train()                 #   train mode
@@ -2030,14 +2021,13 @@ class MaggieClassifier:
                 #------------------------------
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
             #   finish batch training
-                
-            
+                        
             #   当前epoch分类模型在干净测试集上的准确率
             epoch_cle_test_accuracy, epoch_cle_test_loss = self.evaluatefromtensor(self._model, self._cle_test_tensorset_x, self._cle_test_tensorset_y)
             # global_cle_test_acc.append(epoch_cle_test_accuracy)   
             # global_cle_test_loss.append(epoch_cle_test_loss)
-            print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
-            print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
+            print(f'{epoch_index+1:04d} epoch inputmixup trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
+            print(f'{epoch_index+1:04d} epoch inputmixup trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
 
             if args.whitebox == True:
                 #  当前epoch分类模型在白盒对抗测试集上的准确率
@@ -2050,10 +2040,12 @@ class MaggieClassifier:
                 epoch_y_test_adv = self._adv_test_tensorset_y
 
             epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)               
-            print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
-            print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+            print(f'{epoch_index+1:04d} epoch inputmixup trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
+            print(f'{epoch_index+1:04d} epoch inputmixup trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
 
-
+            if (epoch_index+1)  >= 9:
+                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
             os.makedirs(tensorboard_log_adv_acc_dir,exist_ok=True)    
@@ -2234,10 +2226,7 @@ class MaggieClassifier:
             # global_cle_test_acc.append(epoch_cle_test_accuracy)   
             # global_cle_test_loss.append(epoch_cle_test_loss)
             print(f'{epoch_index+1:04d} epoch at trained classifier accuary on the clean testing examples:{epoch_cle_test_accuracy*100:.4f}%' )  
-            print(f'{epoch_index+1:04d} epoch at trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )   
-
-            # if (epoch_index+1)  >= 9:
-            #     torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
+            print(f'{epoch_index+1:04d} epoch at trained classifier loss on the clean testing examples:{epoch_cle_test_loss:.4f}' )           
 
             if args.whitebox == True:
                 #  当前epoch分类模型在白盒对抗测试集上的准确率
@@ -2252,6 +2241,9 @@ class MaggieClassifier:
             epoch_adv_test_accuracy, epoch_adv_test_loss = self.evaluatefromtensor(self._model,epoch_x_test_adv,epoch_y_test_adv)               
             print(f'{epoch_index+1:04d} epoch at trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch at trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
+
+            if (epoch_index+1)  >= 9:
+                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
