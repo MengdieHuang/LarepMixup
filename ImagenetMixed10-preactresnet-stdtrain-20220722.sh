@@ -60,3 +60,6 @@ python -u tasklauncher-20220722.py run --save_path /root/autodl-tmp/maggie/resul
 
 # preactresnet50 imagenetmixed10 stdftrain  lr = 0.001
 python -u tasklauncher-20220722.py run --save_path /root/autodl-tmp/maggie/result --mode train --train_mode cla-train --exp_name preactresnet50-imagenetmixed10 --cla_model preactresnet50 --dataset imagenetmixed10 --batch_size 16 --epochs 40 --lr 0.001 >> /root/autodl-nas/maggie/mmat/log/ImagenetMixed10/classsifier-standard-train/preactresnet50-imagenetmixed10-stdtrain-20220722.log 2>&1
+
+# 关机
+shutdown

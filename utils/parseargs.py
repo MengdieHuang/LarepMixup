@@ -182,15 +182,15 @@ def parse_arguments():
 
 
         #-------------------------arguments for classifier defense-------------------------
-        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='rmt',choices=['at','mmat','rmt','inputmixup','manifoldmixup','patchmixup','puzzlemixup','cutmixup'])
+        parser_object.add_argument('--defense_mode', help='defense method', type=str, default='rmt',choices=['at','mmat','rmt','inputmixup','manifoldmixup','patchmixup','puzzlemixup','cutmixup','dmat'])
         # parser_object.add_argument('--adv_dataset', help='adv_dataset', type=str)
         parser_object.add_argument('--mix_dataset', help='mix_dataset', type=str)
         parser_object.add_argument('--aug_adv_num',type=int, default=None)
         parser_object.add_argument('--aug_num',type=int, default=None)
         parser_object.add_argument('--aug_mix_rate',type=float, default=None)
-        parser_object.add_argument('--train_adv_dataset', help='train_adv_dataset', type=str)   # 对抗训练时指定用于训练的对抗样本路径        
-        parser_object.add_argument('--test_adv_dataset', help='test_adv_dataset', type=str)     # 指定用于测试的对抗样本路径    
-
+        parser_object.add_argument('--train_adv_dataset', help='train_adv_dataset', type=str)       # 对抗训练时指定用于训练的对抗样本路径        
+        parser_object.add_argument('--test_adv_dataset', help='test_adv_dataset', type=str)         # 指定用于测试的对抗样本路径    
+        parser_object.add_argument('--train_adv_dataset_2', help='train_adv_dataset_2', type=str)   # DMAT对抗训练时指定用于训练的像素层对抗样本路径        
 
         #-------------------------other arguments-------------------------
         parser_object.add_argument('--img_size',type=int, default=32)
@@ -274,7 +274,7 @@ def set_exp_result_dir(args):
     elif args.mode == 'interpolate':
         exp_result_dir = f'{save_path}/{args.mode}/{args.mix_w_num}mixup/{args.mix_mode}/{args.sample_mode}/{args.exp_name}/{date}'
     elif args.mode == 'defense':     
-        if args.defense_mode == "at":
+        if args.defense_mode in ["at","dmat"]:
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.exp_name}/{attack}/{date}'
         elif args.defense_mode == "mmat":
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{date}'
