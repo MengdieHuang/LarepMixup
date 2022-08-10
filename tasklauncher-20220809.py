@@ -303,11 +303,11 @@ if __name__ == '__main__':
             print(f'Accuary of before adversarial trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of before adversarial trained classifier clean testset:{cle_test_loss}' ) 
 
-            # # adv pixel testset acc and loss
-            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            # print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' )           
-            # raise error("maggie stop here")
+            # adv pixel testset acc and loss
+            adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+            print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' )           
+            raise error("maggie stop here")
             
             target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
 
@@ -734,11 +734,11 @@ if __name__ == '__main__':
             print(f'Accuary of before adversarial trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of before adversarial trained classifier clean testset:{cle_test_loss}' ) 
 
-            # # adv pixel testset acc and loss
-            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            # print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' )           
-            # raise error("maggie stop here")
+            # adv pixel testset acc and loss
+            adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+            print(f'Accuary of before adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before adversarial trained classifier on white-box adv testset:{adv_test_loss}' )           
+            raise error("maggie stop here")
             
             target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
 
