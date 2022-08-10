@@ -281,7 +281,7 @@ if __name__ == '__main__':
             print("cle_y_test.shape:",cle_y_test.shape)
 
             # 对抗样本训练集
-            # print("args.train_adv_dataset",args.train_adv_dataset)
+            print("args.train_adv_dataset",args.train_adv_dataset)
             adv_trainset_path = args.train_adv_dataset
 
             adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
