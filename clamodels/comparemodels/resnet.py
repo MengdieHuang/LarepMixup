@@ -302,7 +302,7 @@ class ResNet(nn.Module):
             layer_mix: 2
             """
             layer_mix = random.randint(1, 3)                                            #   从1 2 3中随机选
-            print("layer_mix:",layer_mix)                                             #   layer_mix: 2       
+            # print("layer_mix:",layer_mix)                                             #   layer_mix: 2       
         
         else:
             layer_mix = None

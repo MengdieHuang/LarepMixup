@@ -45,14 +45,14 @@ def cost_matrix(width, device='cuda'):
     return C
 
 cost_matrix_dict = {
-    # '2': cost_matrix(2, 'cuda').unsqueeze(0),
-    # '4': cost_matrix(4, 'cuda').unsqueeze(0),
-    # '8': cost_matrix(8, 'cuda').unsqueeze(0),
-    # '16': cost_matrix(16, 'cuda').unsqueeze(0)
-    '2': cost_matrix(2, 'cpu').unsqueeze(0),    #   为了stylegan cuda内存暂时改为cpu
-    '4': cost_matrix(4, 'cpu').unsqueeze(0),
-    '8': cost_matrix(8, 'cpu').unsqueeze(0),
-    '16': cost_matrix(16, 'cpu').unsqueeze(0)    
+    '2': cost_matrix(2, 'cuda').unsqueeze(0),       #   本地运行puzzlemixup
+    '4': cost_matrix(4, 'cuda').unsqueeze(0),
+    '8': cost_matrix(8, 'cuda').unsqueeze(0),
+    '16': cost_matrix(16, 'cuda').unsqueeze(0)
+    # '2': cost_matrix(2, 'cpu').unsqueeze(0),    #   为了stylegan cuda内存暂时改为cpu 
+    # '4': cost_matrix(4, 'cpu').unsqueeze(0),
+    # '8': cost_matrix(8, 'cpu').unsqueeze(0),
+    # '16': cost_matrix(16, 'cpu').unsqueeze(0)    
 }
 
 def mask_transport(mask, grad_pool, eps=0.01):

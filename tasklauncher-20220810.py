@@ -540,35 +540,33 @@ if __name__ == '__main__':
         elif args.defense_mode =='puzzlemixup':
             print("puzzle mixup")
             print("lr:",args.lr)
+            print("args.attack_mode:",args.attack_mode)
             print("cla_network_pkl:",args.cla_network_pkl)
 
             # model
             learned_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_model)
 
-            # clean pixel testset
+            # 干净样本训练集
             cle_x_train, cle_y_train = target_classifier.getrawset(cle_train_dataloader)
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
-            # print("cle_x_train.shape:",cle_x_train.shape)
-            # print("cle_y_train.shape:",cle_y_train.shape)
-            cle_x_train=cle_x_train[:25397]                                                 #   训练时保持和表征数据集一样的训练集大小
-            cle_y_train=cle_y_train[:25397]
             print("cle_x_train.shape:",cle_x_train.shape)
             print("cle_y_train.shape:",cle_y_train.shape)
+            # 干净样本测试集
+            print("cle_x_test.shape:",cle_x_test.shape)
+            print("cle_y_test.shape:",cle_y_test.shape)
             cle_y_train = torch.nn.functional.one_hot(cle_y_train, args.n_classes).float()  #   标签转为one hot
             print("cle_y_train.shape:",cle_y_train.shape)
-            
-            # adversarial testset
-            print("args.adv_dataset：",args.adv_dataset)
-            #   /home/data/maggie/result-newhome/attack/fgsm/preactresnet18-cifar10/20220627/00000-fgsm-eps-0.02-acc-53.98/attack-cifar10-dataset/samples/test
-            # adv_testset_path = os.path.join(args.adv_dataset,'test')
-            adv_testset_path = args.adv_dataset
-            adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)          #   加载对抗样本测试集
 
-            # # clean pixel testset acc and loss
-            # cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
-            # print(f'Accuary of before puzzle mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before puzzle mixup trained classifier clean testset:{cle_test_loss}' ) 
+            # 对抗样本测试集
+            print("args.test_adv_dataset",args.test_adv_dataset)
+            adv_testset_path = args.test_adv_dataset
+            adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
+
+            # clean pixel testset acc and loss
+            cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   在干净样本测试集上评估精度
+            print(f'Accuary of before puzzle mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
+            print(f'Loss of before puzzle mixup trained classifier clean testset:{cle_test_loss}' ) 
 
             # # adv pixel testset acc and loss
             # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度

@@ -2718,11 +2718,15 @@ class MaggieClassifier:
             epoch_total_loss = 0
 
             for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):           #   加载原始训练集batch
-                # raw_lab_batch = LongTensor(raw_lab_batch)                                                   #   list型转为tensor
-                # raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
+                raw_lab_batch = LongTensor(raw_lab_batch)                                                   #   list型转为tensor
+                raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
                 
                 # print("raw_img_batch.shape:",raw_img_batch.shape)
                 # print("raw_lab_batch.shape:",raw_lab_batch.shape)
+                # """
+                # raw_img_batch.shape: torch.Size([256, 3, 32, 32])
+                # raw_lab_batch.shape: torch.Size([256, 10])
+                # """
 
                 #-----------maggie cat clean and mix------------
                 if (batch_index + 1) % w_batch_num == 0:
@@ -2766,8 +2770,25 @@ class MaggieClassifier:
 
                 mix_input_var, mix_target_var = puzzle_mixup_data(input_var, target_var, beta_alpha=self._args.beta_alpha, grad=unary)  #   混合样本 two-hot标签              
 
-                inputs = mix_input_var.cuda()
-                targets = mix_target_var.cuda()
+                #   原始代码无拼接干净样本,过拟合
+                # inputs = mix_input_var.cuda()
+                # targets = mix_target_var.cuda()
+
+                #------------------20220810--------------------
+                raw_img_batch = raw_img_batch.cuda()
+                raw_lab_batch = raw_lab_batch.cuda()
+                mix_input_var = mix_input_var.cuda()
+                mix_target_var = mix_target_var.cuda()
+
+                # print("raw_img_batch.shape",raw_img_batch.shape)
+                # print("raw_lab_batch.shape",raw_lab_batch.shape)
+                # print("mix_input_var.shape",mix_input_var.shape)
+                # print("mix_target_var.shape",mix_target_var.shape)
+
+                aug_x_train = torch.cat([raw_img_batch, mix_input_var], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_target_var], dim=0)
+                inputs = aug_x_train.cuda()
+                targets = aug_y_train.cuda()
 
                 # print("inputs:",inputs)
                 # print("inputs.shape:",inputs.shape)
@@ -2931,8 +2952,8 @@ class MaggieClassifier:
             epoch_total_loss = 0
 
             for batch_index, (raw_img_batch, raw_lab_batch) in enumerate(self._train_dataloader):           #   加载原始训练集batch
-                # raw_lab_batch = LongTensor(raw_lab_batch)                                                   #   list型转为tensor
-                # raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
+                raw_lab_batch = LongTensor(raw_lab_batch)                                                   #   list型转为tensor
+                raw_lab_batch = torch.nn.functional.one_hot(raw_lab_batch, args.n_classes).float()
                 
                 # print("raw_img_batch.shape:",raw_img_batch.shape)
                 # print("raw_lab_batch.shape:",raw_lab_batch.shape)
@@ -2960,8 +2981,27 @@ class MaggieClassifier:
 
 
                 mix_input_var, mix_target_var = cut_mixup_data(input_var, target_var, self._args.beta_alpha)  #   混合样本 two-hot标签              
-                inputs = mix_input_var.cuda()
-                targets = mix_target_var.cuda()
+
+                #   原始代码无拼接干净样本,过拟合
+                # inputs = mix_input_var.cuda()
+                # targets = mix_target_var.cuda()
+
+                #------------------20220810--------------------
+                raw_img_batch = raw_img_batch.cuda()
+                raw_lab_batch = raw_lab_batch.cuda()
+                mix_input_var = mix_input_var.cuda()
+                mix_target_var = mix_target_var.cuda()
+
+                # print("raw_img_batch.shape",raw_img_batch.shape)
+                # print("raw_lab_batch.shape",raw_lab_batch.shape)
+                # print("mix_input_var.shape",mix_input_var.shape)
+                # print("mix_target_var.shape",mix_target_var.shape)
+
+                aug_x_train = torch.cat([raw_img_batch, mix_input_var], dim=0)
+                aug_y_train = torch.cat([raw_lab_batch, mix_target_var], dim=0)
+                inputs = aug_x_train.cuda()
+                targets = aug_y_train.cuda()
+
 
                 # print("inputs:",inputs)
                 # print("inputs.shape:",inputs.shape)
