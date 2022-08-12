@@ -2424,7 +2424,7 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch manifoldmixup trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch manifoldmixup trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
 
-            if (epoch_index+1)  >= 38:
+            if (epoch_index+1)  <=20 or (epoch_index+1) >= 38:
                 torch.save(self._model,f'{self._exp_result_dir}/manifoldmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             #-------------tensorboard实时画图-------------------
@@ -2608,7 +2608,7 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch patchmixup trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch patchmixup trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
             
-            if (epoch_index+1)  >= 38:
+            if (epoch_index+1)  <=20 or (epoch_index+1) >= 38:
                 torch.save(self._model,f'{self._exp_result_dir}/patchmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             #-------------tensorboard实时画图-------------------
