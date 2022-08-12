@@ -39,6 +39,10 @@ if __name__ == '__main__':
     print("cle_train_dataloader.len",len(cle_train_dataloader))
     print("cle_test_dataloader.len",len(cle_test_dataloader))
 
+    """
+    cle_train_dataloader.len 2414
+    cle_test_dataloader.len 94
+    """
     if args.mode == 'train':
         if args.train_mode =="gen-train":                                               
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
@@ -64,17 +68,21 @@ if __name__ == '__main__':
                 if args.attack_mode =='cw':     
                     print("confidence:",args.confidence)
                 else:
-                    print("eps:",args.attack_eps)
+                    print("eps:",args.attack_eps)                   #   0.05
 
                 print("pixel adversarial attack.............")
                 print("cla_network_pkl:",args.cla_network_pkl)
-                
+                """
+                cla_network_pkl: /root/autodl-tmp/maggie/result/train/cla-train/preactresnet18-imagenetmixed10/standard-trained-classifier-preactresnet18-on-clean-imagenetmixed10-epoch-0023-acc-90.47.pkl
+                """
+
                 learned_model = torch.load(args.cla_network_pkl)
                 attack_classifier = AdvAttack(args,learned_model)
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
+                print("start generating adv 20220812")
                 x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
-                
+
                 adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
                 print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
                 print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    

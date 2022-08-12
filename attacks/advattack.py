@@ -217,12 +217,14 @@ class AdvAttack():
             self._y_train_adv=None
 
             self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
+            print("finish get x list")
             self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
+            print("finish get y list")
 
-            # print("self._x_train.shape:",self._x_train.shape)
-            # print("self._y_train.shape:",self._y_train.shape)
-            # print("self._x_test.shape:",self._x_test.shape)
-            # print("self._y_test.shape:",self._y_test.shape)
+            print("self._x_train.shape:",self._x_train.shape)
+            print("self._y_train.shape:",self._y_train.shape)
+            print("self._x_test.shape:",self._x_test.shape)
+            print("self._y_test.shape:",self._y_test.shape)
             # """
             # self._x_train.shape: torch.Size([50000, 3, 32, 32])
             # self._y_train.shape: torch.Size([50000])
@@ -599,9 +601,11 @@ class AdvAttack():
             xset_tensor = torch.stack(xset_tensor)  
 
         if self._args.dataset == 'imagenetmixed10':
-            print("len(dataloader.dataset):",len(dataloader.dataset))
+            print("len(dataloader.dataset):",len(dataloader.dataset))   # 77237
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
+                if img_index % 100 == 0: 
+                    print("img_index:",img_index)
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)     
 
@@ -692,6 +696,8 @@ class AdvAttack():
             print("len(dataloader.dataset):",len(dataloader.dataset))
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
+                if img_index % 100 == 0: 
+                    print("img_index:",img_index)                
                 yset_tensor.append(dataloader.dataset[img_index][1])
 
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
