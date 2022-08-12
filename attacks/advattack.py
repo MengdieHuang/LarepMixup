@@ -305,7 +305,7 @@ class AdvAttack():
             self._x_test = torch.from_numpy(self._x_test).cuda()
             self._y_test = torch.from_numpy(self._y_test).cuda()
 
-            # self.__saveadvpng__()
+            self.__saveadvpng__()
             return self._x_test_adv, self._y_test_adv         #   GPU tensor
 
     def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test,gan_net):
