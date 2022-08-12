@@ -1,6 +1,9 @@
 source ~/.bashrc
 source /home/xieyi/anaconda3/bin/activate mmat
 
+--gen_model stylegan2ada --gen_network_pkl /home/data/maggie/result-newhome/train/gen-train/stylegan2ada-cifar10/20210702/00000/cifar10-auto1-batch64-ada-bgc-noresume/network-snapshot-023063.pkl --dataset cifar10
+
+
 # Dual RepMixup
 # # vgg19 cifar10 autoattack dual rmt cle+mix lr =0.001 beta(2.0, 2.0) eps=0.3
 # CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220218.py run --mode defense --defense_mode rmt --beta_alpha 2.0 --attack_mode autoattack --attack_eps 0.3 --blackbox --exp_name vgg19-cifar10 --cla_model vgg19 --cla_network_pkl /home/maggie/mmat/result/train/cla-train/vgg19-cifar10/20210908/00002-testacc-0.8705/train-cifar10-dataset/standard-trained-classifier-vgg19-on-clean-cifar10-epoch-0013.pkl --gen_model stylegan2ada --gen_network_pkl /home/maggie/mmat/result/train/gen-train/stylegan2ada-cifar10/20210702/00000/cifar10-auto1-batch64-ada-bgc-noresume/network-snapshot-023063.pkl --dataset cifar10 --projected_dataset /home/maggie/mmat/result/project/stylegan2ada-cifar10/20210913/00000/project-cifar10-trainset --adv_dataset /home/maggie/mmat/result/attack/autoattack/vgg19-cifar10/20220219/00004-eps0.3-acc0.14/attack-cifar10-dataset/samples --batch_size 256 --epochs 40 --lr 0.001 >> /home/maggie/mmat/log/vgg19-cifar10-rmt/vgg19-cifar10-rmt-autoattack-20220218.log 2>&1
