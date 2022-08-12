@@ -216,10 +216,10 @@ class AdvAttack():
             self._x_train_adv=None
             self._y_train_adv=None
 
-            self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)
-            print("finish get x list")
+            self._x_train, self._y_train = self.__getsettensor__(self._train_dataloader)        #   imagenet不生成对抗样本训练集
+            print("finish get train list")
             self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
-            print("finish get y list")
+            print("finish get test list")
 
             print("self._x_train.shape:",self._x_train.shape)
             print("self._y_train.shape:",self._y_train.shape)
@@ -390,21 +390,22 @@ class AdvAttack():
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # 存储训练集对抗样本
-            print(f"Saving {self._args.dataset} trainset adversarial examples...")
-            for img_index, _ in enumerate(self._x_train_adv):
-                save_adv_img = self._x_train_adv[img_index]
-                # save_cle_img = self._x_train[img_index]
-                img_true_label = self._y_train_adv[img_index]
-               
-                # 存储对抗样本npz
-                np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
-
-                # 存储对抗样本png
-                # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+            if self._args.dataset != "imagenetmixed10":
+                # 存储训练集对抗样本
+                print(f"Saving {self._args.dataset} trainset adversarial examples...")
+                for img_index, _ in enumerate(self._x_train_adv):
+                    save_adv_img = self._x_train_adv[img_index]
+                    # save_cle_img = self._x_train[img_index]
+                    img_true_label = self._y_train_adv[img_index]
                 
-                # 存储干净样本png
-                # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
+                    # 存储对抗样本npz
+                    np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
+
+                    # 存储对抗样本png
+                    # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                    
+                    # 存储干净样本png
+                    # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
              
             # 存储测试集对抗样本 
             print(f"Saving {self._args.dataset} testset adversarial examples...")            

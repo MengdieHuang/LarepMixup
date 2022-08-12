@@ -81,7 +81,8 @@ if __name__ == '__main__':
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
                 print("start generating adv 20220812")
-                x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          #     GPU Tensor
+                # x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          
+                x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader)          
 
                 adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
                 print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
