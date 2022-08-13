@@ -2664,7 +2664,7 @@ class MaggieClassifier:
      
         self._exp_result_dir = exp_result_dir
         if self._args.defense_mode == "puzzlemixup":
-            self._exp_result_dir = os.path.join(self._exp_result_dir,f'patchmixup-{self._args.dataset}-dataset')
+            self._exp_result_dir = os.path.join(self._exp_result_dir,f'puzzlemixup-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True) 
 
         if torch.cuda.is_available():
