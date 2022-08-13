@@ -216,7 +216,10 @@ if __name__ == '__main__':
             target_classifier = MaggieClassifier(args,learned_model)
 
             # 干净样本投影训练集
+            print("args.projected_dataset",args.projected_dataset)
             cle_w_train, cle_y_train = target_classifier.getproset(args.projected_dataset)
+            print("cle_w_train.shape:",cle_w_train.shape)
+            print("cle_y_train.shape:",cle_y_train.shape)
 
             # 干净样本测试集
             cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
