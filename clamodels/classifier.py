@@ -2041,8 +2041,8 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch inputmixup trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch inputmixup trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
 
-            if (epoch_index+1)  >= 9:
-                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+            if (epoch_index+1)  >= 38:
+                torch.save(self._model,f'{self._exp_result_dir}/inputmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
                 
             #-------------tensorboard实时画图-------------------
             tensorboard_log_adv_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc-adv')
