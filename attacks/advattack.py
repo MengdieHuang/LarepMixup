@@ -594,7 +594,7 @@ class AdvAttack():
         if self._args.dataset == 'imagenetmixed10':
             print("len(dataloader.dataset):",len(dataloader.dataset))   # 77237
             xset_tensor = []
-            jieduan_num = 32
+            jieduan_num = 50000
             for img_index in range(jieduan_num):            
             # for img_index in range(len(dataloader.dataset)):
                 if img_index % 100 == 0: 
@@ -641,7 +641,7 @@ class AdvAttack():
         if self._args.dataset == 'imagenetmixed10':
             print("len(dataloader.dataset):",len(dataloader.dataset))
             yset_tensor = []
-            jieduan_num = 32
+            jieduan_num = 50000
             for img_index in range(jieduan_num):            
             # for img_index in range(len(dataloader.dataset)):
                 if img_index % 100 == 0: 
