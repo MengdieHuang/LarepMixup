@@ -308,7 +308,7 @@ class AdvAttack():
             self.__saveadvpng__()
             return self._x_test_adv, self._y_test_adv         #   GPU tensor
 
-    def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test,gan_net):
+    def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net):
         self._exp_result_dir = exp_result_dir
         self._exp_result_dir = os.path.join(self._exp_result_dir,f'attack-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True)     
@@ -431,39 +431,39 @@ class AdvAttack():
             print("label_names:",classification)  
 
             os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
-            # os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
+            os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
 
-            # 存储训练集对抗样本 
-            print(f"Saving {self._args.dataset} trainset adversarial examples...")
-            for img_index, _ in enumerate(self._x_test_adv):
-                save_adv_img = self._x_test_adv[img_index]
-                # save_cle_img = self._x_test[img_index]
-                img_true_label = self._y_test_adv[img_index]
-
-                # 存储对抗样本npz
-                np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                
-                # 存储对抗样本png
-                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
-
-                # 存储干净样本png
-                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
-
-            # # 存储测试集对抗样本
-            # print(f"Saving {self._args.dataset} testset adversarial examples...")
+            # # 存储训练集对抗样本 
+            # print(f"Saving {self._args.dataset} trainset adversarial examples...")
             # for img_index, _ in enumerate(self._x_test_adv):
             #     save_adv_img = self._x_test_adv[img_index]
             #     # save_cle_img = self._x_test[img_index]
             #     img_true_label = self._y_test_adv[img_index]
 
             #     # 存储对抗样本npz
-            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
                 
             #     # 存储对抗样本png
-            #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+            #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
 
             #     # 存储干净样本png
-            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
+            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+            # 存储测试集对抗样本
+            print(f"Saving {self._args.dataset} testset adversarial examples...")
+            for img_index, _ in enumerate(self._x_test_adv):
+                save_adv_img = self._x_test_adv[img_index]
+                # save_cle_img = self._x_test[img_index]
+                img_true_label = self._y_test_adv[img_index]
+
+                # 存储对抗样本npz
+                np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                
+                # 存储对抗样本png
+                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+
+                # 存储干净样本png
+                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
         print("save adversarial examples finished")
 
     def generateadvfromtestsettensor(self, testset_tensor_x, testset_tensor_y, exp_result_dir = None):
@@ -559,11 +559,7 @@ class AdvAttack():
         return xset_tensor, yset_tensor
     
     def __getxsettensor__(self,dataloader)->"Tensor":
-
-        # print("dataloader.dataset.data[0]:",dataloader.dataset.data[0])             #   dataloader.dataset.data[0]: [[[ 59  62  63]
-
         if self._args.dataset == 'cifar10':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
@@ -575,10 +571,8 @@ class AdvAttack():
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)                                                                          
                                         
-
         elif self._args.dataset == 'imagenet':
             jieduan_num = 1000
-
             xset_tensor = []
             # for img_index in range(len(dataloader.dataset)):
             for img_index in range(jieduan_num):
@@ -586,16 +580,12 @@ class AdvAttack():
             xset_tensor = torch.stack(xset_tensor)                                                                          
             
         elif self._args.dataset == 'svhn':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
-            # for img_index in range(64):
-
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)   
 
         elif self._args.dataset == 'kmnist':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
@@ -604,7 +594,9 @@ class AdvAttack():
         if self._args.dataset == 'imagenetmixed10':
             print("len(dataloader.dataset):",len(dataloader.dataset))   # 77237
             xset_tensor = []
-            for img_index in range(len(dataloader.dataset)):
+            jieduan_num = 32
+            for img_index in range(jieduan_num):            
+            # for img_index in range(len(dataloader.dataset)):
                 if img_index % 100 == 0: 
                     print("img_index:",img_index)
                 xset_tensor.append(dataloader.dataset[img_index][0])
@@ -615,94 +607,46 @@ class AdvAttack():
     def __getysettensor__(self,dataloader)->"Tensor":
 
         if self._args.dataset == 'cifar10':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'cifar100':
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           
-            # print("yset_tensor.type:", type(yset_tensor))                                         
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'imagenet':
             jieduan_num = 1000
-            # y_ndarray = []       
-            # datasetset_len = len(dataloader.dataset)
-            # print('datasetset len:',datasetset_len)
-
-            # for index in range(jieduan_num):
-            # # for index in range(datasetset_len):
-
-            #     _, label = dataloader.dataset.__getitem__(index)
-            #     y_ndarray.append(label)      
-
             yset_tensor = []
             # for img_index in range(len(dataloader.dataset)):
             for img_index in range(jieduan_num):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           
-            # print("yset_tensor.type:", type(yset_tensor))                       #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)                      #   yset_tensor.shape: torch.Size([1000])
 
         elif self._args.dataset == 'svhn':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
-            # for img_index in range(64):
-
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'kmnist':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         if self._args.dataset == 'imagenetmixed10':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
             print("len(dataloader.dataset):",len(dataloader.dataset))
             yset_tensor = []
-            for img_index in range(len(dataloader.dataset)):
+            jieduan_num = 32
+            for img_index in range(jieduan_num):            
+            # for img_index in range(len(dataloader.dataset)):
                 if img_index % 100 == 0: 
                     print("img_index:",img_index)                
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接

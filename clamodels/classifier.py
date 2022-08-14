@@ -876,11 +876,7 @@ class MaggieClassifier:
         return xset_tensor, yset_tensor
     
     def __getxsettensor__(self,dataloader)->"Tensor":
-
-        # print("dataloader.dataset.data[0]:",dataloader.dataset.data[0])             #   dataloader.dataset.data[0]: [[[ 59  62  63]
-
         if self._args.dataset == 'cifar10':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
@@ -890,31 +886,37 @@ class MaggieClassifier:
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
-            xset_tensor = torch.stack(xset_tensor)                                                                          
-                                        
+            xset_tensor = torch.stack(xset_tensor)                                                                                                               
 
         elif self._args.dataset == 'imagenet':
             jieduan_num = 1000
-
             xset_tensor = []
-            # for img_index in range(len(dataloader.dataset)):
             for img_index in range(jieduan_num):
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)                                                                          
             
         elif self._args.dataset == 'svhn':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)   
 
         elif self._args.dataset == 'kmnist':
-
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)  
+
+        elif self._args.dataset == 'imagenetmixed10':
+            print("len(dataloader.dataset):",len(dataloader.dataset))   # 77237
+            xset_tensor = []
+            jieduan_num = 32
+            for img_index in range(jieduan_num):
+            # for img_index in range(len(dataloader.dataset)):
+                if img_index % 100 == 0: 
+                    print("img_index:",img_index)
+                xset_tensor.append(dataloader.dataset[img_index][0])
+            xset_tensor = torch.stack(xset_tensor)     
 
         # return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
         return xset_tensor.cpu()
@@ -922,78 +924,46 @@ class MaggieClassifier:
     def __getysettensor__(self,dataloader)->"Tensor":
 
         if self._args.dataset == 'cifar10':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'cifar100':
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           
-            # print("yset_tensor.type:", type(yset_tensor))                                         
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'imagenet':
             jieduan_num = 1000
-            # y_ndarray = []       
-            # datasetset_len = len(dataloader.dataset)
-            # print('datasetset len:',datasetset_len)
-
-            # for index in range(jieduan_num):
-            # # for index in range(datasetset_len):
-
-            #     _, label = dataloader.dataset.__getitem__(index)
-            #     y_ndarray.append(label)      
-
             yset_tensor = []
-            # for img_index in range(len(dataloader.dataset)):
             for img_index in range(jieduan_num):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           
-            # print("yset_tensor.type:", type(yset_tensor))                       #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)                      #   yset_tensor.shape: torch.Size([1000])
 
         elif self._args.dataset == 'svhn':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
         elif self._args.dataset == 'kmnist':
-        #     y_ndarray = dataloader.dataset.targets
-        #     print("y_ndarray.type:", type(y_ndarray))
-
-            # y_ndarray = y_ndarray[:jieduan_num]
-
             yset_tensor = []
             for img_index in range(len(dataloader.dataset)):
                 yset_tensor.append(dataloader.dataset[img_index][1])
-
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
-            # print("yset_tensor.type:", type(yset_tensor))                   #   yset_tensor.type: <class 'torch.Tensor'>
-            # print("yset_tensor.shape:", yset_tensor.shape)
 
+        elif self._args.dataset == 'imagenetmixed10':
+            print("len(dataloader.dataset):",len(dataloader.dataset))
+            yset_tensor = []
+            jieduan_num = 32
+            for img_index in range(jieduan_num):            
+            # for img_index in range(len(dataloader.dataset)):
+                if img_index % 100 == 0: 
+                    print("img_index:",img_index)                                
+                yset_tensor.append(dataloader.dataset[img_index][1])
+            yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
 
         # return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
         return yset_tensor.cpu()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
