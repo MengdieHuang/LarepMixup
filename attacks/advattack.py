@@ -594,12 +594,20 @@ class AdvAttack():
         if self._args.dataset == 'imagenetmixed10':
             print("len(dataloader.dataset):",len(dataloader.dataset))   # 77237
             xset_tensor = []
-            jieduan_num = 40000
-            for img_index in range(jieduan_num):            
-            # for img_index in range(len(dataloader.dataset)):
-                if img_index % 100 == 0: 
-                    print("img_index:",img_index)
-                xset_tensor.append(dataloader.dataset[img_index][0])
+            
+            if len(dataloader.dataset) == 77237:                            #   训练集
+                jieduan_num = 23197
+                for img_index in range(jieduan_num):
+                # for img_index in range(len(dataloader.dataset)):
+                    if img_index % 100 == 0: 
+                        print("trainset_img_index:",img_index)
+                    xset_tensor.append(dataloader.dataset[img_index][0])
+            elif len(dataloader.dataset) == 3000:                            #   测试集
+                for img_index in range(len(dataloader.dataset)):
+                    if img_index % 100 == 0: 
+                        print("testset_img_index:",img_index)
+                    xset_tensor.append(dataloader.dataset[img_index][0])
+
             xset_tensor = torch.stack(xset_tensor)     
 
         return xset_tensor.cuda()                                       #   xset_tensor原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
@@ -641,12 +649,20 @@ class AdvAttack():
         if self._args.dataset == 'imagenetmixed10':
             print("len(dataloader.dataset):",len(dataloader.dataset))
             yset_tensor = []
-            jieduan_num = 40000
-            for img_index in range(jieduan_num):            
-            # for img_index in range(len(dataloader.dataset)):
-                if img_index % 100 == 0: 
-                    print("img_index:",img_index)                
-                yset_tensor.append(dataloader.dataset[img_index][1])
+
+            if len(dataloader.dataset) == 77237:                            #   训练集
+                jieduan_num = 23197
+                for img_index in range(jieduan_num):            
+                # for img_index in range(len(dataloader.dataset)):
+                    if img_index % 100 == 0: 
+                        print("trainset_label_index:",img_index)                                
+                    yset_tensor.append(dataloader.dataset[img_index][1])
+            elif len(dataloader.dataset) == 3000:                            #   测试集
+                for img_index in range(len(dataloader.dataset)):
+                    if img_index % 100 == 0: 
+                        print("testset_label_index:",img_index)                                
+                    yset_tensor.append(dataloader.dataset[img_index][1])
+
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
 
         return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
