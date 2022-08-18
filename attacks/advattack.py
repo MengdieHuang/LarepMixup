@@ -596,7 +596,7 @@ class AdvAttack():
             xset_tensor = []
             
             if len(dataloader.dataset) == 77237:                            #   训练集
-                jieduan_num = 23197
+                jieduan_num = 15000
                 for img_index in range(jieduan_num):
                 # for img_index in range(len(dataloader.dataset)):
                     if img_index % 100 == 0: 
@@ -651,7 +651,7 @@ class AdvAttack():
             yset_tensor = []
 
             if len(dataloader.dataset) == 77237:                            #   训练集
-                jieduan_num = 23197
+                jieduan_num = 15000
                 for img_index in range(jieduan_num):            
                 # for img_index in range(len(dataloader.dataset)):
                     if img_index % 100 == 0: 
