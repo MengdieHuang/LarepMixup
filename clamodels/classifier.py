@@ -912,7 +912,7 @@ class MaggieClassifier:
             xset_tensor = []
 
             if len(dataloader.dataset) == 77237:                            #   训练集
-                jieduan_num = 24305
+                jieduan_num = 26925
                 for img_index in range(jieduan_num):
                 # for img_index in range(len(dataloader.dataset)):
                     if img_index % 100 == 0: 
@@ -969,7 +969,7 @@ class MaggieClassifier:
             yset_tensor = []
 
             if len(dataloader.dataset) == 77237:                            #   训练集
-                jieduan_num = 24305
+                jieduan_num = 26925
                 for img_index in range(jieduan_num):            
                 # for img_index in range(len(dataloader.dataset)):
                     if img_index % 100 == 0: 
