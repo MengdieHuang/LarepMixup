@@ -1737,7 +1737,7 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch rmt trained classifier accuary on adversarial testset:{epoch_adv_test_accuracy * 100:.4f}%' ) 
             print(f'{epoch_index+1:04d} epoch rmt trained classifier loss on adversarial testset:{epoch_adv_test_loss}' )    
 
-            if (epoch_index+1) >= 11 or self._args.dataset == "imagenetmixed10":
+            if (epoch_index+1) >= 1 or self._args.dataset == "imagenetmixed10":
                 torch.save(self._model,f'{self._exp_result_dir}/rmt-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')            
 
             #-------------tensorboard实时画图-------------------
