@@ -1,8 +1,6 @@
 source ~/.bashrc
 source /home/xieyi/anaconda3/bin/activate mmat
 
-
-
 # adv50000 cat cle50000
 # PreActResNet34 pgd+ompgd dual manifold adversarial training against FGSM (eps=0.1)
 CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20220826.py run --mode defense --defense_mode dmat --attack_mode fgsm --attack_eps 0.1 --blackbox --exp_name preactresnet34-svhn --cla_model preactresnet34 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/preactresnet34-svhn/20220627/00003-testacc-95.75/train-svhn-dataset/standard-trained-classifier-preactresnet34-on-clean-svhn-epoch-0013.pkl --dataset svhn --train_adv_dataset /home/data/maggie/result-newhome/attack/pgd/preactresnet34-svhn/20220824/00000-ompgd-eps-0.1-acc-8.19/attack-svhn-dataset/latent-attack-samples/train --train_adv_dataset_2 /home/data/maggie/result-newhome/attack/pgd/preactresnet34-svhn/20220629/00002-pgd-eps-0.1-acc-35.57/attack-svhn-dataset/samples/train --test_adv_dataset /home/data/maggie/result-newhome/attack/fgsm/preactresnet34-svhn/20220628/00002-fgsm-eps-0.1-acc-57.11/attack-svhn-dataset/samples/test --batch_size 256 --epochs 40 --lr 0.01 >> /home/maggie/mmat/log/SVHN/defense/dual-manifold-adversarial-training/preactresnet34-svhn-pgddmat-fgsm-20220825.log 2>&1
