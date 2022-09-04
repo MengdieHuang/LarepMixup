@@ -237,8 +237,20 @@ if __name__ == '__main__':
             print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of before rmt trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.cla_model not in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','goodlenet']:
+            if args.cla_model in ['preactresnet18','preactresnet34','preactresnet50'] and args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                raise error
+
+            if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','goodlenet'] and args.attack_mode == "om-pgd":
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                raise error
+
+            if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','goodlenet'] and args.attack_eps != 0.02:    
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
