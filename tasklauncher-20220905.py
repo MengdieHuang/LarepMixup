@@ -256,6 +256,12 @@ if __name__ == '__main__':
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
                 raise error
 
+            if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','goodlenet'] and args.attack_mode in ["fog","snow","elastic","jpeg"]:
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                raise error            
+
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
             print("args.beta_alpha:",args.beta_alpha)
