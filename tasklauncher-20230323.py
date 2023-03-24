@@ -242,24 +242,29 @@ if __name__ == '__main__':
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                # 针对PreAct的非FGSM的攻击 只评估精度 
                 raise error
 
             if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_mode == "om-pgd":
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                # 针对非PreAct的OM-PGD的攻击 只评估精度 
                 raise error
 
             if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_eps != 0.02:    
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                # 针对非PreAct的eps不等于0.02的攻击 只评估精度 
+
                 raise error
 
             if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_mode in ["fog","snow","elastic","jpeg"]:
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                # 针对非PreAct的perceptual攻击 只评估精度 
                 raise error            
 
             print("args.mix_mode:",args.mix_mode)
@@ -270,13 +275,13 @@ if __name__ == '__main__':
             # train
             target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
 
-            # test
-            # clean pixel testset acc and loss
+            #------------test after rmt------------
+            # evaluate acc and loss on clean pixel testset 
             cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
             print(f'Accuary of rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             print(f'Loss of rmt trained classifier on clean testset:{cle_test_loss}' ) 
            
-            # adversarial pixel testset acc and loss
+            # evaluate acc and loss on adversarial pixel testset 
             if args.whitebox == True:
                 # white box adversarial pixel testset acc and loss
                 attack_classifier = AdvAttack(args, target_classifier.model())
@@ -794,81 +799,6 @@ if __name__ == '__main__':
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of dual manifold adversarial trained classifier on black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of dual manifold adversarial trained classifier on black-box adv testset:{adv_test_loss}' ) 
-
-        else:
-            learned_model = torch.load(args.cla_network_pkl)
-            target_classifier = MaggieClassifier(args,learned_model)
-
-            cle_x_train, cle_y_train = target_classifier.settensor(cle_train_dataloader)
-            cle_x_test, cle_y_test = target_classifier.settensor(cle_test_dataloader)
-
-            #------------读取对抗样本---------
-            
-            if args.defense_mode == "at":
-                adv_trainset_path = os.path.join(args.adv_dataset,'train')
-                x_train_adv, y_train_adv = target_classifier.getadvset(adv_trainset_path)
-
-            adv_testset_path = os.path.join(args.adv_dataset,'test')
-            x_test_adv, y_test_adv = target_classifier.getadvset(adv_testset_path)
-        
-            # #-----------测试准确率------------
-            adv_test_accuracy, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),x_test_adv,y_test_adv)
-            print(f'standard trained classifier *accuary* on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
-            # print(f'standard trained classifier *loss* on adversarial testset:{adv_test_loss}' )  
-
-            cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)
-            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )               
-            # print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
-
-            # raise error
-
-            if args.defense_mode == "at":
-
-                target_classifier.adversarialtrain(args, cle_x_train,cle_y_train, x_train_adv, y_train_adv, x_test_adv, y_test_adv, target_classifier.artmodel(),exp_result_dir)
-                    
-                
-                at_cle_test_accuracy, at_cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
-                print(f'adversarial trained classifier accuary on clean testset:{at_cle_test_accuracy * 100:.4f}%' ) 
-                print(f'adversarial trained classifier loss on clean testset:{at_cle_test_loss}' ) 
-
-                at_adv_test_accuracy, at_adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),x_test_adv,y_test_adv)
-                print(f'adversarial trained classifier accuary on adversarial testset:{at_adv_test_accuracy * 100:.4f}%' ) 
-                print(f'adversarial trained classifier loss on adversarial testset:{at_adv_test_loss}' )     
-
-                # SaveTxt(args,exp_result_dir,cle_test_accuracy,adv_test_accuracy,at_adv_test_accuracy,at_cle_test_accuracy, cle_test_loss,adv_test_loss,at_adv_test_loss,at_cle_test_loss)
-
-            if args.defense_mode == "mmat":
-                generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
-                generate_model.mixgenerate(cle_train_dataloader)
-                
-                #------------读取混合样本--------- 不要全部读，读出要求的比例即可
-                if args.aug_mix_rate != 0:
-                    x_train_mix, y_train_mix = generate_model.generatedset()
-                else:
-                    x_train_mix = None
-                    y_train_mix = None
-                
-                #------------混合训练---------
-
-                target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir) 
-
-                # target_classifier.mmat(args, cle_x_train, cle_y_train, x_train_mix, y_train_mix, cle_x_test, cle_y_test, x_test_adv, y_test_adv, exp_result_dir, target_classifier.artmodel())              
-
-            #    生成对抗样本
-                mmat_learned_model= target_classifier.model()
-                attack_classifier = AdvAttack(args, mmat_learned_model)
-                mmat_target_model = attack_classifier.targetmodel()
-    
-                # mmat_x_test_adv, mmat_y_test_adv = attack_classifier.generate(exp_result_dir,cle_test_dataloader)          #     只生成testset对抗样本
-                mmat_x_test_adv, mmat_y_test_adv = attack_classifier.generateadvfromtestsettensor(exp_result_dir, cle_x_test, cle_y_test)
-
-                mmat_adv_test_accuracy, mmat_adv_test_loss = target_classifier.evaluatefromtensor(mmat_target_model,mmat_x_test_adv,mmat_y_test_adv)
-                print(f'mmat trained classifier accuary on adversarial testset:{mmat_adv_test_accuracy * 100:.4f}%' ) 
-                print(f'mmat trained classifier loss on adversarial testset:{mmat_adv_test_loss}' )    
-                mmat_cle_test_accuracy, mmat_cle_test_loss = target_classifier.evaluatefromtensor(mmat_target_model,cle_x_test,cle_y_test)
-                print(f'mmat trained classifier accuary on clean testset:{mmat_cle_test_accuracy * 100:.4f}%' ) 
-                print(f'mmat trained classifier loss on clean testset:{mmat_cle_test_loss}' ) 
-                SaveTxt(args, exp_result_dir, cle_test_accuracy, adv_test_accuracy, mmat_adv_test_accuracy, mmat_cle_test_accuracy, cle_test_loss, adv_test_loss, mmat_adv_test_loss, mmat_cle_test_loss)
         
     print("---------------------------------------")
     print("\n")
