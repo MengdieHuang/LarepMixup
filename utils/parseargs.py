@@ -45,13 +45,14 @@ def parse_arguments():
                 'preactresnet18-kmnist', 'preactresnet18-svhn', 'preactresnet18-cifar10','preactresnet18-imagenetmixed10',
                 'preactresnet34-kmnist', 'preactresnet34-svhn', 'preactresnet34-cifar10','preactresnet34-imagenetmixed10',
                 'preactresnet50-kmnist', 'preactresnet50-svhn', 'preactresnet50-cifar10','preactresnet50-imagenetmixed10',
-                'wideresnet2810-kmnist', 'wideresnet2810-svhn', 'wideresnet2810-cifar10'
+                'wideresnet2810-kmnist', 'wideresnet2810-svhn', 'wideresnet2810-cifar10',
+                'cusresnet18-cifar10'
 
             ]  
 
         )
         parser_object.add_argument('--cla_model',type=str,default=None,
-            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet2810']
+            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet2810','cusresnet18']
         )
 
         parser_object.add_argument('--gen_model',type=str,default=None,
@@ -174,6 +175,9 @@ def parse_arguments():
 
         parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
+        parser_object.add_argument('--attack_eps_step', help='number of the PGD epsilon step size', type=float, default=0.1)
+        parser_object.add_argument('--attack_max_iter', help='number of the PGD epsilon step size', type=int, default=100)
+
         parser_object.add_argument('--whitebox',action='store_true', help='white box attack')
         parser_object.add_argument('--blackbox',action='store_true', help='black box attack')
         parser_object.add_argument('--latentattack', action='store_true', help='latent adversarial attack')

@@ -458,14 +458,15 @@ class MaggieDataset:
                         #---------20230324------
                         transforms.RandomCrop(32, padding=4),
                         transforms.RandomHorizontalFlip(),
+                        # transforms.RandomVerticalFlip(),
                         transforms.ToTensor(),
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
                         #-----------------------
                         # #---------20230325------                        
                         # transforms.RandomCrop(32, padding=4),  #先四周填充0，在吧图像随机裁剪成32*32
                         # transforms.RandomHorizontalFlip(),  #图像一半的概率翻转，一半的概率不翻转
                         # transforms.ToTensor(),
-                        # transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]), #R,G,B每层的归一化用到的均值和方差
+                        transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]), #R,G,B每层的归一化用到的均值和方差
                         Cutout(n_holes=1, length=16),                        
                     ]
                 ),
@@ -698,13 +699,13 @@ class MaggieDataset:
                         # transforms.RandomCrop(32, padding=4),
                         # transforms.RandomHorizontalFlip(),
                         transforms.ToTensor(),
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
                         #-----------------------     
                         # #---------20230325------                        
                         # # transforms.RandomCrop(32, padding=4),  #先四周填充0，在吧图像随机裁剪成32*32
                         # # transforms.RandomHorizontalFlip(),  #图像一半的概率翻转，一半的概率不翻转
                         # transforms.ToTensor(),
-                        # transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]), #R,G,B每层的归一化用到的均值和方差
+                        transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]), #R,G,B每层的归一化用到的均值和方差
                         # # Cutout(n_holes=1, length=16),                                                  
                     ]
                 ),
