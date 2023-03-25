@@ -648,6 +648,11 @@ class MaggieClassifier:
         elif self._args.lr_schedule == 'StepLR':
             scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=1, gamma=0.1) 
             print("lr scheduler = StepLR")
+        elif self._args.lr_schedule == 'MultiStepLR':
+            if self._args.epochs == 200:
+                scheduler = torch.optim.lr_scheduler.MultiStepLR(self._optimizer, milestones=[120], gamma=0.1)
+            elif self._args.epochs == 300:
+                scheduler = torch.optim.lr_scheduler.MultiStepLR(self._optimizer, milestones=[150, 250], gamma=0.1)
             
         else:
             print("lr_scheduler = None")
