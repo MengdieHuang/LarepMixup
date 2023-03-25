@@ -446,21 +446,13 @@ class MaggieDataset:
                 download=False,                                          
                 transform=transforms.Compose(
                     [
-                        # # transforms.Resize(self._args.img_size), 
-                        # # transforms.CenterCrop(self._args.img_size),
-                        # transforms.Resize(crop_size), 
-                        # transforms.CenterCrop(crop_size),
-                        # transforms.ToTensor(), 
-                        # transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
-                        # # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
-                        
-                        
-                        #---------20230324------
-                        transforms.RandomCrop(32, padding=4),
-                        transforms.RandomHorizontalFlip(),
-                        transforms.ToTensor(),
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
-                        #-----------------------
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),
+                        transforms.ToTensor(), 
+                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
                     ]
                 ),
             )
@@ -677,20 +669,13 @@ class MaggieDataset:
                 download=False,                                          #   自动从网上下载数据集
                 transform=transforms.Compose(
                     [
-                        # # transforms.Resize(self._args.img_size), 
-                        # # transforms.CenterCrop(self._args.img_size),
-                        # transforms.Resize(crop_size), 
-                        # transforms.CenterCrop(crop_size),                        
-                        # transforms.ToTensor(), 
-                        # transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
-                        # # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
-                        
-                        #---------20230324------
-                        # transforms.RandomCrop(32, padding=4),
-                        # transforms.RandomHorizontalFlip(),
-                        transforms.ToTensor(),
-                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),                        
-                        #-----------------------                        
+                        # transforms.Resize(self._args.img_size), 
+                        # transforms.CenterCrop(self._args.img_size),
+                        transforms.Resize(crop_size), 
+                        transforms.CenterCrop(crop_size),                        
+                        transforms.ToTensor(), 
+                        transforms.Normalize([0.5,0.5,0.5], [0.5,0.5,0.5])
+                        # transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
                     ]
                 ),
             )

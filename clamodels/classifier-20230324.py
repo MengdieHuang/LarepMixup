@@ -23,7 +23,6 @@ import random
 import copy
 from attacks.advattack import AdvAttack
 from clamodels import comparemodels
-from utils.ealystop import EarlyStopping
 
 from tensorboardX import SummaryWriter
 from genmodels.mixgenerate import MixGenerate
@@ -572,7 +571,6 @@ class MaggieClassifier:
         # torch.optim.SparseAdam()
         # torch.optim.Optimizer()
         optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
-        # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9, weight_decay=5e-4)
 
         # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9,  weight_decay=1e-4)
         return optimizer
@@ -625,20 +623,15 @@ class MaggieClassifier:
         return self._model
 
     def __trainloop__(self):
-        #   only for standard training
+
         global_train_acc = []
         global_test_acc = []
         global_train_loss = []
         global_test_loss = []
-        # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=200)
-       
-        #------maggie add 20230324
-        # early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=20) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
-        early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=40) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
 
         for epoch_index in range(self._args.epochs):
-            print('\nEpoch: %d' % epoch_index)            
-            # self.__adjustlearningrate__(epoch_index)     
+            
+            self.__adjustlearningrate__(epoch_index)     
 
             epoch_correct_num = 0
             epoch_total_loss = 0
@@ -710,30 +703,9 @@ class MaggieClassifier:
             print(f'{epoch_index+1:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
             print(f'{epoch_index+1:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
             
-            # save model path
-                
-            #------------20230324 ealystop------------
-            early_stopping(epoch_test_loss, self._model)
-            if early_stopping.early_stop == True:
-                print("Early stopping")
-                model_savepath = f'{self._exp_result_dir}/{self._args.cla_model}-{self._args.dataset}-{self._args.n_classes}classes-stdtrain-epoch-{epoch_index+1:04d}-acc-{epoch_test_accuracy:.4f}.pkl'
-                torch.save(self._model, model_savepath)
-                break 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            # if (epoch_index+1) % 11== 0 and epoch_index > 0:
+            if (epoch_index+1)  >= 9:
+                torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')
             
             #-------------tensorboard实时画图-------------------
             tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc')
@@ -3118,62 +3090,4 @@ class MaggieClassifier:
             writer_tra_loss = SummaryWriter(log_dir = tensorboard_log_train_loss_dir, comment= '-'+'augtrainloss') 
             writer_tra_loss.add_scalar(tag = "epoch_augtrain_loss", scalar_value = epoch_total_loss/len(self._train_dataloader), global_step = epoch_index + 1 )
             writer_tra_loss.close()
-            #--------------------------------------------------   
-            
-#----------------------------------------------------------
-#----------------------------------------------------------
-    def newtrain(self,train_dataloader,test_dataloader,exp_result_dir, train_mode) -> "torchvision.models or CustomNet":
-
-        # initilize the dataloader
-        self._train_dataloader = train_dataloader
-        self._test_dataloader = test_dataloader 
-        self._trainset_len = len(self._train_dataloader.dataset)
-        self._trainbatch_num = len(self._train_dataloader)
-        self._exp_result_dir = exp_result_dir
-        print("self._trainset_len:",self._trainset_len)                 
-        print("self._trainbatch_num:",self._trainbatch_num)
-        print("self._testset_len:",len( self._test_dataloader.dataset))     
-        # print("self._train_dataloader.dataset[0][0][0].shape:",self._train_dataloader.dataset[0][0][0].shape)
-        # print("self._test_dataloader.dataset[0][0][0].shape:",self._test_dataloader.dataset[0][0][0].shape)
-
-        """
-        self._trainset_len: 77237
-        self._trainbatch_num: 151
-        self._testset_len: 3000
-        self._train_dataloader.dataset[0][0][0].shape: torch.Size([256, 256])
-        self._test_dataloader.dataset[0][0][0].shape: torch.Size([256, 256])
-        """
-
-        self._exp_result_dir = os.path.join(self._exp_result_dir,f'train-{self._args.dataset}-dataset')
-        os.makedirs(self._exp_result_dir,exist_ok=True)    
-
-        if torch.cuda.is_available():
-            self._lossfunc.cuda()
-            self._model.cuda()
-
-        
-        # raise Exception("maggie stop")
-
-        
-        global_train_acc, global_test_acc, global_train_loss, global_test_loss = self.__trainloop__()
-        
-        
-        
-        if train_mode == "std-train":
-            torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-finished.pkl')
-            accuracy_png_name = f'standard trained classifier {self._args.cla_model} accuracy on clean {self._args.dataset}'
-            loss_png_name = f'standard trained classifier {self._args.cla_model} loss on clean {self._args.dataset}'
-        
-        elif train_mode == "adv-train":     
-            torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-adv-{self._args.dataset}-finished.pkl')
-            accuracy_png_name = f'adversarial trained classifier {self._args.cla_model} accuracy on adversarial {self._args.dataset}'
-            loss_png_name = f'adversarial trained classifier {self._args.cla_model} loss on adversarial {self._args.dataset}'
-
-
-
-        SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_test_acc, accuracy_png_name)
-
-        SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_test_loss, loss_png_name)
-
-        return self._model
-         
+            #--------------------------------------------------            
