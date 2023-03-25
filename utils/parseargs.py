@@ -203,6 +203,12 @@ def parse_arguments():
         parser_object.add_argument('--seed', type=int, default=0)  
         parser_object.add_argument('--save_images_every', type=int, default=10)
         parser_object.add_argument('--save_every', type=int, default=1000)
+
+        #--------------optimizer----------
+        parser_object.add_argument('--optimizer', help='optimizer', type=str, default='adam')
+        parser_object.add_argument('--lr_schedule', help='CosineAnnealingLR, StepLR', type=str, default=None)
+        parser_object.add_argument('--patience', help='early stop', type=int, default=40)
+        
     
     return parser.parse_args()
 

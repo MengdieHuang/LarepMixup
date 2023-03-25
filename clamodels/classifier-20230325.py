@@ -571,16 +571,9 @@ class MaggieClassifier:
         # torch.optim.SGD()
         # torch.optim.SparseAdam()
         # torch.optim.Optimizer()
-
-        # optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
+        optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
         # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9, weight_decay=5e-4)
-                
-        if self._args.optimizer =='adam': 
-            optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
-            print("optimizer=adam")
-        elif self._args.optimizer =='sgd':
-            optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9, weight_decay=5e-4)
-            print("optimizer=sgd")
+
         # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9,  weight_decay=1e-4)
         return optimizer
 
@@ -637,32 +630,12 @@ class MaggieClassifier:
         global_test_acc = []
         global_train_loss = []
         global_test_loss = []
-        
-        #----------maggie add 20230325----------
         # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=200)
-
-        if self._args.lr_schedule == 'CosineAnnealingLR':
-            scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self._optimizer, T_max=self._args.epochs)
-            print("lr scheduler = CosineAnnealingLR")
-            
-        elif self._args.lr_schedule == 'StepLR':
-            scheduler = torch.optim.lr_scheduler.StepLR(self._optimizer, step_size=1, gamma=0.1) 
-            print("lr scheduler = StepLR")
-            
-        else:
-            print("lr_scheduler = None")
-        #----------maggie add 20230325----------
-        
-        
-        
-        #------maggie add 20230324---
+       
+        #------maggie add 20230324
         # early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=20) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
-        # early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=40) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
-        print("self._args.patience:",self._args.patience)
-        early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=self._args.patience) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
-        
-        #---------------------------
-        
+        early_stopping = EarlyStopping(save_path=self._exp_result_dir, patience=40) #当验证集损失在连续20次训练周期中都没有得到降低时,停止模型训练,以防止模型过拟合
+
         for epoch_index in range(self._args.epochs):
             print('\nEpoch: %d' % epoch_index)            
             # self.__adjustlearningrate__(epoch_index)     
@@ -736,7 +709,31 @@ class MaggieClassifier:
             # print(f'{epoch_index:04d} epoch classifier loss on the current epoch training examples:{epoch_train_loss:.4f}' )   
             print(f'{epoch_index+1:04d} epoch classifier accuary on the entire testing examples:{epoch_test_accuracy*100:.4f}%' )  
             print(f'{epoch_index+1:04d} epoch classifier loss on the entire testing examples:{epoch_test_loss:.4f}' )  
-                        
+            
+            # save model path
+                
+            #------------20230324 ealystop------------
+            early_stopping(epoch_test_loss, self._model)
+            if early_stopping.early_stop == True:
+                print("Early stopping")
+                model_savepath = f'{self._exp_result_dir}/{self._args.cla_model}-{self._args.dataset}-{self._args.n_classes}classes-stdtrain-epoch-{epoch_index+1:04d}-acc-{epoch_test_accuracy:.4f}.pkl'
+                torch.save(self._model, model_savepath)
+                break 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             #-------------tensorboard实时画图-------------------
             tensorboard_log_acc_dir = os.path.join(self._exp_result_dir,f'tensorboard-log-run-acc')
@@ -786,17 +783,7 @@ class MaggieClassifier:
             # raise error
             #--------------------------------------------------
 
-            # save model path
-            #------------20230324 ealystop------------
-            early_stopping(epoch_test_loss, self._model)
-            if early_stopping.early_stop == True:
-                print("Early stopping")
-                model_savepath = f'{self._exp_result_dir}/{self._args.cla_model}-{self._args.dataset}-{self._args.n_classes}classes-stdtrain-epoch-{epoch_index+1:04d}-acc-{epoch_test_accuracy:.4f}.pkl'
-                torch.save(self._model, model_savepath)
-                break 
-            
-            scheduler.step()
-            
+
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss
     
     def evaluatefromdataloader(self,model,test_dataloader) -> None:
