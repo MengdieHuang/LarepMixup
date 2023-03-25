@@ -43,6 +43,7 @@ if __name__ == '__main__':
     cle_train_dataloader.len 2414
     cle_test_dataloader.len 94
     """
+<<<<<<< HEAD
     # if args.mode == 'train':
     #     if args.train_mode =="gen-train":                                               
     #         generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
@@ -62,6 +63,8 @@ if __name__ == '__main__':
     #         print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
     #         print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
 
+=======
+>>>>>>> 01f3dcf2e6f3c5db287fd343205eac0afd88d1d2
     if args.mode == 'train':
         if args.train_mode =="gen-train":                                               
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
@@ -72,18 +75,26 @@ if __name__ == '__main__':
             # cle_x_test, cle_y_test = target_classifier.settensor(cle_test_dataloader)
 
             if args.pretrained_on_imagenet == False:
+<<<<<<< HEAD
                 # target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')     
                 
                 target_classifier.newtrain(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                   
                 
                                              
+=======
+                target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                                  
+>>>>>>> 01f3dcf2e6f3c5db287fd343205eac0afd88d1d2
             elif args.pretrained_on_imagenet == True:
                 target_classifier = target_classifier
 
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 01f3dcf2e6f3c5db287fd343205eac0afd88d1d2
     elif args.mode == 'attack':
         if args.latentattack == False:    
             if args.perceptualattack == False:  #   像素层对抗攻击
