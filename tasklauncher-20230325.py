@@ -81,7 +81,8 @@ if __name__ == '__main__':
                 target_classifier = target_classifier
 
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
-            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
+            print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )
+            #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
             
     elif args.mode == 'attack':
@@ -100,9 +101,15 @@ if __name__ == '__main__':
                 """
 
                 learned_model = torch.load(args.cla_network_pkl)
-                attack_classifier = AdvAttack(args,learned_model)
+                attack_classifier = AdvAttack(args,learned_model)                
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
+                #-------------maggie 20230325
+                cle_test_accuracy, cle_test_loss = attack_classifier.evaluatefromdataloader(target_model,cle_test_dataloader)
+                print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )
+                print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
+                #----------------------------      
+                                
                 print("start generating adv 20230325")
                 # x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          
                 x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader)          

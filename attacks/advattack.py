@@ -16,6 +16,7 @@ import copy
 import os
 from torch import LongTensor
 import advertorch.attacks
+from evaluations.accuracy import EvaluateAccuracy
 
 Tensor = torch.Tensor
 
@@ -669,3 +670,14 @@ class AdvAttack():
             yset_tensor = LongTensor(yset_tensor)                           #   list型转为tensor
 
         return yset_tensor.cuda()       #   yset_tensor 原本是CPU Tensor, 转成GPU Tenso,便于后面与mix样本拼接
+
+    def evaluatefromdataloader(self,model,test_dataloader) -> None:
+        if torch.cuda.is_available():
+            self._lossfunc.cuda()
+            # self._model.cuda()    #             check
+            model.cuda()
+        test_accuracy, test_loss = EvaluateAccuracy(model, self._lossfunc, test_dataloader,self._args.cla_model)     
+        # print(f'classifier *accuary* on testset:{test_accuracy * 100:.4f}%' ) 
+        # print(f'classifier *loss* on testset:{test_loss}' ) 
+        #  
+        return test_accuracy, test_loss
