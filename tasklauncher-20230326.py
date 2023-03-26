@@ -40,11 +40,6 @@ if __name__ == '__main__':
     print("batchnum=cle_train_dataloader.len",len(cle_train_dataloader))
     print("batchnum=cle_test_dataloader.len",len(cle_test_dataloader))
 
-    """
-    cle_train_dataloader.len 2414
-    cle_test_dataloader.len 94
-    """
-
     if args.mode == 'train':
         if args.train_mode =="gen-train":                                               
             generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
@@ -65,75 +60,110 @@ if __name__ == '__main__':
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
+
             
     elif args.mode == 'attack':
         if args.latentattack == False:    
+            print("cla_network_pkl:",args.cla_network_pkl)
+            learned_model = torch.load(args.cla_network_pkl)
+
+            
             if args.perceptualattack == False:  #   像素层对抗攻击
+                print("-----------------generate pixel-level adversarial examples----------------")
                 
                 if args.attack_mode =='cw':     
                     print("confidence:",args.confidence)
                 else:
                     print("eps:",args.attack_eps)                   #   0.05
 
-                print("pixel adversarial attack.............")
-                print("cla_network_pkl:",args.cla_network_pkl)
-                """
-                cla_network_pkl: /root/autodl-tmp/maggie/result/train/cla-train/preactresnet18-imagenetmixed10/standard-trained-classifier-preactresnet18-on-clean-imagenetmixed10-epoch-0023-acc-90.47.pkl
-                """
-
-                learned_model = torch.load(args.cla_network_pkl)
+                # print("cla_network_pkl:",args.cla_network_pkl)
+                # learned_model = torch.load(args.cla_network_pkl)
                 attack_classifier = AdvAttack(args,learned_model)                
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
-                #-------------maggie 20230325
+
                 cle_test_accuracy, cle_test_loss = attack_classifier.evaluatefromdataloader(target_model,cle_test_dataloader)
-                print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )
-                print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
-                #----------------------------      
-                                
-                print("start generating adv 20230325")
+                print(f'Accuary of load {args.cla_model} classifier on clean testset:{cle_test_accuracy * 100:.4f}%' ) 
+                print(f'Loss of load {args.cla_model} classifier on clean testset:{cle_test_loss}' ) 
+                                                    
+                  
+                print("-----------------start generate pixel-level adversarial examples----------------")
+                                                                
                 # x_train_adv, y_train_adv, x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader,cle_train_dataloader)          
+                
+                # 现在只生成test adv
                 x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, cle_test_dataloader)          
                 # x_test_adv, y_test_adv = attack_classifier.generate(exp_result_dir, test_dataloader=cle_train_dataloader)     #为了保存方便    
 
-                adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)
-                print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
-                print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
+                # target_model.eval()
+                # adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)  
+                # print(f'Accuary of load {args.cla_model} classifier on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
+                # print(f'Loss of load {args.cla_model} classifier on adversarial testset:{adv_test_loss}' ) 
 
-                accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-                txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
-                accuracy_txt.write(str(txt_content))
+                # accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
+                # txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
+                # accuracy_txt.write(str(txt_content))
             
-                loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
-                loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
-                loss_txt.write(str(loss_txt_content))    
+                # loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
+                # loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
+                # loss_txt.write(str(loss_txt_content))    
+            
             
             elif args.perceptualattack == True:  #   像素层感知攻击
-                learned_model = torch.load(args.cla_network_pkl)
+                print("-----------------generate pixel-level perceptual examples----------------")
+                
+                # learned_model = torch.load(args.cla_network_pkl)
+                
                 attack_classifier = PerAttack(args,learned_model)
                 target_model = attack_classifier.targetmodel()    #   target model是待攻击的目标模型
 
+                cle_test_accuracy, cle_test_loss = attack_classifier.evaluatefromdataloader(target_model,cle_test_dataloader)
+                print(f'Accuary of load {args.cla_model} classifier on clean testset:{cle_test_accuracy * 100:.4f}%' ) 
+                print(f'Loss of load {args.cla_model} classifier on clean testset:{cle_test_loss}' ) 
+
+
+                print("-----------------start generate pixel-level perceptual examples----------------")
                 x_test_per, y_test_per = attack_classifier.generate(exp_result_dir, cle_test_dataloader)          
 
-                target_model.eval()
-                per_test_accuracy, per_test_loss = attack_classifier.evaluatefromtensor(target_model, x_test_per, y_test_per)
-                print(f'standard trained classifier accuary on perceptual attack testset:{per_test_accuracy * 100:.4f}%' ) 
-                print(f'standard trained classifier loss on perceptual attack testset:{per_test_loss}' )    
+                # target_model.eval()
+                # per_test_accuracy, per_test_loss = attack_classifier.evaluatefromtensor(target_model, x_test_per, y_test_per)
+                # print(f'standard trained classifier accuary on perceptual attack testset:{per_test_accuracy * 100:.4f}%' ) 
+                # print(f'standard trained classifier loss on perceptual attack testset:{per_test_loss}' )    
 
-                accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
-                txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-per-{args.dataset}-testset = {per_test_accuracy}\n'
-                accuracy_txt.write(str(txt_content))
+                # accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
+                # txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-per-{args.dataset}-testset = {per_test_accuracy}\n'
+                # accuracy_txt.write(str(txt_content))
             
-                loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
-                loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-per-{args.dataset}-testset = {per_test_loss}\n'
-                loss_txt.write(str(loss_txt_content))    
+                # loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
+                # loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-per-{args.dataset}-testset = {per_test_loss}\n'
+                # loss_txt.write(str(loss_txt_content))    
+
+
+
+
+            target_model.eval()
+            adv_test_accuracy, adv_test_loss = attack_classifier.evaluatefromtensor(target_model,x_test_adv,y_test_adv)  
+            print(f'Accuary of load {args.cla_model} classifier on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
+            print(f'Loss of load {args.cla_model} classifier on adversarial testset:{adv_test_loss}' ) 
+
+            accuracy_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-accuracy-on-{args.dataset}-testset.txt', "w")    
+            txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-accuracy-on-adv-{args.dataset}-testset = {adv_test_accuracy}\n'
+            accuracy_txt.write(str(txt_content))
+        
+            loss_txt=open(f'{attack_classifier.getexpresultdir()}/classifier-{args.cla_model}-loss-on-{args.dataset}-testset.txt', "w")    
+            loss_txt_content = f'{attack_classifier.getexpresultdir()}/pretrained-classifier-{args.cla_model}-loss-on-adv-{args.dataset}-testset = {adv_test_loss}\n'
+            loss_txt.write(str(loss_txt_content)) 
+            
         
         elif args.latentattack == True:  #   表征层对抗攻击
+            print("-----------------generate representation-level perceptual examples----------------")
+            
             print("eps:",args.attack_eps)
-            print("latent adversarial attack.............")
+            
             print("cla_network_pkl:",args.cla_network_pkl)
             learned_cla_model = torch.load(args.cla_network_pkl)
             target_classifier = MaggieClassifier(args,learned_cla_model)
+            
             cle_w_test, cle_y_test = target_classifier.getproset(args.projected_dataset)
             cle_y_test = cle_y_test[:,0]    #这个不能注释
             print("cle_w_test.shape:",cle_w_test.shape)
@@ -156,11 +186,21 @@ if __name__ == '__main__':
             merge_model = torch.nn.Sequential(gan_net, cla_net)
             latent_attacker = AdvAttack(args,merge_model)
             
-            adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)             
+            
+            
+            cle_test_accuracy, cle_test_loss = latent_attacker.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
+            print(f'Accuary of load {args.cla_model} classifier on clean testset:{cle_test_accuracy * 100:.4f}%' ) 
+            print(f'Loss of load {args.cla_model} classifier on clean testset:{cle_test_loss}' )             
+            
+            print("-----------------start generate pixel-level adversarial examples----------------")
+            
+            adv_x_test, adv_y_test = latent_attacker.generatelatentadv(exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net)    
+                     
             adv_test_accuracy, adv_test_loss = latent_attacker.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            print(f'standard trained classifier accuary on adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
-            print(f'standard trained classifier loss on adversarial testset:{adv_test_loss}' )    
 
+            print(f'Accuary of load {args.cla_model} classifier on OM adversarial testset:{adv_test_accuracy * 100:.4f}%' ) 
+            print(f'Loss of load {args.cla_model} classifier on OM adversarial testset:{adv_test_loss}' ) 
+            
             #   20220809
             # gan_net.eval()
             # testset_total_num = int(cle_w_test.size(0))

@@ -446,6 +446,7 @@ class MaggieClassifier:
         # torch.optim.Optimizer()
 
         # optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
+        # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9, weight_decay=5e-4)
                 
         if self._args.optimizer =='adam': 
             optimizer = torch.optim.Adam(params=self._model.parameters(), lr=self._args.lr)
@@ -453,7 +454,6 @@ class MaggieClassifier:
         elif self._args.optimizer =='sgd':
             optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9, weight_decay=5e-4)
             print("optimizer=sgd")
-            
         # optimizer = torch.optim.SGD(params=self._model.parameters(), lr=self._args.lr, momentum=0.9,  weight_decay=1e-4)
         return optimizer
 
@@ -1154,16 +1154,13 @@ class MaggieClassifier:
         stdtrain_total_cost_time=stdtrain_end_time-stdtrain_start_time
         print(f'stdtrain_total_cost_time: {stdtrain_total_cost_time:.4f} seconds, = {str(datetime.timedelta(seconds=stdtrain_total_cost_time))}')
 
-        cost_time_txt=open(f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-stdtrain_total_cost_time.txt', "w")    
-        cost_time_txt_content = f'stdtrain_total_cost_time: {stdtrain_total_cost_time:.4f} seconds, = {str(datetime.timedelta(seconds=stdtrain_total_cost_time))}\n'
-        cost_time_txt.write(str(cost_time_txt_content)) 
 
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-stdtrain_total_cost_time.txt')            
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_test_acc.txt')   
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_loss.txt')   
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_test_loss.txt')   
-        # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_cost_time.txt')   
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-stdtrain_total_cost_time.txt')            
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_test_acc.txt')   
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_loss.txt')   
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_test_loss.txt')   
+        torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_cost_time.txt')   
            
         #   返回给trainingloop外的stdtrain函数，所以不用现在存global    
         return global_train_acc, global_test_acc, global_train_loss, global_test_loss, global_cost_time

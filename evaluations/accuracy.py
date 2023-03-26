@@ -81,7 +81,8 @@ def EvaluateAccuracy(classifier, classify_loss, test_dataloader:torch.utils.data
 
     #------当前epoch分类模型在测试集整体上的准确率--------------------(测试集只用1轮)
     test_accuracy = epoch_correct_num / testset_total_num
-    test_loss = epoch_total_loss / len(test_dataloader)                                                         #   除以batch num
+    test_loss = epoch_total_loss / len(test_dataloader)                                                         
+    #   除以batch num
     # print("测试样本总数：",testset_total_num)
     # print("预测正确总数：",epoch_correct_num)
     # print("预测总损失：",epoch_total_loss)
