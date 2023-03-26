@@ -24,6 +24,8 @@ from clamodels import comparemodels
 from utils.ealystop import EarlyStopping
 from clamodels.custommodels.customnets import CustomAlexnet,CustomVGG19,CustomResnNet18,CustomNet
 import clamodels.custommodels.resnet
+import clamodels.custommodels.vgg
+import clamodels.custommodels.densenet
 
 from genmodels.mixgenerate import MixGenerate
 from torch.autograd import Variable
@@ -280,7 +282,7 @@ class MaggieClassifier:
 
     def __getmodel__(self) -> "torchvision.models or CustomNet":
         model_name = self._args.cla_model
-        torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet'] # 少 vgg19
+        torchvisionmodel_dict = ['resnet34','resnet50','densenet169','inception_v3','resnet18','googlenet','wide_resnet50_2'] # 少 vgg19
         comparemodel_dict = ['preactresnet18','preactresnet34','preactresnet50']    #   ,'wideresnet2810'
         if model_name in torchvisionmodel_dict:
             model = self.__gettorchvisionmodel__()      #   加载torchvision库model
@@ -288,7 +290,7 @@ class MaggieClassifier:
         elif model_name in comparemodel_dict:
             model = self.__getcomparemodel__()  #   'preactresnet18','preactresnet34','preactresnet50'
         
-        else:   # alexnet, vgg19, 'cusresnet18'
+        else:   # alexnet, vgg19, 'cusresnet18','cusvgg19','cusdensenet169'
             if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
                 model = self.__getlocalmodel__()
             elif self._args.img_size > 32:
@@ -381,13 +383,15 @@ class MaggieClassifier:
         print("pretrain_flag:",pretrain_flag)                   #  pretrain_flag: False
         print("self._args.channels:",self._args.channels)       #   self._args.channels: 3
 
-        if model_name == 'alexnet':
+        if model_name == 'cusalexnet':
             local_model = CustomAlexnet(name='alexnet',n_channels=data_channels, n_outputs=classes_number)
-        elif model_name == 'vgg19':
+        elif model_name == 'cusvgg19':
             local_model = CustomVGG19(name='VGG19',n_channels=data_channels, n_outputs=classes_number)
         elif model_name == 'cusresnet18':    
-            # local_model = CustomResnNet18(name='cusresnet18',n_channels=data_channels, n_outputs=classes_number) #96.58%
-            local_model = clamodels.custommodels.resnet.ResNet18(n_channels=data_channels, n_outputs=classes_number)
+            local_model = CustomResnNet18(name='cusresnet18',n_channels=data_channels, n_outputs=classes_number) #96.58%
+            # local_model = clamodels.custommodels.resnet.ResNet18(n_channels=data_channels, n_outputs=classes_number)
+        elif model_name == 'cusdensenet169':    
+            local_model = clamodels.custommodels.densenet.DenseNet169(n_channels=data_channels, n_outputs=classes_number)
             
             
         else:
