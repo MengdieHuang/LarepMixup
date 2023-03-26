@@ -26,6 +26,7 @@ from clamodels.custommodels.customnets import CustomAlexnet,CustomVGG19,CustomRe
 import clamodels.custommodels.resnet
 import clamodels.custommodels.vgg
 import clamodels.custommodels.densenet
+import clamodels.custommodels.wideresnet
 
 from genmodels.mixgenerate import MixGenerate
 from torch.autograd import Variable
@@ -392,6 +393,8 @@ class MaggieClassifier:
             # local_model = clamodels.custommodels.resnet.ResNet18(n_channels=data_channels, n_outputs=classes_number)
         elif model_name == 'cusdensenet169':    
             local_model = clamodels.custommodels.densenet.DenseNet169(n_channels=data_channels, n_outputs=classes_number)
+        elif model_name == 'wideresnet28_10':    
+            local_model = clamodels.custommodels.wideresnet.wideResnet28_10(n_channels=data_channels, n_outputs=classes_number)            
             
             
         else:
