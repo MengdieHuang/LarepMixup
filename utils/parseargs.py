@@ -47,6 +47,8 @@ def parse_arguments():
                 'preactresnet50-kmnist', 'preactresnet50-svhn', 'preactresnet50-cifar10','preactresnet50-imagenetmixed10',
                 'wideresnet28_10-kmnist', 'wideresnet28_10-svhn', 'wideresnet28_10-cifar10',
                 'cusresnet18-cifar10','cusresnet18-svhn',
+                'cusresnet34-cifar10','cusresnet34-svhn',
+                'cusresnet50-cifar10','cusresnet50-svhn',                                
                 'cusvgg19-cifar10','cusvgg19-svhn',
                 'cusdensenet169-cifar10','cusdensenet169-svhn',
                 'cusalexnet-cifar10','cusalexnet-svhn',
@@ -56,7 +58,7 @@ def parse_arguments():
 
         )
         parser_object.add_argument('--cla_model',type=str,default=None,
-            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet28_10','cusresnet18','cusvgg19','cusdensenet169','cusalexnet','wide_resnet50_2']
+            choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet28_10','cusresnet18','cusresnet34','cusresnet50','cusvgg19','cusdensenet169','cusalexnet','wide_resnet50_2']
         )
 
         parser_object.add_argument('--gen_model',type=str,default=None,

@@ -44,6 +44,24 @@ if __name__ == '__main__':
     cle_train_dataloader.len 2414
     cle_test_dataloader.len 94
     """
+    # if args.mode == 'train':
+    #     if args.train_mode =="gen-train":                                               
+    #         generate_model = MixGenerate(args, exp_result_dir, stylegan2ada_config_kwargs)
+        
+    #     elif args.train_mode =="cla-train":    
+    #         target_classifier = MaggieClassifier(args)
+    #         # cle_x_train, cle_y_train = target_classifier.settensor(cle_train_dataloader)
+    #         # cle_x_test, cle_y_test = target_classifier.settensor(cle_test_dataloader)
+
+    #         if args.pretrained_on_imagenet == False:
+    #             target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')     
+                                             
+    #         elif args.pretrained_on_imagenet == True:
+    #             target_classifier = target_classifier
+
+    #         cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
+    #         print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )                                    #   *accuary* on testset:75.6900%
+    #         print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
 
     if args.mode == 'train':
         if args.train_mode =="gen-train":                                               
@@ -58,12 +76,14 @@ if __name__ == '__main__':
                 # target_classifier.train(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')     
                 
                 target_classifier.newtrain(cle_train_dataloader,cle_test_dataloader,exp_result_dir, train_mode = 'std-train')                   
-                                            
+                
+                                             
             elif args.pretrained_on_imagenet == True:
                 target_classifier = target_classifier
 
             cle_test_accuracy, cle_test_loss = target_classifier.evaluatefromdataloader(target_classifier.model(),cle_test_dataloader)
             print(f'standard trained classifier *accuary* on clean testset:{cle_test_accuracy * 100:.4f}%' )
+            #   *accuary* on testset:75.6900%
             print(f'standard trained classifier *loss* on clean testset:{cle_test_loss}' ) 
             
     elif args.mode == 'attack':
@@ -301,6 +321,14 @@ if __name__ == '__main__':
                 # 针对非PreAct的OM-PGD的攻击 只评估精度 
                 raise error
 
+            if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_eps != 0.02:    
+                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
+                print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
+                # 针对非PreAct的eps不等于0.02的攻击 只评估精度 
+
+                raise error
+
             if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_mode in ["fog","snow","elastic","jpeg"]:
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -308,14 +336,6 @@ if __name__ == '__main__':
                 # 针对非PreAct的perceptual攻击 只评估精度 
                 raise error            
 
-            if args.cla_model in ['alexnet','resnet18','resnet34','resnet50','vgg19','densenet169','googlenet'] and args.attack_eps != 0.02 and args.attack_mode != 'pgd':    
-                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-                print(f'Accuary of before rmt trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
-                print(f'Loss of before rmt trained classifier on adv testset:{adv_test_loss}' ) 
-                # 针对非PreAct的eps不等于0.02的攻击 只评估精度 
-
-                raise error
-            
             print("args.mix_mode:",args.mix_mode)
             print("args.mix_w_num:",args.mix_w_num)
             print("args.beta_alpha:",args.beta_alpha)
@@ -376,7 +396,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before inputmixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before inputmixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before inputmixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -446,7 +466,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before manifold mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before manifold mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
                 print(f'Accuary of before manifold mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -515,7 +535,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before patch mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before patch mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
                 print(f'Accuary of before patch mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -584,7 +604,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before puzzle mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before puzzle mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
                 print(f'Accuary of before puzzle mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -653,7 +673,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before cut mixup trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before cut mixup trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)     #   在对抗样本测试集上评估精度
                 print(f'Accuary of before cut mixup trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -712,6 +732,7 @@ if __name__ == '__main__':
             # 对抗样本训练集
             # print("args.train_adv_dataset",args.train_adv_dataset)
             adv_trainset_path = args.train_adv_dataset
+
             adv_x_train, adv_y_train = target_classifier.getadvset(adv_trainset_path)
             print("adv_x_train.shape:",adv_x_train.shape)
             print("adv_y_train.shape:",adv_y_train.shape)            
@@ -731,7 +752,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before adversarial trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before adversarial trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm" or args.attack_mode != "pgd":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before at trained classifier on adv testset:{adv_test_acc * 100:.4f}%' ) 
@@ -819,7 +840,7 @@ if __name__ == '__main__':
             # print(f'Accuary of before dual manifold adversarial trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
             # print(f'Loss of before dual manifold adversarial trained classifier clean testset:{cle_test_loss}' ) 
 
-            if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
+            if args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
                 print(f'Accuary of before dual manifold adversarial trained classifier on white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
