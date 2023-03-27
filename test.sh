@@ -1,5 +1,0 @@
-source ~/.bashrc
-source /home/xieyi/anaconda3/bin/activate mmat
-
-# ResNet18 linear rmt beta(1,1) against pgd (eps=0.05)
-CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230325.py run --mode defense --defense_mode rmt --beta_alpha 1 --mix_mode basemixup --sample_mode betasampler --attack_mode pgd --attack_eps 0.05 --blackbox --exp_name resnet18-cifar10 --cla_model resnet18 --cla_network_pkl /home/data/maggie/result-newhome/defense/rmt/pgd/basemixup-betasampler/resnet18-cifar10/blackbox/20220903/00000/rmt-cifar10-dataset/rmt-trained-classifier-resnet18-on-cifar10-epoch-0018-rmt-linear-cla1.pkl --gen_model stylegan2ada --gen_network_pkl /home/data/maggie/result-newhome/train/gen-train/stylegan2ada-cifar10/20210702/00000/cifar10-auto1-batch64-ada-bgc-noresume/network-snapshot-023063.pkl --dataset cifar10 --projected_dataset /home/data/maggie/result-newhome/project/stylegan2ada-cifar10/20220716/00000/project-cifar10-trainset --test_adv_dataset /home/data/maggie/result-newhome/attack/pgd/resnet18-cifar10/20220624/00001-pgd-eps-0.05-acc-34.87/attack-cifar10-dataset/samples/test --batch_size 256 --epochs 40 --lr 0.01

@@ -387,6 +387,7 @@ def main():
     check_arguments(args)
     args = reset_arguments(args)
 
+    print("args.seed:",args.seed)
     exp_result_dir = set_exp_result_dir(args)
     os.makedirs(exp_result_dir, exist_ok=True)
     print('Experiment result save dir: %s' % exp_result_dir)
