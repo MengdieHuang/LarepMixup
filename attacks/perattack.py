@@ -9,6 +9,7 @@ import torch
 import numpy as np
 from utils.savepng import save_image
 from torch import LongTensor
+from evaluations.accuracy import EvaluateAccuracy
 
 Tensor = torch.Tensor
 
@@ -372,3 +373,13 @@ class PerAttack():
     def getexpresultdir(self):
         return self._exp_result_dir
     
+    def evaluatefromdataloader(self,model,test_dataloader) -> None:
+        if torch.cuda.is_available():
+            self._lossfunc.cuda()
+            # self._model.cuda()    #             check
+            model.cuda()
+        test_accuracy, test_loss = EvaluateAccuracy(model, self._lossfunc, test_dataloader,self._args.cla_model)     
+        # print(f'classifier *accuary* on testset:{test_accuracy * 100:.4f}%' ) 
+        # print(f'classifier *loss* on testset:{test_loss}' ) 
+        #  
+        return test_accuracy, test_loss

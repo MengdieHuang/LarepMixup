@@ -69,23 +69,34 @@ class AdvAttack():
             elif self._args.blackbox == True:
                 self._model = torchvision.models.resnet34(pretrained=True)
 
+            self._lossfunc = self.__getlossfunc__()
+            self._optimizer = self.__getoptimizer__()
+            
             self._attacker = self.__getadvertorchmodel__() # 返回多种潜层对抗攻击生成模型
 
     def __getadvertorchmodel__(self):   # 潜层对抗攻击
         # OM-PGD 攻击
         if self._args.attack_mode =='pgd':
             print("latent pgd attack")
-            attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
+            # attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
+            
+            attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=self._args.attack_eps_step, nb_iter=self._args.attack_max_iter, clip_min=(-4.5), clip_max=(4.5))      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
+
             
         # OM-FGSM 攻击    
         elif self._args.attack_mode =='fgsm':
             print("latent fgsm attack")
-            print("eps：",self._args.attack_eps)
-            attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+            print("eps:",self._args.attack_eps)
+            # attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+            attacker = advertorch.attacks.GradientSignAttack(predict=self._model,eps=self._args.attack_eps, clip_min=(-4.5), clip_max=(4.5))
+
+            #55.05%<-OMFGSM (0,1) 
+            #55.05%<-OMFGSM (-4.5,4.5) 
 
         # OM-CW 攻击 
         elif self._args.attack_mode =='cw':
-            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+            # attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
+            attacker = advertorch.attacks.CarliniWagnerL2Attack(predict=self._model, confidence=self._args.confidence, clip_min=(-4.5), clip_max=(4.5))
 
         # elif self._args.attack_mode =='bim':
         #     attacker = advertorch.attacks.LinfBasicIterativeAttack(predict=self._model,eps=self._args.attack_eps,clip_min=None, clip_max=None)
@@ -156,9 +167,25 @@ class AdvAttack():
             min_pixel_value = 0.0
             max_pixel_value = 255.0
         else:
-            min_pixel_value = 0.0
-            max_pixel_value = 1.0        
-
+            if self._args.dataset =='cifar10':
+                # min_pixel_value = -3.0    #8.190
+                # max_pixel_value = 3.0 
+                # min_pixel_value = -2.5  #8.410
+                # max_pixel_value = 2.5 
+                min_pixel_value = -2.7  #8.19
+                max_pixel_value = 2.7  
+                # min_pixel_value = -2.2  #?
+                # max_pixel_value = 2.7 
+                                                
+            else:              
+                min_pixel_value = 0.0
+                max_pixel_value = 1.0       
+        
+        # Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])   -> [-1,1]     
+        # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])   ->[-2.12, 2.12]             
+        print("min_pixel_value:",min_pixel_value)
+        print("max_pixel_value:",max_pixel_value)
+        
         artmodel = PyTorchClassifier(
             model=self._model,
             clip_values=(min_pixel_value, max_pixel_value),
@@ -182,7 +209,7 @@ class AdvAttack():
         #   DeepFool攻击
         elif self._args.attack_mode =='deepfool':                         
             print('Get DeepFool examples generate model')
-            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=self._args.attack_eps)                         
+            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=self._args.attack_eps,max_iter=self._args.attack_max_iter)                         
 
         #   BIM攻击
         elif self._args.attack_mode =='bim':                              
@@ -196,22 +223,22 @@ class AdvAttack():
 
         elif self._args.attack_mode =='cw':                               
             print('Get CW examples generate model')
-            advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, confidence=self._args.confidence, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
+            advgenmodel = art.attacks.evasion.CarliniL2Method(classifier=self._artmodel, confidence=self._args.confidence, max_iter=self._args.attack_max_iter, targeted=False)               #   estimator: A trained classifier. eps: Attack step size (input variation).
         
         #   PGD攻击
         elif self._args.attack_mode =='pgd': 
             # advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)   
             # 默认 eps是0.3  eps_step是0.1 max_iter是100
             
-            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, eps_step=self._args.attack_eps_step, max_iter=self._args.attack_max_iter,targeted=False)   
+            advgenmodel = art.attacks.evasion.ProjectedGradientDescent(estimator=self._artmodel, eps=self._args.attack_eps, eps_step=self._args.attack_eps_step, max_iter=self._args.attack_max_iter, targeted=False)   
+            #eps 0.031 eps_step=0.0078
 
-        # if self._args.attack_mode =='pgd':
-        #     print("latent pgd attack")
-        #     attacker = advertorch.attacks.PGDAttack(predict=self._model, eps=self._args.attack_eps, eps_iter=0.005, nb_iter=100, clip_min=None, clip_max=None)      #   eps_iter: attack step size.     #   nb_iter: number of iterations.
             
         #   auto attack攻击 20220217
         elif self._args.attack_mode =='autoattack':   
-            advgenmodel = art.attacks.evasion.AutoAttack(estimator=self._artmodel, eps=self._args.attack_eps, estimator_orig=self._artmodel, targeted=False)
+            # advgenmodel = art.attacks.evasion.AutoAttack(estimator=self._artmodel, eps=self._args.attack_eps, estimator_orig=self._artmodel, targeted=False)
+            advgenmodel = art.attacks.evasion.AutoAttack(estimator=self._artmodel, eps=self._args.attack_eps, eps_step=self._args.attack_eps_step, estimator_orig=self._artmodel, targeted=False)
+            #eps 0.031 eps_step=0.0078
 
         elif self._args.attack_mode == None:
             raise Exception('please input the attack mode')      
@@ -304,13 +331,24 @@ class AdvAttack():
             os.makedirs(self._exp_result_dir,exist_ok=True)            
 
             self._x_test, self._y_test = self.__getsettensor__(self._test_dataloader)
-
+            # print("self._x_test.shape",self._x_test.shape)
+            # print("self._y_test.shape",self._y_test.shape)
+            # print("self._x_test[:3]",self._x_test[:3])
+            # print("self._y_test[:3]",self._y_test[:3])
+            
             """"artmodel.generate()函数生成对抗样本时只接受numpy ndarray输入，所以进行tensor转numpy"""
 
             self._x_test = self._x_test.cpu().numpy()
             self._y_test = self._y_test.cpu().numpy()
 
             print('generating testset adversarial examples...')
+            
+            # print("self._x_test.shape",self._x_test.shape)
+            # print("self._y_test.shape",self._y_test.shape)
+            # print("self._x_test[:3]",self._x_test[:3])
+            # print("self._y_test[:3]",self._y_test[:3])
+            
+            # raise error
             self._x_test_adv = self._advgenmodel.generate(x = self._x_test, y = self._y_test)
             self._y_test_adv = self._y_test
             print('finished generate testset adversarial examples !')
@@ -326,7 +364,9 @@ class AdvAttack():
             self.__saveadvpng__()
             return self._x_test_adv, self._y_test_adv         #   GPU tensor
 
-    def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net):
+    # def generatelatentadv(self,exp_result_dir, cle_test_dataloader, cle_w_test, cle_y_test, gan_net):
+    def generatelatentadv(self,exp_result_dir, cle_w_test, cle_y_test, gan_net):
+
         self._exp_result_dir = exp_result_dir
         self._exp_result_dir = os.path.join(self._exp_result_dir,f'attack-{self._args.dataset}-dataset')
         os.makedirs(self._exp_result_dir,exist_ok=True)     
@@ -349,6 +389,9 @@ class AdvAttack():
             print("batch_index:",batch_index)
             cle_w_batch = cle_w_test[batch_index * batch_size : (batch_index + 1) * batch_size]
             cle_y_batch = cle_y_test[batch_index * batch_size : (batch_index + 1) * batch_size] 
+            
+            # print("cle_w_batch[:3]:",cle_w_batch[:10])
+            # raise error
             adv_w_batch = self._attacker.perturb(cle_w_batch, cle_y_batch)
             adv_x_batch = gan_net(adv_w_batch)            
             adv_x_test.append(adv_x_batch)
@@ -399,31 +442,35 @@ class AdvAttack():
 
     def __saveadvpng__(self):
 
+        classification = self.__labelnames__() 
+        print("label_names:",classification)  
+
         if self._args.latentattack == False:      # 像素层对抗样本
 
-            classification = self.__labelnames__() 
-            print("label_names:",classification)        
+            # classification = self.__labelnames__() 
+            # print("label_names:",classification)        
             #   label_names: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
             
             os.makedirs(f'{self._exp_result_dir}/samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/samples/test/',exist_ok=True)    
 
-            # if self._args.dataset != "imagenetmixed10":# 暂不存储训练集样本
-            #     # 存储训练集对抗样本
-            #     print(f"Saving {self._args.dataset} trainset adversarial examples...")
-            #     for img_index, _ in enumerate(self._x_train_adv):
-            #         save_adv_img = self._x_train_adv[img_index]
-            #         # save_cle_img = self._x_train[img_index]
-            #         img_true_label = self._y_train_adv[img_index]
-                
-            #         # 存储对抗样本npz
-            #         np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
-
-            #         # 存储对抗样本png
-            #         # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+            if self._args.saveadvtrain ==True:
+                if self._args.dataset != "imagenetmixed10":# 暂不存储训练集样本
+                    # 存储训练集对抗样本
+                    print(f"Saving {self._args.dataset} trainset adversarial examples...")
+                    for img_index, _ in enumerate(self._x_train_adv):
+                        save_adv_img = self._x_train_adv[img_index]
+                        # save_cle_img = self._x_train[img_index]
+                        img_true_label = self._y_train_adv[img_index]
                     
-            #         # 存储干净样本png
-            #         # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
+                        # 存储对抗样本npz
+                        np.savez(f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())      
+
+                        # 存储对抗样本png
+                        # save_image(save_adv_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                        
+                        # 存储干净样本png
+                        # save_image(save_cle_img, f'{self._exp_result_dir}/samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True) 
              
             # 存储测试集对抗样本 
             print(f"Saving {self._args.dataset} testset adversarial examples...")            
@@ -445,43 +492,48 @@ class AdvAttack():
                 # save_image(save_cle_img, f'{self._exp_result_dir}/samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)  
 
         elif self._args.latentattack == True: # 表征层对抗样本
-            classification = self.__labelnames__() 
-            print("label_names:",classification)  
+            # classification = self.__labelnames__() 
+            # print("label_names:",classification)  
 
             os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/train/',exist_ok=True)    
             os.makedirs(f'{self._exp_result_dir}/latent-attack-samples/test/',exist_ok=True)    
 
-            # 存储训练集对抗样本 
-            print(f"Saving {self._args.dataset} trainset adversarial examples...")
-            for img_index, _ in enumerate(self._x_test_adv):
-                save_adv_img = self._x_test_adv[img_index]
-                # save_cle_img = self._x_test[img_index]
-                img_true_label = self._y_test_adv[img_index]
-
-                # 存储对抗样本npz
-                np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+            print("self._args.projected_trainset:",self._args.projected_trainset)
+            if self._args.projected_trainset != None:
                 
-                # 存储对抗样本png
-                # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
+                if self._args.dataset != "imagenetmixed10":# 暂不存储训练集样本
+                    # 存储训练集对抗样本 
+                    print(f"Saving {self._args.dataset} trainset OM adversarial examples...")
+                    for img_index, _ in enumerate(self._x_test_adv):
+                        save_adv_img = self._x_test_adv[img_index]
+                        # save_cle_img = self._x_test[img_index]
+                        img_true_label = self._y_test_adv[img_index]
 
-                # 存储干净样本png
-                # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                        # 存储对抗样本npz
+                        np.savez(f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                        
+                        # 存储对抗样本png
+                        # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)    
 
-            # # 存储测试集对抗样本
-            # print(f"Saving {self._args.dataset} testset adversarial examples...")
-            # for img_index, _ in enumerate(self._x_test_adv):
-            #     save_adv_img = self._x_test_adv[img_index]
-            #     # save_cle_img = self._x_test[img_index]
-            #     img_true_label = self._y_test_adv[img_index]
+                        # 存储干净样本png
+                        # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/train/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+            
+            elif self._args.projected_trainset == None:
+                # 存储测试集对抗样本
+                print(f"Saving {self._args.dataset} testset OM adversarial examples...")
+                for img_index, _ in enumerate(self._x_test_adv):
+                    save_adv_img = self._x_test_adv[img_index]
+                    # save_cle_img = self._x_test[img_index]
+                    img_true_label = self._y_test_adv[img_index]
 
-            #     # 存储对抗样本npz
-            #     np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
-                
-            #     # 存储对抗样本png
-            #     # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
+                    # 存储对抗样本npz
+                    np.savez(f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.npz', w=save_adv_img.cpu().numpy())   
+                    
+                    # 存储对抗样本png
+                    # save_image(save_adv_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-adv-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)
 
-            #     # 存储干净样本png
-            #     # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
+                    # 存储干净样本png
+                    # save_image(save_cle_img, f'{self._exp_result_dir}/latent-attack-samples/test/{img_index:08d}-cle-{img_true_label}-{classification[int(img_true_label)]}.png', nrow=5, normalize=True)       
             
         print("save adversarial examples finished")
 
@@ -583,7 +635,9 @@ class AdvAttack():
             for img_index in range(len(dataloader.dataset)):
                 xset_tensor.append(dataloader.dataset[img_index][0])
             xset_tensor = torch.stack(xset_tensor)                                                                         
-
+            # print("xset_tensor.shape",xset_tensor.shape)
+            # print("xset_tensor[:3]",xset_tensor[:3])
+            
         elif self._args.dataset == 'cifar100':
             xset_tensor = []
             for img_index in range(len(dataloader.dataset)):

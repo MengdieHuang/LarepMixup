@@ -281,11 +281,20 @@ if __name__ == '__main__':
     elif args.mode == 'defense':        
         print("args.lr:",args.lr)
         print("args.attack_mode:",args.attack_mode)
-        print("args.cla_network_pkl:",args.cla_network_pkl)
-
-        learned_model = torch.load(args.cla_network_pkl)
-        target_classifier = MaggieClassifier(args,learned_model)
-
+        
+        print("args.cla_network_pkl:", args.cla_network_pkl)
+        # print("len(args.cla_network_pkl):", len(args.cla_network_pkl))
+        print("type(args.cla_network_pkl):",type(args.cla_network_pkl))
+        
+        if  args.cla_network_pkl is None:
+            print("load unlearned model")
+            target_classifier = MaggieClassifier(args)  #加载初始模型                      
+        else:
+            print("load learned model")
+            learned_model = torch.load(args.cla_network_pkl)
+            target_classifier = MaggieClassifier(args,learned_model)     
+            
+        # raise error
         # 干净样本测试集
         cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
         print("cle_x_test.shape:",cle_x_test.shape)
@@ -320,12 +329,6 @@ if __name__ == '__main__':
                                                                     
         if args.defense_mode == "rmt":
             print("-----------------defense with representation mixup training----------------")
-            # print("args.lr:",args.lr)
-            # print("args.attack_mode:",args.attack_mode)
-            # print("args.cla_network_pkl:",args.cla_network_pkl)
-            
-            # learned_model = torch.load(args.cla_network_pkl)
-            # target_classifier = MaggieClassifier(args,learned_model)
 
             # 干净样本投影训练集
             print("args.projected_trainset",args.projected_trainset)
@@ -334,21 +337,7 @@ if __name__ == '__main__':
             print("cle_w_train.shape:",cle_w_train.shape)
             print("cle_y_train.shape:",cle_y_train.shape)
 
-            # # 干净样本测试集
-            # cle_x_test, cle_y_test = target_classifier.getrawset(cle_test_dataloader)
-            # print("cle_x_test.shape:",cle_x_test.shape)
-            # print("cle_y_test.shape:",cle_y_test.shape)
-
-            # # 对抗样本测试集
-            # print("args.test_adv_dataset",args.test_adv_dataset)
-            # adv_testset_path = args.test_adv_dataset
-            # adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
-            
-            # # clean pixel testset acc and loss
-            # cle_test_acc, cle_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),cle_x_test,cle_y_test)     #   bug
-            # print(f'Accuary of before rmt trained classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of before rmt trained classifier clean testset:{cle_test_loss}' ) 
-
+            # 什么时候不用train
             if args.cla_model in ['preactresnet18','preactresnet34','preactresnet50'] and args.attack_mode != "fgsm":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
@@ -385,9 +374,12 @@ if __name__ == '__main__':
             print("args.dirichlet_gama:",args.dirichlet_gama)
             
             # train
-            target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
-
-            
+            if args.lr_schedule == 'CosineAnnealingLR':
+                print("rmt_sgd_cos ing")
+                target_classifier.rmt_sgd_cos(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
+            else:
+                print("rmt ing")
+                target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
             
             # #------------test after rmt------------
             # # evaluate acc and loss on clean pixel testset 

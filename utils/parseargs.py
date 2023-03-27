@@ -179,7 +179,7 @@ def parse_arguments():
         choices=['fgsm','deepfool','bim','cw','pgd','om-fgsm','om-pgd','fog','snow','elastic','gabor','jpeg','autoattack'])
 
 
-        parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str)
+        parser_object.add_argument('--cla_network_pkl', help='cla_network_pkl', type=str )
         parser_object.add_argument('--attack_eps', help='number of the FGSM epsilon', type=float, default=0.2)
         parser_object.add_argument('--attack_eps_step', help='number of the PGD epsilon step size', type=float, default=0.1)
         parser_object.add_argument('--attack_max_iter', help='number of the PGD epsilon step size', type=int, default=100)
@@ -218,8 +218,10 @@ def parse_arguments():
         parser_object.add_argument('--optimizer', help='optimizer', type=str, default='adam')
         parser_object.add_argument('--lr_schedule', help='CosineAnnealingLR, StepLR', type=str, default=None)
         parser_object.add_argument('--patience', help='early stop', type=int, default=40)
+        parser_object.add_argument('--saveadvtrain', action='store_true', help='save adversarial trainset')
         
-    
+        parser_object.add_argument('--projected_testset', help = 'The projected w testset path of target png images ', type = str, default = None)
+        parser_object.add_argument('--projected_trainset', help = 'The projected w trainset path of target png images ', type = str, default = None)    
     return parser.parse_args()
 
 def reset_arguments(args):

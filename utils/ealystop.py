@@ -47,6 +47,10 @@ class EarlyStopping:
             print(f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
         path = os.path.join(self.save_path, 'best_network.pth')
         torch.save(model.state_dict(), path)	# 这里会存储迄今最优模型的参数
+        
+        path_maggie = os.path.join(self.save_path, 'best_network.pkl')        
+        torch.save(model, path_maggie)	# 这里会存储迄今最优模型的参数
+        
         self.val_loss_min = val_loss
 
 

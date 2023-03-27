@@ -54,6 +54,9 @@ class MaggieDataloader:
                 num_workers=self._args.cpus,
                 pin_memory=True,
             )
+            # print("test_dataloader.dataset[:3][0]",test_dataloader.dataset[:3][0])
+            # print("test_dataloader[:3]",test_dataloader[:3])         
+               
         elif self._args.dataset == 'imagenetmixed10':
             batch_size=self._args.batch_size
             num_workers=self._args.cpus
