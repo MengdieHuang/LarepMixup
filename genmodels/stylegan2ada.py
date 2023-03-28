@@ -1634,14 +1634,23 @@ class MaggieStylegan2ada:
         #   beta分布采样
         if sample_mode == 'uniformsampler':
             # print('sample_mode = uniformsampler, set the same alpha value for each dimension of the 512 dimensions values of projected w !')
-            alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None)                                         #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
-                                # UniformSampler(bs, f, is_2d, p=None)
+            # alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None)                                         
+            # #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
+            # UniformSampler(bs, f, is_2d, p=None)
+            alpha = utils.sampler.UniformSampler(w1.size(0), w1.size(1), is_2d, p=None, seed=self._args.seed)                                         
+            #  UniformSampler里的w1.size(0)应该填1 ，因为此处是batchsize大小
+
+
+
         elif sample_mode == 'uniformsampler2':
             # print('sample_mode = uniformsampler2,set different alpha values for each dimension of the 512 dimensions values of projected w !')
-            alpha = utils.sampler.UniformSampler2(w1.size(0), w1.size(1), is_2d, p=None)
+            # alpha = utils.sampler.UniformSampler2(w1.size(0), w1.size(1), is_2d, p=None)
+            alpha = utils.sampler.UniformSampler2(w1.size(0), w1.size(1), is_2d, p=None, seed=self._args.seed)
+            
         #   修改后的混合模式
         elif sample_mode == 'betasampler':
-            alpha = utils.sampler.BetaSampler(w1.size(0), w1.size(1), is_2d, p=None, beta_alpha = self._args.beta_alpha)
+            # alpha = utils.sampler.BetaSampler(w1.size(0), w1.size(1), is_2d, p=None, beta_alpha = self._args.beta_alpha)
+            alpha = utils.sampler.BetaSampler(w1.size(0), w1.size(1), is_2d, p=None, beta_alpha = self._args.beta_alpha, seed=self._args.seed)
 
 
 
@@ -1669,10 +1678,14 @@ class MaggieStylegan2ada:
         is_2d = True if len(w1.size()) == 2 else False
         if sample_mode == 'bernoullisampler':
             # print('sample_mode = bernoullisampler, samll variance !')
-            m = utils.sampler.BernoulliSampler(w1.size(0), w1.size(1), is_2d, p=None)
+            # m = utils.sampler.BernoulliSampler(w1.size(0), w1.size(1), is_2d, p=None)
+            m = utils.sampler.BernoulliSampler(w1.size(0), w1.size(1), is_2d, p=None, seed=self._args.seed)
+            
+            
         elif sample_mode == 'bernoullisampler2':
             # print('sample_mode = bernoullisampler2, big variance !')
-            m = utils.sampler.BernoulliSampler2(w1.size(0), w1.size(1), is_2d, p=None)
+            # m = utils.sampler.BernoulliSampler2(w1.size(0), w1.size(1), is_2d, p=None)
+            m = utils.sampler.BernoulliSampler2(w1.size(0), w1.size(1), is_2d, p=None, seed=self._args.seed)
 
         lam = []
         for i in range(len(m)):
@@ -1733,7 +1746,8 @@ class MaggieStylegan2ada:
         #   dirichlet 分布采样        
         if  sample_mode =='dirichletsampler':
             # raise error
-            alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama)
+            # alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama)
+            alpha = utils.sampler.DirichletSampler(w1.size(0), w1.size(1), is_2d, dirichlet_gama = self._args.dirichlet_gama, seed=self._args.seed)
 
         alpha1 = alpha[:, 0:1].cuda()
         alpha2 = alpha[:, 1:2].cuda()
@@ -1756,7 +1770,8 @@ class MaggieStylegan2ada:
 
         is_2d = True if len(w1.size()) == 2 else False
         if sample_mode == 'bernoullisampler3':
-            m = utils.sampler.BernoulliSampler3(w1.size(0), w1.size(1), is_2d)
+            # m = utils.sampler.BernoulliSampler3(w1.size(0), w1.size(1), is_2d)
+            m = utils.sampler.BernoulliSampler3(w1.size(0), w1.size(1), is_2d, seed=self._args.seed)
 
         """
         alpha.shape: (4, 3, 512)

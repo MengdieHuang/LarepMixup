@@ -6,7 +6,7 @@ Place:  Xidian University
 """
 
 from logging import error, exception
-from random import sample
+# from random import sample #maggie 20230327
 from PIL.Image import RASTERIZE
 from numpy.core.fromnumeric import shape
 import torch

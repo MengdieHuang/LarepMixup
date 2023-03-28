@@ -203,13 +203,17 @@ class AdvAttack():
         if self._args.attack_mode == 'fgsm':                              
             print('Get FGSM examples generate model')
             print("self._args.attack_eps:",self._args.attack_eps)
-            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)    
+            print("self._args.attack_eps_step:",self._args.attack_eps_step)
+            # advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, targeted=False)    
             #   estimator: A trained classifier. eps: Attack step size (input variation).
+            advgenmodel = art.attacks.evasion.FastGradientMethod(estimator=self._artmodel, eps=self._args.attack_eps, eps_step=self._args.attack_eps_step, targeted=False)    
+
+
 
         #   DeepFool攻击
         elif self._args.attack_mode =='deepfool':                         
             print('Get DeepFool examples generate model')
-            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=self._args.attack_eps,max_iter=self._args.attack_max_iter)                         
+            advgenmodel = art.attacks.evasion.DeepFool(classifier=self._artmodel, epsilon=self._args.attack_eps, max_iter=self._args.attack_max_iter)                         
 
         #   BIM攻击
         elif self._args.attack_mode =='bim':                              
@@ -563,7 +567,6 @@ class AdvAttack():
         self._x_test = torch.from_numpy(self._x_test).cuda()
         self._y_test = torch.from_numpy(self._y_test).cuda()
 
-        # self.__saveadvpng__()
         return self._x_test_adv, self._y_test_adv         #   GPU tensor        
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):

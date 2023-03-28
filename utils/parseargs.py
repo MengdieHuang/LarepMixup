@@ -81,7 +81,7 @@ def parse_arguments():
             """
         )
         parser_object.add_argument('--mode',type=str,default='train',
-            choices=['train','test','attack','defense','valid','project','generate','interpolate','defense'],
+            choices=['train','test','attack','defense','valid','project','generate','interpolate','defense','eval'],
             help="""
                 train:          standard training   
                 test:           evaluate accuracy on clean testing dataset
@@ -90,6 +90,7 @@ def parse_arguments():
                 project:        project x to w using trained network  
                 generate:       generate x from project vector w
                 interpolate:    generate interpolation of w
+                'eval':         evaluate loded model on different dataset
                 """            
         )
         parser_object.add_argument('--n_classes',type=int,default=10,help='Number of classes of the dataset')
@@ -263,10 +264,10 @@ def set_exp_result_dir(args):
 
     if args.seed == 0:
         # print('args.seed=%i' % args.seed)
-        save_path = args.save_path                                                                                  #   save_path=/mmat/result/
+        save_path = args.save_path             
     else:
         # print('args.seed=%i' % args.seed)
-        save_path = f'{args.save_path}/{args.seed}'
+        save_path = f'{args.save_path}/seed-{args.seed}'
 
     cur=datetime.datetime.now()
     date = f'{cur.year:04d}{cur.month:02d}{cur.day:02d}'
@@ -300,6 +301,8 @@ def set_exp_result_dir(args):
         #     exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
         elif args.defense_mode in ['rmt','inputmixup','manifoldmixup','patchmixup','puzzlemixup','cutmixup']:
             exp_result_dir = f'{save_path}/{args.mode}/{args.defense_mode}/{args.attack_mode}/{args.mix_mode}-{args.sample_mode}/{args.exp_name}/{attack}/{date}'
+    elif args.mode =='eval':
+        exp_result_dir = f'{save_path}/{args.mode}/{args.exp_name}/{args.attack_mode}/{attack}/{date}'
 
     else:
         exp_result_dir=f'{save_path}/{args.mode}/{args.exp_name}/{date}'    

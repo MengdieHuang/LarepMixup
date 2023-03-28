@@ -37,9 +37,7 @@ import utils.tensorboarddraw
 import datetime
 
 #----------function defination-------------
-# def mixup_box(out, y, lam, index):
-def mixup_box(out, y, lam, index, seed):
-    
+def mixup_box(out, y, lam, index):
     '''CutMix'''
     input1=out
     input2=out[index]
@@ -72,12 +70,8 @@ def mixup_box(out, y, lam, index, seed):
     batch_size, _, height, width = input1.shape
     ratio = np.zeros([batch_size])
 
-    np.random.seed(seed)
     rx = np.random.uniform(0, height)
-    
-    np.random.seed(seed)
     ry = np.random.uniform(0, width)
-    
     rh = np.sqrt(1 - lam) * height
     rw = np.sqrt(1 - lam) * width
 
@@ -120,40 +114,26 @@ def mixup_box(out, y, lam, index, seed):
 
     return mixed_x, mixed_y
 
-def cut_mixup_data(out, y, beta_alpha, seed):
+def cut_mixup_data(out, y, beta_alpha):
     alpha=beta_alpha
-    np.random.seed(seed)
     lam = np.random.beta(alpha, alpha)                              #   根据beta分布的alpha参数生成随机数lam
-    
     batch_size = out.size()[0]
-    
-    torch.manual_seed(seed)
     index = torch.randperm(batch_size).cuda()                       #   生成一组长度为batchsize的随机数组 32
-    
     # print("index:",index)
     # print("lam:",lam)
     """
     index: tensor([1, 0, 2, 3], device='cuda:0')
     lam: 0.950227157797238
     """
-    # mix_x_train, mix_y_train = mixup_box(out, y, lam=lam, index=index)
-    mix_x_train, mix_y_train = mixup_box(out, y, lam=lam, index=index, seed=seed)
+    mix_x_train, mix_y_train = mixup_box(out, y, lam=lam, index=index)
 
     return mix_x_train, mix_y_train
 
-# def puzzle_mixup_data(out, y, beta_alpha, grad):
-def puzzle_mixup_data(out, y, beta_alpha, grad, seed):
-
+def puzzle_mixup_data(out, y, beta_alpha, grad):
     alpha=beta_alpha
-    
-    np.random.seed(seed)
     lam = np.random.beta(alpha, alpha)                              #   根据beta分布的alpha参数生成随机数lam
     batch_size = out.size()[0]
-    
-    torch.manual_seed(seed)
     index = torch.randperm(batch_size).cuda()                       #   生成一组长度为batchsize的随机数组 32
-    
-    np.random.seed(seed)
     block_num = 2**np.random.randint(1, 5)                          #   2的几次方
                                              
     # print("out.shape:",out.shape)                                   
@@ -235,12 +215,9 @@ def input_mixup_data(args, raw_img_batch, raw_lab_batch):
     # print("raw_img_batch.shape:",raw_img_batch.shape)
     # print("raw_lab_batch.shape:",raw_lab_batch.shape)
 
-    np.random.seed(args.seed)
     lam = np.random.beta(args.beta_alpha, args.beta_alpha)
 
     batch_size = raw_img_batch.size()[0]
-    
-    torch.manual_seed(args.seed)
     index = torch.randperm(batch_size).cuda()   #表示从batch中随机选一个待混合的样本x[index, :]
 
     mixed_img_batch = lam * raw_img_batch + (1 - lam) * raw_img_batch[index, :]
@@ -1357,10 +1334,7 @@ class MaggieClassifier:
         lrmt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
-            
             self.__adjustlearningrate__(epoch_index)       
 
             epoch_total_loss = 0
@@ -1495,14 +1469,14 @@ class MaggieClassifier:
             
             #------------save model------------
             if (epoch_index+1) >= 1 or self._args.dataset == "imagenetmixed10": #每一个都存
-                torch.save(self._model, f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl')            
+                torch.save(self._model, f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}.pkl')            
                             
             # early_stopping(epoch_adv_test_loss, self._model)
             # if early_stopping.early_stop == True:
             #     print("Early stopping")
             #     # model_savepath = f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_test_accuracy:.4f}.pkl'
             #     # torch.save(self._model, model_savepath)
-            #     torch.save(self._model, f'{self._exp_result_dir}/earlystop-rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl')            
+            #     torch.save(self._model, f'{self._exp_result_dir}/earlystop-rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}.pkl')            
                 
             #     break 
         lrmt_end_time=time.time()       
@@ -1612,8 +1586,6 @@ class MaggieClassifier:
         inputmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)       
 
@@ -1844,8 +1816,6 @@ class MaggieClassifier:
         cutmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)       
 
@@ -1882,8 +1852,7 @@ class MaggieClassifier:
                 # print("target_var:",target_var)
 
 
-                # mix_input_var, mix_target_var = cut_mixup_data(input_var, target_var, self._args.beta_alpha)  #   混合样本 two-hot标签              
-                mix_input_var, mix_target_var = cut_mixup_data(input_var, target_var, self._args.beta_alpha, self._args.seed)  #   混合样本 two-hot标签              
+                mix_input_var, mix_target_var = cut_mixup_data(input_var, target_var, self._args.beta_alpha)  #   混合样本 two-hot标签              
 
                 #   原始代码无拼接干净样本,过拟合
                 # inputs = mix_input_var.cuda()
@@ -2088,8 +2057,6 @@ class MaggieClassifier:
         
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)       
 
@@ -2148,8 +2115,7 @@ class MaggieClassifier:
                 self._optimizer.zero_grad()
                 input_var, target_var = Variable(inputs), Variable(targets)
 
-                # mix_input_var, mix_target_var = puzzle_mixup_data(input_var, target_var, beta_alpha=self._args.beta_alpha, grad=unary)  #   混合样本 two-hot标签              
-                mix_input_var, mix_target_var = puzzle_mixup_data(input_var, target_var, beta_alpha=self._args.beta_alpha, grad=unary, seed=self._args.seed)  #   混合样本 two-hot标签              
+                mix_input_var, mix_target_var = puzzle_mixup_data(input_var, target_var, beta_alpha=self._args.beta_alpha, grad=unary)  #   混合样本 two-hot标签              
 
                 #   原始代码无拼接干净样本,过拟合
                 # inputs = mix_input_var.cuda()
@@ -2362,8 +2328,6 @@ class MaggieClassifier:
         manimixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)       
 
@@ -2574,8 +2538,6 @@ class MaggieClassifier:
         patchmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)       
 
@@ -2787,8 +2749,6 @@ class MaggieClassifier:
         advt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             self.__adjustlearningrate__(epoch_index)     
             
@@ -3039,8 +2999,6 @@ class MaggieClassifier:
         lrmt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
-            
-            random.seed(self._args.seed)
             random.shuffle(shuffle_index)
             
             # self.__adjustlearningrate__(epoch_index)       d第一次pao忘记注释掉了
@@ -3176,7 +3134,7 @@ class MaggieClassifier:
                                        
             #------------save model------------
             if (epoch_index+1) >= 1 or self._args.dataset == "imagenetmixed10": #每一个都存
-                torch.save(self._model, f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl')            
+                torch.save(self._model, f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}.pkl')            
              
              
             # save model path                            
@@ -3185,7 +3143,7 @@ class MaggieClassifier:
                 print("Early stopping")
                 # model_savepath = f'{self._exp_result_dir}/rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_test_accuracy:.4f}.pkl'
                 # torch.save(self._model, model_savepath)
-                torch.save(self._model, f'{self._exp_result_dir}/earlystop-rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl')            
+                torch.save(self._model, f'{self._exp_result_dir}/earlystop-rmt-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}.pkl')            
                 #     break 
             
             scheduler.step()      

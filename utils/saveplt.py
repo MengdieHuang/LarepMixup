@@ -35,16 +35,16 @@ def SaveAccuracyCurve(model,dataset,exp_result_dir,global_train_acc,global_test_
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     
-    x_major_locator=MultipleLocator(1)
-    #把x轴的刻度间隔设置为1，并存在变量里
-    y_major_locator=MultipleLocator(10)
-    #把y轴的刻度间隔设置为10，并存在变量里
-    ax=plt.gca()
-    #ax为两条坐标轴的实例
-    ax.xaxis.set_major_locator(x_major_locator)
-    #把x轴的主刻度设置为1的倍数
-    ax.yaxis.set_major_locator(y_major_locator)
-    #把y轴的主刻度设置为10的倍数    
+    # x_major_locator=MultipleLocator(1)
+    # #把x轴的刻度间隔设置为1，并存在变量里
+    # y_major_locator=MultipleLocator(10)
+    # #把y轴的刻度间隔设置为10，并存在变量里
+    # ax=plt.gca()
+    # #ax为两条坐标轴的实例
+    # ax.xaxis.set_major_locator(x_major_locator)
+    # #把x轴的主刻度设置为1的倍数
+    # ax.yaxis.set_major_locator(y_major_locator)
+    # #把y轴的主刻度设置为10的倍数    
     
     plt.show()
     plt.savefig(f'{exp_result_dir}/{png_name}.png')
@@ -88,16 +88,16 @@ def Save3AccuracyCurve(model,dataset,exp_result_dir,global_train_acc, global_cle
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     
-    x_major_locator=MultipleLocator(1)
-    #把x轴的刻度间隔设置为1，并存在变量里
-    y_major_locator=MultipleLocator(10)
-    #把y轴的刻度间隔设置为10，并存在变量里
-    ax=plt.gca()
-    #ax为两条坐标轴的实例
-    ax.xaxis.set_major_locator(x_major_locator)
-    #把x轴的主刻度设置为1的倍数
-    ax.yaxis.set_major_locator(y_major_locator)
-    #把y轴的主刻度设置为10的倍数   
+    # x_major_locator=MultipleLocator(1)
+    # #把x轴的刻度间隔设置为1，并存在变量里
+    # y_major_locator=MultipleLocator(10)
+    # #把y轴的刻度间隔设置为10，并存在变量里
+    # ax=plt.gca()
+    # #ax为两条坐标轴的实例
+    # ax.xaxis.set_major_locator(x_major_locator)
+    # #把x轴的主刻度设置为1的倍数
+    # ax.yaxis.set_major_locator(y_major_locator)
+    # #把y轴的主刻度设置为10的倍数   
         
     plt.show()
     plt.savefig(f'{exp_result_dir}/{png_name}.png')
