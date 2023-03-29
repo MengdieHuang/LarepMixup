@@ -1,0 +1,17 @@
+source ~/.bashrc
+source /home/xieyi/anaconda3/bin/activate mmat
+
+# std trained cusresnet18-10 cifar10 evaluate grey-box acc
+
+# std trained eval vanilla PGD(eps031-step0078-iter7) iter 7
+CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230328.py run --mode eval --exp_name cusresnet18-cifar10 --attack_mode pgd --attack_eps 0.031 --blackbox --cla_model cusresnet18 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/cusresnet18-cifar10/20230326/00007-testacc-0.9641/train-cifar10-dataset/standard-trained-classifier-cusresnet18-on-clean-cifar10-finished.pkl --dataset cifar10 --test_adv_dataset /home/data/maggie/result-newhome/attack/pgd/cusresnet18-cifar10/20230328/00005-eps031-step0078-iter7-acc21.53/attack-cifar10-dataset/samples/test --batch_size 128 >> /home/maggie/mmat/log/CIFAR10/eval/std-cusresnet18-cifar10-against-pgd-eps031-step0078-iter7-20230328.log 2>&1
+
+# std trained eval vanilla PGD(eps031-step0078-iter7) iter 10
+CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230328.py run --mode eval --exp_name cusresnet18-cifar10 --attack_mode pgd --attack_eps 0.031 --blackbox --cla_model cusresnet18 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/cusresnet18-cifar10/20230326/00007-testacc-0.9641/train-cifar10-dataset/standard-trained-classifier-cusresnet18-on-clean-cifar10-finished.pkl --dataset cifar10 --test_adv_dataset /home/data/maggie/result-newhome/attack/pgd/cusresnet18-cifar10/20230328/00002-eps031-step0078-iter10-acc15.58/attack-cifar10-dataset/samples/test --batch_size 128 >> /home/maggie/mmat/log/CIFAR10/eval/std-cusresnet18-cifar10-against-pgd-eps031-step0078-iter10-20230328.log 2>&1
+
+# std trained eval vanilla PGD(eps031-step0078-iter7) iter 20
+CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230328.py run --mode eval --exp_name cusresnet18-cifar10 --attack_mode pgd --attack_eps 0.031 --blackbox --cla_model cusresnet18 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/cusresnet18-cifar10/20230326/00007-testacc-0.9641/train-cifar10-dataset/standard-trained-classifier-cusresnet18-on-clean-cifar10-finished.pkl --dataset cifar10 --test_adv_dataset /home/data/maggie/result-newhome/attack/pgd/cusresnet18-cifar10/20230328/00000-eps031-step0078-iter20-acc10.1/attack-cifar10-dataset/samples/test --batch_size 128 >> /home/maggie/mmat/log/CIFAR10/eval/std-cusresnet18-cifar10-against-pgd-eps031-step0078-iter20-20230328.log 2>&1
+
+# std trained eval vanilla PGD(eps031-step0078-iter7) iter 50
+CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230328.py run --mode eval --exp_name cusresnet18-cifar10 --attack_mode pgd --attack_eps 0.031 --blackbox --cla_model cusresnet18 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/cusresnet18-cifar10/20230326/00007-testacc-0.9641/train-cifar10-dataset/standard-trained-classifier-cusresnet18-on-clean-cifar10-finished.pkl --dataset cifar10 --test_adv_dataset /home/data/maggie/result-newhome/attack/pgd/cusresnet18-cifar10/20230328/00003-eps031-step0078-iter50-acc7.35/attack-cifar10-dataset/samples/test --batch_size 128 >> /home/maggie/mmat/log/CIFAR10/eval/std-cusresnet18-cifar10-against-pgd-eps031-step0078-iter50-20230328.log 2>&1
+#------------------------------------------------------------------------------
