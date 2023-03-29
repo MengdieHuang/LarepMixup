@@ -8,6 +8,21 @@ Place:  Xidian University
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import MultipleLocator
 
+def SaveTotalTimeCurve(model,dataset,exp_result_dir,global_cost_time,png_name):
+    x = list(range(len(global_cost_time)))
+    y = global_cost_time
+    # test_x = list(range(len(global_test_acc)))
+    # test_y = global_test_acc
+    plt.title(f'{png_name}')
+    plt.plot(x, y, color='black') 
+    # plt.plot(test_x, test_y, color='blue', label='on testset accuracy') 
+    plt.legend()
+    plt.xlabel('Epochs')
+    plt.ylabel('Total Cost Time (seconds)')
+    plt.show()
+    plt.savefig(f'{exp_result_dir}/{png_name}.png')
+    plt.close()
+    
 def SaveTimeCurve(model,dataset,exp_result_dir,global_cost_time,png_name):
     x = list(range(len(global_cost_time)))
     y = global_cost_time

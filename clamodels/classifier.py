@@ -11,7 +11,7 @@ from torch.functional import Tensor
 import torchvision
 import torch
 from evaluations.accuracy import EvaluateAccuracy
-from utils.saveplt import SaveAccuracyCurve,Save3AccuracyCurve,SaveLossCurve,Save3LossCurve,SaveTimeCurve
+from utils.saveplt import SaveAccuracyCurve,Save3AccuracyCurve,SaveLossCurve,Save3LossCurve,SaveTimeCurve,SaveTotalTimeCurve
 from art.estimators.classification import PyTorchClassifier
 import numpy as np
 import torch.cuda
@@ -918,7 +918,7 @@ class MaggieClassifier:
             self._lossfunc.cuda()
             self._model.cuda()
         
-        global_train_acc, global_test_acc, global_train_loss, global_test_loss,global_cost_time = self.__trainloop__()
+        global_train_acc, global_test_acc, global_train_loss, global_test_loss,global_cost_time,total_epo_cost_time_list = self.__trainloop__()
         
         if train_mode == "std-train":
             torch.save(self._model,f'{self._exp_result_dir}/standard-trained-classifier-{self._args.cla_model}-on-clean-{self._args.dataset}-finished.pkl')
@@ -937,7 +937,8 @@ class MaggieClassifier:
         SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_test_acc, accuracy_png_name)
         SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
-
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
+        
         return self._model
 
     def newtrain(self,train_dataloader,test_dataloader,exp_result_dir, train_mode) -> "torchvision.models or CustomNet":
@@ -969,7 +970,7 @@ class MaggieClassifier:
             self._lossfunc.cuda()
             self._model.cuda()
         
-        global_train_acc, global_test_acc, global_train_loss, global_test_loss,global_cost_time = self.__trainloop__()
+        global_train_acc, global_test_acc, global_train_loss, global_test_loss,global_cost_time,total_epo_cost_time_list = self.__trainloop__()
         
         
         
@@ -990,6 +991,7 @@ class MaggieClassifier:
         SaveAccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_test_acc, accuracy_png_name)
         SaveLossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         return self._model
          
@@ -1029,7 +1031,9 @@ class MaggieClassifier:
         global_test_loss = []
         global_cost_time = []
 
-        total_epo_cost_time = 0                        
+        total_epo_cost_time = 0 
+        total_epo_cost_time_list=[]
+                               
         stdtrain_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print('\nEpoch: %d' % epoch_index)            
@@ -1116,6 +1120,8 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                                     
             utils.tensorboarddraw.line_chart('epoch', 'test_acc', epoch_index + 1, epoch_test_accuracy, self._exp_result_dir)  
@@ -1152,7 +1158,7 @@ class MaggieClassifier:
         # torch.save(self._model,f'{self._exp_result_dir}/stdtrain-{self._args.cla_model}-on-{self._args.dataset}-global_cost_time.txt')   
            
         #   返回给trainingloop外的stdtrain函数，所以不用现在存global    
-        return global_train_acc, global_test_acc, global_train_loss, global_test_loss, global_cost_time
+        return global_train_acc, global_test_acc, global_train_loss, global_test_loss, global_cost_time,total_epo_cost_time_list
  
 #-------------representation mixup training method------------
     def __CustomSoftlossFunction__(self, batch_outputs, o_batch):       
@@ -1363,6 +1369,7 @@ class MaggieClassifier:
         global_cost_time = []
 
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
         lrmt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
             print("\n")
@@ -1494,6 +1501,8 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)        
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir)  
             
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -1529,6 +1538,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/rmt-{self._args.cla_model}-on-{self._args.dataset}-lrmt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/rmt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -1621,6 +1631,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         inputmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -1757,6 +1768,8 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/inputmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                             
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -1780,6 +1793,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/inputmixt-{self._args.cla_model}-on-{self._args.dataset}-inputmixt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/inputmixt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -1857,6 +1871,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         cutmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -2005,6 +2020,8 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/cutmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                         
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)    
@@ -2027,6 +2044,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/cutmixt-{self._args.cla_model}-on-{self._args.dataset}-cutmixt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/cutmixt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -2104,6 +2122,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         puzzmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -2273,6 +2292,8 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/puzzlemixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                         
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -2295,6 +2316,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/puzzmixt-{self._args.cla_model}-on-{self._args.dataset}-puzzmixt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/puzzmixt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -2382,6 +2404,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         manimixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -2493,6 +2516,7 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/manifoldmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')  
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                         
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -2515,6 +2539,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/manimixt-{self._args.cla_model}-on-{self._args.dataset}-manimixt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/manimixt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -2598,6 +2623,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         patchmixt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -2706,6 +2732,7 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/patchmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                             
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -2728,6 +2755,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/patchmixt-{self._args.cla_model}-on-{self._args.dataset}-patchmixt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/patchmixt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -2815,6 +2843,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         advt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -2945,6 +2974,7 @@ class MaggieClassifier:
                 torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
             
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -2969,6 +2999,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/advtrain-{self._args.cla_model}-on-{self._args.dataset}-advt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/advtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -3070,6 +3101,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list = []
                 
         lrmt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -3202,6 +3234,8 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
+            
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
                         
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -3242,6 +3276,8 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
+
 
         torch.save(self._model,f'{self._exp_result_dir}/rmt-{self._args.cla_model}-on-{self._args.dataset}-lrmt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/rmt-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
@@ -3339,6 +3375,7 @@ class MaggieClassifier:
         global_adv_test_loss = []
         global_cost_time = []
         total_epo_cost_time = 0        
+        total_epo_cost_time_list=[]
       
         advt_start_time=time.time()
         for epoch_index in range(self._args.epochs):
@@ -3464,6 +3501,7 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time) 
 
             total_epo_cost_time += epo_cost_time
+            total_epo_cost_time_list.append(total_epo_cost_time)
             utils.tensorboarddraw.line_chart('epoch', 'total_epo_cost_time', epoch_index + 1, total_epo_cost_time, self._exp_result_dir) 
             
             utils.tensorboarddraw.line_chart('epoch', 'adv_test_acc', epoch_index + 1, epoch_adv_test_accuracy, self._exp_result_dir)  
@@ -3503,6 +3541,7 @@ class MaggieClassifier:
         Save3AccuracyCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_acc, global_cle_test_acc, global_adv_test_acc, accuracy_png_name)
         Save3LossCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_train_loss, global_cle_test_loss, global_adv_test_loss, loss_png_name)
         SaveTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, global_cost_time, time_png_name)
+        SaveTotalTimeCurve(self._args.cla_model, self._args.dataset, self._exp_result_dir, total_epo_cost_time_list, time_png_name)
 
         torch.save(self._model,f'{self._exp_result_dir}/advtrain-{self._args.cla_model}-on-{self._args.dataset}-advt_total_cost_time.txt')            
         torch.save(self._model,f'{self._exp_result_dir}/advtrain-{self._args.cla_model}-on-{self._args.dataset}-global_train_acc.txt')   
