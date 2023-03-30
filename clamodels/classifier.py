@@ -2448,7 +2448,8 @@ class MaggieClassifier:
                     outputs, aux1, aux2 = self._model(inputs)
                 else:                                                                                                                   #   preactresnet
                     # outputs = self._model(inputs)                                                                                     #   进入模型的forward函数
-                    outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode, beta_alpha=self._args.beta_alpha)    #   进入模型的forward函数
+                    # outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode, beta_alpha=self._args.beta_alpha)    #   进入模型的forward函数
+                    outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode, beta_alpha=self._args.beta_alpha, seed=self._args.seed)    #   进入模型的forward函数
 
                #   计算损失
                 loss = self.__CustomSoftlossFunction__(outputs, targets)
@@ -2667,7 +2668,8 @@ class MaggieClassifier:
                     outputs, aux1, aux2 = self._model(inputs)
                 else:                                                                                                                   #   preactresnet
                     # outputs = self._model(inputs)                                                                                     #   进入模型的forward函数
-                    outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode)    #   进入模型的forward函数
+                    # outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode)    #   进入模型的patch mixup forward函数
+                    outputs, targets = self._model(inputs, y=targets, defense_mode=self._args.defense_mode, seed=self._args.seed)    #   进入模型的patch mixup forward函数
 
                #   计算损失
                 loss = self.__CustomSoftlossFunction__(outputs, targets)
