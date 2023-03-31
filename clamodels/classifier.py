@@ -316,7 +316,7 @@ class MaggieClassifier:
         elif model_name in comparemodel_dict:
             model = self.__getcomparemodel__()  #   'preactresnet18','preactresnet34','preactresnet50'
         
-        else:   # alexnet, vgg19, 'cusresnet18','cusvgg19','cusdensenet169'
+        else:   # alexnet, vgg19, 'cusresnet18','cusvgg19','cusdensenet169''wideresnet28_10'
             if self._args.img_size <= 32:           #   32的数据用自定义的alexnet训练
                 model = self.__getlocalmodel__()
             elif self._args.img_size > 32:
@@ -1765,8 +1765,10 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
 
             if (epoch_index+1)  >= 28 or self._args.dataset == "imagenetmixed10":
-                torch.save(self._model,f'{self._exp_result_dir}/inputmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                # torch.save(self._model,f'{self._exp_result_dir}/inputmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
+                torch.save(self._model, f'{self._exp_result_dir}/inputmixup-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
+                
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
             
@@ -2017,8 +2019,10 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
             
             if (epoch_index+1)  >= 28 or self._args.dataset == "imagenetmixed10":
-                torch.save(self._model,f'{self._exp_result_dir}/cutmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                # torch.save(self._model,f'{self._exp_result_dir}/cutmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
 
+                torch.save(self._model, f'{self._exp_result_dir}/cutmixup-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
+                
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
             
@@ -2289,7 +2293,9 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
 
             if (epoch_index+1)  >= 28 or self._args.dataset == "imagenetmixed10":
-                torch.save(self._model,f'{self._exp_result_dir}/puzzlemixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                # torch.save(self._model,f'{self._exp_result_dir}/puzzlemixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+
+                torch.save(self._model, f'{self._exp_result_dir}/puzzlemixup-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
 
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
@@ -2461,12 +2467,13 @@ class MaggieClassifier:
                 # epoch_total_loss += loss
                 
                 # statistic batch accuracy
-                _, pred_y_index = torch.max(outputs.data, 1)   
-                # print("pred_y_index:",pred_y_index)       
-                # output tensor每一行最大值对应的index组成的tensor
-                batch_correct_num = (pred_y_index == targets).sum().item()     
+                _, pred_y_index = torch.max(outputs.data, 1)            
+                _, target_y_index = torch.max(targets.data, 1)                   
+                # batch_correct_num = (pred_y_index == targets).sum().item()    
+                batch_correct_num = (pred_y_index == target_y_index).sum().item()    
                 epoch_correct_num += batch_correct_num                                     
-                epoch_total_loss += loss                   
+                epoch_total_loss += loss  
+                              
                 #------------------------------
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
                 #   finish batch training        
@@ -2514,7 +2521,9 @@ class MaggieClassifier:
 
 
             if (epoch_index+1)  <=20 or (epoch_index+1) >= 28 or self._args.dataset == "imagenetmixed10":
-                torch.save(self._model,f'{self._exp_result_dir}/manifoldmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')  
+                # torch.save(self._model,f'{self._exp_result_dir}/manifoldmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')  
+
+                torch.save(self._model, f'{self._exp_result_dir}/manifoldmixup-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
 
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
@@ -2681,12 +2690,13 @@ class MaggieClassifier:
                 # epoch_total_loss += loss
                 
                 # statistic batch accuracy
-                _, pred_y_index = torch.max(outputs.data, 1)   
-                # print("pred_y_index:",pred_y_index)       
-                # output tensor每一行最大值对应的index组成的tensor
-                batch_correct_num = (pred_y_index == targets).sum().item()     
+                _, pred_y_index = torch.max(outputs.data, 1)            
+                _, target_y_index = torch.max(targets.data, 1)                   
+                # batch_correct_num = (pred_y_index == targets).sum().item()    
+                batch_correct_num = (pred_y_index == target_y_index).sum().item()    
                 epoch_correct_num += batch_correct_num                                     
-                epoch_total_loss += loss                   
+                epoch_total_loss += loss 
+                            
                 #------------------------------
                 print("[Epoch %d/%d] [Batch %d/%d] [Batch classify loss: %f]" % (epoch_index+1, self._args.epochs, batch_index+1, len(self._train_dataloader), loss.item()))
             #   finish batch training        
@@ -2731,7 +2741,9 @@ class MaggieClassifier:
             global_cost_time.append(epo_cost_time)
                         
             if (epoch_index+1)  <=20 or (epoch_index+1) >= 28 or self._args.dataset == "imagenetmixed10":
-                torch.save(self._model,f'{self._exp_result_dir}/patchmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                # torch.save(self._model,f'{self._exp_result_dir}/patchmixup-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+
+                torch.save(self._model, f'{self._exp_result_dir}/patchmixup-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
 
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
@@ -2918,12 +2930,12 @@ class MaggieClassifier:
                 # epoch_total_loss += loss
                 
                 # statistic batch accuracy
-                _, pred_y_index = torch.max(outputs.data, 1)   
-                # print("pred_y_index:",pred_y_index)       
-                # output tensor每一行最大值对应的index组成的tensor
-                batch_correct_num = (pred_y_index == targets).sum().item()     
+                _, pred_y_index = torch.max(outputs.data, 1)            
+                _, target_y_index = torch.max(targets.data, 1)                   
+                # batch_correct_num = (pred_y_index == targets).sum().item()    
+                batch_correct_num = (pred_y_index == target_y_index).sum().item()    
                 epoch_correct_num += batch_correct_num                                     
-                epoch_total_loss += loss                
+                epoch_total_loss += loss              
                 
                 
                 #------------------------------
@@ -2973,7 +2985,10 @@ class MaggieClassifier:
 
 
             if (epoch_index+1)  >= 28 or self._args.dataset == "imagenetmixed10": 
-                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+                # torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')   
+
+                torch.save(self._model, f'{self._exp_result_dir}/adversarial-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
+
 
             total_epo_cost_time += epo_cost_time
             total_epo_cost_time_list.append(total_epo_cost_time)
@@ -3450,12 +3465,12 @@ class MaggieClassifier:
                 # epoch_total_loss += loss
                 
                 # statistic batch accuracy
-                _, pred_y_index = torch.max(outputs.data, 1)   
-                # print("pred_y_index:",pred_y_index)       
-                # output tensor每一行最大值对应的index组成的tensor
-                batch_correct_num = (pred_y_index == targets).sum().item()     
+                _, pred_y_index = torch.max(outputs.data, 1)            
+                _, target_y_index = torch.max(targets.data, 1)                   
+                # batch_correct_num = (pred_y_index == targets).sum().item()    
+                batch_correct_num = (pred_y_index == target_y_index).sum().item()    
                 epoch_correct_num += batch_correct_num                                     
-                epoch_total_loss += loss                
+                epoch_total_loss += loss           
                 
                 
                 #------------------------------
@@ -3516,7 +3531,9 @@ class MaggieClassifier:
 
 
             if (epoch_index+1)  >= 28 or self._args.dataset == "imagenetmixed10": 
-                torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')  
+                # torch.save(self._model,f'{self._exp_result_dir}/adversarial-trained-classifier-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}.pkl')  
+                torch.save(self._model, f'{self._exp_result_dir}/adversarial-trained-{self._args.cla_model}-on-{self._args.dataset}-epoch-{epoch_index+1:04d}-cleacc-{epoch_cle_test_accuracy:.4f}-advacc-{epoch_adv_test_accuracy:.4f}.pkl') 
+
                 
             # save model path                            
             early_stopping(epoch_adv_test_loss, self._model)

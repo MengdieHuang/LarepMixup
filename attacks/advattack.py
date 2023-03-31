@@ -567,6 +567,7 @@ class AdvAttack():
         self._x_test = torch.from_numpy(self._x_test).cuda()
         self._y_test = torch.from_numpy(self._y_test).cuda()
 
+        print("without save adv samples")
         return self._x_test_adv, self._y_test_adv         #   GPU tensor        
 
     def evaluatefromtensor(self, classifier, x_set:Tensor, y_set:Tensor):

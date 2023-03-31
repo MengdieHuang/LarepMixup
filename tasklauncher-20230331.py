@@ -239,7 +239,11 @@ if __name__ == '__main__':
         print(f'Accuary of load {args.cla_model} classifier on clean testset:{cle_test_acc * 100:.4f}%' ) 
         print(f'Loss of load {args.cla_model} classifier on clean testset:{cle_test_loss}' ) 
                               
-                                                                                
+        # adv testset acc and loss
+        adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+        print(f'Accuary of load {args.cla_model} classifier on load adv testset:{adv_x_test * 100:.4f}%' ) 
+        print(f'Loss of load {args.cla_model} classifier on load adv testset:{adv_y_test}' ) 
+                                                                                        
         if args.defense_mode == "rmt":
             print("-----------------defense with representation mixup training----------------")
 
@@ -570,6 +574,14 @@ if __name__ == '__main__':
     elif args.mode =='eval':
         print("args.attack_mode:",args.attack_mode)
         print("args.cla_network_pkl:", args.cla_network_pkl)
+        print("args.seed:",args.seed)
+        print("****************")
+        print("args.attack_mode:",args.attack_mode)
+        print("args.attack_eps:",args.attack_eps)
+        print("args.attack_eps:",args.attack_eps)
+        print("args.attack_max_iter:",args.attack_max_iter)
+        print("****************")        
+        
         print("load learned model !!!!!!")
         learned_model = torch.load(args.cla_network_pkl)
         target_classifier = MaggieClassifier(args,learned_model)     
@@ -603,13 +615,6 @@ if __name__ == '__main__':
             
             if args.latentattack ==True:
                 
-                # print("eps:",args.attack_eps)
-                # print("cla_network_pkl:",args.cla_network_pkl)
-                # learned_cla_model = torch.load(args.cla_network_pkl)
-                # target_classifier = MaggieClassifier(args,learned_cla_model)
-
-                
-                # cla_net = learned_cla_model
                 cla_net = learned_model
 
                 cla_net.cuda()
@@ -652,9 +657,9 @@ if __name__ == '__main__':
                 print(f'Accuary of load {args.cla_model} classifier on real generate white-box adv testset:{adv_test_acc * 100:.4f}%' ) 
                 print(f'Loss of load {args.cla_model} classifier on real generate white-box adv testset:{adv_test_loss}' ) 
                 
-                adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-                print(f'Accuary of {args.defense_mode} load {args.cla_model} classifier on load adv testset:{adv_test_acc * 100:.4f}%' ) 
-                print(f'Loss of {args.defense_mode} load {args.cla_model} classifier on load adv testset:{adv_test_loss}' )                                           
+                # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+                # print(f'Accuary of {args.defense_mode} load {args.cla_model} classifier on load adv testset:{adv_test_acc * 100:.4f}%' ) 
+                # print(f'Loss of {args.defense_mode} load {args.cla_model} classifier on load adv testset:{adv_test_loss}' )                                           
             
             
             
@@ -664,21 +669,21 @@ if __name__ == '__main__':
             
             
             
-            print("-------------------------------------------") 
+            # print("-------------------------------------------") 
 
-        elif args.blackbox == True:
-            # 对抗样本测试集
-            # print("args.test_adv_dataset",args.test_adv_dataset)
-            # adv_testset_path = args.test_adv_dataset
-            # adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
-            # print("adv_x_test.shape:",adv_x_test.shape)
-            # print("adv_y_test.shape:",adv_y_test.shape)                         
+        # elif args.blackbox == True:
+        #     # 对抗样本测试集
+        #     # print("args.test_adv_dataset",args.test_adv_dataset)
+        #     # adv_testset_path = args.test_adv_dataset
+        #     # adv_x_test, adv_y_test = target_classifier.getadvset(adv_testset_path)
+        #     # print("adv_x_test.shape:",adv_x_test.shape)
+        #     # print("adv_y_test.shape:",adv_y_test.shape)                         
             
-            # # adv_x_test, adv_y_test = adv_x_test, adv_y_test #original adv testset
-            # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
-            # print(f'Accuary of {args.defense_mode} load {args.cla_model} classifier on load black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
-            # print(f'Loss of {args.defense_mode} load {args.cla_model} classifier on load black-box adv testset:{adv_test_loss}' )                               
-            print("------------See accuray on load dataset-------------------------------") 
+        #     # # adv_x_test, adv_y_test = adv_x_test, adv_y_test #original adv testset
+        #     # adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
+        #     # print(f'Accuary of {args.defense_mode} load {args.cla_model} classifier on load black-box adv testset:{adv_test_acc * 100:.4f}%' ) 
+        #     # print(f'Loss of {args.defense_mode} load {args.cla_model} classifier on load black-box adv testset:{adv_test_loss}' )                               
+        #     print("------------See accuray on load dataset-------------------------------") 
                 
                                  
     print("---------------------------------------")
