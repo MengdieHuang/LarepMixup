@@ -524,6 +524,13 @@ if __name__ == '__main__':
             print("adv_y_train.shape:",adv_y_train.shape)  
             #------------------------------- 
 
+            # 干净样本投影训练集
+            print("args.projected_trainset",args.projected_trainset)
+            target_classifier._args.projected_dataset = args.projected_trainset  #   getproset需要用到_args.projected_dataset         
+            cle_w_train, cle_y_train = target_classifier.getproset(target_classifier._args.projected_dataset)
+            print("cle_w_train.shape:",cle_w_train.shape)
+            print("cle_y_train.shape:",cle_y_train.shape)
+            
             if args.attack_mode != "fgsm" and args.attack_mode != "pgd":
                 # adv pixel testset acc and loss
                 adv_test_acc, adv_test_loss = target_classifier.evaluatefromtensor(target_classifier.model(),adv_x_test,adv_y_test)
@@ -538,13 +545,15 @@ if __name__ == '__main__':
             # train
             if args.lr_schedule == 'CosineAnnealingLR':
                 print("rmt sgd cosine annel ing !!!!")
-                # target_classifier.rmt_sgd_cos(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
                 
-                target_classifier.advtrain_sgd_cos(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
+                # target_classifier.advtrain_sgd_cos(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
+
+                target_classifier.advtrain_sgd_cos_genom(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir, stylegan2ada_config_kwargs,cle_w_train, cle_y_train)
+                
+                
                 
             else:
                 print("rmt(0.1 annel) ing  !!!!") # 0.1annel更有效,最终选她
-                # target_classifier.rmt(args,cle_w_train,cle_y_train, cle_train_dataloader, cle_x_test,cle_y_test,adv_x_test,adv_y_test,exp_result_dir,stylegan2ada_config_kwargs)
                 
                 target_classifier.advtrain(args, cle_train_dataloader, adv_x_train, adv_y_train, cle_x_test, cle_y_test, adv_x_test, adv_y_test, exp_result_dir)
                 

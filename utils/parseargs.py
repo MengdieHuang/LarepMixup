@@ -61,7 +61,7 @@ def parse_arguments():
             choices=['resnet34','resnet50', 'vgg19','alexnet','densenet169','inception_v3','resnet18','googlenet','preactresnet18','preactresnet34','preactresnet50','wideresnet28_10','cusresnet18','cusresnet34','cusresnet50','cusvgg19','cusdensenet169','cusalexnet','wide_resnet50_2']
         )
 
-        parser_object.add_argument('--gen_model',type=str,default=None,
+        parser_object.add_argument('--gen_model',type=str,default='stylegan2ada',
             choices=['gan', 'acgan', 'aae', 'vae','stylegan2','stylegan2ada']
         )
 

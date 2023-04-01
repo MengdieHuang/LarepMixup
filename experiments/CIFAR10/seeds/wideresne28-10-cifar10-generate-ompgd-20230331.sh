@@ -1,0 +1,5 @@
+source ~/.bashrc
+source /home/xieyi/anaconda3/bin/activate mmat
+
+# cifar10 ompgd wideresnet28_10-acc96.70 eps=0.05 step_size=0.01  max_iter 50 
+CUDA_VISIBLE_DEVICES=1 python -u tasklauncher-20230331.py run --mode attack --attack_mode pgd --latentattack --attack_eps 0.05 --attack_eps_step 0.005 --attack_max_iter 100 --whitebox --exp_name wideresnet28_10-cifar10 --cla_model wideresnet28_10 --cla_network_pkl /home/data/maggie/result-newhome/train/cla-train/wideresnet28_10-cifar10/20230326/00002-testacc-0.9670/train-cifar10-dataset/standard-trained-classifier-wideresnet28_10-on-clean-cifar10-finished.pkl --gen_network_pkl /home/data/maggie/result-newhome/train/gen-train/stylegan2ada-cifar10/20210702/00000/cifar10-auto1-batch64-ada-bgc-noresume/network-snapshot-023063.pkl --projected_testset /home/data/maggie/result-newhome/project/stylegan2ada-cifar10/20220627/00000/project-cifar10-testset --dataset cifar10 >> /home/maggie/mmat/log/CIFAR10/attack-example-generate/wideresnet28_10-acc96.70-generate-ompgd-eps0.05-step0.005-iter100-20230331.log 2>&1

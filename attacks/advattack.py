@@ -409,7 +409,8 @@ class AdvAttack():
         self._y_test_adv = adv_y_test
         print('finished generate latent adversarial examples !')
 
-        self.__saveadvpng__()
+        # self.__saveadvpng__()
+        print("without save latent adv")
 
         return adv_x_test, adv_y_test
 
