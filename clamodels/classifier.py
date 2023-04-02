@@ -3643,6 +3643,8 @@ class MaggieClassifier:
         #   获取对抗样本
         if args.whitebox == True:
             print("白盒")
+            self._args.latentattack = False
+            
             #   当前分类模型在白盒对抗测试集上的准确率 现场生成
             epoch_attack_classifier = AdvAttack(args = self._args, learned_model= self.model())              #   AdvAttack是MaggieClasssifier的子类
             self._model = epoch_attack_classifier.targetmodel()
@@ -3878,6 +3880,9 @@ class MaggieClassifier:
 
             if args.whitebox == True:
                 #  当前epoch分类模型在白盒对抗测试集上的准确率
+                
+                self._args.latentattack = False
+                
                 epoch_attack_classifier = AdvAttack(self._args, self._model)    #   AdvAttack是MaggieClasssifier的子类
                 self._model = epoch_attack_classifier.targetmodel()                #   即输入时的learned_model self._model
                 epoch_x_test_adv, epoch_y_test_adv = epoch_attack_classifier.generateadvfromtestsettensor(self._cle_test_tensorset_x, self._cle_test_tensorset_y)         
